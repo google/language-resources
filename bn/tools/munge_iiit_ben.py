@@ -35,7 +35,7 @@ def ReadData(path):
   return
 
 
-// TODO: Redo the following before open sourcing
+## TODO: Redo the following before open sourcing
 
 PROJECT_DIR = ('/google/src/files/head/depot/google3/' +
                'third_party/speech/tts/iiit/bengali/')

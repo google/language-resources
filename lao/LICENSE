@@ -1,9 +1,11 @@
 
-#####License -  lao-eng-dictionary.csv
+---------------------------lao-eng-dictionary.csv------------------------------------------
+License - lao-eng-dictionary.csv
 
 The MIT License (MIT)
 
-Copyright (c) 2015 The E-Government Center, Ministry of Posts and Telecommunications of Laos
+Copyright (c) 2015 The E-Government Center, Ministry of Posts and
+Telecommunications of Laos
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,10 +25,4 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
----
-
-#####License - lao-spellcheck-dictionary.csv
-
-  [<img src="https://i.creativecommons.org/l/by/4.0/88x31.png">](http://creativecommons.org/licenses/by/4.0)
-
-  This work is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
+---------------------------------------------------------------------------------------------

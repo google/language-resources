@@ -4,7 +4,8 @@ This file lists license and version information of upstream sources which we did
 --------------
 
 * Version: 2012-04-27
-* License: 4-clause BSD license
+* License: 4-clause BSD license; see [COPYING.txt](http://www.festvox.org/databases/iiit_voices/COPYING.txt)
+* We only include the files here that we need for further processing.
 
 
 lo_dictionary_by_mopt_laos

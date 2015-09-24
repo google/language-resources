@@ -151,7 +151,7 @@ k { ə } [rl] u → a;
 ::Null;
 [$] k { a } l[aeo]ːj   → ə;  # Typo in paper: /j/ was /y/.
 [$] k { a } le[mh][ui] → ə;
-[$] k { alə } h[ui]    → alə;
+[$] k { alə } h[ui]    → əle;
 [$] k { a } lə         → ə;
 
 # Diphthongs

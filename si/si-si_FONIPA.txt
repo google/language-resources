@@ -127,8 +127,10 @@ $c=[k g ŋ {ⁿg} c ɟ ɲ ʈ ɖ {ⁿɖ} t d n {ⁿd} p b m {ᵐb} j r l w ʃ s h
 # TODO: Figure out what Rule #2 means.
 
 # Rule #3
+# The paper is unclear about what this rule means. The interpretation here
+# assumes that "preceded" in the paper is a typo and should be read "followed".
 ::Null;
-[aeæoə] (ː)? h { ə → a;
+[a e æ o ə] h { ə → a;
 
 # Rule #4
 ::Null;

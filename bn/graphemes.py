@@ -18,8 +18,9 @@
 """Utilities for working with Bengali script.
 """
 
-import codecs
-import sys
+from __future__ import unicode_literals
+
+import re
 
 CODEPOINT_TO_SYMBOL = {
     # Punctuation and truncation symbols
@@ -148,64 +149,5 @@ CODEPOINT_TO_SYMBOL = {
 }
 
 
-SYMBOL_TO_CHAR = dict((v, unichr(k)) for (k, v) in CODEPOINT_TO_SYMBOL.items())
-
-
-def WriteSymbolTable(writer, epsilon='<epsilon>'):
-  """Write a symbol table in OpenFst text format."""
-  if epsilon:
-    writer.write('%s\t0\n' % epsilon)
-  codepoints = CODEPOINT_TO_SYMBOL.keys()
-  codepoints.sort()
-  for cp in codepoints:
-    writer.write('%s\t%d\n' % (CODEPOINT_TO_SYMBOL[cp], cp))
-  return
-
-
-def CharToSymbol(char):
-  cp = ord(char)
-  return CODEPOINT_TO_SYMBOL.get(cp, 'U+%04X' % cp)
-
-
-def StringToSymbols(token):
-  return ' '.join(CharToSymbol(c) for c in token)
-
-
-def SymbolsToString(symbols):
-  s = u''
-  for symbol in symbols.split():
-    if symbol not in SYMBOL_TO_CHAR:
-      return None
-    s += SYMBOL_TO_CHAR[symbol]
-  return s
-
-
-def Getline(f=sys.stdin):
-  while True:
-    line = f.readline()
-    if not line:
-      break
-    yield line.decode('utf-8').rstrip('\r\n')
-  return
-
-
-def main():
-  stdout = codecs.lookup('utf-8').streamwriter(sys.stdout)
-  stderr = codecs.lookup('utf-8').streamwriter(sys.stderr)
-  for line in Getline():
-    if all(ord(c) in CODEPOINT_TO_SYMBOL for c in line):
-      beng = line
-      xlit = StringToSymbols(line)
-    else:
-      beng = SymbolsToString(line)
-      xlit = line
-      if beng is None:
-        stderr.write('Could not parse line: %s\n' % line)
-        continue
-    stdout.write('%s\t%s\n' % (beng, xlit))
-    stdout.flush()
-  return
-
-
-if __name__ == '__main__':
-  main()
+TOKEN_RE = re.compile(r'%s(?:[-\u0027\u02BC\u200C\u200D]*%s)*' %
+                      ((r'[\u0980-\u09FF]',) * 2))

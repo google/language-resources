@@ -123,8 +123,11 @@ $c=[k g ŋ {ⁿg} c ɟ ɲ ʈ ɖ {ⁿɖ} t d n {ⁿd} p b m {ᵐb} j r l w ʃ s h
 [$] $c $c { ə       → a;
 [$] $c    { ə       → a;
 
-# Rule #2 is not implemented
-# TODO: Figure out what Rule #2 means.
+# Rule #2
+::Null;
+$c r { ə } $c → a;  # clause (a) and (b)
+$c r { a } h  → a;  # clause (d), exception
+$c r { a } $c → ə;  # clause (c)
 
 # Rule #3
 # The paper is unclear about what this rule means. The interpretation here

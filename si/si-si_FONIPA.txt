@@ -132,19 +132,13 @@ $c=[k g ŋ {ⁿg} c ɟ ɲ ʈ ɖ {ⁿɖ} t d n {ⁿd} p b m {ᵐb} j r l w ʃ s h
 ::Null;
 [a e æ o ə] h { ə → a;
 
-# Rule #4
+# Rules #4 through #7
 ::Null;
-ə } $c $c → a;
-
-# Rule #5 & #6
-::Null;
-ə } [rbɖʈ] [$] → ə;  # exception
-ə } $c     [$] → a;
-ə } ji     [$] → a;
-
-# Rule #7
-::Null;
-k { ə } [rl] u → a;
+    ə } $c $c      → a;  # Rule #4
+    ə } [rbɖʈ] [$] → ə;  # Rule #5 exception
+    ə } $c     [$] → a;  # Rule #5
+    ə } ji     [$] → a;  # Rule #6
+k { ə } [rl] u     → a;  # Rule #7
 
 # Rule #8
 # Note that the paper doesn't say explicitly that this rule should be

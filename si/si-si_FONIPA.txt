@@ -1,0 +1,160 @@
+# Sinhala pronunciation rules.
+#
+# Copyright 2015 Google Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# First, delete ZWNJ and ZWJ to simplify further processing.
+\u200C → ;
+\u200D → ;
+
+# Insert a schwa after every consonant that is not followed by a dependent vowel
+# or virama.
+::Null;
+([\u0D9A-\u0DC6]) } [^\u0DCA-\u0DDF] → $1 ə;
+
+# Pronunciation rules proper.
+::Null;
+
+ං → ŋ;
+ඃ → h;
+
+අ → a;
+ආ → aː;
+ඇ → æ;
+ඈ → æː;
+ඉ → i;
+ඊ → iː;
+උ → u;
+ඌ → uː;
+ඍ → ri;
+ඎ → ruː;
+ඏ → ilu;
+ඐ → iluː;
+එ → e;
+ඒ → eː;
+ඓ → ai̯;
+ඔ → o;
+ඕ → oː;
+ඖ → ou̯;
+
+ක → k;
+ඛ → k;
+ග → g;
+ඝ → g;
+ඞ → ŋ;
+ඟ → ⁿg;
+ච → c;
+ඡ → c;
+ජ → ɟ;
+ඣ → ɟ;
+ඤ → ɲ;
+ඥ → ɟɲ;  # TODO: check if this is correct
+ඦ → ɲɟ;  # TODO: check if this is correct
+ට → ʈ;
+ඨ → ʈ;
+ඩ → ɖ;
+ඪ → ɖ;
+ණ → n;
+ඬ → ⁿɖ;
+ත → t;
+ථ → t;
+ද → d;
+ධ → d;
+න → n;
+ඳ → ⁿd;
+ප → p;
+ඵ → p;
+බ → b;
+භ → b;
+ම → m;
+ඹ → ᵐb;
+ය → j;
+ර → r;
+ල → l;
+ව → w;
+ශ → ʃ;
+ෂ → ʃ;
+ස → s;
+හ → h;
+ළ → l;
+ෆ → f;
+
+\u0DCA → ;  # delete virama
+
+ා → aː;
+ැ → æ;
+ෑ → æː;
+\u0DD2 → i;
+\u0DD3 → iː;
+\u0DD4 → u;
+\u0DD6 → uː;
+ෘ → ru;
+ෙ → e;
+ේ → eː;
+ෛ → ai̯;
+ො → o;
+ෝ → oː;
+ෞ → ou̯;
+ෟ → lu;
+ෲ → ruː;
+ෳ → luː;
+
+# Heuristics for turning /ə/ into /a/.
+# Based on Wasala, Weerasinghe & Gamage, COLING/ACL 2006.
+
+$c=[k g ŋ {ⁿg} c ɟ ɲ ʈ ɖ {ⁿɖ} t d n {ⁿd} p b m {ᵐb} j r l w ʃ s h f];
+
+# Rule #1
+::Null;
+[$] sv    { ə       → ə;  # exception (a)
+[$] k     { ə } r   → ə;  # exception (b)
+[$] $c    { ə } [$] → ə;  # exception (c)
+[$] $c $c { ə       → a;
+[$] $c    { ə       → a;
+
+# Rule #2 is not implemented
+# TODO: Figure out what Rule #2 means.
+
+# Rule #3
+::Null;
+[aeæoə] (ː)? h { ə → a;
+
+# Rule #4
+::Null;
+ə } $c $c → a;
+
+# Rule #5 & #6
+::Null;
+ə } [rbɖʈ] [$] → ə;  # exception
+ə } $c     [$] → a;
+ə } ji     [$] → a;
+
+# Rule #7
+::Null;
+k { ə } [rl] u → a;
+
+# Rule #8
+# Note that the paper doesn't say explicitly that this rule should be
+# anchored at the beginning of a word, but the remarks before the rules
+# seem to imply this.
+::Null;
+[$] k { a } l[aeo]ːj   → ə;  # Typo in paper: /j/ was /y/.
+[$] k { a } le[mh][ui] → ə;
+[$] k { alə } h[ui]    → alə;
+[$] k { a } lə         → ə;
+
+# Diphthongs
+::Null;
+[i {iː} e {eː} æ {æː} o {oː} a {aː}] { wu → u̯;
+[u {uː} e {eː} æ {æː} o {oː} a {aː}] { ji → i̯;

@@ -26,6 +26,17 @@
 # Pronunciation rules proper.
 ::Null;
 
+# fප is an alternative spelling of ෆ.
+# This occurs e.g. in ඩේවිඩ් කොපර්fපීල්ඩ් (David Copperfield)
+# [see http://bradshawofthefuture.blogspot.com/2013/02/f.html].
+[Ff]ප → f;
+
+# zස is seemingly the only way to unambiguously indicate a voiced /z/ sound.
+# This occurs in e.g. ඇල්zසයිම' රෝගය (Alzheimer's disease)
+# [see https://si.wikipedia.org/wiki/ඇල්zසයිම%27_රෝගය]
+# or in zසීබ්‍රා (zebra) [see https://si.wikipedia.org/wiki/‍zසීබ්‍රා].
+[Zz]ස → z;
+
 ං → ŋ;
 ඃ → h;
 

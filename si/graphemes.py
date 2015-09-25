@@ -23,6 +23,12 @@ from __future__ import unicode_literals
 import re
 
 CODEPOINT_TO_SYMBOL = {
+    # Latin alphabet
+    0x0046: 'latin_F',
+    0x005A: 'latin_Z',
+    0x0066: 'latin_f',
+    0x007A: 'latin_z',
+
     # Punctuation symbols
     0x0964: 'danda',
     0x0965: 'double_danda',
@@ -168,4 +174,4 @@ CODEPOINT_TO_SYMBOL = {
 
 
 TOKEN_RE = re.compile(r'%s(?:[\u200C\u200D]*%s)*' %
-                      ((r'[\u0D80-\u0DFF]',) * 2))
+                      ((r'[fFzZ\u0D80-\u0DFF]',) * 2))

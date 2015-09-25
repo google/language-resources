@@ -124,7 +124,7 @@
 # Heuristics for turning /ə/ into /a/.
 # Based on Wasala, Weerasinghe & Gamage, COLING/ACL 2006.
 
-$c=[k g ŋ {ⁿg} c ɟ ɲ ʈ ɖ {ⁿɖ} t d n {ⁿd} p b m {ᵐb} j r l w ʃ s h f];
+$c=[k g ŋ {ⁿg} c ɟ ɲ ʈ ɖ {ⁿɖ} t d n {ⁿd} p b m {ᵐb} j r l w ʃ s z h f];
 
 # Rule #1
 ::Null;

@@ -21,6 +21,8 @@ Assumes PyICU is installed somewhere in sys.path.
 """
 
 import codecs
+import sys
+
 import icu  # Debian/Ubuntu: apt-get install python-pyicu
 
 
@@ -29,3 +31,33 @@ def LoadTransliterationRules(path, transform_name):
   transliterator = icu.Transliterator.createFromRules(
       transform_name, rules, icu.UTransDirection.FORWARD)
   return transliterator
+
+
+def TestRulesInteractively(path):
+  """Helper function for testing transliteration rules interactively.
+
+  This is intended to be used in the edit-compile-test cycle when developing ICU
+  transliteration rules. Note: This reloads the rules after every input line
+  (input is unbuffered). This is useful for interactive development, but should
+  not be used for batch processing, where the rules should be loaded exactly
+  once, before the main loop.
+
+  Args:
+    path: Path to file containing transliteration rules.
+
+  """
+  stdout = codecs.lookup('utf-8').streamwriter(sys.stdout)
+  while True:
+    line = sys.stdin.readline()
+    if not line:
+      break
+    line = line.decode('utf-8')
+    transliterator = LoadTransliterationRules(path, 'foo-bar')
+    result = transliterator.transliterate(line)
+    stdout.write(result)
+    stdout.flush()
+  return
+
+
+if __name__ == '__main__':
+  TestRulesInteractively(sys.argv[1])

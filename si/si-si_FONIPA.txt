@@ -126,13 +126,15 @@
 
 $c=[k g ŋ {ⁿg} c ɟ ɲ ʈ ɖ {ⁿɖ} t d n {ⁿd} p b m {ᵐb} j r l w ʃ s z h f];
 
+$s=[:^L:];
+
 # Rule #1
 ::Null;
-[$] sv    { ə       → ə;  # exception (a)
-[$] k     { ə } r   → ə;  # exception (b)
-[$] $c    { ə } [$] → ə;  # exception (c)
-[$] $c $c { ə       → a;
-[$] $c    { ə       → a;
+$s sv    { ə      → ə;  # exception (a)
+$s k     { ə } r  → ə;  # exception (b)
+$s $c    { ə } $s → ə;  # exception (c)
+$s $c $c { ə      → a;
+$s $c    { ə      → a;
 
 # Rule #2
 ::Null;
@@ -148,21 +150,21 @@ $c r { a } $c → ə;  # clause (c)
 
 # Rules #4 through #7
 ::Null;
-    ə } $c $c      → a;  # Rule #4
-    ə } [rbɖʈ] [$] → ə;  # Rule #5 exception
-    ə } $c     [$] → a;  # Rule #5
-    ə } ji     [$] → a;  # Rule #6
-k { ə } [rl] u     → a;  # Rule #7
+    ə } $c $c     → a;  # Rule #4
+    ə } [rbɖʈ] $s → ə;  # Rule #5 exception
+    ə } $c     $s → a;  # Rule #5
+    ə } ji     $s → a;  # Rule #6
+k { ə } [rl] u    → a;  # Rule #7
 
 # Rule #8
 # Note that the paper doesn't say explicitly that this rule should be
 # anchored at the beginning of a word, but the remarks before the rules
 # seem to imply this.
 ::Null;
-[$] k { a } l[aeo]ːj   → ə;  # Typo in paper: /j/ was /y/.
-[$] k { a } le[mh][ui] → ə;
-[$] k { alə } h[ui]    → əle;
-[$] k { a } lə         → ə;
+$s k { a } l[aeo]ːj   → ə;  # Typo in paper: /j/ was /y/.
+$s k { a } le[mh][ui] → ə;
+$s k { alə } h[ui]    → əle;
+$s k { a } lə         → ə;
 
 # Diphthongs
 ::Null;

@@ -54,10 +54,10 @@
 ඐ → iluː;
 එ → e;
 ඒ → eː;
-ඓ → ai̯;
+ඓ → aj;
 ඔ → o;
 ඕ → oː;
-ඖ → ou̯;
+ඖ → aw;  # TODO: check if this is correct
 
 ක → k;
 ඛ → k;
@@ -70,7 +70,7 @@
 ජ → ɟ;
 ඣ → ɟ;
 ඤ → ɲ;
-ඥ → ɟɲ;  # TODO: check if this is correct
+ඥ → gn;  # TODO: check if this is correct
 ඦ → ɲɟ;  # TODO: check if this is correct
 ට → ʈ;
 ඨ → ʈ;
@@ -113,10 +113,10 @@
 ෘ → ru;
 ෙ → e;
 ේ → eː;
-ෛ → ai̯;
+ෛ → aj;
 ො → o;
 ෝ → oː;
-ෞ → ou̯;
+ෞ → aw;  # TODO: check if this is correct
 ෟ → lu;
 ෲ → ruː;
 ෳ → luː;
@@ -168,5 +168,5 @@ $s k { a } lə         → ə;
 
 # Diphthongs
 ::Null;
-[i {iː} e {eː} æ {æː} o {oː} a {aː}] { wu → u̯;
-[u {uː} e {eː} æ {æː} o {oː} a {aː}] { ji → i̯;
+[i {iː} e {eː} æ {æː} o {oː} a {aː}] { wu → w;
+[u {uː} e {eː} æ {æː} o {oː} a {aː}] { ji → j;

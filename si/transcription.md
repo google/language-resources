@@ -47,9 +47,17 @@ Orthography | Transcription | Gloss
 
 ## Diphthongs
 
-Phonologically, diphthongs in Sinhala can be viewed as consisting of a main
-vowel and an off-glide. They can be expressed in several different ways in the
-orthography.
+Views on the nature of diphthongs in Sinhala differ widely. Masica (p. 116)
+states unequivocally that "Sinhalese [...] has no diphthongs". This contrasts
+with accounts that posit up to 20 diphthongs. This much is clear: any of the 12
+main vowels (excluding schwa /ə/ and /əː/) can be followed by an off-glide
+(either /j/ or /w/) in syllable coda position. This leaves open the question of
+whether a homosyllabic vowel plus glide sequence constitutes a diphthong or
+not. (This guide does not attempt to answer that question. An answer would have
+to look for a contrast between e.g. /uj/ on the one hand, and /u.i/ or /u.ji/ or
+/u.j/ on the other.) For simplicity, the term "diphthong" is retained here to
+refer to a homosyllabic vowel+glide sequence. A possibly incomplete inventory of
+diphthongs is as follows:
 
 Diphthong | Example | Transcription | Gloss | Notes
 ----------|---------|---------------|-------|------
@@ -111,6 +119,12 @@ aː | අම්ම | am.maː | mother (misspelling?)
 
 ## References
 
+* Colin P. Masica. 1991. [The Indo-Aryan
+languages](https://books.google.com/books?id=Itp2twGR6tsC). (Cambridge language
+surveys.) Cambridge University Press.
+* H. S. Perera, Daniel Jones. 1919. [A colloquial Sinhalese reader in phonetic
+transcription](https://archive.org/details/colloquialsinhal00pererich).
+Manchester University Press; Longmans, Green & Co.
 * Asanka Wasala, Ruvan Weerasinghe, Kumudu Gamage. 2006. [Sinhala
 grapheme-to-phoneme conversion and rules for schwa
 epenthesis](http://www.aclweb.org/anthology/P06-2114). COLING/ACL 2006,

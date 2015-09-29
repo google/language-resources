@@ -83,6 +83,9 @@ Example | Transcription | Notes
 නම්‍යයි | nam.jaj | යි
 අය්ය | aj.jə | ය්
 
+Further note that යි does not always signal the presence of a diphthong. An
+obvious example where this is not the case is the word සිටියි /si.ʈi.ji/.
+
 
 ## The inherent vowel
 

@@ -15,10 +15,10 @@ with respect to each of the following areas.
 
 ## Historic syllabic consonants
 
-The modern Sinhala pronunciation of the historic syllabic consonants ඍ ◌ෘ
-(gæṭa yanna/pilla) and ඎ ◌ෲ (diga gæṭa yanna/pilla) is not fully predictable
+The modern Sinhala pronunciation of the historic syllabic consonants ඍ  ෘ
+(gæṭa yanna/pilla) and ඎ  ෲ (diga gæṭa yanna/pilla) is not fully predictable
 (Wasala et al. 2006, p. 895). At the beginning of a word ඍ is often read
-/ri/. In non-initial position, ◌ෘ can be read /ru/ or /ur/.
+/ri/. In non-initial position,  ෘ can be read /ru/ or /ur/.
 
 The following examples are taken from Wasala et al. 2006:
 
@@ -29,11 +29,11 @@ Orthography | Transcription | Gloss
 විවෘත | wi.wur.tə | opened
 
 
-## Near-open front unrounded vowels æ and æː
+## æda pilla
 
-The pronunciation of ◌ැ (æda pilla) and ◌ෑ (diɡa æda pilla) is not fully
-predictable. The vowel stroke ◌ැ (æda pilla) can be read either /æ/ (common)
-or /u/ (less common). Analogously, ◌ෑ can be read /æː/ or /uː/.
+The pronunciation of  ැ (æda pilla) and  ෑ (diɡa æda pilla) is not fully
+predictable. The vowel stroke  ැ (æda pilla) can be read either /æ/ (common)
+or /u/ (less common). Analogously,  ෑ can be read /æː/ or /uː/.
 
 The following examples are based on Wasala et al. 2006:
 
@@ -58,19 +58,16 @@ ej  | මැරෙයි | mæ.rej | get killed | යි
 oj  | කොයි | koj | where | යි
 æj  | ඇයි | æj | why | යි
 aj  | කෛරාටික | kaj.raː.ʈi.kə | cunning | ඓ
-----------|---------|---------------|-------|------
 uːj | ඌයි | uːj | hurt | යි
 eːj | ඒයි | eːj | to call someone | යි
 oːj | හෝයිය | hoːj.ja | take an effort | යි
 æːj | රෑයියා | ræːj.jaː | insect | යි
 aːj | ආයි | aːj | again | යි
-----------|---------|---------------|-------|------
 iw  | ලිව්වා | liw.waː | write | ව්
 ew  | කෙරෙව්වා | ke.rew.waː | had done | ව්
 ow  | සොරොව්ව | so.row.wə | sluice gate | ව්
 æw  | කැවුම | kæw.mə | traditional sweet | වු
 aw  | කෞතුක | kaw.tu.kə | relic | ඖ
-----------|---------|---------------|-------|------
 iːw | මීව්වා | miːw.waː | buffalo calf | ව්
 eːw | | | |
 oːw | හෝව් | hoːw | stop | ව්
@@ -106,7 +103,7 @@ Realization | Example | Transcription | Gloss
 ə  | කර | kə.rə | to do
 a  | නම්‍යයි | nam.jaj | flexible
 əː | පරණ | pa.rəː.nə | old
-aː | අම්ම | am.maː | mother
+aː | අම්ම | am.maː | mother (misspelling?)
 
 
 ## References

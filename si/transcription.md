@@ -8,9 +8,9 @@ transcribers.
 
 These guidelines do not cover the full details of Sinhala phonology and the
 grapheme-phoneme correspondence. We assume that a rough transcription can be
-obtained by deterministic pronunciation rules and that human transcribers
-should mainly focus on correcting the automatic transcriptions, especially
-with respect to each of the following areas.
+obtained by deterministic pronunciation rules, so that human transcribers can
+focus on correcting the automatic transcriptions, especially with respect to
+each of the following areas.
 
 
 ## Historic syllabic consonants
@@ -27,6 +27,15 @@ Orthography | Transcription | Gloss
 ඍණ | ri.nə | minus
 කෘතිය | kru.ti.jə | book
 විවෘත | wi.wur.tə | opened
+
+When  ෘ is read /ur/, this may trigger further cluster simplification (to avoid
+coda clusters in native words), which needs to be transcribed
+approriately. Examples include:
+
+Orthography | Expected but incorrect transcription | Correct transcription
+------------|--------------------------------------|----------------------
+සමෘද්ධි | ~~sa.murd.di~~ | sa.mur.di
+ප්‍රවෘත්ති | ~~pra.wurt.ti~~ | pra.wur.ti
 
 
 ## æda pilla
@@ -119,6 +128,8 @@ aː | අම්ම | am.maː | mother (misspelling?)
 
 ## References
 
+* Dileep Chandralal. 2010. [Sinhala](http://dx.doi.org/10.1075/loall.15).
+(London Oriental and African Language Library, 15.) John Benjamins.
 * Colin P. Masica. 1991. [The Indo-Aryan
 languages](https://books.google.com/books?id=Itp2twGR6tsC). (Cambridge language
 surveys.) Cambridge University Press.

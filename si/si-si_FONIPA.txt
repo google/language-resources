@@ -14,14 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# First, delete ZWNJ and ZWJ to simplify further processing.
+# Simplify ya + yansaya to plain ya after a consonant.
+[\u0D9A-\u0DC6] \u0DCA (\u200D)? { ය්‍ය → ය;
+
+# Delete ZWNJ and ZWJ to simplify further processing.
 \u200C → ;
 \u200D → ;
 
 # Insert a schwa after every consonant that is not followed by a dependent vowel
 # or virama.
 ::Null;
-([\u0D9A-\u0DC6]) } [^\u0DCA-\u0DDF] → $1 ə;
+([\u0D9A-\u0DC6]) } [^\u0DCA-\u0DDF \u0DF2\u0DF3] → $1 ə;
 
 # Pronunciation rules proper.
 ::Null;
@@ -38,6 +41,8 @@
 [Zz]ස → z;
 
 ං → ŋ;
+
+ඃ ([\u0D9A-\u0DC6]) → | $1 \u0DCA $1;  # TODO: check which consonants geminate
 ඃ → h;
 
 අ → a;
@@ -70,8 +75,8 @@
 ජ → ɟ;
 ඣ → ɟ;
 ඤ → ɲ;
-ඥ → gn;  # TODO: check if this is correct
-ඦ → ɲɟ;  # TODO: check if this is correct
+ඥ → kɲ;  # TODO: double-check
+ඦ → ɟ;
 ට → ʈ;
 ඨ → ʈ;
 ඩ → ɖ;
@@ -168,5 +173,9 @@ $s k { a } lə         → ə;
 
 # Diphthongs
 ::Null;
+www+ → ww;  # යෞව්වන
 [i {iː} e {eː} æ {æː} o {oː} a {aː}] { wu → w;
+
+əji → aj;
+iji → iː;  # perhaps: ij
 [u {uː} e {eː} æ {æː} o {oː} a {aː}] { ji → j;

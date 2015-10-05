@@ -125,6 +125,15 @@ a  | නම්‍යයි | nam.jaj | flexible
 əː | පරණ | pa.rəː.nə | old
 aː | අම්ම | am.maː | mother (misspelling?)
 
+A similar issue arises for the reading of the independent vowel sign අ, which
+can be realized as either /a/ (typically in native words) or /ə/ (typically in
+certain foreign words). Examples of this include:
+
+Realization | Example | Transcription | Gloss
+------------|---------|---------------|------
+ə | අර්න්ස්ට් | ərnsʈ | Ernst (a name)
+a | අර්ජුන | ar.ɟu.nə | Arjuna (a name)
+
 
 ## References
 

@@ -86,7 +86,7 @@ ow  | සොරොව්ව | so.row.wə | sluice gate | ව්
 æw  | කැවුම | kæw.mə | traditional sweet | වු
 aw  | කෞතුක | kaw.tu.kə | relic | ඖ
 iːw | මීව්වා | miːw.waː | buffalo calf | ව්
-eːw | | | |
+eːw | දේව්දාස් | deːw.daːs | | ව්
 oːw | හෝව් | hoːw | stop | ව්
 æːw | හෑව්වා | hæːw.waː | plough | ව්
 aːw | ලාවුලු | laːw.lu | fruit | වු

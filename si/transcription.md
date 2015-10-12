@@ -179,7 +179,7 @@ misleading: the inherent vowel is virtually always realized when indicated in
 the orthography, and Wasala et al. do not report other cases of epenthesis
 (e.g. for cluster simplification). In fact the main question concerns the
 quality of the inherent vowel: Is the inherent vowel realized as /ə/ or /a/
-(both common) or as /əː/ or /aː/ (both rare)?
+(both common) or as /əː/ (rare)?
 
 Examples of the possible realizations of the independent vowel include:
 
@@ -188,7 +188,6 @@ Realization | Example | Transcription | Gloss
 ə  | කර | kə.rə | to do
 a  | නම්‍යයි | nam.jaj | flexible
 əː | පරණ | pa.rəː.nə | old
-aː | අම්ම | am.ma | mother
 
 A similar issue arises for the reading of the independent vowel sign අ, which
 can be realized as either /a/ (typically in native words) or /ə/ (typically in

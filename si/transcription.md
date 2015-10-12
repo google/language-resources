@@ -1,6 +1,12 @@
 # Sinhala phonemic transcription guide
 
-This document sets out areas in which the pronunciation of Sinhala words is
+This document sets out guidelines for the phonemic transcription of colloquial
+Sinhala. The goal of phonemic transcription is to provide an accurate
+representation of the contrasting segments (phonemes) of the language. This
+will allow a computer (or an absolute beginner learning Sinhala as a second
+language) to pronounce words or sentences correctly.
+
+We focus on several areas in which the pronunciation of Sinhala words is
 either not fully predictable from their orthography, or in which the
 pronunciation differs from what would be expected from the orthography. It is
 these areas of ambiguity or uncertainty that require intervention by human
@@ -8,9 +14,70 @@ transcribers.
 
 These guidelines do not cover the full details of Sinhala phonology and the
 grapheme-phoneme correspondence. We assume that a rough transcription can be
-obtained by deterministic pronunciation rules, so that human transcribers can
-focus on correcting the automatic transcriptions, especially with respect to
-each of the following areas.
+obtained by [deterministic pronunciation rules](si-si_FONIPA.txt), so that
+human transcribers can focus on correcting the automatic transcriptions,
+especially with respect to the areas of ambiguity explained below.
+
+
+## Sinhala phonemes
+
+We use an inventory of 40 phonemes together with "." (full stop, dot), which
+indicates syllable boundaries. The letters in the following table are only
+meant for illustration: sometimes the same letter can be read in different
+ways; and many phonemes can be indicated by more than one Sinhala letter.
+
+All phonemes are represented using the International Phonetic Alphabet
+(IPA). In addition, the phoneme /j/ can optionally be written as /y/, which is
+closer to how Sinhala would conventionally be Romanized and which is less
+likely to be confused with the phoneme /ɟ/.
+
+Phoneme | Typical Sinhala letter
+--------|-----------------------
+ə  | see ["The inherent vowel"](#The inherent vowel)
+əː | see ["The inherent vowel"](#The inherent vowel)
+a  | see ["The inherent vowel"](#The inherent vowel)
+aː | ආ
+æ  | ඇ
+æː | ඈ
+i  | ඉ
+iː | ඊ
+u  | උ
+uː | ඌ
+e  | එ
+eː | ඒ
+o  | ඔ
+oː | ඕ
+k  | ක්
+g  | ග්
+ŋ  | ඞ්
+ⁿg | ඟ්
+c  | ච්
+ɟ  | ජ්
+ɲ  | ඤ්
+ʈ  | ට්
+ɖ  | ඩ්
+ⁿɖ | ඬ්
+t  | ත්
+d  | ද්
+n  | න්
+ⁿd | ඳ්
+p  | ප්
+b  | බ්
+m  | ම්
+ᵐb | ඹ්
+j/y | ය්
+r  | ය්
+l  | ල්
+w  | ව්
+ʃ  | ෂ්
+s  | ස්
+h  | හ්
+f  | ෆ්
+
+For example, the word "සංස්කෘතිය" would be transcribed phonemically as
+/saŋs.kru.ti.jə/. The dots indicate that the word consists of four
+syllables. (We sometimes optionally use spaces to separate phonemes. This
+results in the same pronunciation, i.e. spaces are not significant.)
 
 
 ## Historic syllabic consonants
@@ -56,17 +123,17 @@ Orthography | Transcription | Gloss
 
 ## Diphthongs
 
+We transcribe diphthongs as a combination of a main vowel followed by a glide
+within the same syllable.
+
 Views on the nature of diphthongs in Sinhala differ widely. Masica (p. 116)
 states unequivocally that "Sinhalese [...] has no diphthongs". This contrasts
-with accounts that posit up to 20 diphthongs. This much is clear: any of the 12
-main vowels (excluding schwa /ə/ and /əː/) can be followed by an off-glide
-(either /j/ or /w/) in syllable coda position. This leaves open the question of
-whether a homosyllabic vowel plus glide sequence constitutes a diphthong or
-not. (This guide does not attempt to answer that question. An answer would have
-to look for a contrast between e.g. /uj/ on the one hand, and /u.i/ or /u.ji/ or
-/u.j/ on the other.) For simplicity, the term "diphthong" is retained here to
-refer to a homosyllabic vowel+glide sequence. A possibly incomplete inventory of
-diphthongs is as follows:
+with accounts that posit up to 20 diphthongs as separate phonemes. This much
+is clear: any of the 12 main vowels (excluding the schwas, /ə/ and /əː/) can
+be followed by an off-glide (either /j/ or /w/) in syllable coda
+position. Since virtually all combinations of vowels and glides can occur in
+principle, it is simplest to allow them to combine freely in
+transcription. Examples of vowel+glide sequences include:
 
 Diphthong | Example | Transcription | Gloss | Notes
 ----------|---------|---------------|-------|------
@@ -91,17 +158,15 @@ oːw | හෝව් | hoːw | stop | ව්
 æːw | හෑව්වා | hæːw.waː | plough | ව්
 aːw | ලාවුලු | laːw.lu | fruit | වු
 
-Note that the same diphthong can be written in different ways. For example, the
-diphthong /aj/ can be written as follows in different words:
+Note that the same diphthong can be written in different ways in Sinhala
+orthography. For example, the diphthong /aj/ can be written as follows in
+different words:
 
 Example | Transcription | Notes
 --------|---------------|------
 කෛරාටික | kaj.raː.ʈi.kə | ඓ
 නම්‍යයි | nam.jaj | යි
 අය්ය | aj.jə | ය්
-
-Further note that යි does not always signal the presence of a diphthong. An
-obvious example where this is not the case is the word සිටියි /si.ʈi.ji/.
 
 
 ## The inherent vowel
@@ -123,7 +188,7 @@ Realization | Example | Transcription | Gloss
 ə  | කර | kə.rə | to do
 a  | නම්‍යයි | nam.jaj | flexible
 əː | පරණ | pa.rəː.nə | old
-aː | අම්ම | am.maː | mother (misspelling?)
+aː | අම්ම | am.ma | mother
 
 A similar issue arises for the reading of the independent vowel sign අ, which
 can be realized as either /a/ (typically in native words) or /ə/ (typically in

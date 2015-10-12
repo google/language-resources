@@ -33,9 +33,9 @@ likely to be confused with the phoneme /ɟ/.
 
 Phoneme | Typical Sinhala letter
 --------|-----------------------
-ə  | see ["The inherent vowel"](#The inherent vowel)
-əː | see ["The inherent vowel"](#The inherent vowel)
-a  | see ["The inherent vowel"](#The inherent vowel)
+ə  | see ["The inherent vowel"](#the-inherent-vowel)
+əː | see ["The inherent vowel"](#the-inherent-vowel)
+a  | see ["The inherent vowel"](#the-inherent-vowel)
 aː | ආ
 æ  | ඇ
 æː | ඈ

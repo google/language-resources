@@ -5,10 +5,12 @@ Datasets and scripts for developers and researchers to work with.
 This is not an official Google product.
 
 
-| Languages Available | 
-|-------------------|
-| Lao (lo)		 	| 
-| Bengali (bn)		|
+| Languages Available    |
+|------------------------|
+| Bengali / Bangla (bn)  |
+| Burmese / Myanmar (my) |
+| Lao (lo)               |
+| Sinhala (si)           |
 
 
 

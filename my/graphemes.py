@@ -88,7 +88,7 @@ CODEPOINT_TO_SYMBOL = {
     0x103C: '-r-',
     0x103D: '-w-',
     0x103E: '-h-',
-    0x103F: 'ssa',
+    0x103F: 'great_sa',
     0x1040: '0',
     0x1041: '1',
     0x1042: '2',
@@ -105,7 +105,18 @@ CODEPOINT_TO_SYMBOL = {
     0x104D: 'completed',
     0x104E: 'aforementioned',
     0x104F: 'genitive',
+    # Pali and Sanskrit extensions
+    0x1050: 'sha',
+    0x1051: 'ssa',
+    0x1052: 'ri',
+    0x1053: 'rri',
+    0x1054: 'li',
+    0x1055: 'lli',
+    0x1056: '-ri',
+    0x1057: '-rri',
+    0x1058: '-li',
+    0x1059: '-lli',
 }
 
 
-TOKEN_RE = re.compile(r'[\u1000-\u104F]+')
+TOKEN_RE = re.compile(r'[\u1000-\u1059]+')

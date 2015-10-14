@@ -5,12 +5,12 @@ Datasets and scripts for developers and researchers to work with.
 This is not an official Google product.
 
 
-| Languages Available    |
-|------------------------|
-| Bengali / Bangla (bn)  |
-| Burmese / Myanmar (my) |
-| Lao (lo)               |
-| Sinhala (si)           |
+| Directory | Language Available |
+|-----------|--------------------|
+| bn        | Bengali / Bangla   |
+| lo        | Lao                |
+| my        | Burmese / Myanmar  |
+| si        | Sinhala            |
 
 
 

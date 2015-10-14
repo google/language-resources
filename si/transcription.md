@@ -50,7 +50,7 @@ oː | ඕ
 k  | ක්
 g  | ග්
 ŋ  | ඞ්
-ⁿg | ඟ්
+ᵑg | ඟ්
 c  | ච්
 ɟ  | ජ්
 ɲ  | ඤ්
@@ -107,7 +107,7 @@ Orthography | Expected but incorrect transcription | Correct transcription
 
 ## æda pilla
 
-The pronunciation of  ැ (æda pilla) and  ෑ (diɡa æda pilla) is not fully
+The pronunciation of  ැ (æda pilla) and  ෑ (diga æda pilla) is not fully
 predictable. The vowel stroke  ැ (æda pilla) can be read either /æ/ (common)
 or /u/ (less common). Analogously,  ෑ can be read /æː/ or /uː/.
 

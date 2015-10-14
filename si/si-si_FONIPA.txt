@@ -41,6 +41,7 @@
 [Zz]ස → z;
 
 ං → ŋ;
+o → ŋ;  # common substitution for anusvaraya
 
 ඃ ([\u0D9A-\u0DC6]) → | $1 \u0DCA $1;  # TODO: check which consonants geminate
 ඃ → h;
@@ -69,7 +70,7 @@
 ග → g;
 ඝ → g;
 ඞ → ŋ;
-ඟ → ⁿg;
+ඟ → ᵑg;
 ච → c;
 ඡ → c;
 ජ → ɟ;
@@ -129,7 +130,7 @@
 # Heuristics for turning /ə/ into /a/.
 # Based on Wasala, Weerasinghe & Gamage, COLING/ACL 2006.
 
-$c=[k g ŋ {ⁿg} c ɟ ɲ ʈ ɖ {ⁿɖ} t d n {ⁿd} p b m {ᵐb} j r l w ʃ s z h f];
+$c=[k g ŋ {ᵑg} c ɟ ɲ ʈ ɖ {ⁿɖ} t d n {ⁿd} p b m {ᵐb} j r l w ʃ s z h f];
 
 $s=[:^L:];
 

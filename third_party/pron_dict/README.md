@@ -13,3 +13,4 @@ WordList_IPA_SAMPA.xls in Libreoffice 4.0.4.2 and saving it in "Text
 CSV" format with default options, i.e. character set "Unicode (UTF-8)",
 comma as field delimiter, and double quotes text delimiter.
 * words_2012.txt: A list of 9146 words in the dictionary that were added in 2012 and whose transcription conventions differ slightly from the other 55873 entries in the dictionary.
+* suggestions.csv: A list of 659 suggested corrections to dictionary entries.

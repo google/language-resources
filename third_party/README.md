@@ -3,6 +3,7 @@ This file lists license and version information of upstream sources which we did
 [iiit_ben_ant](http://www.festvox.org/databases/iiit_voices/iiit_ben_ant.tar.gz)
 --------------
 
+* Description: subset of the Bengali TTS voice data from IIIT Hyderabad
 * Version: 2012-04-27
 * License: 4-clause BSD license; see [COPYING.txt](http://www.festvox.org/databases/iiit_voices/COPYING.txt)
 * We only include the files here that we need for further processing.
@@ -11,5 +12,14 @@ This file lists license and version information of upstream sources which we did
 lo_dictionary_by_mopt_laos
 --------------------------
 
+* Description: Lao-English dictionary from the Lao Ministry of Post and Telecommunications
 * Version: 2012-08-30
 * License: MIT license
+
+
+[pron_dict](http://www.malfong.is/index.php?pg=framburdur&lang=en)
+-----------
+
+* Description: Pronunciation dictionary for Icelandic
+* Version: 2013-01-06
+* License: Creative Commons Attribution (CC BY) 3.0; see [license.txt](pron_dict/license.txt)

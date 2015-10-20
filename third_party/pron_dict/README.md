@@ -1,5 +1,7 @@
-The original Icelandic pron_dict distribution, which we're
-redistributing here, consists of the following three files:
+The [Pronunciation Dictionary for
+Icelandic](http://www.malfong.is/index.php?pg=framburdur&lang=en) or
+pron_dict, which we're redistributing here, consists of the following
+three files:
 
 * license.txt
 * readme.txt

@@ -1,6 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
 openfst = "@openfst//"
+
 prefix_dir = "src/"
 
 # Command-line binaries (bin/)
@@ -29,12 +30,14 @@ cc_binary(
 
 cc_library(
     name = "thrax_main_lib",
-    hdrs = [prefix_dir + "bin/utildefs.h"],
     srcs = [prefix_dir + "bin/utildefs.cc"],
+    hdrs = [
+        prefix_dir + "bin/utildefs.h",
+        prefix_dir + "include/thrax/symbols.h",  # for k.*SymbolTableName
+    ],
     visibility = ["//visibility:private"],
     deps = [
         ":compat",
-	":function",
         ":grm-manager",
     ],
 )
@@ -55,18 +58,16 @@ cc_library(
 
 cc_library(
     name = "compat",
+    srcs = [
+        prefix_dir + "lib/util/utils.cc",
+        prefix_dir + "lib/flags/flags.cc",
+    ],
     hdrs = [
-        prefix_dir + "include/thrax/compat/closure.h",
         prefix_dir + "include/thrax/compat/compat.h",
-        prefix_dir + "include/thrax/compat/oneof.h",
         prefix_dir + "include/thrax/compat/registry.h",
         prefix_dir + "include/thrax/compat/stlfunctions.h",
         prefix_dir + "include/thrax/compat/utils.h",
         prefix_dir + "include/thrax/make-parens-pair-vector.h",
-    ],
-    srcs = [
-        prefix_dir + "lib/util/utils.cc",
-        prefix_dir + "lib/flags/flags.cc",
     ],
     includes = [prefix_dir + "include"],
     visibility = ["//visibility:private"],
@@ -75,12 +76,12 @@ cc_library(
 
 cc_library(
     name = "grm-manager",
+    srcs = [
+        prefix_dir + "lib/main/grm-manager.cc",
+    ],
     hdrs = [
         prefix_dir + "include/thrax/abstract-grm-manager.h",
         prefix_dir + "include/thrax/grm-manager.h",
-    ],
-    srcs = [
-        prefix_dir + "lib/main/grm-manager.cc",
     ],
     includes = [prefix_dir + "include"],
     deps = [
@@ -93,22 +94,33 @@ cc_library(
 
 cc_library(
     name = "function",
+    srcs = [
+        prefix_dir + "lib/walker/loader.cc",
+        prefix_dir + "lib/walker/stringfst.cc",
+        prefix_dir + "lib/walker/symbols.cc",
+    ],
     hdrs = [
         prefix_dir + "include/thrax/algo/context_dependent_rewrite.h",
         prefix_dir + "include/thrax/algo/prefix_tree.h",
+        prefix_dir + "include/thrax/compat/oneof.h",
+        prefix_dir + "include/thrax/datatype.h",
+        prefix_dir + "include/thrax/fst-node.h",  # for FstNodeType
+        prefix_dir + "include/thrax/function.h",
+        prefix_dir + "include/thrax/node.h",  # included by fst-node.h
+        prefix_dir + "include/thrax/symbols.h",
+
+        # thrax::function::Function implementations
         prefix_dir + "include/thrax/arcsort.h",
         prefix_dir + "include/thrax/assert-equal.h",
         prefix_dir + "include/thrax/cdrewrite.h",
-        prefix_dir + "include/thrax/closure.h",
+        prefix_dir + "include/thrax/closure.h",  # includes fst-node.h
         prefix_dir + "include/thrax/compose.h",
         prefix_dir + "include/thrax/concat.h",
         prefix_dir + "include/thrax/connect.h",
-        prefix_dir + "include/thrax/datatype.h",
         prefix_dir + "include/thrax/determinize.h",
         prefix_dir + "include/thrax/difference.h",
         prefix_dir + "include/thrax/expand.h",
         prefix_dir + "include/thrax/features.h",
-        prefix_dir + "include/thrax/function.h",
         prefix_dir + "include/thrax/invert.h",
         prefix_dir + "include/thrax/loadfst.h",
         prefix_dir + "include/thrax/loadfstfromfar.h",
@@ -122,48 +134,23 @@ cc_library(
         prefix_dir + "include/thrax/rmepsilon.h",
         prefix_dir + "include/thrax/stringfile.h",
         prefix_dir + "include/thrax/stringfst.h",
-        prefix_dir + "include/thrax/symbols.h",
         prefix_dir + "include/thrax/symboltable.h",
         prefix_dir + "include/thrax/union.h",
-    ],
-    srcs = [
-        prefix_dir + "lib/walker/loader.cc",
-        prefix_dir + "lib/walker/stringfst.cc",
-        prefix_dir + "lib/walker/symbols.cc",
     ],
     includes = [prefix_dir + "include"],
     visibility = ["//visibility:private"],
     deps = [
         ":compat",
+        openfst + ":far_base",
         openfst + ":fst_no_export_dynamic",
+        openfst + ":pdt",
     ],
-)        
+)
 
 cc_library(
     name = "grm-compiler",
-    hdrs = [
-        prefix_dir + "include/thrax/collection-node.h",
-        prefix_dir + "include/thrax/fst-node.h",
-        prefix_dir + "include/thrax/function-node.h",
-        prefix_dir + "include/thrax/grammar-node.h",
-        prefix_dir + "include/thrax/identifier-node.h",
-        prefix_dir + "include/thrax/import-node.h",
-        prefix_dir + "include/thrax/node.h",
-        prefix_dir + "include/thrax/return-node.h",
-        prefix_dir + "include/thrax/rule-node.h",
-        prefix_dir + "include/thrax/statement-node.h",
-        prefix_dir + "include/thrax/string-node.h",
-
-        prefix_dir + "include/thrax/grm-compiler.h",
-        prefix_dir + "include/thrax/lexer.h",
-
-        prefix_dir + "include/thrax/algo/resource-map.h",
-        prefix_dir + "include/thrax/evaluator.h",
-        prefix_dir + "include/thrax/namespace.h",
-        prefix_dir + "include/thrax/printer.h",
-        prefix_dir + "include/thrax/walker.h",
-    ],
     srcs = [
+        # Abstract Syntax Tree classses
         prefix_dir + "lib/ast/collection-node.cc",
         prefix_dir + "lib/ast/fst-node.cc",
         prefix_dir + "lib/ast/function-node.cc",
@@ -176,15 +163,44 @@ cc_library(
         prefix_dir + "lib/ast/statement-node.cc",
         prefix_dir + "lib/ast/string-node.cc",
 
+        # Lexer, parser, and core compiler
         prefix_dir + "lib/main/grm-compiler.cc",
         prefix_dir + "lib/main/lexer.cc",
         prefix_dir + "lib/parser.cc",
 
+        # Walker/evaluator
         prefix_dir + "lib/walker/evaluator-specializations.cc",
         prefix_dir + "lib/walker/identifier-counter.cc",
         prefix_dir + "lib/walker/namespace.cc",
         prefix_dir + "lib/walker/printer.cc",
         prefix_dir + "lib/walker/walker.cc",
+    ],
+    hdrs = [
+        # Abstract Syntax Tree classes
+        prefix_dir + "include/thrax/collection-node.h",
+        prefix_dir + "include/thrax/fst-node.h",
+        prefix_dir + "include/thrax/function-node.h",
+        prefix_dir + "include/thrax/grammar-node.h",
+        prefix_dir + "include/thrax/identifier-node.h",
+        prefix_dir + "include/thrax/import-node.h",
+        prefix_dir + "include/thrax/node.h",
+        prefix_dir + "include/thrax/return-node.h",
+        prefix_dir + "include/thrax/rule-node.h",
+        prefix_dir + "include/thrax/statement-node.h",
+        prefix_dir + "include/thrax/string-node.h",
+
+        # Lexer, parser, and core compiler
+        prefix_dir + "include/thrax/grm-compiler.h",
+        prefix_dir + "include/thrax/lexer.h",
+
+        # Walker/evaluator
+        prefix_dir + "include/thrax/algo/resource-map.h",
+        prefix_dir + "include/thrax/compat/closure.h",
+        prefix_dir + "include/thrax/evaluator.h",
+        prefix_dir + "include/thrax/identifier-counter.h",
+        prefix_dir + "include/thrax/namespace.h",
+        prefix_dir + "include/thrax/printer.h",
+        prefix_dir + "include/thrax/walker.h",
     ],
     copts = [
         "-Wno-return-type",
@@ -194,7 +210,7 @@ cc_library(
     deps = [
         ":compat",
         ":function",
-	":grm-manager",
+        ":grm-manager",
         openfst + ":far_base",
         openfst + ":fst_no_export_dynamic",
         openfst + ":pdt",

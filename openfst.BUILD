@@ -1,6 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
 prefix_dir = "src/"
+
 static_binary = 0
 
 # Core library (lib/)
@@ -62,6 +63,7 @@ cc_library(
         prefix_dir + "include/fst/heap.h",
         prefix_dir + "include/fst/intersect.h",
         prefix_dir + "include/fst/invert.h",
+        prefix_dir + "include/fst/isomorphic.h",
         prefix_dir + "include/fst/label-reachable.h",
         prefix_dir + "include/fst/lookahead-filter.h",
         prefix_dir + "include/fst/lookahead-matcher.h",
@@ -146,6 +148,7 @@ cc_library(
         prefix_dir + "include/fst/sparse-tuple-weight.h",
         prefix_dir + "include/fst/string-weight.h",
         prefix_dir + "include/fst/tuple-weight.h",
+        prefix_dir + "include/fst/union-weight.h",
         prefix_dir + "include/fst/weight.h",
     ],
     includes = [prefix_dir + "include"],
@@ -268,6 +271,12 @@ cc_test(
 
 cc_library(
     name = "fstscript_base",
+    srcs = [
+        prefix_dir + "script/fst-class.cc",
+        prefix_dir + "script/script-impl.cc",
+        prefix_dir + "script/text-io.cc",
+        prefix_dir + "script/weight-class.cc",
+    ],
     hdrs = [
         prefix_dir + "include/fst/script/arg-packs.h",
         prefix_dir + "include/fst/script/fst-class.h",
@@ -278,301 +287,354 @@ cc_library(
         prefix_dir + "include/fst/script/text-io.h",
         prefix_dir + "include/fst/script/weight-class.h",
     ],
-    srcs = [
-        prefix_dir + "script/fst-class.cc",
-        prefix_dir + "script/script-impl.cc",
-        prefix_dir + "script/text-io.cc",
-        prefix_dir + "script/weight-class.cc",
-    ],
     copts = ["-Wno-sign-compare"],
     includes = [prefix_dir + "include"],
     visibility = ["//visibility:private"],
     deps = [":fst"],
 )
 
-
 cc_library(
     name = "fstscript_arcsort",
-    hdrs = [prefix_dir + "include/fst/script/arcsort.h"],
     srcs = [prefix_dir + "script/arcsort.cc"],
+    hdrs = [prefix_dir + "include/fst/script/arcsort.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_closure",
-    hdrs = [prefix_dir + "include/fst/script/closure.h"],
     srcs = [prefix_dir + "script/closure.cc"],
+    hdrs = [prefix_dir + "include/fst/script/closure.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_compile",
+    srcs = [prefix_dir + "script/compile.cc"],
     hdrs = [
         prefix_dir + "include/fst/script/compile.h",
         prefix_dir + "include/fst/script/compile-impl.h",
     ],
-    srcs = [prefix_dir + "script/compile.cc"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_compose",
-    hdrs = [prefix_dir + "include/fst/script/compose.h"],
     srcs = [prefix_dir + "script/compose.cc"],
-    deps = [":fstscript_base"],
+    hdrs = [prefix_dir + "include/fst/script/compose.h"],
+    includes = [prefix_dir + "include"],
+    deps = [
+        ":fstscript_base",
+        ":fstscript_connect",
+    ],
 )
 
 cc_library(
     name = "fstscript_concat",
-    hdrs = [prefix_dir + "include/fst/script/concat.h"],
     srcs = [prefix_dir + "script/concat.cc"],
+    hdrs = [prefix_dir + "include/fst/script/concat.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_connect",
-    hdrs = [prefix_dir + "include/fst/script/connect.h"],
     srcs = [prefix_dir + "script/connect.cc"],
+    hdrs = [prefix_dir + "include/fst/script/connect.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_convert",
-    hdrs = [prefix_dir + "include/fst/script/convert.h"],
     srcs = [prefix_dir + "script/convert.cc"],
+    hdrs = [prefix_dir + "include/fst/script/convert.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_decode",
-    hdrs = [prefix_dir + "include/fst/script/decode.h"],
     srcs = [prefix_dir + "script/decode.cc"],
+    hdrs = [prefix_dir + "include/fst/script/decode.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_determinize",
-    hdrs = [prefix_dir + "include/fst/script/determinize.h"],
     srcs = [prefix_dir + "script/determinize.cc"],
+    hdrs = [prefix_dir + "include/fst/script/determinize.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_difference",
-    hdrs = [prefix_dir + "include/fst/script/difference.h"],
     srcs = [prefix_dir + "script/difference.cc"],
-    deps = [":fstscript_base"],
+    hdrs = [prefix_dir + "include/fst/script/difference.h"],
+    includes = [prefix_dir + "include"],
+    deps = [
+        ":fstscript_base",
+        ":fstscript_compose",
+    ],
 )
 
 cc_library(
     name = "fstscript_disambiguate",
-    hdrs = [prefix_dir + "include/fst/script/disambiguate.h"],
     srcs = [prefix_dir + "script/disambiguate.cc"],
+    hdrs = [prefix_dir + "include/fst/script/disambiguate.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_draw",
+    srcs = [prefix_dir + "script/draw.cc"],
     hdrs = [
         prefix_dir + "include/fst/script/draw.h",
         prefix_dir + "include/fst/script/draw-impl.h",
     ],
-    srcs = [prefix_dir + "script/draw.cc"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_encode",
-    hdrs = [prefix_dir + "include/fst/script/encode.h"],
     srcs = [prefix_dir + "script/encode.cc"],
+    hdrs = [prefix_dir + "include/fst/script/encode.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_epsnormalize",
-    hdrs = [prefix_dir + "include/fst/script/epsnormalize.h"],
     srcs = [prefix_dir + "script/epsnormalize.cc"],
+    hdrs = [prefix_dir + "include/fst/script/epsnormalize.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_equal",
-    hdrs = [prefix_dir + "include/fst/script/equal.h"],
     srcs = [prefix_dir + "script/equal.cc"],
+    hdrs = [prefix_dir + "include/fst/script/equal.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_equivalent",
-    hdrs = [prefix_dir + "include/fst/script/equivalent.h"],
     srcs = [prefix_dir + "script/equivalent.cc"],
+    hdrs = [prefix_dir + "include/fst/script/equivalent.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_info",
+    srcs = [prefix_dir + "script/info.cc"],
     hdrs = [
         prefix_dir + "include/fst/script/info.h",
         prefix_dir + "include/fst/script/info-impl.h",
     ],
-    srcs = [prefix_dir + "script/info.cc"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_intersect",
-    hdrs = [prefix_dir + "include/fst/script/intersect.h"],
     srcs = [prefix_dir + "script/intersect.cc"],
-    deps = [":fstscript_base"],
+    hdrs = [prefix_dir + "include/fst/script/intersect.h"],
+    includes = [prefix_dir + "include"],
+    deps = [
+        ":fstscript_base",
+        ":fstscript_compose",
+    ],
 )
 
 cc_library(
     name = "fstscript_invert",
-    hdrs = [prefix_dir + "include/fst/script/invert.h"],
     srcs = [prefix_dir + "script/invert.cc"],
+    hdrs = [prefix_dir + "include/fst/script/invert.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_isomorphic",
-    hdrs = [prefix_dir + "include/fst/script/isomorphic.h"],
     srcs = [prefix_dir + "script/isomorphic.cc"],
+    hdrs = [prefix_dir + "include/fst/script/isomorphic.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_map",
-    hdrs = [prefix_dir + "include/fst/script/map.h"],
     srcs = [prefix_dir + "script/map.cc"],
+    hdrs = [prefix_dir + "include/fst/script/map.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_minimize",
-    hdrs = [prefix_dir + "include/fst/script/minimize.h"],
     srcs = [prefix_dir + "script/minimize.cc"],
+    hdrs = [prefix_dir + "include/fst/script/minimize.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_print",
+    srcs = [prefix_dir + "script/print.cc"],
     hdrs = [
         prefix_dir + "include/fst/script/print.h",
         prefix_dir + "include/fst/script/print-impl.h",
     ],
-    srcs = [prefix_dir + "script/print.cc"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_project",
-    hdrs = [prefix_dir + "include/fst/script/project.h"],
     srcs = [prefix_dir + "script/project.cc"],
+    hdrs = [prefix_dir + "include/fst/script/project.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_prune",
-    hdrs = [prefix_dir + "include/fst/script/prune.h"],
     srcs = [prefix_dir + "script/prune.cc"],
+    hdrs = [prefix_dir + "include/fst/script/prune.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_push",
-    hdrs = [prefix_dir + "include/fst/script/push.h"],
     srcs = [prefix_dir + "script/push.cc"],
+    hdrs = [prefix_dir + "include/fst/script/push.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_randequivalent",
-    hdrs = [prefix_dir + "include/fst/script/randequivalent.h"],
     srcs = [prefix_dir + "script/randequivalent.cc"],
-    deps = [":fstscript_base"],
+    hdrs = [prefix_dir + "include/fst/script/randequivalent.h"],
+    includes = [prefix_dir + "include"],
+    deps = [
+        ":fstscript_base",
+        ":fstscript_randgen",
+    ],
 )
 
 cc_library(
     name = "fstscript_randgen",
-    hdrs = [prefix_dir + "include/fst/script/randgen.h"],
     srcs = [prefix_dir + "script/randgen.cc"],
+    hdrs = [prefix_dir + "include/fst/script/randgen.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_relabel",
-    hdrs = [prefix_dir + "include/fst/script/relabel.h"],
     srcs = [prefix_dir + "script/relabel.cc"],
+    hdrs = [prefix_dir + "include/fst/script/relabel.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_replace",
-    hdrs = [prefix_dir + "include/fst/script/replace.h"],
     srcs = [prefix_dir + "script/replace.cc"],
+    hdrs = [prefix_dir + "include/fst/script/replace.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_reverse",
-    hdrs = [prefix_dir + "include/fst/script/reverse.h"],
     srcs = [prefix_dir + "script/reverse.cc"],
+    hdrs = [prefix_dir + "include/fst/script/reverse.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_reweight",
-    hdrs = [prefix_dir + "include/fst/script/reweight.h"],
     srcs = [prefix_dir + "script/reweight.cc"],
+    hdrs = [prefix_dir + "include/fst/script/reweight.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_rmepsilon",
-    hdrs = [prefix_dir + "include/fst/script/rmepsilon.h"],
     srcs = [prefix_dir + "script/rmepsilon.cc"],
-    deps = [":fstscript_base"],
+    hdrs = [prefix_dir + "include/fst/script/rmepsilon.h"],
+    includes = [prefix_dir + "include"],
+    deps = [
+        ":fstscript_base",
+        ":fstscript_shortest_distance",
+    ],
 )
 
 cc_library(
     name = "fstscript_shortest_distance",
-    hdrs = [prefix_dir + "include/fst/script/shortest-distance.h"],
     srcs = [prefix_dir + "script/shortest-distance.cc"],
-    deps = [":fstscript_base"],
+    hdrs = [prefix_dir + "include/fst/script/shortest-distance.h"],
+    includes = [prefix_dir + "include"],
+    deps = [
+        ":fstscript_base",
+        ":fstscript_prune",
+    ],
 )
 
 cc_library(
     name = "fstscript_shortest_path",
-    hdrs = [prefix_dir + "include/fst/script/shortest-path.h"],
     srcs = [prefix_dir + "script/shortest-path.cc"],
-    deps = [":fstscript_base"],
+    hdrs = [prefix_dir + "include/fst/script/shortest-path.h"],
+    includes = [prefix_dir + "include"],
+    deps = [
+        ":fstscript_base",
+        ":fstscript_shortest_distance",
+    ],
 )
 
 cc_library(
     name = "fstscript_synchronize",
-    hdrs = [prefix_dir + "include/fst/script/synchronize.h"],
     srcs = [prefix_dir + "script/synchronize.cc"],
+    hdrs = [prefix_dir + "include/fst/script/synchronize.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_topsort",
-    hdrs = [prefix_dir + "include/fst/script/topsort.h"],
     srcs = [prefix_dir + "script/topsort.cc"],
+    hdrs = [prefix_dir + "include/fst/script/topsort.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_union",
-    hdrs = [prefix_dir + "include/fst/script/union.h"],
     srcs = [prefix_dir + "script/union.cc"],
+    hdrs = [prefix_dir + "include/fst/script/union.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript_verify",
-    hdrs = [prefix_dir + "include/fst/script/verify.h"],
     srcs = [prefix_dir + "script/verify.cc"],
+    hdrs = [prefix_dir + "include/fst/script/verify.h"],
+    includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
@@ -893,13 +955,13 @@ cc_binary(
 
 cc_library(
     name = "sttable",
-    hdrs = [
-        prefix_dir + "include/fst/extensions/far/stlist.h",
-        prefix_dir + "include/fst/extensions/far/sttable.h",
-    ],
     srcs = [
         prefix_dir + "extensions/far/stlist.cc",
         prefix_dir + "extensions/far/sttable.cc",
+    ],
+    hdrs = [
+        prefix_dir + "include/fst/extensions/far/stlist.h",
+        prefix_dir + "include/fst/extensions/far/sttable.h",
     ],
     includes = [prefix_dir + "include"],
     deps = [":util"],
@@ -919,6 +981,10 @@ cc_library(
 
 cc_library(
     name = "far",
+    srcs = [
+        prefix_dir + "extensions/far/main.cc",
+        prefix_dir + "extensions/far/strings.cc",
+    ],
     hdrs = [
         prefix_dir + "include/fst/extensions/far/compile-strings.h",
         prefix_dir + "include/fst/extensions/far/create.h",
@@ -927,9 +993,9 @@ cc_library(
         prefix_dir + "include/fst/extensions/far/farlib.h",
         prefix_dir + "include/fst/extensions/far/info.h",
         prefix_dir + "include/fst/extensions/far/isomorphic.h",
+        prefix_dir + "include/fst/extensions/far/main.h",
         prefix_dir + "include/fst/extensions/far/print-strings.h",
     ],
-    srcs = [prefix_dir + "extensions/far/strings.cc"],
     includes = [prefix_dir + "include"],
     deps = [
         ":far_base",
@@ -939,8 +1005,8 @@ cc_library(
 
 cc_library(
     name = "farscript",
-    hdrs = [prefix_dir + "include/fst/extensions/far/farscript.h"],
     srcs = [prefix_dir + "extensions/far/farscript.cc"],
+    hdrs = [prefix_dir + "include/fst/extensions/far/farscript.h"],
     includes = [prefix_dir + "include"],
     deps = [
         ":base",
@@ -949,24 +1015,12 @@ cc_library(
     ],
 )
 
-cc_library(
-    name = "far_main_lib",
-    hdrs = [prefix_dir + "include/fst/extensions/far/main.h"],
-    srcs = [prefix_dir + "extensions/far/main.cc"],
-    includes = [prefix_dir + "include"],
-    visibility = ["//visibility:private"],
-    deps = [
-        ":far",
-        ":farscript",
-    ],
-)
-
 cc_binary(
     name = "farcompilestrings",
     srcs = [prefix_dir + "extensions/far/farcompilestrings.cc"],
     copts = ["-Wno-sign-compare"],
     linkstatic = static_binary,
-    deps = [":far_main_lib"],
+    deps = [":farscript"],
 )
 
 cc_binary(
@@ -974,42 +1028,42 @@ cc_binary(
     srcs = [prefix_dir + "extensions/far/farcreate.cc"],
     copts = ["-Wno-sign-compare"],
     linkstatic = static_binary,
-    deps = [":far_main_lib"],
+    deps = [":farscript"],
 )
 
 cc_binary(
     name = "farequal",
     srcs = [prefix_dir + "extensions/far/farequal.cc"],
     linkstatic = static_binary,
-    deps = [":far_main_lib"],
+    deps = [":farscript"],
 )
 
 cc_binary(
     name = "farextract",
     srcs = [prefix_dir + "extensions/far/farextract.cc"],
     linkstatic = static_binary,
-    deps = [":far_main_lib"],
+    deps = [":farscript"],
 )
 
 cc_binary(
     name = "farinfo",
     srcs = [prefix_dir + "extensions/far/farinfo.cc"],
     linkstatic = static_binary,
-    deps = [":far_main_lib"],
+    deps = [":farscript"],
 )
 
 cc_binary(
     name = "farisomorphic",
     srcs = [prefix_dir + "extensions/far/farisomorphic.cc"],
     linkstatic = static_binary,
-    deps = [":far_main_lib"],
+    deps = [":farscript"],
 )
 
 cc_binary(
     name = "farprintstrings",
     srcs = [prefix_dir + "extensions/far/farprintstrings.cc"],
     linkstatic = static_binary,
-    deps = [":far_main_lib"],
+    deps = [":farscript"],
 )
 
 # Extension: PushDown Transducers a/k/a PDT (extensions/pdt/)
@@ -1036,12 +1090,13 @@ cc_library(
 
 cc_library(
     name = "pdtscript",
-    hdrs = [prefix_dir + "include/fst/extensions/pdt/pdtscript.h"],
     srcs = [prefix_dir + "extensions/pdt/pdtscript.cc"],
+    hdrs = [prefix_dir + "include/fst/extensions/pdt/pdtscript.h"],
     includes = [prefix_dir + "include"],
     deps = [
         ":fst",
         ":fstscript_base",
+        ":fstscript_shortest_path",
         ":pdt",
     ],
 )

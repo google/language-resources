@@ -16,9 +16,9 @@
 # download location.
 
 new_local_repository(
-  name = "openfst",
-  path = "/usr/local/src/openfst-1.5.0",
-  build_file = "openfst.BUILD",
+    name = "openfst",
+    build_file = "openfst.BUILD",
+    path = "/usr/local/src/openfst-1.5.0",
 )
 
 # This does not work either; downloading fails with a 403 status code:
@@ -31,7 +31,7 @@ new_local_repository(
 # )
 
 new_local_repository(
-  name = "thrax",
-  path = "/usr/local/src/thrax-1.1.0",
-  build_file = "thrax.BUILD",
+    name = "thrax",
+    build_file = "thrax.BUILD",
+    path = "/usr/local/src/thrax-1.1.0",
 )

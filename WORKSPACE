@@ -1,4 +1,4 @@
-# OpenFst 1.5.0
+# OpenFst, OpenGrm & Thrax
 #
 # It is possible to configure the Bazel workspace so that dependencies
 # will be downloaded automatically. Unfortunately, the following fails
@@ -14,9 +14,24 @@
 # Work around this by downloading and unpacking the OpenFst distribution
 # manually. The local path below may have to be adjusted to reflect the
 # download location.
-#
+
 new_local_repository(
   name = "openfst",
   path = "/usr/local/src/openfst-1.5.0",
   build_file = "openfst.BUILD",
+)
+
+# This does not work either; downloading fails with a 403 status code:
+#
+# new_http_archive(
+#   name = "thrax",
+#   url = "http://www.openfst.org/twiki/pub/GRM/ThraxDownload/thrax-1.1.0.tar.gz",
+#   sha256 = "ce99d5b9b67b0d4ef3c9d7003aebad37f31235ef03191a44b11facd8e1b917da",
+#   build_file = "thrax.BUILD",
+# )
+
+new_local_repository(
+  name = "thrax",
+  path = "/usr/local/src/thrax-1.1.0",
+  build_file = "thrax.BUILD",
 )

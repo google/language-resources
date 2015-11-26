@@ -59,9 +59,9 @@ def RemoveOptionalZW(text):
   return text
 
 
-class TestRemoveOptionalZW(unittest.TestCase):
+class TestBanglaZeroWidth(unittest.TestCase):
 
-  def TestRemoveOptionalZW(self):
+  def test_RemoveOptionalZW(self):
     rally = '\u09b0\u200d\u09cd\u09af\u09be\u09b2\u09c0'
     self.assertEqual(rally, 'র‍্যালী')
     self.assertEqual(RemoveOptionalZW(rally), rally)

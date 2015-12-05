@@ -1,7 +1,7 @@
-# OpenFst, OpenGrm & Thrax
+# OpenFst, OpenGrm NGram & Thrax
 #
 # It is possible to configure the Bazel workspace so that dependencies
-# will be downloaded automatically. Unfortunately, the following fails
+# will be downloaded automatically. Unfortunately, the following all fail
 # with an HTTP 403 status code:
 #
 # new_http_archive(
@@ -11,7 +11,21 @@
 #   build_file = "openfst.BUILD",
 # )
 #
-# Work around this via a GitHub mirror of OpenFst:
+# new_http_archive(
+#   name = "opengrm-ngram",
+#   url = "http://openfst.org/twiki/pub/GRM/NGramDownload/opengrm-ngram-1.2.1.tar.gz"
+#   sha256 = "713f07dccf225cde29cb048ce955d45d3c2a5ce6be7d923b5a688012d4285453",
+#   build_file = "opengrm-ngram.BUILD",
+# )
+#
+# new_http_archive(
+#   name = "thrax",
+#   url = "http://openfst.org/twiki/pub/GRM/ThraxDownload/thrax-1.1.0.tar.gz",
+#   sha256 = "ce99d5b9b67b0d4ef3c9d7003aebad37f31235ef03191a44b11facd8e1b917da",
+#   build_file = "thrax.BUILD",
+# )
+#
+# Work around this with GitHub mirrors:
 
 new_git_repository(
     name = "openfst",
@@ -20,14 +34,12 @@ new_git_repository(
     tag = "1.5.0",
 )
 
-# This does not work either; downloading fails with a 403 status code:
-#
-# new_http_archive(
-#   name = "thrax",
-#   url = "http://www.openfst.org/twiki/pub/GRM/ThraxDownload/thrax-1.1.0.tar.gz",
-#   sha256 = "ce99d5b9b67b0d4ef3c9d7003aebad37f31235ef03191a44b11facd8e1b917da",
-#   build_file = "thrax.BUILD",
-# )
+new_git_repository(
+    name = "opengrm-ngram",
+    build_file = "opengrm-ngram.BUILD",
+    remote = "https://github.com/mjansche/opengrm-ngram.git",
+    tag = "1.2.1",
+)
 
 new_git_repository(
     name = "thrax",

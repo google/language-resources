@@ -11,14 +11,13 @@
 #   build_file = "openfst.BUILD",
 # )
 #
-# Work around this by downloading and unpacking the OpenFst distribution
-# manually. The local path below may have to be adjusted to reflect the
-# download location.
+# Work around this via a GitHub mirror of OpenFst:
 
-new_local_repository(
+new_git_repository(
     name = "openfst",
     build_file = "openfst.BUILD",
-    path = "/usr/local/src/openfst-1.5.0",
+    remote = "https://github.com/mjansche/openfst.git",
+    tag = "1.5.0",
 )
 
 # This does not work either; downloading fails with a 403 status code:
@@ -30,8 +29,9 @@ new_local_repository(
 #   build_file = "thrax.BUILD",
 # )
 
-new_local_repository(
+new_git_repository(
     name = "thrax",
     build_file = "thrax.BUILD",
-    path = "/usr/local/src/thrax-1.1.0",
+    remote = "https://github.com/mjansche/thrax.git",
+    tag = "1.1.0",
 )

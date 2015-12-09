@@ -47,3 +47,33 @@ new_git_repository(
     remote = "https://github.com/mjansche/thrax.git",
     tag = "1.1.0",
 )
+
+# Google Test & Protocol Buffers
+
+new_git_repository(
+    name = "googletest",
+    remote = "https://github.com/google/googletest.git",
+    commit = "57b376a9cb8b7d0efd958bfaa3204bb33a03ac5e",
+    build_file = "googletest.BUILD",
+)
+
+bind(
+    name = "gtest",
+    actual = "@googletest//:gtest",
+)
+
+bind(
+    name = "gtest_main",
+    actual = "@googletest//:gtest_main",
+)
+
+git_repository(
+    name = "protobuf",
+    remote = "https://github.com/google/protobuf.git",
+    commit = "27c522940b6ea134d206416db5c9c47b22b05683",
+)
+
+bind(
+    name = "protobuf_stubs",
+    actual = "@protobuf//:protobuf_lite",
+)

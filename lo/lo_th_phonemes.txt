@@ -41,7 +41,7 @@ f	ຝົນ	f o R n	ฝน	f o R n	 rain	shn:ၽူၼ်
 m	ແມວ	m ɛɛ H w	แมว	m ɛɛ M w	cat
 y	ຢາ	y aa L	ยา	y aa M	medicine
 r	ຣົຖ	r o M t	รถ	r o H t	vehicle
-l	ລາບ	l aa HF p	l aa F p	meat salad (Larb)
+l	ລາບ	l aa HF p	ลาบ	l aa F p	meat salad (Larb)
 w	ແຫວນ	w ɛɛ R n	แหวน	w ɛɛ R n	ring
 s	ເສືອ	s ʉʉa R	เสือ	s ʉʉa R	tiger	shn:သိူဝ်
 h	ຫ່ານ	h aa M n	ห่าน	h aa L n	goose
@@ -106,7 +106,7 @@ iia	ເມຍ/ເມັຽ	m iia H	เมีย	m iia M	wife
 ʉʉa	ເສືອ	s ʉʉa R	เสือ	s ʉʉa R	tiger	shn:သိူဝ်
 ua	ຕົວະ	t ua H ?	n/a	n/a	to tell lies
 ua	n/a	n/a	ลัวะอ้ายกอน	l ua H ? . ? aa F y . k ɔɔ M n	https://th.wikipedia.org/wiki/วัดพระธาตุลำปางหลวง
-uua	ຕົວ(ອັກສອນ)	t uua L . ? a H k . s ɔɔ R n	ตัว(อักษร) t uua M . ? a L k . s ɔɔ R n	letter, alphabet
+uua	ຕົວ(ອັກສອນ)	t uua L . ? a H k . s ɔɔ R n	ตัว(อักษร)	t uua M . ? a L k . s ɔɔ R n	letter, alphabet
 
 # Tones
 #

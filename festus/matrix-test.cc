@@ -44,14 +44,14 @@ namespace {
 //
 // This illustrates how the MatrixSemiring<RealWeightTpl<T>>::Star() operation
 // instantiates the Gauss-Jordan matrix inversion algorithm -- kind of. An
-// important aspect of Gauss-Jordan is an appropriate pivot selections. In
+// important aspect of Gauss-Jordan is selecting an appropriate pivot. In
 // particular the pivot element cannot be zero. The same is true here, mutatis
 // mutandis: the intermediate diagonal element whose Star() we compute must
 // never be 1, since then the Star operation of the real semiring would not be
 // defined. An intermediate 1 on the diagonal can happen even for well-behaved
 // (non-singular, well-conditioned) matrices, and can only be avoided by pivot
 // selection. Since this is not a matrix library (use e.g. BLAS/LAPACK instead),
-// pivot selection was deliberately omitted. Nevertheless, the implemented
+// pivot selection has been deliberately omitted. Nevertheless, the implemented
 // functionality can be used to illustrate how the MatrixSemiring::Star
 // operation generalizes the core insight of Gauss-Jordan when instantiated to
 // the real semiring.

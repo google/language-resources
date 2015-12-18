@@ -52,28 +52,13 @@ new_git_repository(
 
 new_git_repository(
     name = "googletest",
-    remote = "https://github.com/google/googletest.git",
-    commit = "57b376a9cb8b7d0efd958bfaa3204bb33a03ac5e",
     build_file = "googletest.BUILD",
-)
-
-bind(
-    name = "gtest",
-    actual = "@googletest//:gtest",
-)
-
-bind(
-    name = "gtest_main",
-    actual = "@googletest//:gtest_main",
+    commit = "ddb8012eb48bc203aa93dcc2b22c1db516302b29",
+    remote = "https://github.com/google/googletest.git",
 )
 
 git_repository(
     name = "protobuf",
+    commit = "43f9cb1e6f535e3a57bab517f8041beb2b3b1c51",
     remote = "https://github.com/google/protobuf.git",
-    commit = "27c522940b6ea134d206416db5c9c47b22b05683",
-)
-
-bind(
-    name = "protobuf_stubs",
-    actual = "@protobuf//:protobuf_lite",
 )

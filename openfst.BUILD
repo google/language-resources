@@ -244,7 +244,7 @@ cc_library(
     name = "weight-tester",
     testonly = 1,
     hdrs = [prefix_dir + "test/weight-tester.h"],
-    includes = [prefix_dir + "include"],
+    includes = [prefix_dir],
     deps = [":weight"],
 )
 

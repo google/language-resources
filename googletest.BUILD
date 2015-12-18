@@ -3,7 +3,10 @@ package(default_visibility = ["//visibility:public"])
 cc_library(
     name = "gtest",
     srcs = glob(
-        ["googletest/src/*.cc", "googletest/src/*.h"],
+        [
+            "googletest/src/*.cc",
+            "googletest/src/*.h",
+        ],
         exclude = ["googletest/src/gtest-all.cc"],
     ),
     hdrs = glob(["googletest/include/**/*.h"]),

@@ -78,3 +78,29 @@ cc_test(
         ":real-weight",
     ],
 )
+
+cc_library(
+    name = "proto-util",
+    srcs = ["proto-util.cc"],
+    hdrs = ["proto-util.h"],
+    deps = [
+        "@openfst//:base",
+        "@protobuf//:protobuf",
+    ],
+)
+
+cc_library(
+    name = "label-maker",
+    srcs = ["label-maker.cc"],
+    hdrs = ["label-maker.h"],
+    deps = [
+        "@openfst//:base",
+        "@openfst//:symbol-table",
+    ],
+)
+
+cc_library(
+    name = "fst-util",
+    hdrs = ["fst-util.h"],
+    deps = ["@openfst//:fst"],
+)

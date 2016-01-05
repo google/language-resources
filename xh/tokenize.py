@@ -42,7 +42,6 @@ def Tokens(line):
   for token in line.split():
     for match in TOKEN_RE.finditer(token):
       yield match.group(0)
-
   return
 
 

@@ -1,6 +1,21 @@
 # Pronunciation rules for isiXhosa.
 #
 # Author: mjansche@google.com (Martin Jansche)
+#
+# These rules transcribe isiXhosa into the phoneme inventory used within the
+# NCHLT Speech Corpus (https://sites.google.com/site/nchltspeechcorpus/home).
+#
+# The rules were tested using the NCHLT-inlang isiXhosa pronunciation dictionary
+# (http://rma.nwu.ac.za/index.php/resource-catalogue/nchlt-inlang-dictionaries.html).
+# They correctly account for 14,999 out of 15,000 entries in the dictionary.
+#
+# The NCHLT 2013 phone set does not distinguish short and long vowels and does
+# not indicate tone in any way. Transcription of tone is out of scope without a
+# dictionary, since tone is generally not indicated in the orthography.
+#
+# One minor notational difference here is that we use a tie bar for the complex
+# (slack voiced) clicks, e.g. ɡ͡ǀ instead of ɡǀ, to avoid ambiguity and make the
+# phoneme inventory uniquely decodable.
 
 ::Lower;
 

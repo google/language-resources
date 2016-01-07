@@ -29,7 +29,7 @@ b_<	ɓ
 t_h	tʰ
 t_>	tʼ
 d	d
-c_>	c'
+c_>	cʼ
 c_h	cʰ
 J\	ɟ
 k_>	kʼ
@@ -41,7 +41,7 @@ J	ɲ
 N	ŋ
 m_h	mʰ
 n_h	nʰ
-J_h	Jʰ
+J_h	ɲʰ
 i	i
 u	u
 E	ɛ

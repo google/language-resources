@@ -16,6 +16,12 @@ lo_dictionary_by_mopt_laos
 * Version: 2012-08-30
 * License: MIT license
 
+[nchlt_inlang](http://rma.nwu.ac.za/index.php/resource-catalogue/nchlt-inlang-dictionaries.html)
+-----------
+
+* Description: NCHLT-inlang Pronunciation Dictionaries for South Africa
+* Version: 2013-11-05
+* License: Creative Commons Attribution 3.0 Unported License (CC BY 3.0); see [LICENSE.txt](nchlt_inlang/LICENSE.txt)
 
 [pron_dict](http://www.malfong.is/index.php?pg=framburdur&lang=en)
 -----------

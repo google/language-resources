@@ -11,18 +11,19 @@
 #
 # The NCHLT 2013 phone set does not distinguish short and long vowels and does
 # not indicate tone in any way. Transcription of tone is out of scope without a
-# dictionary, since tone is generally not indicated in the orthography.
+# dictionary, since tone is generally not indicated in the orthography. Nasal
+# clicks are not treated as separated phonemes in the NCHLT 2013 phone set and
+# are transcribed as a sequence of nasal plus click instead.
 #
-# One minor notational difference here is that we use a tie bar for the complex
-# (slack voiced) clicks, e.g. ɡ͡ǀ instead of ɡǀ, to avoid ambiguity and make the
-# phoneme inventory uniquely decodable.
+# One minor notational deviation from the NCHLT 2013 phone set is that we use a
+# tie bar within the complex (slack voiced) clicks, e.g. ɡ͡ǀ instead of ɡǀ, to
+# avoid ambiguity and make the phoneme inventory uniquely decodable.
 
 ::Lower;
 
-ntsh → nt͡ʃʼ;
-
 nyh → ɲʰ;
-tsh → t͡ʃʰ;
+n { tsh → t͡ʃʼ;
+    tsh → t͡ʃʰ;
 tyh → cʰ;
 
 bh → bʰ;

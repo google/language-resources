@@ -32,3 +32,19 @@ sh_test(
         "//tools:uniquely_decodable",
     ],
 )
+
+py_test(
+    name = "evaluate_pronunciation_rules",
+    timeout = "short",
+    srcs = ["evaluate_pronunciation_rules.py"],
+    args = [
+        "$(location //third_party/cldr:xh-xh_FONIPA.txt)",
+        "$(location phonemes.txt)",
+        "$(location //third_party/nchlt_inlang:release/dictionaries/nchlt_xho.dict)",
+    ],
+    data = [
+        "phonemes.txt",
+        "//third_party/cldr:xh-xh_FONIPA.txt",
+        "//third_party/nchlt_inlang:release/dictionaries/nchlt_xho.dict",
+    ],
+)

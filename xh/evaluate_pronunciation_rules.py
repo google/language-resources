@@ -48,6 +48,7 @@ def GetSampaToIpaMapping(path):
 
 def TestPronunciationRules(xltor, mapping, dictionary):
   # Batch testing against a dictionary.
+  success = True
   with codecs.open(dictionary, 'r', 'utf-8') as reader:
     for line in reader:
       line = line.rstrip('\n')
@@ -62,8 +63,8 @@ def TestPronunciationRules(xltor, mapping, dictionary):
       if predicted != ipa:
         STDOUT.write('%s\t%s\t%s != %s\n' %
                      (orth, ' '.join(sampa), ipa, predicted))
-        return False
-  return True
+        success = False
+  return success
 
 
 def ApplyPronunciationRules(xltor):

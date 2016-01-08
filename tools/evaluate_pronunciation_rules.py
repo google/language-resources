@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Evaluate isiXhosa pronunciation rules against the NCHLT dictionary.
+"""Evaluate pronunciation rules against the NCHLT dictionaries.
 """
 
 from __future__ import unicode_literals
@@ -25,6 +25,10 @@ import icu  # Debian/Ubuntu: apt-get install python-pyicu
 import sys
 
 STDOUT = codecs.getwriter('utf-8')(sys.stdout)
+
+EXCEPTIONAL_WORDS = frozenset([
+    'apreli',  # known exception in the NCHLT isiXhosa dictionary
+    ])
 
 
 def GetPronunciationRules(path, name):
@@ -57,7 +61,7 @@ def TestPronunciationRules(xltor, mapping, dictionary):
       orth, pron = fields
       sampa = pron.split()
       ipa = ''.join(mapping[p] for p in sampa)
-      if orth == 'apreli':  # known issue
+      if orth in EXCEPTIONAL_WORDS:
         continue
       predicted = xltor.transliterate(orth)
       if predicted != ipa:
@@ -82,10 +86,10 @@ def ApplyPronunciationRules(xltor):
 
 def main(args):
   if len(args) == 2:
-    xltor = GetPronunciationRules(args[1], 'xh-xh_FONIPA')
+    xltor = GetPronunciationRules(args[1], 'foo-bar')
     ApplyPronunciationRules(xltor)
   elif len(args) == 4:
-    xltor = GetPronunciationRules(args[1], 'xh-xh_FONIPA')
+    xltor = GetPronunciationRules(args[1], 'foo-bar')
     mapping = GetSampaToIpaMapping(args[2])
     if TestPronunciationRules(xltor, mapping, args[3]):
       STDOUT.write('PASS\n')

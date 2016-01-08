@@ -30,3 +30,9 @@ py_binary(
     srcs = ["evaluate_pronunciation_rules.py"],
     default_python_version = "PY2",
 )
+
+py_binary(
+    name = "test_icu_transform",
+    srcs = ["test_icu_transform.py"],
+    default_python_version = "PY2",
+)

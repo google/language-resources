@@ -24,3 +24,9 @@ py_binary(
     srcs = ["uniquely_decodable.py"],
     default_python_version = "PY2",
 )
+
+py_binary(
+    name = "evaluate_pronunciation_rules",
+    srcs = ["evaluate_pronunciation_rules.py"],
+    default_python_version = "PY2",
+)

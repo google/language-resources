@@ -33,18 +33,22 @@ sh_test(
     ],
 )
 
-py_test(
-    name = "evaluate_pronunciation_rules",
+sh_test(
+    name = "pronunciation_rules_match_nchlt_dictionary",
     timeout = "short",
-    srcs = ["evaluate_pronunciation_rules.py"],
+    srcs = ["//tools:eval.sh"],
     args = [
-        "$(location //third_party/cldr:xh-xh_FONIPA.txt)",
-        "$(location phonemes.txt)",
-        "$(location //third_party/nchlt_inlang:release/dictionaries/nchlt_xho.dict)",
+        """
+        $(location //tools:evaluate_pronunciation_rules) \
+          $(location //third_party/cldr:xh-xh_FONIPA.txt) \
+          $(location phonemes.txt) \
+          $(location //third_party/nchlt_inlang:release/dictionaries/nchlt_xho.dict)
+        """,
     ],
     data = [
         "phonemes.txt",
         "//third_party/cldr:xh-xh_FONIPA.txt",
         "//third_party/nchlt_inlang:release/dictionaries/nchlt_xho.dict",
+        "//tools:evaluate_pronunciation_rules",
     ],
 )

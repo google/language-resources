@@ -6,3 +6,9 @@ exports_files([
     "xh-xh_FONIPA.txt",
     "zu-zu_FONIPA.txt",
 ])
+
+load("build_defs", "transform_test")
+
+transform_test("xh")
+
+transform_test("zu")

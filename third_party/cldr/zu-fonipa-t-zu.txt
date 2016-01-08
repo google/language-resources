@@ -1,25 +1,34 @@
-abaxhasi	a b_< a |\|\h a s i
-bakholwa	b_< a k_h O l w a
-bayasebenza	b_< a j a s E b_< E n dz a
-dekle	d E kK_> E
-eliphansi	E l i p_h a n ts_> i
-equkethe	E !\ u k E t_h E
-esingangezinyanga	E s i N g a N g E z i J a N g a
-esingaphambili	E s i N g a p_h a m b i l i
-ezibhala	E z i b a l a
-ezinsha	E z i n ts_> a
-hhi	h\ i
-ingqondo	i N !\g_0 O n d O
-kuchazwe	k u |\h a z w E
-kwengxenye	k w E N |\|\g_0 E J E
-nengculazi	n E N |\g_0 u l a z i
-ngangazi	N g a N g a z i
-ngcono	n |\g_0 O n O
-ngiyifundile	N g i j i f u n d i l E
-nokuhlola	n O k u K O l a
-ukuqhubeka	u k u !\h u b_< E k a
-ukutshelwa	u k u tS_> E l w a
-wasemaphandleni	w a s E m a p_h a n K\ E n i
-wokuthula	w O k u t_h u l a
-yamanje	j a m a J d_0Z E
-yokuvuma	j O k u v u m a
+amatoho	amatʼɔhɔ
+angagcina	aŋɡaɡ͡ǀina
+bangempela	ɓaŋɡɛmpʼɛla
+dekle	dɛk͡ɬɛ
+enecala	ɛnɛǀala
+engqondo	ɛŋɡ͡ǃɔndɔ
+esibheka	ɛsibɛka
+eyehlukene	ɛjɛɬukɛnɛ
+ezikhula	ɛzikʰula
+ezinsha	ɛzint͡sʼa
+imantshi	imant͡ʃʼi
+imingcele	imiŋɡ͡ǀɛlɛ
+isiqalo	isiǃalɔ
+isithole	isitʰɔlɛ
+izinkomba	iziŋkɔmba
+kanye	kaɲɛ
+kuqhubekela	kuǃʰuɓɛkɛla
+kusonto	kusɔntʼɔ
+kwezinsiza	kwɛzint͡sʼiza
+lomgwaqo	lɔmɡwaǃɔ
+nabangama	naɓaŋɡama
+nanxa	nanǁa
+ngencazelo	ŋɡɛnǀazɛlɔ
+njengokusebenza	ɲd͡ʒɛŋɡɔkusɛɓɛnd͡za
+nohlelo	nɔɬɛlɔ
+sengifuna	sɛŋɡifuna
+uchaze	uǀʰazɛ
+udweshu	udwɛʃu
+uju	ud͡ʒu
+ukukhuphula	ukukʰupʰula
+wehhovisi	wɛɦɔvisi
+wokudla	wɔkuɮa
+yingxenye	jiŋɡ͡ǁɛɲɛ
+yokuxhumana	jɔkuǁʰumana

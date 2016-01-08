@@ -62,11 +62,11 @@ def TestPronunciationRules(xltor, mapping, dictionary):
       if predicted != ipa:
         STDOUT.write('%s\t%s\t%s != %s\n' %
                      (orth, ' '.join(sampa), ipa, predicted))
-        sys.exit(1)
-  return
+        return False
+  return True
 
 
-def ApplyPronunciationRules(xltor, mapping):
+def ApplyPronunciationRules(xltor):
   # For interactive use.
   while True:
     line = sys.stdin.readline()
@@ -79,11 +79,23 @@ def ApplyPronunciationRules(xltor, mapping):
   return
 
 
-if __name__ == '__main__':
-  assert 3 <= len(sys.argv) <= 4
-  xltor = GetPronunciationRules(sys.argv[1], 'xh-xh_FONIPA')
-  mapping = GetSampaToIpaMapping(sys.argv[2])
-  if len(sys.argv) > 3:
-    TestPronunciationRules(xltor, mapping, sys.argv[3])
+def main(args):
+  if len(args) == 2:
+    xltor = GetPronunciationRules(args[1], 'xh-xh_FONIPA')
+    ApplyPronunciationRules(xltor)
+  elif len(args) == 4:
+    xltor = GetPronunciationRules(args[1], 'xh-xh_FONIPA')
+    mapping = GetSampaToIpaMapping(args[2])
+    if TestPronunciationRules(xltor, mapping, args[3]):
+      STDOUT.write('PASS\n')
+      sys.exit(0)
+    else:
+      STDOUT.write('FAIL\n')
+      sys.exit(1)
   else:
-    ApplyPronunciationRules(xltor, mapping)
+    STDOUT.write('Usage: %s RULES [MAPPING DICTIONARY]\n' % args[0])
+    sys.exit(1)
+
+
+if __name__ == '__main__':
+  main(sys.argv)

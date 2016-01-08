@@ -32,3 +32,23 @@ sh_test(
         "//tools:uniquely_decodable",
     ],
 )
+
+sh_test(
+    name = "pronunciation_rules_match_nchlt_dictionary",
+    timeout = "short",
+    srcs = ["//tools:eval.sh"],
+    args = [
+        """
+        $(location //tools:evaluate_pronunciation_rules) \
+          $(location //third_party/cldr:zu-zu_FONIPA.txt) \
+          $(location phonemes.txt) \
+          $(location //third_party/nchlt_inlang:release/dictionaries/nchlt_zul.dict)
+        """,
+    ],
+    data = [
+        "phonemes.txt",
+        "//third_party/cldr:zu-zu_FONIPA.txt",
+        "//third_party/nchlt_inlang:release/dictionaries/nchlt_zul.dict",
+        "//tools:evaluate_pronunciation_rules",
+    ],
+)

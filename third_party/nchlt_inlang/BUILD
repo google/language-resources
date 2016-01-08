@@ -4,4 +4,5 @@ licenses(["notice"])  # CC BY 3.0
 
 exports_files([
     "release/dictionaries/nchlt_xho.dict",
+    "release/dictionaries/nchlt_zul.dict",
 ])

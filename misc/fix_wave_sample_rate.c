@@ -89,7 +89,7 @@ bool CheckSampleRate(const struct WaveHeader *hdr, const char *path) {
 }
 
 void FixSampleRate(const char *path) {
-  FILE *f = fopen(path, "r+");
+  FILE *f = fopen(path, "r");
   if (!f) {
     perror(path);
     return;
@@ -104,23 +104,34 @@ void FixSampleRate(const char *path) {
       fprintf(stderr, "%s: Could not read wave header (file too short?)\n",
               path);
     }
-    fclose(f);
     return;
   }
+  if (fclose(f) != 0) perror(path);
   if (!CheckHeader(&header, path)) {
-    fclose(f);
     return;
   }
   PrettyPrintHeader(&header, path);
-  header.sample_rate = 48000;
-  if (!CheckSampleRate(&header, path)) {
-    fclose(f);
+  if (header.sample_rate == 48000 && header.byte_rate == 96000) {
+    // Looks good already, nothing to be done.
     return;
   }
-  rewind(f);
+  if (header.byte_rate != 96000) {
+    fprintf(stderr, "%s: Don't know what to do about byte rate %u Bps\n",
+            path, header.byte_rate);
+    return;
+  }
+  header.sample_rate = 48000;
+  if (!CheckSampleRate(&header, path)) {
+    return;
+  }
+  f = fopen(path, "r+");
+  if (!f) {
+    perror(path);
+    return;
+  }
   if (fwrite(&header, kWaveHeaderSize, 1, f) != 1) {
     perror(path);
-    fclose(f);
+    if (fclose(f) != 0) perror(path);
     return;
   }
   if (fflush(f) != 0) {

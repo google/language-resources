@@ -36,3 +36,12 @@ py_binary(
     srcs = ["test_icu_transform.py"],
     default_python_version = "PY2",
 )
+
+cc_binary(
+    name = "thrax_g2p",
+    srcs = ["thrax_g2p.cc"],
+    deps = [
+        "@openfst//:fst",
+        "@thrax//:grm-manager",
+    ],
+)

@@ -68,6 +68,7 @@ class SplitString {
 
 DEFINE_string(fst, "", "Path to G2P FST.");
 DEFINE_string(far, "", "Path to FAR file containing G2P FST.");
+DEFINE_string(far_g2p_key, "G2P", "Name of G2P FST within the FAR file.");
 DEFINE_string(phoneme_syms, "", "Path to phoneme symbols.");
 
 int main(int argc, char *argv[]) {
@@ -86,9 +87,10 @@ int main(int argc, char *argv[]) {
       LOG(ERROR) << "Could not load FAR from " << FLAGS_far;
       return 1;
     }
-    const auto *g2p = grm_manager.GetFst("G2P");
+    const auto *g2p = grm_manager.GetFst(FLAGS_far_g2p_key);
     if (!g2p) {
-      LOG(ERROR) << "Could not find G2P FST inside FAR " << FLAGS_far;
+      LOG(ERROR) << "Could not find G2P FST with key " << FLAGS_far_g2p_key
+                 << " inside FAR " << FLAGS_far;
       return 1;
     }
     fst.reset(new StdVectorFst());

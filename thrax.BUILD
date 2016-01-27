@@ -87,7 +87,7 @@ cc_library(
     deps = [
         ":compat",
         openfst + ":far_base",
-        openfst + ":fst_no_export_dynamic",
+        openfst + ":fst",
         openfst + ":pdt",
     ],
 )
@@ -142,7 +142,7 @@ cc_library(
     deps = [
         ":compat",
         openfst + ":far_base",
-        openfst + ":fst_no_export_dynamic",
+        openfst + ":fst",
         openfst + ":pdt",
     ],
 )
@@ -212,7 +212,7 @@ cc_library(
         ":function",
         ":grm-manager",
         openfst + ":far_base",
-        openfst + ":fst_no_export_dynamic",
+        openfst + ":fst",
         openfst + ":pdt",
     ],
 )

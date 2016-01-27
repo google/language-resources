@@ -61,7 +61,7 @@ cc_library(
         "-Wno-unused-but-set-variable",
     ],
     includes = [prefix_dir + "include"],
-    deps = [openfst + ":fst_no_export_dynamic"],
+    deps = [openfst + ":fst"],
 )
 
 cc_binary(

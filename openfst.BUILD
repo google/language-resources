@@ -2,7 +2,7 @@ package(default_visibility = ["//visibility:public"])
 
 prefix_dir = "src/"
 
-static_binary = 0
+static_binary = 1
 
 # Core library (lib/)
 
@@ -13,17 +13,11 @@ cc_library(
     deps = [":base"],
 )
 
+# This version does not have export-dynamic flag set and should not be used to
+# load dynamic-shared object FST extensions. Please see the "lib_export_dynamic"
+# target below for binaries that need DSO loading.
 cc_library(
     name = "fst",
-    linkopts = ["-Wl,--export-dynamic"],
-    deps = [":fst_no_export_dynamic"],
-)
-
-# This version does not have export-dynamic flag set and should not be used
-# to load dynamic-shared object FST extensions. Please see "fst" rule above
-# for binaries that need DSO loading.
-cc_library(
-    name = "fst_no_export_dynamic",
     srcs = [
         prefix_dir + "lib/fst.cc",
         prefix_dir + "lib/properties.cc",
@@ -119,6 +113,12 @@ cc_library(
         ":util",
         ":weight",
     ],
+)
+
+cc_library(
+    name = "lib_export_dynamic",
+    linkopts = ["-Wl,--export-dynamic"],
+    deps = [":fst"],
 )
 
 cc_library(

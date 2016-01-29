@@ -29,3 +29,10 @@ lo_dictionary_by_mopt_laos
 * Description: Pronunciation dictionary for Icelandic
 * Version: 2013-01-06
 * License: Creative Commons Attribution (CC BY) 3.0; see [license.txt](pron_dict/license.txt)
+
+[wikimedia](https://wikimediafoundation.org/wiki/Our_projects)
+-----------
+
+* Description: various text files excerpted from Wikimedia projects
+* Version: see [wikimedia/README.md](wikimedia/README.md)
+* License: Creative Commons Attribution-ShareAlike (CC BY-SA) 3.0

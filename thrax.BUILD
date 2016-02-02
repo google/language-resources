@@ -24,7 +24,11 @@ cc_binary(
 
 cc_binary(
     name = "thraxrewrite-tester",
-    srcs = [prefix_dir + "bin/rewrite-tester.cc"],
+    srcs = [
+        prefix_dir + "bin/rewrite-tester.cc",
+        prefix_dir + "bin/rewrite-tester-utils.cc",
+        prefix_dir + "bin/rewrite-tester-utils.h",
+    ],
     deps = [":thrax_main_lib"],
 )
 
@@ -88,6 +92,7 @@ cc_library(
         ":compat",
         openfst + ":far_base",
         openfst + ":fst",
+        openfst + ":mpdt",
         openfst + ":pdt",
     ],
 )
@@ -100,7 +105,8 @@ cc_library(
         prefix_dir + "lib/walker/symbols.cc",
     ],
     hdrs = [
-        prefix_dir + "include/thrax/algo/context_dependent_rewrite.h",
+        prefix_dir + "include/thrax/algo/cdrewrite.h",
+        #prefix_dir + "include/thrax/algo/context_dependent_rewrite.h",
         prefix_dir + "include/thrax/algo/prefix_tree.h",
         prefix_dir + "include/thrax/compat/oneof.h",
         prefix_dir + "include/thrax/datatype.h",
@@ -125,10 +131,12 @@ cc_library(
         prefix_dir + "include/thrax/loadfst.h",
         prefix_dir + "include/thrax/loadfstfromfar.h",
         prefix_dir + "include/thrax/minimize.h",
+        prefix_dir + "include/thrax/mpdtcompose.h",
         prefix_dir + "include/thrax/optimize.h",
         prefix_dir + "include/thrax/paradigm.h",
         prefix_dir + "include/thrax/pdtcompose.h",
         prefix_dir + "include/thrax/project.h",
+        prefix_dir + "include/thrax/replace.h",
         prefix_dir + "include/thrax/reverse.h",
         prefix_dir + "include/thrax/rewrite.h",
         prefix_dir + "include/thrax/rmepsilon.h",
@@ -143,6 +151,7 @@ cc_library(
         ":compat",
         openfst + ":far_base",
         openfst + ":fst",
+        openfst + ":mpdt",
         openfst + ":pdt",
     ],
 )

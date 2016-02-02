@@ -45,7 +45,7 @@ new_git_repository(
     name = "thrax",
     build_file = "thrax.BUILD",
     remote = "https://github.com/mjansche/thrax.git",
-    tag = "1.1.0",
+    tag = "1.2.0",
 )
 
 # Google Test & Protocol Buffers

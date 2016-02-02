@@ -1146,3 +1146,67 @@ cc_binary(
     linkstatic = static_binary,
     deps = [":pdtscript"],
 )
+
+# Extension: Multi PushDown Transducers a/k/a MPDT (extensions/mpdt/)
+
+cc_library(
+    name = "mpdt",
+    hdrs = [
+        prefix_dir + "include/fst/extensions/mpdt/compose.h",
+        prefix_dir + "include/fst/extensions/mpdt/expand.h",
+        prefix_dir + "include/fst/extensions/mpdt/info.h",
+        prefix_dir + "include/fst/extensions/mpdt/mpdt.h",
+        prefix_dir + "include/fst/extensions/mpdt/read_write_utils.h",
+        prefix_dir + "include/fst/extensions/mpdt/reverse.h",
+    ],
+    includes = [prefix_dir + "include"],
+    deps = [
+        ":fst",
+        ":pdt",
+    ],
+)
+
+cc_library(
+    name = "mpdtscript",
+    srcs = [prefix_dir + "extensions/mpdt/mpdtscript.cc"],
+    hdrs = [prefix_dir + "include/fst/extensions/mpdt/mpdtscript.h"],
+    includes = [prefix_dir + "include"],
+    deps = [
+        ":fst",
+        ":fstscript_base",
+        ":fstscript_shortest_path",
+        ":mpdt",
+        ":pdtscript",
+    ],
+)
+
+cc_binary(
+    name = "mpdtcompose",
+    srcs = [prefix_dir + "extensions/mpdt/mpdtcompose.cc"],
+    linkstatic = static_binary,
+    deps = [
+        ":fstscript_connect",
+        ":mpdtscript",
+    ],
+)
+
+cc_binary(
+    name = "mpdtexpand",
+    srcs = [prefix_dir + "extensions/mpdt/mpdtexpand.cc"],
+    linkstatic = static_binary,
+    deps = [":mpdtscript"],
+)
+
+cc_binary(
+    name = "mpdtinfo",
+    srcs = [prefix_dir + "extensions/mpdt/mpdtinfo.cc"],
+    linkstatic = static_binary,
+    deps = [":mpdtscript"],
+)
+
+cc_binary(
+    name = "mpdtreverse",
+    srcs = [prefix_dir + "extensions/mpdt/mpdtreverse.cc"],
+    linkstatic = static_binary,
+    deps = [":mpdtscript"],
+)

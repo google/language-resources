@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright 2015 Google, Inc.
+# Copyright 2015, 2016 Google, Inc.
 # Author: mjansche@google.com (Martin Jansche)
 
 package(default_visibility = ["//visibility:public"])
@@ -86,6 +86,25 @@ cc_library(
     deps = [
         "@openfst//:base",
         "@protobuf//:protobuf",
+    ],
+)
+
+cc_library(
+    name = "string-util",
+    srcs = ["string-util.cc"],
+    hdrs = ["string-util.h"],
+    deps = [
+        "@protobuf//:protobuf_lite",
+    ],
+)
+
+cc_test(
+    name = "string-util-test",
+    timeout = "short",
+    srcs = ["string-util-test.cc"],
+    deps = [
+        "@googletest//:gtest_main",
+        ":string-util",
     ],
 )
 

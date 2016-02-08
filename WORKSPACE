@@ -59,6 +59,6 @@ new_git_repository(
 
 git_repository(
     name = "protobuf",
-    commit = "287a095c87d2c188a6869a1e8addcc5d7ab18958",
     remote = "https://github.com/google/protobuf.git",
+    tag = "v3.0.0-beta-2",
 )

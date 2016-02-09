@@ -146,6 +146,10 @@ CODEPOINT_TO_SYMBOL = {
     # Zero-width non-joiner and zero-width joiner
     0x200C: 'ZWNJ',
     0x200D: 'ZWJ',
+
+    # Private-use characters
+    0xE000: '-a',         # inherent vowel
+    0xE001: 'ya_phalaa',  # jo-fola
 }
 
 

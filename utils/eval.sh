@@ -1,2 +1,5 @@
-#! /bin/sh
+#! /bin/bash
+set -o errexit
+set -o pipefail
+set -o nounset
 eval "$@"

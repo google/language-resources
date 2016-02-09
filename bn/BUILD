@@ -20,15 +20,15 @@ package(default_visibility = ["//visibility:public"])
 sh_test(
     name = "ipa_phonemes_are_uniquely_decodable",
     timeout = "short",
-    srcs = ["//tools:eval.sh"],
+    srcs = ["//utils:eval.sh"],
     args = [
         """
         cut -f 2 $(location phonemes.txt) |
-        $(location //tools:uniquely_decodable)
+        $(location //utils:uniquely_decodable)
         """,
     ],
     data = [
         "phonemes.txt",
-        "//tools:uniquely_decodable",
+        "//utils:uniquely_decodable",
     ],
 )

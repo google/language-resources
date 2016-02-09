@@ -20,26 +20,26 @@ package(default_visibility = ["//visibility:public"])
 sh_test(
     name = "ipa_phonemes_are_uniquely_decodable",
     timeout = "short",
-    srcs = ["//tools:eval.sh"],
+    srcs = ["//utils:eval.sh"],
     args = [
         """
         cut -f 2 $(location phonemes.txt) |
-        $(location //tools:uniquely_decodable)
+        $(location //utils:uniquely_decodable)
         """,
     ],
     data = [
         "phonemes.txt",
-        "//tools:uniquely_decodable",
+        "//utils:uniquely_decodable",
     ],
 )
 
 sh_test(
     name = "pronunciation_rules_match_nchlt_dictionary",
     timeout = "short",
-    srcs = ["//tools:eval.sh"],
+    srcs = ["//utils:eval.sh"],
     args = [
         """
-        $(location //tools:evaluate_pronunciation_rules) \
+        $(location //utils:evaluate_pronunciation_rules) \
           $(location //third_party/cldr:xh-xh_FONIPA.txt) \
           $(location phonemes.txt) \
           $(location //third_party/nchlt_inlang:release/dictionaries/nchlt_xho.dict)
@@ -49,6 +49,6 @@ sh_test(
         "phonemes.txt",
         "//third_party/cldr:xh-xh_FONIPA.txt",
         "//third_party/nchlt_inlang:release/dictionaries/nchlt_xho.dict",
-        "//tools:evaluate_pronunciation_rules",
+        "//utils:evaluate_pronunciation_rules",
     ],
 )

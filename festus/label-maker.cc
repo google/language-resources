@@ -22,6 +22,7 @@
 #include <vector>
 
 #include <fst/compat.h>
+#include <fst/icu.h>
 #include <fst/symbol-table.h>
 
 #include "festus/string-util.h"
@@ -49,6 +50,21 @@ bool ByteLabelMaker::LabelsToString(const Labels &labels, string *str) const {
     str->push_back(static_cast<char>(label));
   }
   return true;
+}
+
+bool UnicodeLabelMaker::StringToLabels(const StringPiece str,
+                                       Labels *labels) const {
+  labels->clear();
+  if (!IsStructurallyValidUTF8(str)) {
+    LOG(WARNING) << "String is not structurally valid UTF-8: " << str;
+    return false;
+  }
+  return fst::UTF8StringToLabels(str.ToString(), labels);
+}
+
+bool UnicodeLabelMaker::LabelsToString(const Labels &labels,
+                                       string *str) const {
+  return fst::LabelsToUTF8String(labels, str);
 }
 
 SymbolLabelMaker::SymbolLabelMaker(const fst::SymbolTable *symbols,

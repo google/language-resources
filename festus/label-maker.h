@@ -30,28 +30,41 @@
 
 namespace festus {
 
+// Abstract converter between C++ byte strings and FST label sequences.
 class LabelMaker {
  public:
   typedef std::vector<int> Labels;
 
   virtual ~LabelMaker() = default;
 
-  virtual const fst::SymbolTable *Symbols() const = 0;
+  virtual const fst::SymbolTable *Symbols() const { return nullptr; }
 
   virtual bool StringToLabels(const StringPiece str, Labels *labels) const = 0;
   virtual bool LabelsToString(const Labels &labels, string *str) const = 0;
 };
 
+// Converter that turns a C++ byte string into an FST label sequence where
+// bytes (viewed as unsigned integers) correspond one-for-one to labels.
 class ByteLabelMaker : public LabelMaker {
  public:
   ByteLabelMaker() = default;
-
-  const fst::SymbolTable *Symbols() const override { return nullptr; }
 
   bool StringToLabels(const StringPiece str, Labels *labels) const override;
   bool LabelsToString(const Labels &labels, string *str) const override;
 };
 
+// Converter between UTF-8 byte strings and sequences of Unicode codepoints.
+// Strings must be structurally valid UTF-8. Labels represent UTF-32 codepoints.
+class UnicodeLabelMaker : public LabelMaker {
+ public:
+  UnicodeLabelMaker() = default;
+
+  bool StringToLabels(const StringPiece str, Labels *labels) const override;
+  bool LabelsToString(const Labels &labels, string *str) const override;
+};
+
+// Converter that splits a byte string into symbols and looks up the label
+// values in the provided symbol table.
 class SymbolLabelMaker : public LabelMaker {
  public:
   // TODO: Add special handling of "" as delimiter.

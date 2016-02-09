@@ -1212,3 +1212,23 @@ cc_binary(
     linkstatic = static_binary,
     deps = [":mpdtscript"],
 )
+
+# Extension: LOUDS compressed n-gram language models (extensions/ngram/)
+
+cc_library(
+    name = "ngram",
+    srcs = [
+        prefix_dir + "extensions/ngram/bitmap-index.cc",
+        prefix_dir + "extensions/ngram/ngram-fst.cc",
+        prefix_dir + "extensions/ngram/nthbit.cc",
+    ],
+    hdrs = [
+        prefix_dir + "include/fst/extensions/ngram/bitmap-index.h",
+        prefix_dir + "include/fst/extensions/ngram/ngram-fst.h",
+        prefix_dir + "include/fst/extensions/ngram/nthbit.h",
+    ],
+    includes = [prefix_dir + "include"],
+    deps = [
+        ":fst",
+    ],
+)

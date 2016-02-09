@@ -233,6 +233,7 @@ cc_library(
 
 cc_test(
     name = "fst_test",
+    timeout = "short",
     srcs = [
         prefix_dir + "test/fst_test.cc",
         prefix_dir + "test/fst_test.h",
@@ -250,6 +251,7 @@ cc_library(
 
 cc_test(
     name = "weight_test",
+    timeout = "short",
     srcs = [prefix_dir + "test/weight_test.cc"],
     copts = ["-Wno-unused-local-typedefs"],
     deps = [

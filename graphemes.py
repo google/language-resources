@@ -18,7 +18,7 @@
 import importlib
 import sys
 
-from tools import grapheme_util
+from utils import grapheme_util
 
 if len(sys.argv) <= 1:
   sys.stderr.write('Usage: %s LANGUAGE\n' % sys.argv[0])

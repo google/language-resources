@@ -23,8 +23,8 @@ import os.path
 import re
 import sys
 
-from tools import grapheme_util
-from tools import icu_util
+from utils import grapheme_util
+from utils import icu_util
 
 STDOUT = codecs.lookup('utf-8').streamwriter(sys.stdout)
 STDERR = codecs.lookup('utf-8').streamwriter(sys.stderr)

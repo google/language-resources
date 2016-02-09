@@ -115,6 +115,7 @@ cc_library(
     deps = [
         "@openfst//:base",
         "@openfst//:symbol-table",
+        ":string-util",
     ],
 )
 

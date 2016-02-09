@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Copyright 2015 Google, Inc.
+// Copyright 2015, 2016 Google, Inc.
 // Author: mjansche@google.com (Martin Jansche)
 
 #include "festus/label-maker.h"
@@ -24,27 +24,12 @@
 #include <fst/compat.h>
 #include <fst/symbol-table.h>
 
+#include "festus/string-util.h"
+
 namespace festus {
 
-std::vector<string> Split(const string &str, const string &delimiters) {
-  std::vector<string> split;
-  auto begin = str.find_first_not_of(delimiters);
-  while (true) {
-    if (string::npos == begin) {
-      break;
-    }
-    auto end = str.find_first_of(delimiters, begin);
-    if (string::npos == end) {
-      split.emplace_back(str.substr(begin));
-      break;
-    }
-    split.emplace_back(str.substr(begin, end - begin));
-    begin = str.find_first_not_of(delimiters, end);
-  }
-  return split;
-}
-
-bool ByteLabelMaker::StringToLabels(const string &str, Labels *labels) const {
+bool ByteLabelMaker::StringToLabels(const StringPiece str,
+                                    Labels *labels) const {
   labels->clear();
   labels->reserve(str.size());
   for (const auto byte : str) {
@@ -67,21 +52,22 @@ bool ByteLabelMaker::LabelsToString(const Labels &labels, string *str) const {
 }
 
 SymbolLabelMaker::SymbolLabelMaker(const fst::SymbolTable *symbols,
-                                   char delimiter)
+                                   string delimiters)
     : symbols_(symbols ? symbols->Copy() : nullptr),
-      delimiter_(delimiter) {
+      delimiters_(std::move(delimiters)) {
 }
 
 SymbolLabelMaker::~SymbolLabelMaker() {
   delete symbols_;
 }
 
-bool SymbolLabelMaker::StringToLabels(const string &str, Labels *labels) const {
-  const auto symbols = Split(str, string(1, delimiter_));
+bool SymbolLabelMaker::StringToLabels(const StringPiece str,
+                                      Labels *labels) const {
+  const auto symbols = Split(str, delimiters_);
   labels->clear();
   labels->reserve(symbols.size());
   for (const auto &symbol : symbols) {
-    auto label = symbols_->Find(symbol);
+    auto label = symbols_->Find(symbol.ToString());
     if (label == fst::SymbolTable::kNoSymbol) {
       LOG(ERROR) << "Unknown symbol in SymbolLabelMaker: " << symbol;
       return false;
@@ -91,6 +77,7 @@ bool SymbolLabelMaker::StringToLabels(const string &str, Labels *labels) const {
       LOG(ERROR) << "Label too large in SymbolLabelMaker: " << label;
       return false;
     }
+    VLOG(1) << "Found label " << ilabel << " for symbol \"" << symbol << "\"";
     labels->emplace_back(ilabel);
   }
   return true;
@@ -119,7 +106,9 @@ bool SymbolLabelMaker::LabelsToString(const Labels &labels, string *str) const {
   str->reserve(length);
   str->append(symbols[0]);
   for (std::size_t i = 1; i < symbols.size(); ++i) {
-    str->push_back(delimiter_);
+    if (!delimiters_.empty()) {
+      str->push_back(delimiters_[0]);
+    }
     str->append(symbols[i]);
   }
   return true;

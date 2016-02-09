@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Copyright 2015 Google, Inc.
+// Copyright 2015, 2016 Google, Inc.
 // Author: mjansche@google.com (Martin Jansche)
 //
 // \file
@@ -26,10 +26,9 @@
 #include <fst/compat.h>
 #include <fst/symbol-table.h>
 
-namespace festus {
+#include "festus/string-util.h"
 
-// TODO: Rewrite in terms of google::protobuf::StringPiece.
-std::vector<string> Split(const string &str, const string &delimiters);
+namespace festus {
 
 class LabelMaker {
  public:
@@ -39,7 +38,7 @@ class LabelMaker {
 
   virtual const fst::SymbolTable *Symbols() const = 0;
 
-  virtual bool StringToLabels(const string &str, Labels *labels) const = 0;
+  virtual bool StringToLabels(const StringPiece str, Labels *labels) const = 0;
   virtual bool LabelsToString(const Labels &labels, string *str) const = 0;
 };
 
@@ -49,28 +48,26 @@ class ByteLabelMaker : public LabelMaker {
 
   const fst::SymbolTable *Symbols() const override { return nullptr; }
 
-  bool StringToLabels(const string &str, Labels *labels) const override;
+  bool StringToLabels(const StringPiece str, Labels *labels) const override;
   bool LabelsToString(const Labels &labels, string *str) const override;
 };
 
 class SymbolLabelMaker : public LabelMaker {
  public:
-  // TODO: Generalize delimiter to const char *; add special handling
-  // of "" as delimiter.
-  SymbolLabelMaker(const fst::SymbolTable *symbols,
-                   char delimiter);
+  // TODO: Add special handling of "" as delimiter.
+  SymbolLabelMaker(const fst::SymbolTable *symbols, string delimiters);
   ~SymbolLabelMaker() override;
 
   const fst::SymbolTable *Symbols() const override { return symbols_; }
 
-  bool StringToLabels(const string &str, Labels *labels) const override;
+  bool StringToLabels(const StringPiece str, Labels *labels) const override;
   bool LabelsToString(const Labels &labels, string *str) const override;
 
  private:
   SymbolLabelMaker() = delete;
 
   const fst::SymbolTable *const symbols_;
-  const char delimiter_;
+  const string delimiters_;
 };
 
 }  // namespace festus

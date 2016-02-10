@@ -1,0 +1,17 @@
+sudo: required
+dist: trusty
+
+language: cpp
+
+before_install:
+  - sudo apt-get update -qq
+  # Bazel dependencies:
+  - sudo apt-get install -qq pkg-config zip g++ zlib1g-dev unzip
+  # Project dependencies:
+  - sudo apt-get install -qq python-pyicu
+  # Install Bazel:
+  - wget 'https://github.com/bazelbuild/bazel/releases/download/0.1.4/bazel-0.1.4-installer-linux-x86_64.sh'
+  - bash bazel-0.1.4-installer-linux-x86_64.sh --user
+
+script:
+  - bazel test //bn/... //festus/... //my/...

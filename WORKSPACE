@@ -12,7 +12,7 @@
 # )
 #
 # new_http_archive(
-#   name = "opengrm-ngram",
+#   name = "opengrm_ngram",
 #   url = "http://openfst.org/twiki/pub/GRM/NGramDownload/opengrm-ngram-1.2.1.tar.gz"
 #   sha256 = "713f07dccf225cde29cb048ce955d45d3c2a5ce6be7d923b5a688012d4285453",
 #   build_file = "opengrm-ngram.BUILD",
@@ -35,7 +35,7 @@ new_git_repository(
 )
 
 new_git_repository(
-    name = "opengrm-ngram",
+    name = "opengrm_ngram",
     build_file = "opengrm-ngram.BUILD",
     remote = "https://github.com/mjansche/opengrm-ngram.git",
     tag = "1.2.1",

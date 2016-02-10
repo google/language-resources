@@ -1,41 +1,41 @@
-#Language Resources and Tools
+# Language Resources and Tools
 
+[![Build Status](https://travis-ci.org/googlei18n/language-resources.svg?branch=master)](https://travis-ci.org/googlei18n/language-resources)
 
-Datasets and scripts for developers and researchers to work with. 
+Datasets and scripts for basic natural language and speech processing.
+
 This is not an official Google product.
 
+
+## Natural Languages
 
 | Directory | Language Available |
 |-----------|--------------------|
 | bn        | Bengali / Bangla   |
+| is        | Icelandic          |
 | lo        | Lao                |
 | my        | Burmese / Myanmar  |
 | si        | Sinhala            |
+| xh        | Xhosa              |
+| zu        | Zulu               |
 
 
+## Tools
 
-###What's included
-
-In the repo you'll find the following directories and files.
-
-
-
-| File/Folder     	| Provides                                       |
-|-------------------|------------------------------------------------|
-| CONTRIBUTING.md 	| contribution guidelines.                   	 |
-| LICENSE         	| Project license information.                   |
-| Language_Resources| Datasets and language specific scripts 		 |
-| Third Party     	| Language wordlists/dictionaries etc open source by third party|
-| Tools             | Scripts that works across languages            |
+We are including a few tools for working with the natural language
+datasets. These tools are written in C++ and Python and are built with
+[Bazel](http://bazel.io). To compile and use these tools,
+[install a recent version of Bazel](http://bazel.io/docs/install.html)
+(minimally Bazel release 0.1.4 is required).
 
 
+## License
 
-### License
+Unless otherwise noted, all original files are licensed under an
+[Apache License, Version 2.0](LICENSE).
 
+Where specifically noted, some datasets are licensed under a
+[Creative Commons Attribution 4.0 International License (CC BY 4.0)](http://creativecommons.org/licenses/by/4.0).
 
-* All Files mentioned as Data Sets are under Creative Commons Attribution 4.0 International License unless mentioned otherwise
-
-[<img src="https://i.creativecommons.org/l/by/4.0/88x31.png">](http://creativecommons.org/licenses/by/4.0)
-
-* All Code is under Apache License, Version 2.0 unless mentioned otherwise
-
+The directory [third_party/](third_party/) contains third-party works, which we
+are including under the respective licenses of the upstream projects. See [third_party/README.md](third_party/README.md) for further details.

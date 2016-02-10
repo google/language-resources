@@ -11,7 +11,8 @@ before_install:
   - sudo apt-get install -qq python-pyicu
   # Install Bazel:
   - wget 'https://github.com/bazelbuild/bazel/releases/download/0.1.4/bazel-0.1.4-installer-linux-x86_64.sh'
+  - sha256sum -c third_party/bazel-0.1.4-installer-linux-x86_64.sh.sha256
   - bash bazel-0.1.4-installer-linux-x86_64.sh --user
 
 script:
-  - bazel test //bn/... //festus/... //my/...
+  - bazel test //bn/... //festus/... //my/... //xh/... //zu/...

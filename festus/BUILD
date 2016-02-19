@@ -128,3 +128,13 @@ cc_library(
         ":label-maker",
     ],
 )
+
+# Requires Bazel >= 0.1.4.
+load("@protobuf//:protobuf.bzl", "cc_proto_library")
+
+cc_proto_library(
+    name = "alignables",
+    srcs = ["alignables.proto"],
+    protoc = "@protobuf//:protoc",
+    default_runtime = "@protobuf//:protobuf",
+)

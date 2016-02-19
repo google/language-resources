@@ -123,5 +123,8 @@ cc_library(
 cc_library(
     name = "fst-util",
     hdrs = ["fst-util.h"],
-    deps = ["@openfst//:fst"],
+    deps = [
+        "@openfst//:fst",
+        ":label-maker",
+    ],
 )

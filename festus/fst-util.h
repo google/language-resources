@@ -29,8 +29,11 @@
 #include <fst/connect.h>
 #include <fst/expanded-fst.h>
 #include <fst/fst.h>
+#include <fst/shortest-path.h>
 #include <fst/topsort.h>
 #include <fst/vector-fst.h>
+
+#include "festus/label-maker.h"
 
 namespace festus {
 
@@ -88,6 +91,54 @@ double CountPaths(const F &fst) {
     return CountPathsTopSorted(vector_fst);
   } else {
     return std::numeric_limits<double>::infinity();
+  }
+}
+
+template <class F>
+string OneString(const F &fst, typename F::StateId state,
+                 const LabelMaker &label_maker) {
+  typedef typename F::Arc Arc;
+  typedef typename F::Weight Weight;
+  CHECK_NE(state, fst::kNoStateId);
+  LabelMaker::Labels labels;
+  while (fst.Final(state) == Weight::Zero()) {
+    fst::ArcIterator<F> iter(fst, state);
+    CHECK(!iter.Done());
+    const Arc &arc = iter.Value();
+    if (arc.ilabel != 0) {
+      labels.push_back(arc.ilabel);
+    }
+    CHECK_NE(arc.nextstate, fst::kNoStateId);
+    state = arc.nextstate;
+    DCHECK((iter.Next(), iter.Done()));
+  }
+  DCHECK(fst::ArcIterator<F>(fst, state).Done());
+  string s;
+  CHECK(label_maker.LabelsToString(labels, &s));
+  return s;
+}
+
+template <class F>
+inline string OneString(const F &fst, const LabelMaker &label_maker) {
+  return OneString(fst, fst.Start(), label_maker);
+}
+
+template <class F>
+void NStrings(const F &fst, size_t n, const LabelMaker &label_maker,
+              std::vector<string> *strings) {
+  typedef typename F::Arc Arc;
+  typedef typename F::StateId StateId;
+  const StateId start = fst.Start();
+  if (start == fst::kNoStateId) {
+    return;
+  }
+  fst::VectorFst<Arc> paths;
+  fst::ShortestPath(fst, &paths, n);
+  for (fst::ArcIterator<F> iter(paths, start); !iter.Done(); iter.Next()) {
+    const Arc &arc = iter.Value();
+    CHECK_EQ(arc.ilabel, 0);
+    CHECK_EQ(arc.olabel, 0);
+    strings->emplace_back(OneString(paths, arc.nextstate, label_maker));
   }
 }
 

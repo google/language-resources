@@ -21,10 +21,16 @@
 #ifndef FESTUS_STRING_UTIL_H__
 #define FESTUS_STRING_UTIL_H__
 
+#include <fstream>
+#include <istream>
+#include <string>
 #include <vector>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/stringpiece.h>
+
+using std::string;
 
 namespace festus {
 
@@ -33,10 +39,59 @@ using ::google::protobuf::StringPiece;
 std::vector<StringPiece> Split(
     const StringPiece str, const StringPiece delimiters);
 
+template <class Iterator>
+string Join(Iterator begin, Iterator end, StringPiece delimiter) {
+  if (begin == end) {
+    return "";
+  }
+  string result(begin->begin(), begin->end());
+  ++begin;
+  if (begin == end) {
+    return result;
+  }
+  string::size_type length = result.size();
+  const string::size_type delimiter_length = delimiter.size();
+  for (Iterator iter = begin; iter != end; ++iter) {
+    length += delimiter_length + iter->size();
+  }
+  result.reserve(length);
+  for (Iterator iter = begin; iter != end; ++iter) {
+    result.append(delimiter.begin(), delimiter.end());
+    result.append(iter->begin(), iter->end());
+  }
+  return result;
+}
+
+template <class Container>
+string Join(const Container &strings, StringPiece delimiter) {
+  return Join(strings.begin(), strings.end(), delimiter);
+}
+
 inline bool IsStructurallyValidUTF8(const StringPiece str) {
   return ::google::protobuf::internal::IsStructurallyValidUTF8(
       str.data(), static_cast<int>(str.size()));
 }
+
+class LineReader {
+ public:
+  LineReader() = default;
+  ~LineReader();
+
+  bool Reset(StringPiece path);
+
+  bool Advance();
+
+  const string &line() const { return line_; }
+
+  string LoggingPrefix() const;
+
+ private:
+  std::ifstream infile_;
+  std::istream *instream_;
+  string file_name_;
+  ::google::protobuf::uint32 line_number_;
+  string line_;
+};
 
 }  // namespace festus
 

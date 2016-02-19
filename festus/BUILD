@@ -94,6 +94,7 @@ cc_library(
     srcs = ["string-util.cc"],
     hdrs = ["string-util.h"],
     deps = [
+        "@openfst//:base",
         "@protobuf//:protobuf_lite",
     ],
 )

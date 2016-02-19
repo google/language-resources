@@ -17,9 +17,12 @@
 
 #include "festus/string-util.h"
 
+#include <iostream>
 #include <vector>
 
+#include <fst/compat.h>
 #include <google/protobuf/stubs/stringpiece.h>
+#include <google/protobuf/stubs/strutil.h>
 
 namespace festus {
 
@@ -42,6 +45,47 @@ std::vector<StringPiece> Split(
     begin = str.find_first_not_of(delimiters, end);
   }
   return split;
+}
+
+LineReader::~LineReader() {
+  if (infile_.is_open()) {
+    infile_.close();
+  }
+}
+
+bool LineReader::Reset(StringPiece path) {
+  if (infile_.is_open()) {
+    infile_.close();
+  }
+  if (path.empty()) {
+    instream_ = &std::cin;
+    file_name_ = "<stdin>";
+  } else {
+    infile_.open(path);
+    if (!infile_) {
+      LOG(ERROR) << "Could not open file: " << path;
+      return false;
+    }
+    instream_ = &infile_;
+    file_name_ = path.ToString();
+  }
+  line_number_ = 0;
+  return true;
+}
+
+bool LineReader::Advance() {
+  while (std::getline(*instream_, line_)) {
+    ++line_number_;
+    if (line_.empty() || line_[0] == '#') {
+      continue;
+    }
+    return true;
+  }
+  return false;
+}
+
+string LineReader::LoggingPrefix() const {
+  return ::google::protobuf::StrCat(file_name_, ":", line_number_, ": ");
 }
 
 }  // namespace festus

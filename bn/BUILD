@@ -121,8 +121,8 @@ sh_test(
     ],
     data = [
         ":lexicon-diagnostics",
-        ":make_string2graphemes_fst",
         "alignables.txt",
         "data/lexicon.tsv",
+        "string2graphemes.fst",
     ],
 )

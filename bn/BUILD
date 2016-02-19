@@ -69,3 +69,17 @@ sh_test(
         "//utils:thrax_g2p",
     ],
 )
+
+cc_binary(
+    name = "lexicon-diagnostics",
+    srcs = ["lexicon-diagnostics.cc"],
+    deps = [
+        "//festus:alignables",
+        "//festus:alignables-util",
+        "//festus:fst-util",
+        "//festus:label-maker",
+        "//festus:proto-util",
+        "//festus:string-util",
+        "@openfst//:fst",
+    ],
+)

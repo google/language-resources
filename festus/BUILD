@@ -138,3 +138,14 @@ cc_proto_library(
     protoc = "@protobuf//:protoc",
     default_runtime = "@protobuf//:protobuf",
 )
+
+cc_library(
+    name = "alignables-util",
+    srcs = ["alignables-util.cc"],
+    hdrs = ["alignables-util.h"],
+    deps = [
+        "@openfst//:fst",
+        ":alignables",
+        ":label-maker",
+    ],
+)

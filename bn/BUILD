@@ -83,3 +83,46 @@ cc_binary(
         "@openfst//:fst",
     ],
 )
+
+genrule(
+    name = "make_string2graphemes_fst",
+    srcs = ["bengali.far"],
+    outs = [
+        "UTF8_TO_GRAPHEMES.fst",
+        "string2graphemes.fst",
+    ],
+    cmd = """
+        $(location @openfst//:farextract) \
+          --filename_prefix=$(@D)/ \
+          --keys=UTF8_TO_GRAPHEMES \
+          --filename_suffix=.fst \
+          $(location bengali.far) &&
+        $(location @openfst//:fstmap) \
+          --map_type=to_log64 \
+          $(location UTF8_TO_GRAPHEMES.fst) \
+          $(location string2graphemes.fst)
+        """,
+    tools = [
+        "@openfst//:farextract",
+        "@openfst//:fstmap",
+    ],
+)
+
+sh_test(
+    name = "lexicon_test",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        grep '^[^a-z]' $(location data/lexicon.tsv) |
+        $(location :lexicon-diagnostics) \
+          --alignables=$(location alignables.txt) \
+          --string2graphemes=$(location string2graphemes.fst)
+        """,
+    ],
+    data = [
+        ":lexicon-diagnostics",
+        ":make_string2graphemes_fst",
+        "alignables.txt",
+        "data/lexicon.tsv",
+    ],
+)

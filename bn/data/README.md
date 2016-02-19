@@ -2,6 +2,7 @@
 
 ## Datasets
 
+* [lexicon.tsv](lexicon.tsv): A Bengali pronunciation dictionary.
 * [verbs.tsv](verbs.tsv): A list of Bengali verb forms, including systematic
   homographs.
 

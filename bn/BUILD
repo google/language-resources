@@ -74,13 +74,8 @@ cc_binary(
     name = "lexicon-diagnostics",
     srcs = ["lexicon-diagnostics.cc"],
     deps = [
-        "//festus:alignables",
-        "//festus:alignables-util",
-        "//festus:fst-util",
-        "//festus:label-maker",
-        "//festus:proto-util",
-        "//festus:string-util",
         "@openfst//:fst",
+        "//festus:lexicon-processor",
     ],
 )
 
@@ -120,9 +115,9 @@ sh_test(
         """,
     ],
     data = [
-        ":lexicon-diagnostics",
         "alignables.txt",
         "data/lexicon.tsv",
         "string2graphemes.fst",
+        ":lexicon-diagnostics",
     ],
 )

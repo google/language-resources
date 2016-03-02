@@ -21,6 +21,7 @@
 #ifndef FESTUS_STRING_UTIL_H__
 #define FESTUS_STRING_UTIL_H__
 
+#include <cstddef>
 #include <fstream>
 #include <istream>
 #include <string>
@@ -79,18 +80,23 @@ class LineReader {
 
   bool Reset(StringPiece path);
 
-  bool Advance();
-
-  const string &line() const { return line_; }
-
-  string LoggingPrefix() const;
+  template <class E>
+  bool Advance(E *entry) {
+    while (std::getline(*instream_, entry->line)) {
+      ++line_number_;
+      if (entry->line.empty() || entry->line[0] == '#') {
+        continue;
+      }
+      entry->line_number = line_number_;
+      return true;
+    }
+    return false;
+  }
 
  private:
   std::ifstream infile_;
   std::istream *instream_;
-  string file_name_;
-  ::google::protobuf::uint32 line_number_;
-  string line_;
+  std::size_t line_number_;
 };
 
 }  // namespace festus

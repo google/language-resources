@@ -59,7 +59,6 @@ bool LineReader::Reset(StringPiece path) {
   }
   if (path.empty()) {
     instream_ = &std::cin;
-    file_name_ = "<stdin>";
   } else {
     infile_.open(path);
     if (!infile_) {
@@ -67,25 +66,9 @@ bool LineReader::Reset(StringPiece path) {
       return false;
     }
     instream_ = &infile_;
-    file_name_ = path.ToString();
   }
   line_number_ = 0;
   return true;
-}
-
-bool LineReader::Advance() {
-  while (std::getline(*instream_, line_)) {
-    ++line_number_;
-    if (line_.empty() || line_[0] == '#') {
-      continue;
-    }
-    return true;
-  }
-  return false;
-}
-
-string LineReader::LoggingPrefix() const {
-  return ::google::protobuf::StrCat(file_name_, ":", line_number_, ": ");
 }
 
 }  // namespace festus

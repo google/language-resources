@@ -135,8 +135,8 @@ load("@protobuf//:protobuf.bzl", "cc_proto_library")
 cc_proto_library(
     name = "alignables",
     srcs = ["alignables.proto"],
-    protoc = "@protobuf//:protoc",
     default_runtime = "@protobuf//:protobuf",
+    protoc = "@protobuf//:protoc",
 )
 
 cc_library(
@@ -148,4 +148,23 @@ cc_library(
         ":alignables",
         ":label-maker",
     ],
+)
+
+cc_library(
+    name = "lexicon-processor",
+    srcs = ["lexicon-processor.cc"],
+    hdrs = ["lexicon-processor.h"],
+    deps = [
+        "@openfst//:fst",
+        ":alignables",
+        ":alignables-util",
+        ":proto-util",
+        ":string-util",
+    ],
+)
+
+cc_binary(
+    name = "lexicon-diagnostics",
+    srcs = ["lexicon-diagnostics.cc"],
+    deps = [":lexicon-processor"],
 )

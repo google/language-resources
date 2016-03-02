@@ -129,6 +129,22 @@ cc_library(
     ],
 )
 
+cc_library(
+    name = "iterator",
+    hdrs = ["iterator.h"],
+    deps = ["@openfst//:fst"],
+)
+
+cc_test(
+    name = "iterator-test",
+    timeout = "short",
+    srcs = ["iterator-test.cc"],
+    deps = [
+        "@googletest//:gtest_main",
+        ":iterator",
+    ],
+)
+
 # Requires Bazel >= 0.1.4.
 load("@protobuf//:protobuf.bzl", "cc_proto_library")
 

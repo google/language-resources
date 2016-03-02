@@ -22,7 +22,6 @@
 
 #include <fst/compat.h>
 #include <google/protobuf/stubs/stringpiece.h>
-#include <google/protobuf/stubs/strutil.h>
 
 namespace festus {
 

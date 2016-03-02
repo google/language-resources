@@ -28,7 +28,6 @@
 #include <vector>
 
 #include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/stringpiece.h>
 
 using std::string;

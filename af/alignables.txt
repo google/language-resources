@@ -208,20 +208,52 @@ alignable { input: "y"     output: "@i"}
 alignable { input: "z"     output: "z"}
 
 
-# Curiosa (foreign words, mistakes?)
+# Curiosa (foreign words)
 
-alignable { input: "dramaturge" output: "d r a m a t r g @" }  # (mistake)
-alignable { input: "farao"      output: "f A: r u@" }
-alignable { input: "geël"       output: "x @ l" }  # geëlektrifiseerde
-alignable { input: "individu"   output: "@ n d @ v i d Z u" }
-alignable { input: "kollege"    output: "k O l i d Z" }
-alignable { input: "kolleges"   output: "k O l i d Z @ s" }
-alignable { input: "leuel"      output: "l 2: l" }  # oorvleuel
-alignable { input: "metro"      output: "m E t r @" }
-alignable { input: "motor"      output: "m u@ t @ r" }
-alignable { input: "passasier"  output: "p a s @ s i r" }
-alignable { input: "post"       output: "p @u s t" }
-alignable { input: "rugby"      output: "r a g b i" }
-alignable { input: "speak"      output: "s p i k" }  # speaker
-alignable { input: "spiritu"    output: "s p i r y t S y" }
-alignable { input: "subp"       output: "s 9 p" }  # subprogram
+alignable { input: "a"     output: "@" }        # passAsier
+alignable { input: "ao"    output: "u@" }       # farAO
+alignable { input: "bp"    output: "p" }        # suBProgram
+alignable { input: "d"     output: "d Z" }      # indiviDu-
+alignable { input: "ea"    output: "i" }        # spEAker
+alignable { input: "eue"   output: "2:" }       # oorvlEUEl
+alignable { input: "eë"    output: "@" }        # gEËlektrifiseerde
+alignable { input: "g"     output: "d Z" }      # kolleGes
+alignable { input: "ge"    output: "d Z" }      # kolleGE
+alignable { input: "o"     output: "@" }        # metrO-, motOr-
+alignable { input: "o"     output: "@u" }       # pOst-
+alignable { input: "rit"   output: "r y t S" }  # spiRITu-
+alignable { input: "rugby" output: "r a g b i" }
+
+
+forbidden {
+  alignable { input: "ea" output: "i" }
+  alignable { input: "a"  output: "A:" }
+}
+forbidden {
+  alignable { input: "eë" output: "@" }
+  alignable { input: "e"  output: "i@" }
+}
+forbidden {
+  alignable { input: "ie" output: "i" }
+  alignable { input: "e"  output: "i@" }
+}
+forbidden {
+  alignable { input: "i"  output: "i" }
+  alignable { input: "eë" output: "@" }
+}
+forbidden {
+  alignable { input: "n"  output: "N" }
+  alignable { input: "gg" output: "x" }
+}
+forbidden {
+  alignable { input: "o"  output: "u" }
+  alignable { input: "eë" output: "@" }
+}
+forbidden {
+  alignable { input: "si" output: "S" }
+  alignable { input: "e"  output: "i" }
+}
+forbidden {
+  alignable { input: "si" output: "S" }
+  alignable { input: "ë"  output: "i@" }
+}

@@ -174,6 +174,7 @@ cc_library(
         "@openfst//:fst",
         ":alignables",
         ":alignables-util",
+        ":fst-util",
         ":proto-util",
         ":string-util",
     ],

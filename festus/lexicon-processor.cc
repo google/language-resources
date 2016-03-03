@@ -24,11 +24,13 @@
 #include <fst/determinize.h>
 #include <fst/fst.h>
 #include <fst/intersect.h>
+#include <fst/map.h>
 #include <fst/minimize.h>
 #include <fst/topsort.h>
 
 #include "festus/alignables.pb.h"
 #include "festus/alignables-util.h"
+#include "festus/fst-util.h"
 #include "festus/label-maker.h"
 #include "festus/proto-util.h"
 #include "festus/string-util.h"
@@ -37,6 +39,7 @@ DEFINE_string(alignables, "", "Path to alignables spec");
 DEFINE_bool(filter, false, "If true, echo lines that pass checks to stdout");
 DEFINE_int32(input_index, 0, "Column index of the input field");
 DEFINE_int32(output_index, 1, "Column index of the output field");
+DEFINE_bool(unique_alignments, false, "Whether alignments must be unique");
 
 namespace festus {
 
@@ -107,6 +110,7 @@ bool LexiconProcessor::AlignmentDiagnostics(Entry *entry,
 
   MutableLattice intersection;
   fst::Intersect(entry->input_lattice, entry->output_lattice, &intersection);
+  util_->RemoveForbiddenFactors(&intersection);
   fst::Determinize(intersection, &entry->alignment_lattice);
   fst::AcceptorMinimize(&entry->alignment_lattice);
   if (fst::kNoStateId == entry->alignment_lattice.Start()) {
@@ -148,12 +152,34 @@ Usage:
   if (!reader.Reset(in_name)) return 2;
   string logging_prefix = in_name.empty() ? "<stdin>" : in_name;
 
+  SymbolLabelMaker alignables_label_maker(util_->PairSymbols(), " ");
+
   bool success = true;
   Entry entry;
   while (reader.Advance(&entry)) {
     bool res = AlignmentDiagnostics(&entry, logging_prefix);
+    if (FLAGS_unique_alignments) {
+      double num_paths = CountPaths(entry.alignment_lattice);
+      if (num_paths != 1) {
+        res = false;
+        fst::StdVectorFst std_fst;
+        fst::Map(entry.alignment_lattice, &std_fst, fst::Log64ToStdMapper());
+        std::vector<string> alignments;
+        NStrings(std_fst, 100, alignables_label_maker, &alignments);
+        LOG(ERROR) << logging_prefix << ":" << entry.line_number
+                   << ": Alignment is not unique for line: " << entry.line;
+        for (size_t i = 0; i < alignments.size(); ++i) {
+          LOG(ERROR) << "  " << (i + 1) << ".  " << alignments[i];
+        }
+      }
+    }
     if (FLAGS_filter && res) {
-      std::cout << entry.line << std::endl;
+      std::cout << entry.line;
+      if (FLAGS_unique_alignments) {
+        std::cout << "\t" << OneString(entry.alignment_lattice,
+                                       alignables_label_maker);
+      }
+      std::cout << std::endl;
     }
     success &= res;
   }

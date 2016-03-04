@@ -37,6 +37,7 @@
 
 #include "festus/alignables.pb.h"
 #include "festus/label-maker.h"
+#include "festus/proto-util.h"
 
 using fst::SymbolTable;
 using fst::VectorFst;
@@ -192,7 +193,28 @@ string AlignablesUtil::MakePairSymbol(const Alignable &alignable) {
   return result;
 }
 
-std::unique_ptr<AlignablesUtil> AlignablesUtil::New(
+std::unique_ptr<AlignablesUtil> AlignablesUtil::FromFile(const string &path) {
+  std::unique_ptr<AlignablesUtil> util;
+  if (path.empty()) {
+    LOG(ERROR) << "Path to alignables is empty";
+    return util;
+  }
+  AlignablesSpec spec;
+  if (!GetTextProtoFromFile(path.c_str(), &spec)) {
+    return util;
+  }
+  VLOG(1) << "BEGIN AlignablesSpec\n"
+          << spec.Utf8DebugString()
+          << "END AlignablesSpec";
+  util = FromSpec(spec);
+  if (!util) {
+    LOG(ERROR) << "Could not create AlignablesUtil from spec:\n"
+               << spec.Utf8DebugString();
+  }
+  return util;
+}
+
+std::unique_ptr<AlignablesUtil> AlignablesUtil::FromSpec(
     const AlignablesSpec &spec) {
   std::unique_ptr<AlignablesUtil> util(new AlignablesUtil());
   if (!util->Init(spec)) {

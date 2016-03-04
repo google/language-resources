@@ -54,8 +54,6 @@ class LexiconProcessor {
 
   virtual bool Init();
 
-  bool LoadAlignablesUtil(const string &alignables_path);
-
   virtual bool MakeInputFst(Entry *entry) {
     entry->input_fst = util_->MakeInputFst(
         entry->fields.at(input_index_).ToString());

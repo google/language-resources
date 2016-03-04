@@ -163,6 +163,7 @@ cc_library(
         "@openfst//:fst",
         ":alignables",
         ":label-maker",
+        ":proto-util",
     ],
 )
 
@@ -172,10 +173,8 @@ cc_library(
     hdrs = ["lexicon-processor.h"],
     deps = [
         "@openfst//:fst",
-        ":alignables",
         ":alignables-util",
         ":fst-util",
-        ":proto-util",
         ":string-util",
     ],
 )

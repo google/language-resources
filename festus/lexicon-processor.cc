@@ -28,11 +28,9 @@
 #include <fst/minimize.h>
 #include <fst/topsort.h>
 
-#include "festus/alignables.pb.h"
 #include "festus/alignables-util.h"
 #include "festus/fst-util.h"
 #include "festus/label-maker.h"
-#include "festus/proto-util.h"
 #include "festus/string-util.h"
 
 DEFINE_string(alignables, "", "Path to alignables spec");
@@ -46,28 +44,8 @@ namespace festus {
 bool LexiconProcessor::Init() {
   if (FLAGS_input_index >= 0) input_index_ = FLAGS_input_index;
   if (FLAGS_output_index >= 0) output_index_ = FLAGS_output_index;
-  return LoadAlignablesUtil(FLAGS_alignables);
-}
-
-bool LexiconProcessor::LoadAlignablesUtil(const string &alignables_path) {
-  if (alignables_path.empty()) {
-    LOG(ERROR) << "Path to alignables is empty";
-    return false;
-  }
-  AlignablesSpec spec;
-  if (!GetTextProtoFromFile(alignables_path.c_str(), &spec)) {
-    return false;
-  }
-  VLOG(1) << "BEGIN AlignablesSpec\n"
-          << spec.Utf8DebugString()
-          << "END AlignablesSpec";
-  util_ = AlignablesUtil::New(spec);
-  if (!util_) {
-    LOG(ERROR) << "Could not create AlignablesUtil from spec:\n"
-               << spec.Utf8DebugString();
-    return false;
-  }
-  return true;
+  util_ = AlignablesUtil::FromFile(FLAGS_alignables);
+  return util_ != nullptr;
 }
 
 bool LexiconProcessor::AlignmentDiagnostics(Entry *entry,

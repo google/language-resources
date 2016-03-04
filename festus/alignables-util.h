@@ -92,7 +92,9 @@ class AlignablesUtil {
 
   static string MakePairSymbol(const Alignable &alignable);
 
-  static std::unique_ptr<AlignablesUtil> New(const AlignablesSpec &spec);
+  static std::unique_ptr<AlignablesUtil> FromFile(const string &path);
+
+  static std::unique_ptr<AlignablesUtil> FromSpec(const AlignablesSpec &spec);
 
   CompactStringFst<Arc> MakeInputFst(const string &input) const {
     return MakeStringFst<Arc>(input, *input_label_maker_);

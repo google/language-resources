@@ -175,7 +175,7 @@ cc_library(
         # Lexer, parser, and core compiler
         prefix_dir + "lib/main/grm-compiler.cc",
         prefix_dir + "lib/main/lexer.cc",
-        prefix_dir + "lib/parser.cc",
+        prefix_dir + "lib/main/parser.cc",
 
         # Walker/evaluator
         prefix_dir + "lib/walker/evaluator-specializations.cc",

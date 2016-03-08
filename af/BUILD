@@ -35,7 +35,7 @@ sh_test(
 
 sh_test(
     name = "nchlt_dictionary_test",
-    timeout = "short",
+    timeout = "moderate",
     srcs = ["//utils:eval.sh"],
     args = [
         """

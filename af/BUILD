@@ -50,3 +50,31 @@ sh_test(
         "//third_party/nchlt_inlang:release/dictionaries/nchlt_afr.dict",
     ],
 )
+
+genrule(
+    name = "make_injection_fsts",
+    srcs = ["alignables.txt"],
+    outs = [
+        "bytes_to_graphones.fst",
+        "phonemes_to_graphones.fst",
+    ],
+    cmd = """
+        $(location //festus:make-runtime-fsts) \
+          --alignables=$(location alignables.txt) \
+          $(location bytes_to_graphones.fst) \
+          $(location phonemes_to_graphones.fst)
+        """,
+    tools = ["//festus:make-runtime-fsts"],
+)
+
+genrule(
+    name = "make_graphone_syms",
+    srcs = ["alignables.txt"],
+    outs = ["graphone.syms"],
+    cmd = """
+        $(location //festus:make-alignable-symbols) \
+          --alignables=$(location alignables.txt) \
+          $@
+        """,
+    tools = ["//festus:make-alignable-symbols"],
+)

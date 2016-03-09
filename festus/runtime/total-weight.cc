@@ -18,8 +18,12 @@
 // \file
 // Prints the total weight of an FST. Used for checking that an n-gram model
 // is properly normalized and usable with older versions of OpenFst < 1.5.0.
+//
+// This is essentially the Forward algorithm combined with on-the-fly
+// conversion to the Log64 semiring and, if requested, on-the-fly phi-removal.
 
 #include <cmath>
+#include <cstring>
 #include <iostream>
 #include <memory>
 #include <utility>

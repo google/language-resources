@@ -66,11 +66,14 @@ sh_test(
     args = [
         """
         $(location :total-weight) \
-          $(location ngram_model_with_final_backoff.fst)
+          $(location ngram_model_with_final_backoff.fst) &&
+        $(location :total-weight) \
+          $(location ngram_model_without_final_backoff.fst)
         """,
     ],
     data = [
-        ":total-weight",
         "ngram_model_with_final_backoff.fst",
+        "ngram_model_without_final_backoff.fst",
+        ":total-weight",
     ],
 )

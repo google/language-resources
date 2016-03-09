@@ -213,3 +213,12 @@ cc_binary(
         "//festus/runtime:fst-util",
     ],
 )
+
+cc_binary(
+    name = "make-alignable-symbols",
+    srcs = ["make-alignable-symbols.cc"],
+    deps = [
+        "@openfst//:fst",
+        ":alignables-util",
+    ],
+)

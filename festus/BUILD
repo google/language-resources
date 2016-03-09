@@ -184,3 +184,9 @@ cc_binary(
     srcs = ["lexicon-diagnostics.cc"],
     deps = [":lexicon-processor"],
 )
+
+cc_binary(
+    name = "ngramfinalize",
+    srcs = ["ngramfinalize.cc"],
+    deps = ["@openfst//:fst"],
+)

@@ -145,6 +145,11 @@ cc_test(
     ],
 )
 
+cc_library(
+    name = "types",
+    hdrs = ["types.h"],
+)
+
 # Requires Bazel >= 0.1.4.
 load("@protobuf//:protobuf.bzl", "cc_proto_library")
 
@@ -192,5 +197,19 @@ cc_binary(
     deps = [
         "@openfst//:fst",
         "@openfst//:ngram",
+    ],
+)
+
+cc_binary(
+    name = "make-runtime-fsts",
+    srcs = ["make-runtime-fsts.cc"],
+    deps = [
+        "@openfst//:fst",
+        "@openfst//:fstscript_info",
+        ":alignables-util",
+        ":iterator",
+        ":types",
+        "//festus/runtime:compact",
+        "//festus/runtime:fst-util",
     ],
 )

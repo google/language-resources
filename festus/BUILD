@@ -189,5 +189,8 @@ cc_binary(
 cc_binary(
     name = "ngramfinalize",
     srcs = ["ngramfinalize.cc"],
-    deps = ["@openfst//:fst"],
+    deps = [
+        "@openfst//:fst",
+        "@openfst//:ngram",
+    ],
 )

@@ -25,6 +25,7 @@
 
 #include <fst/compat.h>
 #include <fst/fstlib.h>
+#include <fst/extensions/ngram/ngram-fst.h>
 
 namespace festus {
 
@@ -89,10 +90,12 @@ weights computed along the backoff path. This makes n-gram models usable with
 older versions of OpenFst (<1.5.0).
 
 Usage:
-  ngramfinalize [--phi_label] [in.fst [out.fst]]
+  ngramfinalize [--flags] [in.fst [out.fst]]
 )";
 
 DEFINE_int32(phi_label, 0, "Phi (failure, backoff) label");
+
+DEFINE_bool(to_runtime_model, false, "Convert to the runtime model format");
 
 int main(int argc, char *argv[]) {
   SET_FLAGS(kUsage, &argc, &argv, true);
@@ -108,7 +111,17 @@ int main(int argc, char *argv[]) {
   if (!model) return 2;
 
   if (!festus::MakeAllStatesFinal(model.get(), FLAGS_phi_label)) return 2;
-  model->Write(out_name);
+
+  if (FLAGS_to_runtime_model) {
+    fst::VectorFst<fst::LogArc> log_fst;
+    fst::Map(*model, &log_fst, fst::StdToLogMapper());
+    log_fst.SetInputSymbols(nullptr);
+    log_fst.SetOutputSymbols(nullptr);
+    fst::NGramFst<fst::LogArc> ngram(log_fst);
+    ngram.Write(out_name);
+  } else {
+    model->Write(out_name);
+  }
 
   return 0;
 }

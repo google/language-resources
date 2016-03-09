@@ -32,6 +32,7 @@
 #include "festus/fst-util.h"
 #include "festus/label-maker.h"
 #include "festus/string-util.h"
+#include "festus/runtime/fst-util.h"
 
 DEFINE_string(alignables, "", "Path to alignables spec");
 DEFINE_bool(filter, false, "If true, echo lines that pass checks to stdout");
@@ -137,7 +138,7 @@ Usage:
   while (reader.Advance(&entry)) {
     bool res = AlignmentDiagnostics(&entry, logging_prefix);
     if (FLAGS_unique_alignments) {
-      double num_paths = CountPaths(entry.alignment_lattice);
+      double num_paths = CountPaths(&entry.alignment_lattice);
       if (num_paths != 1) {
         res = false;
         fst::StdVectorFst std_fst;

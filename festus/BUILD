@@ -176,6 +176,7 @@ cc_library(
         ":alignables-util",
         ":fst-util",
         ":string-util",
+        "//festus/runtime:fst-util",
     ],
 )
 

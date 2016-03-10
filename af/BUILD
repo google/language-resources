@@ -90,3 +90,22 @@ genrule(
     cmd = "$(location :prepare-g2p-data) $(@D)",
     tools = [":prepare-g2p-data"],
 )
+
+sh_binary(
+    name = "train-graphone-model",
+    srcs = ["train-graphone-model.sh"],
+    data = [
+        "//festus:ngramfinalize",
+        "@opengrm_ngram//:ngramcount",
+        "@opengrm_ngram//:ngrammake",
+        "@opengrm_ngram//:ngramshrink",
+    ],
+)
+
+genrule(
+    name = "make_graphone_model",
+    srcs = ["g2p_train.far"],
+    outs = ["graphone_model.fst"],
+    cmd = "$(location :train-graphone-model) $< $@",
+    tools = [":train-graphone-model"],
+)

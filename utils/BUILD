@@ -32,6 +32,12 @@ py_binary(
 )
 
 py_binary(
+    name = "eval_dictionary_simple",
+    srcs = ["eval_dictionary_simple.py"],
+    default_python_version = "PY2",
+)
+
+py_binary(
     name = "test_icu_transform",
     srcs = ["test_icu_transform.py"],
     default_python_version = "PY2",

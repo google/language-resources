@@ -67,14 +67,26 @@ genrule(
     tools = ["//festus:make-runtime-fsts"],
 )
 
+sh_binary(
+    name = "prepare-g2p-data",
+    srcs = ["prepare-g2p-data.sh"],
+    data = [
+        "alignables.txt",
+        "test_words.txt",
+        "//festus:lexicon-diagnostics",
+        "//festus:make-alignable-symbols",
+        "//third_party/nchlt_inlang:release/dictionaries/nchlt_afr.dict",
+        "@openfst//:farcompilestrings",
+    ],
+)
+
 genrule(
-    name = "make_graphone_syms",
-    srcs = ["alignables.txt"],
-    outs = ["graphone.syms"],
-    cmd = """
-        $(location //festus:make-alignable-symbols) \
-          --alignables=$(location alignables.txt) \
-          $@
-        """,
-    tools = ["//festus:make-alignable-symbols"],
+    name = "make_g2p_data",
+    outs = [
+        "g2p_test.tsv",
+        "g2p_train.far",
+        "graphone.syms",
+    ],
+    cmd = "$(location :prepare-g2p-data) $(@D)",
+    tools = [":prepare-g2p-data"],
 )

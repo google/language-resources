@@ -109,3 +109,30 @@ genrule(
     cmd = "$(location :train-graphone-model) $< $@",
     tools = [":train-graphone-model"],
 )
+
+sh_test(
+    name = "g2p_accuracy_test",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        cut -f1 $(location g2p_test.tsv) |
+        $(location //festus/runtime:g2p-lookup) \
+          --bytes_to_graphones=$(location bytes_to_graphones.fst) \
+          --graphone_model=$(location graphone_model.fst) \
+          --phonemes_to_graphones=$(location phonemes_to_graphones.fst) \
+          --max_prons=1 |
+        $(location //utils:eval_dictionary_simple) \
+          $(location g2p_test.tsv) \
+          90
+        """,
+    ],
+    data = [
+        "bytes_to_graphones.fst",
+        "graphone_model.fst",
+        "phonemes_to_graphones.fst",
+        "g2p_test.tsv",
+        "//festus/runtime:g2p-lookup",
+        "//utils:eval_dictionary_simple",
+    ],
+)

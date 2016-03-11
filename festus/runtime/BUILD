@@ -62,7 +62,7 @@ cc_binary(
 sh_test(
     name = "total-weight_test",
     timeout = "short",
-    srcs = ["//utils:eval.sh"],
+    srcs = ["eval.sh"],
     args = [
         """
         $(location :total-weight) \

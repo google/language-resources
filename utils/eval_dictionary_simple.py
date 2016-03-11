@@ -61,18 +61,19 @@ def main(args):
   correct = 0
   for key, val in ReadTSV(STDIN):
     if key not in golden:
-      STDERR.write('Skipping %s; not in golden dictionary\n')
+      STDOUT.write('Skipping %s; not in golden dictionary\n')
       continue
     total += 1
     if val in golden[key]:
       correct += 1
 
   if total == 0:
-    STDERR.write('Total number of words is zero.\n')
+    STDOUT.write('Total number of words that can be evaluated is zero.\n')
     sys.exit(2)
 
   accuracy = correct * 100.0 / total
   STDOUT.write('Accuracy: %d / %d = %g %%\n' % (correct, total, accuracy))
+  STDERR.write('Accuracy: %d / %d = %g %%\n' % (correct, total, accuracy))
 
   if target < 0:
     sys.exit(0)

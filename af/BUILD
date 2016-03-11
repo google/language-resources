@@ -71,12 +71,12 @@ sh_binary(
     name = "prepare-g2p-data",
     srcs = ["prepare-g2p-data.sh"],
     data = [
+        "@openfst//:farcompilestrings",
         "alignables.txt",
         "test_words.txt",
         "//festus:lexicon-diagnostics",
         "//festus:make-alignable-symbols",
         "//third_party/nchlt_inlang:release/dictionaries/nchlt_afr.dict",
-        "@openfst//:farcompilestrings",
     ],
 )
 
@@ -95,10 +95,10 @@ sh_binary(
     name = "train-graphone-model",
     srcs = ["train-graphone-model.sh"],
     data = [
-        "//festus:ngramfinalize",
         "@opengrm_ngram//:ngramcount",
         "@opengrm_ngram//:ngrammake",
         "@opengrm_ngram//:ngramshrink",
+        "//festus:ngramfinalize",
     ],
 )
 
@@ -110,12 +110,16 @@ genrule(
     tools = [":train-graphone-model"],
 )
 
-sh_test(
-    name = "g2p_accuracy_test",
-    timeout = "short",
-    srcs = ["//utils:eval.sh"],
-    args = [
-        """
+genrule(
+    name = "g2p_evaluation",
+    srcs = [
+        "bytes_to_graphones.fst",
+        "g2p_test.tsv",
+        "graphone_model.fst",
+        "phonemes_to_graphones.fst",
+    ],
+    outs = ["g2p_evaluation_results.txt"],
+    cmd = """
         cut -f1 $(location g2p_test.tsv) |
         $(location //festus/runtime:g2p-lookup) \
           --bytes_to_graphones=$(location bytes_to_graphones.fst) \
@@ -124,14 +128,9 @@ sh_test(
           --max_prons=1 |
         $(location //utils:eval_dictionary_simple) \
           $(location g2p_test.tsv) \
-          90
+          > $@
         """,
-    ],
-    data = [
-        "bytes_to_graphones.fst",
-        "graphone_model.fst",
-        "phonemes_to_graphones.fst",
-        "g2p_test.tsv",
+    tools = [
         "//festus/runtime:g2p-lookup",
         "//utils:eval_dictionary_simple",
     ],

@@ -16,11 +16,11 @@
 # Author: mjansche@google.com (Martin Jansche)
 
 # Path to OpenFst installation.
+OPENFST=/usr/local
 #OPENFST=/usr/local/stow/openfst-1.3.4
 #OPENFST=/usr/local/stow/openfst-1.4.1
 #OPENFST=/usr/local/stow/openfst-1.5.0
 #OPENFST=/usr/local/stow/openfst-1.5.1
-OPENFST=/usr/local
 
 # C++ compiler that supports C++11.
 CXX=g++-4.8

@@ -24,6 +24,7 @@
 #include <vector>
 
 #include <fst/arc.h>
+#include <fst/compact-fst.h>
 #include <fst/compat.h>
 #include <fst/compose.h>
 #include <fst/project.h>
@@ -36,35 +37,13 @@
 #include <fst/vector-fst.h>
 #include <thrax/grm-manager.h>
 
+#include "festus/fst-util.h"
+#include "festus/label-maker.h"
+#include "festus/string-util.h"
+
 using fst::StdVectorFst;
 using fst::SymbolTable;
-
-typedef fst::StringCompiler<fst::StdArc> StdStringCompiler;
-typedef fst::StringPrinter<fst::StdArc> StdStringPrinter;
-
 using std::string;
-
-namespace {
-
-class SplitString {
- public:
-  SplitString(const string &line, const char *delim)
-      : c_str_(new char[line.size() + 1]) {
-    line.copy(c_str_.get(), line.size());
-    c_str_[line.size()] = '\0';
-    fst::SplitToVector(c_str_.get(), delim, &pieces_, true);
-  }
-
-  std::vector<char *>::iterator begin() { return pieces_.begin(); }
-
-  std::vector<char *>::iterator end() { return pieces_.end(); }
-
- private:
-  std::unique_ptr<char[]> c_str_;
-  std::vector<char *> pieces_;
-};
-
-}  // namespace
 
 DEFINE_string(fst, "", "Path to G2P FST.");
 DEFINE_string(far, "", "Path to FAR file containing G2P FST.");
@@ -108,21 +87,20 @@ int main(int argc, char *argv[]) {
       SymbolTable::ReadText(FLAGS_phoneme_syms));
   if (!phoneme_syms) return 1;
 
-  std::vector<char *> phrases;
-  StdStringCompiler compile_graphemes(StdStringCompiler::UTF8);
-  StdVectorFst graphemes, lattice;
-  StdStringPrinter print_phonemes(StdStringPrinter::SYMBOL, phoneme_syms.get());
-  string phonemes;
+  festus::UnicodeLabelMaker input_label_maker;
+  festus::SymbolLabelMaker output_label_maker(phoneme_syms.get(), " ");
+  fst::StdCompactStringFst graphemes;
+  StdVectorFst lattice;
   for (string line; std::getline(std::cin, line); ) {
     std::cout << line << "\t";
     bool at_start = true;
-    for (const char *phrase : SplitString(line, " ")) {
+    for (const auto phrase : festus::Split(line, " ")) {
       if (at_start) {
         at_start = false;
       } else {
         std::cout << " # ";
       }
-      if (!compile_graphemes(phrase, &graphemes)) {
+      if (!input_label_maker.StringToCompactFst(phrase, &graphemes)) {
         std::cout << "ERROR_compiling_input: " << phrase;
         continue;
       }
@@ -131,18 +109,18 @@ int main(int argc, char *argv[]) {
         std::cout << "ERROR_empty_composition: " << phrase;
         continue;
       }
-      fst::Prune(&lattice, 0.1);
-      if (!lattice.Properties(fst::kString, true)) {
-        std::cout << "ERROR_ambiguous_output: " << phrase;
-        continue;
-      }
       fst::Project(&lattice, fst::PROJECT_OUTPUT);
-      fst::RmEpsilon(&lattice);
-      if (!print_phonemes(lattice, &phonemes)) {
-        std::cout << "ERROR_printing_output: " << phrase;
-        continue;
+      if (lattice.Properties(fst::kString, true)) {
+        VLOG(1) << "Lattice is a string after composition, no pruning required";
+      } else {
+        fst::Prune(&lattice, 0.1);
+        if (!lattice.Properties(fst::kString, true)) {
+          std::cout << "ERROR_ambiguous_output: " << phrase;
+          continue;
+        }
       }
-      std::cout << phonemes;
+      fst::RmEpsilon(&lattice);
+      std::cout << festus::OneString(lattice, output_label_maker);
     }
     std::cout << std::endl;
   }

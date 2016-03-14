@@ -47,6 +47,9 @@ cc_binary(
     name = "thrax_g2p",
     srcs = ["thrax_g2p.cc"],
     deps = [
+        "//festus:fst-util",
+        "//festus:label-maker",
+        "//festus:string-util",
         "@openfst//:fst",
         "@thrax//:grm-manager",
     ],

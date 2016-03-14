@@ -41,6 +41,14 @@ class LabelMaker {
 
   virtual bool StringToLabels(const StringPiece str, Labels *labels) const = 0;
   virtual bool LabelsToString(const Labels &labels, string *str) const = 0;
+
+  template <class CompactFstType>
+  bool StringToCompactFst(const StringPiece str, CompactFstType *fst) {
+    Labels labels;
+    if (!StringToLabels(str, &labels)) return false;
+    fst->SetCompactElements(labels.begin(), labels.end());
+    return true;
+  }
 };
 
 // Converter that turns a C++ byte string into an FST label sequence where

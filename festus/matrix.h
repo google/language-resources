@@ -194,11 +194,11 @@ void MatrixSemiring<W>::Star(Matrix *m) {
 // super-final state n with the corresponding final weight. Thus the adjacency
 // matrix contains complete information about all weights in the FST.
 template <class F, class ArcFilter = AnyArcFilter<typename F::Arc>>
-typename MatrixSemiring<typename F::Arc::Weight>::Matrix AdjacencyMatrix(
+typename MatrixSemiring<typename F::Weight>::Matrix AdjacencyMatrix(
     const F &fst, ArcFilter arc_filter = ArcFilter()) {
   typedef typename F::Arc Arc;
-  typedef typename Arc::StateId StateId;
-  typedef typename Arc::Weight Weight;
+  typedef typename F::StateId StateId;
+  typedef typename F::Weight Weight;
   const StateId num_states = CountStates(fst);
   auto matrix = MatrixSemiring<Weight>::Zero(num_states + 1);
   if (num_states == 0) {
@@ -231,11 +231,23 @@ typename MatrixSemiring<typename F::Arc::Weight>::Matrix AdjacencyMatrix(
 // for further details). In particular D[fst.Start()][fst.NumStates()] holds the
 // semiring sum over all accepting paths through the FST.
 template <class F, class ArcFilter = AnyArcFilter<typename F::Arc>>
-typename MatrixSemiring<typename F::Arc::Weight>::Matrix AllPairsDistance(
+typename MatrixSemiring<typename F::Weight>::Matrix AllPairsDistance(
     const F &fst) {
   auto matrix = AdjacencyMatrix(fst, ArcFilter());
-  MatrixSemiring<typename F::Arc::Weight>::Star(&matrix);
+  MatrixSemiring<typename F::Weight>::Star(&matrix);
   return matrix;
+}
+
+// Computes the total distance of the given FST (graph), which is simply the
+// distance from its start state to its implicit super-final state.
+template <class F, class ArcFilter = AnyArcFilter<typename F::Arc>>
+typename F::Weight TotalDistance(const F &fst) {
+  auto weight = F::Weight::Zero();
+  if (fst::kNoStateId != fst.Start()) {
+    auto matrix = AllPairsDistance(fst);
+    weight = matrix[fst.Start()].back();
+  }
+  return weight;
 }
 
 }  // namespace fst

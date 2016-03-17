@@ -72,10 +72,10 @@ bool MakeAllStatesFinal(fst::MutableFst<Arc> *fst,
           return false;
         }
         state = arc.nextstate;
-        weight = fst::Times(weight, arc.weight);
+        weight = Times(weight, arc.weight);
       }
     }
-    weight = fst::Times(weight, fst->Final(state));
+    weight = Times(weight, fst->Final(state));
     fst->SetFinal(s, weight);
     VLOG(1) << "Final weight of state " << s << " set to " << weight.Value();
   }

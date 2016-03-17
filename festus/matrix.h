@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Copyright 2015 Google, Inc.
+// Copyright 2015, 2016 Google, Inc.
 // Author: mjansche@google.com (Martin Jansche)
 //
 // \file
@@ -32,10 +32,7 @@
 #include <fst/expanded-fst.h>
 #include <fst/fst.h>
 
-#include "festus/float-weight-star.h"
-#include "festus/real-weight.h"
-
-namespace fst {
+namespace festus {
 
 // The square matrices of fixed dimension with entries in a (star) semiring form
 // a (star) semiring under the usual matrix addition and multiplication. Mainly
@@ -69,13 +66,13 @@ class MatrixSemiring {
   static void Scale(Matrix *m, const W &w);
 
   // Computes the matrix addition m := m + n.
-  static bool Plus(Matrix *m, const Matrix &n);
+  static bool MPlus(Matrix *m, const Matrix &n);
 
   // Computes the matrix product: p := p + m n.
-  static bool Times(Matrix *p, const Matrix &m, const Matrix &n);
+  static bool MTimes(Matrix *p, const Matrix &m, const Matrix &n);
 
   // Computes the matrix star/asteration/closure see comments below: m := m*.
-  static void Star(Matrix *m);
+  static void MStar(Matrix *m);
 
  private:
   const std::size_t size_;
@@ -100,14 +97,13 @@ void MatrixSemiring<W>::Scale(Matrix *m, const W &w) {
     auto &m_i = (*m)[i];
     DCHECK_EQ(size, m_i.size());
     for (std::size_t j = 0; j < size; ++j) {
-      using ::fst::Times;
       m_i[j] = Times(m_i[j], w);
     }
   }
 }
 
 template <class W>
-bool MatrixSemiring<W>::Plus(Matrix *m, const Matrix &n) {
+bool MatrixSemiring<W>::MPlus(Matrix *m, const Matrix &n) {
   std::size_t size = m->size();
   if (n.size() != size) {
     return false;
@@ -118,7 +114,6 @@ bool MatrixSemiring<W>::Plus(Matrix *m, const Matrix &n) {
     DCHECK_EQ(size, m_i.size());
     DCHECK_EQ(size, n_i.size());
     for (std::size_t j = 0; j < size; ++j) {
-      using ::fst::Plus;
       m_i[j] = Plus(m_i[j], n_i[j]);
     }
   }
@@ -126,7 +121,7 @@ bool MatrixSemiring<W>::Plus(Matrix *m, const Matrix &n) {
 }
 
 template <class W>
-bool MatrixSemiring<W>::Times(Matrix *p, const Matrix &m, const Matrix &n) {
+bool MatrixSemiring<W>::MTimes(Matrix *p, const Matrix &m, const Matrix &n) {
   std::size_t size = m.size();
   if (n.size() != size || p->size() != size) {
     return false;
@@ -139,8 +134,6 @@ bool MatrixSemiring<W>::Times(Matrix *p, const Matrix &m, const Matrix &n) {
       W &p_ij = p_i[j];
       for (std::size_t k = 0; k < size; ++k) {
         DCHECK_EQ(size, n[k].size());
-        using ::fst::Plus;
-        using ::fst::Times;
         p_ij = Plus(p_ij, Times(m_i[k], n[k][j]));
       }
     }
@@ -153,10 +146,7 @@ bool MatrixSemiring<W>::Times(Matrix *p, const Matrix &m, const Matrix &n) {
 // path a/k/a semiring matrix asteration algorithm. This version computes
 // Star(m) in-place (see Jansche 2003, p. 176).
 template <class W>
-void MatrixSemiring<W>::Star(Matrix *m) {
-  using ::fst::Plus;
-  using ::fst::Times;
-  using ::fst::Star;
+void MatrixSemiring<W>::MStar(Matrix *m) {
   const std::size_t size = m->size();
   for (std::size_t k = 0; k < size; ++k) {
     auto &m_k = (*m)[k];
@@ -193,7 +183,7 @@ void MatrixSemiring<W>::Star(Matrix *m) {
 // ordinary state s (with 0 <= s < n) expressed instead as an arc from s to the
 // super-final state n with the corresponding final weight. Thus the adjacency
 // matrix contains complete information about all weights in the FST.
-template <class F, class ArcFilter = AnyArcFilter<typename F::Arc>>
+template <class F, class ArcFilter = fst::AnyArcFilter<typename F::Arc>>
 typename MatrixSemiring<typename F::Weight>::Matrix AdjacencyMatrix(
     const F &fst, ArcFilter arc_filter = ArcFilter()) {
   typedef typename F::Arc Arc;
@@ -206,7 +196,7 @@ typename MatrixSemiring<typename F::Weight>::Matrix AdjacencyMatrix(
   }
   for (StateId source = 0; source < num_states; ++source) {
     auto &source_to = matrix[source];
-    for (ArcIterator<F> iter(fst, source); !iter.Done(); iter.Next()) {
+    for (fst::ArcIterator<F> iter(fst, source); !iter.Done(); iter.Next()) {
       const Arc &arc = iter.Value();
       if (!arc_filter(arc)) {
         continue;
@@ -230,17 +220,17 @@ typename MatrixSemiring<typename F::Weight>::Matrix AdjacencyMatrix(
 // state number n = fst.NumStates() (see the comments for AdjacencyMatrix above
 // for further details). In particular D[fst.Start()][fst.NumStates()] holds the
 // semiring sum over all accepting paths through the FST.
-template <class F, class ArcFilter = AnyArcFilter<typename F::Arc>>
+template <class F, class ArcFilter = fst::AnyArcFilter<typename F::Arc>>
 typename MatrixSemiring<typename F::Weight>::Matrix AllPairsDistance(
     const F &fst) {
   auto matrix = AdjacencyMatrix(fst, ArcFilter());
-  MatrixSemiring<typename F::Weight>::Star(&matrix);
+  MatrixSemiring<typename F::Weight>::MStar(&matrix);
   return matrix;
 }
 
 // Computes the total distance of the given FST (graph), which is simply the
 // distance from its start state to its implicit super-final state.
-template <class F, class ArcFilter = AnyArcFilter<typename F::Arc>>
+template <class F, class ArcFilter = fst::AnyArcFilter<typename F::Arc>>
 typename F::Weight TotalDistance(const F &fst) {
   auto weight = F::Weight::Zero();
   if (fst::kNoStateId != fst.Start()) {
@@ -250,6 +240,6 @@ typename F::Weight TotalDistance(const F &fst) {
   return weight;
 }
 
-}  // namespace fst
+}  // namespace festus
 
 #endif  // FESTUS_MATRIX_H__

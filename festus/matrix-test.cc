@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Copyright 2015 Google, Inc.
+// Copyright 2015, 2016 Google, Inc.
 // Author: mjansche@google.com (Martin Jansche)
 //
 // \file
@@ -34,6 +34,7 @@
 #include <fst/vector-fst.h>
 #include <gtest/gtest.h>
 
+#include "festus/float-weight-star.h"
 #include "festus/real-weight.h"
 
 namespace {
@@ -60,7 +61,7 @@ void TestRealMatrixInverse(std::size_t size,
                            double det,
                            std::initializer_list<double> inv) {
   typedef fst::Real64Weight R;
-  typedef fst::MatrixSemiring<R> Semiring;
+  typedef festus::MatrixSemiring<R> Semiring;
 
   Semiring::Matrix matrix;
   Semiring::Matrix inverse;
@@ -79,13 +80,13 @@ void TestRealMatrixInverse(std::size_t size,
   Semiring::Matrix tmp = matrix;
   Semiring::Scale(&tmp, -1);
   Semiring::Matrix m = Semiring::One(size);
-  EXPECT_TRUE(Semiring::Plus(&m, tmp));
+  EXPECT_TRUE(Semiring::MPlus(&m, tmp));
 
-  Semiring::Star(&m);  // m = (I - matrix)* == matrix^{-1}
+  Semiring::MStar(&m);  // m = (I - matrix)* == matrix^{-1}
   Semiring::Matrix mn = Semiring::Zero(size);
   Semiring::Matrix nm = Semiring::Zero(size);
-  EXPECT_TRUE(Semiring::Times(&mn, m, matrix));
-  EXPECT_TRUE(Semiring::Times(&nm, matrix, m));
+  EXPECT_TRUE(Semiring::MTimes(&mn, m, matrix));
+  EXPECT_TRUE(Semiring::MTimes(&nm, matrix, m));
   for (std::size_t i = 0; i < size; ++i) {
     for (std::size_t j = 0; j < size; ++j) {
       EXPECT_DOUBLE_EQ(inverse[i][j].Value(), m[i][j].Value());
@@ -115,7 +116,7 @@ TEST(MatrixTest, RealMatrixInverse) {
 
 template <class W>
 void ExpectMatrixEq(const std::vector<W> &expected,
-                    const typename fst::MatrixSemiring<W>::Matrix &actual) {
+                    const typename festus::MatrixSemiring<W>::Matrix &actual) {
   auto iter = expected.begin();
   for (std::size_t i = 0; i < actual.size(); ++i) {
     auto &actual_i = actual[i];
@@ -160,7 +161,7 @@ TEST(MatrixTest, AllPairsDistance) {
   fst.SetStart(0);
   fst.SetFinal(0, 9);
 
-  auto matrix = fst::AdjacencyMatrix(fst);
+  auto matrix = festus::AdjacencyMatrix(fst);
   ExpectMatrixEq(std::vector<Weight>{
       inf,   3,   8, inf, -4,    9,
       inf, inf, inf,   1,  7,  inf,
@@ -169,7 +170,7 @@ TEST(MatrixTest, AllPairsDistance) {
       inf, inf, inf,   6, inf, inf,
       inf, inf, inf, inf, inf, inf}, matrix);
 
-  auto distance = fst::AllPairsDistance(fst);
+  auto distance = festus::AllPairsDistance(fst);
   ExpectMatrixEq(std::vector<Weight>{
       0.0,   1,  -3,   2,  -4,   9,
       3.0,   0,  -4,   1,  -1,  12,
@@ -248,7 +249,7 @@ TEST(MatrixTest, MarginalProbability_AllPairsDistance) {
   fst::VectorFst<fst::Log64Arc> fst;
   const double expected = HighProbabilityCycle(&fst);
 
-  auto distance = fst::AllPairsDistance(fst);
+  auto distance = festus::AllPairsDistance(fst);
   auto prob = distance[fst.Start()][fst.NumStates()];
 
   LogResult(expected, prob.Value());

@@ -59,11 +59,7 @@ cc_test(
 cc_library(
     name = "matrix",
     hdrs = ["matrix.h"],
-    deps = [
-        "@openfst//:fst",
-        ":float-weight-star",
-        ":real-weight",
-    ],
+    deps = ["@openfst//:fst"],
 )
 
 cc_test(
@@ -74,6 +70,7 @@ cc_test(
     deps = [
         "@googletest//:gtest_main",
         "@openfst//:fst",
+        ":float-weight-star",
         ":matrix",
         ":real-weight",
     ],

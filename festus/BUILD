@@ -219,3 +219,10 @@ cc_binary(
         ":alignables-util",
     ],
 )
+
+cc_proto_library(
+    name = "expression",
+    srcs = ["expression.proto"],
+    default_runtime = "@protobuf//:protobuf",
+    protoc = "@protobuf//:protoc",
+)

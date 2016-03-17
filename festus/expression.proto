@@ -1,0 +1,58 @@
+// festus/expression.proto
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+// Copyright 2016 Google, Inc.
+// Author: mjansche@google.com (Martin Jansche)
+//
+// \file
+// Serializable formal expressions in star semirings.
+
+syntax = "proto2";
+
+package festus;
+
+message Expression {
+  oneof expression {
+    bool zero = 1;  // "bool" is a placeholder, the value is ignored
+    bool one = 2;   // ditto
+    LeafValue leaf = 3;
+    BinaryExpression plus = 4;
+    BinaryExpression minus = 5;
+    BinaryExpression times = 6;
+    // BinaryExpression divide = 7;  // reserved; implement if needed
+    UnaryExpression star = 8;
+  }
+}
+
+message LeafValue {
+  oneof value {
+    int32 int_value = 1;
+    double double_value = 2;
+    bytes bytes_value = 3;
+  }
+}
+
+message BinaryExpression {
+  optional uint32 child1 = 1;
+  optional uint32 child2 = 2;
+}
+
+message UnaryExpression {
+  optional uint32 child = 1;
+}
+
+message ExpressionGraph {
+  optional uint32 root = 1;
+  map<uint32, Expression> node = 2;
+}

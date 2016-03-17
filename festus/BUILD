@@ -226,3 +226,12 @@ cc_proto_library(
     default_runtime = "@protobuf//:protobuf",
     protoc = "@protobuf//:protoc",
 )
+
+cc_library(
+    name = "expression-node",
+    hdrs = ["expression-node.h"],
+    deps = [
+        "@openfst//:base",
+        ":expression",
+    ],
+)

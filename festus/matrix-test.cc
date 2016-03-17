@@ -60,7 +60,7 @@ void TestRealMatrixInverse(std::size_t size,
                            std::initializer_list<double> mat,
                            double det,
                            std::initializer_list<double> inv) {
-  typedef fst::Real64Weight R;
+  typedef festus::Real64Weight R;
   typedef festus::MatrixSemiring<R> Semiring;
 
   Semiring::Matrix matrix;

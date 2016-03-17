@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Copyright 2015 Google, Inc.
+// Copyright 2015, 2016 Google, Inc.
 // Author: mjansche@google.com (Martin Jansche)
 //
 // \file
@@ -26,7 +26,7 @@
 #include <fst/compat.h>
 #include <fst/float-weight.h>
 
-namespace fst {
+namespace festus {
 
 // The semiring of real numbers under ordinary addition and multiplication is
 // defined here for illustration and testing purposes. For most practical
@@ -80,35 +80,42 @@ namespace fst {
 //   w == 1 only in the sense that both the left hand side (1*) and the right
 //   hand side (1 + 1 1*) are undefined.
 //
+// * Beyond the Star axiom, the real semiring (strictly speaking over the
+//   one-point compactification of the reals with 1/0 == inf and 1/inf == 0)
+//   has the following additional identity:
+//
+//     Star(Star(Star(w))) == w
+//
 template <class T>
-class RealWeightTpl : public FloatWeightTpl<T> {
+class RealWeightTpl : public fst::FloatWeightTpl<T> {
  public:
-  using FloatWeightTpl<T>::Value;
+  using fst::FloatWeightTpl<T>::GetPrecisionString;
+  using fst::FloatWeightTpl<T>::Value;
 
   typedef RealWeightTpl ReverseWeight;
 
-  RealWeightTpl() : FloatWeightTpl<T>() {}
+  RealWeightTpl() : fst::FloatWeightTpl<T>() {}
 
-  RealWeightTpl(T f) : FloatWeightTpl<T>(f) {}
+  RealWeightTpl(T f) : fst::FloatWeightTpl<T>(f) {}
 
-  RealWeightTpl(const RealWeightTpl<T> &w) : FloatWeightTpl<T>(w) {}
+  RealWeightTpl(const RealWeightTpl<T> &w) : fst::FloatWeightTpl<T>(w) {}
 
   static const RealWeightTpl<T> Zero() { return RealWeightTpl<T>(0); }
 
   static const RealWeightTpl<T> One() { return RealWeightTpl<T>(1); }
 
   static const RealWeightTpl<T> NoWeight() {
-    return RealWeightTpl<T>(FloatLimits<T>::NumberBad());
+    return RealWeightTpl<T>(fst::FloatLimits<T>::NumberBad());
   }
 
   static const string &Type() {
-    static const string type = "real" + FloatWeightTpl<T>::GetPrecisionString();
+    static const string type = "real" + GetPrecisionString();
     return type;
   }
 
   bool Member() const { return std::isfinite(Value()); }
 
-  RealWeightTpl<T> Quantize(float delta = kDelta) const {
+  RealWeightTpl<T> Quantize(float delta = fst::kDelta) const {
     if (std::isfinite(Value())) {
       return RealWeightTpl<T>(std::floor(Value() / delta + 0.5F) * delta);
     } else {
@@ -118,7 +125,7 @@ class RealWeightTpl : public FloatWeightTpl<T> {
 
   RealWeightTpl<T> Reverse() const { return *this; }
 
-  static uint64 Properties() { return kSemiring | kCommutative; }
+  static uint64 Properties() { return fst::kSemiring | fst::kCommutative; }
 };
 
 // Single-precision real weight
@@ -177,19 +184,19 @@ inline RealWeightTpl<double> Times(const RealWeightTpl<double> &w1,
 template <class T>
 inline RealWeightTpl<T> Divide(const RealWeightTpl<T> &w1,
                                const RealWeightTpl<T> &w2,
-                               DivideType typ = DIVIDE_ANY) {
+                               fst::DivideType typ = fst::DIVIDE_ANY) {
   return RealWeightTpl<T>(w1.Value() / w2.Value());
 }
 
 inline RealWeightTpl<float> Divide(const RealWeightTpl<float> &w1,
                                    const RealWeightTpl<float> &w2,
-                                   DivideType typ = DIVIDE_ANY) {
+                                   fst::DivideType typ = fst::DIVIDE_ANY) {
   return Divide<float>(w1, w2, typ);
 }
 
 inline RealWeightTpl<double> Divide(const RealWeightTpl<double> &w1,
                                     const RealWeightTpl<double> &w2,
-                                    DivideType typ = DIVIDE_ANY) {
+                                    fst::DivideType typ = fst::DIVIDE_ANY) {
   return Divide<double>(w1, w2, typ);
 }
 
@@ -204,17 +211,25 @@ inline RealWeightTpl<double> Divide(const RealWeightTpl<double> &w1,
 //   real semiring here differs crucially from Star() of the log semiring, which
 //   is only defined for inputs on which the geometric power series converges.
 //
-// * For w == 1 we define w* as NaN instead of infinity, as it is unclear what
-//   sign the result should have: The limit of 1/(1-w) as w approaches 1 from
-//   below is positive infinity, but the limit from above is negative infinity.
+// * For w == 1 we define w* as infinity, which fails the Member() predicate of
+//   this weight class. This is motivated by viewing the real line as having
+//   been extended with a single point at (unsigned) infinity, i.e. a one-point
+//   compactification as opposed to the two-point compactification with signed
+//   infinities used in IEEE floating point. In the latter, it would be unclear
+//   what sign the result should have, since the left and right limits of
+//   1/(1-w) as w approaches 1 diverge.
 template <class T>
 inline RealWeightTpl<T> Star(const RealWeightTpl<T> &w) {
+  RealWeightTpl<T> star;
   T f = w.Value();
   if (f == 1) {
-    return RealWeightTpl<T>::NoWeight();
+    star = fst::FloatLimits<T>::PosInfinity();
+  } else if (std::isinf(f)) {
+    star = 0.0;
   } else {
-    return RealWeightTpl<T>(1.0 / (1.0 - f));
+    star = 1.0 / (1.0 - f);
   }
+  return star;
 }
 
 inline RealWeightTpl<float> Star(const RealWeightTpl<float> &w) {
@@ -225,6 +240,6 @@ inline RealWeightTpl<double> Star(const RealWeightTpl<double> &w) {
   return Star<double>(w);
 }
 
-}  // namespace fst
+}  // namespace festus
 
 #endif  // FESTUS_REAL_WEIGHT_H__

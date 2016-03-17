@@ -36,7 +36,7 @@ namespace {
 template <class T>
 class RealWeightGenerator_ {
  public:
-  typedef fst::RealWeightTpl<T> Weight;
+  typedef festus::RealWeightTpl<T> Weight;
 
   RealWeightGenerator_(int seed = std::time(0), bool allow_zero = true)
       : allow_zero_(allow_zero) {
@@ -70,7 +70,7 @@ template <class T> const int RealWeightGenerator_<T>::kNumRandomWeights;
 template <class T>
 void TestTemplatedWeights(int repeat, int seed) {
   RealWeightGenerator_<T> real_generator(seed);
-  fst::WeightTester<fst::RealWeightTpl<T>, RealWeightGenerator_<T> >
+  fst::WeightTester<festus::RealWeightTpl<T>, RealWeightGenerator_<T> >
       real_tester(real_generator);
   real_tester.Test(repeat);
 }
@@ -83,9 +83,9 @@ TEST(RealWeightTest, RandomWeights) {
 }
 
 TEST(RealWeightTest, Type) {
-  EXPECT_EQ("real", fst::RealWeight::Type());
-  EXPECT_NE(fst::RealWeightTpl<double>::Type(),
-            fst::RealWeightTpl<float>::Type());
+  EXPECT_EQ("real", festus::RealWeight::Type());
+  EXPECT_NE(festus::RealWeightTpl<double>::Type(),
+            festus::RealWeightTpl<float>::Type());
 }
 
 }  // namespace

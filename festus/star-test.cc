@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Copyright 2015 Google, Inc.
+// Copyright 2015, 2016 Google, Inc.
 // Author: mjansche@google.com (Martin Jansche)
 //
 // \file
@@ -43,11 +43,11 @@ const float kTestValues[] = {
 template <class Weight>
 void TestUniversalProperties(float threshold_near = 1e-12) {
   // Star of a non-member is a non-member.
-  EXPECT_FALSE(fst::Star(Weight::NoWeight()).Member());
+  EXPECT_FALSE(Star(Weight::NoWeight()).Member());
 
   // Star of Zero is always One.
   // This is because 0* == 1 + 0 0* == 1 + 0 == 1.
-  EXPECT_EQ(Weight::One(), fst::Star(Weight::Zero()));
+  EXPECT_EQ(Weight::One(), Star(Weight::Zero()));
 
   // In a semiring with idempotent Plus, w* == 1 + w*. This holds because
   // 1 + w* == 1 + (1 + w w*) == (1 + 1) + w w* == 1 + w w* == w*, where the
@@ -69,13 +69,13 @@ void TestUniversalProperties(float threshold_near = 1e-12) {
   // 1* == 1^0 + 1^1 + 1^2 + 1^3 + ... == 1 + 1 + 1 + 1 + ... which all collapse
   // into 1 by idempotence, i.e. 1* == 1.
   if (Weight::Properties() & fst::kIdempotent) {
-    EXPECT_EQ(Weight::One(), fst::Star(Weight::One()));
+    EXPECT_EQ(Weight::One(), Star(Weight::One()));
     for (float x : kTestValues) {
       for (float s : {+1.0F, -1.0F}) {
         Weight w = std::copysign(x, s);
-        Weight star = fst::Star(w);
-        Weight one_plus_star = fst::Plus(Weight::One(), star);
-        Weight star1 = fst::Star(fst::Plus(Weight::One(), w));
+        Weight star = Star(w);
+        Weight one_plus_star = Plus(Weight::One(), star);
+        Weight star1 = Star(Plus(Weight::One(), w));
         if (!star.Member()) {
           EXPECT_FALSE(one_plus_star.Member());
           EXPECT_FALSE(star1.Member());
@@ -92,12 +92,12 @@ void TestUniversalProperties(float threshold_near = 1e-12) {
   for (float x : kTestValues) {
     for (float s : {+1.0F, -1.0F}) {
       Weight w = std::copysign(x, s);
-      Weight star = fst::Star(w);
+      Weight star = Star(w);
       if (!w.Member() || !star.Member()) {
         continue;
       }
-      Weight one_plus_w_star = fst::Plus(Weight::One(), fst::Times(w, star));
-      Weight one_plus_star_w = fst::Plus(Weight::One(), fst::Times(star, w));
+      Weight one_plus_w_star = Plus(Weight::One(), Times(w, star));
+      Weight one_plus_star_w = Plus(Weight::One(), Times(star, w));
       EXPECT_TRUE(one_plus_w_star.Member());
       EXPECT_TRUE(one_plus_star_w.Member());
       if (std::isinf(star.Value())) {
@@ -130,8 +130,8 @@ TEST(StarTest, UniversalPropertiesMinMax) {
 }
 
 TEST(StarTest, UniversalPropertiesReal) {
-  TestUniversalProperties<fst::RealWeightTpl<float>>(1e-7);
-  TestUniversalProperties<fst::RealWeightTpl<double>>();
+  TestUniversalProperties<festus::RealWeightTpl<float>>(1e-7);
+  TestUniversalProperties<festus::RealWeightTpl<double>>();
 }
 
 template <class T>
@@ -140,7 +140,7 @@ void TestMinMax() {
   for (float x : kTestValues) {
     for (float s : {+1.0F, -1.0F}) {
       Weight w = std::copysign(x, s);
-      EXPECT_EQ(Weight::One(), fst::Star(w));
+      EXPECT_EQ(Weight::One(), Star(w));
     }
   }
 }
@@ -157,9 +157,9 @@ void TestTropical() {
     for (float s : {+1.0F, -1.0F}) {
       Weight w = std::copysign(x, s);
       if (w.Value() >= 0) {
-        EXPECT_EQ(Weight::One(), fst::Star(w));
+        EXPECT_EQ(Weight::One(), Star(w));
       } else {
-        EXPECT_EQ(Weight(-inf), fst::Star(w));
+        EXPECT_EQ(Weight(-inf), Star(w));
       }
     }
   }
@@ -203,7 +203,7 @@ void TestLog() {
   T p = 0;
   for (int n = 0; n < 1000; ++n) {
     Weight w = -std::log(p);
-    Weight star = fst::Star(w);
+    Weight star = Star(w);
     EXPECT_EQ((p != 0), std::isfinite(w.Value()));
     EXPECT_GT(w.Value(), 0);
     EXPECT_TRUE(w.Member());
@@ -217,7 +217,7 @@ void TestLog() {
   for (T lp : {745.0f, 745.1332191f, 745.1332192f, 746.0f}) {
     p = std::exp(-lp);
     Weight w = lp;
-    Weight star = fst::Star(w);
+    Weight star = Star(w);
     EXPECT_TRUE(w.Member());
     EXPECT_TRUE(star.Member());
     ExpectApproxEq<T>(1.0 / (1.0 - p), std::exp(-star.Value()));
@@ -230,7 +230,7 @@ void TestLog() {
   };
   for (T p : kRealProbs) {
     Weight w = -std::log(p);
-    Weight star = fst::Star(w);
+    Weight star = Star(w);
     EXPECT_GT(w.Value(), 0);
     EXPECT_TRUE(w.Member());
     EXPECT_TRUE(star.Member());
@@ -242,7 +242,7 @@ void TestLog() {
   for (int n = 0; n < 1000; ++n) {
     p = std::nextafter(p, static_cast<T>(-inf));
     Weight w = -std::log(p);
-    Weight star = fst::Star(w);
+    Weight star = Star(w);
     EXPECT_LT(p, 1);
     EXPECT_GT(w.Value(), 0);
     EXPECT_TRUE(w.Member());
@@ -253,7 +253,7 @@ void TestLog() {
   // Test real probability of exactly 1:
   {
     Weight w = -std::log(1);
-    Weight star = fst::Star(w);
+    Weight star = Star(w);
     EXPECT_EQ(0, w.Value());
     EXPECT_EQ(Weight::One(), w);
     EXPECT_TRUE(w.Member());
@@ -264,7 +264,7 @@ void TestLog() {
   for (int n = 0; n < 1000; ++n) {
     p = std::nextafter(p, static_cast<T>(inf));
     Weight w = -std::log(p);
-    Weight star = fst::Star(w);
+    Weight star = Star(w);
     EXPECT_GT(p, 1);
     EXPECT_LT(w.Value(), 0);
     EXPECT_TRUE(w.Member());
@@ -275,6 +275,24 @@ void TestLog() {
 TEST(StarTest, Log) {
   TestLog<float>();
   TestLog<double>();
+}
+
+template <class T>
+void TestStar3() {
+  typedef festus::RealWeightTpl<T> Weight;
+  static constexpr float kWeights[] = {
+    0.0f, 1.0f, -1.0f, 0.5f, -0.5f, 2.0f, -2.0f
+  };
+  for (T x : kWeights) {
+    Weight w = x;
+    Weight s3 = Star(Star(Star(w)));
+    ExpectApproxEq<T>(x, s3.Value());
+  }
+}
+
+TEST(RealWeightTest, Star) {
+  TestStar3<float>();
+  TestStar3<double>();
 }
 
 }  // namespace

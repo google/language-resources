@@ -323,14 +323,14 @@ void PathsToVector(
         if (!str.empty()) str.push_back(' ');
         str.append(symbols->Find(arc.olabel));
       }
-      weight = fst::Times(weight, arc.weight);
+      weight = Times(weight, arc.weight);
       state = arc.nextstate;
       CHECK_NE(state, fst::kNoStateId);
       CHECK((iter.Next(), iter.Done()));
     }
     CHECK(fst::ArcIterator<fst::VectorFst<Arc>>(paths_fst, state).Done());
-    weight = fst::Times(weight, paths_fst.Final(state));
-    weight = fst::Divide(weight, total_weight);
+    weight = Times(weight, paths_fst.Final(state));
+    weight = Divide(weight, total_weight);
     paths->emplace_back(std::move(str), std::exp(-weight.Value()));
   }
 }

@@ -38,17 +38,37 @@
 #include <utility>
 
 #include <fst/compat.h>
+#include <fst/weight.h>
 
 #include "festus/expression.pb.h"
 
 namespace festus {
+
+// The template classes ExpressionNode<> and FormalWeight<> expect as their
+// template parameter a class with a similar signature as in this example:
+struct ExampleLeaf {
+  // The storage type of leaf payloads in ExpressionNode<>.
+  typedef string Leaf;
+
+  // Returns a name for the leaf type. Used by FormalWeight<>::Type().
+  static string TypeName() { return "example"; }
+
+  // Serializes a leaf value to the protobuf message LeafValue.
+  static void ToLeafValue(const string &val, festus::LeafValue *leaf_value) {
+    leaf_value->set_bytes_value(val);
+  }
+
+  // Semiring properties, used by FormalWeight<>::Properties().
+  // The values provided here are for illustration only.
+  static uint64 Properties() { return fst::kSemiring | fst::kCommutative; }
+};
 
 template <class L>
 class ExpressionNode {
  public:
   class Visitor;
 
-  ExpressionNode() : xcase_(Expression::kZero) {}
+  ExpressionNode() = default;
 
   explicit ExpressionNode(Expression::ExpressionCase c) : xcase_(c) {}
 
@@ -160,8 +180,8 @@ class ExpressionNode {
   static const std::shared_ptr<const ExpressionNode> kZeroNode;
   static const std::shared_ptr<const ExpressionNode> kOneNode;
 
-  Expression::ExpressionCase xcase_;
-  L leaf_;
+  Expression::ExpressionCase xcase_ = Expression::kZero;
+  typename L::Leaf leaf_;
   std::shared_ptr<const ExpressionNode> child1_;
   std::shared_ptr<const ExpressionNode> child2_;
 
@@ -407,7 +427,7 @@ class ExpressionNode<L>::Visitor {
   virtual void VisitNoWeight() {}
   virtual void VisitZero() {}
   virtual void VisitOne() {}
-  virtual void VisitLeaf(const L &value) {}
+  virtual void VisitLeaf(const typename L::Leaf &value) {}
   virtual void VisitPlus(const ExpressionNode<L> &child1,
                          const ExpressionNode<L> &child2) {}
   virtual void VisitMinus(const ExpressionNode<L> &child1,
@@ -461,7 +481,7 @@ class ExpressionNodePrintVisitor : public ExpressionNode<L>::Visitor {
 
   void VisitOne() override { strm_ << "One"; }
 
-  void VisitLeaf(const L &value) override { strm_ << value; }
+  void VisitLeaf(const typename L::Leaf &value) override { strm_ << value; }
 
   void VisitPlus(const ExpressionNode<L> &child1,
                  const ExpressionNode<L> &child2) override {
@@ -505,36 +525,6 @@ std::ostream &operator<<(std::ostream &strm, const ExpressionNode<L> &n) {
   n.Accept(&visitor);
   return strm;
 }
-
-// This template must be specialized for types passed as the template argument
-// to ExpressionNode<> and FormalWeight<>.
-template <class L>
-struct LeafUtil {
-  // Returns a name for the template argument L.
-  // Used by FormalWeight<L>::Type().
-  static string TypeName() { return string(); }
-
-  // Serialized a leaf value to the protobuf message LeafValue.
-  static void ToLeafValue(const L &, LeafValue *) {}
-};
-
-template <>
-struct LeafUtil<string> {
-  static string TypeName() { return "string"; }
-
-  static void ToLeafValue(const string &val, LeafValue *leaf_value) {
-    leaf_value->set_bytes_value(val);
-  }
-};
-
-template <>
-struct LeafUtil<int> {
-  static string TypeName() { return "int"; }
-
-  static void ToLeafValue(const int &val, LeafValue *leaf_value) {
-    leaf_value->set_int_value(val);
-  }
-};
 
 }  // namespace festus
 

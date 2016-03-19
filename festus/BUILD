@@ -231,7 +231,7 @@ cc_library(
     name = "expression-node",
     hdrs = ["expression-node.h"],
     deps = [
-        "@openfst//:base",
+        "@openfst//:weight",
         ":expression",
     ],
 )

@@ -21,7 +21,6 @@
 #ifndef FESTUS_RUNTIME_FST_UTIL_H__
 #define FESTUS_RUNTIME_FST_UTIL_H__
 
-#include <cmath>
 #include <cstddef>
 #include <iterator>
 #include <limits>
@@ -295,18 +294,19 @@ void DeterminizeConvertWeight(
 }
 
 // Converts the output FST of ShortestPath() into vector form.
+// Returns a vector holding the output string and weight of each successful
+// path in the FST.
 template <class F>
-void PathsToVector(
+std::vector<std::pair<string, float>> ShortestPathsToVector(
     const F &paths_fst,
-    std::vector<std::pair<string, float>> *paths,
     typename F::Arc::Weight total_weight = F::Arc::Weight::One()) {
   typedef typename F::Arc Arc;
   typedef typename F::StateId StateId;
   typedef typename F::Weight Weight;
-  paths->clear();
+  std::vector<std::pair<string, float>> paths;
   const StateId start = paths_fst.Start();
-  if (start == fst::kNoStateId) return;
-  paths->reserve(paths_fst.NumArcs(start));
+  if (start == fst::kNoStateId) return paths;
+  paths.reserve(paths_fst.NumArcs(start));
   const fst::SymbolTable *symbols = paths_fst.OutputSymbols();
   CHECK(symbols != nullptr);
   typedef fst::ArcIterator<fst::VectorFst<Arc>> MyArcIterator;
@@ -329,10 +329,9 @@ void PathsToVector(
       CHECK((iter.Next(), iter.Done()));
     }
     CHECK(fst::ArcIterator<fst::VectorFst<Arc>>(paths_fst, state).Done());
-    weight = Times(weight, paths_fst.Final(state));
-    weight = Divide(weight, total_weight);
-    paths->emplace_back(std::move(str), std::exp(-weight.Value()));
+    paths.emplace_back(std::move(str), weight.Value());
   }
+  return paths;
 }
 
 constexpr uint64 kConnected = fst::kAccessible | fst::kCoAccessible;

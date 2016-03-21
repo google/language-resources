@@ -143,6 +143,24 @@ cc_test(
 )
 
 cc_library(
+    name = "topsort",
+    hdrs = ["topsort.h"],
+    deps = ["@openfst//:fst"],
+)
+
+cc_test(
+    name = "topsort-test",
+    timeout = "short",
+    srcs = ["topsort-test.cc"],
+    deps = [
+        "@googletest//:gtest_main",
+        "@openfst//:fst",
+        ":iterator",
+        ":topsort",
+    ],
+)
+
+cc_library(
     name = "types",
     hdrs = ["types.h"],
 )

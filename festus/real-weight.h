@@ -21,12 +21,46 @@
 #ifndef FESTUS_REAL_WEIGHT_H__
 #define FESTUS_REAL_WEIGHT_H__
 
+#include <cstddef>
+#include <cstdlib>
 #include <cmath>
+#include <functional>
+#include <istream>
+#include <limits>
+#include <ostream>
+#include <type_traits>
 
 #include <fst/compat.h>
-#include <fst/float-weight.h>
+#include <fst/weight.h>
 
 namespace festus {
+
+template <typename T>
+inline bool VolatileEqualTo(volatile T v1, volatile T v2) {
+  return v1 == v2;
+}
+
+template <int> struct PrecisionString {};
+
+template <> struct PrecisionString<1> {
+  static string Get() { return "8"; }
+};
+
+template <> struct PrecisionString<2> {
+  static string Get() { return "16"; }
+};
+
+template <> struct PrecisionString<4> {
+  static string Get() { return "32"; }
+};
+
+template <> struct PrecisionString<8> {
+  static string Get() { return "64"; }
+};
+
+template <> struct PrecisionString<16> {
+  static string Get() { return "128"; }
+};
 
 // The semiring of real numbers under ordinary addition and multiplication is
 // defined here for illustration and testing purposes. For most practical
@@ -54,7 +88,7 @@ namespace festus {
 //              == 1/(1-w)
 //              == w*
 //
-//   The substitution 1 == (1-w)/(1-w) is well-defined becaues of the assumption
+//   The substitution 1 == (1-w)/(1-w) is well-defined because of the assumption
 //   that w != 1. Because the real semiring is commutative, the second equality
 //   of the axiom follows trivially.
 //
@@ -80,124 +114,142 @@ namespace festus {
 //   w == 1 only in the sense that both the left hand side (1*) and the right
 //   hand side (1 + 1 1*) are undefined.
 //
-// * Beyond the Star axiom, the real semiring (strictly speaking over the
-//   one-point compactification of the reals with 1/0 == inf and 1/inf == 0)
-//   has the following additional identity:
+// * Beyond the Star axiom, the real semiring (over the one-point
+//   compactification of the reals, and with Star(1) == inf and, improperly,
+//   Star(inf) == 0) has the following additional identity:
 //
 //     Star(Star(Star(w))) == w
 //
 template <class T>
-class RealWeightTpl : public fst::FloatWeightTpl<T> {
+class RealWeightTpl {
  public:
-  using fst::FloatWeightTpl<T>::GetPrecisionString;
-  using fst::FloatWeightTpl<T>::Value;
-
   typedef RealWeightTpl ReverseWeight;
 
-  RealWeightTpl() : fst::FloatWeightTpl<T>() {}
+  RealWeightTpl() = default;
+  ~RealWeightTpl() = default;
+  RealWeightTpl(RealWeightTpl &&) = default;
+  RealWeightTpl(const RealWeightTpl &) = default;
+  RealWeightTpl &operator=(RealWeightTpl &&) = default;
+  RealWeightTpl &operator=(const RealWeightTpl &) = default;
 
-  RealWeightTpl(T f) : fst::FloatWeightTpl<T>(f) {}
+  constexpr RealWeightTpl(T value) : value_(value) {}
 
-  RealWeightTpl(const RealWeightTpl<T> &w) : fst::FloatWeightTpl<T>(w) {}
-
-  static const RealWeightTpl<T> Zero() { return RealWeightTpl<T>(0); }
-
-  static const RealWeightTpl<T> One() { return RealWeightTpl<T>(1); }
-
-  static const RealWeightTpl<T> NoWeight() {
-    return RealWeightTpl<T>(fst::FloatLimits<T>::NumberBad());
+  RealWeightTpl &operator=(T value) {
+    value_ = value;
+    return *this;
   }
 
-  static const string &Type() {
-    static const string type = "real" + GetPrecisionString();
-    return type;
+  T Value() const { return value_; }
+
+  static const RealWeightTpl NoWeight() {
+    return RealWeightTpl(std::numeric_limits<T>::quiet_NaN());
   }
 
-  bool Member() const { return std::isfinite(Value()); }
+  static constexpr RealWeightTpl Zero() { return RealWeightTpl(0); }
 
-  RealWeightTpl<T> Quantize(float delta = fst::kDelta) const {
-    if (std::isfinite(Value())) {
-      return RealWeightTpl<T>(std::floor(Value() / delta + 0.5F) * delta);
+  static constexpr RealWeightTpl One() { return RealWeightTpl(1); }
+
+  friend inline RealWeightTpl Plus(RealWeightTpl lhs, RealWeightTpl rhs) {
+    lhs.value_ += rhs.value_;
+    return lhs;
+  }
+
+  friend inline RealWeightTpl Minus(RealWeightTpl lhs, RealWeightTpl rhs) {
+    lhs.value_ -= rhs.value_;
+    return lhs;
+  }
+
+  friend inline RealWeightTpl Times(RealWeightTpl lhs, RealWeightTpl rhs) {
+    lhs.value_ *= rhs.value_;
+    return lhs;
+  }
+
+  friend inline RealWeightTpl Divide(RealWeightTpl lhs, RealWeightTpl rhs,
+                                     fst::DivideType typ = fst::DIVIDE_ANY) {
+    lhs.value_ /= rhs.value_;
+    return lhs;
+  }
+
+  RealWeightTpl Quantize(float delta = fst::kDelta) const {
+    if (std::isfinite(value_)) {
+      return RealWeightTpl(std::floor(value_ / delta + 0.5F) * delta);
     } else {
       return *this;
     }
   }
 
-  RealWeightTpl<T> Reverse() const { return *this; }
+  RealWeightTpl Reverse() const { return *this; }
+
+  bool Member() const { return std::isfinite(value_); }
+
+  friend inline bool operator==(const RealWeightTpl w1,
+                                const RealWeightTpl w2) {
+    return VolatileEqualTo<T>(w1.value_, w2.value_);
+  }
+
+  friend inline bool operator!=(const RealWeightTpl w1,
+                                const RealWeightTpl w2) {
+    return !VolatileEqualTo<T>(w1.value_, w2.value_);
+  }
+
+  std::size_t Hash() const { return std::hash<T>()(value_); }
+
+  std::istream &Read(std::istream &strm) {
+    static_assert(std::is_pod<T>::value, "underlying type should be POD");
+    return strm.read(reinterpret_cast<char *>(&value_), sizeof(value_));
+  }
+
+  std::ostream &Write(std::ostream &strm) const {
+    return strm.write(reinterpret_cast<const char *>(&value_), sizeof(value_));
+  }
+
+  static const string &Type() {
+    static const string type = "real" +
+        (sizeof(value_) == 4 ? "" : PrecisionString<sizeof(value_)>::Get());
+    return type;
+  }
 
   static uint64 Properties() { return fst::kSemiring | fst::kCommutative; }
+
+ private:
+  T value_;
 };
 
-// Single-precision real weight
-typedef RealWeightTpl<float> RealWeight;
-// Double-precision real weight
-typedef RealWeightTpl<double> Real64Weight;
-
 template <class T>
-inline RealWeightTpl<T> Plus(const RealWeightTpl<T> &w1,
-                             const RealWeightTpl<T> &w2) {
-  return RealWeightTpl<T>(w1.Value() + w2.Value());
-}
-
-inline RealWeightTpl<float> Plus(const RealWeightTpl<float> &w1,
-                                 const RealWeightTpl<float> &w2) {
-  return Plus<float>(w1, w2);
-}
-
-inline RealWeightTpl<double> Plus(const RealWeightTpl<double> &w1,
-                                  const RealWeightTpl<double> &w2) {
-  return Plus<double>(w1, w2);
+inline bool ApproxEqual(const RealWeightTpl<T> w1,
+                        const RealWeightTpl<T> w2,
+                        float delta = fst::kDelta) {
+  return w1.Value() <= w2.Value() + delta && w2.Value() <= w1.Value() + delta;
 }
 
 template <class T>
-inline RealWeightTpl<T> Minus(const RealWeightTpl<T> &w1,
-			      const RealWeightTpl<T> &w2) {
-  return RealWeightTpl<T>(w1.Value() - w2.Value());
-}
-
-inline RealWeightTpl<float> Minus(const RealWeightTpl<float> &w1,
-				  const RealWeightTpl<float> &w2) {
-  return Minus<float>(w1, w2);
-}
-
-inline RealWeightTpl<double> Minus(const RealWeightTpl<double> &w1,
-				   const RealWeightTpl<double> &w2) {
-  return Minus<double>(w1, w2);
+inline std::ostream &operator<<(std::ostream &strm, const RealWeightTpl<T> &w) {
+  T f = w.Value();
+  switch (std::fpclassify(f)) {
+    case FP_NAN: return strm << "BadNumber";
+    case FP_INFINITE: return strm << (f < 0 ? "-" : "") << "Infinity";
+    default: return strm << f;
+  }
 }
 
 template <class T>
-inline RealWeightTpl<T> Times(const RealWeightTpl<T> &w1,
-                              const RealWeightTpl<T> &w2) {
-  return RealWeightTpl<T>(w1.Value() * w2.Value());
-}
-
-inline RealWeightTpl<float> Times(const RealWeightTpl<float> &w1,
-                                  const RealWeightTpl<float> &w2) {
-  return Times<float>(w1, w2);
-}
-
-inline RealWeightTpl<double> Times(const RealWeightTpl<double> &w1,
-                                   const RealWeightTpl<double> &w2) {
-  return Times<double>(w1, w2);
-}
-
-template <class T>
-inline RealWeightTpl<T> Divide(const RealWeightTpl<T> &w1,
-                               const RealWeightTpl<T> &w2,
-                               fst::DivideType typ = fst::DIVIDE_ANY) {
-  return RealWeightTpl<T>(w1.Value() / w2.Value());
-}
-
-inline RealWeightTpl<float> Divide(const RealWeightTpl<float> &w1,
-                                   const RealWeightTpl<float> &w2,
-                                   fst::DivideType typ = fst::DIVIDE_ANY) {
-  return Divide<float>(w1, w2, typ);
-}
-
-inline RealWeightTpl<double> Divide(const RealWeightTpl<double> &w1,
-                                    const RealWeightTpl<double> &w2,
-                                    fst::DivideType typ = fst::DIVIDE_ANY) {
-  return Divide<double>(w1, w2, typ);
+inline std::istream &operator>>(std::istream &strm, RealWeightTpl<T> &w) {
+  string s;
+  strm >> s;
+  if (s == "Infinity") {
+    w = RealWeightTpl<T>(std::numeric_limits<T>::infinity());
+  } else if (s == "-Infinity") {
+    w = RealWeightTpl<T>(-std::numeric_limits<T>::infinity());
+  } else {
+    char *p;
+    T f = std::strtod(s.c_str(), &p);
+    if (p < s.c_str() + s.size()) {
+      strm.clear(std::ios::badbit);
+    } else {
+      w = RealWeightTpl<T>(f);
+    }
+  }
+  return strm;
 }
 
 // Note that the definition of Star(w) (w* for short) here coincides with the
@@ -219,26 +271,23 @@ inline RealWeightTpl<double> Divide(const RealWeightTpl<double> &w1,
 //   what sign the result should have, since the left and right limits of
 //   1/(1-w) as w approaches 1 diverge.
 template <class T>
-inline RealWeightTpl<T> Star(const RealWeightTpl<T> &w) {
-  RealWeightTpl<T> star;
+inline RealWeightTpl<T> Star(RealWeightTpl<T> w) {
   T f = w.Value();
   if (f == 1) {
-    star = fst::FloatLimits<T>::PosInfinity();
+    w = std::numeric_limits<T>::infinity();
   } else if (std::isinf(f)) {
-    star = 0.0;
+    w = static_cast<T>(0);
   } else {
-    star = 1.0 / (1.0 - f);
+    w = 1.0 / (1.0 - f);
   }
-  return star;
+  return w;
 }
 
-inline RealWeightTpl<float> Star(const RealWeightTpl<float> &w) {
-  return Star<float>(w);
-}
+// Single-precision real weight
+typedef RealWeightTpl<float> RealWeight;
 
-inline RealWeightTpl<double> Star(const RealWeightTpl<double> &w) {
-  return Star<double>(w);
-}
+// Double-precision real weight
+typedef RealWeightTpl<double> Real64Weight;
 
 }  // namespace festus
 

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Copyright 2015 Google, Inc.
+// Copyright 2015, 2016 Google, Inc.
 // Author: mjansche@google.com (Martin Jansche)
 //
 // \file
@@ -22,6 +22,7 @@
 
 #include <cstdlib>
 #include <ctime>
+#include <type_traits>
 
 #include <fst/compat.h>
 #include <fst/float-weight.h>
@@ -80,12 +81,25 @@ TEST(RealWeightTest, RandomWeights) {
   LOG(INFO) << "Seed = " << seed;
   TestTemplatedWeights<float>(FLAGS_repeat, seed);
   TestTemplatedWeights<double>(FLAGS_repeat, seed);
+  TestTemplatedWeights<long double>(FLAGS_repeat, seed);
 }
 
-TEST(RealWeightTest, Type) {
+TEST(RealWeightTest, TypeName) {
   EXPECT_EQ("real", festus::RealWeight::Type());
   EXPECT_NE(festus::RealWeightTpl<double>::Type(),
             festus::RealWeightTpl<float>::Type());
+}
+
+TEST(RealWeightTest, TypeTraits) {
+  // These could become compile-time static assertions, but that would risk
+  // build breakage instead of test failures.
+  EXPECT_EQ(sizeof(float), sizeof(festus::RealWeightTpl<float>));
+  EXPECT_EQ(sizeof(double), sizeof(festus::RealWeightTpl<double>));
+  EXPECT_EQ(sizeof(long double), sizeof(festus::RealWeightTpl<long double>));
+
+  EXPECT_TRUE(std::is_pod<festus::RealWeightTpl<float>>::value);
+  EXPECT_TRUE(std::is_pod<festus::RealWeightTpl<double>>::value);
+  EXPECT_TRUE(std::is_pod<festus::RealWeightTpl<long double>>::value);
 }
 
 }  // namespace

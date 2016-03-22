@@ -165,6 +165,23 @@ cc_library(
     hdrs = ["types.h"],
 )
 
+cc_library(
+    name = "arc",
+    hdrs = ["arc.h"],
+    deps = ["@openfst//:fst"],
+)
+
+cc_test(
+    name = "arc-test",
+    timeout = "short",
+    srcs = ["arc-test.cc"],
+    deps = [
+        "@openfst//:fst",
+        ":arc",
+        ":real-weight",
+    ],
+)
+
 # Requires Bazel >= 0.1.4.
 load("@protobuf//:protobuf.bzl", "cc_proto_library")
 

@@ -91,6 +91,6 @@ class ValueArcTpl {
   StateId nextstate;
 };
 
-}  // namespace fst
+}  // namespace festus
 
 #endif  // FESTUS_ARC_H__

@@ -37,7 +37,7 @@ join -t$'\t' -j1 "$words" - \
   > "$test"
 
 sort -t$'\t' -k1,1 "$dict" |
-comm --check-order -23 - "$test" |
+comm -23 - "$test" |
 "$festus/lexicon-diagnostics" \
   --alignables="$alignables" \
   --unique_alignments \

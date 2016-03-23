@@ -21,46 +21,16 @@
 #ifndef FESTUS_REAL_WEIGHT_H__
 #define FESTUS_REAL_WEIGHT_H__
 
-#include <cstddef>
 #include <cstdlib>
 #include <cmath>
-#include <functional>
 #include <istream>
 #include <limits>
 #include <ostream>
-#include <type_traits>
+//#include <type_traits>
 
-#include <fst/compat.h>
-#include <fst/weight.h>
+#include "festus/weight.h"
 
 namespace festus {
-
-template <typename T>
-inline bool VolatileEqualTo(volatile T v1, volatile T v2) {
-  return v1 == v2;
-}
-
-template <int> struct PrecisionString {};
-
-template <> struct PrecisionString<1> {
-  static string Get() { return "8"; }
-};
-
-template <> struct PrecisionString<2> {
-  static string Get() { return "16"; }
-};
-
-template <> struct PrecisionString<4> {
-  static string Get() { return "32"; }
-};
-
-template <> struct PrecisionString<8> {
-  static string Get() { return "64"; }
-};
-
-template <> struct PrecisionString<16> {
-  static string Get() { return "128"; }
-};
 
 // The semiring of real numbers under ordinary addition and multiplication is
 // defined here for illustration and testing purposes. For most practical
@@ -78,9 +48,11 @@ template <> struct PrecisionString<16> {
 //   (The log semiring must include at least one infinity for its
 //   transformation of real 0).
 //
-// * The real semiring is a star semiring, i.e. its Star operation is defined to
-//   satisfy the Star axiom w* == 1 + w w* == 1 + w* w. It is easy to check that
-//   this axiom is satisfied for w != 1 if we define Star(w) = 1/(1-w):
+// * The real semiring is a star semiring, i.e. its Star operation is defined
+//   to satisfy the Star axiom w* == 1 + w w* == 1 + w* w. Star() is a partial
+//   function Star(w) == 1/(1-w) which is defined for all (finite) real numbers
+//   w != 1. It is easy to check that this definition satisfies the star axiom
+//   for any w != 1:
 //
 //     1 + w w* == 1           + w . 1/(1-w)
 //              == (1-w)/(1-w) + w . 1/(1-w)
@@ -92,18 +64,28 @@ template <> struct PrecisionString<16> {
 //   that w != 1. Because the real semiring is commutative, the second equality
 //   of the axiom follows trivially.
 //
-// * By contrast, the log semiring is a complete star semiring whose Star
-//   operation is defined (in festus/float-weight-star.h) as an infinite sum of
-//   a convergent power series (under log semiring operations). In the real
-//   semiring the Star operation can be viewed as the infinite sum of a
-//   geometric power series regardless of convergence. For further details, see
-//   the comments for the Star() operation below.
+//   Note that Star(w) in the real semiring coincides with the infinite sum of
+//   a geometric series, including the &#x1d508; sum of a divergent series
+//   [https://books.google.com/books?id=fa9QaUJWLz0C&q="regular in an open"].
+//   In particular w* is defined for reals w with |w| > 1, where the geometric
+//   power series diverges. By contrast, the log semiring is a complete star
+//   semiring whose Star operation is defined (in festus/float-weight-star.h)
+//   as an infinite sum of a convergent power series (under log semiring
+//   operations).
+//
+// * For w == 1 we define w* as infinity, which fails the Member() predicate of
+//   the real semiring. This is motivated by viewing the real line as having
+//   been extended with a single point at (unsigned) infinity, i.e. a one-point
+//   compactification as opposed to the two-point compactification with signed
+//   infinities used in IEEE floating point. In the latter, it would be unclear
+//   what sign the result should have, since the left and right limits of
+//   1/(1-w) as w approaches 1 diverge.
 //
 // * For simplicity, the behavior of semiring operations on non-member inputs is
 //   not defined rigorously, in the sense that no conclusions should be drawn
 //   depending on which non-finite floating point value (positive infinity,
 //   negative infinity, or NaN) an operation returns. Operations that yield
-//   non-member results should be thought of as partial functions.  For example,
+//   non-member results should be thought of as partial functions. For example,
 //   Divide(1, 0) returns positive infinity under IEEE floating point semantics,
 //   which is not a member of this semiring. The semiring axioms hold when all
 //   input and output values are members of this semiring, i.e. are finite
@@ -112,7 +94,7 @@ template <> struct PrecisionString<16> {
 //   Times(0, -inf) are both undefined (NaN under IEEE semantics). Similarly,
 //   the Star axiom w* == 1 + w w* holds for all finite w != 1, but applies to
 //   w == 1 only in the sense that both the left hand side (1*) and the right
-//   hand side (1 + 1 1*) are undefined.
+//   hand side (1 + 1 1*) are non-members.
 //
 // * Beyond the Star axiom, the real semiring (over the one-point
 //   compactification of the reals, and with Star(1) == inf and, improperly,
@@ -120,107 +102,50 @@ template <> struct PrecisionString<16> {
 //
 //     Star(Star(Star(w))) == w
 //
-template <class T>
-class RealWeightTpl {
- public:
-  typedef RealWeightTpl ReverseWeight;
+template <typename R>
+struct RealSemiring {
+  typedef R ValueType;
 
-  RealWeightTpl() = default;
-  ~RealWeightTpl() = default;
-  RealWeightTpl(RealWeightTpl &&) = default;
-  RealWeightTpl(const RealWeightTpl &) = default;
-  RealWeightTpl &operator=(RealWeightTpl &&) = default;
-  RealWeightTpl &operator=(const RealWeightTpl &) = default;
+  static const string Name() { return "real"; }
+  static constexpr uint64 kProperties = fst::kCommutative | fst::kSemiring;
 
-  constexpr RealWeightTpl(T value) : value_(value) {}
+  static constexpr R NoWeight() { return std::numeric_limits<R>::quiet_NaN(); }
+  static constexpr R Zero() { return 0; }
+  static constexpr R One() { return 1; }
+  static constexpr R Plus(R lhs, R rhs) { return lhs + rhs; }
+  static constexpr R Minus(R lhs, R rhs) { return lhs - rhs; }
+  static constexpr R Times(R lhs, R rhs) { return lhs * rhs; }
+  static constexpr R Divide(R lhs, R rhs) { return lhs / rhs; }
 
-  RealWeightTpl &operator=(T value) {
-    value_ = value;
-    return *this;
-  }
-
-  T Value() const { return value_; }
-
-  static const RealWeightTpl NoWeight() {
-    return RealWeightTpl(std::numeric_limits<T>::quiet_NaN());
-  }
-
-  static constexpr RealWeightTpl Zero() { return RealWeightTpl(0); }
-
-  static constexpr RealWeightTpl One() { return RealWeightTpl(1); }
-
-  friend inline RealWeightTpl Plus(RealWeightTpl lhs, RealWeightTpl rhs) {
-    lhs.value_ += rhs.value_;
-    return lhs;
-  }
-
-  friend inline RealWeightTpl Minus(RealWeightTpl lhs, RealWeightTpl rhs) {
-    lhs.value_ -= rhs.value_;
-    return lhs;
-  }
-
-  friend inline RealWeightTpl Times(RealWeightTpl lhs, RealWeightTpl rhs) {
-    lhs.value_ *= rhs.value_;
-    return lhs;
-  }
-
-  friend inline RealWeightTpl Divide(RealWeightTpl lhs, RealWeightTpl rhs,
-                                     fst::DivideType typ = fst::DIVIDE_ANY) {
-    lhs.value_ /= rhs.value_;
-    return lhs;
-  }
-
-  RealWeightTpl Quantize(float delta = fst::kDelta) const {
-    if (std::isfinite(value_)) {
-      return RealWeightTpl(std::floor(value_ / delta + 0.5F) * delta);
+  static const R Star(R val) {
+    if (val == 1) {
+      return std::numeric_limits<R>::infinity();
+    } else if (std::isinf(val)) {
+      return 0;
     } else {
-      return *this;
+      return 1.0 / (1.0 - val);
     }
   }
 
-  RealWeightTpl Reverse() const { return *this; }
+  static constexpr R Reverse(R val) { return val; }
 
-  bool Member() const { return std::isfinite(value_); }
-
-  friend inline bool operator==(const RealWeightTpl w1,
-                                const RealWeightTpl w2) {
-    return VolatileEqualTo<T>(w1.value_, w2.value_);
+  static constexpr R Quantize(R val, float delta) {
+    return Member(val) ? std::floor(val / delta + 0.5F) * delta : val;
   }
 
-  friend inline bool operator!=(const RealWeightTpl w1,
-                                const RealWeightTpl w2) {
-    return !VolatileEqualTo<T>(w1.value_, w2.value_);
+  static constexpr bool Member(R val) { return std::isfinite(val); }
+
+  static constexpr bool EqualTo(volatile R lhs, volatile R rhs) {
+    return Member(lhs) && Member(rhs) && lhs == rhs;
   }
 
-  std::size_t Hash() const { return std::hash<T>()(value_); }
-
-  std::istream &Read(std::istream &strm) {
-    static_assert(std::is_pod<T>::value, "underlying type should be POD");
-    return strm.read(reinterpret_cast<char *>(&value_), sizeof(value_));
+  static constexpr bool ApproxEqual(R lhs, R rhs, float delta) {
+    return lhs <= rhs + delta && rhs <= lhs + delta;
   }
-
-  std::ostream &Write(std::ostream &strm) const {
-    return strm.write(reinterpret_cast<const char *>(&value_), sizeof(value_));
-  }
-
-  static const string &Type() {
-    static const string type = "real" +
-        (sizeof(value_) == 4 ? "" : PrecisionString<sizeof(value_)>::Get());
-    return type;
-  }
-
-  static uint64 Properties() { return fst::kSemiring | fst::kCommutative; }
-
- private:
-  T value_;
 };
 
-template <class T>
-inline bool ApproxEqual(const RealWeightTpl<T> w1,
-                        const RealWeightTpl<T> w2,
-                        float delta = fst::kDelta) {
-  return w1.Value() <= w2.Value() + delta && w2.Value() <= w1.Value() + delta;
-}
+template <typename T>
+using RealWeightTpl = ValueWeightTpl<RealSemiring<T>>;
 
 template <class T>
 inline std::ostream &operator<<(std::ostream &strm, const RealWeightTpl<T> &w) {
@@ -250,37 +175,6 @@ inline std::istream &operator>>(std::istream &strm, RealWeightTpl<T> &w) {
     }
   }
   return strm;
-}
-
-// Note that the definition of Star(w) (w* for short) here coincides with the
-// sum of a geometric series, including the &#x1d508; sum of a divergent series
-// [https://books.google.com/books?id=fa9QaUJWLz0C&q="regular in an open"].
-// Contrast this with the similar Star() operation of the log semiring:
-//
-// * Star() is a partial function w* == 1/(1-w) that is defined for all (finite)
-//   real numbers w != 1. In particular it is defined for reals w where |w| > 1,
-//   where the geometric power series diverges. In this regard Star() of the
-//   real semiring here differs crucially from Star() of the log semiring, which
-//   is only defined for inputs on which the geometric power series converges.
-//
-// * For w == 1 we define w* as infinity, which fails the Member() predicate of
-//   this weight class. This is motivated by viewing the real line as having
-//   been extended with a single point at (unsigned) infinity, i.e. a one-point
-//   compactification as opposed to the two-point compactification with signed
-//   infinities used in IEEE floating point. In the latter, it would be unclear
-//   what sign the result should have, since the left and right limits of
-//   1/(1-w) as w approaches 1 diverge.
-template <class T>
-inline RealWeightTpl<T> Star(RealWeightTpl<T> w) {
-  T f = w.Value();
-  if (f == 1) {
-    w = std::numeric_limits<T>::infinity();
-  } else if (std::isinf(f)) {
-    w = static_cast<T>(0);
-  } else {
-    w = 1.0 / (1.0 - f);
-  }
-  return w;
 }
 
 // Single-precision real weight

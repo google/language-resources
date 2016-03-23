@@ -28,9 +28,18 @@ cc_library(
 )
 
 cc_library(
+    name = "weight",
+    hdrs = ["weight.h"],
+    deps = ["@openfst//:weight"],
+)
+
+cc_library(
     name = "real-weight",
     hdrs = ["real-weight.h"],
-    deps = ["@openfst//:weight"],
+    deps = [
+        "@openfst//:weight",
+        ":weight",
+    ],
 )
 
 cc_test(

@@ -26,7 +26,6 @@
 #include <istream>
 #include <limits>
 #include <ostream>
-//#include <type_traits>
 
 #include "festus/weight.h"
 
@@ -48,11 +47,12 @@ namespace festus {
 //   (The log semiring must include at least one infinity for its
 //   transformation of real 0).
 //
-// * The real semiring is a star semiring, i.e. its Star operation is defined
-//   to satisfy the Star axiom w* == 1 + w w* == 1 + w* w. Star() is a partial
+// * The real semiring is a star semiring, i.e. its Star operation is defined to
+//   satisfy the Star axiom w* == 1 + w w* == 1 + w* w. Star() is a partial
 //   function Star(w) == 1/(1-w) which is defined for all (finite) real numbers
-//   w != 1. It is easy to check that this definition satisfies the star axiom
-//   for any w != 1:
+//   w != 1 (for w == 1 we define w* as infinity, which fails the Member()
+//   predicate of the real semiring). It is easy to check that this definition
+//   satisfies the star axiom for any w != 1:
 //
 //     1 + w w* == 1           + w . 1/(1-w)
 //              == (1-w)/(1-w) + w . 1/(1-w)
@@ -73,28 +73,16 @@ namespace festus {
 //   as an infinite sum of a convergent power series (under log semiring
 //   operations).
 //
-// * For w == 1 we define w* as infinity, which fails the Member() predicate of
-//   the real semiring. This is motivated by viewing the real line as having
-//   been extended with a single point at (unsigned) infinity, i.e. a one-point
-//   compactification as opposed to the two-point compactification with signed
-//   infinities used in IEEE floating point. In the latter, it would be unclear
-//   what sign the result should have, since the left and right limits of
-//   1/(1-w) as w approaches 1 diverge.
-//
-// * For simplicity, the behavior of semiring operations on non-member inputs is
-//   not defined rigorously, in the sense that no conclusions should be drawn
-//   depending on which non-finite floating point value (positive infinity,
-//   negative infinity, or NaN) an operation returns. Operations that yield
-//   non-member results should be thought of as partial functions. For example,
-//   Divide(1, 0) returns positive infinity under IEEE floating point semantics,
-//   which is not a member of this semiring. The semiring axioms hold when all
-//   input and output values are members of this semiring, i.e. are finite
-//   floating point values. For example, Zero() (real 0) in this semiring is an
-//   annihilator for all finite floating point values, but Times(0, inf) and
-//   Times(0, -inf) are both undefined (NaN under IEEE semantics). Similarly,
-//   the Star axiom w* == 1 + w w* holds for all finite w != 1, but applies to
-//   w == 1 only in the sense that both the left hand side (1*) and the right
-//   hand side (1 + 1 1*) are non-members.
+// * Operations that yield non-member results are partial functions. The
+//   behavior of operations on non-member arguments is undefined. The semiring
+//   axioms hold when all arguments and return values are members of this
+//   semiring, i.e. are finite floating point values. For example, Zero() (real
+//   0) in this semiring is an annihilator for all finite floating point values,
+//   but Times(0, inf) and Times(0, -inf) are both undefined (NaN under IEEE
+//   semantics), i.e. non-members. Similarly, the Star axiom w* == 1 + w w*
+//   holds for all finite w != 1, but applies to w == 1 only in the sense that
+//   both the left hand side (1*) and the right hand side (1 + 1 1*) are
+//   non-members.
 //
 // * Beyond the Star axiom, the real semiring (over the one-point
 //   compactification of the reals, and with Star(1) == inf and, improperly,
@@ -116,17 +104,7 @@ struct RealSemiring {
   static constexpr R Minus(R lhs, R rhs) { return lhs - rhs; }
   static constexpr R Times(R lhs, R rhs) { return lhs * rhs; }
   static constexpr R Divide(R lhs, R rhs) { return lhs / rhs; }
-
-  static const R Star(R val) {
-    if (val == 1) {
-      return std::numeric_limits<R>::infinity();
-    } else if (std::isinf(val)) {
-      return 0;
-    } else {
-      return 1.0 / (1.0 - val);
-    }
-  }
-
+  static constexpr R Star(R val) { return 1.0 / (1.0 - val); }
   static constexpr R Reverse(R val) { return val; }
 
   static constexpr R Quantize(R val, float delta) {

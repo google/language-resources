@@ -55,81 +55,104 @@ template <> struct PrecisionString<16> {
 };
 
 // OpenFst weight façade for semirings whose elements are passed by value.
+//
+// This version works with a semiring class S with static member functions.
 template <class S>
-class ValueWeightTpl {
+class ValueWeightStatic {
  public:
   typedef typename S::ValueType ValueType;
-  typedef ValueWeightTpl ReverseWeight;
+  typedef ValueWeightStatic ReverseWeight;
 
-  ValueWeightTpl() = default;
-  ~ValueWeightTpl() = default;
-  ValueWeightTpl(ValueWeightTpl &&) = default;
-  ValueWeightTpl(const ValueWeightTpl &) = default;
-  ValueWeightTpl &operator=(ValueWeightTpl &&) = default;
-  ValueWeightTpl &operator=(const ValueWeightTpl &) = default;
+  ValueWeightStatic() = default;
+  ~ValueWeightStatic() = default;
+  ValueWeightStatic(ValueWeightStatic &&) = default;
+  ValueWeightStatic(const ValueWeightStatic &) = default;
+  ValueWeightStatic &operator=(ValueWeightStatic &&) = default;
+  ValueWeightStatic &operator=(const ValueWeightStatic &) = default;
 
-  constexpr ValueWeightTpl(ValueType value) : value_(value) {}
+  constexpr ValueWeightStatic(ValueType value) : value_(value) {}
 
-  ValueWeightTpl &operator=(ValueType value) {
+  ValueWeightStatic &operator=(ValueType value) {
     value_ = value;
     return *this;
   }
 
   ValueType Value() const { return value_; }
 
-  static const ValueWeightTpl NoWeight() {
-    return ValueWeightTpl(S::NoWeight());
+  static const ValueWeightStatic NoWeight() {
+    return ValueWeightStatic(S::NoWeight());
   }
 
-  static constexpr ValueWeightTpl Zero() { return ValueWeightTpl(S::Zero()); }
+  static constexpr ValueWeightStatic Zero() {
+    return ValueWeightStatic(S::Zero());
+  }
 
-  static constexpr ValueWeightTpl One() { return ValueWeightTpl(S::One()); }
+  static constexpr ValueWeightStatic One() {
+    return ValueWeightStatic(S::One());
+  }
 
-  friend inline ValueWeightTpl Plus(ValueWeightTpl lhs, ValueWeightTpl rhs) {
-    lhs.value_ = S::Plus(lhs.value_, rhs.value_);
+  friend inline ValueWeightStatic Plus(
+      ValueWeightStatic lhs,
+      ValueWeightStatic rhs) {
+    lhs.value_ = S::OpPlus(lhs.value_, rhs.value_);
     return lhs;
   }
 
-  friend inline ValueWeightTpl Minus(ValueWeightTpl lhs, ValueWeightTpl rhs) {
-    lhs.value_ = S::Minus(lhs.value_, rhs.value_);
+  friend inline ValueWeightStatic Minus(
+      ValueWeightStatic lhs,
+      ValueWeightStatic rhs) {
+    lhs.value_ = S::OpMinus(lhs.value_, rhs.value_);
     return lhs;
   }
 
-  friend inline ValueWeightTpl Times(ValueWeightTpl lhs, ValueWeightTpl rhs) {
-    lhs.value_ = S::Times(lhs.value_, rhs.value_);
+  friend inline ValueWeightStatic Times(
+      ValueWeightStatic lhs,
+      ValueWeightStatic rhs) {
+    lhs.value_ = S::OpTimes(lhs.value_, rhs.value_);
     return lhs;
   }
 
-  friend inline ValueWeightTpl Divide(ValueWeightTpl lhs, ValueWeightTpl rhs,
-                                      fst::DivideType typ = fst::DIVIDE_ANY) {
-    lhs.value_ = S::Divide(lhs.value_, rhs.value_);
+  friend inline ValueWeightStatic Divide(
+      ValueWeightStatic lhs,
+      ValueWeightStatic rhs,
+      fst::DivideType typ = fst::DIVIDE_ANY) {
+    lhs.value_ = S::OpDivide(lhs.value_, rhs.value_);
     return lhs;
   }
 
-  friend inline ValueWeightTpl Star(ValueWeightTpl w) {
-    w.value_ = S::Star(w.value_);
+  friend inline ValueWeightStatic Star(
+      ValueWeightStatic w) {
+    w.value_ = S::OpStar(w.value_);
     return w;
   }
 
-  ValueWeightTpl Reverse() const { return ValueWeightTpl(S::Reverse(value_)); }
+  ValueWeightStatic Reverse() const {
+    return ValueWeightStatic(S::Reverse(value_));
+  }
 
-  ValueWeightTpl Quantize(float delta = fst::kDelta) const {
-    return ValueWeightTpl(S::Quantize(value_, delta));
+  ValueWeightStatic Quantize(float delta = fst::kDelta) const {
+    return ValueWeightStatic(S::Quantize(value_, delta));
   }
 
   constexpr bool Member() const { return S::Member(value_); }
 
-  friend inline bool operator==(ValueWeightTpl lhs, ValueWeightTpl rhs) {
+  friend inline bool operator==(
+      ValueWeightStatic lhs,
+      ValueWeightStatic rhs) {
     return S::EqualTo(lhs.value_, rhs.value_);
   }
 
-  friend inline bool operator!=(ValueWeightTpl lhs, ValueWeightTpl rhs) {
+  friend inline bool operator!=(
+      ValueWeightStatic lhs,
+      ValueWeightStatic rhs) {
     return !S::EqualTo(lhs.value_, rhs.value_);
   }
 
-  friend inline bool ApproxEqual(ValueWeightTpl lhs, ValueWeightTpl rhs,
-                                 float delta = fst::kDelta) {
-    return S::ApproxEqual(lhs.value_, rhs.value_, delta);
+  friend inline bool ApproxEqual(
+      ValueWeightStatic lhs,
+      ValueWeightStatic rhs,
+      float delta = fst::kDelta) {
+    return S::ApproxEqualTo(lhs.value_, rhs.value_, delta);
   }
 
   std::size_t Hash() const { return std::hash<ValueType>()(value_); }
@@ -149,7 +172,7 @@ class ValueWeightTpl {
     return type;
   }
 
-  static constexpr uint64 Properties() { return S::kProperties; }
+  static constexpr uint64 Properties() { return S::Properties(); }
 
  private:
   ValueType value_;

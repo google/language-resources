@@ -94,17 +94,20 @@ template <typename R>
 struct RealSemiring {
   typedef R ValueType;
 
-  static const string Name() { return "real"; }
-  static constexpr uint64 kProperties = fst::kCommutative | fst::kSemiring;
+  static string Name() { return "real"; }
+
+  static constexpr uint64 Properties() {
+    return fst::kCommutative | fst::kSemiring;
+  }
 
   static constexpr R NoWeight() { return std::numeric_limits<R>::quiet_NaN(); }
   static constexpr R Zero() { return 0; }
   static constexpr R One() { return 1; }
-  static constexpr R Plus(R lhs, R rhs) { return lhs + rhs; }
-  static constexpr R Minus(R lhs, R rhs) { return lhs - rhs; }
-  static constexpr R Times(R lhs, R rhs) { return lhs * rhs; }
-  static constexpr R Divide(R lhs, R rhs) { return lhs / rhs; }
-  static constexpr R Star(R val) { return 1.0 / (1.0 - val); }
+  static constexpr R OpPlus(R lhs, R rhs) { return lhs + rhs; }
+  static constexpr R OpMinus(R lhs, R rhs) { return lhs - rhs; }
+  static constexpr R OpTimes(R lhs, R rhs) { return lhs * rhs; }
+  static constexpr R OpDivide(R lhs, R rhs) { return lhs / rhs; }
+  static constexpr R OpStar(R val) { return 1.0 / (1.0 - val); }
   static constexpr R Reverse(R val) { return val; }
 
   static constexpr R Quantize(R val, float delta) {
@@ -112,18 +115,19 @@ struct RealSemiring {
   }
 
   static constexpr bool Member(R val) { return std::isfinite(val); }
+  static constexpr bool NotZero(R val) { return val != 0; }
 
   static constexpr bool EqualTo(volatile R lhs, volatile R rhs) {
     return Member(lhs) && Member(rhs) && lhs == rhs;
   }
 
-  static constexpr bool ApproxEqual(R lhs, R rhs, float delta) {
+  static constexpr bool ApproxEqualTo(R lhs, R rhs, float delta) {
     return lhs <= rhs + delta && rhs <= lhs + delta;
   }
 };
 
 template <typename T>
-using RealWeightTpl = ValueWeightTpl<RealSemiring<T>>;
+using RealWeightTpl = ValueWeightStatic<RealSemiring<T>>;
 
 template <class T>
 inline std::ostream &operator<<(std::ostream &strm, const RealWeightTpl<T> &w) {

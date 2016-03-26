@@ -24,6 +24,13 @@
 // self-loops (cycles of length 1). To produce a generalized topological
 // ordering, use the usual Depth-First Search algorithm, but ignore back arcs
 // that are loops.
+//
+// The generalized topological ordering as defined here is actually a special
+// case of partitioning the input graph into strongly-connected components (of
+// size <= 1 in this special case) and producing a strict toplogical ordering
+// of the condensation of the original graph. Since the strongly-connected
+// components consist of at most one original state, the condensation is
+// isomorphic to the original graph.
 
 #ifndef FESTUS_TOPSORT_H__
 #define FESTUS_TOPSORT_H__

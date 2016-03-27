@@ -29,6 +29,8 @@
 #include <test/weight-tester.h>  // fst/test/weight-tester.h
 #include <gtest/gtest.h>
 
+#include "festus/weight-test-lib.h"
+
 DEFINE_int32(seed, -1, "random seed");
 DEFINE_int32(repeat, 100000, "number of test repetitions");
 
@@ -100,6 +102,38 @@ TEST(RealWeightTest, TypeTraits) {
   EXPECT_TRUE(std::is_pod<festus::RealWeightTpl<float>>::value);
   EXPECT_TRUE(std::is_pod<festus::RealWeightTpl<double>>::value);
   EXPECT_TRUE(std::is_pod<festus::RealWeightTpl<long double>>::value);
+}
+
+TEST(RealWeightTest, BasicWeights) {
+  festus::TestBasicWeights<festus::RealWeightTpl<float>>();
+  festus::TestBasicWeights<festus::RealWeightTpl<double>>();
+  festus::TestBasicWeights<festus::RealWeightTpl<long double>>();
+}
+
+template <typename T>
+void TestRealIdentities() {
+  typedef festus::RealWeightTpl<T> Weight;
+  TestIdentities(Weight::Zero());
+  TestIdentities(Weight::One());
+  TestIdentities(Weight());
+  TestIdentities(Weight(0));
+  TestIdentities(Weight(1));
+  TestIdentities(Weight(2));
+  TestIdentities(Weight(22 / 7.0f));
+  TestIdentities(Weight(-0.0f));
+  TestIdentities(Weight(-1));
+  TestIdentities(Weight(-2));
+  TestIdentities(Weight(-1e6f));
+  TestIdentities(Plus(Weight(43), Weight(9)));
+  TestIdentities(Minus(Weight(43), Weight(9)));
+  TestIdentities(Times(Weight(43), Weight(9)));
+  TestIdentities(Star(Weight(9)));
+}
+
+TEST(RealWeightTest, Identities) {
+  TestRealIdentities<float>();
+  TestRealIdentities<double>();
+  TestRealIdentities<long double>();
 }
 
 }  // namespace

@@ -34,11 +34,18 @@ cc_library(
 )
 
 cc_library(
+    name = "weight-test-lib",
+    hdrs = ["weight-test-lib.h"],
+    deps = ["@googletest//:gtest"],
+)
+
+cc_library(
     name = "real-weight",
     hdrs = ["real-weight.h"],
     deps = [
         "@openfst//:weight",
         ":weight",
+        ":weight-test-lib",
     ],
 )
 

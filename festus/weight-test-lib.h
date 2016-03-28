@@ -46,6 +46,14 @@ void ExpectApproxEq(const T &x, const T &y, float delta) {
   EXPECT_TRUE(ApproxEqual(y, x, delta));
 }
 
+template <class T>
+void ExpectEqIfMember(const T &x, const T &y) {
+  ASSERT_TRUE(x.Member());
+  if (y.Member()) {
+    ExpectEq(x, y);
+  }
+}
+
 // Tests the Minus operation if it is defined for weight W.
 template <class W>
 auto MinusTest(const W &w) -> decltype(Minus(w, w), void()) {
@@ -55,9 +63,9 @@ auto MinusTest(const W &w) -> decltype(Minus(w, w), void()) {
   EXPECT_FALSE(Minus(n, w).Member());
   EXPECT_FALSE(Minus(w, n).Member());
   if (w.Member()) {
-    ExpectEq(w, Minus(w, z));
-    ExpectEq(z, Minus(w, w));
-    ExpectEq(z, Plus(w, Minus(z, w)));
+    ExpectEqIfMember(w, Minus(w, z));
+    ExpectEqIfMember(z, Minus(w, w));
+    ExpectEqIfMember(z, Plus(w, Minus(z, w)));
   }
 }
 

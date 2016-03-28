@@ -60,6 +60,7 @@ template <> struct PrecisionString<16> {
 template <class S>
 class ValueWeightStatic {
  public:
+  typedef S SemiringType;
   typedef typename S::ValueType ValueType;
   typedef ValueWeightStatic ReverseWeight;
 
@@ -80,35 +81,35 @@ class ValueWeightStatic {
   ValueType Value() const { return value_; }
 
   static const ValueWeightStatic NoWeight() {
-    return ValueWeightStatic(S::NoWeight());
+    return ValueWeightStatic(SemiringType::NoWeight());
   }
 
   static constexpr ValueWeightStatic Zero() {
-    return ValueWeightStatic(S::Zero());
+    return ValueWeightStatic(SemiringType::Zero());
   }
 
   static constexpr ValueWeightStatic One() {
-    return ValueWeightStatic(S::One());
+    return ValueWeightStatic(SemiringType::One());
   }
 
   friend inline ValueWeightStatic Plus(
       ValueWeightStatic lhs,
       ValueWeightStatic rhs) {
-    lhs.value_ = S::OpPlus(lhs.value_, rhs.value_);
+    lhs.value_ = SemiringType::OpPlus(lhs.value_, rhs.value_);
     return lhs;
   }
 
   friend inline ValueWeightStatic Minus(
       ValueWeightStatic lhs,
       ValueWeightStatic rhs) {
-    lhs.value_ = S::OpMinus(lhs.value_, rhs.value_);
+    lhs.value_ = SemiringType::OpMinus(lhs.value_, rhs.value_);
     return lhs;
   }
 
   friend inline ValueWeightStatic Times(
       ValueWeightStatic lhs,
       ValueWeightStatic rhs) {
-    lhs.value_ = S::OpTimes(lhs.value_, rhs.value_);
+    lhs.value_ = SemiringType::OpTimes(lhs.value_, rhs.value_);
     return lhs;
   }
 
@@ -116,46 +117,52 @@ class ValueWeightStatic {
       ValueWeightStatic lhs,
       ValueWeightStatic rhs,
       fst::DivideType typ = fst::DIVIDE_ANY) {
-    lhs.value_ = S::OpDivide(lhs.value_, rhs.value_);
+    lhs.value_ = SemiringType::OpDivide(lhs.value_, rhs.value_);
     return lhs;
   }
 
   friend inline ValueWeightStatic Star(
       ValueWeightStatic w) {
-    w.value_ = S::OpStar(w.value_);
+    w.value_ = SemiringType::OpStar(w.value_);
     return w;
   }
 
   ValueWeightStatic Reverse() const {
-    return ValueWeightStatic(S::Reverse(value_));
+    return ValueWeightStatic(SemiringType::Reverse(value_));
   }
 
   ValueWeightStatic Quantize(float delta = fst::kDelta) const {
-    return ValueWeightStatic(S::Quantize(value_, delta));
+    return ValueWeightStatic(SemiringType::Quantize(value_, delta));
   }
 
-  constexpr bool Member() const { return S::Member(value_); }
+  constexpr bool Member() const { return SemiringType::Member(value_); }
 
   friend inline bool operator==(
       ValueWeightStatic lhs,
       ValueWeightStatic rhs) {
-    return S::EqualTo(lhs.value_, rhs.value_);
+    return SemiringType::EqualTo(lhs.value_, rhs.value_);
   }
 
   friend inline bool operator!=(
       ValueWeightStatic lhs,
       ValueWeightStatic rhs) {
-    return !S::EqualTo(lhs.value_, rhs.value_);
+    return !SemiringType::EqualTo(lhs.value_, rhs.value_);
   }
 
   friend inline bool ApproxEqual(
       ValueWeightStatic lhs,
       ValueWeightStatic rhs,
       float delta = fst::kDelta) {
-    return S::ApproxEqualTo(lhs.value_, rhs.value_, delta);
+    return SemiringType::ApproxEqualTo(lhs.value_, rhs.value_, delta);
   }
 
   std::size_t Hash() const { return std::hash<ValueType>()(value_); }
+
+  friend std::ostream &operator<<(
+      std::ostream &strm,
+      ValueWeightStatic w) {
+    return SemiringType::Print(strm, w.value_);
+  }
 
   std::istream &Read(std::istream &strm) {
     static_assert(std::is_pod<ValueType>::value, "value type should be POD");
@@ -167,12 +174,11 @@ class ValueWeightStatic {
   }
 
   static const string &Type() {
-    static const string type = S::Name() +
-        (sizeof(value_) == 4 ? "" : PrecisionString<sizeof(value_)>::Get());
+    static const string type = SemiringType::Name();
     return type;
   }
 
-  static constexpr uint64 Properties() { return S::Properties(); }
+  static constexpr uint64 Properties() { return SemiringType::Properties(); }
 
  private:
   ValueType value_;
@@ -186,6 +192,7 @@ class ValueWeightStatic {
 template <class S>
 class ValueWeightSingleton {
  public:
+  typedef S SemiringType;
   typedef typename S::ValueType ValueType;
   typedef ValueWeightSingleton ReverseWeight;
 
@@ -206,35 +213,35 @@ class ValueWeightSingleton {
   ValueType Value() const { return value_; }
 
   static const ValueWeightSingleton NoWeight() {
-    return ValueWeightSingleton(kInstance->NoWeight());
+    return ValueWeightSingleton(Semiring().NoWeight());
   }
 
   static constexpr ValueWeightSingleton Zero() {
-    return ValueWeightSingleton(kInstance->Zero());
+    return ValueWeightSingleton(Semiring().Zero());
   }
 
   static constexpr ValueWeightSingleton One() {
-    return ValueWeightSingleton(kInstance->One());
+    return ValueWeightSingleton(Semiring().One());
   }
 
   friend inline ValueWeightSingleton Plus(
       ValueWeightSingleton lhs,
       ValueWeightSingleton rhs) {
-    lhs.value_ = kInstance->OpPlus(lhs.value_, rhs.value_);
+    lhs.value_ = Semiring().OpPlus(lhs.value_, rhs.value_);
     return lhs;
   }
 
   friend inline ValueWeightSingleton Minus(
       ValueWeightSingleton lhs,
       ValueWeightSingleton rhs) {
-    lhs.value_ = kInstance->OpMinus(lhs.value_, rhs.value_);
+    lhs.value_ = Semiring().OpMinus(lhs.value_, rhs.value_);
     return lhs;
   }
 
   friend inline ValueWeightSingleton Times(
       ValueWeightSingleton lhs,
       ValueWeightSingleton rhs) {
-    lhs.value_ = kInstance->OpTimes(lhs.value_, rhs.value_);
+    lhs.value_ = Semiring().OpTimes(lhs.value_, rhs.value_);
     return lhs;
   }
 
@@ -242,46 +249,52 @@ class ValueWeightSingleton {
       ValueWeightSingleton lhs,
       ValueWeightSingleton rhs,
       fst::DivideType typ = fst::DIVIDE_ANY) {
-    lhs.value_ = kInstance->OpDivide(lhs.value_, rhs.value_);
+    lhs.value_ = Semiring().OpDivide(lhs.value_, rhs.value_);
     return lhs;
   }
 
   friend inline ValueWeightSingleton Star(
       ValueWeightSingleton w) {
-    w.value_ = kInstance->OpStar(w.value_);
+    w.value_ = Semiring().OpStar(w.value_);
     return w;
   }
 
   ValueWeightSingleton Reverse() const {
-    return ValueWeightSingleton(kInstance->Reverse(value_));
+    return ValueWeightSingleton(Semiring().Reverse(value_));
   }
 
   ValueWeightSingleton Quantize(float delta = fst::kDelta) const {
-    return ValueWeightSingleton(kInstance->Quantize(value_, delta));
+    return ValueWeightSingleton(Semiring().Quantize(value_, delta));
   }
 
-  constexpr bool Member() const { return kInstance->Member(value_); }
+  constexpr bool Member() const { return Semiring().Member(value_); }
 
   friend inline bool operator==(
       ValueWeightSingleton lhs,
       ValueWeightSingleton rhs) {
-    return kInstance->EqualTo(lhs.value_, rhs.value_);
+    return Semiring().EqualTo(lhs.value_, rhs.value_);
   }
 
   friend inline bool operator!=(
       ValueWeightSingleton lhs,
       ValueWeightSingleton rhs) {
-    return !kInstance->EqualTo(lhs.value_, rhs.value_);
+    return !Semiring().EqualTo(lhs.value_, rhs.value_);
   }
 
   friend inline bool ApproxEqual(
       ValueWeightSingleton lhs,
       ValueWeightSingleton rhs,
       float delta = fst::kDelta) {
-    return kInstance->ApproxEqualTo(lhs.value_, rhs.value_, delta);
+    return Semiring().ApproxEqualTo(lhs.value_, rhs.value_, delta);
   }
 
   std::size_t Hash() const { return std::hash<ValueType>()(value_); }
+
+  friend std::ostream &operator<<(
+      std::ostream &strm,
+      ValueWeightSingleton w) {
+    return Semiring().Print(strm, w.value_);
+  }
 
   std::istream &Read(std::istream &strm) {
     static_assert(std::is_pod<ValueType>::value, "value type should be POD");
@@ -293,12 +306,13 @@ class ValueWeightSingleton {
   }
 
   static const string &Type() {
-    static const string type = kInstance->Name() +
-        (sizeof(value_) == 4 ? "" : PrecisionString<sizeof(value_)>::Get());
+    static const string type = Semiring().Name();
     return type;
   }
 
-  static constexpr uint64 Properties() { return kInstance->Properties(); }
+  static constexpr uint64 Properties() { return Semiring().Properties(); }
+
+  static const S &Semiring() { return *kInstance; }
 
  private:
   static const S *const kInstance;  // Owned singleton, will never be deleted.

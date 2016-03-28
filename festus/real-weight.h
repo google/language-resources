@@ -94,7 +94,9 @@ template <typename R>
 struct RealSemiring {
   typedef R ValueType;
 
-  static string Name() { return "real"; }
+  static string Name() {
+    return "real" + (sizeof(R) == 4 ? "" : PrecisionString<sizeof(R)>::Get());
+  }
 
   static constexpr uint64 Properties() {
     return fst::kCommutative | fst::kSemiring;
@@ -124,20 +126,18 @@ struct RealSemiring {
   static constexpr bool ApproxEqualTo(R lhs, R rhs, float delta) {
     return lhs <= rhs + delta && rhs <= lhs + delta;
   }
+
+  static std::ostream &Print(std::ostream &strm, R val) {
+    switch (std::fpclassify(val)) {
+      case FP_NAN: return strm << "BadNumber";
+      case FP_INFINITE: return strm << (val < 0 ? "-" : "") << "Infinity";
+      default: return strm << val;
+    }
+  }
 };
 
 template <typename T>
 using RealWeightTpl = ValueWeightStatic<RealSemiring<T>>;
-
-template <class T>
-inline std::ostream &operator<<(std::ostream &strm, const RealWeightTpl<T> &w) {
-  T f = w.Value();
-  switch (std::fpclassify(f)) {
-    case FP_NAN: return strm << "BadNumber";
-    case FP_INFINITE: return strm << (f < 0 ? "-" : "") << "Infinity";
-    default: return strm << f;
-  }
-}
 
 template <class T>
 inline std::istream &operator>>(std::istream &strm, RealWeightTpl<T> &w) {

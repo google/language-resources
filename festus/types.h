@@ -36,6 +36,28 @@ template <class F> struct FstType<const F *>  { typedef F Type; };
 #define STATE_ID_TYPE(x) FST_TYPE(x)::StateId
 #define LABEL_TYPE(x)    ARC_TYPE(x)::Label
 
+template <int> struct PrecisionString {};
+
+template <> struct PrecisionString<1> {
+  static string Get() { return "8"; }
+};
+
+template <> struct PrecisionString<2> {
+  static string Get() { return "16"; }
+};
+
+template <> struct PrecisionString<4> {
+  static string Get() { return "32"; }
+};
+
+template <> struct PrecisionString<8> {
+  static string Get() { return "64"; }
+};
+
+template <> struct PrecisionString<16> {
+  static string Get() { return "128"; }
+};
+
 }  // namespace festus
 
 #endif  // FESTUS_TYPES_H__

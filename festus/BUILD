@@ -29,8 +29,15 @@ cc_library(
 
 cc_library(
     name = "weight",
-    hdrs = ["weight.h"],
-    deps = ["@openfst//:weight"],
+    hdrs = [
+        "value-weight-singleton.h",
+        "value-weight-static.h",
+        "weight.h"
+    ],
+    deps = [
+        "@openfst//:weight",
+        ":types",
+    ],
 )
 
 cc_library(

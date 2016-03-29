@@ -34,12 +34,21 @@
 
 namespace festus {
 
+template <class S>
+struct DefaultInstance {
+  // Owned pointer, will never be deleted.
+  static const S *const kInstance;
+};
+
+template <class S>
+const S *const DefaultInstance<S>::kInstance = new S();
+
 // OpenFst weight façade for semirings whose elements are passed by value.
 //
 // This version works with a semiring class S with const member functions and
-// creates a singleton instance of S, which it never cleans up. The singleton
+// uses a singleton instance of S, which must never be deleted. The singleton
 // semiring object should be thread safe.
-template <class S>
+template <class S, class Singleton = DefaultInstance<S>>
 class ValueWeightSingleton {
  public:
   typedef S SemiringType;
@@ -61,6 +70,8 @@ class ValueWeightSingleton {
   }
 
   ValueType Value() const { return value_; }
+
+  static constexpr const S &Semiring() { return *Singleton::kInstance; }
 
   static constexpr ValueWeightSingleton NoWeight() {
     return ValueWeightSingleton(Semiring().NoWeight());
@@ -181,15 +192,9 @@ class ValueWeightSingleton {
 
   static constexpr uint64 Properties() { return Semiring().Properties(); }
 
-  static const S &Semiring() { return *kInstance; }
-
  private:
-  static const S *const kInstance;  // Owned singleton, will never be deleted.
   ValueType value_;
 };
-
-template <class S>
-const S *const ValueWeightSingleton<S>::kInstance = new S();
 
 }  // namespace festus
 

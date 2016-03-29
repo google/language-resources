@@ -52,7 +52,6 @@ cc_library(
     deps = [
         "@openfst//:weight",
         ":weight",
-        ":weight-test-lib",
     ],
 )
 
@@ -64,6 +63,25 @@ cc_test(
         "@googletest//:gtest",
         "@openfst//:weight-tester",
         ":real-weight",
+        ":weight-test-lib",
+    ],
+)
+
+cc_library(
+    name = "modular-int-semiring",
+    hdrs = ["modular-int-semiring.h"],
+    deps = ["@openfst//:weight"],
+)
+
+cc_test(
+    name = "modular-int-semiring-test",
+    timeout = "short",
+    srcs = ["modular-int-semiring-test.cc"],
+    deps = [
+        "@googletest//:gtest_main",
+        ":modular-int-semiring",
+        "//festus:weight",
+        "//festus:weight-test-lib",
     ],
 )
 

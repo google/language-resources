@@ -28,6 +28,7 @@
 #include <ostream>
 
 #include "festus/weight.h"
+#include "festus/types.h"
 
 namespace festus {
 
@@ -98,9 +99,8 @@ struct RealSemiring {
     return "real" + (sizeof(R) == 4 ? "" : PrecisionString<sizeof(R)>::Get());
   }
 
-  static constexpr uint64 Properties() {
-    return fst::kCommutative | fst::kSemiring;
-  }
+  static constexpr bool Commutative() { return true; }
+  static constexpr bool Idempotent() { return false; }
 
   static constexpr R NoWeight() { return std::numeric_limits<R>::quiet_NaN(); }
   static constexpr R Zero() { return 0; }

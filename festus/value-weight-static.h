@@ -30,8 +30,6 @@
 #include <fst/compat.h>
 #include <fst/weight.h>
 
-#include "festus/types.h"
-
 namespace festus {
 
 // OpenFst weight façade for semirings whose elements are passed by value.
@@ -93,31 +91,15 @@ class ValueWeightStatic {
     return lhs;
   }
 
-  friend ValueWeightStatic Divide(
+  friend inline ValueWeightStatic Divide(
       ValueWeightStatic lhs,
       ValueWeightStatic rhs,
       fst::DivideType typ = fst::DIVIDE_ANY) {
-    switch (typ) {
-      case fst::DIVIDE_LEFT: {
-        auto recip = SemiringType::Reciprocal(rhs.value_);
-        lhs.value_ = SemiringType::OpTimes(recip, lhs.value_);
-        break;
-      }
-      case fst::DIVIDE_RIGHT: {
-        auto recip = SemiringType::Reciprocal(rhs.value_);
-        lhs.value_ = SemiringType::OpTimes(lhs.value_, recip);
-        break;
-      }
-      case fst::DIVIDE_ANY:
-        if (!(Properties() & fst::kCommutative)) {
-          FSTERROR() << "Only explicit left or right division is defined "
-                     << "for the noncommutative " << Type() << " semiring";
-          return NoWeight();
-        }
-        lhs.value_ = SemiringType::OpDivide(lhs.value_, rhs.value_);
-        break;
+    if (SemiringType::Commutative()) {
+      return DivideCommutative(lhs, rhs);
+    } else {
+      return DivideNoncommutative(lhs, rhs, typ);
     }
-    return lhs;
   }
 
   friend inline ValueWeightStatic Star(
@@ -177,9 +159,44 @@ class ValueWeightStatic {
     return type;
   }
 
-  static constexpr uint64 Properties() { return SemiringType::Properties(); }
+  static constexpr uint64 Properties() {
+    return fst::kSemiring
+        | (SemiringType::Commutative() ? fst::kCommutative : 0)
+        | (SemiringType::Idempotent()  ? fst::kIdempotent  : 0);
+  }
 
  private:
+  static ValueWeightStatic DivideCommutative(
+      ValueWeightStatic lhs,
+      ValueWeightStatic rhs) {
+    lhs.value_ = SemiringType::OpDivide(lhs.value_, rhs.value_);
+    return lhs;
+  }
+
+  static ValueWeightStatic DivideNoncommutative(
+      ValueWeightStatic lhs,
+      ValueWeightStatic rhs,
+      fst::DivideType typ) {
+    switch (typ) {
+      case fst::DIVIDE_LEFT: {
+        auto recip = SemiringType::Reciprocal(rhs.value_);
+        lhs.value_ = SemiringType::OpTimes(recip, lhs.value_);
+        break;
+      }
+      case fst::DIVIDE_RIGHT: {
+        auto recip = SemiringType::Reciprocal(rhs.value_);
+        lhs.value_ = SemiringType::OpTimes(lhs.value_, recip);
+        break;
+      }
+      case fst::DIVIDE_ANY:
+        FSTERROR() << "Only explicit left or right division is defined "
+                   << "for the noncommutative " << Type() << " semiring";
+        lhs.value_ = SemiringType::NoWeight();
+        break;
+    }
+    return lhs;
+  }
+
   ValueType value_;
 };
 

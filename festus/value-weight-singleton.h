@@ -30,8 +30,6 @@
 #include <fst/compat.h>
 #include <fst/weight.h>
 
-#include "festus/types.h"
-
 namespace festus {
 
 template <class S>
@@ -106,31 +104,15 @@ class ValueWeightSingleton {
     return lhs;
   }
 
-  friend ValueWeightSingleton Divide(
+  friend inline ValueWeightSingleton Divide(
       ValueWeightSingleton lhs,
       ValueWeightSingleton rhs,
       fst::DivideType typ = fst::DIVIDE_ANY) {
-    switch (typ) {
-      case fst::DIVIDE_LEFT: {
-        auto recip = Semiring().Reciprocal(rhs.value_);
-        lhs.value_ = Semiring().OpTimes(recip, lhs.value_);
-        break;
-      }
-      case fst::DIVIDE_RIGHT: {
-        auto recip = Semiring().Reciprocal(rhs.value_);
-        lhs.value_ = Semiring().OpTimes(lhs.value_, recip);
-        break;
-      }
-      case fst::DIVIDE_ANY:
-        if (!(Properties() & fst::kCommutative)) {
-          FSTERROR() << "Only explicit left or right division is defined "
-                     << "for the noncommutative " << Type() << " semiring";
-          return NoWeight();
-        }
-        lhs.value_ = Semiring().OpDivide(lhs.value_, rhs.value_);
-        break;
+    if (Semiring().Commutative()) {
+      return DivideCommutative(lhs, rhs);
+    } else {
+      return DivideNoncommutative(lhs, rhs, typ);
     }
-    return lhs;
   }
 
   friend inline ValueWeightSingleton Star(
@@ -190,9 +172,44 @@ class ValueWeightSingleton {
     return type;
   }
 
-  static constexpr uint64 Properties() { return Semiring().Properties(); }
+  static constexpr uint64 Properties() {
+    return fst::kSemiring
+        | (Semiring().Commutative() ? fst::kCommutative : 0)
+        | (Semiring().Idempotent()  ? fst::kIdempotent  : 0);
+  }
 
  private:
+  static ValueWeightSingleton DivideCommutative(
+      ValueWeightSingleton lhs,
+      ValueWeightSingleton rhs) {
+    lhs.value_ = Semiring().OpDivide(lhs.value_, rhs.value_);
+    return lhs;
+  }
+
+  static ValueWeightSingleton DivideNoncommutative(
+      ValueWeightSingleton lhs,
+      ValueWeightSingleton rhs,
+      fst::DivideType typ) {
+    switch (typ) {
+      case fst::DIVIDE_LEFT: {
+        auto recip = Semiring().Reciprocal(rhs.value_);
+        lhs.value_ = Semiring().OpTimes(recip, lhs.value_);
+        break;
+      }
+      case fst::DIVIDE_RIGHT: {
+        auto recip = Semiring().Reciprocal(rhs.value_);
+        lhs.value_ = Semiring().OpTimes(lhs.value_, recip);
+        break;
+      }
+      case fst::DIVIDE_ANY:
+        FSTERROR() << "Only explicit left or right division is defined "
+                   << "for the noncommutative " << Type() << " semiring";
+        lhs.value_ = Semiring().NoWeight();
+        break;
+    }
+    return lhs;
+  }
+
   ValueType value_;
 };
 

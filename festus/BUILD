@@ -34,10 +34,7 @@ cc_library(
         "value-weight-static.h",
         "weight.h"
     ],
-    deps = [
-        "@openfst//:weight",
-        ":types",
-    ],
+    deps = ["@openfst//:weight"],
 )
 
 cc_library(
@@ -50,8 +47,8 @@ cc_library(
     name = "real-weight",
     hdrs = ["real-weight.h"],
     deps = [
-        "@openfst//:weight",
         ":weight",
+        ":types",
     ],
 )
 
@@ -70,7 +67,7 @@ cc_test(
 cc_library(
     name = "modular-int-semiring",
     hdrs = ["modular-int-semiring.h"],
-    deps = ["@openfst//:weight"],
+    deps = ["@openfst//:base"],
 )
 
 cc_test(

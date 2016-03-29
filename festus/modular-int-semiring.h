@@ -29,7 +29,6 @@
 #include <sstream>
 
 #include <fst/compat.h>
-#include <fst/weight.h>
 
 namespace festus {
 
@@ -53,9 +52,8 @@ struct ModularIntegerSemiring {
     return strm.str();
   }
 
-  static constexpr uint64 Properties() {
-    return fst::kCommutative | fst::kSemiring;
-  }
+  static constexpr bool Commutative() { return true; }
+  static constexpr bool Idempotent() { return false; }
 
   static constexpr Z NoWeight() { return std::numeric_limits<Z>::min(); }
   static constexpr Z Zero() { return 0; }

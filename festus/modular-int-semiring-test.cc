@@ -90,6 +90,16 @@ TEST(ModularIntSemiringTest, NoOverflow) {
   EXPECT_EQ(  0, Z<127>::OpTimes(-127,  127));
   EXPECT_EQ(  0, Z<127>::OpTimes( 127, -127));
   EXPECT_EQ(  0, Z<127>::OpTimes( 127,  127));
+
+  EXPECT_EQ(  2, Z<128>::OpPlus (-127, -127));
+  EXPECT_EQ(  0, Z<128>::OpPlus (-127,  127));
+  EXPECT_EQ(  0, Z<128>::OpPlus ( 127, -127));
+  EXPECT_EQ(126, Z<128>::OpPlus ( 127,  127));
+  EXPECT_EQ(  2, Z<128>::OpMinus(-127,  127));
+  EXPECT_EQ(  1, Z<128>::OpTimes(-127, -127));
+  EXPECT_EQ(127, Z<128>::OpTimes(-127,  127));
+  EXPECT_EQ(127, Z<128>::OpTimes( 127, -127));
+  EXPECT_EQ(  1, Z<128>::OpTimes( 127,  127));
 }
 
 TEST(ModularIntSemiringTest, Reciprocal) {
@@ -103,6 +113,9 @@ TEST(ModularIntSemiringTest, Reciprocal) {
   EXPECT_EQ(111, Z<128>::Reciprocal(15));
   EXPECT_EQ(113, Z<128>::Reciprocal(17));
   EXPECT_EQ( 27, Z<128>::Reciprocal(19));
+  EXPECT_EQ( 61, Z<128>::Reciprocal(21));
+  EXPECT_EQ( 39, Z<128>::Reciprocal(23));
+  EXPECT_EQ( 25, Z<128>::Reciprocal(41));
   for (int a = 2; a < 128; a += 2) {
     EXPECT_FALSE(Z<128>::Member(Z<128>::Reciprocal(a)));
   }
@@ -181,6 +194,7 @@ TEST(ModularIntSemiringTest, Exhaustive) {
   ExhaustiveTestZ<13>();
   ExhaustiveTestZ<127>();
   ExhaustiveTestZ<128>();
+  ExhaustiveTestZ<129>();
 }
 
 TEST(ModularIntSemiringTest, BasicWeights) {
@@ -189,6 +203,7 @@ TEST(ModularIntSemiringTest, BasicWeights) {
   festus::TestBasicWeights<ModularIntWeight<13>>();
   festus::TestBasicWeights<ModularIntWeight<127>>();
   festus::TestBasicWeights<ModularIntWeight<128>>();
+  festus::TestBasicWeights<ModularIntWeight<129>>();
 }
 
 template <int64 N>
@@ -206,6 +221,7 @@ TEST(ModularIntSemiringTest, Identities) {
   TestModularIntIdentities<13>();
   TestModularIntIdentities<127>();
   TestModularIntIdentities<128>();
+  TestModularIntIdentities<129>();
 }
 
 }  // namespace

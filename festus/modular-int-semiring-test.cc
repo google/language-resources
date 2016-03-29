@@ -146,7 +146,7 @@ TEST(ModularIntSemiringTest, Reciprocal) {
   EXPECT_FALSE(Z<13>::Member(Z<13>::Reciprocal(13)));
 }
 
-template <long N>
+template <int64 N>
 void ExhaustiveTestZ() {
   typedef Z<N> Ring;
   constexpr auto z = Ring::Zero();

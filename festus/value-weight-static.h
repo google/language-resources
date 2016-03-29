@@ -93,11 +93,30 @@ class ValueWeightStatic {
     return lhs;
   }
 
-  friend inline ValueWeightStatic Divide(
+  friend ValueWeightStatic Divide(
       ValueWeightStatic lhs,
       ValueWeightStatic rhs,
       fst::DivideType typ = fst::DIVIDE_ANY) {
-    lhs.value_ = SemiringType::OpDivide(lhs.value_, rhs.value_);
+    switch (typ) {
+      case fst::DIVIDE_LEFT: {
+        auto recip = SemiringType::Reciprocal(rhs.value_);
+        lhs.value_ = SemiringType::OpTimes(recip, lhs.value_);
+        break;
+      }
+      case fst::DIVIDE_RIGHT: {
+        auto recip = SemiringType::Reciprocal(rhs.value_);
+        lhs.value_ = SemiringType::OpTimes(lhs.value_, recip);
+        break;
+      }
+      case fst::DIVIDE_ANY:
+        if (!(Properties() & fst::kCommutative)) {
+          FSTERROR() << "Only explicit left or right division is defined "
+                     << "for the noncommutative " << Type() << " semiring";
+          return NoWeight();
+        }
+        lhs.value_ = SemiringType::OpDivide(lhs.value_, rhs.value_);
+        break;
+    }
     return lhs;
   }
 

@@ -95,11 +95,30 @@ class ValueWeightSingleton {
     return lhs;
   }
 
-  friend inline ValueWeightSingleton Divide(
+  friend ValueWeightSingleton Divide(
       ValueWeightSingleton lhs,
       ValueWeightSingleton rhs,
       fst::DivideType typ = fst::DIVIDE_ANY) {
-    lhs.value_ = Semiring().OpDivide(lhs.value_, rhs.value_);
+    switch (typ) {
+      case fst::DIVIDE_LEFT: {
+        auto recip = Semiring().Reciprocal(rhs.value_);
+        lhs.value_ = Semiring().OpTimes(recip, lhs.value_);
+        break;
+      }
+      case fst::DIVIDE_RIGHT: {
+        auto recip = Semiring().Reciprocal(rhs.value_);
+        lhs.value_ = Semiring().OpTimes(lhs.value_, recip);
+        break;
+      }
+      case fst::DIVIDE_ANY:
+        if (!(Properties() & fst::kCommutative)) {
+          FSTERROR() << "Only explicit left or right division is defined "
+                     << "for the noncommutative " << Type() << " semiring";
+          return NoWeight();
+        }
+        lhs.value_ = Semiring().OpDivide(lhs.value_, rhs.value_);
+        break;
+    }
     return lhs;
   }
 

@@ -109,6 +109,7 @@ struct RealSemiring {
   static constexpr R OpMinus(R lhs, R rhs) { return lhs - rhs; }
   static constexpr R OpTimes(R lhs, R rhs) { return lhs * rhs; }
   static constexpr R OpDivide(R lhs, R rhs) { return lhs / rhs; }
+  static constexpr R Reciprocal(R val) { return 1.0f / val; }
   static constexpr R OpStar(R val) { return 1.0 / (1.0 - val); }
   static constexpr R Reverse(R val) { return val; }
 

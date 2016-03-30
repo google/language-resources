@@ -18,7 +18,10 @@
 // \file
 // The (semi)ring of integers modulo N.
 //
-// When N is prime, this ring is in fact a finite field.
+// When N is prime, this ring is in fact a finite field. In fields (and more
+// generally in division rings), Star(w) == 1/(1 - w) for all w != 1, since
+// the reciprocal 1/u is defined for all u != 0. While Star() is well-defined,
+// it is not the sum of a convergent series, and the semiring is not k-closed.
 
 #ifndef FESTUS_MODULAR_INT_SEMIRING_H__
 #define FESTUS_MODULAR_INT_SEMIRING_H__
@@ -35,7 +38,7 @@ namespace festus {
 // The ring (resp. field) of integers modulo N for N >= 2 (resp. N prime).
 //
 // The template parameter Z must be a signed integer type. Its smallest value
-// is reserved for
+// is reserved for representing undefined results.
 template <typename Z, int64 N>
 struct ModularIntegerSemiring {
   static_assert(std::numeric_limits<Z>::is_integer, "integral type expected");

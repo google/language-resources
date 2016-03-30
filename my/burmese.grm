@@ -241,10 +241,13 @@ g2p_nucleus =
 | ("-aa".g? ("nga".g | "nya".g) "asat visarga".g : "ɪ́ɴ".p)
 | ("-aa".g? ("nga".g | "nya".g) "asat".g : "ɪ̀ɴ".p)
 | ("-aa".g? "ca asat".g : "ɪ ʔ".p)  # maybe sometimes /eɪ̯ʔ/
+| ("-aa".g? "ya".g "dot asat".g     : "ɛ̰".p)
+| ("-aa".g? "ya".g "asat visarga".g : "ɛ́".p)
+| ("-aa".g? "ya".g "asat".g         : "ɛ̀".p)
   # Vowel quality can vary for final nnya. Defaulting to /ɛ/ here:
-| (("-e".g? "nnya".g | "ya".g | "-aa ya".g) "dot asat".g : "ɛ̰".p)
-| (("-e".g? "nnya".g | "ya".g | "-aa ya".g) "asat visarga".g : "ɛ́".p)
-| (("-e".g? "nnya".g | "ya".g | "-aa ya".g) "asat".g : "ɛ̀".p)
+| ("-e".g? "nnya".g "dot asat".g     : "ɛ̰".p)
+| ("-e".g? "nnya".g "asat visarga".g : "ɛ́".p)
+| ("-e".g? "nnya".g "asat".g         : "ɛ̀".p)
 | ("-aa".g? ("nna".g | "na".g | "ma".g) "dot asat".g : "a̰ɴ".p)
 | ("-aa".g? ("nna".g | "na".g | "ma".g) "asat visarga".g : "áɴ".p)
 | ("-aa".g? ("nna".g | "na".g | "ma".g) "asat".g : "àɴ".p)

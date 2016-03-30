@@ -145,7 +145,7 @@ struct ModularIntegerSemiring {
   }
 
   // Constructs an element of the semiring from the given integer a.
-  static Z FromInteger(std::intmax_t a) {
+  static Z From(std::intmax_t a) {
     auto quot_rem = std::imaxdiv(a, N);
     auto r = quot_rem.rem;
     r += N * (r < 0);

@@ -26,6 +26,7 @@
 #include <istream>
 #include <ostream>
 #include <type_traits>
+#include <utility>
 
 #include <fst/compat.h>
 #include <fst/weight.h>
@@ -49,11 +50,12 @@ class ValueWeightStatic {
   ValueWeightStatic &operator=(ValueWeightStatic &&) = default;
   ValueWeightStatic &operator=(const ValueWeightStatic &) = default;
 
+  // Deprecated implicit constructor. Use From() instead.
   constexpr ValueWeightStatic(ValueType value) : value_(value) {}
 
-  ValueWeightStatic &operator=(ValueType value) {
-    value_ = value;
-    return *this;
+  template <typename T>
+  static constexpr ValueWeightStatic From(T &&arg) {
+    return ValueWeightStatic(SemiringType::From(std::forward<T>(arg)));
   }
 
   ValueType Value() const { return value_; }

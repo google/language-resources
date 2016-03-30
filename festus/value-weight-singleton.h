@@ -26,6 +26,7 @@
 #include <istream>
 #include <ostream>
 #include <type_traits>
+#include <utility>
 
 #include <fst/compat.h>
 #include <fst/weight.h>
@@ -60,11 +61,12 @@ class ValueWeightSingleton {
   ValueWeightSingleton &operator=(ValueWeightSingleton &&) = default;
   ValueWeightSingleton &operator=(const ValueWeightSingleton &) = default;
 
+  // Deprecated implicit constructor. Use From() instead.
   constexpr ValueWeightSingleton(ValueType value) : value_(value) {}
 
-  ValueWeightSingleton &operator=(ValueType value) {
-    value_ = value;
-    return *this;
+  template <typename T>
+  static constexpr ValueWeightSingleton From(T &&arg) {
+    return ValueWeightSingleton(Semiring().From(std::forward<T>(arg)));
   }
 
   ValueType Value() const { return value_; }

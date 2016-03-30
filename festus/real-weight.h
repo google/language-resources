@@ -105,6 +105,7 @@ struct RealSemiring {
   static constexpr R NoWeight() { return std::numeric_limits<R>::quiet_NaN(); }
   static constexpr R Zero() { return 0; }
   static constexpr R One() { return 1; }
+  static constexpr R From(R val) { return val; }
   static constexpr R OpPlus(R lhs, R rhs) { return lhs + rhs; }
   static constexpr R OpMinus(R lhs, R rhs) { return lhs - rhs; }
   static constexpr R OpTimes(R lhs, R rhs) { return lhs * rhs; }

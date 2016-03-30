@@ -210,7 +210,7 @@ template <int64 N>
 void TestModularIntIdentities() {
   typedef ModularIntWeight<N> Weight;
   for (int a = -300; a <= 300; ++a) {
-    Weight w = Weight::SemiringType::FromInteger(a);
+    Weight w = Weight::From(a);
     TestIdentities(w);
   }
 }

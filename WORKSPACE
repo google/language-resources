@@ -59,6 +59,13 @@ new_git_repository(
 
 git_repository(
     name = "protobuf",
-    remote = "https://github.com/google/protobuf.git",
     commit = "5e933847cc9e7826f1a9ee8b3dc1df4960b1ea5d",
+    remote = "https://github.com/google/protobuf.git",
+)
+
+new_git_repository(
+    name = "farmhash",
+    build_file = "farmhash.BUILD",
+    commit = "34c13ddfab0e35422f4c3979f360635a8c050260",
+    remote = "https://github.com/google/farmhash.git",
 )

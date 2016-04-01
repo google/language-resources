@@ -89,7 +89,6 @@ int main(int argc, char *argv[]) {
 
   festus::UnicodeLabelMaker input_label_maker;
   festus::SymbolLabelMaker output_label_maker(phoneme_syms.get(), " ");
-  fst::StdCompactStringFst graphemes;
   StdVectorFst lattice;
   for (string line; std::getline(std::cin, line); ) {
     std::cout << line << "\t";
@@ -100,6 +99,7 @@ int main(int argc, char *argv[]) {
       } else {
         std::cout << " # ";
       }
+      fst::StdCompactStringFst graphemes;
       if (!input_label_maker.StringToCompactFst(phrase, &graphemes)) {
         std::cout << "ERROR_compiling_input: " << phrase;
         continue;

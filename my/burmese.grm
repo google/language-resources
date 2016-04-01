@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright 2015 Google Inc. All Rights Reserved.
+# Copyright 2015, 2016 Google Inc. All Rights Reserved.
 # Author: mjansche@google.com (Martin Jansche)
 
 g = SymbolTable['my/grapheme.syms'];
@@ -244,10 +244,10 @@ g2p_nucleus =
 | ("-aa".g? "ya".g "dot asat".g     : "ɛ̰".p)
 | ("-aa".g? "ya".g "asat visarga".g : "ɛ́".p)
 | ("-aa".g? "ya".g "asat".g         : "ɛ̀".p)
-  # Vowel quality can vary for final nnya. Defaulting to /ɛ/ here:
-| ("-e".g? "nnya".g "dot asat".g     : "ɛ̰".p)
-| ("-e".g? "nnya".g "asat visarga".g : "ɛ́".p)
-| ("-e".g? "nnya".g "asat".g         : "ɛ̀".p)
+  # Vowel quality can vary for final nnya. Defaulting to /i/ here:
+| ("-e".g? "nnya".g "dot asat".g     : "ḭ".p)
+| ("-e".g? "nnya".g "asat visarga".g : "í".p)
+| ("-e".g? "nnya".g "asat".g         : "ì".p)
 | ("-aa".g? ("nna".g | "na".g | "ma".g) "dot asat".g : "a̰ɴ".p)
 | ("-aa".g? ("nna".g | "na".g | "ma".g) "asat visarga".g : "áɴ".p)
 | ("-aa".g? ("nna".g | "na".g | "ma".g) "asat".g : "àɴ".p)

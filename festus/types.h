@@ -24,11 +24,11 @@
 namespace festus {
 
 template <class F> struct FstType             { typedef F Type; };
-template <class F> struct FstType<F &>        { typedef F Type; };
 template <class F> struct FstType<F *>        { typedef F Type; };
+template <class F> struct FstType<F &>        { typedef F Type; };
 template <class F> struct FstType<F &&>       { typedef F Type; };
-template <class F> struct FstType<const F &>  { typedef F Type; };
 template <class F> struct FstType<const F *>  { typedef F Type; };
+template <class F> struct FstType<const F &>  { typedef F Type; };
 
 #define FST_TYPE(x)      ::festus::FstType<decltype(x)>::Type
 #define ARC_TYPE(x)      FST_TYPE(x)::Arc
@@ -36,7 +36,7 @@ template <class F> struct FstType<const F *>  { typedef F Type; };
 #define STATE_ID_TYPE(x) FST_TYPE(x)::StateId
 #define LABEL_TYPE(x)    ARC_TYPE(x)::Label
 
-template <int> struct PrecisionString {};
+template <int SizeInBytes> struct PrecisionString {};
 
 template <> struct PrecisionString<1> {
   static string Get() { return "8"; }

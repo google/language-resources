@@ -82,6 +82,24 @@ cc_test(
     ],
 )
 
+cc_library(
+    name = "max-times-semiring",
+    hdrs = ["max-times-semiring.h"],
+    deps = ["@openfst//:base"],
+)
+
+cc_test(
+    name = "max-times-semiring-test",
+    timeout = "short",
+    srcs = ["max-times-semiring-test.cc"],
+    deps = [
+        "@googletest//:gtest_main",
+        ":max-times-semiring",
+        "//festus:weight",
+        "//festus:weight-test-lib",
+    ],
+)
+
 cc_test(
     name = "star-test",
     timeout = "short",

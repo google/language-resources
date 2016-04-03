@@ -24,6 +24,7 @@ namespace festus {
 
 template <class T>
 void ExpectNe(const T &x, const T &y) {
+  VLOG(1) << "Expecting " << x << " != " << y;
   EXPECT_FALSE(x == y);
   EXPECT_FALSE(y == x);
   EXPECT_TRUE(x != y);
@@ -32,6 +33,7 @@ void ExpectNe(const T &x, const T &y) {
 
 template <class T>
 void ExpectEq(const T &x, const T &y) {
+  VLOG(1) << "Expecting " << x << " == " << y;
   EXPECT_TRUE(x == y);
   EXPECT_TRUE(y == x);
   EXPECT_FALSE(x != y);
@@ -42,6 +44,7 @@ void ExpectEq(const T &x, const T &y) {
 
 template <class T>
 void ExpectApproxEq(const T &x, const T &y, float delta) {
+  VLOG(1) << "Expecting " << x << " ~= " << y;
   EXPECT_TRUE(ApproxEqual(x, y, delta));
   EXPECT_TRUE(ApproxEqual(y, x, delta));
 }
@@ -59,13 +62,14 @@ template <class W>
 auto MinusTest(const W &w) -> decltype(Minus(w, w), void()) {
   VLOG(1) << "Testing Minus for " << w;
   const W n = W::NoWeight();
-  const W z = W::Zero();
   EXPECT_FALSE(Minus(n, w).Member());
   EXPECT_FALSE(Minus(w, n).Member());
   if (w.Member()) {
+    const W z = W::Zero();
+    const W o = W::One();
     ExpectEqIfMember(w, Minus(w, z));
-    ExpectEqIfMember(z, Minus(w, w));
-    ExpectEqIfMember(z, Plus(w, Minus(z, w)));
+    ExpectEqIfMember(z, Plus(Minus(z, w), w));
+    ExpectEqIfMember(o, Plus(Minus(o, w), w));
   }
 }
 
@@ -80,19 +84,19 @@ void TestBasicWeights() {
   const W z = W::Zero();
   const W o = W::One();
 
-  // Zero and One are equal to themselves.
+  VLOG(1) << "Zero and One are equal to themselves.";
   ExpectEq(z, z);
   ExpectEq(o, o);
 
-  // Zero and One are distinct from each other.
+  VLOG(1) << "Zero and One are distinct from each other.";
   ExpectNe(z, o);
 
-  // NoWeight is distinct from everything, including from itself.
+  VLOG(1) << "NoWeight is distinct from everything, including from itself.";
   ExpectNe(n, n);
   ExpectNe(n, z);
   ExpectNe(n, o);
 
-  // Operations involving NoWeight are undefined.
+  VLOG(1) << "Operations involving NoWeight are undefined.";
   EXPECT_FALSE(n.Member());
 
   EXPECT_FALSE(Plus(n, n).Member());

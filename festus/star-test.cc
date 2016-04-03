@@ -72,7 +72,7 @@ void TestUniversalProperties(float threshold_near = 1e-12) {
     EXPECT_EQ(Weight::One(), Star(Weight::One()));
     for (float x : kTestValues) {
       for (float s : {+1.0F, -1.0F}) {
-        Weight w = std::copysign(x, s);
+        Weight w = Weight(std::copysign(x, s));
         Weight star = Star(w);
         Weight one_plus_star = Plus(Weight::One(), star);
         Weight star1 = Star(Plus(Weight::One(), w));
@@ -91,7 +91,7 @@ void TestUniversalProperties(float threshold_near = 1e-12) {
   // floating-point values (assumes Weight can be constructed from a float).
   for (float x : kTestValues) {
     for (float s : {+1.0F, -1.0F}) {
-      Weight w = std::copysign(x, s);
+      Weight w = Weight(std::copysign(x, s));
       Weight star = Star(w);
       if (!w.Member() || !star.Member()) {
         continue;
@@ -117,21 +117,25 @@ void TestUniversalProperties(float threshold_near = 1e-12) {
 TEST(StarTest, UniversalPropertiesTropical) {
   TestUniversalProperties<fst::TropicalWeightTpl<float>>();
   TestUniversalProperties<fst::TropicalWeightTpl<double>>();
+  TestUniversalProperties<fst::TropicalWeightTpl<long double>>();
 }
 
 TEST(StarTest, UniversalPropertiesLog) {
   TestUniversalProperties<fst::LogWeightTpl<float>>(1e-7);
   TestUniversalProperties<fst::LogWeightTpl<double>>();
+  // TODO: TestUniversalProperties<fst::LogWeightTpl<long double>>();
 }
 
 TEST(StarTest, UniversalPropertiesMinMax) {
   TestUniversalProperties<fst::MinMaxWeightTpl<float>>();
   TestUniversalProperties<fst::MinMaxWeightTpl<double>>();
+  TestUniversalProperties<fst::MinMaxWeightTpl<long double>>();
 }
 
 TEST(StarTest, UniversalPropertiesReal) {
   TestUniversalProperties<festus::RealWeightTpl<float>>(1e-7);
   TestUniversalProperties<festus::RealWeightTpl<double>>();
+  TestUniversalProperties<festus::RealWeightTpl<long double>>();
 }
 
 template <class T>
@@ -139,7 +143,7 @@ void TestMinMax() {
   typedef fst::MinMaxWeightTpl<T> Weight;
   for (float x : kTestValues) {
     for (float s : {+1.0F, -1.0F}) {
-      Weight w = std::copysign(x, s);
+      Weight w = Weight(std::copysign(x, s));
       EXPECT_EQ(Weight::One(), Star(w));
     }
   }
@@ -148,6 +152,7 @@ void TestMinMax() {
 TEST(StarTest, MinMax) {
   TestMinMax<float>();
   TestMinMax<double>();
+  TestMinMax<long double>();
 }
 
 template <class T>
@@ -155,7 +160,7 @@ void TestTropical() {
   typedef fst::TropicalWeightTpl<T> Weight;
   for (float x : kTestValues) {
     for (float s : {+1.0F, -1.0F}) {
-      Weight w = std::copysign(x, s);
+      Weight w = Weight(std::copysign(x, s));
       if (w.Value() >= 0) {
         EXPECT_EQ(Weight::One(), Star(w));
       } else {
@@ -168,6 +173,7 @@ void TestTropical() {
 TEST(StarTest, Tropical) {
   TestTropical<float>();
   TestTropical<double>();
+  TestTropical<long double>();
 }
 
 template <class T>
@@ -183,6 +189,11 @@ inline void ExpectApproxEq<double>(double x, double y) {
   EXPECT_DOUBLE_EQ(x, y);
 }
 
+template <>
+inline void ExpectApproxEq<long double>(long double x, long double y) {
+  EXPECT_DOUBLE_EQ(x, y);
+}
+
 template <class T>
 inline void ExpectRelEq(T x, T y);
 
@@ -194,6 +205,11 @@ inline void ExpectRelEq<float>(float x, float y) {
 template <>
 inline void ExpectRelEq<double>(double x, double y) {
   EXPECT_LT(std::abs((x - y) / x), 1e-14);
+}
+
+template <>
+inline void ExpectRelEq<long double>(long double x, long double y) {
+  EXPECT_LT(std::abs((x - y) / x), 1e-6);
 }
 
 template <class T>
@@ -275,6 +291,7 @@ void TestLog() {
 TEST(StarTest, Log) {
   TestLog<float>();
   TestLog<double>();
+  // TODO: TestLog<long double>();
 }
 
 template <class T>
@@ -293,6 +310,7 @@ void TestStar3() {
 TEST(RealWeightTest, Star) {
   TestStar3<float>();
   TestStar3<double>();
+  TestStar3<long double>();
 }
 
 }  // namespace

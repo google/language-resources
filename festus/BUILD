@@ -326,3 +326,9 @@ cc_library(
         ":expression",
     ],
 )
+
+cc_library(
+    name = "hash",
+    hdrs = ["hash.h"],
+    deps = ["@farmhash//:farmhash"],
+)

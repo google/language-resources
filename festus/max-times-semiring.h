@@ -31,7 +31,7 @@
 //
 // This is the case for 0* == 1 and a* == LIMIT for all a > 1. The Star axiom
 // constrains but does not dictate the definition of 1*. To satisfy the Star
-// axiom 1* == max(1, 1*), any choice of 1* >= 1 will do. Note that the
+// axiom 1* == max(1, 1*), any choice of 1* >= 1 will do. Note that this
 // semiring is k-closed iff 1* == 1.
 
 #ifndef FESTUS_MAX_TIMES_SEMIRING_H__
@@ -55,15 +55,15 @@ struct LimitedMaxTimesSemiring {
   static_assert(LIMIT <= std::numeric_limits<N>::max(), "LIMIT too large");
   static_assert(ONE_STAR >= 1, "expected ONE_STAR >= 1");
   static_assert(ONE_STAR <= LIMIT, "expected ONE_STAR <= LIMIT");
-  static const N kLimit;
-  static const N kOneStar;
+
+  static constexpr N Limit() { return static_cast<N>(LIMIT); }
 
   typedef N ValueType;
 
   static string Name() {
     std::ostringstream strm;
-    strm << "natural_max_times_up_to_" << kLimit
-         << "_with_one_star_eq_" << kOneStar;
+    strm << "natural_max_times_up_to_" << LIMIT
+         << "_with_one_star_eq_" << ONE_STAR;
     return strm.str();
   }
 
@@ -76,9 +76,15 @@ struct LimitedMaxTimesSemiring {
   static constexpr N Reverse(N a) { return a; }
   static constexpr N Quantize(N a, float) { return a; }
 
+  // Constructs an element of the semiring from the given integer a.
+  static constexpr N From(std::intmax_t a) {
+    return a < 0 ? NoWeight() : (a > Limit() ? Limit() : a);
+  }
+
+  // Computes a + b up to LIMIT.
   static constexpr N OpPlus(N a, N b) {
     return (!Member(a) || !Member(b)) ? NoWeight()
-        : std::min(kLimit, std::max(a, b));
+        : std::min(Limit(), std::max(a, b));
   }
 
   // Returns m such that OpPlus(m, b) == a, or NoWeight() if no such m exists.
@@ -99,8 +105,8 @@ struct LimitedMaxTimesSemiring {
   static N OpTimes(N a, N b) {
     if (!Member(a) || !Member(b)) return NoWeight();
     if (b == 0) return 0;
-    if (a <= kLimit / b) return a * b;
-    return kLimit;
+    if (a <= Limit() / b) return a * b;
+    return Limit();
   }
 
   // Returns d such that OpTimes(d, b) == a == OpTimes(b, d), or NoWeight() if
@@ -109,8 +115,8 @@ struct LimitedMaxTimesSemiring {
     if (!Member(a) || !Member(b)) return NoWeight();
     if (a == 0) return 0;  // Includes 0/0, which is not unique.
     if (b == 0) return NoWeight();
-    if (a >= kLimit) return kLimit;  // Not necessarily unique.
-    if (b > kLimit) b = kLimit;
+    if (a >= Limit()) return Limit();  // Not necessarily unique.
+    if (b > Limit()) b = Limit();
     N div = a / b;
     if (div * b == a) return div;
     return NoWeight();
@@ -118,11 +124,17 @@ struct LimitedMaxTimesSemiring {
 
   static constexpr N Reciprocal(N a) { return a == 1 ? 1 : NoWeight(); }
 
+  // Returns s such that
+  //
+  //   s == OpPlus(One(), OpTimes(a, s)) and
+  //   s == OpPlus(One(), OpTimes(s, a)).
+  //
+  // TODO(C++14): Make this a constexpr function.
   static N OpStar(N a) {
     if (!Member(a)) return NoWeight();
     if (a == 0) return 1;
-    if (a == 1) return kOneStar;
-    return kLimit;
+    if (a == 1) return static_cast<N>(ONE_STAR);
+    return Limit();
   }
 
   static constexpr bool Member(N a) { return a >= 0; }
@@ -138,20 +150,7 @@ struct LimitedMaxTimesSemiring {
   static std::ostream &Print(std::ostream &strm, N a) {
     return strm << static_cast<int64>(a);
   }
-
-  // Constructs an element of the semiring from the given integer a.
-  static constexpr N From(std::intmax_t a) {
-    return a < 0 ? NoWeight() : (a > kLimit ? kLimit : a);
-  }
 };
-
-template <typename N, int64 LIMIT, int64 ONE_STAR>
-const N LimitedMaxTimesSemiring<N, LIMIT, ONE_STAR>::kLimit =
-    static_cast<N>(LIMIT);
-
-template <typename N, int64 LIMIT, int64 ONE_STAR>
-const N LimitedMaxTimesSemiring<N, LIMIT, ONE_STAR>::kOneStar =
-    static_cast<N>(ONE_STAR);
 
 }  // namespace festus
 

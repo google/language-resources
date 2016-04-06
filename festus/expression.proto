@@ -26,20 +26,26 @@ message Expression {
   oneof expression {
     bool zero = 1;  // "bool" is a placeholder, the value is ignored
     bool one = 2;   // ditto
-    LeafValue leaf = 3;
-    BinaryExpression plus = 4;
-    BinaryExpression minus = 5;
-    BinaryExpression times = 6;
-    // BinaryExpression divide = 7;  // reserved; implement if needed
-    UnaryExpression star = 8;
+    string error = 3;
+    LeafValue leaf = 4;
+    BinaryExpression plus = 5;
+    BinaryExpression minus = 6;
+    BinaryExpression times = 7;
+    // BinaryExpression divide = 8;     // reserved; implement if needed
+    // UnaryExpression reciprocal = 9;  // reserved; implement if needed
+    UnaryExpression star = 10;
+    UnaryExpression kleene_plus = 11;
   }
+
+  optional bool multiple_parents = 12;
 }
 
 message LeafValue {
   oneof value {
-    int32 int_value = 1;
-    double double_value = 2;
-    bytes bytes_value = 3;
+    uint64 payload = 1;
+    bytes bytes_value = 2;
+    double double_value = 3;
+    int32 int_value = 4;
   }
 }
 

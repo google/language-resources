@@ -43,6 +43,15 @@ struct DefaultInstance {
 template <class S>
 const S *const DefaultInstance<S>::kInstance = new S();
 
+template <class S>
+struct DefaultStaticInstance {
+  static constexpr S kStaticInstance = {};
+  static constexpr const S &Instance() { return kStaticInstance; }
+};
+
+template <class S>
+constexpr S DefaultStaticInstance<S>::kStaticInstance;
+
 // OpenFst weight façade for semirings whose elements are passed by value.
 //
 // This version works with a semiring class S with const member functions and

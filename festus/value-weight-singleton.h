@@ -37,6 +37,7 @@ template <class S>
 struct DefaultInstance {
   // Owned pointer, will never be deleted.
   static const S *const kInstance;
+  static constexpr const S &Instance() { return *kInstance; }
 };
 
 template <class S>
@@ -71,7 +72,7 @@ class ValueWeightSingleton {
 
   ValueType Value() const { return value_; }
 
-  static constexpr const S &Semiring() { return *Singleton::kInstance; }
+  static constexpr const S &Semiring() { return Singleton::Instance(); }
 
   static constexpr ValueWeightSingleton NoWeight() {
     return ValueWeightSingleton(Semiring().NoWeight());

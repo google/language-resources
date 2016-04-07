@@ -332,3 +332,12 @@ cc_library(
     hdrs = ["hash.h"],
     deps = ["@farmhash//:farmhash"],
 )
+
+cc_library(
+    name = "term-semiring",
+    hdrs = ["term-semiring.h"],
+    deps = [
+        "@openfst//:base",
+        ":expression",
+    ],
+)

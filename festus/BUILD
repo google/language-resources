@@ -341,3 +341,16 @@ cc_library(
         ":expression",
     ],
 )
+
+cc_test(
+    name = "term-semiring-test",
+    timeout = "short",
+    srcs = ["term-semiring-test.cc"],
+    deps = [
+        "@googletest//:gtest_main",
+        "@openfst//:weight",
+        ":term-semiring",
+        "//festus:weight",
+        "//festus:weight-test-lib",
+    ],
+)

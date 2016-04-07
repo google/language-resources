@@ -102,7 +102,7 @@ TEST(TermSemiringTest, Printing) {
   }
   {
     std::ostringstream strm;
-    strm << BasicTermWeight::From(BasicTermWeight::SemiringType::kLeafLimit);
+    strm << BasicTermWeight::From(BasicTermWeight::SemiringType::LeafLimit());
     EXPECT_EQ("Error(leaf value too large)", strm.str());
   }
   {

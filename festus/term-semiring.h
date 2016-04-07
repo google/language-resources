@@ -91,12 +91,12 @@ class TermSemiringBase {
   // There is a hard limit of 60 bits on the size of the leaf payload. In
   // practice it is advisable to keep the leaf payload size at or below 31
   // bits (better yet: at or below 25 bits) to reduce memoization.
-  static constexpr uint64 kLeafLimit = 1ULL << 60;
+  static constexpr uint64 LeafLimit() { return 1ULL << 60; }
 
   // Creates a leaf term with the given payload. The payload value must be less
   // than kLeafLimit.
   static constexpr uint64 From(uint64 val) {
-    return (val < kLeafLimit) ? ((val << 4) | kLeaf) : MakeError(kErrorLeaf);
+    return (val < LeafLimit()) ? ((val << 4) | kLeaf) : MakeError(kErrorLeaf);
   }
 
   static uint64 GetLeafPayload(uint64 x) {

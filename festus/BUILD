@@ -77,8 +77,8 @@ cc_test(
     deps = [
         "@googletest//:gtest_main",
         ":modular-int-semiring",
-        "//festus:weight",
-        "//festus:weight-test-lib",
+        ":weight",
+        ":weight-test-lib",
     ],
 )
 
@@ -95,8 +95,8 @@ cc_test(
     deps = [
         "@googletest//:gtest_main",
         ":max-times-semiring",
-        "//festus:weight",
-        "//festus:weight-test-lib",
+        ":weight",
+        ":weight-test-lib",
     ],
 )
 
@@ -350,7 +350,7 @@ cc_test(
         "@googletest//:gtest_main",
         "@openfst//:weight",
         ":term-semiring",
-        "//festus:weight",
-        "//festus:weight-test-lib",
+        ":weight",
+        ":weight-test-lib",
     ],
 )

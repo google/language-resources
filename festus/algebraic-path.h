@@ -99,9 +99,9 @@ void MatrixKleenePlus(M *matrix, S *sr) {
     }
     // Finish the case i == k that was skipped above:
     if (sr->NotZero(m_k[k])) {
-      auto c = sr->OpTimes(m_k[k], b);
+      auto ab = sr->OpTimes(m_k[k], b);
       for (std::size_t j = 0; j < size; ++j) {
-        m_k[j] = sr->OpPlus(m_k[j], sr->OpTimes(c, m_k[j]));
+        m_k[j] = sr->OpPlus(m_k[j], sr->OpTimes(ab, m_k[j]));
       }
     }
   }
@@ -121,6 +121,14 @@ typename S::ValueType SumTotalValue(const F &fst, S *semiring) {
     return semiring->Zero();
   }
   auto matrix = internal::AdjacencyMatrix(fst, semiring);
+  for (const auto &row : matrix) {
+    for (auto value : row) {
+      if (!semiring->Member(value)) {
+        LOG(ERROR) << "Adjacency matrix contains ill-formed value";
+        return value;
+      }
+    }
+  }
   internal::MatrixKleenePlus(&matrix, semiring);
   // If we were interested in the Star() of the matrix, we would need to add
   // semiring->One() to the diagonal. However, we only need to access one value
@@ -135,6 +143,8 @@ template <class W>
 struct SemiringForValueWeight {
   typedef W Weight;
   typedef typename std::decay<decltype(W::Zero().Value())>::type ValueType;
+
+  static constexpr bool Member(ValueType x) { return Weight(x).Member(); }
 
   static constexpr bool NotZero(ValueType x) {
     return Weight(x) != Weight::Zero();

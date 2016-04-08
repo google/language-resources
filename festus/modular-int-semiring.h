@@ -187,8 +187,8 @@ struct ModularIntegerSemiring {
 };
 
 // Integral binary logarithm of N.
-template <int64 N> struct Log2    { enum { value = (1 + Log2<N/2>::value) };};
-template <>        struct Log2<1> { enum { value = 0 };};
+template <int64 N> struct Log2    { enum { value = (1 + Log2<N/2>::value) }; };
+template <>        struct Log2<1> { enum { value = 0 }; };
 
 // Signed integer type of size 2^LogBytes bytes.
 template <uint8 LogBytes> struct SignedInt {};

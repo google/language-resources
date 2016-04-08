@@ -354,3 +354,27 @@ cc_test(
         ":weight-test-lib",
     ],
 )
+
+cc_library(
+    name = "algebraic-path",
+    hdrs = ["algebraic-path.h"],
+    deps = [
+        "@openfst//:fst",
+    ],
+)
+
+cc_test(
+    name = "algebraic-path-test",
+    timeout = "short",
+    srcs = ["algebraic-path-test.cc"],
+    deps = [
+        "@googletest//:gtest_main",
+        "@openfst//:fst",
+        ":algebraic-path",
+        ":arc",
+        ":float-weight-star",
+        ":max-times-semiring",
+        ":modular-int-semiring",
+        ":weight",
+    ],
+)

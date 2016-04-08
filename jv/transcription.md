@@ -85,3 +85,15 @@ The following issues need to be resolved:
 * What is the best way to transcribe the schwa sound, /ě/ in the current
   proposal? Is "ě" easy enough to type? We could use plain "e", but that
   potentially risks some ambiguity.
+
+## Stimuli for elicitation
+
+Word      | Respelling
+----------|-----------
+video     |
+zébra     |
+Obama     |
+utama     |
+jroning   |
+khusus    |
+dyah      |

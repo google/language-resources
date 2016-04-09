@@ -53,9 +53,9 @@ class ValueWeightStatic {
   // Deprecated implicit constructor. Use From() instead.
   constexpr ValueWeightStatic(ValueType value) : value_(value) {}
 
-  template <typename T>
-  static constexpr ValueWeightStatic From(T &&arg) {
-    return ValueWeightStatic(SemiringType::From(std::forward<T>(arg)));
+  template <typename... Args>
+  static constexpr ValueWeightStatic From(Args &&... args) {
+    return ValueWeightStatic(SemiringType::From(std::forward<Args>(args)...));
   }
 
   constexpr ValueType Value() { return value_; }

@@ -74,9 +74,9 @@ class ValueWeightSingleton {
   // Deprecated implicit constructor. Use From() instead.
   constexpr ValueWeightSingleton(ValueType value) : value_(value) {}
 
-  template <typename T>
-  static constexpr ValueWeightSingleton From(T &&arg) {
-    return ValueWeightSingleton(Semiring().From(std::forward<T>(arg)));
+  template <typename... Args>
+  static constexpr ValueWeightSingleton From(Args &&... args) {
+    return ValueWeightSingleton(Semiring().From(std::forward<Args>(args)...));
   }
 
   constexpr ValueType Value() { return value_; }

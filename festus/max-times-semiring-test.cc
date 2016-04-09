@@ -45,7 +45,7 @@ void TestMaxTimesIdentities() {
   typedef MaxTimesWeight<LIMIT, ONE_STAR> Weight;
   for (int a = 0; a - 1 <= LIMIT; ++a) {
     Weight w = Weight::From(a);
-    TestIdentities(w);
+    festus::TestIdentities(w);
   }
 }
 

@@ -211,7 +211,7 @@ void TestModularIntIdentities() {
   typedef ModularIntWeight<N> Weight;
   for (int a = -300; a <= 300; ++a) {
     Weight w = Weight::From(a);
-    TestIdentities(w);
+    festus::TestIdentities(w);
   }
 }
 

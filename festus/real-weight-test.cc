@@ -113,21 +113,21 @@ TEST(RealWeightTest, BasicWeights) {
 template <typename T>
 void TestRealIdentities() {
   typedef festus::RealWeightTpl<T> Weight;
-  TestIdentities(Weight::Zero());
-  TestIdentities(Weight::One());
-  TestIdentities(Weight());
-  TestIdentities(Weight(0));
-  TestIdentities(Weight(1));
-  TestIdentities(Weight(2));
-  TestIdentities(Weight(22 / 7.0f));
-  TestIdentities(Weight(-0.0f));
-  TestIdentities(Weight(-1));
-  TestIdentities(Weight(-2));
-  TestIdentities(Weight(-1e6f));
-  TestIdentities(Plus(Weight(43), Weight(9)));
-  TestIdentities(Minus(Weight(43), Weight(9)));
-  TestIdentities(Times(Weight(43), Weight(9)));
-  TestIdentities(Star(Weight(9)));
+  festus::TestIdentities(Weight::Zero());
+  festus::TestIdentities(Weight::One());
+  festus::TestIdentities(Weight());
+  festus::TestIdentities(Weight(0));
+  festus::TestIdentities(Weight(1));
+  festus::TestIdentities(Weight(2));
+  festus::TestIdentities(Weight(22 / 7.0f));
+  festus::TestIdentities(Weight(-0.0f));
+  festus::TestIdentities(Weight(-1));
+  festus::TestIdentities(Weight(-2));
+  festus::TestIdentities(Weight(-1e6f));
+  festus::TestIdentities(Plus(Weight(43), Weight(9)));
+  festus::TestIdentities(Minus(Weight(43), Weight(9)));
+  festus::TestIdentities(Times(Weight(43), Weight(9)));
+  festus::TestIdentities(Star(Weight(9)));
 }
 
 TEST(RealWeightTest, Identities) {

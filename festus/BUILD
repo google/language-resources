@@ -100,6 +100,26 @@ cc_test(
     ],
 )
 
+cc_library(
+    name = "quaternion-semiring",
+    hdrs = ["quaternion-semiring.h"],
+    deps = ["@openfst//:base"],
+)
+
+cc_test(
+    name = "quaternion-semiring-test",
+    timeout = "short",
+    srcs = ["quaternion-semiring-test.cc"],
+    deps = [
+        "@googletest//:gtest_main",
+        "@openfst//:weight",
+        ":quaternion-semiring",
+        ":real-weight",
+        ":weight",
+        ":weight-test-lib",
+    ],
+)
+
 cc_test(
     name = "star-test",
     timeout = "short",

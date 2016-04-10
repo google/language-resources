@@ -390,7 +390,7 @@ cc_test(
     timeout = "short",
     srcs = ["algebraic-path-test.cc"],
     deps = [
-        "@googletest//:gtest_main",
+        "@googletest//:gtest",
         "@openfst//:fst",
         ":algebraic-path",
         ":arc",

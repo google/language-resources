@@ -20,6 +20,9 @@
 
 #include "festus/algebraic-path.h"
 
+#include <cmath>
+
+#include <fst/compat.h>
 #include <fst/fstlib.h>
 #include <gtest/gtest.h>
 
@@ -30,6 +33,13 @@
 #include "festus/quaternion-semiring.h"
 #include "festus/real-weight.h"
 #include "festus/value-weight-static.h"
+
+DEFINE_double(delta, fst::kDelta,
+              "Convergence threshold for ShortestDistance");
+DEFINE_bool(modular_int, false,
+            "Try to compute ShortestDistance in modular int semiring");
+DEFINE_bool(quaternion, false,
+            "Try to compute ShortestDistance in quaternion semiring");
 
 namespace {
 
@@ -44,17 +54,23 @@ TEST(AlgebraicPathTest, Log) {
   const auto &semiring = SemiringForWeight::Instance();
   EXPECT_EQ(semiring.Zero(), Weight::Zero().Value());
 
+  constexpr float q = 1.0f / 32768.0f;
+
   fst::VectorFst<Arc> fst;
   auto s = fst.AddState();
   fst.SetStart(s);
-  fst.AddArc(s, Arc(0, 0, Weight(9.53674771e-07f), s));
-  fst.SetFinal(s, Weight(13.8629436f));
+  fst.AddArc(s, Arc(0, 0, -std::log1p(-q), s));
+  fst.SetFinal(s, -std::log(q));
 
   const auto total_value = festus::SumTotalValue(fst, &semiring);
-  EXPECT_NEAR(0, total_value, 1e-12);
+  EXPECT_NEAR(0, total_value, 1e-9);
 
   const Weight total_weight = festus::SumTotalWeight(fst);
   EXPECT_TRUE(ApproxEqual(Weight::One(), total_weight));
+
+  VLOG(0) << "sum total = " << total_weight;
+  VLOG(0) << "shortest distance computation will be slow and imprecise:";
+  VLOG(0) << "shortest distance = " << fst::ShortestDistance(fst, FLAGS_delta);
 }
 
 TEST(AlgebraicPathTest, LimitedMaxTimes) {
@@ -81,6 +97,10 @@ TEST(AlgebraicPathTest, LimitedMaxTimes) {
 
   const Weight total_weight = festus::SumTotalWeight(fst);
   EXPECT_EQ(Weight::From(2), total_weight);
+
+  VLOG(0) << "sum total = " << total_weight;
+  VLOG(0) << "shortest distance computation will be fast and wrong:";
+  VLOG(0) << "shortest distance =  " << fst::ShortestDistance(fst, FLAGS_delta);
 }
 
 TEST(AlgebraicPathTest, IntegersMod13) {
@@ -107,6 +127,13 @@ TEST(AlgebraicPathTest, IntegersMod13) {
 
   const Weight total_weight = festus::SumTotalWeight(fst);
   EXPECT_EQ(Weight::One(), total_weight);
+
+  VLOG(0) << "sum total = " << total_weight;
+  if (FLAGS_modular_int) {
+    VLOG(0) << "shortest distance computation will not terminate:";
+    VLOG(0) << "shortest distance = "
+            << fst::ShortestDistance(fst, FLAGS_delta);
+  }
 }
 
 TEST(AlgebraicPathTest, Quaternion) {
@@ -121,7 +148,7 @@ TEST(AlgebraicPathTest, Quaternion) {
   const auto &semiring = SemiringForWeight::Instance();
   EXPECT_EQ(semiring.Zero(), Weight::Zero().Value());
 
-  const Weight p = Weight::From(0.4f, -0.2f, -0.4f, 0.8f);
+  const Weight p = Weight::From(-0.5f, 0.5f, 0.5f, 0.5f);
   const Weight q = Minus(Weight::One(), p);
 
   fst::VectorFst<Arc> fst;
@@ -131,13 +158,26 @@ TEST(AlgebraicPathTest, Quaternion) {
   fst.SetFinal(s, q);
 
   const auto total_value = festus::SumTotalValue(fst, &semiring);
-  EXPECT_NEAR(1, total_value[0], 1e-6);
-  EXPECT_NEAR(0, total_value[1], 1e-6);
-  EXPECT_NEAR(0, total_value[2], 1e-6);
-  EXPECT_NEAR(0, total_value[3], 1e-6);
+  EXPECT_NEAR(1, total_value[0], 1e-7);
+  EXPECT_NEAR(0, total_value[1], 1e-7);
+  EXPECT_NEAR(0, total_value[2], 1e-7);
+  EXPECT_NEAR(0, total_value[3], 1e-7);
 
   const Weight total_weight = festus::SumTotalWeight(fst);
-  EXPECT_TRUE(ApproxEqual(Weight::One(), total_weight, 1e-6));
+  EXPECT_TRUE(ApproxEqual(Weight::One(), total_weight, 1e-7));
+
+  VLOG(0) << "sum total = " << total_weight;
+  if (FLAGS_quaternion) {
+    VLOG(0) << "shortest distance computation will not terminate:";
+    VLOG(0) << "shortest distance = "
+            << fst::ShortestDistance(fst, FLAGS_delta);
+  }
 }
 
 }  // namespace
+
+int main(int argc, char *argv[]) {
+  testing::InitGoogleTest(&argc, argv);
+  SET_FLAGS(argv[0], &argc, &argv, true);
+  return RUN_ALL_TESTS();
+}

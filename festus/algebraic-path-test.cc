@@ -57,32 +57,6 @@ TEST(AlgebraicPathTest, Log) {
   EXPECT_TRUE(ApproxEqual(Weight::One(), total_weight));
 }
 
-TEST(AlgebraicPathTest, IntegersMod13) {
-  // Note that this semiring is not k-closed.
-  typedef festus::IntegersMod<13> SemiringType;
-  typedef festus::ValueWeightStatic<SemiringType> Weight;
-  typedef festus::ValueArcTpl<Weight> Arc;
-
-  // Internal implementation detail:
-  typedef typename festus::internal::SemiringFor<Weight> SemiringForWeight;
-  EXPECT_EQ(1, SemiringForWeight::IsSpecialized());
-
-  const auto &semiring = SemiringForWeight::Instance();
-  EXPECT_EQ(semiring.Zero(), Weight::Zero().Value());
-
-  fst::VectorFst<Arc> fst;
-  auto s = fst.AddState();
-  fst.SetStart(s);
-  fst.AddArc(s, Arc(0, 0, Weight::From(3), s));
-  fst.SetFinal(s, Weight::From(11));
-
-  const auto total_value = festus::SumTotalValue(fst, &semiring);
-  EXPECT_EQ(1, total_value);
-
-  const Weight total_weight = festus::SumTotalWeight(fst);
-  EXPECT_EQ(Weight::One(), total_weight);
-}
-
 TEST(AlgebraicPathTest, LimitedMaxTimes) {
   // Note that this semiring is not k-closed.
   typedef festus::LimitedMaxTimesSemiring<int8, 3, 2> SemiringType;
@@ -107,6 +81,32 @@ TEST(AlgebraicPathTest, LimitedMaxTimes) {
 
   const Weight total_weight = festus::SumTotalWeight(fst);
   EXPECT_EQ(Weight::From(2), total_weight);
+}
+
+TEST(AlgebraicPathTest, IntegersMod13) {
+  // Note that this semiring is not k-closed.
+  typedef festus::IntegersMod<13> SemiringType;
+  typedef festus::ValueWeightStatic<SemiringType> Weight;
+  typedef festus::ValueArcTpl<Weight> Arc;
+
+  // Internal implementation detail:
+  typedef typename festus::internal::SemiringFor<Weight> SemiringForWeight;
+  EXPECT_EQ(1, SemiringForWeight::IsSpecialized());
+
+  const auto &semiring = SemiringForWeight::Instance();
+  EXPECT_EQ(semiring.Zero(), Weight::Zero().Value());
+
+  fst::VectorFst<Arc> fst;
+  auto s = fst.AddState();
+  fst.SetStart(s);
+  fst.AddArc(s, Arc(0, 0, Weight::From(3), s));
+  fst.SetFinal(s, Weight::From(11));
+
+  const auto total_value = festus::SumTotalValue(fst, &semiring);
+  EXPECT_EQ(1, total_value);
+
+  const Weight total_weight = festus::SumTotalWeight(fst);
+  EXPECT_EQ(Weight::One(), total_weight);
 }
 
 TEST(AlgebraicPathTest, Quaternion) {

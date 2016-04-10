@@ -27,6 +27,8 @@
 #include "festus/float-weight-star.h"
 #include "festus/max-times-semiring.h"
 #include "festus/modular-int-semiring.h"
+#include "festus/quaternion-semiring.h"
+#include "festus/real-weight.h"
 #include "festus/value-weight-static.h"
 
 namespace {
@@ -105,6 +107,37 @@ TEST(AlgebraicPathTest, LimitedMaxTimes) {
 
   const Weight total_weight = festus::SumTotalWeight(fst);
   EXPECT_EQ(Weight::From(2), total_weight);
+}
+
+TEST(AlgebraicPathTest, Quaternion) {
+  // Note that this semiring is not k-closed.
+  typedef festus::QuaternionWeightTpl<festus::RealSemiring<float>> Weight;
+  typedef festus::ValueArcTpl<Weight> Arc;
+
+  // Internal implementation detail:
+  typedef typename festus::internal::SemiringFor<Weight> SemiringForWeight;
+  EXPECT_EQ(1, SemiringForWeight::IsSpecialized());
+
+  const auto &semiring = SemiringForWeight::Instance();
+  EXPECT_EQ(semiring.Zero(), Weight::Zero().Value());
+
+  const Weight p = Weight::From(0.4f, -0.2f, -0.4f, 0.8f);
+  const Weight q = Minus(Weight::One(), p);
+
+  fst::VectorFst<Arc> fst;
+  auto s = fst.AddState();
+  fst.SetStart(s);
+  fst.AddArc(s, Arc(0, 0, p, s));
+  fst.SetFinal(s, q);
+
+  const auto total_value = festus::SumTotalValue(fst, &semiring);
+  EXPECT_NEAR(1, total_value[0], 1e-6);
+  EXPECT_NEAR(0, total_value[1], 1e-6);
+  EXPECT_NEAR(0, total_value[2], 1e-6);
+  EXPECT_NEAR(0, total_value[3], 1e-6);
+
+  const Weight total_weight = festus::SumTotalWeight(fst);
+  EXPECT_TRUE(ApproxEqual(Weight::One(), total_weight, 1e-6));
 }
 
 }  // namespace

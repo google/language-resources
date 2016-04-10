@@ -397,6 +397,8 @@ cc_test(
         ":float-weight-star",
         ":max-times-semiring",
         ":modular-int-semiring",
+        ":quaternion-semiring",
+        ":real-weight",
         ":weight",
     ],
 )

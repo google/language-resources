@@ -107,6 +107,82 @@ void MatrixKleenePlus(M *matrix, S *sr) {
   }
 }
 
+// Adapter that presents an OpenFst weight class as a semiring class.
+// Has just enough definitions to instantiate MatrixKleenePlus.
+template <class W>
+struct SemiringForValueWeight {
+  typedef W Weight;
+  typedef typename std::decay<decltype(W::Zero().Value())>::type ValueType;
+
+  static constexpr bool Member(ValueType x) { return Weight(x).Member(); }
+
+  static constexpr bool NotZero(ValueType x) {
+    return Weight(x) != Weight::Zero();
+  }
+
+  static constexpr ValueType Zero() { return Weight::Zero().Value(); }
+
+  static constexpr ValueType OpPlus(ValueType x, ValueType y) {
+    return Plus(Weight(x), Weight(y)).Value();
+  }
+
+  static constexpr ValueType OpTimes(ValueType x, ValueType y) {
+    return Times(Weight(x), Weight(y)).Value();
+  }
+
+  static constexpr ValueType OpStar(ValueType x) {
+    return Star(Weight(x)).Value();
+  }
+};
+
+// TMP helper template and specializations for retrieving a semiring
+// instance for the given weight W.
+//
+// If class W has a static member function W::Semiring() (which is the
+// case for W = ValueWeightSingleton<...>), then
+// SemiringFor<W>::Instance() dispatches to W::Semiring().
+//
+// Otherwise, if class W contains the typename SemiringType (which is
+// the case for W = ValueWeightStatic<...>), then
+// SemiringFor<W>::Instance() returns an object of type W::SemiringType.
+//
+// In all other cases SemiringFor<W>::Instance() returns an object of
+// type SemiringForValueWeight<W>.
+//
+// Intended usage:
+//
+//   const auto &semiring = SemiringFor<W>::Instance();
+//
+template <class W, class HasSemiringType = void, class HasInstanceFunc = void>
+struct SemiringFor {
+  typedef SemiringForValueWeight<W> Type;
+  static constexpr Type Instance() { return Type(); }
+  static constexpr int IsSpecialized() { return 0; }
+};
+
+template <typename T> struct Void { typedef void type; };
+
+template <class W, class HasInstanceFunc>
+struct SemiringFor<W,
+                   typename Void<typename W::SemiringType>::type,
+                   HasInstanceFunc> {
+  typedef typename W::SemiringType Type;
+  static Type Instance() {
+    typename W::SemiringType result;
+    return result;
+  }
+  static constexpr int IsSpecialized() { return 1; }
+};
+
+template <class W>
+struct SemiringFor<W,
+                   typename Void<typename W::SemiringType>::type,
+                   typename Void<decltype(W::Semiring())>::type> {
+  typedef typename W::SemiringType Type;
+  static constexpr const Type &Instance() { return W::Semiring(); }
+  static constexpr int IsSpecialized() { return 2; }
+};
+
 }  // namespace internal
 
 // Returns the algebraic sum total value (in the given semiring) of all paths.
@@ -138,54 +214,14 @@ typename S::ValueType SumTotalValue(const F &fst, S *semiring) {
   return matrix[start].back();
 }
 
-// Just enough semiring operations for MatrixKleenePlus.
-template <class W>
-struct SemiringForValueWeight {
-  typedef W Weight;
-  typedef typename std::decay<decltype(W::Zero().Value())>::type ValueType;
-
-  static constexpr bool Member(ValueType x) { return Weight(x).Member(); }
-
-  static constexpr bool NotZero(ValueType x) {
-    return Weight(x) != Weight::Zero();
-  }
-
-  static constexpr ValueType Zero() { return Weight::Zero().Value(); }
-
-  static constexpr ValueType OpPlus(ValueType x, ValueType y) {
-    return Plus(Weight(x), Weight(y)).Value();
-  }
-
-  static constexpr ValueType OpTimes(ValueType x, ValueType y) {
-    return Times(Weight(x), Weight(y)).Value();
-  }
-
-  static constexpr ValueType OpStar(ValueType x) {
-    return Star(Weight(x)).Value();
-  }
-};
-
-template <class W, class V = void>
-struct SemiringFor {
-  typedef SemiringForValueWeight<W> Type;
-  static constexpr bool IsSpecialized() { return false; }
-};
-
-template <typename T> struct Void { typedef void type; };
-
-template <class W>
-struct SemiringFor<W, typename Void<typename W::SemiringType>::type> {
-  typedef typename W::SemiringType Type;
-  static constexpr bool IsSpecialized() { return true; }
-};
-
 template <class F>
 typename F::Weight SumTotalWeight(const F &fst) {
-  typedef SemiringFor<typename F::Weight> Semiring;
+  typedef internal::SemiringFor<typename F::Weight> SemiringForWeight;
   VLOG(1) << "festus::SumTotalWeight() uses "
-          << (Semiring::IsSpecialized() ? "semiring from weight facade"
+          << (SemiringForWeight::IsSpecialized()
+              ? "semiring from weight facade"
               : "SemiringForValueWeight adapter");
-  constexpr typename Semiring::Type semiring;
+  const auto &semiring = SemiringForWeight::Instance();
   return SumTotalValue(fst, &semiring);
 }
 

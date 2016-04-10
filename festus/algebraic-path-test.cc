@@ -36,9 +36,12 @@ TEST(AlgebraicPathTest, IntegersMod13) {
   typedef festus::IntegersMod<13> SemiringType;
   typedef festus::ValueWeightStatic<SemiringType> Weight;
   typedef festus::ValueArcTpl<Weight> Arc;
-  EXPECT_TRUE(festus::SemiringFor<Weight>::IsSpecialized());
 
-  constexpr SemiringType semiring;
+  // Internal implementation detail:
+  typedef typename festus::internal::SemiringFor<Weight> SemiringForWeight;
+  EXPECT_EQ(1, SemiringForWeight::IsSpecialized());
+
+  const auto &semiring = SemiringForWeight::Instance();
   EXPECT_EQ(semiring.Zero(), Weight::Zero().Value());
 
   fst::VectorFst<Arc> fst;
@@ -54,15 +57,17 @@ TEST(AlgebraicPathTest, IntegersMod13) {
   EXPECT_EQ(Weight::One(), total_weight);
 }
 
-#if 1
 TEST(AlgebraicPathTest, LimitedMaxTimes) {
   // Note that this semiring is not k-closed.
   typedef festus::LimitedMaxTimesSemiring<int8, 3, 2> SemiringType;
   typedef festus::ValueWeightStatic<SemiringType> Weight;
   typedef festus::ValueArcTpl<Weight> Arc;
-  EXPECT_TRUE(festus::SemiringFor<Weight>::IsSpecialized());
 
-  constexpr SemiringType semiring;
+  // Internal implementation detail:
+  typedef typename festus::internal::SemiringFor<Weight> SemiringForWeight;
+  EXPECT_EQ(1, SemiringForWeight::IsSpecialized());
+
+  const auto &semiring = SemiringForWeight::Instance();
   EXPECT_EQ(semiring.Zero(), Weight::Zero().Value());
 
   fst::VectorFst<Arc> fst;
@@ -75,17 +80,18 @@ TEST(AlgebraicPathTest, LimitedMaxTimes) {
   EXPECT_EQ(2, total_value);
 
   const Weight total_weight = festus::SumTotalWeight(fst);
-  EXPECT_EQ(Weight::From(2), total_weight.Value());
+  EXPECT_EQ(Weight::From(2), total_weight);
 }
-#endif
 
 TEST(AlgebraicPathTest, Log) {
   typedef fst::LogArc Arc;
   typedef Arc::Weight Weight;
-  typedef typename festus::SemiringFor<Weight>::Type SemiringType;
-  EXPECT_FALSE(festus::SemiringFor<Weight>::IsSpecialized());
 
-  constexpr SemiringType semiring;
+  // Internal implementation detail:
+  typedef typename festus::internal::SemiringFor<Weight> SemiringForWeight;
+  EXPECT_EQ(0, SemiringForWeight::IsSpecialized());
+
+  const auto &semiring = SemiringForWeight::Instance();
   EXPECT_EQ(semiring.Zero(), Weight::Zero().Value());
 
   fst::VectorFst<Arc> fst;

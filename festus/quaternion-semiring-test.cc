@@ -26,25 +26,11 @@
 #include <gtest/gtest.h>
 
 #include "festus/real-weight.h"
-#include "festus/value-weight-singleton.h"
 #include "festus/weight-test-lib.h"
 
 namespace {
 
-typedef festus::RealSemiring<float> R;
-typedef festus::QuaternionSemiring<R> H;
-
-struct RealQuaternionInstance {
-  static constexpr R kReals{};
-  static constexpr H kQuaternions{&kReals};
-
-  static constexpr const H &Instance() { return kQuaternions; }
-};
-
-constexpr R RealQuaternionInstance::kReals;
-constexpr H RealQuaternionInstance::kQuaternions;
-
-typedef festus::ValueWeightSingleton<H, RealQuaternionInstance>
+typedef festus::QuaternionWeightTpl<festus::RealSemiring<float>>
 QuaternionWeight;
 
 TEST(QuaternionSemiringTest, TypeTraits) {
@@ -89,11 +75,11 @@ TEST(QuaternionSemiringTest, Identities) {
   const auto y = QuaternionWeight::From(-2, 0, 4, -4);
   festus::TestIdentities(x);
   festus::TestIdentities(y);
-  EXPECT_EQ( 9, QuaternionWeight::Semiring().Norm2(x.Value()));
-  EXPECT_EQ(36, QuaternionWeight::Semiring().Norm2(y.Value()));
+  EXPECT_EQ( 9, QuaternionWeight::SemiringType::Norm2(x.Value()));
+  EXPECT_EQ(36, QuaternionWeight::SemiringType::Norm2(y.Value()));
 
   const auto x_reciprocal = QuaternionWeight(
-      QuaternionWeight::Semiring().Reciprocal(x.Value()));
+      QuaternionWeight::SemiringType::Reciprocal(x.Value()));
   festus::TestIdentities(x_reciprocal);
   EXPECT_TRUE(ApproxEqual(Times(x, x_reciprocal), one, 1e-12));
   EXPECT_TRUE(ApproxEqual(Times(x_reciprocal, x), one, 1e-12));

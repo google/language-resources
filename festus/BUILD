@@ -103,7 +103,10 @@ cc_test(
 cc_library(
     name = "quaternion-semiring",
     hdrs = ["quaternion-semiring.h"],
-    deps = ["@openfst//:base"],
+    deps = [
+        "@openfst//:base",
+        ":weight",
+    ],
 )
 
 cc_test(
@@ -115,7 +118,6 @@ cc_test(
         "@openfst//:weight",
         ":quaternion-semiring",
         ":real-weight",
-        ":weight",
         ":weight-test-lib",
     ],
 )

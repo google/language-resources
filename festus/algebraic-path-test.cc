@@ -31,6 +31,30 @@
 
 namespace {
 
+TEST(AlgebraicPathTest, Log) {
+  typedef fst::LogArc Arc;
+  typedef Arc::Weight Weight;
+
+  // Internal implementation detail:
+  typedef typename festus::internal::SemiringFor<Weight> SemiringForWeight;
+  EXPECT_EQ(0, SemiringForWeight::IsSpecialized());
+
+  const auto &semiring = SemiringForWeight::Instance();
+  EXPECT_EQ(semiring.Zero(), Weight::Zero().Value());
+
+  fst::VectorFst<Arc> fst;
+  auto s = fst.AddState();
+  fst.SetStart(s);
+  fst.AddArc(s, Arc(0, 0, Weight(9.53674771e-07f), s));
+  fst.SetFinal(s, Weight(13.8629436f));
+
+  const auto total_value = festus::SumTotalValue(fst, &semiring);
+  EXPECT_NEAR(0, total_value, 1e-12);
+
+  const Weight total_weight = festus::SumTotalWeight(fst);
+  EXPECT_TRUE(ApproxEqual(Weight::One(), total_weight));
+}
+
 TEST(AlgebraicPathTest, IntegersMod13) {
   // Note that this semiring is not k-closed.
   typedef festus::IntegersMod<13> SemiringType;
@@ -81,30 +105,6 @@ TEST(AlgebraicPathTest, LimitedMaxTimes) {
 
   const Weight total_weight = festus::SumTotalWeight(fst);
   EXPECT_EQ(Weight::From(2), total_weight);
-}
-
-TEST(AlgebraicPathTest, Log) {
-  typedef fst::LogArc Arc;
-  typedef Arc::Weight Weight;
-
-  // Internal implementation detail:
-  typedef typename festus::internal::SemiringFor<Weight> SemiringForWeight;
-  EXPECT_EQ(0, SemiringForWeight::IsSpecialized());
-
-  const auto &semiring = SemiringForWeight::Instance();
-  EXPECT_EQ(semiring.Zero(), Weight::Zero().Value());
-
-  fst::VectorFst<Arc> fst;
-  auto s = fst.AddState();
-  fst.SetStart(s);
-  fst.AddArc(s, Arc(0, 0, Weight(9.53674771e-07f), s));
-  fst.SetFinal(s, Weight(13.8629436f));
-
-  const auto total_value = festus::SumTotalValue(fst, &semiring);
-  EXPECT_NEAR(0, total_value, 1e-12);
-
-  const Weight total_weight = festus::SumTotalWeight(fst);
-  EXPECT_TRUE(ApproxEqual(Weight::One(), total_weight));
 }
 
 }  // namespace

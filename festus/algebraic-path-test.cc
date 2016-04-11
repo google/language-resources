@@ -43,34 +43,61 @@ DEFINE_bool(quaternion, false,
 
 namespace {
 
+template <class Arc>
+void TestOneStateLoop(
+    typename Arc::Weight loop_weight,
+    typename Arc::Weight final_weight,
+    typename Arc::Weight expected_sum_total,
+    float comparison_delta,
+    int power_series_terms,
+    bool use_shortest_distance,
+    const char *msg) {
+  typedef typename Arc::Weight Weight;
+
+  // One-state FST with a loop at its only (initial and final) state.
+  fst::VectorFst<Arc> fst;
+  const auto state = fst.AddState();
+  fst.SetStart(state);
+  fst.AddArc(state, Arc(0, 0, loop_weight, state));
+  fst.SetFinal(state, final_weight);
+
+  const Weight sum_total = festus::SumTotalWeight(fst);
+  EXPECT_TRUE(ApproxEqual(sum_total, expected_sum_total, comparison_delta));
+
+  VLOG(0) << "sum total = " << sum_total << " ~= " << expected_sum_total;
+
+  if (power_series_terms) {
+    Weight power = Weight::One();
+    Weight series = Weight::One();
+    VLOG(0) << "\\sum_{n=0}^0 loop_weight^n = " << series;
+    VLOG(0) << "  sum x final = " << Times(series, final_weight);
+    for (int n = 1; n <= power_series_terms; ++n) {
+      power = Times(power, loop_weight);
+      series = Plus(series, power);
+      VLOG(0) << "\\sum_{n=0}^" << n << " loop_weight^n = " << series;
+      VLOG(0) << "  sum x final = " << Times(series, final_weight);
+    }
+  }
+
+  if (use_shortest_distance) {
+    VLOG(0) << msg;
+    VLOG(0) << "shortest distance = "
+            << fst::ShortestDistance(fst, FLAGS_delta);
+  }
+}
+
 TEST(AlgebraicPathTest, Log) {
   typedef fst::LogArc Arc;
   typedef Arc::Weight Weight;
 
-  // Internal implementation detail:
-  typedef typename festus::internal::SemiringFor<Weight> SemiringForWeight;
-  EXPECT_EQ(0, SemiringForWeight::IsSpecialized());
-
-  const auto &semiring = SemiringForWeight::Instance();
-  EXPECT_EQ(semiring.Zero(), Weight::Zero().Value());
-
   constexpr float q = 1.0f / 32768.0f;
 
-  fst::VectorFst<Arc> fst;
-  auto s = fst.AddState();
-  fst.SetStart(s);
-  fst.AddArc(s, Arc(0, 0, -std::log1p(-q), s));
-  fst.SetFinal(s, -std::log(q));
+  TestOneStateLoop<Arc>(
+      Weight(-std::log1p(-q)), Weight(-std::log(q)), Weight::One(), 1e-9, 9,
+      true, "shortest distance computation will be slow and imprecise");
 
-  const auto total_value = festus::SumTotalValue(fst, &semiring);
-  EXPECT_NEAR(0, total_value, 1e-9);
-
-  const Weight total_weight = festus::SumTotalWeight(fst);
-  EXPECT_TRUE(ApproxEqual(Weight::One(), total_weight));
-
-  VLOG(0) << "sum total = " << total_weight;
-  VLOG(0) << "shortest distance computation will be slow and imprecise:";
-  VLOG(0) << "shortest distance = " << fst::ShortestDistance(fst, FLAGS_delta);
+  // Internal implementation detail:
+  EXPECT_EQ(0, festus::internal::SemiringFor<Weight>::IsSpecialized());
 }
 
 TEST(AlgebraicPathTest, LimitedMaxTimes) {
@@ -79,28 +106,12 @@ TEST(AlgebraicPathTest, LimitedMaxTimes) {
   typedef festus::ValueWeightStatic<SemiringType> Weight;
   typedef festus::ValueArcTpl<Weight> Arc;
 
+  TestOneStateLoop<Arc>(
+      Weight::From(1), Weight::From(1), Weight::From(2), 1e-30, 3,
+      true, "shortest distance computation will be fast and different");
+
   // Internal implementation detail:
-  typedef typename festus::internal::SemiringFor<Weight> SemiringForWeight;
-  EXPECT_EQ(1, SemiringForWeight::IsSpecialized());
-
-  const auto &semiring = SemiringForWeight::Instance();
-  EXPECT_EQ(semiring.Zero(), Weight::Zero().Value());
-
-  fst::VectorFst<Arc> fst;
-  auto s = fst.AddState();
-  fst.SetStart(s);
-  fst.AddArc(s, Arc(0, 0, Weight::From(1), s));
-  fst.SetFinal(s, Weight::From(1));
-
-  const auto total_value = festus::SumTotalValue(fst, &semiring);
-  EXPECT_EQ(2, total_value);
-
-  const Weight total_weight = festus::SumTotalWeight(fst);
-  EXPECT_EQ(Weight::From(2), total_weight);
-
-  VLOG(0) << "sum total = " << total_weight;
-  VLOG(0) << "shortest distance computation will be fast and wrong:";
-  VLOG(0) << "shortest distance =  " << fst::ShortestDistance(fst, FLAGS_delta);
+  EXPECT_EQ(1, festus::internal::SemiringFor<Weight>::IsSpecialized());
 }
 
 TEST(AlgebraicPathTest, IntegersMod13) {
@@ -109,31 +120,12 @@ TEST(AlgebraicPathTest, IntegersMod13) {
   typedef festus::ValueWeightStatic<SemiringType> Weight;
   typedef festus::ValueArcTpl<Weight> Arc;
 
+  TestOneStateLoop<Arc>(
+      Weight::From(3), Weight::From(11), Weight::One(), 1e-30, 5,
+      FLAGS_modular_int, "shortest distance computation will not terminate");
+
   // Internal implementation detail:
-  typedef typename festus::internal::SemiringFor<Weight> SemiringForWeight;
-  EXPECT_EQ(1, SemiringForWeight::IsSpecialized());
-
-  const auto &semiring = SemiringForWeight::Instance();
-  EXPECT_EQ(semiring.Zero(), Weight::Zero().Value());
-
-  fst::VectorFst<Arc> fst;
-  auto s = fst.AddState();
-  fst.SetStart(s);
-  fst.AddArc(s, Arc(0, 0, Weight::From(3), s));
-  fst.SetFinal(s, Weight::From(11));
-
-  const auto total_value = festus::SumTotalValue(fst, &semiring);
-  EXPECT_EQ(1, total_value);
-
-  const Weight total_weight = festus::SumTotalWeight(fst);
-  EXPECT_EQ(Weight::One(), total_weight);
-
-  VLOG(0) << "sum total = " << total_weight;
-  if (FLAGS_modular_int) {
-    VLOG(0) << "shortest distance computation will not terminate:";
-    VLOG(0) << "shortest distance = "
-            << fst::ShortestDistance(fst, FLAGS_delta);
-  }
+  EXPECT_EQ(1, festus::internal::SemiringFor<Weight>::IsSpecialized());
 }
 
 TEST(AlgebraicPathTest, Quaternion) {
@@ -141,37 +133,15 @@ TEST(AlgebraicPathTest, Quaternion) {
   typedef festus::QuaternionWeightTpl<festus::RealSemiring<float>> Weight;
   typedef festus::ValueArcTpl<Weight> Arc;
 
-  // Internal implementation detail:
-  typedef typename festus::internal::SemiringFor<Weight> SemiringForWeight;
-  EXPECT_EQ(1, SemiringForWeight::IsSpecialized());
-
-  const auto &semiring = SemiringForWeight::Instance();
-  EXPECT_EQ(semiring.Zero(), Weight::Zero().Value());
-
   const Weight p = Weight::From(-0.5f, 0.5f, 0.5f, 0.5f);
   const Weight q = Minus(Weight::One(), p);
 
-  fst::VectorFst<Arc> fst;
-  auto s = fst.AddState();
-  fst.SetStart(s);
-  fst.AddArc(s, Arc(0, 0, p, s));
-  fst.SetFinal(s, q);
+  TestOneStateLoop<Arc>(
+      p, q, Weight::One(), 1e-9, 5,
+      FLAGS_quaternion, "shortest distance computation will not terminate");
 
-  const auto total_value = festus::SumTotalValue(fst, &semiring);
-  EXPECT_NEAR(1, total_value[0], 1e-7);
-  EXPECT_NEAR(0, total_value[1], 1e-7);
-  EXPECT_NEAR(0, total_value[2], 1e-7);
-  EXPECT_NEAR(0, total_value[3], 1e-7);
-
-  const Weight total_weight = festus::SumTotalWeight(fst);
-  EXPECT_TRUE(ApproxEqual(Weight::One(), total_weight, 1e-7));
-
-  VLOG(0) << "sum total = " << total_weight;
-  if (FLAGS_quaternion) {
-    VLOG(0) << "shortest distance computation will not terminate:";
-    VLOG(0) << "shortest distance = "
-            << fst::ShortestDistance(fst, FLAGS_delta);
-  }
+  // Internal implementation detail:
+  EXPECT_EQ(1, festus::internal::SemiringFor<Weight>::IsSpecialized());
 }
 
 }  // namespace

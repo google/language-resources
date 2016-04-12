@@ -17,6 +17,64 @@
 //
 // \file
 // Unit test for algebraic path computation.
+//
+// This also illustrates the different behaviors of fst::ShortestDistance(fst)
+// vs. festus::SumTotalWeight(fst):
+//
+// * ShortestDistance() requires, but cannot check, that the weight semiring
+//   is (approximately) k-closed. It uses this assumption to compute an
+//   implicitly defined Star() closure of the semiring by expanding out a
+//   power series until (approximate) convergence.
+//
+// * SumTotalWeight() requires that a Star() operation has been explicitly
+//   defined which satisfies the Star axiom. It makes no assumptions about
+//   Star() being equivalent to a convergent power series.
+//
+// The behavior of these two functions differs in at least the following
+// situations:
+//
+// * The power series for all observed cycles converge; the limit of a
+//   convergent power series is also provided by the corresponding Star()
+//   operation. This means that, for all practical purposes and with only minor
+//   hand-waving, the semiring is approximately k-closed. This is the case,
+//   inter alia, for the log semiring and graphs/FSTs without negative weight
+//   cycles, i.e. all real weights fall into [0;1), so the geometric power
+//   series converges.
+//
+//   In this situation SumTotalWeight() and ShortestDistance() will eventually
+//   give approximately the same answer. However, there are differences in
+//   terms of speed and quality.
+//
+//   SumTotalWeight() will give a generally more precise answer in terms of
+//   Star(), which is quick to compute by itself, but uses an algorithm with
+//   worst-case cubic running time in the number of state/vertices
+//   (TODO: cubic in the size of the largest strongly connected component).
+//
+//   ShortestDistance() will give an answer in terms of the limit of a
+//   convergent power series, but in order to do so it has to expand out the
+//   terms of the power series one-by-one (without acceleration) until
+//   approximate convergence. For high-probability cycles (whose real
+//   probabilities are close to 1), convergence can be slow. The quality of the
+//   answer also depends on the configured convergence threshold.
+//
+// * A cycle weight can be computed via a convergent power series, but its
+//   limit differs from the result of the defined Star() operation. This is
+//   the case for the particular instance of LimitedMaxTimesSemiring below,
+//   where 2 == Star(1) != max(1^0, 1^1, 1^2, 1^3, ...) == 1.
+//
+//   In this situation SumTotalWeight() will give an answer in terms of Star(),
+//   and ShortestDistance() will give a different answer in terms of the limit
+//   of the convergent power series.
+//
+// * The power series for a cycle weight diverges, but the corresponding Star()
+//   value is well-defined. This is the case, inter alia, for the finite field
+//   of integers modulo a prime, and for the division ring of quaternions. In
+//   all division rings (and hence all fields), whenever Star(x) is defined, it
+//   must be defined as Star(x) := (1 - x)^{-1}; and in all rings, Star(x) must
+//   be undefined when 1 - x == 0.
+//
+//   In this situation SumTotalWeight() will give an answer in terms of Star(),
+//   and ShortestDistance() will not terminate.
 
 #include "festus/algebraic-path.h"
 

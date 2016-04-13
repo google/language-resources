@@ -1,6 +1,6 @@
-#! /usr/bin/env python
+#! /usr/bin/python2
 #
-# Copyright 2008 Google Inc. All Rights Reserved.
+# Copyright 2008, 2009, 2016 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,14 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Compare predicted pronunciations against a golden pronunciation
-lexicon and report several evaluation metrics.
+"""Compares predicted pronunciations against a golden pronunciation lexicon.
+
+Reports several evaluation metrics, including Phoneme Error Rate and
+Mean Reciprocal Rank.
+
 """
 
 __author__ = 'mjansche@google.com (Martin Jansche)'
 
 import codecs
 import math
+import optparse
 import sys
 
 import edist
@@ -36,16 +40,26 @@ _INF = 1e300 * 1e300
 _NAN = _INF - _INF
 
 
-class FLAGS:
+class FLAGS(object):
   output_edit_stats = False
   output_word_stats = False
   output_summary_stats = True
-  predicted_oracle_type = "best"
+  predicted_oracle_type = 'best'
 
 
 def fdiv(x, y):
-  """By default, Python turns SIGFPE into an exception on floating
-  point division-by-zero.  Work around it.
+  """Floating point division without exceptions.
+
+  By default, Python turns SIGFPE into an exception on floating point
+  division-by-zero. Work around it.
+
+  Args:
+      x: dividend
+      y: divisor
+
+  Returns:
+      x / y as close as possible to IEEE floating point semantics
+
   """
   if x != x or y != y:
     return _NAN
@@ -57,42 +71,50 @@ def fdiv(x, y):
     else:
       return -_INF
   else:
-    return x * 1.0 / y
+    return (x * 1.0) / y
 
 
 def ReadLexicon(reader):
-  """Reads a pronunciation lexicon from 'reader'.  The lexicon file
-  format is line-oriented, where each line is of the form
+  """Reads a pronunciation lexicon from 'reader'.
+
+  The lexicon file format is line-oriented, where each line is of the form
 
     word TAB pronunciation [TAB cost [TAB field]...]
 
   and pronunciations are space-separated.  The third column gives an
   optional rank or cost (lower is better) that is used when multiple
   pronunciations per word are provided.
+
+  Args:
+      reader: source of the lexicon
+
+  Returns:
+      lexicon read
+
   """
   d = {}
   for line in reader:
     line = line.rstrip('\r\n')
     fields = line.split('\t')
     if len(fields) < 2:
-      _stderr.write("Warning: Ignoring line with less than two "
-                    + "tab-separated fields: %s\n" % line)
+      _stderr.write('Warning: Ignoring line with less than two '
+                    + 'tab-separated fields: %s\n' % line)
       continue
     word = fields[0]
     pron = fields[1].strip()
     if pron != fields[1]:
-      _stderr.write("Info: Removed outer whitespace around pronunciation "
-                    + "'%s' on line: %s\n" % (pron, line))
-    if "  " in pron:
-      _stderr.write("Warning: Two adjacent spaces found in pronunciation "
-                    + "'%s' on line: %s\n" % (pron, line))
+      _stderr.write('Info: Removed outer whitespace around pronunciation '
+                    + '"%s" on line: %s\n' % (pron, line))
+    if '  ' in pron:
+      _stderr.write('Warning: Two adjacent spaces found in pronunciation '
+                    + '"%s" on line: %s\n' % (pron, line))
     pron = tuple(pron.split(' '))
     if len(fields) >= 3:
       try:
         cost = float(fields[2])
         other = tuple(fields[3:])
-      except:
-        _stderr.write("Warning: Ignoring line with ill-formed cost '%s': %s\n"
+      except ValueError:
+        _stderr.write('Warning: Ignoring line with ill-formed cost "%s": %s\n'
                       % (fields[2], line))
         continue
     else:
@@ -106,11 +128,11 @@ def ReadLexicon(reader):
           if cost > max_cost:
             max_cost = cost
         cost = max_cost + 1
-        _stderr.write(("Info: Multiple pronunciations for word '%s' found,"
-                       + " but cost was not specified for '%s'; using %g\n")
+        _stderr.write(('Info: Multiple pronunciations for word "%s" found,'
+                       ' but cost was not specified for "%s"; using %g\n')
                       % (word, fields[1], cost))
       else:
-        _stderr.write("Info: No cost specified, using 0: %s\n" % line)
+        _stderr.write('Info: No cost specified, using 0: %s\n' % line)
         cost = 0
     if word in d:
       d[word].append((pron, cost, other))
@@ -122,7 +144,7 @@ def ReadLexicon(reader):
   return d
 
 
-class Stats:
+class Stats(object):
   def __init__(self):
     self.not_found = 0
     self.words_total = 0
@@ -144,6 +166,13 @@ def CompareLexica(golden_lex, predicted_lex, writer,
   reference dictionary.  Outputs statistics to 'writer' in
   tab-separated value format with headers, to facility further
   analysis with R.
+
+  Args:
+      golden_lex: golden lexicon to compare against
+      predicted_lex: lexicon containing predicted pronunciations
+      writer: writer to which output will be sent
+      golden_cutoff: only consider top n golden pronunciations
+      predicted_cutoff: only consider top n predicted pronunciations
   """
   stats = Stats()
   for word, prons in predicted_lex.iteritems():
@@ -154,7 +183,7 @@ def CompareLexica(golden_lex, predicted_lex, writer,
     else:
       stats.words_total += 1
 
-    assert len(prons) >=1
+    assert prons
     stats.prons += len(prons)
 
     assert len(golden_lex[word]) >= 1
@@ -177,31 +206,31 @@ def CompareLexica(golden_lex, predicted_lex, writer,
       assert inner_argmin is not None
       if FLAGS.output_word_stats:
         # Output phone error per predicted pronunciation.
-        writer.write("#PRON_PhE\t%s\t%s\t%s\t%f\t%s\n" %
+        writer.write('#PRON_PhE\t%s\t%s\t%s\t%f\t%s\n' %
                      (word,
                       ' '.join(inner_argmin[0][0]),
                       ' '.join(predicted_pron),
                       inner_valmin,
                       '\t'.join(predicted[2])))
       argvals.append((inner_argmin, inner_valmin))
-    assert argvals != []
+    assert argvals
     argvals.sort(lambda x, y: cmp(x[1], y[1]))  # Sort by increasing values.
     # Outer oracle: Find the best/etc. among the predicted pronunciations.
-    if FLAGS.predicted_oracle_type == "best":
+    if FLAGS.predicted_oracle_type == 'best':
       index = 0
-    elif FLAGS.predicted_oracle_type == "worst":
+    elif FLAGS.predicted_oracle_type == 'worst':
       index = -1
-    elif FLAGS.predicted_oracle_type == "median":
+    elif FLAGS.predicted_oracle_type == 'median':
       index = len(argvals) >> 1
     else:
-      assert False, "This cannot happen."
+      assert False, 'This cannot happen.'
     ((golden, predicted, ed), pherr) = argvals[index]
     golden_pron = golden[0]
     edits = ed.Valmin()
     assert fdiv(edits, len(golden_pron)) == pherr
     if FLAGS.output_word_stats:
       # Output phone error per word.
-      writer.write("#WORD_PhE\t%s\t%s\t%s\t%f\t%s\n" %
+      writer.write('#WORD_PhE\t%s\t%s\t%s\t%f\t%s\n' %
                    (word,
                     ' '.join(golden_pron),
                     ' '.join(predicted[0]),
@@ -216,7 +245,7 @@ def CompareLexica(golden_lex, predicted_lex, writer,
     if pherr > stats.max_phone_error:
       stats.max_phone_error = pherr
     if FLAGS.output_edit_stats:
-      alignment = ed.Argmin("<eps>", "<eps>")
+      alignment = ed.Argmin('<eps>', '<eps>')
       for edit in alignment:
         if edit not in stats.edit_stats:
           stats.edit_stats[edit] = 0
@@ -239,40 +268,40 @@ def CompareLexica(golden_lex, predicted_lex, writer,
     assert found == (rr != 0)
     stats.reciprocal_rank += rr
     if FLAGS.output_word_stats:
-      writer.write("#WORD_RR\t%s\t%f\n" % (word, rr))
+      writer.write('#WORD_RR\t%s\t%f\n' % (word, rr))
 
   if FLAGS.output_edit_stats:
     for (i, o), c in stats.edit_stats.iteritems():
-      writer.write("#EDIT\t%s\t%s\t%d\n" % (i, o, c))
+      writer.write('#EDIT\t%s\t%s\t%d\n' % (i, o, c))
 
   if FLAGS.output_summary_stats:
-    writer.write("#MISSING: %d words without reference pronunciation\n"
+    writer.write('#MISSING: %d words without reference pronunciation\n'
                  % stats.not_found)
-    writer.write("#TOTAL:   %d words with reference pronunciation\n"
+    writer.write('#TOTAL:   %d words with reference pronunciation\n'
                  % stats.words_total)
-    writer.write("#PRONS:   %d pronunciations\n" % stats.prons)
-    writer.write("#PPW:     %.6f pronunciations per word (average)\n"
+    writer.write('#PRONS:   %d pronunciations\n' % stats.prons)
+    writer.write('#PPW:     %.6f pronunciations per word (average)\n'
                  % fdiv(stats.prons, stats.words_total))
-    writer.write("#ORACLE:  %s\n" % FLAGS.predicted_oracle_type)
-    writer.write("#WER:     %.4f %% word error rate\n"
+    writer.write('#ORACLE:  %s\n' % FLAGS.predicted_oracle_type)
+    writer.write('#WER:     %.4f %% word error rate\n'
                  % (100 * fdiv(stats.word_error, stats.words_total)))
-    writer.write("#PhER:    %.4f %% phone error rate\n"
+    writer.write('#PhER:    %.4f %% phone error rate\n'
                  % (100 * fdiv(stats.phone_edits, stats.reference_length)))
-    writer.write("#AVG_PhE: %.4f %% mean phone error per word\n"
+    writer.write('#AVG_PhE: %.4f %% mean phone error per word\n'
                  % (100 * fdiv(stats.phone_error, stats.words_total)))
-    writer.write("#RMS_PhE: %.4f %% root mean square phone error per word\n"
+    writer.write('#RMS_PhE: %.4f %% root mean square phone error per word\n'
                  % (100 * math.sqrt(fdiv(stats.squared_phone_error,
-                                          stats.words_total))))
-    writer.write("#MAX_PhE: %.4f %% maximum phone error per word\n"
+                                         stats.words_total))))
+    writer.write('#MAX_PhE: %.4f %% maximum phone error per word\n'
                  % (100.0 * stats.max_phone_error))
-    writer.write("#MRR:     %.6f mean reciprocal rank\n"
+    writer.write('#MRR:     %.6f mean reciprocal rank\n'
                  % fdiv(stats.reciprocal_rank, stats.words_total))
   return
 
 
 def main(argv):
   if len(argv) < 2:
-    _stderr.write("Not enough arguments. Use --help for usage information.\n")
+    _stderr.write('Not enough arguments. Use --help for usage information.\n')
     sys.exit(1)
 
   reader = codecs.open(argv[1], 'r', 'utf_8')
@@ -286,27 +315,30 @@ def main(argv):
   predicted = ReadLexicon(reader)
   reader.close()
 
-  stats = CompareLexica(golden, predicted, _stdout)  # Uses oracle.
-  # Alternatively, 
-  #   stats = CompareLexica(golden, predicted, _stdout, 1, 1)
+  CompareLexica(golden, predicted, _stdout)  # Uses oracle.
+  # Alternatively, CompareLexica(golden, predicted, _stdout, 1, 1)
   # would compute word/phone error based on the top golden and top
   # predicted pronunciation.
   return
 
 
 if __name__ == '__main__':
-  import optparse
-  usage = "Usage: %prog [options] GOLDEN_LEXICON [PREDICTIONS]"
+  usage = 'Usage: %prog [options] GOLDEN_LEXICON [PREDICTIONS]'
   parser = optparse.OptionParser(usage)
-  parser.add_option("--output_edit_stats", action="store_true",
-                    dest="output_edit_stats",
-                    help="Output statistics about edit operations.")
-  parser.add_option("--output_word_stats", action="store_true",
-                    dest="output_word_stats",
-                    help="Output phone error and MRR for each word.")
-  parser.add_option("--predicted_oracle_type", action="store",
-                    dest="predicted_oracle_type",
-                    help='What type of oracle to use to choose among multiple predicted pronunciations for a word; valid values are "best" to choose the best pronunciation; "worst" to choose the worst pronunciation; and "median" to choose a pronunciation half-way between best and worst.')
+  parser.add_option('--output_edit_stats', action='store_true',
+                    dest='output_edit_stats',
+                    help='Output statistics about edit operations.')
+  parser.add_option('--output_word_stats', action='store_true',
+                    dest='output_word_stats',
+                    help='Output phone error and MRR for each word.')
+  parser.add_option('--predicted_oracle_type', action='store',
+                    dest='predicted_oracle_type',
+                    help='What type of oracle to use to choose among multiple'
+                    ' predicted pronunciations for a word; valid values are'
+                    ' "best" to choose the best pronunciation;'
+                    ' "worst" to choose the worst pronunciation; and'
+                    ' "median" to choose a pronunciation half-way between'
+                    ' best and worst.')
   options, args = parser.parse_args()
   if options.output_edit_stats:
     FLAGS.output_edit_stats = True
@@ -315,10 +347,10 @@ if __name__ == '__main__':
   if options.predicted_oracle_type is None:
     # Don't change the default value.
     pass
-  elif options.predicted_oracle_type in ("best", "worst", "median"):
+  elif options.predicted_oracle_type in ('best', 'worst', 'median'):
     FLAGS.predicted_oracle_type = options.predicted_oracle_type
   else:
-    _stderr.write("Illegal option value --predicted_oracle_type=%s.\n"
+    _stderr.write('Illegal option value --predicted_oracle_type=%s.\n'
                   % options.predicted_oracle_type)
     sys.exit(1)
   main([parser.prog] + args)

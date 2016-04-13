@@ -38,6 +38,15 @@ py_binary(
 )
 
 py_binary(
+    name = "eval_lex",
+    srcs = [
+        "edist.py",
+        "eval_lex.py",
+    ],
+    default_python_version = "PY2",
+)
+
+py_binary(
     name = "test_icu_transform",
     srcs = ["test_icu_transform.py"],
     default_python_version = "PY2",
@@ -47,10 +56,10 @@ cc_binary(
     name = "thrax_g2p",
     srcs = ["thrax_g2p.cc"],
     deps = [
+        "@openfst//:fst",
+        "@thrax//:grm-manager",
         "//festus:fst-util",
         "//festus:label-maker",
         "//festus:string-util",
-        "@openfst//:fst",
-        "@thrax//:grm-manager",
     ],
 )

@@ -33,21 +33,37 @@ sh_test(
     ],
 )
 
+genrule(
+    name = "make_regular_lexicon",
+    srcs = [
+        "//third_party/nchlt_inlang:release/dictionaries/nchlt_afr.dict",
+        "lex_additional.txt",
+    ],
+    outs = ["lex_regular.txt"],
+    cmd = """
+        $(location //utils:merge_lexicons) \
+          $(location //third_party/nchlt_inlang:release/dictionaries/nchlt_afr.dict) \
+          $(location lex_additional.txt) \
+          > $@
+        """,
+    tools = ["//utils:merge_lexicons"],
+)
+
 sh_test(
-    name = "nchlt_dictionary_test",
+    name = "regular_lexicon_test",
     timeout = "moderate",
     srcs = ["//utils:eval.sh"],
     args = [
         """
         $(location //festus:lexicon-diagnostics) \
           --alignables=$(location alignables.txt) \
-          $(location //third_party/nchlt_inlang:release/dictionaries/nchlt_afr.dict)
+          $(location lex_regular.txt)
         """,
     ],
     data = [
         "alignables.txt",
+        "lex_regular.txt",
         "//festus:lexicon-diagnostics",
-        "//third_party/nchlt_inlang:release/dictionaries/nchlt_afr.dict",
     ],
 )
 
@@ -73,10 +89,10 @@ sh_binary(
     data = [
         "@openfst//:farcompilestrings",
         "alignables.txt",
+        "lex_regular.txt",
         "test_words.txt",
         "//festus:lexicon-diagnostics",
         "//festus:make-alignable-symbols",
-        "//third_party/nchlt_inlang:release/dictionaries/nchlt_afr.dict",
     ],
 )
 

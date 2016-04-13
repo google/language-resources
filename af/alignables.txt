@@ -165,6 +165,8 @@ alignable { input: "pb"    output: "b" }
 alignable { input: "pp"    output: "p" }
 alignable { input: "ps"    output: "s" }  # psigo-
 
+alignable { input: "qu"    output: "k w" }
+
 alignable { input: "r"     output: "r" }
 alignable { input: "rm"    output: "r @ m" }
 alignable { input: "rr"    output: "r" }

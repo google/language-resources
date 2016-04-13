@@ -18,7 +18,7 @@ test="$outdir/g2p_test.tsv"
 
 # Input files and tools:
 runfiles="${0}.runfiles"
-dict="$runfiles/third_party/nchlt_inlang/release/dictionaries/nchlt_afr.dict"
+dict="$runfiles/af/lex_regular.txt"
 alignables="$runfiles/af/alignables.txt"
 words="$runfiles/af/test_words.txt"
 festus="$runfiles/festus"

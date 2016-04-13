@@ -298,8 +298,7 @@ void DeterminizeConvertWeight(
 // path in the FST.
 template <class F>
 std::vector<std::pair<string, float>> ShortestPathsToVector(
-    const F &paths_fst,
-    typename F::Arc::Weight total_weight = F::Arc::Weight::One()) {
+    const F &paths_fst) {
   typedef typename F::Arc Arc;
   typedef typename F::StateId StateId;
   typedef typename F::Weight Weight;
@@ -329,6 +328,7 @@ std::vector<std::pair<string, float>> ShortestPathsToVector(
       CHECK((iter.Next(), iter.Done()));
     }
     CHECK(fst::ArcIterator<fst::VectorFst<Arc>>(paths_fst, state).Done());
+    weight = Times(weight, paths_fst.Final(state));
     paths.emplace_back(std::move(str), weight.Value());
   }
   return paths;

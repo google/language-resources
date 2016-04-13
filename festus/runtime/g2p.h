@@ -255,9 +255,9 @@ bool G2P<Arc>::Pronounce(const string &spelling,
   }
 
   VLOG(2) << "8. Convert shortest paths to pronunciations.";
-  result->pronunciations = ShortestPathsToVector(paths, total_weight.Value());
+  result->pronunciations = ShortestPathsToVector(paths);
   for (auto &pron : result->pronunciations) {
-    pron.second = std::exp(-pron.second);
+    pron.second = std::exp(total_weight.Value() - pron.second);
   }
   result->error.clear();
   return true;

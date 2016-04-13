@@ -63,3 +63,9 @@ cc_binary(
         "//festus:string-util",
     ],
 )
+
+py_binary(
+    name = "merge_lexicons",
+    srcs = ["merge_lexicons.py"],
+    default_python_version = "PY2",
+)

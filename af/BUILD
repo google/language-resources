@@ -49,6 +49,24 @@ genrule(
     tools = ["//utils:merge_lexicons"],
 )
 
+genrule(
+    name = "make_full_lexicon",
+    srcs = [
+        "lex_generated.txt",
+        "lex_regular.txt",
+        "lex_exceptions.txt",
+    ],
+    outs = ["lex_full.txt"],
+    cmd = """
+        $(location //utils:merge_lexicons) \
+          $(location lex_generated.txt) \
+          $(location lex_regular.txt) \
+          $(location lex_exceptions.txt) \
+          > $@
+        """,
+    tools = ["//utils:merge_lexicons"],
+)
+
 sh_test(
     name = "regular_lexicon_test",
     timeout = "moderate",

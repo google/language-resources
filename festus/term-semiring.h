@@ -80,6 +80,7 @@
 #include <fst/compat.h>
 
 #include "festus/expression.pb.h"
+#include "festus/value-weight-singleton.h"
 
 namespace festus {
 
@@ -796,6 +797,11 @@ void TermSemiring<M, P>::ToGraphAux(
 
 template <class Props>
 using BasicTermSemiring = TermSemiring<NoopMemo, Props>;
+
+template <class Props>
+using BasicTermWeightTpl = festus::ValueWeightSingleton<
+  festus::BasicTermSemiring<Props>,
+  festus::DefaultStaticInstance<festus::BasicTermSemiring<Props>>>;
 
 }  // namespace festus
 

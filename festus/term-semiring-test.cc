@@ -28,21 +28,16 @@
 #include <fst/weight.h>
 #include <gtest/gtest.h>
 
-#include "festus/weight.h"
+#include "festus/value-weight-singleton.h"
 #include "festus/weight-test-lib.h"
 
 namespace {
 
-template <class Props>
-using BasicTermWeightTpl = festus::ValueWeightSingleton<
-  festus::BasicTermSemiring<Props>,
-  festus::DefaultStaticInstance<festus::BasicTermSemiring<Props>>>;
-
 using BasicTermWeight =
-    BasicTermWeightTpl<festus::FreeSemiringProperties>;
+    festus::BasicTermWeightTpl<festus::FreeSemiringProperties>;
 
 using BasicCommutativeTermWeight =
-    BasicTermWeightTpl<festus::CommutativeRingProperties>;
+    festus::BasicTermWeightTpl<festus::CommutativeRingProperties>;
 
 typedef festus::TermSemiring<festus::SynchronizedMemo> FreeSemiring;
 

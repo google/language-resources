@@ -361,6 +361,7 @@ cc_library(
     deps = [
         "@openfst//:base",
         ":expression",
+        ":weight",
     ],
 )
 

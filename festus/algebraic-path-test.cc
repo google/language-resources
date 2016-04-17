@@ -47,8 +47,9 @@
 //
 //   SumTotalWeight() will give a generally more precise answer in terms of
 //   Star(), which is quick to compute by itself, but uses an algorithm with
-//   worst-case cubic running time in the number of state/vertices
-//   (TODO: cubic in the size of the largest strongly connected component).
+//   worst-case cubic running time in the number of states/vertices (TODO:
+//   running time dominated by the sum of the cube of the strongly connected
+//   component sizes).
 //
 //   ShortestDistance() will give an answer in terms of the limit of a
 //   convergent power series, but in order to do so it has to expand out the

@@ -58,7 +58,7 @@ class ValueWeightStatic {
     return ValueWeightStatic(SemiringType::From(std::forward<Args>(args)...));
   }
 
-  constexpr ValueType Value() { return value_; }
+  constexpr ValueType Value() const { return value_; }
 
   static constexpr ValueWeightStatic NoWeight() {
     return ValueWeightStatic(SemiringType::NoWeight());
@@ -110,11 +110,11 @@ class ValueWeightStatic {
     return w;
   }
 
-  constexpr ValueWeightStatic Reverse() {
+  constexpr ValueWeightStatic Reverse() const {
     return ValueWeightStatic(SemiringType::Reverse(value_));
   }
 
-  constexpr ValueWeightStatic Quantize(float delta = fst::kDelta) {
+  constexpr ValueWeightStatic Quantize(float delta = fst::kDelta) const {
     return ValueWeightStatic(SemiringType::Quantize(value_, delta));
   }
 
@@ -139,7 +139,7 @@ class ValueWeightStatic {
     return SemiringType::ApproxEqualTo(lhs.value_, rhs.value_, delta);
   }
 
-  constexpr std::size_t Hash() { return std::hash<ValueType>()(value_); }
+  constexpr std::size_t Hash() const { return std::hash<ValueType>()(value_); }
 
   friend std::ostream &operator<<(
       std::ostream &strm,

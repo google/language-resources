@@ -79,7 +79,7 @@ class ValueWeightSingleton {
     return ValueWeightSingleton(Semiring().From(std::forward<Args>(args)...));
   }
 
-  constexpr ValueType Value() { return value_; }
+  constexpr ValueType Value() const { return value_; }
 
   static constexpr const S &Semiring() { return Singleton::Instance(); }
 
@@ -133,11 +133,11 @@ class ValueWeightSingleton {
     return w;
   }
 
-  constexpr ValueWeightSingleton Reverse() {
+  constexpr ValueWeightSingleton Reverse() const {
     return ValueWeightSingleton(Semiring().Reverse(value_));
   }
 
-  constexpr ValueWeightSingleton Quantize(float delta = fst::kDelta) {
+  constexpr ValueWeightSingleton Quantize(float delta = fst::kDelta) const {
     return ValueWeightSingleton(Semiring().Quantize(value_, delta));
   }
 
@@ -162,7 +162,7 @@ class ValueWeightSingleton {
     return Semiring().ApproxEqualTo(lhs.value_, rhs.value_, delta);
   }
 
-  constexpr std::size_t Hash() { return std::hash<ValueType>()(value_); }
+  constexpr std::size_t Hash() const { return std::hash<ValueType>()(value_); }
 
   friend std::ostream &operator<<(
       std::ostream &strm,

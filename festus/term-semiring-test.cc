@@ -173,22 +173,22 @@ TEST(TermSemiringTest, Printing) {
 TEST(TermSemiringTest, NoMemoization) {
   typedef BasicTermWeight Weight;
 
-  constexpr Weight leaf61 = Weight::From(1ULL << 60);
+  const Weight leaf61 = Weight::From(1ULL << 60);
   EXPECT_FALSE(leaf61.Member());
 
-  constexpr Weight leaf60 = Weight::From((1ULL << 60) - 1);
+  const Weight leaf60 = Weight::From((1ULL << 60) - 1);
   EXPECT_TRUE(leaf60.Member());
   EXPECT_TRUE(Plus(Weight::Zero(), leaf60).Member());
   EXPECT_FALSE(Plus(leaf60, leaf60).Member());
   EXPECT_FALSE(Times(leaf60, leaf60).Member());
 
-  constexpr Weight leaf31 = Weight::From((1ULL << 31) - 1);
+  const Weight leaf31 = Weight::From((1ULL << 31) - 1);
   EXPECT_TRUE(leaf31.Member());
   EXPECT_TRUE(Plus(Weight::Zero(), leaf31).Member());
   EXPECT_FALSE(Plus(leaf31, leaf31).Member());
   EXPECT_TRUE(Times(leaf31, leaf31).Member());
 
-  constexpr Weight leaf25 = Weight::From((1ULL << 25) - 1);
+  const Weight leaf25 = Weight::From((1ULL << 25) - 1);
   EXPECT_TRUE(leaf25.Member());
   EXPECT_TRUE(Plus(Weight::Zero(), leaf25).Member());
   EXPECT_TRUE(Plus(leaf25, leaf25).Member());

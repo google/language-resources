@@ -382,6 +382,8 @@ class TermSemiring : public TermSemiringBase {
   static constexpr bool Commutative() { return Props::kCommutative; }
   static constexpr bool Idempotent() { return Props::kIdempotent; }
 
+  constexpr TermSemiring() : memo_() {}
+
   uint64 GetChild1(uint64 x) const {
     CHECK(IsBinary(x));  // Plus or Times
     return GetChild1Unchecked(x);
@@ -528,7 +530,7 @@ class TermSemiring : public TermSemiringBase {
       x = y;
       y = tmp;
     }
-    // Least significant bits (tt is 2-bit tag for binary operations):
+    // Least significant bits (tt is the 2-bit tag for binary operations):
     //
     //   0 tt  Half format, first child fits into 13 bits
     //   1 tt  Full format, first child fits into 30 bits

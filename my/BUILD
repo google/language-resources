@@ -23,12 +23,12 @@ sh_test(
     srcs = ["//utils:eval.sh"],
     args = [
         """
-        cut -f 1 $(location phoneme.syms) |
+        cut -f 2 $(location phonemes.txt) |
         $(location //utils:uniquely_decodable)
         """,
     ],
     data = [
-        "phoneme.syms",
+        "phonemes.txt",
         "//utils:uniquely_decodable",
     ],
 )

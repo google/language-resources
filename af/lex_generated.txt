@@ -1494,7 +1494,6 @@ peterson	p i@ t @ r s O n	0.448366	0.448366
 petim	p i@ t @ m	0.389217	0.389217
 petrus	p @ t r 9 s	0.4871	0.4871
 peule	p E y l @	0.367739	0.367739
-ph	p h\	1	1
 phakamani	p h\ a k a m a n i	0.440976	0.440976
 phillip	p h\ @ l @ p	0.961205	0.961205
 phorus	p h\ u@ r 9 s	0.91818	0.91818

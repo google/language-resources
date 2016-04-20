@@ -34,6 +34,43 @@ sh_test(
 )
 
 genrule(
+    name = "make_custom_phoneme_syms",
+    srcs = ["phonemes.txt"],
+    outs = ["custom_phoneme.syms"],
+    cmd = """
+          awk 'BEGIN {printf "<epsilon>\\t0\\n"}
+               {printf "%s\\t%d\\n", $$1, NR}' \
+            $< >$@
+          """,
+)
+
+genrule(
+    name = "make_ipa_phoneme_syms",
+    srcs = ["phonemes.txt"],
+    outs = ["ipa_phoneme.syms"],
+    cmd = """
+          awk 'BEGIN {printf "<epsilon>\\t0\\n"}
+               {printf "%s\\t%d\\n", $$2, NR}' \
+            $< >$@
+          """,
+)
+
+# It is difficult to get rid of phoneme.syms: doing so would make the
+# compilation of burmese.grm much messier, since the location of phoneme.syms
+# must be known. Comprompise: keep phoneme.syms, but ensure that it matches the
+# automatically generated ipa_phoneme.syms.
+sh_test(
+    name = "phoneme_syms_is_current",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = ["diff -u $(location phoneme.syms) $(location ipa_phoneme.syms)"],
+    data = [
+        "ipa_phoneme.syms",
+        "phoneme.syms",
+    ],
+)
+
+genrule(
     name = "compile_burmese_grm",
     srcs = [
         "burmese.grm",

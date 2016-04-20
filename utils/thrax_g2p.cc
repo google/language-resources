@@ -97,7 +97,7 @@ int main(int argc, char *argv[]) {
       if (at_start) {
         at_start = false;
       } else {
-        std::cout << " # ";
+        std::cout << " | ";
       }
       fst::StdCompactStringFst graphemes;
       if (!input_label_maker.StringToCompactFst(phrase, &graphemes)) {

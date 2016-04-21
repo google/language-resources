@@ -7,90 +7,67 @@ allow a computer (or an absolute beginner learning Javanese as a second
 language) to pronounce words and sentences correctlly.
 
 The transcription system proposed here is, to the largest extent possible,
-identical to the modern orthography of Javanese in Latin script. However, there
-are some questions around the status of the phoneme inventory that need to be
-resolved. Depending on the exact phoneme inventory, some additional diacritics
-and conventions need to be introduced that differ from the standard orthography.
+identical to the modern orthography of Javanese in Latin script. In order to
+distinguish phonemic transcription from orthography and to avoid ambiguities,
+phonemes are always separated from each other by spaces.
 
 ## Phonemes
 
-The following is a list of potential phonemes of Javanese, subject to discussion
-and clarification.
+The following is a list of phonemes of Javanese:
 
-Orthographic form | IPA | comment
-------------------|-----|--------
-p | p
-b | b
-f | f
-v | v | needs review
-m | m
-t | t
-d | d
-l | l
-n | n
-s | s
-z | z | needs review
-r | r
+Phoneme | IPA | comment
+--------|-----|--------
+p  | p
+b  | b
+f  | f
+m  | m
+t  | t
+d  | d
+l  | l
+n  | n
+s  | s
+z  | z | in loanwords
+r  | r
 sy | ʃ
 th | ʈ
 dh | ɖ
-c | t͡ʃ
-j | d͡ʒ
-y | j
+c  | t͡ʃ
+j  | d͡ʒ
+y  | j
 ny | ɲ
-k | k
-g | g
+k  | k
+g  | g
 kh | x
-w | w
+w  | w
 ng | ŋ
-' | ʔ | see below
-h | h
-i | i
-é | e
-ě | ə | see below
-è | ɛ
-a | a
-u | u
-o | o
-å | ɔ | see below
+'  | ʔ | also realization of final «k»
+h  | h
+i  | i
+e  | e | orthographic «é» in open syllables, «è» (phonetic [ɛ]) in closed syllables
+ex | ə | orthographic «e»
+a  | a
+u  | u
+o  | o
+ax | ɔ | not normally indicated in the orthography
 
+The phonemic transcription is best illustrated by example:
 
-The proposal here is to transcribe words by respelling them in the orthographic
-inventory. This is best illustrated by example:
-
-Word      | Respelling
-----------|-----------
-Google    | gugěl
-Facebook  | fésbuk
-Uniqlo    | yuniklo
-psikologi | sikologi
-request   | rěkuèst
-change    | cénj
-hothead   | hot-hèd
-
-## Open issues
-
-The following issues need to be resolved:
-
-* What is the status of /v/? Is it a stand-alone phoneme, distinct from /f/?
-
-* What is the status of /z/ as a phoneme?
-
-* What is the status of /å/, especially in foreign words? If it is treated as a
-  phoneme, what is the most convenient notation of it? Is "å" easy enough to
-  type?
-
-* What is the status of the glottal stop /'/ as a phoneme?
-
-* What is the best way to transcribe the schwa sound, /ě/ in the current
-  proposal? Is "ě" easy enough to type? We could use plain "e", but that
-  potentially risks some ambiguity.
-
-## Stimuli for elicitation
-
-Word      | Respelling
-----------|-----------
-video     |
+Word      | Transcription
+----------|--------------
+Google    | g u g ex l
+Facebook  | f e y s b u k
+Uniqlo    | y u n i k l o
+psikologi | s i k o l o g i
+request   | r i k u e s t
+change    | c e n j
+hothead   | h o t h e d
+video     | f i d i o
+Zulfa     | z u l f a
+Jawa      | j ox w ox
+Wedhok    | w e dh ox '
+i'tidal   | i ' t i d a l
+late      | l e y t
+let       | l e t
 zébra     |
 Obama     |
 utama     |

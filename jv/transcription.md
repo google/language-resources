@@ -97,3 +97,6 @@ utama     |
 jroning   |
 khusus    |
 dyah      |
+tie       |
+thigh     |
+sigh      |

@@ -99,3 +99,14 @@ genrule(
         """,
     tools = ["@openfst//:farextract"],
 )
+
+sh_binary(
+    name = "prepare-data-for-correction",
+    srcs = ["prepare-data-for-correction.sh"],
+    data = [
+        "G2P.fst",
+        "custom_phoneme.syms",
+        "split_sentences.py",
+        "//utils:thrax_g2p",
+    ],
+)

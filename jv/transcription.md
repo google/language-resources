@@ -4,7 +4,7 @@ This document sets out guidelines for representing the pronunciation of Javanese
 words. The goal of phonemic transcription is to provide an accurate
 representation of the contrasting segments (phonemes) of the language. This will
 allow a computer (or an absolute beginner learning Javanese as a second
-language) to pronounce words and sentences correctlly.
+language) to pronounce words and sentences correctly.
 
 The transcription system proposed here is, to the largest extent possible,
 identical to the modern orthography of Javanese in Latin script. In order to
@@ -81,4 +81,4 @@ dyah      | d i y a h
 tie       | t a y
 thigh     |
 thy       |
-sigh      |
+sigh      | s a y

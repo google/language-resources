@@ -1,7 +1,6 @@
 p	p
 b	b
 f	f
-v	v
 m	m
 t	t
 d	d
@@ -25,10 +24,9 @@ ng	ŋ
 '	ʔ
 h	h
 i	i
-é	e
-ě	ə
-è	ɛ
+e	e
+ex	ə
 a	a
 u	u
 o	o
-å	ɔ
+ox	ɔ

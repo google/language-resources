@@ -105,6 +105,7 @@ genrule(
 
 sh_test(
     name = "lexicon_test",
+    timeout = "long",
     srcs = ["//utils:eval.sh"],
     args = [
         """

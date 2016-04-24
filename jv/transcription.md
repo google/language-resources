@@ -74,11 +74,11 @@ late      | l e y t
 let       | l e t
 zébra     | z e b r a
 Obama     | o b a m a
-utama     | u t a m a
+utama     | u t ox m ox
 jroning   | j r o n i ng
 khusus    | kh u s u s
 dyah      | d i y a h
 tie       | t a y
-thigh     |
-thy       |
+thigh     | t a y
+thy       | d a y
 sigh      | s a y

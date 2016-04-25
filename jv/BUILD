@@ -34,6 +34,31 @@ sh_test(
 )
 
 genrule(
+    name = "make_custom_phoneme_syms",
+    srcs = ["phonemes.txt"],
+    outs = ["custom_phoneme.syms"],
+    cmd = """
+          awk 'BEGIN {printf "<epsilon>\\t0\\n"}
+               {printf "%s\\t%d\\n", $$1, NR}' \
+            $< >$@
+          """,
+)
+
+# It is difficult to get rid of phoneme.syms: doing so would make compiling the
+# G2P grammar much messier, since the location of phoneme.syms must be known.
+# Comprompise: keep phoneme.syms and ensure that it matches phonemes.txt.
+sh_test(
+    name = "phoneme_syms_is_current",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = ["diff -u $(location phoneme.syms) $(location custom_phoneme.syms)"],
+    data = [
+        "custom_phoneme.syms",
+        "phoneme.syms",
+    ],
+)
+
+genrule(
     name = "compile_javanese_grm",
     srcs = [
         "javanese.grm",

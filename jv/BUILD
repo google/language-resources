@@ -48,3 +48,33 @@ genrule(
           """,
     tools = ["@thrax//:thraxcompiler"],
 )
+
+genrule(
+    name = "make_lexicon",
+    srcs = [
+        "//third_party/wikimedia:jv_sentences.txt",
+        "javanese.far",
+        "phoneme.syms",
+    ],
+    outs = [
+        "bad_tokens.txt",
+        "unpronouncable.txt",
+        "lexicon.txt",
+    ],
+    cmd = """
+          $(location tokenize.py) \
+            < $(location //third_party/wikimedia:jv_sentences.txt) \
+            2> $(location bad_tokens.txt) |
+          LC_ALL=C sort -u |
+          $(location //utils:thrax_g2p) \
+            --far=$(location javanese.far) \
+            --phoneme_syms=$(location phoneme.syms) |
+          awk '{print > "/dev/std" (/ERROR/ ? "err" : "out")}' \
+            1> $(location lexicon.txt) \
+            2> $(location unpronouncable.txt)
+          """,
+    tools = [
+        "tokenize.py",
+        "//utils:thrax_g2p",
+    ],
+)

@@ -32,3 +32,19 @@ sh_test(
         "//utils:uniquely_decodable",
     ],
 )
+
+genrule(
+    name = "compile_javanese_grm",
+    srcs = [
+        "javanese.grm",
+        "grapheme.syms",
+        "phoneme.syms",
+    ],
+    outs = ["javanese.far"],
+    cmd = """
+          $(location @thrax//:thraxcompiler) \
+            --input_grammar=$(location javanese.grm) \
+            --output_far=$@
+          """,
+    tools = ["@thrax//:thraxcompiler"],
+)

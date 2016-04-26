@@ -90,7 +90,7 @@ genrule(
           $(location tokenize.py) \
             < $(location //third_party/wikimedia:jv_sentences.txt) \
             2> $(location bad_tokens.txt) |
-          LC_ALL=C sort -u |
+          $(location freq.py) |
           $(location //utils:thrax_g2p) \
             --far=$(location javanese.far) \
             --phoneme_syms=$(location phoneme.syms) |
@@ -99,6 +99,7 @@ genrule(
             2> $(location unpronouncable.txt)
           """,
     tools = [
+        "freq.py",
         "tokenize.py",
         "//utils:thrax_g2p",
     ],

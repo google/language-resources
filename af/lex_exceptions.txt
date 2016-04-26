@@ -1,3 +1,4 @@
+_pause	pau
 'n	@
 ŉ	@
 a_letter	A:

@@ -58,6 +58,7 @@ output_symbol { key: "l"   value: 35 }
 output_symbol { key: "j"   value: 36 }
 output_symbol { key: "w"   value: 37 }
 
+alignable { input: "'s"    output: "z" }
 
 alignable { input: "a"     output: "A:" }
 alignable { input: "a"     output: "a" }
@@ -122,6 +123,7 @@ alignable { input: "i"     output: "@" }
 alignable { input: "i"     output: "i" }
 alignable { input: "ie"    output: "i" }
 alignable { input: "ieu"   output: "2:" }  # ingenieur
+alignable { input: "ié"    output: "i" }   # dié
 alignable { input: "ië"    output: "i" }   # hiërargiese
 alignable { input: "ië"    output: "i@" }  # indië
 alignable { input: "ï"     output: "@" }
@@ -165,6 +167,7 @@ alignable { input: "pb"    output: "b" }
 alignable { input: "pp"    output: "p" }
 alignable { input: "ps"    output: "s" }  # psigo-
 
+alignable { input: "q"     output: "k" }
 alignable { input: "qu"    output: "k w" }
 
 alignable { input: "r"     output: "r" }

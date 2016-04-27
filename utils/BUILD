@@ -69,3 +69,9 @@ py_binary(
     srcs = ["merge_lexicons.py"],
     default_python_version = "PY2",
 )
+
+py_binary(
+    name = "festival_lexicon_from_tsv",
+    srcs = ["festival_lexicon_from_tsv.py"],
+    default_python_version = "PY2",
+)

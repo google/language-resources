@@ -1,6 +1,9 @@
 _pause	pau
 'n	@
 ŉ	@
+ná	n A:
+nóg	n O x
+s'n	s @ n
 a_letter	A:
 b_letter	b i@
 c_letter	s i@

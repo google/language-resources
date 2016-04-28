@@ -35,28 +35,31 @@ STDOUT = codecs.getwriter('utf-8')(sys.stdout)
 STDERR = codecs.getwriter('utf-8')(sys.stderr)
 
 
-def ReadTsvLexicon(path):
+def ReadTsvLexicon(reader):
   """Reads a lexicon in TSV format. Only the first 2 columns are used."""
   lex = {}
-  with codecs.open(path, 'r', 'utf-8') as reader:
-    for line in reader:
-      line = line.rstrip('\n')
-      fields = line.split('\t')
-      assert len(fields) >= 2
-      orth, pron = fields[:2]
-      if orth not in lex:
-        lex[orth] = []
-      lex[orth].append(pron)
+  for line in reader:
+    line = line.rstrip('\n')
+    fields = line.split('\t')
+    assert len(fields) >= 2
+    orth, pron = fields[:2]
+    if orth not in lex:
+      lex[orth] = []
+    lex[orth].append(pron)
   return lex
 
 
 def main(argv):
   if len(argv) == 1:
     STDOUT.write('Usage: %s LEXICON...\n' % argv[0])
-    sys.exit(1)
+    sys.exit(2)
   lex = {}
   for path in argv[1:]:
-    lex.update(ReadTsvLexicon(path))
+    if path == '-':
+      lex.update(ReadTsvLexicon(STDIN))
+    else:
+      with codecs.open(path, 'r', 'utf-8') as reader:
+        lex.update(ReadTsvLexicon(reader))
   words = lex.keys()
   words.sort()
   for orth in words:

@@ -106,3 +106,39 @@ genrule(
         "//utils:thrax_g2p",
     ],
 )
+
+genrule(
+    name = "make_en_lexicon",
+    srcs = [
+        "//third_party/wikimedia:simple_wiktionary.txt",
+        "data/lexicon.tsv",
+        "javanese.far",
+        "phoneme.syms",
+    ],
+    outs = [
+        "en_bad_tokens.txt",
+        "en_unpronouncable.txt",
+        "en_lexicon.txt",
+    ],
+    cmd = """
+          $(location tokenize.py) \
+            < $(location //third_party/wikimedia:simple_wiktionary.txt) \
+            2> $(location en_bad_tokens.txt) |
+          $(location freq.py) |
+          $(location //utils:thrax_g2p) \
+            --far=$(location javanese.far) \
+            --phoneme_syms=$(location phoneme.syms) |
+          awk '{print > "/dev/std" (/ERROR/ ? "err" : "out")}' \
+            2> $(location en_unpronouncable.txt) |
+          $(location //utils:merge_lexicons) \
+            - \
+            $(location data/lexicon.tsv) \
+            > $(location en_lexicon.txt)
+          """,
+    tools = [
+        "freq.py",
+        "tokenize.py",
+        "//utils:merge_lexicons",
+        "//utils:thrax_g2p",
+    ],
+)

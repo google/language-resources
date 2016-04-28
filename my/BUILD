@@ -55,10 +55,9 @@ genrule(
           """,
 )
 
-# It is difficult to get rid of phoneme.syms: doing so would make the
-# compilation of burmese.grm much messier, since the location of phoneme.syms
-# must be known. Comprompise: keep phoneme.syms, but ensure that it matches the
-# automatically generated ipa_phoneme.syms.
+# It is difficult to get rid of phoneme.syms: doing so would make compiling the
+# G2P grammar much messier, since the location of phoneme.syms must be known.
+# Comprompise: keep phoneme.syms and ensure that it matches phonemes.txt.
 sh_test(
     name = "phoneme_syms_is_current",
     timeout = "short",

@@ -4,5 +4,5 @@ licenses(["restricted"])  # CC BY-SA 3.0
 
 exports_files([
     "LICENSE",
-    "jv_sentences.txt",
+    "jv_wiki_cleaned.txt",
 ])

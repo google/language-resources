@@ -78,6 +78,7 @@ genrule(
     name = "make_lexicon",
     srcs = [
         "//third_party/wikimedia:jv_wiki_cleaned.txt",
+        "data/prompts.txt",
         "javanese.far",
         "phoneme.syms",
     ],
@@ -87,7 +88,8 @@ genrule(
         "lexicon.txt",
     ],
     cmd = """
-          cat $(location //third_party/wikimedia:jv_wiki_cleaned.txt) |
+          cat $(location //third_party/wikimedia:jv_wiki_cleaned.txt) \
+              $(location data/prompts.txt) |
           $(location tokenize.py) \
             2> $(location bad_tokens.txt) |
           $(location freq.py) |

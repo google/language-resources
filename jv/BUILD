@@ -75,7 +75,7 @@ genrule(
 )
 
 genrule(
-    name = "make_lexicon",
+    name = "make_jv_lexicon",
     srcs = [
         "//third_party/wikimedia:jv_wiki_cleaned.txt",
         "data/prompts.txt",
@@ -83,22 +83,22 @@ genrule(
         "phoneme.syms",
     ],
     outs = [
-        "bad_tokens.txt",
-        "unpronouncable.txt",
-        "lexicon.txt",
+        "jv_bad_tokens.txt",
+        "jv_unpronouncable.txt",
+        "jv_lexicon.txt",
     ],
     cmd = """
           cat $(location //third_party/wikimedia:jv_wiki_cleaned.txt) \
               $(location data/prompts.txt) |
           $(location tokenize.py) \
-            2> $(location bad_tokens.txt) |
+            2> $(location jv_bad_tokens.txt) |
           $(location freq.py) |
           $(location //utils:thrax_g2p) \
             --far=$(location javanese.far) \
             --phoneme_syms=$(location phoneme.syms) |
           awk '{print > "/dev/std" (/ERROR/ ? "err" : "out")}' \
-            1> $(location lexicon.txt) \
-            2> $(location unpronouncable.txt)
+            1> $(location jv_lexicon.txt) \
+            2> $(location jv_unpronouncable.txt)
           """,
     tools = [
         "freq.py",

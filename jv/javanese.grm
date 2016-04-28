@@ -97,13 +97,13 @@ g2p_consonant =
 | ("s".g : "s".p)
 | ("z".g : "z".p)
 | ("r".g : "r".p)
-| ("s y".g : "sy".p)  | ("s j".g : "sy".p) | ("s h".g : "sy".p)
+| ("s y".g : "sy".p) | ("s h".g : "sy".p)
 | ("t h".g : "th".p)
 | ("d h".g : "dh".p)
 | ("c".g : "c".p)     | ("t j".g : "c".p)
 | ("j".g : "j".p <1>) | ("d j".g : "j".p)
 | ("y".g : "y".p <1>)
-| ("n y".g : "ny".p)  | ("n j".g : "ny".p)
+| ("n y".g : "ny".p)
 | ("k".g : "k".p)
 | ("q".g : "k".p)
 | ("x".g : "k s".p)
@@ -143,7 +143,7 @@ g2p_nonfinal_syllable =
 
 g2p_final_syllable_with_a =
  rm_hyphen
- (g2p_consonant)*
+ (g2p_consonant)+
  ("a".g : "ox".p)
 ;
 

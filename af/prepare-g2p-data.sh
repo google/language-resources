@@ -24,7 +24,7 @@ words="$runfiles/af/test_words.txt"
 festus="$runfiles/festus"
 openfst="$runfiles/external/openfst"
 
-export LC_ALL=C
+export LC_ALL=C.UTF-8
 
 "$festus/make-alignable-symbols" \
   --alignables="$alignables" \

@@ -10,9 +10,9 @@ before_install:
   # Project dependencies:
   - sudo apt-get install -qq python-pyicu
   # Install Bazel:
-  - wget 'https://github.com/bazelbuild/bazel/releases/download/0.2.0/bazel-0.2.0-installer-linux-x86_64.sh'
-  - sha256sum -c third_party/bazel-0.2.0-installer-linux-x86_64.sh.sha256
-  - bash bazel-0.2.0-installer-linux-x86_64.sh --user
+  - wget 'https://github.com/bazelbuild/bazel/releases/download/0.2.2b/bazel-0.2.2b-installer-linux-x86_64.sh'
+  - sha256sum -c third_party/bazel-0.2.2b-installer-linux-x86_64.sh.sha256
+  - bash bazel-0.2.2b-installer-linux-x86_64.sh --user
 
 script:
   - bazel test //af/... //bn/... //festus/... //hi_ur/... //my/... //xh/... //zu/...

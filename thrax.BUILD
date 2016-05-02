@@ -8,7 +8,13 @@ prefix_dir = "src/"
 
 cc_binary(
     name = "thraxcompiler",
-    srcs = [prefix_dir + "bin/compiler.cc"],
+    srcs = [
+        prefix_dir + "bin/compiler.cc",
+        prefix_dir + "include/thrax/compiler.h",
+        prefix_dir + "lib/main/compiler-log.cc",
+        prefix_dir + "lib/main/compiler-log64.cc",
+        prefix_dir + "lib/main/compiler-stdarc.cc",
+    ],
     deps = [
         ":grm-compiler",
         ":thrax_main_lib",
@@ -106,7 +112,7 @@ cc_library(
     ],
     hdrs = [
         prefix_dir + "include/thrax/algo/cdrewrite.h",
-        #prefix_dir + "include/thrax/algo/context_dependent_rewrite.h",
+        prefix_dir + "include/thrax/algo/optimize.h",
         prefix_dir + "include/thrax/algo/prefix_tree.h",
         prefix_dir + "include/thrax/compat/oneof.h",
         prefix_dir + "include/thrax/datatype.h",
@@ -117,7 +123,9 @@ cc_library(
 
         # thrax::function::Function implementations
         prefix_dir + "include/thrax/arcsort.h",
+        prefix_dir + "include/thrax/assert-empty.h",
         prefix_dir + "include/thrax/assert-equal.h",
+        prefix_dir + "include/thrax/assert-null.h",
         prefix_dir + "include/thrax/cdrewrite.h",
         prefix_dir + "include/thrax/closure.h",  # includes fst-node.h
         prefix_dir + "include/thrax/compose.h",
@@ -222,6 +230,5 @@ cc_library(
         ":grm-manager",
         openfst + ":far_base",
         openfst + ":fst",
-        openfst + ":pdt",
     ],
 )

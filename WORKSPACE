@@ -31,21 +31,21 @@ new_git_repository(
     name = "openfst",
     build_file = "openfst.BUILD",
     remote = "https://github.com/mjansche/openfst.git",
-    tag = "1.5.0",
+    tag = "1.5.1",
 )
 
 new_git_repository(
     name = "opengrm_ngram",
     build_file = "opengrm-ngram.BUILD",
     remote = "https://github.com/mjansche/opengrm-ngram.git",
-    tag = "1.2.1",
+    tag = "1.2.2",
 )
 
 new_git_repository(
     name = "thrax",
     build_file = "thrax.BUILD",
     remote = "https://github.com/mjansche/thrax.git",
-    tag = "1.2.0",
+    tag = "1.2.1",
 )
 
 # Google Test & Protocol Buffers

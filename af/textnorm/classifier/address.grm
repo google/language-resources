@@ -1,0 +1,50 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2016 and onwards, Google, Inc.
+
+# This file does not parse all addresses, for now it is only used for a
+# workaround so that "hoofdstraat 7e" does not get classified as an ordinal but
+# as a cardinal and a letter
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+street_suffixes = "alley" | "anneks" | "annex" | "arcade" | "arkade" | "ave" |
+                  "avenue" | "baai" | "baan" | "blok" | "blvd" | "boulevard" |
+                  "course" | "court" | "cove" | "cove" | "creek" | "cres" |
+                  "crescent" | "crk" | "crse" | "ct" | "cv" | "deurgang" |
+                  "deurgang" | "deurloop" | "deurpad" | "dr" | "drive" |
+                  "est" | "estate" | "gateway" | "gebou" | "gtwy" | "highway" |
+                  "hof" | "hoofweg" | "hwy" | "ingang" | "inham" | "jctn" |
+                  "junction" | "kring" | "laan" | "laan" | "landgoed" |
+                  "landgoed" | "lane" | "laning" | "ln" | "loop" | "manor" |
+                  "oord" | "pad" | "parade" | "park" | "parkway" | "parkweg" |
+                  "pas" | "pas" | "pass" | "passage" | "path" | "pde" | "pk" |
+                  "pky" | "pl" | "place" | "plain" | "plaza" | "plein" | "pln" |
+                  "plz" | "poort" | "psge" | "rd" | "road" | "rylaan" | "ryln" |
+                  "singel" | "spruit" | "sq" | "square" | "st" | "stadsplein" |
+                  "steeg" | "str" | "straat" | "street" | "terras" |
+                  "throughway" | "thwy" | "verbinding" | "vierkant" |
+                  "voetpad" | "walk" | "wandellaan" | "wandelpad" | "way" |
+                  "weg";
+
+# "*straat 4e" would be rewritten to "*straat vierde" instead of "vier e_letter"
+# if not for this rule.
+# The same for 112 (alarm number) which is normally rewritten to "een een twee"
+export AFRIKAANS_ADDRESS = Optimize[
+  (universal_rules.kAlpha+ street_suffixes @ universal_rules.word_token)
+  universal_rules.one_space
+  universal_rules.token_delimiter
+  ((universal_rules.CARDINAL_MARKUP universal_rules.token_delimiter ("e" @ universal_rules.word_token)) |
+   "112" @ universal_rules.CARDINAL_MARKUP)
+];

@@ -1,0 +1,61 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2016 and onwards, Google, Inc.
+
+# Combined classifier / tokenizer. Goes from arbitrary input string to output
+# tokens in one fell swoop.
+
+import 'classify.grm' as classify;
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+# Legal letters in a typical Afrikaans word. We expect most odd accented
+# characters to be normalized by the rewrite module, but we keep e acute
+# because it can indicate useful information (resume vs. resumé, for example)
+# Umlauts indicate syllable breaks between two vowels (rather than long vowel)
+# e.g. geënt /ch @ . e 1 n t/ which is distinct from geent /ch ee 1 n t/
+# <ê> is useful to see the difference between "gene" and "gêne"
+special = "á" | "é" | "í" | "ó" | "ú" | "ä" | "ë" | "ï" | "ö" | "ü" |
+          "â" | "ê" | "î" | "ô" | "û" | "à" | "è" | "ì" | "ò" | "ù" |
+          "Á" | "É" | "Í" | "Ó" | "Ú" | "Ä" | "Ë" | "Ï" | "Ö" | "Ü" |
+          "Â" | "Ê" | "Î" | "Ô" | "Û" | "À" | "È" | "Ì" | "Ò" | "Ù" ;
+
+letter_def = universal_rules.kAlpha | special;
+vowel = universal_rules.VOWELS_INSENSITIVE | special;
+
+# This is the definition of a legally spelt word.
+legal_word = ((letter_def+ "'")?
+              letter_def* vowel letter_def*
+              ("'" letter_def+)?) |
+             (letter_def? "'" letter_def); # z'n. m'n, 'n, 'r
+
+# we rewrite "'s middags" to "smiddags"
+# altough it is an incorrect spelling, we do the same for 's-middags
+smove =
+  CDRewrite["'s " | "'s-" : "s", " " | "-" | "[BOS]", "", universal_rules.kBytes*]
+;
+
+sigma_star = universal_rules.kBytes*;
+
+# Style is not generally understood by the verbalizers for Afrikaans, so we
+# clean any styles out.
+
+kill_style = CDRewrite[("style:" " "+ universal_rules.kDigit) : "", "", "", sigma_star];
+
+export TOKENIZE_AND_CLASSIFY =  Optimize[
+ (smove @
+  universal_func.TokenizeAndClassifyEvenSimpler[classify.CLASSIFY,
+                                   universal_func.WordTokenSimple[legal_word]])
+  @ kill_style
+  @ universal_rules.CLEAN_SPACES
+];

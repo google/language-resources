@@ -1,0 +1,468 @@
+#
+# All list of the most important football clubs in the netherlands to parse
+# sports scores correctly (Nederland - Duitsland 2-1 -> 'twee een' instead of
+# 'twee tot een'
+# If they consist of multiple words they are often  spelled out or only shown
+# partially (sc enschede -> enschede, real madrid -> madrid) to also match
+# other clubs with the same end-word.
+# Hopefully this does not overmatch, but if it does the result is not
+# very bad.
+#
+
+#
+# premierleague (january 2016)
+#
+Arsenal
+Aston Villa
+Bournemouth
+Chelsea
+Crystal Palace
+Everton
+Leicester City
+Leicester
+Liverpool
+Manchester City
+Man City	Manchester City
+Manchester United
+Man Utd	Manchester United
+Newcastle United
+Newcastle
+Norwich City
+Norwich
+Southampton
+Stoke City
+Stoke
+Sunderland
+Swansea City
+Swansea
+Tottenham Hotspur
+Spurs
+Watford
+West Bromwich Albion
+West Brom
+West Ham United
+West Ham
+
+#
+# List of countries of the world
+#
+Abchasië
+Afganistan
+Akrotiri en Dhekelië
+Åland
+Albanië
+Algerië
+Amerikaanse Samoa
+Andorra
+Angola
+Anguilla
+Antigua en Barbuda
+Argentinië
+Armenië
+Aruba
+Ascension-eiland
+Australië
+Azerbeidjan
+Bahamas
+Bahrein
+Bangladesj
+Barbados
+Belarus
+België
+Belize
+Benin
+Bermuda
+Bhoetan
+Birma
+Bolivia
+Bosnië-Herzegowina
+Botswana
+Brasilië
+Britse Maagde-eilande
+Broenei
+Bulgarye
+Burkina Faso
+Burundi
+Chili
+Ciprus
+Cocos-eilande
+Comore
+Cookeilande
+Costa Rica
+Denemarke
+Dhekelië
+Djiboeti
+Dominika
+Dominikaanse Republiek
+Duitsland
+Ecuador
+Egipte
+Eiland Man
+Ekwatoriaal-Guinee
+El Salvador
+Eritrea
+Estland
+Ethiopië
+Falklandeilande
+Faroëreilande
+Fidji
+Filippyne
+Finland
+Frankryk
+Franse Polinesië
+Gaboen
+Gambië
+Georgië
+Ghana
+Gibraltar
+Griekeland
+Groenland
+Grenada
+Guam
+Guatemala
+Guernsey
+Guinee
+Guinee-Bissau
+Guyana
+Haïti
+Honduras
+Hongarye
+Hongkong
+Ierland
+Indië
+Indonesië
+Iran
+Irak
+Israel
+Italië
+Ivoorkus
+Jamaika
+Japan
+Jemen
+Jersey
+Jordanië
+Kaaimanseilande
+Kaap Verde
+Kambodja
+Kameroen
+Kanada
+Kazakstan
+Katar
+Kenia
+Kirgisië
+Kiribati
+Koeweit
+Colombië
+Kolombië
+Demokratiese Republiek van die Kongo
+Republiek van die Kongo
+Noord-Korea
+Suid-Korea
+Kroasië
+Kuba
+Laos
+Lesotho
+Letland
+Libanon
+Liberië
+Libië
+Liechtenstein
+Litaue
+Luxemburg
+Madagaskar
+Malawi
+Maleisië
+Maledive-eilande
+Mali
+Malta
+Makau
+Marokko
+Marshalleilande
+Macedonië
+Mauritanië
+Mauritius
+Mayotte
+Meksiko
+Mianmar
+Mikronesië
+Moldowa
+Monaco
+Mongolië
+Montenegro
+Montserrat
+Mosambiek
+Nagorno-Karabach
+Namibië
+Nauru
+Nepal
+Nederland
+Nederlandse Antille
+Nieu-Kaledonië
+Nieu-Seeland
+Nicaragua
+Niger
+Nigerië
+Niue
+Norfolk-eiland
+Noord-Ciprus
+Noord-Mariana-eilande
+Noord-Korea
+Noorweë
+Oekraïne
+Oesbekistan
+Oman
+Oostenryk
+Oos-Timor
+Pakistan
+Palau
+Palestynse Owerheid
+Panama
+Papoea-Nieu-Guinee
+Paraguay
+Peru
+Pitcairn-eilande
+Pole
+Portugal
+Pridnestrovië
+Puerto Rico
+Roemenië
+Rusland
+Rwanda
+Arabiese Demokratiese Republiek van Sahrawi
+Samoa
+San Marino
+São Tomé en Principe
+Saoedi-Arabië
+Senegal
+Sentraal-Afrikaanse Republiek
+Serwië
+Seychelle
+Sierra Leone
+Singapoer
+Sint-Bartholomeus
+Sint Helena
+Sint Kitts en Nevis
+Sint Lucia
+Sint-Martin
+Sint-Pierre en Miquelon
+Sint Vincent en die Grenadines
+Sirië
+Sjina
+Taiwan
+Slowakye
+Slowenië
+Soedan
+Solomoneilande
+Somalië
+Somaliland
+Spanje
+Sri Lanka
+Suid-Afrika
+Suid-Korea
+Suid-Ossetië
+Suid-Soedan
+Suriname
+Svalbard
+Swaziland
+Swede
+Switserland
+Tadjikistan
+Taiwan
+Tanzanië
+Thailand
+Timor-Leste
+Togo
+Tokelau
+Tonga
+Transnistrië
+Trinidad en Tobago
+Tristan da Cunha
+Tsjad
+Tsjeggiese Republiek
+Tunisië
+Turkye
+Turkmenistan
+Turks- en Caicoseilande
+Tuvalu
+Uganda
+Uruguay
+Vanuatu
+Vatikaanstad
+Venezuela
+Verenigde Arabiese Emirate
+Verenigde Koninkryk
+Verenigde State van Amerika
+Amerikaanse Maagde-eilande
+Viëtnam
+Wallis en Futuna
+Wes Sahara
+Ysland
+Zambië
+Zimbabwe
+Engeland
+Skotland
+Wallis
+
+#
+# ICC: Full International Cricket Council members
+#
+Australië
+Bangladesj
+Engeland
+Indië
+Nieu-Seeland
+Pakistan
+Suid-Afrika
+Sri Lanka
+Wes-Indië
+Zimbabwe
+
+#
+# ICC: Associate Members with T20I status
+#
+Afganistan
+Hongkong
+Ierland
+Nederland
+Skotland
+Verenigde Arabiese Emirate
+Papoea-Nieu-Guinee
+Oman
+
+#
+# IPL: teams
+#
+Delhi Daredevils
+Kings XI Punjab
+Kolkata Knight Riders
+Mumbai Indians
+Royal Challengers Bangalore
+Sunrisers Hyderabad
+Team Pune
+Team Rajkot
+
+#
+# Super 16 (2016)
+#
+Brumbies
+Force
+Rebels
+Reds
+Waratahs
+Blues
+Chiefs
+Crusaders
+Highlanders
+Hurricanes
+Bulls
+Cheetahs
+Stormers
+Sunwolves
+Kings
+Lions
+Sharks
+Jaguares
+
+#
+# Castle cup 2016
+#
+Pumas
+Springboks
+Kiwis
+Wallabies
+
+#
+# SA teams
+#
+proteas
+bafana bafana
+
+#
+# Domestic SA teams
+#
+cape cobras
+dolphins
+knights
+lions
+titans
+warriors
+
+#
+# PSL premier league
+#
+Wits
+Sundowns
+Black Aces
+Chiefs
+Plat Stars
+Arrows
+Celtic
+SS Utd
+Chippa Utd
+FS Stars
+Ajax
+Pirates
+Polokwane
+Cosmos
+Tuks
+Maritzburg
+Bidvest Wits
+Mamelodi Sundowns
+Black Aces
+Kaizer Chiefs
+Platinum Stars
+Golden Arrows
+Bloem Celtic
+SuperSport United
+Chippa United
+Free State Stars
+Ajax Cape Town
+Orlando Pirates
+Polokwane City
+Jomo Cosmos
+University of Pretoria
+Maritzburg Utd
+
+#
+# PSL First division
+#
+Baroka FC
+Mbombela
+Mbombela United
+CT All Stars
+Cape Town All Stars
+Witbank Spurs
+Royal Eagles
+Highlands
+Highlands Park
+Milano United
+Milano United AFC
+AmaZulu
+Black Leopards
+Thanda Royal
+Thanda Royal Zulu FC
+Santos
+Vasco Da Gama
+African Warriors
+Swallows
+Moroka Swallows
+FC Cape Town
+Mthatha Bucks
+
+#
+# Curriebeker
+#
+Griekwas
+Luiperds
+Natalse Haaie
+Pumas
+Grens Bulldogs
+Oostelike Provinsie
+Vrystaat Cheetahs
+Griffons
+Boland Kavaliers
+SWD Arende
+Westelike Provinsie
+Valke
+Goue Leeus
+Blou Bulle

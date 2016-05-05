@@ -1,0 +1,93 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2016 and onwards, Google, Inc.
+
+# Afrikaans-specific parser for measures.
+# Extends universal measure parser, adding support for
+# locale-specific conventions. For example, "km/h" would
+# be "km/h" in Afrikaans, but pronounced as "kilomoter per uur"
+
+# This grammar is more flexible about separators than the
+# Afrikaans decimal grammar: the decimal grammar accepts
+# only decimal commas, but this grammar also accepts
+# decimal points if the fractional part of the number
+# has just one or two digits. We can be sure these
+# are intended as decimals because of the measure.
+# Sources like Wikipedia commonly use a decimal point
+# rather than a decimal comma under these conditions,
+# e.g. "14.42 km2" instead of "14,42 km2".
+
+import 'mapper.grm' as mapper;
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+unit_plural = StringFile[
+    'measure_plural.txt'];
+unit_singular = StringFile[
+  'measure_singular.txt'];
+unit_prefixes = StringFile[
+  'measure_prefixes.txt'];
+afrikaans_abbreviations = StringFile[
+  'measure_abbreviations.txt'];
+
+afrikaans_units = Project[(unit_prefixes?
+                      unit_singular | unit_plural),
+                    'output'];
+
+# power units not included by universal measure grammar
+p_units = ("myl" : "mile");
+power_units = Optimize[(universal_rules.UNIT_PREFIXES_ALL? p_units universal_rules.POWERS)
+                       @ universal_rules.REWRITE_POWERS];
+
+# Combine list of Afrikaans-specific units with universal list, measures in the
+# universal measure grammar have a higher weight so we can override
+# abbreviations
+# We filter MB and KB as they are pronounced as lseq's in Afrikaans
+all_units = ((universal_rules.sigma_star) @ universal_rules.ALL_UNITS <1>) |
+            (afrikaans_abbreviations ("." : "")?) |
+            power_units |
+            (afrikaans_units <-1>);
+
+# Accept fractions, decimal numbers using the decimal point,
+# and decimal numbers using a comma if the fractional part
+# has just one or two digits.
+limited_decimal_fractional_part = ("" : "fractional_part: \"")
+                                  (universal_rules.kDigit{1,2} @ universal_rules.DIGIT)
+                                  ("" : "\"");
+
+limited_decimal = universal_rules.INTEGER_DECIMAL
+                  ("." : " ")
+                  limited_decimal_fractional_part;
+limited_decimal_markup = ("" : " decimal { ") limited_decimal ("" : " }");
+
+number = mapper.AFRIKAANS_FRACTION_MARKUP |
+         universal_rules.INTEGER_DECIMAL_DOT_MARKUP |
+         limited_decimal_markup;
+
+measure_no_markup = number universal_rules.one_space universal_func.UnitMarkup[all_units];
+
+# s:second and others are disabled in the universal measure grammar for
+# overgenerating, however after the 'per' there is much less chance of
+# overgenerating
+overgenerating_units = all_units | ("s" : "second") | ("min" : "minute");
+
+measure_with_markup = universal_func.MeasureMarkup[number,
+                          all_units ("/" overgenerating_units)?] |
+                      universal_func.UnitsPerUnitsMarkup["", "",
+                          (("per " | "p/") : "per"), overgenerating_units] |
+                      universal_func.UnitsPerUnitsMarkup["", "",
+                          ("/" : "per"), all_units] |
+                      universal_rules.COMPOUND_MEASURES;
+
+export AFRIKAANS_MEASURE = Optimize[measure_no_markup];
+export AFRIKAANS_MEASURE_MARKUP = Optimize[measure_with_markup];

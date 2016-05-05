@@ -1,0 +1,32 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2016 and onwards, Google, Inc.
+
+# Parser for digit sequences, we extend the universal classifier for words like
+# "radio 538"
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+export DIGIT = universal_rules.DIGIT;
+export DIGIT_MARKUP = universal_rules.DIGIT_MARKUP;
+
+
+# Digits with neighbouring contexts
+export CONTEXT_DIGIT_MARKUP = Optimize[
+  universal_rules.CONTEXT_DIGIT_MARKUP |
+  # radio 1584
+  ((universal_rules.lower_case @ "radio" @ universal_rules.word_token)
+   universal_rules.token_delimiter universal_rules.del_space_star
+   ("1584" @ DIGIT_MARKUP))
+];

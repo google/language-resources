@@ -1,0 +1,35 @@
+AE	astronomical unit
+d/m	parts per million
+dm.	inch
+kG	kilo byte
+sek.	second
+s.	second
+persent	percent
+pk	horsepower
+km/h	kilometer per hour
+m.p.u	miles per hour
+ps.	percent
+p.u.	per hour
+j.	year
+jt.	yard
+d.	day
+md.	month
+bl.	page
+t.	teaspoon
+e.	tablespoon
+kJ	kilojoule
+sm.	nautical mile
+st	piece
+pst	per piece
+vt.	feet
+o.p.m	revolutions per minute
+o/m	revolutions per minute
+o.p.s.	revolutions per second
+o/s.	revolutions per second
+p.j.	per year
+p.jt.	per yard
+p.u.	per hour
+p.w.	per week
+u.	hour
+v.p.m.	feet per minute
+v/m	feet per minute

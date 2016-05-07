@@ -53,13 +53,13 @@ new_git_repository(
 new_git_repository(
     name = "googletest",
     build_file = "googletest.BUILD",
-    commit = "ff5ffd457e032c8be8a64a7a94c824063c8b11e3",
+    commit = "d225acc90bc3a8c420a9bcd1f033033c1ccd7fe0",
     remote = "https://github.com/google/googletest.git",
 )
 
 git_repository(
     name = "protobuf",
-    commit = "5e933847cc9e7826f1a9ee8b3dc1df4960b1ea5d",
+    commit = "d392ed4577a7c2e795a7f035a523f4c800123c41",
     remote = "https://github.com/google/protobuf.git",
 )
 

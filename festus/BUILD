@@ -403,3 +403,16 @@ cc_test(
         ":weight",
     ],
 )
+
+cc_binary(
+    name = "fst2re",
+    srcs = ["fst2re.cc"],
+    deps = [
+        "@openfst//:fst",
+        ":algebraic-path",
+        ":arc",
+        ":expression",
+        ":term-semiring",
+        ":weight",
+    ],
+)

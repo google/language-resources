@@ -69,3 +69,10 @@ new_git_repository(
     commit = "34c13ddfab0e35422f4c3979f360635a8c050260",
     remote = "https://github.com/google/farmhash.git",
 )
+
+new_git_repository(
+    name = "re2",
+    build_file = "re2.BUILD",
+    tag = "2016-05-01",
+    remote = "https://github.com/google/re2.git",
+)

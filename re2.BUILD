@@ -6,6 +6,7 @@ cc_library(
         "re2/stringpiece.h",
         "re2/variadic_function.h",
     ],
+    includes = ["."],
     deps = ["re2-impl"],
     visibility = ["//visibility:public"],
 )

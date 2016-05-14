@@ -76,3 +76,10 @@ new_git_repository(
     tag = "2016-05-01",
     remote = "https://github.com/google/re2.git",
 )
+
+new_git_repository(
+    name = "sparrowhawk",
+    build_file = "sparrowhawk.BUILD",
+    tag = "0.1",
+    remote = "https://github.com/google/sparrowhawk.git",
+)

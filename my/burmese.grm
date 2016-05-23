@@ -361,7 +361,11 @@ g2p_exceptions =
 ("".g : "".p <-1>)
 ;
 
-g2p_syllable = g2p_regular | g2p_other | g2p_exceptions;
+# Override pronunciation of လည်း so that it comes out as /lɛ́/.
+g2p_le = "la nnya asat visarga".g : "l ɛ́".p <-10>;
+
+
+g2p_syllable = g2p_regular | g2p_other | g2p_exceptions | g2p_le;
 
 syllable_boundary = "".g : ".".p;
 

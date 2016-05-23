@@ -75,3 +75,12 @@ py_binary(
     srcs = ["festival_lexicon_from_tsv.py"],
     default_python_version = "PY2",
 )
+
+cc_binary(
+    name = "sh-utter",
+    srcs = ["sh-utter.cc"],
+    deps = [
+        "@openfst//:base",
+        "@sparrowhawk//:normalizer",
+    ],
+)

@@ -106,6 +106,7 @@ sh_binary(
         "G2P.fst",
         "custom_phoneme.syms",
         "split_sentences.py",
+        "tokenize.py",
         "//utils:thrax_g2p",
     ],
 )

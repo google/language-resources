@@ -44,22 +44,50 @@ def GetToken(match):
   return items[0]
 
 
-def main(unused_argv):
+def Tokenize(line):
+  end = 0
+  for match in TOKEN.finditer(line):
+    if match.start() != end:
+      unmatched = line[end:match.start()]
+      yield None, unmatched
+    kind_token = GetToken(match)
+    yield kind_token
+    end = match.end()
+  if end < len(line):
+    yield None, line[end:]
+  return
+
+
+def Debug():
   for line in STDIN:
-    STDOUT.write('\n%s' % line)
+    STDOUT.write('\n%s\n' % line)
     line = line.rstrip('\n')
-    end = 0
-    for match in TOKEN.finditer(line):
-      if match.start() != end:
-        unmatched = line[end:match.start()]
-        STDOUT.write('Unmatched: %s\n' % repr(unmatched))
-      kind_token = GetToken(match)
-      STDOUT.write('token %6s: %s\n' % kind_token)
-      end = match.end()
-    if end < len(line):
-      STDOUT.write('Unmatched: %s\n' % repr(line[end:]))
+    for kind, token in Tokenize(line):
+      if kind:
+        STDOUT.write('token %6s: %s\n' % (kind, token))
+      else:
+        STDOUT.write('Unmatched: %s\n' % repr(token))
+  return
+
+
+def main():
+  for line in STDIN:
+    line = line.rstrip('\n')
+    if not line:
+      STDOUT.write('\n')
+    tokens = list(Tokenize(line))
+    if not tokens:
+      continue
+    if all(kind in ('native', 'punct', 'space') for (kind, token) in tokens):
+      STDOUT.write('%s\n' % ' '.join(token for (kind, token) in tokens
+                                     if kind == 'native'))
+    else:
+      STDERR.write('%s\n' % line)
   return
 
 
 if __name__ == '__main__':
-  main(sys.argv)
+  if len(sys.argv) > 1 and sys.argv[1].endswith('debug'):
+    Debug()
+  else:
+    main()

@@ -8,6 +8,7 @@ runfiles="${0}.runfiles"
 
 G2P () {
   cut -f 1 |
+  "$runfiles/my/tokenize.py" |
   "$runfiles/utils/thrax_g2p" \
     --fst="$runfiles/my/G2P.fst" \
     --phoneme_syms="$runfiles/my/custom_phoneme.syms"

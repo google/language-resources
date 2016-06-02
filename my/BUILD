@@ -17,6 +17,8 @@
 
 package(default_visibility = ["//visibility:public"])
 
+licenses(["notice"])  # Apache 2.0
+
 sh_test(
     name = "ipa_phonemes_are_uniquely_decodable",
     timeout = "short",
@@ -57,7 +59,7 @@ genrule(
 
 # It is difficult to get rid of phoneme.syms: doing so would make compiling the
 # G2P grammar much messier, since the location of phoneme.syms must be known.
-# Comprompise: keep phoneme.syms and ensure that it matches phonemes.txt.
+# Compromise: keep phoneme.syms and ensure that it matches phonemes.txt.
 sh_test(
     name = "phoneme_syms_is_current",
     timeout = "short",
@@ -112,15 +114,15 @@ sh_binary(
 )
 
 sh_binary(
-  name = "train-ngram-model",
-  srcs = ["train-ngram-model.sh"],
-  data = [
-      "@openfst//:farcompilestrings",
-      "@opengrm_ngram//:ngramcount",
-      "@opengrm_ngram//:ngrammake",
-      "@opengrm_ngram//:ngramshrink",
-      "codepoint.syms",
-      "extract_text.py",
-      "text_to_symbols.py",
-  ],
+    name = "train-ngram-model",
+    srcs = ["train-ngram-model.sh"],
+    data = [
+        "@openfst//:farcompilestrings",
+        "@opengrm_ngram//:ngramcount",
+        "@opengrm_ngram//:ngrammake",
+        "@opengrm_ngram//:ngramshrink",
+        "codepoint.syms",
+        "extract_text.py",
+        "text_to_symbols.py",
+    ],
 )

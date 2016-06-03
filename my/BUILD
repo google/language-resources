@@ -102,6 +102,16 @@ genrule(
 )
 
 sh_binary(
+    name = "g2p",
+    srcs = ["g2p.sh"],
+    data = [
+        "G2P.fst",
+        "ipa_phoneme.syms",
+        "//utils:thrax_g2p",
+    ],
+)
+
+sh_binary(
     name = "prepare-data-for-correction",
     srcs = ["prepare-data-for-correction.sh"],
     data = [

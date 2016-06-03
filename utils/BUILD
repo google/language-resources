@@ -1,4 +1,4 @@
-# tools/BUILD
+# utils/BUILD
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 # Author: mjansche@google.com (Martin Jansche)
 
 package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])  # Apache 2.0
 
 exports_files(["eval.sh"])
 

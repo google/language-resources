@@ -406,6 +406,8 @@ export G2P = Optimize[
 @ phonological_postprocessing
 ];
 
+export B2P = Optimize[UTF8_TO_GRAPHEME* @ G2P];
+
 #
 # Phonemic respelling (phoneme-to-grapheme) rules
 #

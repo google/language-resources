@@ -88,7 +88,7 @@ genrule(
 )
 
 genrule(
-    name = "g2p_fst",
+    name = "make_g2p_fst",
     srcs = ["burmese.far"],
     outs = ["G2P.fst"],
     cmd = """
@@ -99,6 +99,33 @@ genrule(
           $<
         """,
     tools = ["@openfst//:farextract"],
+)
+
+genrule(
+    name = "make_b2p_fsts",
+    srcs = [
+        "burmese.far",
+        "ipa_phoneme.syms",
+    ],
+    outs = [
+        "B2P.fst",
+        "B2P_IPA.fst",
+    ],
+    cmd = """
+        $(location @openfst//:farextract) \
+          --filename_prefix=$(@D)/ \
+          --keys=B2P \
+          --filename_suffix=.fst \
+          $(location burmese.far) &&
+        $(location @openfst//:fstsymbols) \
+          --osymbols=$(location ipa_phoneme.syms) \
+          $(location B2P.fst) \
+          $(location B2P_IPA.fst)
+        """,
+    tools = [
+        "@openfst//:farextract",
+        "@openfst//:fstsymbols",
+    ],
 )
 
 sh_binary(

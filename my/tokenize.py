@@ -29,12 +29,15 @@ STDOUT = codecs.getwriter('utf-8')(sys.stdout)
 STDERR = codecs.getwriter('utf-8')(sys.stderr)
 
 TOKEN = re.compile(r'''
-  (?P<native>[\u1000-\u103F\u104C-\u104F\u1050-\u1059\u200C]+)
+  (?P<native>[\u1000-\u103F\u104C-\u104F\u1050-\u108F\u109A-\u109D\u200C\uAA60-\uAA7F\uA9E0-\uA9EF\uA9FA-\uA9FE]+)
 | (?P<latin>[A-Za-z]+)
 | (?P<number>[\u101D\u1040-\u1049]*[\u1040-\u1049]+[\u101D\u1040-\u1049]*)
-| (?P<punct>[:\u104A\u104B\u2018\u2019\u2013\u2014]+)
+| (?P<number1>[0-9]+)
+| (?P<number2>[\u1090-\u1099]+)
+| (?P<number3>[\uA9F0-\uA9F9]+)
+| (?P<punct>[-"&'()*,./:?\[\]\u104A\u104B\u2013\u2014\u2018\u2019\u201C\u201D\u2026]+)
 | (?P<space>[\u0020\u00A0\u200B]+)
-| (?P<symbol>[$]+)
+| (?P<symbol>[$+=|\u109E\u109F]+)
 ''', re.VERBOSE)
 
 

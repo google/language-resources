@@ -1,90 +1,90 @@
-k	k
-c	kʰ
-g	g
-ng	ŋ
-ng2	ŋ̊
-k1	tɕ
-c1	tɕʰ
-g1	dʑ
-s	s
-sh	sʰ
-z	z
-ny	ɲ
-ny2	ɲ̥
-t	t
-th	tʰ
-d	d
-n	n
-n2	n̥
-p	p
-ph	pʰ
-b	b
-m	m
-m2	m̥
-j	j
-r	r
-s2	ʃ
-l	l
-l2	l̥
-w	w
-w2	w̥
-ts	θ
-ds	ð
-h	h
-?	ʔ
-a-	ə
-i	ì
-i;	í
-i,	ḭ
-i'	ḭˑ	consider merging from iT'
-u	ù
-u;	ú
-u,	ṵ
-u'	ṵˑ	consider merging from uT'
-e	è
-e;	é
-e,	ḛ
-o	ò
-o;	ó
-o,	o̰
-eL	ɛ̀
-eL;	ɛ́
-eL,	ɛ̰
-au	ɔ̀
-au;	ɔ́
-au,	ɔ̰
-a	à
-a;	á
-a,	a̰
-a'	a̰ˑ	consider merging into aT'
-iN	ɪ̀ɴ
-iN;	ɪ́ɴ
-iN,	ɪ̰ɴ
-uN	ʊ̀ɴ
-uN;	ʊ́ɴ
-uN,	ʊ̰ɴ
-eiN	èɪ̯ɴ
-eiN;	éɪ̯ɴ
-eiN,	ḛɪ̯ɴ
-oaN	òʊ̯ɴ
-oaN;	óʊ̯ɴ
-oaN,	o̰ʊ̯ɴ
-aiN	àɪ̯ɴ
-aiN;	áɪ̯ɴ
-aiN,	a̰ɪ̯ɴ
-auN	àʊ̯ɴ
-auN;	áʊ̯ɴ
-auN,	a̰ʊ̯ɴ
-aN	àɴ
-aN;	áɴ
-aN,	a̰ɴ
-iT'	ɪ	consider merging into i'
-uT'	ʊ	consider merging into u'
-ei'	eɪ̯
-oa'	oʊ̯
-e'	ɛ
-ai'	aɪ̯
-au'	aʊ̯
-aT'	a	consider mering from a'
-.	.
-/	|
+k	k	k
+c	kʰ	kh
+g	g	g
+ng	ŋ	ng
+ng2	ŋ̊	hng
+k1	tɕ	tc
+c1	tɕʰ	tch
+g1	dʑ	dz
+s	s	s
+sh	sʰ	sh
+z	z	z
+ny	ɲ	ny
+ny2	ɲ̥	hny
+t	t	t
+th	tʰ	th
+d	d	d
+n	n	n
+n2	n̥	hn
+p	p	p
+ph	pʰ	ph
+b	b	b
+m	m	m
+m2	m̥	hm
+j	j	j
+r	r	r
+s2	ʃ	S
+l	l	l
+l2	l̥	hl
+w	w	w
+w2	w̥	hw
+ts	θ	T
+ds	ð	D
+h	h	h
+?	ʔ	q
+a-	ə	@
+i	ì	iL
+i;	í	iH
+i,	ḭ	iC
+i'	ḭˑ	IK	consider merging from iT'
+u	ù	uL
+u;	ú	uH
+u,	ṵ	uC
+u'	ṵˑ	UK	consider merging from uT'
+e	è	eL
+e;	é	eH
+e,	ḛ	eC
+o	ò	oL
+o;	ó	oH
+o,	o̰	oC
+eL	ɛ̀	EL
+eL;	ɛ́	EH
+eL,	ɛ̰	EC
+au	ɔ̀	OL
+au;	ɔ́	OH
+au,	ɔ̰	OC
+a	à	aL
+a;	á	aH
+a,	a̰	aC
+a'	a̰ˑ	aK	consider merging into aT'
+iN	ɪ̀ɴ	INL
+iN;	ɪ́ɴ	INH
+iN,	ɪ̰ɴ	INC
+uN	ʊ̀ɴ	UNL
+uN;	ʊ́ɴ	UNH
+uN,	ʊ̰ɴ	UNC
+eiN	èɪ̯ɴ	eINL
+eiN;	éɪ̯ɴ	eINH
+eiN,	ḛɪ̯ɴ	eINC
+oaN	òʊ̯ɴ	oUNL
+oaN;	óʊ̯ɴ	oUNH
+oaN,	o̰ʊ̯ɴ	oUNC
+aiN	àɪ̯ɴ	aINL
+aiN;	áɪ̯ɴ	aINH
+aiN,	a̰ɪ̯ɴ	aINC
+auN	àʊ̯ɴ	aUNL
+auN;	áʊ̯ɴ	aUNH
+auN,	a̰ʊ̯ɴ	aUNC
+aN	àɴ	aNL
+aN;	áɴ	aNH
+aN,	a̰ɴ	aNC
+iT'	ɪ	IK	consider merging into i'
+uT'	ʊ	UK	consider merging into u'
+ei'	eɪ̯	eIK
+oa'	oʊ̯	oUK
+e'	ɛ	EK
+ai'	aɪ̯	aIK
+au'	aʊ̯	aUK
+aT'	a	aK	consider mering from a'
+.	.	.
+/	|	|

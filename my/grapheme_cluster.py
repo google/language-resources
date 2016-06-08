@@ -26,7 +26,7 @@ import sys
 
 STDOUT = codecs.lookup('utf-8').streamwriter(sys.stdout)
 
-GRAPHEME_CLUSTER = re.compile(r'''
+UNICODE_GRAPHEME_CLUSTER = re.compile(r'''
   [()\u1040-\u104D\u104F\u200B]
 | (\u1004\u103A\u1039)? \u104E
 | ([\u1004\u101B]\u103A\u1039)?                # kinzi etc. above
@@ -38,6 +38,28 @@ GRAPHEME_CLUSTER = re.compile(r'''
 ''', re.VERBOSE)
 
 
+class GraphemeClusterer(object):
+
+  def __init__(self, which):
+    if which.startswith('z'):
+      self.pattern = ZAWGYI_GRAPHEME_CLUSTER
+    else:
+      self.pattern = UNICODE_GRAPHEME_CLUSTER
+    return
+
+  def GraphemeClusters(self, text):
+    end = 0
+    for match in self.pattern.finditer(text):
+      if match.start() != end:
+        unmatched = text[end:match.start()]
+        yield False, unmatched
+      yield True, match.group(0)
+      end = match.end()
+    if end < len(text):
+      yield False, text[end:]
+    return
+
+
 def GetlineUnbuffered(f=sys.stdin):
   while True:
     line = f.readline()
@@ -47,24 +69,17 @@ def GetlineUnbuffered(f=sys.stdin):
   return
 
 
-def GraphemeClusters(text):
-  end = 0
-  for match in GRAPHEME_CLUSTER.finditer(text):
-    if match.start() != end:
-      unmatched = text[end:match.start()]
-      yield False, unmatched
-    yield True, match.group(0)
-    end = match.end()
-  if end < len(text):
-    yield False, text[end:]
-  return
-
-
 if __name__ == '__main__':
+  if len(sys.argv) != 2 or sys.argv[1].lower() not in ('unicode', 'zawgyi'):
+    STDOUT.write('Usage: %s (unicode|zawgyi)\n' % sys.argv[0])
+    sys.exit(2)
+
+  clusterer = GraphemeClusterer(sys.argv[1].lower())
+
   for line in GetlineUnbuffered():
     line = line.rstrip('\n')
     STDOUT.write('Line: %s\n' % line)
-    for matched, text in GraphemeClusters(line):
+    for matched, text in clusterer.GraphemeClusters(line):
       if matched:
         STDOUT.write('  Grapheme cluster: %s\n' % text)
       else:

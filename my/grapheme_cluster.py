@@ -42,7 +42,7 @@ ZAWGYI_GRAPHEME_CLUSTER = re.compile(r'''
 | \u1031?                                                        # prevowel e
   [\u103B\u107E-\u1084]?                                         # medial r
   [\u1000-\u102A\u1040\u106A\u106B\u106E\u106F\u1086\u108F-\u1092\u1097]
-  ( [\u102B-\u1030\u1032-\u103F\u105A\u1060-\u1069\u106C\u106D]  # modifiers
+  ( [\u102B-\u1030\u1032-\u103A\u103C-\u103F\u105A\u1060-\u1069\u106C\u106D]
   | [\u1070-\u107D\u1085\u1087-\u108E\u1093-\u1096\u200C\u200D]
   )*
 ''', re.VERBOSE)

@@ -48,7 +48,7 @@ DOCUMENT_HEADER = r'''
 \usepackage{fontspec}
 \setmainfont{Noto Sans}
 \newfontfamily\unicode{Noto Sans Myanmar}
-\newfontface\zawgyi{Zawgyi-One}
+\newfontface\zawgyi{ZawgyiOne.ttf}[Path=fonts/]
 \usepackage{longtable}
 \usepackage[table]{xcolor}
 \definecolor{light-gray}{gray}{0.95}
@@ -56,17 +56,17 @@ DOCUMENT_HEADER = r'''
 \setlength{\tabcolsep}{24bp}
 \begin{document}
 \begin{center}
-\Large
+\large
 \rowcolors{1}{light-gray}{white}
-\begin{longtable}{r l}
-{\normalfont\bf ID} & {\normalfont\bf Zawgyi} \\*
-& {\normalfont\bf Unicode} \\[10bp]
+\begin{longtable}{r l l}
+\textbf{Line} & \textbf{Zawgyi}  & \textbf{Codepoints} \\*
+              & \textbf{Unicode} & \\[10bp]
 \endhead
 '''
 
 TABLE_ITEM = r'''
-%s & {\zawgyi %s} \\*
-%s & {\unicode %s} \\[10bp]
+%s & {\zawgyi %s}  & {\small %s} \\*
+%s & {\unicode %s} & {\small %s} \\[10bp]
 '''
 
 DOCUMENT_FOOTER = r'''
@@ -83,8 +83,11 @@ def main(unused_argv):
     line = line.rstrip('\n')
     fields = line.split('\t')
     assert len(fields) == 2
+    z, u = fields
     n += 1
-    STDOUT.write(TABLE_ITEM % ('% 4d' % n, fields[0], ' ' * 4, fields[1]))
+    STDOUT.write(TABLE_ITEM %
+                 ('% 4d' % n, z, ' '.join('%04X' % ord(c) for c in z),
+                  ' ' * 4,    u, ' '.join('%04X' % ord(c) for c in u)))
   STDOUT.write(DOCUMENT_FOOTER)
   return
 

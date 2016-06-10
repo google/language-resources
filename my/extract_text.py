@@ -30,14 +30,9 @@ STDERR = codecs.getwriter('utf-8')(sys.stderr)
 
 # Contiguous ranges of text in Myanmar codeblocks.
 MYANMAR_RE = re.compile(r'''
-[\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF()\u200B-\u200D]*
+[\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF()\u200B-\u200D-]*
 [\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF]+
-[\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF()\u200B-\u200D]*
-''', re.VERBOSE)
-
-# Codepoints for which Zawgyi encoding behaves differently from Unicode.
-ZAWGYI_DIFFERENCE_RE = re.compile(r'''
-[\u1031\u1033\u1034\u1039-\u103D\u104E\u105A\u1060-\u1097]
+[\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF()\u200B-\u200D-]*
 ''', re.VERBOSE)
 
 
@@ -54,16 +49,29 @@ def Split(line):
   return
 
 
-def main(unused_argv):
+def Debug():
+  for line in STDIN:
+    STDOUT.write('\n%s\n' % line)
+    line = line.rstrip('\n')
+    for myanmar, text in Split(line):
+      if myanmar:
+        STDOUT.write('  matched: %s\n' % text)
+      else:
+        STDOUT.write('Unmatched: %s\n' % repr(text))
+  return
+
+
+def main():
   for line in STDIN:
     line = line.rstrip('\n')
     for myanmar, text in Split(line):
-      if not myanmar:
-        continue
-      if ZAWGYI_DIFFERENCE_RE.search(text):
+      if myanmar:
         STDOUT.write('%s\n' % text)
   return
 
 
 if __name__ == '__main__':
-  main(sys.argv)
+  if len(sys.argv) > 1 and sys.argv[1].endswith('debug'):
+    Debug()
+  else:
+    main()

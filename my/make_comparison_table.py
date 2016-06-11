@@ -19,13 +19,17 @@
 
 Reads two-column tab-separated values from stdin and writes a LaTeX document to
 stdout. Column 1 of the input is expected to be in Zawgyi encoding; column 2 is
-expected to be in Unicode 5.2 encoding. The resulting document can be compiled
-with XeLaTeX from a recent version of TeX Live (tested with tl-20160609).
+expected to be in Unicode 5.1 encoding. The resulting document can be compiled
+with LuaLaTeX from a recent version of TeX Live (tested with tl-20160609).
 
 The output document requires the following TrueType fonts:
 
-* Noto Sans and Noto Sans Myanmar, which can be downloaded from
+* Noto Sans, which can be downloaded from
   https://www.google.com/get/noto/
+
+* Padauk, which can be downloaded from
+  http://scripts.sil.org/cms/scripts/page.php?item_id=Padauk
+  (tested with version 2.8)
 
 * Zawgyi-One, which was originally distributed by
   http://web.archive.org/web/20120628203851/http://www.zawgyi.net/
@@ -47,8 +51,8 @@ DOCUMENT_HEADER = r'''
 \usepackage[paperwidth=595bp,paperheight=792bp,margin=108bp]{geometry}
 \usepackage{fontspec}
 \setmainfont{Noto Sans}
-\newfontfamily\unicode{Noto Sans Myanmar}
-\newfontface\zawgyi{ZawgyiOne.ttf}[Path=fonts/]
+\newfontface\unicode{Padauk-book}[Path=fonts/,Scale=1.15,Script=Myanmar]
+\newfontface\zawgyi{ZawgyiOne}[Path=fonts/]
 \usepackage{longtable}
 \usepackage[table]{xcolor}
 \definecolor{light-gray}{gray}{0.95}

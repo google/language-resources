@@ -29,7 +29,7 @@ STDOUT = codecs.lookup('utf-8').streamwriter(sys.stdout)
 UNICODE_GRAPHEME_CLUSTER = re.compile(r'''
   [()\u1040-\u104D\u104F\u200B]
 | (\u1004\u103A\u1039)? \u104E
-| ([\u1004\u101B]\u103A\u1039)?                # kinzi etc. above
+| ([\u1004\u101B\u105A]\u103A\u1039)?          # kinzi above
   [\u1000-\u102A\u103F\u1050-\u1055]           # main independent letter
   (\u1039[\u1000-\u102A\u103F\u1050-\u1055])*  # stacked consonant below
   [\u103A-\u103E\u200C\u200D]*                 # asat and medials
@@ -88,9 +88,9 @@ if __name__ == '__main__':
 
   for line in GetlineUnbuffered():
     line = line.rstrip('\n')
-    STDOUT.write('Line: %s\n' % line)
+    STDOUT.write('Line\t%s\n' % line)
     for matched, text in clusterer.GraphemeClusters(line):
-      if matched:
-        STDOUT.write('  Grapheme cluster: %s\n' % text)
-      else:
-        STDOUT.write('  Unmatched: %s\n' % repr(text))
+      STDOUT.write('%s\t%s\t%s\n' %
+                   ('Cluster' if matched else 'Unmatched',
+                    text,
+                    ' '.join('%04X' % ord(c) for c in text)))

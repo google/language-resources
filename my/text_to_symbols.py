@@ -28,34 +28,32 @@ STDOUT = codecs.getwriter('utf-8')(sys.stdout)
 STDERR = codecs.getwriter('utf-8')(sys.stderr)
 
 
-def TextToSymbols(text):
-  for ch in text:
-    if ch in '\u200B\u200C\u200D':
-      continue
-    if ch in '()':
-      yield ch
-      continue
-    cp = ord(ch)
-    if 0xAA60 <= cp <= 0xAA7F:
-      yield 'AA60-AA7F'
-      continue
-    elif 0xA9E0 <= cp <= 0xA9FF:
-      yield 'A9E0-A9FF'
-      continue
-    assert 0x1000 <= cp <= 0x109F
-    if cp in (0x101D, 0x1040):
-      yield '101D|1040'
-    elif cp in (0x1044, 0x104E):
-      yield '1044|104E'
-    else:
-      yield '%04X' % cp
-  return
+def ReadSymbolTable(path):
+  symtab = {}
+  with codecs.open(path, 'r', 'utf-8') as reader:
+    for line in reader:
+      line = line.rstrip('\n')
+      fields = line.split('\t')
+      assert len(fields) == 2
+      label = int(fields[1])
+      if label == 0:
+        continue
+      symtab[label] = fields[0]
+  return symtab
 
 
-def main(unused_argv):
+def TextToSymbols(text, symtab):
+  return ' '.join(symtab[ord(ch)] for ch in text)
+
+
+def main(argv):
+  if len(argv) != 2:
+    STDERR.write('Usage: %s codepoint.syms\n' % argv[0])
+    sys.exit(2)
+  symtab = ReadSymbolTable(argv[1])
   for line in STDIN:
     line = line.rstrip('\n')
-    STDOUT.write('%s\n' % ' '.join(TextToSymbols(line)))
+    STDOUT.write('%s\n' % TextToSymbols(line, symtab))
   return
 
 

@@ -7,21 +7,24 @@ set -o pipefail
 order="${1:-3}"
 theta="${2:-0}"
 
-runfiles="${0}.runfiles"
+projdir="${0}.runfiles"
+openfst="${0}.runfiles/external/openfst"
+opengrm="${0}.runfiles/external/opengrm_ngram"
 
-"$runfiles/my/extract_text.py" |
-"$runfiles/my/text_to_symbols.py" |
-"$runfiles/external/openfst/farcompilestrings" \
-  --symbols="$runfiles/my/codepoint.syms" \
+"$projdir/my/extract_text.py" |
+"$projdir/my/text_to_symbols.py" \
+  "$projdir/my/codepoint.syms" |
+"$openfst/farcompilestrings" \
+  --symbols="$projdir/my/codepoint.syms" \
   --keep_symbols \
-  --generate_keys=6 |
-"$runfiles/external/opengrm_ngram/ngramcount" \
+  --generate_keys=7 |
+"$opengrm/ngramcount" \
   --order="$order" |
-"$runfiles/external/opengrm_ngram/ngrammake" \
+"$opengrm/ngrammake" \
   --check_consistency \
   --method=kneser_ney \
   --backoff |
-"$runfiles/external/opengrm_ngram/ngramshrink" \
+"$opengrm/ngramshrink" \
   --check_consistency \
   --method=seymore \
   --shrink_opt=2 \

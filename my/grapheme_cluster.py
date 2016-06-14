@@ -27,10 +27,10 @@ import sys
 STDOUT = codecs.lookup('utf-8').streamwriter(sys.stdout)
 
 UNICODE_GRAPHEME_CLUSTER = re.compile(r'''
-  [()\u1040-\u104D\u104F\u200B]
+  [-()\u1041-\u104D\u104F\u200B]
 | (\u1004\u103A\u1039)? \u104E
 | ([\u1004\u101B\u105A]\u103A\u1039)?          # kinzi above
-  [\u1000-\u102A\u103F\u1050-\u1055]           # main independent letter
+  [\u1000-\u102A\u103F\u1040\u1050-\u1055]     # main independent letter
   (\u1039[\u1000-\u102A\u103F\u1050-\u1055])*  # stacked consonant below
   [\u103A-\u103E\u200C\u200D]*                 # asat and medials
   [\u102B-\u1035\u1056-\u1059]*                # dependent vowels
@@ -38,8 +38,8 @@ UNICODE_GRAPHEME_CLUSTER = re.compile(r'''
 ''', re.VERBOSE)
 
 ZAWGYI_GRAPHEME_CLUSTER = re.compile(r'''
-  [()\u1041-\u104F\u200B]
-| \u1031?                                                        # prevowel e
+  [-()\u1041-\u104F\u200B]
+| \u1031*                                                        # prevowel e
   [\u103B\u107E-\u1084]?                                         # medial r
   [\u1000-\u102A\u1040\u106A\u106B\u106E\u106F\u1086\u108F-\u1092\u1097]
   ( [\u102B-\u1030\u1032-\u103A\u103C-\u103F\u105A\u1060-\u1069\u106C\u106D]

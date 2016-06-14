@@ -46,12 +46,13 @@ STDIN = codecs.getreader('utf-8')(sys.stdin)
 STDOUT = codecs.getwriter('utf-8')(sys.stdout)
 STDERR = codecs.getwriter('utf-8')(sys.stderr)
 
-DOCUMENT_HEADER = r'''
-\documentclass{article}
-\usepackage[paperwidth=595bp,paperheight=792bp,margin=108bp]{geometry}
+DOCUMENT_HEADER = r'''\documentclass{article}
+\usepackage{geometry}
+\geometry{paperwidth=595bp,paperheight=792bp,hmargin=72bp,vmargin=90bp}
 \usepackage{fontspec}
 \setmainfont{Noto Sans}
-\newfontface\unicode{Padauk-book}[Path=fonts/,Scale=1.15,Script=Myanmar]
+\newfontface\unicode{Padauk-book}[Path=fonts/,Scale=1.16,Script=Myanmar]
+%%\newfontface\unicode{mm3}[Path=fonts/,Scale=1.05,Script=Myanmar]
 \newfontface\zawgyi{ZawgyiOne}[Path=fonts/]
 \usepackage{longtable}
 \usepackage[table]{xcolor}
@@ -64,13 +65,13 @@ DOCUMENT_HEADER = r'''
 \rowcolors{1}{light-gray}{white}
 \begin{longtable}{r l l}
 \textbf{Line} & \textbf{Zawgyi}  & \textbf{Codepoints} \\*
-              & \textbf{Unicode} & \\[10bp]
+              & \textbf{Unicode} & \\[16bp]
 \endhead
 '''
 
 TABLE_ITEM = r'''
 %s & {\zawgyi %s}  & {\small %s} \\*
-%s & {\unicode %s} & {\small %s} \\[10bp]
+%s & {\unicode %s} & {\small %s} \\[12bp]
 '''
 
 DOCUMENT_FOOTER = r'''
@@ -90,8 +91,8 @@ def main(unused_argv):
     z, u = fields
     n += 1
     STDOUT.write(TABLE_ITEM %
-                 ('% 4d' % n, z, ' '.join('%04X' % ord(c) for c in z),
-                  ' ' * 4,    u, ' '.join('%04X' % ord(c) for c in u)))
+                 ('%4d' % n, z, ' '.join('%04X' % ord(c) for c in z),
+                  ' ' * 4,   u, ' '.join('%04X' % ord(c) for c in u)))
   STDOUT.write(DOCUMENT_FOOTER)
   return
 

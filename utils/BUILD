@@ -86,3 +86,13 @@ cc_binary(
         "@sparrowhawk//:normalizer",
     ],
 )
+
+cc_binary(
+    name = "lm-scores",
+    srcs = ["lm-scores.cc"],
+    deps = [
+        "@openfst//:fst",
+        "//festus:label-maker",
+        "//festus/runtime:fst-util",
+    ],
+)

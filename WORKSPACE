@@ -26,7 +26,7 @@ new_git_repository(
 new_git_repository(
     name = "googletest",
     build_file = "googletest.BUILD",
-    commit = "d225acc90bc3a8c420a9bcd1f033033c1ccd7fe0",
+    commit = "0a439623f75c029912728d80cb7f1b8b48739ca4",
     remote = "https://github.com/google/googletest.git",
 )
 
@@ -46,7 +46,7 @@ new_git_repository(
 new_git_repository(
     name = "re2",
     build_file = "re2.BUILD",
-    tag = "2016-05-01",
+    tag = "2016-06-01",
     remote = "https://github.com/google/re2.git",
 )
 

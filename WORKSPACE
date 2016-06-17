@@ -32,7 +32,7 @@ new_git_repository(
 
 git_repository(
     name = "protobuf",
-    tag = "v3.0.0-beta-3",
+    tag = "v3.0.0-beta-3.2",
     remote = "https://github.com/google/protobuf.git",
 )
 

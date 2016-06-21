@@ -36,11 +36,11 @@ a-	ə	@	@
 i	ì	iL	i_L
 i;	í	iH	i_H
 i,	ḭ	iC	i_k
-i'	ḭˑ	IK	I	consider merging from iT'
+i'	ḭˑ	IK	I?	consider merging from iT'
 u	ù	uL	u_L
 u;	ú	uH	u_H
 u,	ṵ	uC	u_k
-u'	ṵˑ	UK	U	consider merging from uT'
+u'	ṵˑ	UK	U?	consider merging from uT'
 e	è	eL	e_L
 e;	é	eH	e_H
 e,	ḛ	eC	e_k
@@ -56,7 +56,7 @@ au,	ɔ̰	OC	O_k
 a	à	aL	a_L
 a;	á	aH	a_H
 a,	a̰	aC	a_k
-a'	a̰ˑ	aK	a	consider merging into aT'
+a'	a̰ˑ	aK	a?	consider merging into aT'
 iN	ɪ̀ɴ	INL	I~_L
 iN;	ɪ́ɴ	INH	I~_H
 iN,	ɪ̰ɴ	INC	I~_k

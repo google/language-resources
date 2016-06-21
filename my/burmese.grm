@@ -70,7 +70,7 @@ export UTF8_TO_PHONEME = Optimize[
  ("t":"t".p)|("tʰ":"tʰ".p)|("d":"d".p)|("n":"n".p)|("n̥":"n̥".p)|
  ("p":"p".p)|("pʰ":"pʰ".p)|("b":"b".p)|("m":"m".p)|("m̥":"m̥".p)|
  ("j":"j".p)|
- ("r":"r".p)|("ʃ":"ʃ".p)|
+ ("ɹ":"ɹ".p)|("ʃ":"ʃ".p)|
  ("l":"l".p)|("l̥":"l̥".p)|
  ("w":"w".p)|("w̥":"w̥".p)|
  ("θ":"θ".p)|("ð":"ð".p)|
@@ -209,7 +209,7 @@ g2p_initial =
 # Other letters
 | ("ya".g       : "j".p)
 | ("ya -h".g    : "ʃ".p)
-| ("ra".g       : "j".p)
+| ("ra".g       : "ɹ".p)
 | ("ra -h".g    : "ʃ".p)
 | ("la".g       : "l".p)
 | ("la -h".g    : "l̥".p)
@@ -322,7 +322,7 @@ g2p_coda_consonant =
   | ("ba".g     : "b".p)
   | ("bha".g    : "b".p)
   | ("ma".g     : "m".p)  # e.g. in ခရင်မ် "cream"
-  | ("ra".g     : "j".p)  # silent in native words
+  | ("ra".g     : "ɹ".p)  # silent in native words
   | ("ra -h".g  : "ʃ".p)
   | ("la".g     : "l".p)  # silent in native words
   | ("ha".g     : "h".p)  # always silent?
@@ -400,13 +400,17 @@ phonological_postprocessing = Optimize[
 @ full_final_vowel
 ];
 
-export G2P = Optimize[
+g2p_with_r = Optimize[
   orthographic_preprocessing
 @ g2p_core
 @ phonological_postprocessing
 ];
 
-export B2P = Optimize[UTF8_TO_GRAPHEME* @ G2P];
+r_to_j = CDRewrite["ɹ".p : "j".p, "".p, "".p, pstar];
+
+export G2P = Optimize[g2p_with_r @ r_to_j];
+
+export B2P = Optimize[UTF8_TO_GRAPHEME* @ g2p_with_r];
 
 #
 # Phonemic respelling (phoneme-to-grapheme) rules
@@ -444,14 +448,14 @@ p2g_initial =
 | ("m̥".p   : "ma -h".g)
 # Glides, laterals, other fricatives
 | ("j".p   : "ya".g)
-| ("r".p   : "ra".g)
+| ("ɹ".p   : "ra".g)
 | ("ʃ".p   : "ra -h".g)
 | ("l".p   : "la".g)
 | ("l̥".p   : "la -h".g)
 # NB: /w/ is handled spcially:
 | ("w̥".p   : "wa -h".g)
 | ("θ".p   : "sa".g)
-| ("ð".p   : "* sa".g)  # is there a better diacritic to mark this?
+| ("ð".p   : "sa -h".g)  # is there a better diacritic to mark this?
 | ("h".p   : "ha".g)
 | ("ʔ".p   : "a".g)
 ;
@@ -569,12 +573,12 @@ p2g_coda_consonant =
 | ("b".p   : "ba".g)
 | ("m".p   : "ma".g)
 | ("j".p   : "ya".g)
-| ("r".p   : "ra".g)
+| ("ɹ".p   : "ra".g)
 | ("ʃ".p   : "ra -h".g)
 | ("l".p   : "la".g)
 | ("w".p   : "wa".g)
 | ("θ".p   : "sa".g)
-## | ("ð".p   : "sa".g)  # is there a diacritic to mark this?
+| ("ð".p   : "sa -h".g)  # is there a diacritic to mark this?
 | ("h".p   : "ha".g)
 ) ("".p : "asat".g)
 |

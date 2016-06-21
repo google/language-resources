@@ -22,7 +22,7 @@ b	b	b	b
 m	m	m	m
 m2	m̥	hm	m_0
 j	j	j	j
-r	r	r	r\
+r	ɹ	r	r\
 s2	ʃ	S	S
 l	l	l	l
 l2	l̥	hl	l_0

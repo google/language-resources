@@ -57,6 +57,17 @@ genrule(
           """,
 )
 
+genrule(
+    name = "make_xsampa_phoneme_syms",
+    srcs = ["phonemes.txt"],
+    outs = ["xsampa_phoneme.syms"],
+    cmd = """
+          awk 'BEGIN {printf "<epsilon>\\t0\\n"}
+               {printf "%s\\t%d\\n", $$4, NR}' \
+            $< >$@
+          """,
+)
+
 # It is difficult to get rid of phoneme.syms: doing so would make compiling the
 # G2P grammar much messier, since the location of phoneme.syms must be known.
 # Compromise: keep phoneme.syms and ensure that it matches phonemes.txt.
@@ -105,11 +116,11 @@ genrule(
     name = "make_b2p_fsts",
     srcs = [
         "burmese.far",
-        "ipa_phoneme.syms",
+        "xsampa_phoneme.syms",
     ],
     outs = [
         "B2P.fst",
-        "B2P_IPA.fst",
+        "B2P_XSAMPA.fst",
     ],
     cmd = """
         $(location @openfst//:farextract) \
@@ -118,9 +129,9 @@ genrule(
           --filename_suffix=.fst \
           $(location burmese.far) &&
         $(location @openfst//:fstsymbols) \
-          --osymbols=$(location ipa_phoneme.syms) \
+          --osymbols=$(location xsampa_phoneme.syms) \
           $(location B2P.fst) \
-          $(location B2P_IPA.fst)
+          $(location B2P_XSAMPA.fst)
         """,
     tools = [
         "@openfst//:farextract",
@@ -133,7 +144,7 @@ sh_binary(
     srcs = ["g2p.sh"],
     data = [
         "G2P.fst",
-        "ipa_phoneme.syms",
+        "xsampa_phoneme.syms",
         "//utils:thrax_g2p",
     ],
 )

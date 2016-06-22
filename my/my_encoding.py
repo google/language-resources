@@ -1,4 +1,4 @@
-#! /usr/bin/python2 -u
+#! /usr/bin/python2
 # -*- coding: utf-8 -*-
 #
 # Copyright 2016 Google Inc. All Rights Reserved.
@@ -27,12 +27,14 @@ output is of the form Label TAB Line, where Label can be one of:
 * "Neither": The line is neither consistent with Zawgyi nor with Unicode 5.1
   encoding of Burmese.
 
-* "Zawgyi": The line is consistent with Zawgyi font encoding of Burmese.
+* "Zawgyi": The line is consistent with Zawgyi font encoding of Burmese,
+  but not with Unicode 5.1 encoding of Burmese.
 
-* "Unicode": The line is consistent with Unicode 5.1 encoding of Burmese.
+* "Unicode": The line is consistent with Unicode 5.1 encoding of Burmese,
+  but not with Zawgyi font encoding of Burmese.
 
 * "Zawgyi|Unicode": The line is consistent with both Zawgyi and Unicode 5.1
-  encoding of Burmese.
+  encoding of Burmese, but its meaning differs between those encodings.
 
 * "Consensus": The line is consistent with both Zawgyi and Unicode 5.1
   encoding of Burmese and has the same meaning in both encodings.

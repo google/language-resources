@@ -1,4 +1,4 @@
-#! /usr/bin/python2 -u
+#! /usr/bin/python2
 # -*- coding: utf-8 -*-
 #
 # Copyright 2016 Google Inc. All Rights Reserved.
@@ -28,12 +28,23 @@ STDIN = codecs.getreader('utf-8')(sys.stdin)
 STDOUT = codecs.getwriter('utf-8')(sys.stdout)
 STDERR = codecs.getwriter('utf-8')(sys.stderr)
 
+ENTITY_10 = re.compile(r'&#([0-9]+);')
+ENTITY_16 = re.compile(r'&#[xX]([0-9A-Fa-f]+);')
+
 # Contiguous ranges of text in Myanmar codeblocks.
 MYANMAR_RE = re.compile(r'''
 [\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF()\u200B-\u200D-]*
 [\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF]+
 [\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF()\u200B-\u200D-]*
 ''', re.VERBOSE)
+
+ZERO_WIDTH = re.compile(r'[\u200B-\u200D]+')
+
+
+def UnescapeEntities(text):
+  text = ENTITY_10.sub(lambda m: unichr(int(m.group(1), 10)), text)
+  text = ENTITY_16.sub(lambda m: unichr(int(m.group(1), 16)), text)
+  return text
 
 
 def Split(line):
@@ -49,23 +60,35 @@ def Split(line):
   return
 
 
+def GetlineUnbuffered(f=sys.stdin):
+  while True:
+    line = f.readline()
+    if not line:
+      break
+    yield line.decode('utf-8')
+  return
+
+
 def Debug():
-  for line in STDIN:
-    STDOUT.write('\n%s\n' % line)
+  for line in GetlineUnbuffered():
     line = line.rstrip('\n')
+    STDOUT.write('%s\n' % line)
+    line = UnescapeEntities(line)
     for myanmar, text in Split(line):
       if myanmar:
-        STDOUT.write('  matched: %s\n' % text)
+        STDOUT.write('   matched: %s\n' % text)
       else:
-        STDOUT.write('Unmatched: %s\n' % repr(text))
+        STDOUT.write(' Unmatched: %s\n' % repr(text))
   return
 
 
 def main():
   for line in STDIN:
     line = line.rstrip('\n')
+    line = UnescapeEntities(line)
     for myanmar, text in Split(line):
       if myanmar:
+        text = ZERO_WIDTH.sub('', text)
         STDOUT.write('%s\n' % text)
   return
 

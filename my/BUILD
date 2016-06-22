@@ -144,7 +144,7 @@ sh_binary(
     srcs = ["g2p.sh"],
     data = [
         "G2P.fst",
-        "xsampa_phoneme.syms",
+        "ipa_phoneme.syms",
         "//utils:thrax_g2p",
     ],
 )

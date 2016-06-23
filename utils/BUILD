@@ -58,11 +58,11 @@ cc_binary(
     name = "thrax_g2p",
     srcs = ["thrax_g2p.cc"],
     deps = [
-        "@openfst//:fst",
-        "@thrax//:grm-manager",
         "//festus:fst-util",
         "//festus:label-maker",
         "//festus:string-util",
+        "@openfst//:fst",
+        "@thrax//:grm-manager",
     ],
 )
 
@@ -91,8 +91,14 @@ cc_binary(
     name = "lm-scores",
     srcs = ["lm-scores.cc"],
     deps = [
-        "@openfst//:fst",
         "//festus:label-maker",
         "//festus/runtime:fst-util",
+        "@openfst//:fst",
     ],
+)
+
+py_binary(
+    name = "sample",
+    srcs = ["sample.py"],
+    default_python_version = "PY2",
 )

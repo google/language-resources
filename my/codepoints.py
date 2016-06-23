@@ -1,4 +1,4 @@
-#! /usr/bin/python2 -u
+#! /usr/bin/python2
 # -*- coding: utf-8 -*-
 #
 # Copyright 2016 Google Inc. All Rights Reserved.
@@ -33,7 +33,7 @@ def main(unused_argv):
   for line in STDIN:
     for ch in line:
       cp = ord(ch)
-      if 0x1000 <= cp <= 0x109F:
+      if 0x1000 <= cp <= 0x109F or 0x200B <= cp <= 0x200D:
         count[cp] = count.get(cp, 0) + 1
   for cp in sorted(count.keys()):
     STDOUT.write('%04X\t%d\n' % (cp, count[cp]))

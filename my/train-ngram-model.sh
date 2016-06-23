@@ -4,18 +4,18 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-order="${1:-3}"
-theta="${2:-0}"
+symbols="$1"
+order="${2:-3}"
+theta="${3:-0}"
 
 projdir="${0}.runfiles"
 openfst="${0}.runfiles/external/openfst"
 opengrm="${0}.runfiles/external/opengrm_ngram"
 
-"$projdir/my/extract_text.py" |
 "$projdir/my/text_to_symbols.py" \
-  "$projdir/my/codepoint.syms" |
+  "$symbols" |
 "$openfst/farcompilestrings" \
-  --symbols="$projdir/my/codepoint.syms" \
+  --symbols="$symbols" \
   --keep_symbols \
   --generate_keys=7 |
 "$opengrm/ngramcount" \

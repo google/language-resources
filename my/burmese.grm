@@ -315,6 +315,8 @@ g2p_coda_consonant =
   | ("ga".g     : "g".p)
   | ("ca".g     : "s".p)
   | ("ja".g     : "z".p)
+  | ("ta".g     : "t".p)
+  | ("tha".g    : "tʰ".p)
   | ("da".g     : "d".p)
   | ("na".g     : "n".p)
   | ("pa".g     : "p".p)

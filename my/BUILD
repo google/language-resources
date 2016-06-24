@@ -174,3 +174,13 @@ sh_binary(
         "@opengrm_ngram//:ngramshrink",
     ],
 )
+
+sh_binary(
+    name = "detect-charset",
+    srcs = ["detect-charset.sh"],
+    data = [
+        "models/unicode.fst",
+        "models/zawgyi.fst",
+        "//utils:lm-scores",
+    ],
+)

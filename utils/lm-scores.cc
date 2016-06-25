@@ -26,9 +26,17 @@
 
 #include <fst/compat.h>
 #include <fst/fstlib.h>
+#include <fst/extensions/ngram/ngram-fst.h>
 
 #include "festus/label-maker.h"
 #include "festus/runtime/fst-util.h"
+
+namespace {
+
+// Register the LOUDS-compressed n-gram FST representation.
+static fst::FstRegisterer<fst::NGramFst<fst::StdArc>> std_ngram_reg;
+
+}  // namespace
 
 static const char kUsage[] =
     R"(Scores text with codepoint LMs.

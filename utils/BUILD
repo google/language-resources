@@ -94,6 +94,7 @@ cc_binary(
         "//festus:label-maker",
         "//festus/runtime:fst-util",
         "@openfst//:fst",
+        "@openfst//:ngram",
     ],
 )
 

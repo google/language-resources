@@ -345,7 +345,6 @@ cc_library(
     ],
     copts = ["-Wno-sign-compare"],
     includes = [prefix_dir + "include"],
-    visibility = ["//visibility:private"],
     deps = [":fst"],
 )
 

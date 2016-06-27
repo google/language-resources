@@ -360,14 +360,19 @@ g2p_exceptions =
 | ("wa".g "na".g "asat visarga".g : "w ʊ́ɴ".p)
 | ("wa".g "na".g "asat".g : "w ʊ̀ɴ".p)
 )
-("".g : "".p <-1>)
+("".g : "".p)
 ;
 
 # Override pronunciation of လည်း so that it comes out as /lɛ́/.
-g2p_le = "la nnya asat visarga".g : "l ɛ́".p <-10>;
+g2p_le = "la nnya asat visarga".g : "l ɛ́".p;
 
 
-g2p_syllable = g2p_regular | g2p_other | g2p_exceptions | g2p_le;
+g2p_syllable =
+  (g2p_regular <2>)
+| (g2p_other <2>)
+| (g2p_exceptions <1>)  # needs to be cheaper than the preceding disjuncts
+| (g2p_le)              # cheaper still
+;
 
 syllable_boundary = "".g : ".".p;
 

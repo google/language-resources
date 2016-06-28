@@ -223,6 +223,15 @@ std::unique_ptr<AlignablesUtil> AlignablesUtil::FromSpec(
   return util;
 }
 
+template <class A>
+static void DeterminizeUnweighted(fst::MutableFst<A> *fst) {
+  CHECK(fst->Properties(fst::kUnweighted, true));
+  fst::VectorFst<A> tmp;
+  fst::Determinize(*fst, &tmp);
+  fst::ArcMap(tmp, fst, fst::RmWeightMapper<A>());
+  CHECK(fst->Properties(fst::kUnweighted, true));
+}
+
 bool AlignablesUtil::Init(const AlignablesSpec &spec) {
   typedef Arc::Label Label;
   typedef Arc::Weight Weight;
@@ -361,16 +370,13 @@ bool AlignablesUtil::Init(const AlignablesSpec &spec) {
     }
     forbidden_factors_fsa_.SetInputSymbols(&pair_symbols);
     forbidden_factors_fsa_.SetOutputSymbols(&pair_symbols);
-    fst::VectorFst<Arc> tmp;
-    fst::Determinize(forbidden_factors_fsa_, &tmp);
-    fst::ArcMap(tmp, &forbidden_factors_fsa_, fst::RmWeightMapper<Arc>());
+    DeterminizeUnweighted(&forbidden_factors_fsa_);
     fst::Concat(pair_fsa_, &forbidden_factors_fsa_);
     fst::Concat(&forbidden_factors_fsa_, pair_fsa_);
     fst::RmEpsilon(&forbidden_factors_fsa_);
     // This results in a huge blow-up of the FSA:
-    fst::Determinize(forbidden_factors_fsa_, &tmp);
-    fst::AcceptorMinimize(&tmp);
-    fst::ArcMap(tmp, &forbidden_factors_fsa_, fst::RmWeightMapper<Arc>());
+    DeterminizeUnweighted(&forbidden_factors_fsa_);
+    fst::AcceptorMinimize(&forbidden_factors_fsa_);
     fst::ArcSort(&forbidden_factors_fsa_, fst::ILabelCompare<Arc>());
     uint64 props = forbidden_factors_fsa_.Properties(fst::kFstProperties, true);
     uint64 unoeps = fst::kUnweighted | fst::kNoEpsilons | fst::kIDeterministic |

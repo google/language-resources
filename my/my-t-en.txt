@@ -18,7 +18,7 @@ Golden Gate	ဂိုးလ်ဒင်းဂိတ်
 Silicon Valley	ဆီလီကွန်ဗယ်လီ
 Colorado	ကော်လိုရာဒို
 Denver	ဒင်န်ဗာ
-Connecticut	ကွန်နက်တီကတ်ပြည်နယ်
+Connecticut	ကွန်နက်တီကတ်
 Hartford	ဟတ်ဖို့ဒ်
 Bridgeport	ဘရစ်ချ်ပို့တ်
 New Haven	နယူးဟေးဗင်း
@@ -43,7 +43,7 @@ Indiana	အင်ဒီယားနား
 Indianapolis	အင်ဒီယားနားပိုလစ်
 Acropolis	အကရော့ပလစ်
 Iowa	အိုင်အိုဝါ
-Kansa	ကန်းဆပ်
+Kansas	ကန်းဆပ်
 Topeka	တိုပီကာ
 Wichita	ဝီချီတာ
 Kentucky	ကင်တပ်ကီ

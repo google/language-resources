@@ -60,6 +60,24 @@ def Split(line):
   return
 
 
+def ExtractText(iterable, debug=None):
+  for line in iterable:
+    line = line.rstrip('\n')
+    if debug:
+      debug.write('%s\n' % line)
+    line = UnescapeEntities(line)
+    for myanmar, text in Split(line):
+      if myanmar:
+        if debug:
+          debug.write('   matched: %s\n' % text)
+        else:
+          text = ZERO_WIDTH.sub('', text)
+          yield text
+      elif debug:
+        debug.write(' Unmatched: %s\n' % repr(text))
+  return
+
+
 def GetlineUnbuffered(f=sys.stdin):
   while True:
     line = f.readline()
@@ -69,32 +87,15 @@ def GetlineUnbuffered(f=sys.stdin):
   return
 
 
-def Debug():
-  for line in GetlineUnbuffered():
-    line = line.rstrip('\n')
-    STDOUT.write('%s\n' % line)
-    line = UnescapeEntities(line)
-    for myanmar, text in Split(line):
-      if myanmar:
-        STDOUT.write('   matched: %s\n' % text)
-      else:
-        STDOUT.write(' Unmatched: %s\n' % repr(text))
-  return
-
-
-def main():
-  for line in STDIN:
-    line = line.rstrip('\n')
-    line = UnescapeEntities(line)
-    for myanmar, text in Split(line):
-      if myanmar:
-        text = ZERO_WIDTH.sub('', text)
-        STDOUT.write('%s\n' % text)
+def main(argv):
+  if len(argv) > 1 and argv[1].endswith('debug'):
+    for _ in ExtractText(GetlineUnbuffered(), STDOUT):
+      pass
+  else:
+    for text in ExtractText(STDIN):
+      STDOUT.write('%s\n' % text)
   return
 
 
 if __name__ == '__main__':
-  if len(sys.argv) > 1 and sys.argv[1].endswith('debug'):
-    Debug()
-  else:
-    main()
+  main(sys.argv)

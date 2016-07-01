@@ -33,12 +33,13 @@ ENTITY_16 = re.compile(r'&#[xX]([0-9A-Fa-f]+);')
 
 # Contiguous ranges of text in Myanmar codeblocks.
 MYANMAR_RE = re.compile(r'''
-[\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF()\u200B-\u200D-]*
+[\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF()\u00AD\u200B-\u200D\u2010-\u2015-]*
 [\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF]+
-[\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF()\u200B-\u200D-]*
+[\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF()\u00AD\u200B-\u200D\u2010-\u2015-]*
 ''', re.VERBOSE)
 
 ZERO_WIDTH = re.compile(r'[\u200B-\u200D]+')
+DASH = re.compile(r'[-\u00AD\u2010-\u2015]+')
 
 
 def UnescapeEntities(text):
@@ -72,6 +73,7 @@ def ExtractText(iterable, debug=None):
           debug.write('   matched: %s\n' % text)
         else:
           text = ZERO_WIDTH.sub('', text)
+          text = DASH.sub('-', text)
           yield text
       elif debug:
         debug.write(' Unmatched: %s\n' % repr(text))

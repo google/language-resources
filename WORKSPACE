@@ -32,7 +32,7 @@ new_git_repository(
 
 git_repository(
     name = "protobuf",
-    tag = "v3.0.0-beta-3.2",
+    tag = "v3.0.0-beta-3.3",
     remote = "https://github.com/google/protobuf.git",
 )
 
@@ -46,7 +46,7 @@ new_git_repository(
 new_git_repository(
     name = "re2",
     build_file = "re2.BUILD",
-    tag = "2016-06-01",
+    tag = "2016-07-01",
     remote = "https://github.com/google/re2.git",
 )
 

@@ -16,6 +16,15 @@
 # limitations under the License.
 
 """Extract Myanmar codepoint bigrams from text.
+
+Usage examples:
+
+* Print counts of codepoint bigrams in Myanmar text:
+  $ ./bigrams.py < some_file.txt
+
+* Print count of unseen codepoint bigrams for each file in a directory:
+  $ find path/to/directory -type f | ./bigrams.py known_bigrams.txt
+
 """
 
 from __future__ import unicode_literals
@@ -82,8 +91,51 @@ def PrintNgramCounts(n=2):
   return
 
 
+def ReadNgrams(path, default_count=1):
+  with codecs.open(path, 'r', 'utf-8') as reader:
+    for line in reader:
+      line = line.rstrip('\n')
+      fields = line.split('\t')
+      if len(fields) >= 2:
+        yield fields[0], int(fields[1])
+      else:
+        yield fields[0], default_count
+  return
+
+
+def ProcessFile(known_bigrams, path):
+  total = 0
+  unseen = 0
+  with codecs.open(path, 'r', 'utf-8') as reader:
+    ngrams = FormatNGrams(NGrams(MyanmarPhrases(reader), 2, ' '))
+    for ngram in ngrams:
+      total += 1
+      if ngram not in known_bigrams:
+        unseen += 1
+  sys.stdout.write('%s\t%d\t%d\t' % (path, unseen, total))
+  if total == 0:
+    sys.stdout.write('NaN\n')
+  else:
+    sys.stdout.write('%f\n' % (unseen * 100.0 / total))
+  return
+
+
+def ProcessFiles(known_bigrams):
+  for path in sys.stdin:
+    path = path[:-1]
+    ProcessFile(known_bigrams, path)
+  return
+
+
 def main(argv):
-  PrintNgramCounts()
+  if len(argv) == 1:
+    PrintNgramCounts()
+  elif len(argv) == 2:
+    known_bigrams = dict(ReadNgrams(argv[1]))
+    ProcessFiles(known_bigrams)
+  else:
+    STDERR.write('Usage: %s [frequent_bigrams.txt]\n' % argv[0])
+    sys.exit(2)
   return
 
 

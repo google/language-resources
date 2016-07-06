@@ -62,6 +62,7 @@ def UpperTailTest(x, n, p=0.5, conf_level=0.95):
   print('data:  %d and %d' % (x, n))
   print('number of successes = %d, number of trials = %d, p-value = %.7g'
         % (x, n, p_value))
+  print('model of null hypothesis: successes ~ binom(%d; %.7g)' % (n, p))
   print('alternative hypothesis: true probability of success is' +
         ' greater than %.7g' % p)
   print('%g percent confidence interval:' % (conf_level * 100.0))

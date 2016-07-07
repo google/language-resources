@@ -47,6 +47,10 @@ def LogBetaBinomPMF(k, n, alpha, beta):
 def UpperTailPValue(successes, trials, alpha, beta):
   assert 0 <= successes <= trials
   assert alpha >= 0 and beta >= 0
+  # This evaluates the cumulative distribution function in the upper tail by
+  # naive summation of the probability mass function. This is linear in the
+  # length of the tail. To make it a constant-time computation, we would need a
+  # way to evaluate the generalized hypergeometric function 3F2 at unity.
   p_value = 0
   for k in range(successes, trials + 1):
     p_value += math.exp(LogBetaBinomPMF(k, trials, alpha, beta))

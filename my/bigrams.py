@@ -15,15 +15,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Extract Myanmar codepoint bigrams from text.
+"""Computes basic statistics about Myanmar codepoint bigrams.
 
 Usage examples:
 
 * Print counts of codepoint bigrams in Myanmar text:
   $ ./bigrams.py < some_file.txt
 
-* Print count of unseen codepoint bigrams for each file in a directory:
+* Read filenames from stdin (one per line) and write frequency and
+  percentage of unseen codepoint bigrams to stdout:
+
   $ find path/to/directory -type f | ./bigrams.py known_bigrams.txt
+
+* Read filenames from stdin (one per line) and write frequency, percentage,
+  and beta-binomial p-value of unseen codepoint bigrams to stdout:
+
+  $ find path/to/directory -type f | ./bigrams.py known_bigrams.txt 2 700
 
 """
 
@@ -34,6 +41,7 @@ import re
 import sys
 
 import extract_text
+import betabinom_test
 
 STDIN = codecs.getreader('utf-8')(sys.stdin)
 STDOUT = codecs.getwriter('utf-8')(sys.stdout)
@@ -95,6 +103,8 @@ def ReadNgrams(path, default_count=1):
   with codecs.open(path, 'r', 'utf-8') as reader:
     for line in reader:
       line = line.rstrip('\n')
+      if not line or line.startswith('#'):
+        continue
       fields = line.split('\t')
       if len(fields) >= 2:
         yield fields[0], int(fields[1])
@@ -103,7 +113,7 @@ def ReadNgrams(path, default_count=1):
   return
 
 
-def ProcessFile(known_bigrams, path):
+def ProcessFile(path, known_bigrams, alpha, beta):
   total = 0
   unseen = 0
   with codecs.open(path, 'r', 'utf-8') as reader:
@@ -112,29 +122,49 @@ def ProcessFile(known_bigrams, path):
       total += 1
       if ngram not in known_bigrams:
         unseen += 1
-  sys.stdout.write('%s\t%d\t%d\t' % (path, unseen, total))
+  sys.stdout.write('%s\t%d\t%d' % (path, unseen, total))
   if total == 0:
-    sys.stdout.write('NaN\n')
+    sys.stdout.write('\tNA')
   else:
-    sys.stdout.write('%f\n' % (unseen * 100.0 / total))
+    sys.stdout.write('\t%f' % (unseen * 100.0 / total))
+  if alpha and beta:
+    p_value = betabinom_test.UpperTailPValue(unseen, total, alpha, beta)
+    if p_value < 0.001:
+      sig = '***'
+    elif p_value < 0.01:
+      sig = '**'
+    elif p_value < 0.05:
+      sig = '*'
+    elif p_value < 0.1:
+      sig = '.'
+    else:
+      sig = ''
+    sys.stdout.write('\t%g\t%s' % (p_value, sig))
+  sys.stdout.write('\n')
   return
 
 
-def ProcessFiles(known_bigrams):
+def ProcessFiles(known_bigrams, alpha, beta):
   for path in sys.stdin:
     path = path[:-1]
-    ProcessFile(known_bigrams, path)
+    ProcessFile(path, known_bigrams, alpha, beta)
   return
 
 
 def main(argv):
   if len(argv) == 1:
     PrintNgramCounts()
-  elif len(argv) == 2:
+  elif len(argv) >= 2:
     known_bigrams = dict(ReadNgrams(argv[1]))
-    ProcessFiles(known_bigrams)
+    if len(argv) >= 4:
+      alpha = float(argv[2])
+      beta = float(argv[3])
+    else:
+      alpha = None
+      beta = None
+    ProcessFiles(known_bigrams, alpha, beta)
   else:
-    STDERR.write('Usage: %s [frequent_bigrams.txt]\n' % argv[0])
+    STDERR.write('Usage: %s [frequent_bigrams.txt [alpha beta]]\n' % argv[0])
     sys.exit(2)
   return
 

@@ -136,28 +136,30 @@ def GetlineUnbuffered(f=sys.stdin):
   return
 
 
+def ClassifyCharset(text):
+  if not EITHER.match(text):
+    return 'Not Myanmar'
+  zawgyi = ZAWGYI.match(text)
+  my_uni = BURMESE_UNICODE_51.match(text)
+  if CONSENSUS.match(text):
+    assert zawgyi
+    assert my_uni
+    return 'Consensus'
+  if zawgyi:
+    if my_uni:
+      return 'Zawgyi|Unicode'
+    else:
+      return 'Zawgyi'
+  elif my_uni:
+    return 'Unicode'
+  else:
+    return 'Neither'
+
+
 def main(unused_argv):
   for line in GetlineUnbuffered():
     line = line.rstrip('\n')
-    if not EITHER.match(line):
-      STDOUT.write('Not Myanmar\t%s\n' % line)
-      continue
-    zawgyi = ZAWGYI.match(line)
-    my_uni = BURMESE_UNICODE_51.match(line)
-    if CONSENSUS.match(line):
-      STDOUT.write('Consensus\t%s\n' % line)
-      assert zawgyi
-      assert my_uni
-      continue
-    if zawgyi:
-      if my_uni:
-        label = 'Zawgyi|Unicode'
-      else:
-        label = 'Zawgyi'
-    elif my_uni:
-      label = 'Unicode'
-    else:
-      label = 'Neither'
+    label = ClassifyCharset(line)
     STDOUT.write('%s\t%s\n' % (label, line))
   return
 

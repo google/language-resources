@@ -103,3 +103,9 @@ py_binary(
     srcs = ["sample.py"],
     default_python_version = "PY2",
 )
+
+py_binary(
+    name = "freq",
+    srcs = ["freq.py"],
+    default_python_version = "PY2",
+)

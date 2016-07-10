@@ -92,7 +92,7 @@ genrule(
               $(location data/prompts.txt) |
           $(location tokenize.py) \
             2> $(location jv_bad_tokens.txt) |
-          $(location freq.py) |
+          $(location //utils:freq) |
           $(location //utils:thrax_g2p) \
             --far=$(location javanese.far) \
             --phoneme_syms=$(location phoneme.syms) |
@@ -101,8 +101,8 @@ genrule(
             2> $(location jv_unpronouncable.txt)
           """,
     tools = [
-        "freq.py",
         "tokenize.py",
+        "//utils:freq",
         "//utils:thrax_g2p",
     ],
 )
@@ -124,7 +124,7 @@ genrule(
           $(location tokenize.py) \
             < $(location //third_party/wikimedia:simple_wiktionary.txt) \
             2> $(location en_bad_tokens.txt) |
-          $(location freq.py) |
+          $(location //utils:freq) |
           $(location //utils:thrax_g2p) \
             --far=$(location javanese.far) \
             --phoneme_syms=$(location phoneme.syms) |
@@ -136,8 +136,8 @@ genrule(
             > $(location en_lexicon.txt)
           """,
     tools = [
-        "freq.py",
         "tokenize.py",
+        "//utils:freq",
         "//utils:merge_lexicons",
         "//utils:thrax_g2p",
     ],

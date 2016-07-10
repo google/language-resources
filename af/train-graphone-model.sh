@@ -21,8 +21,8 @@ theta="${4:-1e-2}"
 
 # Tools:
 runfiles="${0}.runfiles"
-festus="$runfiles/festus"
-opengrm="$runfiles/external/opengrm_ngram"
+festus="$runfiles/language_resources/festus"
+opengrm="$runfiles/opengrm_ngram"
 
 "$opengrm/ngramcount" \
   --order="$order" \

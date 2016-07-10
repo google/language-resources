@@ -1,3 +1,5 @@
+workspace(name = "language_resources")
+
 # OpenFst, OpenGrm NGram & Thrax
 
 new_git_repository(

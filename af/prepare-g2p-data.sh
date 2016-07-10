@@ -18,11 +18,12 @@ test="$outdir/g2p_test.tsv"
 
 # Input files and tools:
 runfiles="${0}.runfiles"
-dict="$runfiles/af/lex_regular.txt"
-alignables="$runfiles/af/alignables.txt"
-words="$runfiles/af/test_words.txt"
-festus="$runfiles/festus"
-openfst="$runfiles/external/openfst"
+projdir="$runfiles/language_resources"
+dict="$projdir/af/lex_regular.txt"
+alignables="$projdir/af/alignables.txt"
+words="$projdir/af/test_words.txt"
+festus="$projdir/festus"
+openfst="$runfiles/openfst"
 
 export LC_ALL=C.UTF-8
 

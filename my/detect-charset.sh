@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-projdir="${0}.runfiles"
+projdir="${0}.runfiles/language_resources"
 
 exec "$projdir/utils/lm-scores" \
   "$projdir/my/models/unicode.fst" \

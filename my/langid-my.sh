@@ -81,7 +81,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-projdir="${0}.runfiles"
+projdir="${0}.runfiles/language_resources"
 
 if [ -d "$projdir" ]; then
   mydir="$projdir/my"

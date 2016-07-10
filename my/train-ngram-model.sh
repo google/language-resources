@@ -8,9 +8,9 @@ symbols="$1"
 order="${2:-3}"
 theta="${3:-0}"
 
-projdir="${0}.runfiles"
-openfst="${0}.runfiles/external/openfst"
-opengrm="${0}.runfiles/external/opengrm_ngram"
+projdir="${0}.runfiles/language_resources"
+openfst="${0}.runfiles/openfst"
+opengrm="${0}.runfiles/opengrm_ngram"
 
 "$projdir/my/text_to_symbols.py" \
   "$symbols" |

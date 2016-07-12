@@ -47,7 +47,7 @@
     ["a",  "vowel", "unrounded", "low",      "front",   "default"],
     ["u",  "vowel", "rounded",   "high",     "back",    "default"],
     ["o",  "vowel", "rounded",   "mid-high", "back",    "default"],
-    ["O",  "vowel", "rounded",   "mid-low",  "back",    "default"],
+    ["ox", "vowel", "rounded",   "mid-low",  "back",    "default"],
 
     ["sil", "silence"],
     ["pau", "silence"]

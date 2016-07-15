@@ -8,7 +8,7 @@ import re
 # Technical Note #11, version 4, page 15, available from
 # http://unicode.org/notes/tn11/ .
 #
-# Copyright © 2004-2012 Martin Hosken and Unicode, Inc. All Rights
+# Copyright (C) 2004-2012 Martin Hosken and Unicode, Inc. All Rights
 # Reserved. The Unicode Consortium, and Martin Hosken make no expressed or
 # implied warranty of any kind, and assume no liability for errors or
 # omissions. No liability is assumed for incidental and consequential damages

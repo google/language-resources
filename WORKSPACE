@@ -28,7 +28,7 @@ new_git_repository(
 new_git_repository(
     name = "googletest",
     build_file = "googletest.BUILD",
-    commit = "0a439623f75c029912728d80cb7f1b8b48739ca4",
+    commit = "ec44c6c1675c25b9827aacd08c02433cccde7780",
     remote = "https://github.com/google/googletest.git",
 )
 

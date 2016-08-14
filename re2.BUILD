@@ -43,6 +43,7 @@ cc_library(
     ],
     hdrs = [
         "util/benchmark.h",
+        "util/bitmap.h",
         "util/flags.h",
         "util/logging.h",
         "util/mutex.h",

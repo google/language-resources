@@ -48,7 +48,7 @@ new_git_repository(
 new_git_repository(
     name = "re2",
     build_file = "re2.BUILD",
-    tag = "2016-07-01",
+    tag = "2016-08-01",
     remote = "https://github.com/google/re2.git",
 )
 

@@ -1,5 +1,14 @@
 workspace(name = "language_resources")
 
+# Android SDK
+
+android_sdk_repository(
+    name = "androidsdk",
+    api_level = 24,
+    build_tools_version = "24.0.1",
+    path = "/opt/android-sdk",
+)
+
 # OpenFst, OpenGrm NGram & Thrax
 
 new_git_repository(

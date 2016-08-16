@@ -183,3 +183,12 @@ sh_binary(
         "//utils:lm-scores",
     ],
 )
+
+sh_binary(
+    name = "langid-my",
+    srcs = ["langid-my.sh"],
+    data = [
+        "bigrams.py",
+        "frequent_bigrams_my.txt",
+    ],
+)

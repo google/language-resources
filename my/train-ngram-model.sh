@@ -4,13 +4,13 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-symbols="$1"
-order="${2:-3}"
-theta="${3:-0}"
-
 projdir="${0}.runfiles/language_resources"
 openfst="${0}.runfiles/openfst"
 opengrm="${0}.runfiles/opengrm_ngram"
+
+symbols="${1:-${projdir}/my/codepoint.syms}"
+order="${2:-3}"
+theta="${3:-0}"
 
 "$projdir/my/text_to_symbols.py" \
   "$symbols" |

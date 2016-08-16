@@ -166,7 +166,6 @@ sh_binary(
     srcs = ["train-ngram-model.sh"],
     data = [
         "codepoint.syms",
-        "extract_text.py",
         "text_to_symbols.py",
         "@openfst//:farcompilestrings",
         "@opengrm_ngram//:ngramcount",

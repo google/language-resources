@@ -43,8 +43,8 @@ new_git_repository(
 
 git_repository(
     name = "protobuf",
-    tag = "v3.0.0-beta-3.3",
     remote = "https://github.com/google/protobuf.git",
+    tag = "v3.0.0",
 )
 
 new_git_repository(
@@ -57,13 +57,13 @@ new_git_repository(
 new_git_repository(
     name = "re2",
     build_file = "re2.BUILD",
-    tag = "2016-08-01",
     remote = "https://github.com/google/re2.git",
+    tag = "2016-08-01",
 )
 
 new_git_repository(
     name = "sparrowhawk",
     build_file = "sparrowhawk.BUILD",
-    tag = "0.1",
     remote = "https://github.com/google/sparrowhawk.git",
+    tag = "0.1",
 )

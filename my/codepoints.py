@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Count occurrences of codepoints in Myanmar Unicode block.
+"""Count occurrences of codepoints in Myanmar Unicode blocks.
 """
 
 from __future__ import unicode_literals
@@ -33,7 +33,8 @@ def main(unused_argv):
   for line in STDIN:
     for ch in line:
       cp = ord(ch)
-      if 0x1000 <= cp <= 0x109F or 0x200B <= cp <= 0x200D:
+      if (0x1000 <= cp <= 0x109F or 0x200B <= cp <= 0x200D or
+          0xA9E0 <= cp <= 0xA9FF or 0xAA60 <= cp <= 0xAA7F):
         count[cp] = count.get(cp, 0) + 1
   for cp in sorted(count.keys()):
     STDOUT.write('%04X\t%d\n' % (cp, count[cp]))

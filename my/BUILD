@@ -192,3 +192,11 @@ sh_binary(
         "frequent_bigrams_my.txt",
     ],
 )
+
+java_library(
+    name = "java-utils",
+    srcs = glob(
+        ["java/**/*.java"],
+        exclude = ["java/**/*Main.java"],
+    ),
+)

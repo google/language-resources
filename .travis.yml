@@ -1,8 +1,6 @@
 sudo: required
 dist: trusty
 
-language: cpp
-
 before_install:
   - sudo apt-get update -qq
   # Bazel dependencies:
@@ -13,6 +11,13 @@ before_install:
   - wget 'https://github.com/bazelbuild/bazel/releases/download/0.3.0/bazel-0.3.0-installer-linux-x86_64.sh'
   - sha256sum -c third_party/bazel-0.3.0-installer-linux-x86_64.sh.sha256
   - bash bazel-0.3.0-installer-linux-x86_64.sh --user
+  # Install Android SDK:
+  - sudo mkdir -p /usr/local/android-sdk
+  - sudo chmod 1777 /usr/local/android-sdk
+  - wget 'https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz'
+  - tar xzf android-sdk_r24.4.1-linux.tgz -C /usr/local/android-sdk --strip-components=1
+  - echo y | /usr/local/android-sdk/tools/android update sdk --no-ui --filter build-tools-24.0.1
+  - echo y | /usr/local/android-sdk/tools/android update sdk --no-ui --filter android-24
 
 script:
   - bazel test //af/... //bn/... //festus/... //hi_ur/... //my/... //xh/... //zu/...

@@ -30,6 +30,8 @@ import java.util.logging.Logger;
  * <p>When {@code toString()} is called on a {@code GraphemeCluster} object, the resulting string
  * holds the canonical character sequence representation of the grapheme cluster. In particular, it
  * follows the canonical diacritic storage order specified in UTN 11.
+ *
+ * @see GraphemeComposer
  */
 class GraphemeCluster {
   private final Logger logger = Logger.getLogger("com.google.languageresources.my.GraphemeCluster");

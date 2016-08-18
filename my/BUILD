@@ -200,3 +200,10 @@ java_library(
         exclude = ["java/**/*Main.java"],
     ),
 )
+
+java_test(
+    name = "GraphemeComposerTest",
+    timeout = "short",
+    srcs = ["javatests/com/google/languageresources/my/GraphemeComposerTest.java"],
+    deps = [":libjava-utils.jar"],
+)

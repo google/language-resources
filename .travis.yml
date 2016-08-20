@@ -1,6 +1,9 @@
 sudo: required
 dist: trusty
 
+env:
+  - BAZEL=0.3.0
+
 before_install:
   - sudo apt-get update -qq
   # Bazel dependencies:
@@ -8,9 +11,9 @@ before_install:
   # Project dependencies:
   - sudo apt-get install -qq python-pyicu
   # Install Bazel:
-  - wget 'https://github.com/bazelbuild/bazel/releases/download/0.3.0/bazel-0.3.0-installer-linux-x86_64.sh'
-  - sha256sum -c third_party/bazel-0.3.0-installer-linux-x86_64.sh.sha256
-  - bash bazel-0.3.0-installer-linux-x86_64.sh --user
+  - wget 'https://github.com/bazelbuild/bazel/releases/download/${BAZEL}/bazel-${BAZEL}-installer-linux-x86_64.sh'
+  - sha256sum -c third_party/bazel-${BAZEL}-installer-linux-x86_64.sh.sha256
+  - bash bazel-${BAZEL}-installer-linux-x86_64.sh --user
   # Install Android SDK:
   - sudo mkdir -p /usr/local/android-sdk
   - sudo chmod 1777 /usr/local/android-sdk

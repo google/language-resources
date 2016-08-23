@@ -14,23 +14,27 @@
 
 package com.google.languageresources.my;
 
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 /** Conversion from Zawgyi font encoding of Burmese to Unicode 5.1 encoding. */
-public class ZawgyiToUnicodeConverter {
+public final class ZawgyiToUnicodeConverter {
+  private final Logger logger =
+      Logger.getLogger("com.google.languageresources.my.ZawgyiToUnicodeConverter");
+
   private final boolean throwOnError;
 
   private void unexpectedCodePoint(int c, GraphemeComposer gc, StringBuilder unicode) {
     gc.flushTo(unicode);
     unicode.append('\uFFFD');
+    String msg = "Unexpected Zawgyi codepoint: " + Integer.toHexString(c);
+    logger.warning(msg);
     if (throwOnError) {
-      throw new Error("Unexpected Zawgyi codepoint: " + Integer.toHexString(c));
+      throw new Error(msg);
     }
   }
 
-  /**
-   * Constructs a {@code ZawgyiToUnicodeConverter} which handles errors silently.
-   */
+  /** Constructs a {@code ZawgyiToUnicodeConverter} which handles errors silently. */
   public ZawgyiToUnicodeConverter() {
     this(false);
   }
@@ -50,7 +54,7 @@ public class ZawgyiToUnicodeConverter {
   private static final Pattern ZERO_AFTER_ALPHABETIC =
       Pattern.compile("([\u1000-\u103F\u104C-\u1059])\u1040");
 
-  private static final Pattern LAGAUN = Pattern.compile("\u1044\u1004\u103A\u1038");
+  private static final Pattern FOUR_LAGAUN = Pattern.compile("\u1044\u1004\u103A\u1038");
 
   /**
    * Converts a Zawgyi codepoint sequence into a Unicode string.
@@ -63,7 +67,7 @@ public class ZawgyiToUnicodeConverter {
     StringBuilder b = new StringBuilder();
     convertTo(z, b);
     String u = ZERO_AFTER_ALPHABETIC.matcher(b).replaceAll("$1\u101D");
-    u = LAGAUN.matcher(u).replaceAll("\u104E\u1004\u103A\u1038");
+    u = FOUR_LAGAUN.matcher(u).replaceAll("\u104E\u1004\u103A\u1038");
     return u;
   }
 

@@ -193,6 +193,12 @@ sh_binary(
     ],
 )
 
+py_binary(
+    name = "check_myanmar_text",
+    srcs = ["check_myanmar_text.py"],
+    deps = ["//third_party/unicode:utn11"],
+)
+
 java_library(
     name = "java-utils",
     srcs = glob(

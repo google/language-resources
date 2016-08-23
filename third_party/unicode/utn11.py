@@ -1,3 +1,6 @@
+"""Myanmar diacritic storage order according to Unicode Technical Note #11.
+"""
+
 from __future__ import unicode_literals
 
 import re
@@ -89,4 +92,5 @@ myregex = e(r'''(?:$kinzi?$cons$stack{0,2}(?:                 # syllable start
 
 # END QUOTE
 
-DIACRITIC_ORDERING = re.compile('%s$' % myregex, re.VERBOSE)
+CLUSTER = re.compile('%s$' % myregex, re.VERBOSE)
+CLUSTERS = re.compile('%s*$' % myregex, re.VERBOSE)

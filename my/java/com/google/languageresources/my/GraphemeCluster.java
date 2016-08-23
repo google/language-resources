@@ -17,8 +17,8 @@ package com.google.languageresources.my;
 import java.util.logging.Logger;
 
 /**
- * A {@code GraphemeCluster} is a graphical unit of Burmese text consisting of a letter and
- * optional modifiers.
+ * A {@code GraphemeCluster} is a graphical unit of Burmese text consisting of a letter and optional
+ * modifiers.
  *
  * <p>The definition of a {@code GraphemeCluster} is mostly consistent with the description in the
  * <a href="http://unicode.org/notes/tn11/">Unicode Technical Note #11</a> (Representing Myanmar in
@@ -113,7 +113,8 @@ class GraphemeCluster {
   /**
    * Determines if the grapheme cluster is complete.
    *
-   * A cluster is complete when a main letter has been defined
+   * <p>A cluster is complete when a main letter has been defined and editing of the stacked
+   * consonant slot is not in progress.
    *
    * @return {@code true} iff the grapheme cluster is complete
    */
@@ -305,7 +306,8 @@ class GraphemeCluster {
           return;
         }
         int category = Character.getType(c);
-        if (category == Character.COMBINING_SPACING_MARK || category == Character.NON_SPACING_MARK) {
+        if (category == Character.COMBINING_SPACING_MARK
+            || category == Character.NON_SPACING_MARK) {
           unexpectedCharacter(c, "main");
         }
         main = c;
@@ -315,9 +317,7 @@ class GraphemeCluster {
     standardize();
   }
 
-  /**
-   * Standardizes a grapheme cluster by replacing alternative spellings with canonical versions.
-   */
+  /** Standardizes a grapheme cluster by replacing alternative spellings with canonical versions. */
   private void standardize() {
     if (kinzi == 0 && canSetKinzi(main) && stacked == STACKING_IN_PROGRESS && asat1 != 0) {
       kinzi = main;

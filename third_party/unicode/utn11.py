@@ -31,6 +31,14 @@ import re
 #
 # * Changed capturing groups '(...)' in regular expressions to non-capturing
 #   groups '(?:...)'.
+#
+# Bugs fixed:
+#
+# * Digit range in 'cons' expression now starts at \u1040 (was \u1041).
+#
+# Known issues:
+#
+# * '\u101B\u103E\u1031\u1037' gets rejected.
 
 def e(x) :
     '''Expand $var in a string'''
@@ -38,7 +46,7 @@ def e(x) :
 
 # Basic character classes
 kinzi = e(r'(?:[\u1004\u101B\u105A]\u103A\u1039)')
-cons = e(r'[\u1000-\u102A\u103F\u1041-\u1049\u104E\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E\u1070\u1075-\u1081\u108E\u109F\uA9E0-\uA9E4\uA9E7-\uA9EF\uA9FA-\uA9FE\uAA60-\uAA6F\uAA71-\uAA76\uAA7A\uAA7E\uAA7F]')
+cons = e(r'[\u1000-\u102A\u103F\u1040-\u1049\u104E\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E\u1070\u1075-\u1081\u108E\u109F\uA9E0-\uA9E4\uA9E7-\uA9EF\uA9FA-\uA9FE\uAA60-\uAA6F\uAA71-\uAA76\uAA7A\uAA7E\uAA7F]')
 stack = e(r'(?:\u1039[\u1000-\u101C\u101E\u1020\u1021\u1050\u1051\u105A-\u105D])')
 asat = e(r'\u103A')
 my = e(r'[\u103B\u105E\u105F]')

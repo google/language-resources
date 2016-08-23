@@ -207,3 +207,11 @@ java_test(
     srcs = ["javatests/com/google/languageresources/my/GraphemeComposerTest.java"],
     deps = [":libjava-utils.jar"],
 )
+
+java_test(
+    name = "ZawgyiToUnicodeConverterTest",
+    timeout = "short",
+    srcs = ["javatests/com/google/languageresources/my/ZawgyiToUnicodeConverterTest.java"],
+    resources = ["zawgyi_unicode_test.tsv"],
+    deps = [":libjava-utils.jar"],
+)

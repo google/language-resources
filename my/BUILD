@@ -221,3 +221,10 @@ java_test(
     resources = ["zawgyi_unicode_test.tsv"],
     deps = [":libjava-utils.jar"],
 )
+
+java_binary(
+    name = "zawgyi-to-unicode",
+    srcs = ["java/com/google/languageresources/my/ZawgyiToUnicodeMain.java"],
+    main_class = "com.google.languageresources.my.ZawgyiToUnicodeMain",
+    deps = [":libjava-utils.jar"],
+)

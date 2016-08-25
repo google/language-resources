@@ -115,6 +115,13 @@ public class GraphemeComposer {
    * @return {@code this} for easy chaining of method invocations
    */
   public GraphemeComposer flushTo(StringBuilder builder) {
+    if (graphemeCluster.hasConflict()) {
+      StringBuilder msg = new StringBuilder("Conflict in GraphemeCluster composed of");
+      for (char c : sequence) {
+        msg.append(" U+").append(Integer.toHexString(c));
+      }
+      graphemeCluster.logger.warning(msg.toString());
+    }
     graphemeCluster.appendTo(builder);
     clear();
     return this;

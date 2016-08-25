@@ -34,7 +34,7 @@ import java.util.logging.Logger;
  * @see GraphemeComposer
  */
 class GraphemeCluster {
-  private final Logger logger = Logger.getLogger("com.google.languageresources.my.GraphemeCluster");
+  final Logger logger = Logger.getLogger("com.google.languageresources.my.GraphemeCluster");
 
   private final boolean throwOnError;
 
@@ -102,12 +102,41 @@ class GraphemeCluster {
   }
 
   /**
+   * Determines if the given codepoint is used for writing the Burmese language.
+   *
+   * @param c the character (Unicode code point) to be tested
+   * @return {@code true} iff the character is used for writing Burmese
+   */
+  private static boolean isBurmese(int c) {
+    return '\u1000' <= c && c <= '\u1055' && NOT_BURMESE.indexOf(c) < 0;
+  }
+
+  /**
+   * Determines if the given codepoint is a private-use character recognized by this class.
+   *
+   * @param c the character (Unicode code point) to be tested
+   * @return {@code true} iff the character is a private-use character recognized by this class
+   */
+  private static boolean isPrivateUse(int c) {
+    return '\uE000' <= c && c <= '\uE055';
+  }
+
+  /**
    * Determines if the grapheme cluster is non-empty.
    *
    * @return {@code true} iff the grapheme cluster is non-empty
    */
   private boolean isComposing() {
     return composing;
+  }
+
+  /**
+   * Determines if the grapheme cluster received conflicting additions.
+   *
+   * @return {@code true} iff the grapheme cluster had a conflict
+   */
+  public boolean hasConflict() {
+    return conflict;
   }
 
   /**
@@ -156,11 +185,36 @@ class GraphemeCluster {
    */
   void setKinzi(int c) {
     if (canSetKinzi(c)) {
+      if (kinzi != 0) {
+        conflict = true;
+      }
       kinzi = (char) c;
       composing = true;
       standardize();
     } else {
       unexpectedCharacter(c, "kinzi");
+      return;
+    }
+  }
+
+  private static boolean canSetMain(int c) {
+    int category = Character.getType(c);
+    return isBurmese(c)
+        && category != Character.COMBINING_SPACING_MARK
+        && category != Character.NON_SPACING_MARK;
+  }
+
+  private void setMain(char c) {
+    if (canSetMain(c)) {
+      if (main != 0) {
+        conflict = true;
+      }
+      main = c;
+      composing = true;
+      standardize();
+    } else {
+      unexpectedCharacter(c, "main");
+      return;
     }
   }
 
@@ -183,22 +237,114 @@ class GraphemeCluster {
    */
   void setStacked(int c) {
     if (canSetStacked(c)) {
+      if (stacked != 0 && stacked != STACKING_IN_PROGRESS) {
+        conflict = true;
+      }
       stacked = (char) c;
       composing = true;
       standardize();
     } else {
       unexpectedCharacter(c, "stacked");
+      return;
     }
   }
 
-  /**
-   * Determines if the given codepoint is a private-use character recognized by this class.
-   *
-   * @param c the character (Unicode code point) to be tested
-   * @return {@code true} iff the character is a private-use character recognized by this class
-   */
-  private static boolean isPrivateUse(int c) {
-    return ('\uE000' <= c && c <= '\uE055');
+  private void setAsat1(int c) {
+    if (asat1 != 0) {
+      conflict = true;
+    }
+    asat1 = (char) c;
+  }
+
+  private void setMedialY(char c) {
+    if (medialY != 0) {
+      conflict = true;
+    }
+    medialY = c;
+  }
+
+  private void setMedialR(char c) {
+    if (medialR != 0) {
+      conflict = true;
+    }
+    medialR = c;
+  }
+
+  private void setMedialW(char c) {
+    if (medialW != 0) {
+      conflict = true;
+    }
+    medialW = c;
+  }
+
+  private void setMedialH(char c) {
+    if (medialH != 0) {
+      conflict = true;
+    }
+    medialH = c;
+  }
+
+  private void setDiacriticE(char c) {
+    if (diacriticE != 0) {
+      conflict = true;
+    }
+    diacriticE = c;
+  }
+
+  private void setDiacriticI(int c) {
+    if (diacriticI != 0) {
+      conflict = true;
+    }
+    diacriticI = (char) c;
+  }
+
+  private void setDiacriticU(char c) {
+    if (diacriticU != 0) {
+      conflict = true;
+    }
+    diacriticU = c;
+  }
+
+  private void setDiacriticAi(int c) {
+    if (diacriticAi != 0) {
+      conflict = true;
+    }
+    diacriticAi = (char) c;
+  }
+
+  private void setAnusvara(int c) {
+    if (anusvara != 0) {
+      conflict = true;
+    }
+    anusvara = (char) c;
+  }
+
+  private void setVowelA(char c) {
+    if (vowelA != 0) {
+      conflict = true;
+    }
+    vowelA = c;
+  }
+
+  private void setDotBelow(char c) {
+    if (dotBelow != 0) {
+      conflict = true;
+    }
+    dotBelow = c;
+  }
+
+  private void setAsat2(char c) {
+    if (asat2 != 0) {
+      conflict = true;
+    }
+    asat2 = c;
+  }
+
+  private void setVisarga(char c) {
+    if (visarga != 0) {
+      conflict = true;
+    }
+    visarga = c;
   }
 
   /**
@@ -208,8 +354,7 @@ class GraphemeCluster {
    * @return {@code true} iff the character can be added to this grapheme cluster
    */
   public static boolean canAdd(int c) {
-    return ('\u1000' <= c && c <= '\u1055' && NOT_BURMESE.indexOf(c) < 0)
-        || canSetKinzi(c - PRIVATE_USE_OFFSET);
+    return isBurmese(c) || canSetKinzi(c - PRIVATE_USE_OFFSET);
   }
 
   /**
@@ -225,99 +370,97 @@ class GraphemeCluster {
     switch (c) {
       case '\u102B':
       case '\u102C':
-        vowelA = c;
+        setVowelA(c);
         break;
 
       case '\u102E':
-        diacriticAi = 0;
+        setDiacriticAi(0);
         // fall through
       case '\u102D':
-        diacriticI = c;
-        asat1 = 0;
+        setDiacriticI(c);
+        setAsat1(0);
         break;
 
       case '\u102F':
       case '\u1030':
-        diacriticU = c;
+        setDiacriticU(c);
         break;
 
       case '\u1031':
-        diacriticE = c;
+        setDiacriticE(c);
         break;
 
       case '\u1032':
-        diacriticAi = c;
-        asat1 = 0;
+        setDiacriticAi(c);
+        setAsat1(0);
         if (diacriticI == '\u102E') {
-          diacriticI = 0;
+          setDiacriticI(0);
         }
-        anusvara = 0;
+        setAnusvara(0);
         break;
 
       case '\u1036':
-        anusvara = c;
-        asat1 = 0;
-        diacriticAi = 0;
+        setAnusvara(c);
+        setAsat1(0);
+        setDiacriticAi(0);
         break;
 
       case '\u1037':
-        dotBelow = c;
+        setDotBelow(c);
         break;
 
       case '\u1038':
-        visarga = c;
+        setVisarga(c);
         break;
 
       case '\u1039':
+        if (stacked != 0) {
+          conflict = true;
+        }
         stacked = STACKING_IN_PROGRESS;
         break;
 
       case '\u103A':
         if (vowelA == 0) {
-          asat1 = c;
-          diacriticI = 0;
-          diacriticAi = 0;
-          anusvara = 0;
+          setAsat1(c);
+          setDiacriticI(0);
+          setDiacriticAi(0);
+          setAnusvara(0);
         } else {
-          asat2 = c;
+          setAsat2(c);
         }
         break;
 
       case '\u103B':
-        medialY = c;
+        setMedialY(c);
         break;
       case '\u103C':
-        medialR = c;
+        setMedialR(c);
         break;
       case '\u103D':
-        medialW = c;
+        setMedialW(c);
         break;
       case '\u103E':
-        medialH = c;
+        setMedialH(c);
         break;
 
       default:
         if (isPrivateUse(c)) {
           setKinzi(c - PRIVATE_USE_OFFSET);
-          return;
-        }
-        if (stacked == STACKING_IN_PROGRESS) {
+        } else if (stacked == STACKING_IN_PROGRESS) {
           setStacked(c);
-          return;
+        } else {
+          setMain(c);
         }
-        int category = Character.getType(c);
-        if (category == Character.COMBINING_SPACING_MARK
-            || category == Character.NON_SPACING_MARK) {
-          unexpectedCharacter(c, "main");
-        }
-        main = c;
-        break;
+        return;
     }
     composing = true;
     standardize();
   }
 
-  /** Standardizes a grapheme cluster by replacing alternative spellings with canonical versions. */
+  /**
+   * Standardizes a grapheme cluster by replacing alternative spellings with canonical versions.
+   */
   private void standardize() {
     if (kinzi == 0 && canSetKinzi(main) && stacked == STACKING_IN_PROGRESS && asat1 != 0) {
       kinzi = main;

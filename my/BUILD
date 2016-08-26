@@ -230,3 +230,10 @@ java_binary(
     main_class = "com.google.languageresources.my.ZawgyiToUnicodeMain",
     deps = [":libjava-utils.jar"],
 )
+
+java_binary(
+    name = "canonicalize",
+    srcs = ["java/com/google/languageresources/my/CanonicalizeMain.java"],
+    main_class = "com.google.languageresources.my.CanonicalizeMain",
+    deps = [":libjava-utils.jar"],
+)

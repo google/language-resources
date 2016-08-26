@@ -201,10 +201,12 @@ py_binary(
 
 java_library(
     name = "java-utils",
-    srcs = glob(
-        ["java/**/*.java"],
-        exclude = ["java/**/*Main.java"],
-    ),
+    srcs = [
+        "java/com/google/languageresources/my/BurmeseTextUtils.java",
+        "java/com/google/languageresources/my/GraphemeCluster.java",
+        "java/com/google/languageresources/my/GraphemeComposer.java",
+        "java/com/google/languageresources/my/ZawgyiToUnicodeConverter.java",
+    ],
 )
 
 java_test(

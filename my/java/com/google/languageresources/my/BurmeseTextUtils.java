@@ -45,6 +45,17 @@ class BurmeseTextUtils {
         }
       };
 
+  /** {@code Unicodifier} that takes Zawgyi text as input and converts it to Unicode. */
+  public static final Unicodifier FROM_ZAWGYI =
+      new Unicodifier() {
+        private final ZawgyiToUnicodeConverter converter = new ZawgyiToUnicodeConverter();
+
+        @Override
+        public String toUnicode(String original) {
+          return converter.convert(original);
+        }
+      };
+
   /** Pattern that matches contiguous spans of Myanmar text with interspersed whitespace. */
   private static final Pattern MYANMAR_TEXT =
       Pattern.compile("[\u1000-\u109F]+(\\p{Zs}+[\u1000-\u109F]+)*");

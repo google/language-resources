@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2008-2009 The Android Open Source Project
+ * Copyright 2016 Google, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.example.android.softkeyboard;
+package com.google.languageresources.mymr;
 
 import android.app.Dialog;
 import android.inputmethodservice.InputMethodService;
@@ -42,8 +43,17 @@ import java.util.List;
  * to be a complete soft keyboard implementation.  Its purpose is to provide
  * a basic example for how you would get started writing an input method, to
  * be fleshed out as appropriate.
+ *
+ * Based on
+ *
+ *   development/samples/SoftKeyboard/src/com/example/android/softkeyboard/SoftKeyboard.java
+ *
+ * available from
+ *
+ *   https://android.googlesource.com/platform/development/+/master/samples/SoftKeyboard/
+ *
  */
-public class SoftKeyboard extends InputMethodService
+public class MyanmarUnicodeKeyboard extends InputMethodService
         implements KeyboardView.OnKeyboardActionListener {
     static final boolean DEBUG = false;
 

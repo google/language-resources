@@ -32,17 +32,14 @@ import android.view.inputmethod.CompletionInfo;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
-import android.view.inputmethod.InputMethodSubtype;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Example of writing an input method for a soft keyboard.  This code is
+ * Example of a soft keyboard for entering text in Myanmar script.  This code is
  * focused on simplicity over completeness, so it should in no way be considered
- * to be a complete soft keyboard implementation.  Its purpose is to provide
- * a basic example for how you would get started writing an input method, to
- * be fleshed out as appropriate.
+ * to be a complete implementation.
  *
  * Based on
  *
@@ -67,9 +64,11 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
      */
     static final boolean PROCESS_HARD_KEYS = true;
 
+    static final int KEYCODE_LANGUAGE_SWITCH = -101;
+
     private InputMethodManager mInputMethodManager;
 
-    private LatinKeyboardView mInputView;
+    private KeyboardView mInputView;
     private CandidateView mCandidateView;
     private CompletionInfo[] mCompletions;
 
@@ -81,13 +80,12 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
     private long mLastShiftTime;
     private long mMetaState;
 
-    private LatinKeyboard mSymbolsKeyboard;
-    private LatinKeyboard mSymbolsShiftedKeyboard;
-    private LatinKeyboard mQwertyKeyboard;
+    private Keyboard mBurmeseKeyboard;
+    private Keyboard mBurmeseShiftedKeyboard;
 
-    private LatinKeyboard mCurKeyboard;
+    private Keyboard mCurKeyboard;
 
-    private String mWordSeparators;
+    private static final String SEPARATORS = " \n\u104A\u104B";
 
     /**
      * Main initialization of the input method component.  Be sure to call
@@ -97,7 +95,6 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
     public void onCreate() {
         super.onCreate();
         mInputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        mWordSeparators = getResources().getString(R.string.word_separators);
     }
 
     /**
@@ -106,17 +103,18 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
      */
     @Override
     public void onInitializeInterface() {
-        if (mQwertyKeyboard != null) {
+        if (mBurmeseKeyboard != null) {
             // Configuration changes can happen after the keyboard gets recreated,
             // so we need to be able to re-build the keyboards if the available
             // space has changed.
             int displayWidth = getMaxWidth();
-            if (displayWidth == mLastDisplayWidth) return;
+            if (displayWidth == mLastDisplayWidth) {
+                return;
+            }
             mLastDisplayWidth = displayWidth;
         }
-        mQwertyKeyboard = new LatinKeyboard(this, R.xml.qwerty);
-        mSymbolsKeyboard = new LatinKeyboard(this, R.xml.symbols);
-        mSymbolsShiftedKeyboard = new LatinKeyboard(this, R.xml.symbols_shift);
+        mBurmeseKeyboard = new Keyboard(this, R.xml.keyboard_burmese);
+        mBurmeseShiftedKeyboard = new Keyboard(this, R.xml.keyboard_burmese_shifted);
     }
 
     /**
@@ -127,16 +125,14 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
      */
     @Override
     public View onCreateInputView() {
-        mInputView = (LatinKeyboardView) getLayoutInflater().inflate(R.layout.input, null);
+        mInputView = (KeyboardView) getLayoutInflater().inflate(R.layout.input, null);
         mInputView.setOnKeyboardActionListener(this);
-        setLatinKeyboard(mQwertyKeyboard);
+        mInputView.setPreviewEnabled(false);
+        setKeyboard(mBurmeseKeyboard);
         return mInputView;
     }
 
-    private void setLatinKeyboard(LatinKeyboard nextKeyboard) {
-        final boolean shouldSupportLanguageSwitchKey =
-                mInputMethodManager.shouldOfferSwitchingToNextInputMethod(getToken());
-        nextKeyboard.setLanguageSwitchKeyVisibility(shouldSupportLanguageSwitchKey);
+    private void setKeyboard(Keyboard nextKeyboard) {
         mInputView.setKeyboard(nextKeyboard);
     }
 
@@ -182,13 +178,13 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
             case InputType.TYPE_CLASS_DATETIME:
                 // Numbers and dates default to the symbols keyboard, with
                 // no extra features.
-                mCurKeyboard = mSymbolsKeyboard;
+                mCurKeyboard = mBurmeseKeyboard;
                 break;
 
             case InputType.TYPE_CLASS_PHONE:
                 // Phones will also default to the symbols keyboard, though
                 // often you will want to have a dedicated phone keyboard.
-                mCurKeyboard = mSymbolsKeyboard;
+                mCurKeyboard = mBurmeseKeyboard;
                 break;
 
             case InputType.TYPE_CLASS_TEXT:
@@ -196,7 +192,7 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
                 // normal alphabetic keyboard, and assume that we should
                 // be doing predictive text (showing candidates as the
                 // user types).
-                mCurKeyboard = mQwertyKeyboard;
+                mCurKeyboard = mBurmeseKeyboard;
                 mPredictionOn = true;
 
                 // We now look for a few special variations of text that will
@@ -236,13 +232,9 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
             default:
                 // For all unknown input types, default to the alphabetic
                 // keyboard with no special features.
-                mCurKeyboard = mQwertyKeyboard;
+                mCurKeyboard = mBurmeseKeyboard;
                 updateShiftKeyState(attribute);
         }
-
-        // Update the label on the enter key, depending on what the application
-        // says it will do.
-        mCurKeyboard.setImeOptions(getResources(), attribute.imeOptions);
     }
 
     /**
@@ -263,7 +255,7 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
         // its window.
         setCandidatesViewShown(false);
 
-        mCurKeyboard = mQwertyKeyboard;
+        mCurKeyboard = mBurmeseKeyboard;
         if (mInputView != null) {
             mInputView.closing();
         }
@@ -273,15 +265,8 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
     public void onStartInputView(EditorInfo attribute, boolean restarting) {
         super.onStartInputView(attribute, restarting);
         // Apply the selected keyboard to the input view.
-        setLatinKeyboard(mCurKeyboard);
+        setKeyboard(mCurKeyboard);
         mInputView.closing();
-        final InputMethodSubtype subtype = mInputMethodManager.getCurrentInputMethodSubtype();
-        mInputView.setSubtypeOnSpaceKey(subtype);
-    }
-
-    @Override
-    public void onCurrentInputMethodSubtypeChanged(InputMethodSubtype subtype) {
-        mInputView.setSubtypeOnSpaceKey(subtype);
     }
 
     /**
@@ -336,7 +321,7 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
     }
 
     /**
-     * This translates incoming hard key events in to edit operations on an
+     * This translates incoming hard key events into edit operations on an
      * InputConnection.  It is only needed when using the
      * PROCESS_HARD_KEYS option.
      */
@@ -410,26 +395,6 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
                 // text being entered with a hard keyboard, we need to process
                 // it and do the appropriate action.
                 if (PROCESS_HARD_KEYS) {
-                    if (keyCode == KeyEvent.KEYCODE_SPACE
-                            && (event.getMetaState() & KeyEvent.META_ALT_ON) != 0) {
-                        // A silly example: in our input method, Alt+Space
-                        // is a shortcut for 'android' in lower case.
-                        InputConnection ic = getCurrentInputConnection();
-                        if (ic != null) {
-                            // First, tell the editor that it is no longer in the
-                            // shift state, since we are consuming this.
-                            ic.clearMetaKeyStates(KeyEvent.META_ALT_ON);
-                            keyDownUp(KeyEvent.KEYCODE_A);
-                            keyDownUp(KeyEvent.KEYCODE_N);
-                            keyDownUp(KeyEvent.KEYCODE_D);
-                            keyDownUp(KeyEvent.KEYCODE_R);
-                            keyDownUp(KeyEvent.KEYCODE_O);
-                            keyDownUp(KeyEvent.KEYCODE_I);
-                            keyDownUp(KeyEvent.KEYCODE_D);
-                            // And we consume this event.
-                            return true;
-                        }
-                    }
                     if (mPredictionOn && translateKeyDown(keyCode, event)) {
                         return true;
                     }
@@ -474,7 +439,7 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
      * editor state.
      */
     private void updateShiftKeyState(EditorInfo attr) {
-        if (attr != null && mInputView != null && mQwertyKeyboard == mInputView.getKeyboard()) {
+        if (attr != null && mInputView != null && mBurmeseKeyboard == mInputView.getKeyboard()) {
             int caps = 0;
             EditorInfo ei = getCurrentInputEditorInfo();
             if (ei != null && ei.inputType != InputType.TYPE_NULL) {
@@ -523,8 +488,9 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
 
     // Implementation of KeyboardViewListener
 
+    @Override
     public void onKey(int primaryCode, int[] keyCodes) {
-        if (isWordSeparator(primaryCode)) {
+        if (isSeparator(primaryCode)) {
             // Handle separator
             if (mComposing.length() > 0) {
                 commitTyped(getCurrentInputConnection());
@@ -538,24 +504,23 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
         } else if (primaryCode == Keyboard.KEYCODE_CANCEL) {
             handleClose();
             return;
-        } else if (primaryCode == LatinKeyboardView.KEYCODE_LANGUAGE_SWITCH) {
+        } else if (primaryCode == KEYCODE_LANGUAGE_SWITCH) {
             handleLanguageSwitch();
             return;
-        } else if (primaryCode == LatinKeyboardView.KEYCODE_OPTIONS) {
-            // Show a menu or somethin'
         } else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE && mInputView != null) {
             Keyboard current = mInputView.getKeyboard();
-            if (current == mSymbolsKeyboard || current == mSymbolsShiftedKeyboard) {
-                setLatinKeyboard(mQwertyKeyboard);
+            if (current == mBurmeseKeyboard) {
+                setKeyboard(mBurmeseShiftedKeyboard);
             } else {
-                setLatinKeyboard(mSymbolsKeyboard);
-                mSymbolsKeyboard.setShifted(false);
+                setKeyboard(mBurmeseKeyboard);
+                mBurmeseKeyboard.setShifted(false);
             }
         } else {
             handleCharacter(primaryCode, keyCodes);
         }
     }
 
+    @Override
     public void onText(CharSequence text) {
         InputConnection ic = getCurrentInputConnection();
         if (ic == null) return;
@@ -619,18 +584,14 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
         }
 
         Keyboard currentKeyboard = mInputView.getKeyboard();
-        if (mQwertyKeyboard == currentKeyboard) {
-            // Alphabet keyboard
-            checkToggleCapsLock();
-            mInputView.setShifted(mCapsLock || !mInputView.isShifted());
-        } else if (currentKeyboard == mSymbolsKeyboard) {
-            mSymbolsKeyboard.setShifted(true);
-            setLatinKeyboard(mSymbolsShiftedKeyboard);
-            mSymbolsShiftedKeyboard.setShifted(true);
-        } else if (currentKeyboard == mSymbolsShiftedKeyboard) {
-            mSymbolsShiftedKeyboard.setShifted(false);
-            setLatinKeyboard(mSymbolsKeyboard);
-            mSymbolsKeyboard.setShifted(false);
+        if (currentKeyboard == mBurmeseKeyboard) {
+            mBurmeseKeyboard.setShifted(true);
+            setKeyboard(mBurmeseShiftedKeyboard);
+            mBurmeseShiftedKeyboard.setShifted(true);
+        } else if (currentKeyboard == mBurmeseShiftedKeyboard) {
+            mBurmeseShiftedKeyboard.setShifted(false);
+            setKeyboard(mBurmeseKeyboard);
+            mBurmeseKeyboard.setShifted(false);
         }
     }
 
@@ -682,13 +643,8 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
         }
     }
 
-    private String getWordSeparators() {
-        return mWordSeparators;
-    }
-
-    public boolean isWordSeparator(int code) {
-        String separators = getWordSeparators();
-        return separators.contains(String.valueOf((char) code));
+    public boolean isSeparator(int code) {
+        return SEPARATORS.contains(String.valueOf((char)code));
     }
 
     public void pickDefaultCandidate() {

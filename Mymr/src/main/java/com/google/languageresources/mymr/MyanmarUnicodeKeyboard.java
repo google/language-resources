@@ -33,6 +33,8 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -630,7 +632,34 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
     }
 
     private void handleLanguageSwitch() {
-        mInputMethodManager.switchToNextInputMethod(getToken(), false /* onlyCurrentIme */);
+        try {
+            Method m =
+                    InputMethodManager.class
+                            .getMethod(
+                                    "switchToNextInputMethod",
+                                    new Class[] {android.os.IBinder.class, boolean.class});
+            m.invoke(mInputMethodManager, getToken(), false /* onlyCurrentIme */);
+            return;
+        } catch (NoSuchMethodException e) {
+            // Android API level < 14. Do nothing.
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            // This cannot happen.
+            throw new AssertionError(e);
+        }
+        try {
+            Method m =
+                    InputMethodManager.class
+                            .getMethod(
+                                    "switchToLastInputMethod",
+                                    new Class[] {android.os.IBinder.class});
+            m.invoke(mInputMethodManager, getToken());
+            return;
+        } catch (NoSuchMethodException e) {
+            // Android API level < 11. Do nothing.
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            // This cannot happen.
+            throw new AssertionError(e);
+        }
     }
 
     private void checkToggleCapsLock() {
@@ -644,7 +673,7 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
     }
 
     public boolean isSeparator(int code) {
-        return SEPARATORS.contains(String.valueOf((char)code));
+        return SEPARATORS.contains(String.valueOf((char) code));
     }
 
     public void pickDefaultCandidate() {

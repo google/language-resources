@@ -571,7 +571,7 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
 
     private void handlePasteFromZawgyi() {
         CharSequence text = getTextFromClipboard();
-        if (text.length() == 0) {
+        if (text == null || text.length() == 0) {
             return;
         }
         InputConnection ic = getCurrentInputConnection();

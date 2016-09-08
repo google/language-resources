@@ -199,7 +199,7 @@ py_binary(
     deps = ["//third_party/unicode:utn11"],
 )
 
-java_library(
+android_library(
     name = "java-utils",
     srcs = [
         "java/com/google/languageresources/my/BurmeseTextUtils.java",

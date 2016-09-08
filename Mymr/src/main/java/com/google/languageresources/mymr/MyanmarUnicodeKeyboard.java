@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.languageresources.my.GraphemeComposer;
+import com.google.languageresources.my.ZawgyiToUnicodeConverter;
 
 /**
  * Example of a soft keyboard for entering text in Myanmar script.  This code is
@@ -68,6 +69,7 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
      */
     static final boolean PROCESS_HARD_KEYS = true;
 
+    static final int KEYCODE_PASTE_FROM_ZAWGYI = -100;
     static final int KEYCODE_LANGUAGE_SWITCH = -101;
 
     private InputMethodManager mInputMethodManager;
@@ -88,6 +90,9 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
     private Keyboard mBurmeseShiftedKeyboard;
 
     private static final String SEPARATORS = " \n\u104A\u104B";
+
+    private static final ZawgyiToUnicodeConverter ZAWGYI_TO_UNICODE_CONVERTER =
+            new ZawgyiToUnicodeConverter();
 
     /**
      * Main initialization of the input method component.  Be sure to call
@@ -421,6 +426,9 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
             case Keyboard.KEYCODE_CANCEL:
                 handleClose();
                 break;
+            case KEYCODE_PASTE_FROM_ZAWGYI:
+                handlePasteFromZawgyi();
+                break;
             case KEYCODE_LANGUAGE_SWITCH:
                 handleLanguageSwitch();
                 break;
@@ -538,6 +546,39 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
         commitTyped(getCurrentInputConnection());
         requestHideSelf(0);
         mInputView.closing();
+    }
+
+    private CharSequence getTextFromClipboard() {
+        android.text.ClipboardManager cm =
+                (android.text.ClipboardManager)
+                        getSystemService(android.content.Context.CLIPBOARD_SERVICE);
+        return cm.getText();
+    }
+
+    // In API level 11 and above:
+    //
+    // private CharSequence getTextFromClipboard() {
+    //     android.content.ClipboardManager cm =
+    //             (android.content.ClipboardManager)
+    //                     getSystemService(android.content.Context.CLIPBOARD_SERVICE);
+    //     android.content.ClipData clip = cm.getPrimaryClip();
+    //     if (clip == null) {
+    //         return "";
+    //     }
+    //     android.content.ClipData.Item item = clip.getItemAt(0);
+    //     return item.coerceToText(this).toString();
+    // }
+
+    private void handlePasteFromZawgyi() {
+        CharSequence text = getTextFromClipboard();
+        if (text.length() == 0) {
+            return;
+        }
+        InputConnection ic = getCurrentInputConnection();
+        if (ic == null) {
+            return;
+        }
+        ic.commitText(ZAWGYI_TO_UNICODE_CONVERTER.convert(text), 1);
     }
 
     private IBinder getToken() {

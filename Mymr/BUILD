@@ -19,8 +19,12 @@ licenses(["notice"])  # Apache 2.0
 
 android_binary(
     name = "MyanmarUnicodeKeyboard",
-    srcs = [],
+    srcs = [
+      "src/main/java/com/google/languageresources/mymr/CandidateView.java",
+      "src/main/java/com/google/languageresources/mymr/MyanmarUnicodeKeyboard.java",
+    ],
     custom_package = "com.google.languageresources.mymr",
     manifest = "AndroidManifest.xml",
     resource_files = glob(["res/**"]),
+    deps = ["//my:java-utils"],
 )

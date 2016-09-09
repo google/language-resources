@@ -23,8 +23,6 @@ import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.os.IBinder;
 import android.text.InputType;
-import android.text.method.MetaKeyKeyListener;
-import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -84,7 +82,6 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
     private boolean mPredictionOn;
     private boolean mCompletionOn;
     private int mLastDisplayWidth;
-    private long mMetaState;
 
     private Keyboard mBurmeseKeyboard;
     private Keyboard mBurmeseShiftedKeyboard;
@@ -169,11 +166,6 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
         // the underlying state of the text editor could have changed in any way.
         mComposer.clear();
         updateCandidates();
-
-        if (!restarting) {
-            // Clear shift states.
-            mMetaState = 0;
-        }
 
         mPredictionOn = true;
         mCompletionOn = false;
@@ -295,9 +287,15 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
      * PROCESS_HARD_KEYS option.
      */
     private boolean translateKeyDown(int keyCode, KeyEvent event) {
-        mMetaState = MetaKeyKeyListener.handleKeyDown(mMetaState, keyCode, event);
-        int c = event.getUnicodeChar(MetaKeyKeyListener.getMetaState(mMetaState));
-        mMetaState = MetaKeyKeyListener.adjustMetaAfterKeypress(mMetaState);
+        // Handle Ctrl-Shift-V
+        if (event.getKeyCode() == KeyEvent.KEYCODE_V
+                && event.isCtrlPressed() // requires API level 11
+                && event.isShiftPressed()) {
+            handlePasteFromZawgyi();
+            return true;
+        }
+
+        int c = event.getUnicodeChar();
         InputConnection ic = getCurrentInputConnection();
         if (c == 0 || ic == null) {
             return false;
@@ -355,23 +353,6 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
         }
 
         return super.onKeyDown(keyCode, event);
-    }
-
-    /**
-     * Use this to monitor key events being delivered to the application.
-     * We get first crack at them, and can either resume them or let them
-     * continue to the app.
-     */
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        // If we want to do transformations on text being entered with a hard
-        // keyboard, we need to process the up events to update the meta key
-        // state we are tracking.
-        if (PROCESS_HARD_KEYS) {
-            mMetaState = MetaKeyKeyListener.handleKeyUp(mMetaState, keyCode, event);
-        }
-
-        return super.onKeyUp(keyCode, event);
     }
 
     /**

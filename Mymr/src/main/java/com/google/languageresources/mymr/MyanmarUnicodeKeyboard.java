@@ -434,7 +434,7 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
         }
         ic.beginBatchEdit();
         commitTyped(ic);
-        ic.commitText(text, 0);
+        ic.commitText(text, 1);
         ic.endBatchEdit();
     }
 
@@ -555,11 +555,7 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
         if (text == null || text.length() == 0) {
             return;
         }
-        InputConnection ic = getCurrentInputConnection();
-        if (ic == null) {
-            return;
-        }
-        ic.commitText(ZAWGYI_TO_UNICODE_CONVERTER.convert(text), 1);
+        onText(ZAWGYI_TO_UNICODE_CONVERTER.convert(text));
     }
 
     private IBinder getToken() {

@@ -418,7 +418,9 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
                     // Handle separator
                     commitTyped(getCurrentInputConnection());
                     sendKey(primaryCode);
-                    setShiftedKeyboard(false);
+                    if (mInputView != null) {
+                        setShiftedKeyboard(false);
+                    }
                 } else {
                     handleCharacter(primaryCode, keyCodes);
                 }

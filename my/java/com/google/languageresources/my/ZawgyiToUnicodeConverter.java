@@ -49,10 +49,17 @@ public final class ZawgyiToUnicodeConverter {
   }
 
   private static final Pattern SPACE_BEFORE_DOT_BELOW =
+      //                 SPACES    ZAWGYI DOT BELOW
       Pattern.compile("\\p{Zs}+([\u1037\u1094\u1095])");
 
   private static final Pattern ZERO_AFTER_ALPHABETIC =
+      //                   LETTERS, MARKS, SYMBOLS     ZERO
       Pattern.compile("([\u1000-\u103F\u104C-\u1059])\u1040");
+
+  private static final Pattern ZERO_BEFORE_LETTER_WITH_ASAT =
+      Pattern.compile(
+          // ZERO    LETTERS                           VOWELS+DOT   MEDIALS        ASAT
+          "\u1040([\u1000-\u1021\u103F\u1050-\u1055][\u102D-\u1037\u103B-\u103E]*\u103A)");
 
   private static final Pattern FOUR_LAGAUN = Pattern.compile("\u1044\u1004\u103A\u1038");
 
@@ -67,6 +74,7 @@ public final class ZawgyiToUnicodeConverter {
     StringBuilder b = new StringBuilder();
     convertTo(z, b);
     String u = ZERO_AFTER_ALPHABETIC.matcher(b).replaceAll("$1\u101D");
+    u = ZERO_BEFORE_LETTER_WITH_ASAT.matcher(u).replaceAll("\u101D$1");
     u = FOUR_LAGAUN.matcher(u).replaceAll("\u104E\u1004\u103A\u1038");
     return u;
   }

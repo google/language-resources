@@ -52,6 +52,12 @@ public class ZawgyiToUnicodeConverterTest {
   }
 
   @Test
+  public void testZeroToWa() {
+    checkConverter("\u101C\u102F\u1036\u1038\u1040", "\u101C\u102F\u1036\u1038\u101D");
+    checkConverter("\u1040\u1004\u1039\u1038", "\u101D\u1004\u103A\u1038");
+  }
+
+  @Test
   public void testExhaustive() throws IOException {
     InputStream istream = ClassLoader.getSystemResourceAsStream("my/zawgyi_unicode_test.tsv");
     assertNotNull(istream);

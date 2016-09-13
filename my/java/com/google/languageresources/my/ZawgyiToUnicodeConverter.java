@@ -58,8 +58,8 @@ public final class ZawgyiToUnicodeConverter {
 
   private static final Pattern ZERO_BEFORE_LETTER_WITH_ASAT =
       Pattern.compile(
-          // ZERO    LETTERS                           VOWELS+DOT   MEDIALS        ASAT
-          "\u1040([\u1000-\u1021\u103F\u1050-\u1055][\u102D-\u1037\u103B-\u103E]*\u103A)");
+          // ZERO    LETTERS                           VOWELS+DOT   MEDIALS         STACK ASAT
+          "\u1040([\u1000-\u1021\u103F\u1050-\u1055][\u102D-\u1037\u103B-\u103E]*[\u1039\u103A])");
 
   private static final Pattern FOUR_LAGAUN = Pattern.compile("\u1044\u1004\u103A\u1038");
 

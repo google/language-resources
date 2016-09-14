@@ -19,7 +19,7 @@ before_install:
   - sudo chmod 1777 /usr/local/android-sdk
   - wget https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
   - tar xzf android-sdk_r24.4.1-linux.tgz -C /usr/local/android-sdk --strip-components=1
-  - echo y | /usr/local/android-sdk/tools/android update sdk --no-ui --filter build-tools-24.0.1
+  - echo y | /usr/local/android-sdk/tools/android update sdk --no-ui --filter build-tools-24.0.2
   - echo y | /usr/local/android-sdk/tools/android update sdk --no-ui --filter android-24
 
 script:

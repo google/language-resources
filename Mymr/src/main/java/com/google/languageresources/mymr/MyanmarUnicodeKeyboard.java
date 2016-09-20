@@ -34,6 +34,8 @@ import android.view.inputmethod.InputMethodManager;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import com.google.languageresources.my.GraphemeComposer;
@@ -79,6 +81,8 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
     private GraphemeComposer mComposer = new GraphemeComposer("\u1031");
     private StringBuilder mComposed = new StringBuilder(8);
 
+    private HashMap<String, String[]> mCandidates;
+
     private boolean mPredictionOn;
     private boolean mCompletionOn;
     private int mLastDisplayWidth;
@@ -99,6 +103,11 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
     public void onCreate() {
         super.onCreate();
         mInputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        mCandidates = new HashMap<String, String[]>();
+        for (String item : getResources().getStringArray(R.array.candidates_burmese)) {
+            String[] candidates = item.split(" ");
+            mCandidates.put(candidates[0], candidates);
+        }
     }
 
     /**
@@ -260,7 +269,7 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
     /**
      * This tells us about completions that the editor has determined based
      * on the current text in it.  We want to use this in fullscreen mode
-     * to show the completions ourself, since the editor can not be seen
+     * to show the completions ourself, since the editor cannot be seen
      * in that situation.
      */
     @Override
@@ -440,20 +449,17 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
         ic.endBatchEdit();
     }
 
-    /**
-     * Update the list of available candidates from the current composing
-     * text.  This will need to be filled in by however you are determining
-     * candidates.
-     */
+    /** Update the list of available candidates from the current composing text. */
     private void updateCandidates() {
         if (!mCompletionOn) {
             if (mPredictionOn && !mComposer.isEmpty()) {
-                ArrayList<String> list = new ArrayList<String>();
-                list.add(mComposer.toString());
-                setSuggestions(list, true, true);
-            } else {
-                setSuggestions(null, false, false);
+                String[] candidates = mCandidates.get(mComposer.toString());
+                if (candidates != null) {
+                    setSuggestions(Arrays.asList(candidates), true, true);
+                    return;
+                }
             }
+            setSuggestions(null, false, false);
         }
     }
 
@@ -619,10 +625,10 @@ public class MyanmarUnicodeKeyboard extends InputMethodService
                 mCandidateView.clear();
             }
         } else if (!mComposer.isEmpty()) {
-            // If we were generating candidate suggestions for the current
-            // text, we would commit one of them here.  But for this sample,
-            // we will just commit the current text.
-            commitTyped(getCurrentInputConnection());
+            String[] candidates = mCandidates.get(mComposer.toString());
+            if (candidates != null && index >= 0 && index < candidates.length) {
+                getCurrentInputConnection().commitText(candidates[index], 1);
+            }
         }
     }
 

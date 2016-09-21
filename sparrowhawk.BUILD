@@ -99,7 +99,7 @@ cc_library(
     visibility = ["//visibility:private"],
     deps = [
         "@openfst//:base",
-        "@re2//:re2",
+        "//external:re2",
         ":utils",
     ],
 )
@@ -138,8 +138,8 @@ cc_library(
     includes = ["src/include"],
     deps = [
         "@openfst//:base",
-        "@re2//:re2",
         "@thrax//:grm-manager",
+        "//external:re2",
         ":protos",
         ":sentence_boundary",
         ":utils",

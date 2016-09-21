@@ -42,7 +42,7 @@ public class CandidateView extends View {
 
     private Rect mBgPadding;
 
-    private static final int MAX_SUGGESTIONS = 32;
+    private static final int MAX_SUGGESTIONS = 75;
     private static final int SCROLL_PIXELS = 20;
 
     private int[] mWordWidth = new int[MAX_SUGGESTIONS];
@@ -249,7 +249,11 @@ public class CandidateView extends View {
             List<String> suggestions, boolean completions, boolean typedWordValid) {
         clear();
         if (suggestions != null) {
-            mSuggestions = new ArrayList<String>(suggestions);
+            if (suggestions.size() <= MAX_SUGGESTIONS) {
+                mSuggestions = new ArrayList<String>(suggestions);
+            } else {
+                mSuggestions = new ArrayList<String>(suggestions.subList(0, MAX_SUGGESTIONS));
+            }
         }
         mTypedWordValid = typedWordValid;
         scrollTo(0, 0);

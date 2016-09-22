@@ -10,6 +10,7 @@ This is not an official Google product.
 * [Key character map](res/raw/keyboard_layout_burmese.kcm) for physical keyboard, overlaying Myanmar3 layout onto a QWERTY keyboard.
 * Incremental composition of grapheme clusters.
 * Automatic correction of non-standard input. One example of many: typing သ (101E) followed by ြ (103C) gets corrected to ဩ (1029).
+* Suggestions for completing grapheme clusters. For example, after typing ဖ (1016), grapheme clusters can be selected from a list of frequent completions, starting with ဖြ ဖွဲ့ ဖြူ.
 * Stand-alone library for composing grapheme clusters and serializing them in canonical storage order.
 * The [grapheme composer library](../my/java/com/google/languageresources/my/GraphemeComposer.java) is configurable: decide at construction time whether ေ (1031) must be typed before or after a letter (in the sample keyboard, it must be typed before a letter), whether ြ (103C) must be typed before or after a letter, etc.
 * Soft key for conversion from Zawgyi. Converts Android clipboard contents from Zawgyi to Unicode and inserts the resulting Unicode text.

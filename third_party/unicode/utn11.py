@@ -39,6 +39,7 @@ import re
 # Known issues:
 #
 # * '\u101B\u103E\u1031\u1037' gets rejected.
+# * '\u101D\u103E\u1031\u1037' gets rejected.
 
 def e(x) :
     '''Expand $var in a string'''

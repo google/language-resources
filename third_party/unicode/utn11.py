@@ -108,6 +108,14 @@ CLUSTERS = re.compile('%s*$' % myregex, re.VERBOSE)
 #
 # The code after this comment and up to END QUOTE is taken from Unicode
 # Technical Note #11, version 4, pages 17-19.
+#
+# Modifications:
+#
+# * Changed u'' strings to '' strings in conjunction with
+#
+#     from __future__ import unicode_literals
+#
+#   above. This is to ensure compatibility with Python 2 and 3.
 
 class unitable(object) :
     reorder_class = 3
@@ -192,7 +200,7 @@ def canon_subsort(table, text, orders, flags, start, end) :
         if f :
             j = i + 1
             num = ord(text[start + indices[j]])
-            if j + 1 <= final and text[start + indices[j]] == u'\u1082' and text[start + indices[j+1]] == u'\u1060' :
+            if j + 1 <= final and text[start + indices[j]] == '\u1082' and text[start + indices[j+1]] == '\u1060' :
                 i = j + 2
                 continue
             while j <= final and f & flags[indices[j]] :
@@ -202,7 +210,7 @@ def canon_subsort(table, text, orders, flags, start, end) :
                 i -= 2
         i += 1
     substr = map(lambda x: text[start + x], indices)
-    return text[:start] + u"".join(substr) + text[end:]
+    return text[:start] + ''.join(substr) + text[end:]
 
 def canon(table, text) :
     index = 0

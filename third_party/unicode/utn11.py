@@ -241,3 +241,8 @@ def canon(table, text) :
     return text
 
 # END QUOTE
+
+UNITABLE = unitable()
+
+def Canonicalize(text):
+    return canon(UNITABLE, text)

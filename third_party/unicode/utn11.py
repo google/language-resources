@@ -116,6 +116,8 @@ CLUSTERS = re.compile('%s*$' % myregex, re.VERBOSE)
 #     from __future__ import unicode_literals
 #
 #   above. This is to ensure compatibility with Python 2 and 3.
+#
+# * Changed sorted(cmp=...) to sorted(key=...).
 
 class unitable(object) :
     reorder_class = 3
@@ -192,7 +194,15 @@ def canon_subsort(table, text, orders, flags, start, end) :
         else :
             return cmp(orders[x], orders[y])
 
-    indices = sorted(range(end - start), cmp=canon_cmp)
+    def canon_key(x) :
+        # Key for canonical ordering: first compare on orders[x],
+        # and if orders are equal fall back on comparing x itself.
+        # Same behavior as canon_cmp above, in the sense that
+        # cmp(canon_key(x), canon_key(y)) == canon_cmp(x, y).
+        return (orders[x], x)
+
+    # ORIGINAL: indices = sorted(range(end - start), cmp=canon_cmp)
+    indices = sorted(range(end - start), key=canon_key)
     final = len(indices) - 1
     i = 0
     while i < final :

@@ -1,0 +1,68 @@
+$c = [\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9];
+$v = [\u0BBE-\u0BC2\u0BC6-\u0BC8\u0BCA-\u0BCC];
+
+# Delete ZWNJ and ZWJ to simplify further processing.
+\u200C → ;
+\u200D → ;
+
+::NFC;
+
+# Manifest the implicit vowel after every consonant that is not followed by a
+# dependent vowel or virama.
+$c { } [^$v\u0BCD] → ɐ;
+
+::Null;
+
+ஃப → f;
+ஃ → x;
+
+அ → ɐ;
+ஆ → aː;
+இ → i;
+ஈ → iː;
+உ → u;
+ஊ → uː;
+எ → e;
+ஏ → eː;
+ஐ → ɐi̯;
+ஒ → o;
+ஓ → oː;
+ஔ → ɐu̯;
+
+க → k;
+ங → ŋ;
+ச → c;
+ஜ → ɟ;
+ஞ → ɲ;
+ட → ʈ;
+ண → ɳ;
+த → t̪;
+ந → n̪;
+ன → n;
+ப → p;
+ம → m;
+ய → j;
+ர → ɾ;
+ற → r;
+ல → l;
+ள → ɭ;
+ழ → ɻ;
+வ → ʋ;
+ஶ → ʃ;
+ஷ → ʂ;
+ஸ → s;
+ஹ → h;
+
+\u0BBE → aː;
+\u0BBF → i;
+\u0BC0 → iː;
+\u0BC1 → u;
+\u0BC2 → uː;
+\u0BC6 → e;
+\u0BC7 → eː;
+\u0BC8 → ɐi̯;
+\u0BCA → o;
+\u0BCB → oː;
+\u0BCC → ɐu̯;
+
+\u0BCD → ;

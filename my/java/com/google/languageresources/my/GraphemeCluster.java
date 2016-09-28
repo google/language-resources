@@ -152,6 +152,19 @@ class GraphemeCluster {
   }
 
   /**
+   * Logs an error message and, if requested, raises an exception.
+   *
+   * @param message the error message
+   * @throws {@code Error} if {@code throwOnError} was set to {@code true} on construction
+   */
+  void logError(String message) {
+    logger.warning(message);
+    if (throwOnError) {
+      throw new Error(message);
+    }
+  }
+
+  /**
    * Handles the error condition when an unexpected character was encountered.
    *
    * @param c the character that was unexpected
@@ -161,11 +174,7 @@ class GraphemeCluster {
     StringBuilder b = new StringBuilder();
     b.append("Unexpected ").append(slot).append(" character: ").appendCodePoint(c);
     b.append(" U+").append(Integer.toHexString(c));
-    String msg = b.toString();
-    logger.warning(msg);
-    if (throwOnError) {
-      throw new Error(msg);
-    }
+    logError(b.toString());
   }
 
   /**

@@ -120,7 +120,7 @@ public class GraphemeComposer {
       for (char c : sequence) {
         msg.append(" U+").append(Integer.toHexString(c));
       }
-      graphemeCluster.logger.warning(msg.toString());
+      graphemeCluster.logError(msg.toString());
     }
     graphemeCluster.appendTo(builder);
     clear();

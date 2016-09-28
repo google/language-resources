@@ -65,8 +65,8 @@ def RemoveOptionalZW(text):
   orthography, the use of ZWJ is obligatory as part of yansaya and
   rakaransaya. It is debatable whether repaya is obligatory, but we will treat
   it as such and not remove ZWJ (to remove ZWJ from repaya, use
-  RemoeRepaya). All other uses of ZWNJ and ZWJ are optional/adivsory and will be
-  removed.
+  RemoveRepaya). All other uses of ZWNJ and ZWJ are optional/adivsory and will
+  be removed.
 
   This method changes ZWNJ to ZWJ in the context of yansaya, rakaransaya, and
   repaya and preserves it; and removes ZWNJ and ZWJ everywhere else.

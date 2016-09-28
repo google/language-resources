@@ -510,6 +510,16 @@ class GraphemeCluster {
       }
       return;
     }
+    if (main == '\u1026') {
+      if (asat1 != 0 || diacriticI != 0 || diacriticAi != 0 || anusvara != 0) {
+        conflict = true;
+        asat1 = 0;
+        diacriticI = 0;
+        diacriticAi = 0;
+        anusvara = 0;
+      }
+      return;
+    }
     if (main == '\u1040') {
       if (medialY == 0 && medialR == 0 && vowelA == '\u102C') {
         main = '\u1010';

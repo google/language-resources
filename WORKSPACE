@@ -5,7 +5,7 @@ workspace(name = "language_resources")
 android_sdk_repository(
     name = "androidsdk",
     api_level = 24,
-    build_tools_version = "24.0.2",
+    build_tools_version = "24.0.3",
     path = "/usr/local/android-sdk",
 )
 

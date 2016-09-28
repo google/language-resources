@@ -458,9 +458,7 @@ class GraphemeCluster {
     standardize();
   }
 
-  /**
-   * Standardizes a grapheme cluster by replacing alternative spellings with canonical versions.
-   */
+  /** Standardizes a grapheme cluster by replacing alternative spellings with canonical versions. */
   private void standardize() {
     if (kinzi == 0 && canSetKinzi(main) && stacked == STACKING_IN_PROGRESS && asat1 != 0) {
       kinzi = main;
@@ -492,6 +490,7 @@ class GraphemeCluster {
       return;
     }
     if (main == '\u1025') {
+      // Note that this leaves "\u1025\u102F\u1036" untouched.
       if (kinzi != 0
           || stacked != 0
           || asat1 != 0
@@ -500,13 +499,13 @@ class GraphemeCluster {
           || medialW != 0
           || medialH != 0
           || diacriticE != 0
-          || diacriticU != 0
           || diacriticAi != 0
           || vowelA != 0) {
         main = '\u1009';
-      } else if (diacriticI != 0 || anusvara != 0) {
+      } else if (diacriticI != 0) {
         main = '\u1026';
         diacriticI = 0;
+        diacriticAi = 0;
         anusvara = 0;
       }
       return;

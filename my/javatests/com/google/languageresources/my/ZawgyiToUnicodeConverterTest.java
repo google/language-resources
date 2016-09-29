@@ -28,7 +28,7 @@ import org.junit.Test;
 
 public class ZawgyiToUnicodeConverterTest {
 
-  private static final ZawgyiToUnicodeConverter CONVERTER = new ZawgyiToUnicodeConverter(true);
+  private static final ZawgyiToUnicodeConverter CONVERTER = new ZawgyiToUnicodeConverter();
 
   private void checkConverter(String zawgyi, String expected) {
     String actual = CONVERTER.convert(zawgyi);

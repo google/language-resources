@@ -1,6 +1,9 @@
 $c = [\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9];
 $v = [\u0BBE-\u0BC2\u0BC6-\u0BC8\u0BCA-\u0BCC];
 
+$nasal = [ŋɲɳnm];
+$dental_nasal = n̪;
+
 # Delete ZWNJ and ZWJ to simplify further processing.
 \u200C → ;
 \u200D → ;
@@ -9,7 +12,7 @@ $v = [\u0BBE-\u0BC2\u0BC6-\u0BC8\u0BCA-\u0BCC];
 
 # Manifest the implicit vowel after every consonant that is not followed by a
 # dependent vowel or virama.
-$c { } [^$v\u0BCD] → ɐ;
+($c) } [^$v\u0BCD] → $1 ɐ;
 
 ::Null;
 
@@ -31,7 +34,7 @@ $c { } [^$v\u0BCD] → ɐ;
 
 க → k;
 ங → ŋ;
-ச → c;
+ச → tɕ;
 ஜ → ɟ;
 ஞ → ɲ;
 ட → ʈ;
@@ -42,7 +45,10 @@ $c { } [^$v\u0BCD] → ɐ;
 ப → p;
 ம → m;
 ய → j;
-ர → ɾ;
+ர → ɽ;
+ற } \u0BCD → t;
+$nasal { ற → t;
+$dental_nasal { ற → t;
 ற → r;
 ல → l;
 ள → ɭ;

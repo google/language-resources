@@ -21,6 +21,18 @@ cc_binary(
     ],
 )
 
+genrule(
+    name = "rename_thraxmakedep",
+    srcs = [prefix_dir + "bin/thraxmakedep"],
+    outs = ["thraxmakedep.py"],
+    cmd = "cp $< $@",
+)
+
+py_binary(
+    name = "thraxmakedep",
+    srcs = ["thraxmakedep.py"],
+)
+
 cc_binary(
     name = "thraxrandom-generator",
     srcs = [prefix_dir + "bin/random-generator.cc"],

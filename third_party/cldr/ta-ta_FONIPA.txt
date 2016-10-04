@@ -11,14 +11,14 @@ $nasal = [ŋɲɳnm];
 
 # Manifest the implicit vowel after every consonant that is not followed by a
 # dependent vowel or virama.
-($c) } [^$v\u0BCD] → $1 ɐ;
+($c) } [^$v\u0BCD] → $1 a;
 
 ::Null;
 
 ஃப → f;
 ஃ → x;
 
-அ → ɐ;
+அ → a;
 ஆ → aː;
 இ → i;
 ஈ → iː;
@@ -26,10 +26,10 @@ $nasal = [ŋɲɳnm];
 ஊ → uː;
 எ → e;
 ஏ → eː;
-ஐ → ɐi̯;
+ஐ → aɪ;
 ஒ → o;
 ஓ → oː;
-ஔ → ɐu̯;
+ஔ → aʊ;
 
 க → k;
 ங → ŋ;
@@ -65,9 +65,9 @@ $nasal { ற → t;
 \u0BC2 → uː;
 \u0BC6 → e;
 \u0BC7 → eː;
-\u0BC8 → ɐi̯;
+\u0BC8 → aɪ;
 \u0BCA → o;
 \u0BCB → oː;
-\u0BCC → ɐu̯;
+\u0BCC → aʊ;
 
 \u0BCD → ;

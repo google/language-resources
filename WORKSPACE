@@ -28,8 +28,8 @@ new_git_repository(
 new_git_repository(
     name = "thrax",
     build_file = "thrax.BUILD",
+    commit = "fa51f84e8bbff730c88df293aacc1041a0e4cf1a",
     remote = "https://github.com/mjansche/thrax.git",
-    tag = "1.2.2",
 )
 
 # Google Test & Protocol Buffers

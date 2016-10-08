@@ -171,7 +171,10 @@ void MatrixSemiring<W>::MStar(Matrix *m) {
         m_k[j] = Times(c, m_k[j]);
       }
     }
-    m_k[k] = Plus(m_k[k], W::One());
+  }
+  for (std::size_t k = 0; k < size; ++k) {
+    auto &m_kk = (*m)[k][k];
+    m_kk = Plus(m_kk, W::One());
   }
 }
 

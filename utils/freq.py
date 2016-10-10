@@ -35,12 +35,13 @@ STDERR = codecs.getwriter('utf-8')(sys.stderr)
 
 def main(unused_argv):
   token_count = {}
-  for token in STDIN:
+  for line in STDIN:
+    token = line.rstrip('\n')
     token_count[token] = token_count.get(token, 0) + 1
   items = token_count.items()
   items.sort(key = lambda (token, count): (-count, token))
   for token, count in items:
-    STDOUT.write(token)
+    STDOUT.write('%s\t%d\n' % (token, count))
   return
 
 

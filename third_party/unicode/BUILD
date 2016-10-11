@@ -22,3 +22,9 @@ py_library(
     name = "utn11",
     srcs = ["utn11.py"],
 )
+
+py_test(
+    name = "utn11_test",
+    srcs = ["utn11_test.py"],
+    deps = [":utn11"],
+)

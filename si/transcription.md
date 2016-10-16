@@ -97,7 +97,7 @@ Orthography | Transcription | Gloss
 
 When  ෘ is read /ur/, this may trigger further cluster simplification (to avoid
 coda clusters in native words), which needs to be transcribed
-approriately. Examples include:
+appropriately. Examples include:
 
 Orthography | Expected but incorrect transcription | Correct transcription
 ------------|--------------------------------------|----------------------

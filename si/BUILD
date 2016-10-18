@@ -24,7 +24,7 @@ sh_test(
     args = [
         """
         cut -f1 $(location phoneme.syms) |
-        fgrep -v '<epsilon>' |
+        fgrep -v epsilon |
         $(location //utils:uniquely_decodable)
         """,
     ],

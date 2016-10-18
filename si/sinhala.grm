@@ -1,0 +1,101 @@
+# si/sinhala.grm
+# -*- Thrax -*-
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2016 Google Inc. All Rights Reserved.
+# Author: mjansche@google.com (Martin Jansche)
+
+g = SymbolTable['si/grapheme.syms'];
+
+utf8_to_codepoint = Optimize[
+  ("[0xE0][0xB6][0x82]" : "anusvara".g)  # SIGN ANUSVARAYA
+| ("[0xE0][0xB6][0x83]" : "visarga".g)   # SIGN VISARGAYA
+| ("[0xE0][0xB6][0x85]" : "a".g)       # LETTER AYANNA
+| ("[0xE0][0xB6][0x86]" : "aa".g)      # LETTER AAYANNA
+| ("[0xE0][0xB6][0x87]" : "ae".g)      # LETTER AEYANNA
+| ("[0xE0][0xB6][0x88]" : "aae".g)     # LETTER AEEYANNA
+| ("[0xE0][0xB6][0x89]" : "i".g)       # LETTER IYANNA
+| ("[0xE0][0xB6][0x8A]" : "ii".g)      # LETTER IIYANNA
+| ("[0xE0][0xB6][0x8B]" : "u".g)       # LETTER UYANNA
+| ("[0xE0][0xB6][0x8C]" : "uu".g)      # LETTER UUYANNA
+| ("[0xE0][0xB6][0x8D]" : "ri".g)      # LETTER IRUYANNA
+| ("[0xE0][0xB6][0x91]" : "e".g)       # LETTER EYANNA
+| ("[0xE0][0xB6][0x92]" : "ee".g)      # LETTER EEYANNA
+| ("[0xE0][0xB6][0x93]" : "ai".g)      # LETTER AIYANNA
+| ("[0xE0][0xB6][0x94]" : "o".g)       # LETTER OYANNA
+| ("[0xE0][0xB6][0x95]" : "oo".g)      # LETTER OOYANNA
+| ("[0xE0][0xB6][0x96]" : "au".g)      # LETTER AUYANNA
+| ("[0xE0][0xB6][0x9A]" : "ka".g)      # LETTER ALPAPRAANA KAYANNA
+| ("[0xE0][0xB6][0x9B]" : "kha".g)     # LETTER MAHAAPRAANA KAYANNA
+| ("[0xE0][0xB6][0x9C]" : "ga".g)      # LETTER ALPAPRAANA GAYANNA
+| ("[0xE0][0xB6][0x9D]" : "gha".g)     # LETTER MAHAAPRAANA GAYANNA
+| ("[0xE0][0xB6][0x9E]" : "nga".g)     # LETTER KANTAJA NAASIKYAYA
+| ("[0xE0][0xB6][0x9F]" : "nnga".g)    # LETTER SANYAKA GAYANNA
+| ("[0xE0][0xB6][0xA0]" : "ca".g)      # LETTER ALPAPRAANA CAYANNA
+| ("[0xE0][0xB6][0xA1]" : "cha".g)     # LETTER MAHAAPRAANA CAYANNA
+| ("[0xE0][0xB6][0xA2]" : "ja".g)      # LETTER ALPAPRAANA JAYANNA
+| ("[0xE0][0xB6][0xA3]" : "jha".g)     # LETTER MAHAAPRAANA JAYANNA
+| ("[0xE0][0xB6][0xA4]" : "nya".g)     # LETTER TAALUJA NAASIKYAYA
+| ("[0xE0][0xB6][0xA5]" : "jnya".g)    # LETTER TAALUJA SANYOOGA NAAKSIKYAYA
+| ("[0xE0][0xB6][0xA7]" : "tta".g)     # LETTER ALPAPRAANA TTAYANNA
+| ("[0xE0][0xB6][0xA8]" : "ttha".g)    # LETTER MAHAAPRAANA TTAYANNA
+| ("[0xE0][0xB6][0xA9]" : "dda".g)     # LETTER ALPAPRAANA DDAYANNA
+| ("[0xE0][0xB6][0xAA]" : "ddha".g)    # LETTER MAHAAPRAANA DDAYANNA
+| ("[0xE0][0xB6][0xAB]" : "nna".g)     # LETTER MUURDHAJA NAYANNA
+| ("[0xE0][0xB6][0xAC]" : "nndda".g)   # LETTER SANYAKA DDAYANNA
+| ("[0xE0][0xB6][0xAD]" : "ta".g)      # LETTER ALPAPRAANA TAYANNA
+| ("[0xE0][0xB6][0xAE]" : "tha".g)     # LETTER MAHAAPRAANA TAYANNA
+| ("[0xE0][0xB6][0xAF]" : "da".g)      # LETTER ALPAPRAANA DAYANNA
+| ("[0xE0][0xB6][0xB0]" : "dha".g)     # LETTER MAHAAPRAANA DAYANNA
+| ("[0xE0][0xB6][0xB1]" : "na".g)      # LETTER DANTAJA NAYANNA
+| ("[0xE0][0xB6][0xB3]" : "nda".g)     # LETTER SANYAKA DAYANNA
+| ("[0xE0][0xB6][0xB4]" : "pa".g)      # LETTER ALPAPRAANA PAYANNA
+| ("[0xE0][0xB6][0xB5]" : "pha".g)     # LETTER MAHAAPRAANA PAYANNA
+| ("[0xE0][0xB6][0xB6]" : "ba".g)      # LETTER ALPAPRAANA BAYANNA
+| ("[0xE0][0xB6][0xB7]" : "bha".g)     # LETTER MAHAAPRAANA BAYANNA
+| ("[0xE0][0xB6][0xB8]" : "ma".g)      # LETTER MAYANNA
+| ("[0xE0][0xB6][0xB9]" : "mba".g)     # LETTER AMBA BAYANNA
+| ("[0xE0][0xB6][0xBA]" : "ya".g)      # LETTER YAYANNA
+| ("[0xE0][0xB6][0xBB]" : "ra".g)      # LETTER RAYANNA
+| ("[0xE0][0xB6][0xBD]" : "la".g)      # LETTER DANTAJA LAYANNA
+| ("[0xE0][0xB7][0x80]" : "va".g)      # LETTER VAYANNA
+| ("[0xE0][0xB7][0x81]" : "sha".g)     # LETTER TAALUJA SAYANNA
+| ("[0xE0][0xB7][0x82]" : "ssa".g)     # LETTER MUURDHAJA SAYANNA
+| ("[0xE0][0xB7][0x83]" : "sa".g)      # LETTER DANTAJA SAYANNA
+| ("[0xE0][0xB7][0x84]" : "ha".g)      # LETTER HAYANNA
+| ("[0xE0][0xB7][0x85]" : "lla".g)     # LETTER MUURDHAJA LAYANNA
+| ("[0xE0][0xB7][0x86]" : "fa".g)      # LETTER FAYANNA
+| ("[0xE0][0xB7][0x8A]" : "virama".g)  # SIGN AL-LAKUNA
+| ("[0xE0][0xB7][0x8F]" : "-aa".g)     # VOWEL SIGN AELA-PILLA
+| ("[0xE0][0xB7][0x90]" : "-ae".g)     # VOWEL SIGN KETTI AEDA-PILLA
+| ("[0xE0][0xB7][0x91]" : "-aae".g)    # VOWEL SIGN DIGA AEDA-PILLA
+| ("[0xE0][0xB7][0x92]" : "-i".g)      # VOWEL SIGN KETTI IS-PILLA
+| ("[0xE0][0xB7][0x93]" : "-ii".g)     # VOWEL SIGN DIGA IS-PILLA
+| ("[0xE0][0xB7][0x94]" : "-u".g)      # VOWEL SIGN KETTI PAA-PILLA
+| ("[0xE0][0xB7][0x96]" : "-uu".g)     # VOWEL SIGN DIGA PAA-PILLA
+| ("[0xE0][0xB7][0x98]" : "-ri".g)     # VOWEL SIGN GAETTA-PILLA
+| ("[0xE0][0xB7][0x99]" : "-e".g)      # VOWEL SIGN KOMBUVA
+| ("[0xE0][0xB7][0x9A]" : "-ee".g)     # VOWEL SIGN DIGA KOMBUVA
+| ("[0xE0][0xB7][0x9B]" : "-ai".g)     # VOWEL SIGN KOMBU DEKA
+| ("[0xE0][0xB7][0x9C]" : "-o".g)      # VOWEL SIGN KOMBUVA HAA AELA-PILLA
+| ("[0xE0][0xB7][0x9D]" : "-oo".g)     # VOWEL SIGN KOMBUVA HAA DIGA AELA-PILLA
+| ("[0xE0][0xB7][0x9E]" : "-au".g)     # VOWEL SIGN KOMBUVA HAA GAYANUKITTA
+| ("[0xE0][0xB7][0xB2]" : "-rri".g)    # VOWEL SIGN DIGA GAETTA-PILLA
+| ("[0xE2][0x80][0x8C]" : "ZWNJ".g)    # ZERO WIDTH NON-JOINER
+| ("[0xE2][0x80][0x8D]" : "ZWJ".g)     # ZERO WIDTH JOINER
+];
+
+export UTF8_TO_GRAPHEMES = Optimize[
+  utf8_to_codepoint*
+];

@@ -33,3 +33,18 @@ sh_test(
         "//utils:uniquely_decodable",
     ],
 )
+
+genrule(
+    name = "compile_sinhala_grm",
+    srcs = [
+        "sinhala.grm",
+        "grapheme.syms",
+    ],
+    outs = ["sinhala.far"],
+    cmd = """
+        $(location @thrax//:thraxcompiler) \
+          --input_grammar=$(location sinhala.grm) \
+          --output_far=$@
+        """,
+    tools = ["@thrax//:thraxcompiler"],
+)

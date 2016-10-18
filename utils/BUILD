@@ -91,11 +91,33 @@ py_binary(
 )
 
 cc_binary(
-    name = "sh-utter",
+    name = "sh_utter",
     srcs = ["sh-utter.cc"],
     deps = [
         "@openfst//:base",
         "@sparrowhawk//:normalizer",
+    ],
+)
+
+cc_binary(
+    name = "grm_tester",
+    srcs = ["grm_tester.cc"],
+    deps = [
+        "//festus:fst-util",
+        "//festus:string-util",
+        "@openfst//:fst",
+        "@thrax//:grm-manager",
+    ],
+)
+
+cc_library(
+    name = "grm_tester_lib",
+    srcs = ["grm_tester.cc"],
+    deps = [
+        "//festus:fst-util",
+        "//festus:string-util",
+        "@openfst//:fst",
+        "@thrax//:grm-manager",
     ],
 )
 

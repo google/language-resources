@@ -1,0 +1,73 @@
+# Single letters
+LSEQ_MARKUP	letters: "අ"	අ_letter
+LSEQ_MARKUP	letters: "ආ"	ආ_letter
+LSEQ_MARKUP	letters: "ඇ"	ඇ_letter
+LSEQ_MARKUP	letters: "ඈ"	ඈ_letter
+LSEQ_MARKUP	letters: "ඉ"	ඉ_letter
+LSEQ_MARKUP	letters: "උ"	උ_letter
+LSEQ_MARKUP	letters: "ඌ"	ඌ_letter
+LSEQ_MARKUP	letters: "ඍ"	ඍ_letter
+LSEQ_MARKUP	letters: "ක"	ක_letter
+LSEQ_MARKUP	letters: "ඛ"	ඛ_letter
+LSEQ_MARKUP	letters: "ග"	ග_letter
+LSEQ_MARKUP	letters: "ඝ"	ඝ_letter
+LSEQ_MARKUP	letters: "ම"	ම_letter
+LSEQ_MARKUP	letters: "භ"	භ_letter
+LSEQ_MARKUP	letters: "ඹ"	ඹ_letter
+LSEQ_MARKUP	letters: "ට"	ට_letter
+LSEQ_MARKUP	letters: "ව"	ව_letter
+LSEQ_MARKUP	letters: "ප"	ප_letter
+LSEQ_MARKUP	letters: "ච"	ච_letter
+LSEQ_MARKUP	letters: "ජ"	ජ_letter
+LSEQ_MARKUP	letters: "ඡ"	ඡ_letter
+LSEQ_MARKUP	letters: "ත"	ත_letter
+LSEQ_MARKUP	letters: "ල"	ල_letter
+LSEQ_MARKUP	letters: "ළ"	ළ_letter
+LSEQ_MARKUP	letters: "හ"	හ_letter
+LSEQ_MARKUP	letters: "න"	න_letter
+LSEQ_MARKUP	letters: "ණ"	ණ_letter
+LSEQ_MARKUP	letters: "ර"	ර_letter
+LSEQ_MARKUP	letters: "ං"	ං_letter
+LSEQ_MARKUP	letters: "ඃ"	ඃ_letter
+LSEQ_MARKUP	letters: "ඤ"	ඤ_letter
+LSEQ_MARKUP	letters: "ඥ"	ඥ_letter
+LSEQ_MARKUP	letters: "ඬ"	ඬ_letter
+LSEQ_MARKUP	letters: "ඩ"	ඩ_letter
+LSEQ_MARKUP	letters: "ස"	ස_letter
+LSEQ_MARKUP	letters: "ද"	ද_letter
+LSEQ_MARKUP	letters: "ෂ"	ෂ_letter
+LSEQ_MARKUP	letters: "ඣ"	ඣ_letter
+LSEQ_MARKUP	letters: "ඞ"	ඞ_letter
+LSEQ_MARKUP	letters: "ඳ"	ඳ_letter
+LSEQ_MARKUP	letters: "ඟ"	ඟ_letter
+LSEQ_MARKUP	letters: "ය"	ය_letter
+LSEQ_MARKUP	letters: "ථ"	ථ_letter
+LSEQ_MARKUP	letters: "ශ"	ශ_letter
+
+# Latin chars
+LSEQ_MARKUP	letters: "a"	a_letter-en
+LSEQ_MARKUP	letters: "A"	a_letter-en
+LSEQ_MARKUP	letters: "b"	b_letter-en
+LSEQ_MARKUP	letters: "B"	b_letter-en
+LSEQ_MARKUP	letters: "e"	e_letter-en
+LSEQ_MARKUP	letters: "E"	e_letter-en
+LSEQ_MARKUP	letters: "m"	m_letter-en
+LSEQ_MARKUP	letters: "M"	m_letter-en
+LSEQ_MARKUP	letters: "Q"	q_letter-en
+LSEQ_MARKUP	letters: "q"	q_letter-en
+LSEQ_MARKUP	letters: "x"	x_letter-en
+LSEQ_MARKUP	letters: "X"	x_letter-en
+
+# Multiple letters
+LSEQ_MARKUP	letters: "ක.ක.ස."	ක_letter ක_letter ස_letter
+LSEQ_MARKUP	letters: "ප.ව"		ප_letter ව_letter
+
+# Latin sequences
+LSEQ_MARKUP	letters: "abc"		a_letter-en b_letter-en c_letter-en
+LSEQ_MARKUP	letters: "IMF"		i_letter-en m_letter-en f_letter-en
+LSEQ_MARKUP	letters: "IBM"		i_letter-en b_letter-en m_letter-en
+LSEQ_MARKUP	letters: "msn"		m_letter-en s_letter-en n_letter-en
+LSEQ_MARKUP	letters: "edu"		e_letter-en d_letter-en u_letter-en
+LSEQ_MARKUP	letters: "goog"		g_letter-en o_letter-en o_letter-en g_letter-en
+LSEQ_MARKUP	letters: "U.S"		u_letter-en s_letter-en
+LSEQ_MARKUP	letters: "FBI"		f_letter-en b_letter-en i_letter-en

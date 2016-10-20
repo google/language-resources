@@ -96,6 +96,13 @@ utf8_to_codepoint = Optimize[
 | ("[0xE2][0x80][0x8D]" : "ZWJ".g)     # ZERO WIDTH JOINER
 ];
 
+codepoint = Project[utf8_to_codepoint, 'output'];
+
+export CODEPOINTS_TO_GRAPHEMES = Optimize[
+  codepoint*
+];
+
 export UTF8_TO_GRAPHEMES = Optimize[
   utf8_to_codepoint*
+@ CODEPOINTS_TO_GRAPHEMES
 ];

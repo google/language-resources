@@ -48,3 +48,25 @@ genrule(
         """,
     tools = ["@thrax//:thraxcompiler"],
 )
+
+sh_test(
+    name = "graphemes_test",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        cut -f 1 $(location graphemes_test.tsv) |
+        $(location //utils:thrax_g2p) \
+          --far=$(location sinhala.far) \
+          --far_g2p_key=CODEPOINTS_TO_GRAPHEMES \
+          --phoneme_syms=$(location grapheme.syms) |
+        diff -U0 - $(location graphemes_test.tsv)
+        """,
+    ],
+    data = [
+        "sinhala.far",
+        "grapheme.syms",
+        "graphemes_test.tsv",
+        "//utils:thrax_g2p",
+    ],
+)

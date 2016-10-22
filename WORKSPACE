@@ -37,7 +37,7 @@ new_git_repository(
 new_git_repository(
     name = "googletest",
     build_file = "googletest.BUILD",
-    commit = "ec44c6c1675c25b9827aacd08c02433cccde7780",
+    commit = "ecd530865cefdfa7dea58e84f6aa1b548950363d",
     remote = "https://github.com/google/googletest.git",
 )
 
@@ -50,7 +50,7 @@ git_repository(
 new_git_repository(
     name = "farmhash",
     build_file = "farmhash.BUILD",
-    commit = "34c13ddfab0e35422f4c3979f360635a8c050260",
+    commit = "92e897b282426729f4724d91a637596c7e2fe28f",
     remote = "https://github.com/google/farmhash.git",
 )
 

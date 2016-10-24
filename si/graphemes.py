@@ -146,6 +146,12 @@ CODEPOINT_TO_SYMBOL = {
     0x200C: 'ZWNJ',
     0x200D: 'ZWJ',
 
+    # Private-use characters
+    0xE000: '-a',           # inherent vowel
+    0xE001: 'yansaya',      # medial ya
+    0xE002: 'rakaransaya',  # medial ra
+    0xE003: 'repaya',       # reph
+
     # Sinhala Archaic Numbers Unicode block, per Unicode Standard version 8.0
     #
     # Historical digits

@@ -130,12 +130,59 @@ ins_medials = CDRewrite[
 # Delete ZWJ everywhere else.
 del_zwj = CDRewrite["ZWJ".g : "".g, "".g, "".g, gstar];
 
+consonant_g =
+  "ka".g  | "kha".g  | "ga".g  | "gha".g  | "nga".g | "nnga".g
+| "ca".g  | "cha".g  | "ja".g  | "jha".g  | "nya".g |             "jnya".g
+| "tta".g | "ttha".g | "dda".g | "ddha".g | "nna".g | "nndda".g
+| "ta".g  | "tha".g  | "da".g  | "dha".g  | "na".g  | "nda".g
+| "pa".g  | "pha".g  | "ba".g  | "bha".g  | "ma".g  | "mba".g
+| "ya".g  | "ra".g   | "la".g  | "va".g
+| "sha".g | "ssa".g  | "sa".g  | "ha".g
+| "lla".g | "fa".g
+;
+
+medial_g = "yansaya".g | "rakaransaya".g;
+
+dependent_vowel_g =
+            "-aa".g
+| "-ae".g | "-aae".g
+| "-i".g  | "-ii".g
+| "-u".g  | "-uu".g
+| "-ri".g
+| "-e".g  | "-ee".g  | "-ai".g
+| "-o".g  | "-oo".g  | "-au".g
+|           "-rri".g
+;
+
+independent_vowel_g =
+  "a".g  | "aa".g
+| "ae".g | "aae".g
+| "i".g  | "ii".g
+| "u".g  | "uu".g
+| "ri".g
+| "e".g  | "ee".g | "ai".g
+| "o".g  | "oo".g | "au".g
+;
+
+# Provisionally insert a schwa after every consonant letter or medial.
+ins_schwa = CDRewrite["".g : "-a".g, consonant_g | medial_g, "".g, gstar];
+
+# Delete a schwa before a medial, dependent vowel sign, or virama.
+del_schwa = CDRewrite[
+  "-a".g : "".g,
+  "".g,
+  medial_g | dependent_vowel_g | "virama".g,
+  gstar
+];
+
 export CODEPOINTS_TO_GRAPHEMES = Optimize[
   input_codepoint*
 @ zwnj_to_zwj
 @ ins_repaya
 @ ins_medials
 @ del_zwj
+@ ins_schwa
+@ del_schwa
 ];
 
 export UTF8_TO_GRAPHEMES = Optimize[

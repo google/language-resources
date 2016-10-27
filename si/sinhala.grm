@@ -175,6 +175,16 @@ del_schwa = CDRewrite[
   gstar
 ];
 
+# Check that every consonant letter is followed by either a medial, dependent
+# vowel sign (including schwa), or virama. If that is not the case, insert
+# ZWNJ. This is only intended for debugging.
+check_consonants = CDRewrite[
+  "".g : "ZWNJ".g,
+  consonant_g,
+  grapheme - (medial_g | dependent_vowel_g | "-a".g | "virama".g),
+  gstar
+];
+
 export CODEPOINTS_TO_GRAPHEMES = Optimize[
   input_codepoint*
 @ zwnj_to_zwj
@@ -183,6 +193,7 @@ export CODEPOINTS_TO_GRAPHEMES = Optimize[
 @ del_zwj
 @ ins_schwa
 @ del_schwa
+@ check_consonants
 ];
 
 export UTF8_TO_GRAPHEMES = Optimize[

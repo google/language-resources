@@ -192,13 +192,26 @@ del_schwa = CDRewrite[
   gstar
 ];
 
+# Modifiers that follow all and only consonants.
+consonant_modifier = medial_g | dependent_vowel_g | "-a".g | "virama".g;
+
 # Check that every consonant letter is followed by either a medial, dependent
-# vowel sign (including schwa), or virama. If that is not the case, insert
-# ZWNJ. This is only intended for debugging.
+# vowel sign (including schwa), or virama.
+# Where that is not the case, insert ZWNJ as a marker for debugging.
 check_consonants = CDRewrite[
   "".g : "ZWNJ".g,
   consonant_g,
-  grapheme - (medial_g | dependent_vowel_g | "-a".g | "virama".g),
+  grapheme - consonant_modifier,
+  gstar
+];
+
+# Check that no independent vowel letter is followed by a medial, dependent
+# vowel sign (including schwa), or virama.
+# Where that is not the case, insert ZWNJ as a marker for debugging.
+check_independent_vowels = CDRewrite[
+  "".g : "ZWNJ".g,
+  independent_vowel_g,
+  consonant_modifier,
   gstar
 ];
 
@@ -213,6 +226,7 @@ export CODEPOINTS_TO_GRAPHEMES = Optimize[
 @ ins_schwa
 @ del_schwa
 @ check_consonants
+@ check_independent_vowels
 ];
 
 export UTF8_TO_GRAPHEMES = Optimize[

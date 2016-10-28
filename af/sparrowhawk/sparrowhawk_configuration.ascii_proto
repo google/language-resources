@@ -1,0 +1,3 @@
+tokenizer_grammar: "tokenizer.ascii_proto"
+verbalizer_grammar: "verbalizer.ascii_proto"
+sentence_boundary_regexp: "[\\.:!\\?] "

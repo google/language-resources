@@ -130,6 +130,23 @@ ins_medials = CDRewrite[
 # Delete ZWJ everywhere else.
 del_zwj = CDRewrite["ZWJ".g : "".g, "".g, "".g, gstar];
 
+ins_repaya_and_medials = Optimize[
+  zwnj_to_zwj
+@ ins_repaya
+@ ins_medials
+@ del_zwj
+];
+
+expand_repaya_and_medials_aux =
+  ("yansaya".g : "virama ZWJ ya".g)
+| ("rakaransaya".g : "virama ZWJ ra".g)
+| ("repaya".g : "ra virama ZWJ".g)
+;
+
+expand_repaya_and_medials = CDRewrite[
+  expand_repaya_and_medials_aux, "".g, "".g, gstar
+];
+
 consonant_g =
   "ka".g  | "kha".g  | "ga".g  | "gha".g  | "nga".g | "nnga".g
 | "ca".g  | "cha".g  | "ja".g  | "jha".g  | "nya".g |             "jnya".g
@@ -185,12 +202,14 @@ check_consonants = CDRewrite[
   gstar
 ];
 
+export REMOVE_OPTIONAL_ZW = Optimize[
+  ins_repaya_and_medials
+@ expand_repaya_and_medials
+];
+
 export CODEPOINTS_TO_GRAPHEMES = Optimize[
   input_codepoint*
-@ zwnj_to_zwj
-@ ins_repaya
-@ ins_medials
-@ del_zwj
+@ ins_repaya_and_medials
 @ ins_schwa
 @ del_schwa
 @ check_consonants

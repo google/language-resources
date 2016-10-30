@@ -109,7 +109,10 @@ grapheme =
 gstar = Optimize[grapheme*];
 
 # Change (non-standard, legacy?) ZWNJ to ZWJ everywhere.
-zwnj_to_zwj = CDRewrite["ZWNJ".g : "ZWJ".g, "".g, "".g, gstar];
+# Collapse multiple adjacent ZW(N)Js into a single ZWJ.
+standardize_zero_wdith = CDRewrite[
+  ("ZWNJ".g | "ZWJ".g)+ : "ZWJ".g, "".g, "".g, gstar
+];
 
 # Change <ra virama ZWJ> to <repaya>.
 ins_repaya = CDRewrite[
@@ -131,7 +134,7 @@ ins_medials = CDRewrite[
 del_zwj = CDRewrite["ZWJ".g : "".g, "".g, "".g, gstar];
 
 ins_repaya_and_medials = Optimize[
-  zwnj_to_zwj
+  standardize_zero_wdith
 @ ins_repaya
 @ ins_medials
 @ del_zwj

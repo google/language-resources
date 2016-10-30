@@ -24,12 +24,15 @@ import codecs
 import sys
 import unicodedata
 
+import zero_width
+
 STDIN = codecs.getreader('utf-8')(sys.stdin)
 STDOUT = codecs.getwriter('utf-8')(sys.stdout)
 
 
 def NormalizeText(text):
   text = unicodedata.normalize('NFC', text)
+  text = zero_width.RemoveOptionalZW(text)
   text = text.replace('\u0D85\u0DCF', '\u0D86')  # අා -> ආ
   text = text.replace('\u0D85\u0DD0', '\u0D87')  # අැ -> ඇ
   text = text.replace('\u0D85\u0DD1', '\u0D88')  # අෑ -> ඈ

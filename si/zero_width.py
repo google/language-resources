@@ -122,6 +122,9 @@ class TestSinhalaZeroWidth(unittest.TestCase):
     self.assertEqual(
         RemoveOptionalZW(kaaryaala),
         '\u0d9a\u0dcf\u0dbb\u0dca\u200d\u0dba\u0dca\u200d\u0dba\u0dcf\u0dbd')
+    self.assertEqual(RemoveOptionalZW('අකාර්යක්‍ෂමතාව'), 'අකාර්යක්ෂමතාව')
+    self.assertEqual(RemoveOptionalZW('අත්තක්‌'), 'අත්තක්')
+    self.assertEqual(RemoveOptionalZW('අනුයුක්‌තව'), 'අනුයුක්තව')
 
   def test_RemoveRepaya(self):
     self.assertEqual(RemoveRepaya('කාර්‍ය්‍යාල'), 'කාර්ය්‍යාල')

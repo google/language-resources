@@ -1,7 +1,7 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2015 Google Inc. All Rights Reserved.
+# Copyright 2015, 2016 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,11 +28,13 @@ import re
 import sys
 import unittest
 
-STANDARDIZE_ZW = re.compile(
-    r'(?<=[\u0d9a-\u0dc6]\u0dca)[\u200c\u200d]+(?=[\u0dba\u0dbb])')
+SINHALA_TEXT = re.compile(r'''
+( [\u0d80-\u0dff\u200c\u200d]*
+  [\u0d80-\u0dff]
+  [\u0d80-\u0dff\u200c\u200d]* )
+''', re.VERBOSE)
 
-DELETE_ZW = re.compile(
-    r'(?<![\u0d9a-\u0dc6]\u0dca)[\u200c\u200d](?![\u0dba\u0dbb])')
+ZERO_WIDTH = re.compile(r'[\u200c\u200d]+')
 
 CONSONANT_RAKARANSAYA_ONSETS = [
     'ක',  # odds 60072:2236, prob 96.4%
@@ -54,6 +56,24 @@ CONSONANT_RAKARANSAYA_ONSETS = [
 
 LIKELY_RAKARANSAYA = re.compile(
     r'(?<=[%s]\u0dca)(?=\u0dbb)' % ''.join(CONSONANT_RAKARANSAYA_ONSETS))
+
+
+def RemoveOptionalZW_aux(match):
+  text = match.group(1)
+  # standardize_zero_width
+  text = ZERO_WIDTH.sub('\u200d', text)
+  # ins_repaya
+  text = text.replace('\u0dbb\u0dca\u200d', '\uE003')
+  # ins_medials
+  text = text.replace('\u0dca\u200d\u0dba', '\uE001')
+  text = text.replace('\u0dca\u200d\u0dbb', '\uE002')
+  # del_zwj
+  text = text.replace('\u200d', '')
+  # expand_repaya_and_medials
+  text = text.replace('\uE001', '\u0dca\u200d\u0dba')
+  text = text.replace('\uE002', '\u0dca\u200d\u0dbb')
+  text = text.replace('\uE003', '\u0dbb\u0dca\u200d')
+  return text
 
 
 def RemoveOptionalZW(text):
@@ -78,9 +98,7 @@ def RemoveOptionalZW(text):
     The text with all non-obligatory occurrences of ZWNJ and ZWJ removed.
 
   """
-  text = STANDARDIZE_ZW.sub('\u200D', text)
-  text = DELETE_ZW.sub('', text)
-  return text
+  return SINHALA_TEXT.sub(RemoveOptionalZW_aux, text)
 
 
 def RemoveRepaya(text):

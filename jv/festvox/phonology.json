@@ -1,6 +1,12 @@
 {
   "name": "jv-custom-phoneset",
 
+  "feature_types":[
+    ["consonant", "voicing", "place", "ctype"],
+    ["vowel", "rounding", "height", "frontness", "length"],
+    ["silence"]
+  ],
+
   "features": [
     ["vc", "consonant", "vowel", "silence"],
     ["voicing", "voiced", "voiceless"],

@@ -1,6 +1,13 @@
 {
   "name": "nchlt2013afr",
 
+  "feature_types" : [
+        ["consonant","voicing", "place", "ctype"],
+        ["vowel", "rounding", "height", "frontness", "length"],
+        ["diph", "rounding", "height", "frontness", "rounding2", "height2", "frontness2", "length"],
+        ["silence"]
+    ],
+
   "features": [
     ["vc", "consonant", "vowel", "diph", "silence"],
     ["voicing", "voiced", "voiceless"],
@@ -55,10 +62,10 @@
     ["{",  "vowel", "unrounded", "near-low", "front",   "short"],
     ["9",  "vowel", "rounded",   "mid-low",  "front",   "short"],
 
-    ["@i", "diph", "unrounded",  "mid",      "central",
-                   "unrounded",  "high",     "front",   "short"],
+    ["@i", "diph", "unrounded",  "mid",      "central",  "unrounded",
+                "high",  "front",   "short"],
     ["9y", "diph", "rounded",    "mid-low",  "front",
-                   "rounded",    "high",     "front",   "short"],
+            "rounded",    "high",     "front",   "short"],
     ["@u", "diph", "unrounded",  "mid",      "central",
                    "rounded",    "high",     "back",    "short"],
     ["i@", "diph", "unrounded",  "high",     "front",

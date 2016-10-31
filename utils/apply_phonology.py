@@ -50,27 +50,45 @@ def MakePhonesetScm(writer, phonology, inst_lang, vox):
   writer.write(';;; Automatically generated. Edit with caution.\n\n')
   writer.write('(defPhoneSet\n  %s\n  (\n' % phonology['name'])
   # A good amount of the following logic is specific to how we chose to handle.
-  # standard phonology.json files. TODO: Generalize.
-  assert len(phonology['features']) == NO_OF_FEATURES
+  # standard phonology.json files.
+  types_of_features = []
+
   for feature in phonology['features']:
     writer.write('   (%s 0)\n' % ' '.join(feature))
   writer.write('   )\n  (\n')
   silences = []
+
+  for feature_type in phonology['feature_types']:
+    types_of_features.append([ feature_type[0]] + feature_type[1:])
+
+  no_of_features = len(phonology['features'])
+
   for phone in phonology['phones']:
-    assert len(phone) >= 2
-    if phone[1] == 'consonant':
-      assert len(phone) == 5
-      writer.write('(%-3s %s %-9s %-13s %s 0 0 0 0)\n' %  tuple(phone))
-    elif phone[1] == 'vowel':
-      assert len(phone) == 6
-      lolostr = '(%-3s %s 0 0 0 %-9s %-8s %-7s %s)\n' % tuple(phone[:-1] + [phone[-1]])
-      strtt = '(%-3s %s 0 0 0 %-9s %-8s %-7s  %s)\n' % tuple(phone[:-1] + [phone[-1]])
-      writer.write(strtt)
-    else:
-      assert phone[1] == 'silence'
-      assert len(phone) == 2
-      writer.write('(%-3s %s 0 0 0 0 0 0 0)\n' % tuple(phone))
-      silences.append(phone[0])
+      labels = []
+      labels.append(phone[0])
+      labels.append(phone[1])
+      if phone[1] == 'silence':
+        silences.append(phone[0])
+
+      phone_features = []
+
+      for types_of_feature in types_of_features:
+        if phone[1] == types_of_feature[0]:
+          phone_features = types_of_feature[1:]
+          break
+
+      next_entry = 2
+      for feature in phonology['features'][1:]:
+        if feature[0] in phone_features:
+          labels.append(phone[next_entry])
+          next_entry +=1
+        else:
+          labels.append("0")
+      label_str = " ".join(labels).rstrip()
+      phone_line_str = ("(%s)") % (label_str)
+      assert no_of_features == len(label_str.split(" ")[1:])
+      writer.write(phone_line_str + "\n")
+
   writer.write('  )\n)\n\n')
   writer.write("(PhoneSet.silences '(%s))\n\n" % ' '.join(silences))
   writer.write(r'''(define (%s_%s::select_phoneset)
@@ -97,7 +115,6 @@ Reset phone set for %s."
        inst_lang, vox)
   )
   return
-
 
 def MakeLexiconScm(writer, inst_lang, vox):
   writer.write(r''';;; Automatically generated. Edit with caution.

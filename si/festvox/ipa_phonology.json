@@ -1,5 +1,12 @@
 {
   "name": "si_lk_ipa_phoneset",
+
+  "feature_types" : [
+        ["consonant","voiced", "place", "ctype"],
+        ["vowel", "rounding", "height", "frontness", "length"],
+        ["silence"]
+    ],
+
   "features": [
     ["vc", "consonant", "vowel", "silence"],
     ["voicing", "voiced", "voiceless", "unkown"],
@@ -13,6 +20,7 @@
     ["frontness", "front", "central", "back"],
     ["length", "default", "long","schwa", "schwalong"]
   ],
+
   "phones": [
     ["p",  "consonant", "voiceless",    "bilabial",  "p"],
     ["b",  "consonant", "voiced",    "bilabial",  "p"],
@@ -40,6 +48,7 @@
     ["l",  "consonant",  "voiced",    "alveolar",  "l"],
     ["y",  "consonant",  "voiced",    "velar",  "a"],
     ["w",  "consonant",  "voiced",    "bilabial",  "a"],
+
     ["a",  "vowel", "unrounded", "open",   "back",  "default"],
     ["aː",  "vowel", "unrounded", "open",   "back",  "long"],
     ["æ",  "vowel", "unrounded", "low",   "front",  "schwa"],
@@ -47,13 +56,14 @@
     ["i",  "vowel", "unrounded", "open",   "front",  "default"],
     ["iː",  "vowel", "unrounded", "open",   "front",  "long"],
     ["u",  "vowel", "unrounded", "close",   "back",  "default"],
-    ["uː ",  "vowel", "unrounded", "close",   "back",  "long"],
+    ["uː",  "vowel", "unrounded", "close",   "back",  "long"],
     ["e",  "vowel", "unrounded", "mid",   "front",  "default"],
     ["eː",  "vowel", "unrounded", "mid",   "front",  "long"],
     ["o",  "vowel", "unrounded", "mid",   "back",  "default"],
     ["oː",  "vowel", "unrounded", "mid",   "back",  "long"],
     ["ə",  "vowel", "unrounded", "mid",   "central",  "default"],
     ["əː",  "vowel", "unrounded", "mid",   "central",  "long"],
+
     ["pau", "silence"]
   ]
 }

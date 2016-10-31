@@ -28,6 +28,12 @@ py_binary(
 )
 
 py_binary(
+    name = "phonology_json_validator",
+    srcs = ["phonology_json_validator.py"],
+    default_python_version = "PY2",
+)
+
+py_binary(
     name = "uniquely_decodable",
     srcs = ["uniquely_decodable.py"],
     default_python_version = "PY2",

@@ -2,7 +2,7 @@
   "name": "si_lk_ipa_phoneset",
 
   "feature_types" : [
-        ["consonant","voiced", "place", "ctype"],
+        ["consonant","voicing", "place", "ctype"],
         ["vowel", "rounding", "height", "frontness", "length"],
         ["silence"]
     ],

@@ -22,6 +22,12 @@ licenses(["notice"])  # Apache 2.0
 exports_files(["eval.sh"])
 
 py_binary(
+    name = "apply_phonology",
+    srcs = ["apply_phonology.py"],
+    default_python_version = "PY2",
+)
+
+py_binary(
     name = "uniquely_decodable",
     srcs = ["uniquely_decodable.py"],
     default_python_version = "PY2",

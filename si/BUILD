@@ -70,3 +70,27 @@ sh_test(
         "//utils:thrax_g2p",
     ],
 )
+
+genrule(
+    name = "make_string2graphemes_fst",
+    srcs = ["sinhala.far"],
+    outs = [
+        "UTF8_TO_GRAPHEMES.fst",
+        "string2graphemes.fst",
+    ],
+    cmd = """
+        $(location @openfst//:farextract) \
+          --filename_prefix=$(@D)/ \
+          --keys=UTF8_TO_GRAPHEMES \
+          --filename_suffix=.fst \
+          $(location sinhala.far) &&
+        $(location @openfst//:fstmap) \
+          --map_type=to_log64 \
+          $(location UTF8_TO_GRAPHEMES.fst) \
+          $(location string2graphemes.fst)
+        """,
+    tools = [
+        "@openfst//:farextract",
+        "@openfst//:fstmap",
+    ],
+)

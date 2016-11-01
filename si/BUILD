@@ -94,3 +94,23 @@ genrule(
         "@openfst//:fstmap",
     ],
 )
+
+sh_test(
+    name = "lexicon_test",
+    timeout = "long",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        grep '^[^#]' $(location lexicon_test.tsv) |
+        $(location //bn:lexicon-diagnostics) \
+          --alignables=$(location alignables.txt) \
+          --string2graphemes=$(location string2graphemes.fst)
+        """,
+    ],
+    data = [
+        "alignables.txt",
+        "lexicon_test.tsv",
+        "string2graphemes.fst",
+        "//bn:lexicon-diagnostics",
+    ],
+)

@@ -37,7 +37,7 @@ new_git_repository(
 new_git_repository(
     name = "googletest",
     build_file = "googletest.BUILD",
-    commit = "ecd530865cefdfa7dea58e84f6aa1b548950363d",
+    commit = "3447fc31b4eea1fbcb86fa0e2f5d9ed9f38776bf",
     remote = "https://github.com/google/googletest.git",
 )
 
@@ -69,6 +69,6 @@ bind(
 new_git_repository(
     name = "sparrowhawk",
     build_file = "sparrowhawk.BUILD",
+    commit = "eb97411535e9ab280982bae18c99d6a2c933e162",
     remote = "https://github.com/google/sparrowhawk.git",
-    tag = "0.1",
 )

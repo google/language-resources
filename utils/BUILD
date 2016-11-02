@@ -22,6 +22,18 @@ licenses(["notice"])  # Apache 2.0
 exports_files(["eval.sh"])
 
 py_binary(
+    name = "apply_phonology",
+    srcs = ["apply_phonology.py"],
+    default_python_version = "PY2",
+)
+
+py_binary(
+    name = "phonology_json_validator",
+    srcs = ["phonology_json_validator.py"],
+    default_python_version = "PY2",
+)
+
+py_binary(
     name = "uniquely_decodable",
     srcs = ["uniquely_decodable.py"],
     default_python_version = "PY2",
@@ -79,11 +91,33 @@ py_binary(
 )
 
 cc_binary(
-    name = "sh-utter",
+    name = "sh_utter",
     srcs = ["sh-utter.cc"],
     deps = [
         "@openfst//:base",
         "@sparrowhawk//:normalizer",
+    ],
+)
+
+cc_binary(
+    name = "grm_tester",
+    srcs = ["grm_tester.cc"],
+    deps = [
+        "//festus:fst-util",
+        "//festus:string-util",
+        "@openfst//:fst",
+        "@thrax//:grm-manager",
+    ],
+)
+
+cc_library(
+    name = "grm_tester_lib",
+    srcs = ["grm_tester.cc"],
+    deps = [
+        "//festus:fst-util",
+        "//festus:string-util",
+        "@openfst//:fst",
+        "@thrax//:grm-manager",
     ],
 )
 

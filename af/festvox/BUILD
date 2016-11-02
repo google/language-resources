@@ -17,6 +17,26 @@
 
 package(default_visibility = ["//visibility:public"])
 
+"""
+Usage
+    bazel test af/festvox:valid_phonology_file
+
+"""
+sh_test(
+    name = "valid_phonology_file",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        $(location //utils:phonology_json_validator) $(location phonology.json)
+        """,
+    ],
+    data = [
+        "phonology.json",
+        "//utils:phonology_json_validator",
+    ],
+)
+
 genrule(
     name = "make_lexicon_scm",
     srcs = ["//af:lex_full.txt"],

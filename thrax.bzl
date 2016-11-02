@@ -40,3 +40,18 @@ def thrax_compile_grm(name, src=None, deps=[]):
             --print_rules=false
           """ % (thraxcompiler, src),
   )
+
+# This macro is used to run thrax grammer tests.
+def grm_regression_test(name, far_file_path, test_file_path, far_file, test_file):
+    native.cc_test(
+        name = name,
+        size = "small",
+        args = ["--far=" + far_file_path + far_file, "--test_file=" + test_file_path + test_file],
+        data=[
+              far_file,
+              test_file,
+        ],
+        deps = [
+            "//utils:grm_tester_lib"
+        ],
+    )

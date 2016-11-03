@@ -140,87 +140,87 @@ output_symbol { key: "h"   value: 39 }
 output_symbol { key: "f"   value: 40 }
 
 
-alignable { input: "anusvara"     output: "ŋ" }
-alignable { input: "visarga"      output: "h" }
+alignable { input: "anusvara"       output: "ŋ" }
+alignable { input: "visarga"        output: "h" }
 
-alignable { input: "a"            output: "a" }
-alignable { input: "aa"           output: "aː" }
-alignable { input: "ae"           output: "æ" }
-alignable { input: "aae"          output: "æː" }
-alignable { input: "i"            output: "i" }
-alignable { input: "ii"           output: "iː" }
-alignable { input: "u"            output: "u" }
-alignable { input: "uu"           output: "uː" }
-alignable { input: "ri"           output: "r i" }
-alignable { input: "e"            output: "e" }
-alignable { input: "ee"           output: "eː" }
-alignable { input: "ai"           output: "a y" }
-alignable { input: "o"            output: "o" }
-alignable { input: "oo"           output: "oː" }
-alignable { input: "au"           output: "a w" }
+alignable { input: "a"              output: "a" }
+alignable { input: "aa"             output: "aː" }
+alignable { input: "ae"             output: "æ" }
+alignable { input: "aae"            output: "æː" }
+alignable { input: "i"              output: "i" }
+alignable { input: "ii"             output: "iː" }
+alignable { input: "u"              output: "u" }
+alignable { input: "uu"             output: "uː" }
+alignable { input: "ri"             output: "r i" }
+alignable { input: "e"              output: "e" }
+alignable { input: "ee"             output: "eː" }
+alignable { input: "ai"             output: "a y" }
+alignable { input: "o"              output: "o" }
+alignable { input: "oo"             output: "oː" }
+alignable { input: "au"             output: "a w" }
 
-alignable { input: "ka"           output: "k" }
-alignable { input: "kha"          output: "k" }
-alignable { input: "ga"           output: "g" }
-alignable { input: "gha"          output: "g" }
-alignable { input: "nga"          output: "ŋ" }
-alignable { input: "nnga"         output: "ᵑg" }
-alignable { input: "ca"           output: "c" }
-alignable { input: "cha"          output: "c" }
-alignable { input: "ja"           output: "ɟ" }
-alignable { input: "jha"          output: "ɟ" }
-alignable { input: "nya"          output: "ɲ" }
-alignable { input: "jnya"         output: "k ɲ" }
-alignable { input: "tta"          output: "ʈ" }
-alignable { input: "ttha"         output: "ʈ" }
-alignable { input: "dda"          output: "ɖ" }
-alignable { input: "ddha"         output: "ɖ" }
-alignable { input: "nna"          output: "n" }
-alignable { input: "nndda"        output: "ⁿɖ" }
-alignable { input: "ta"           output: "t" }
-alignable { input: "tha"          output: "t" }
-alignable { input: "da"           output: "d" }
-alignable { input: "dha"          output: "d" }
-alignable { input: "na"           output: "n" }
-alignable { input: "nda"          output: "ⁿd" }
-alignable { input: "pa"           output: "p" }
-alignable { input: "pha"          output: "p" }
-alignable { input: "ba"           output: "b" }
-alignable { input: "bha"          output: "b" }
-alignable { input: "ma"           output: "m" }
-alignable { input: "mba"          output: "ᵐb" }
-alignable { input: "ya"           output: "y" }
-alignable { input: "ra"           output: "r" }
-alignable { input: "la"           output: "l" }
-alignable { input: "va"           output: "w" }
-alignable { input: "sha"          output: "ʃ" }
-alignable { input: "ssa"          output: "ʃ" }
-alignable { input: "sa"           output: "s" }
-alignable { input: "ha"           output: "h" }
-alignable { input: "lla"          output: "l" }
-alignable { input: "fa"           output: "f" }
+alignable { input: "ka"             output: "k" }
+alignable { input: "kha"            output: "k" }
+alignable { input: "ga"             output: "g" }
+alignable { input: "gha"            output: "g" }
+alignable { input: "nga"            output: "ŋ" }
+alignable { input: "nnga"           output: "ᵑg" }
+alignable { input: "ca"             output: "c" }
+alignable { input: "cha"            output: "c" }
+alignable { input: "ja"             output: "ɟ" }
+alignable { input: "jha"            output: "ɟ" }
+alignable { input: "nya"            output: "ɲ" }
+alignable { input: "jnya"           output: "k ɲ" }
+alignable { input: "tta"            output: "ʈ" }
+alignable { input: "ttha"           output: "ʈ" }
+alignable { input: "dda"            output: "ɖ" }
+alignable { input: "ddha"           output: "ɖ" }
+alignable { input: "nna"            output: "n" }
+alignable { input: "nndda"          output: "ⁿɖ" }
+alignable { input: "ta"             output: "t" }
+alignable { input: "tha"            output: "t" }
+alignable { input: "da"             output: "d" }
+alignable { input: "dha"            output: "d" }
+alignable { input: "na"             output: "n" }
+alignable { input: "nda"            output: "ⁿd" }
+alignable { input: "pa"             output: "p" }
+alignable { input: "pha"            output: "p" }
+alignable { input: "ba"             output: "b" }
+alignable { input: "bha"            output: "b" }
+alignable { input: "ma"             output: "m" }
+alignable { input: "mba"            output: "ᵐb" }
+alignable { input: "ya"             output: "y" }
+alignable { input: "ra"             output: "r" }
+alignable { input: "la"             output: "l" }
+alignable { input: "va"             output: "w" }
+alignable { input: "sha"            output: "ʃ" }
+alignable { input: "ssa"            output: "ʃ" }
+alignable { input: "sa"             output: "s" }
+alignable { input: "ha"             output: "h" }
+alignable { input: "lla"            output: "l" }
+alignable { input: "fa"             output: "f" }
 
-alignable { input: "yansaya"      output: "y" }
-alignable { input: "rakaransaya"  output: "r" }
-alignable { input: "repaya"       output: "r" }
+alignable { input: "yansaya"        output: "y" }
+alignable { input: "rakaransaya"    output: "r" }
+alignable { input: "repaya"         output: "r" }
 
-alignable { input: "virama"       output: "" }
+alignable { input: "virama"         output: "" }
 
-alignable { input: "-a"           output: "ə" }
-alignable { input: "-a"           output: "a" }
+alignable { input: "-a"             output: "ə" }
+alignable { input: "-a"             output: "a" }
 
-alignable { input: "-aa"          output: "aː" }
-alignable { input: "-ae"          output: "æ" }
-alignable { input: "-aae"         output: "æː" }
-alignable { input: "-i"           output: "i" }
-alignable { input: "-ii"          output: "iː" }
-alignable { input: "-u"           output: "u" }
-alignable { input: "-uu"          output: "uː" }
-alignable { input: "-ri"          output: "r u" }
-alignable { input: "-e"           output: "e" }
-alignable { input: "-ee"          output: "eː" }
-alignable { input: "-ai"          output: "a y" }
-alignable { input: "-o"           output: "o" }
-alignable { input: "-oo"          output: "oː" }
-alignable { input: "-au"          output: "a w" }
-alignable { input: "-rri"         output: "r uː" }
+alignable { input: "-aa"            output: "aː" }
+alignable { input: "-ae"            output: "æ" }
+alignable { input: "-aae"           output: "æː" }
+alignable { input: "-i"             output: "i" }
+alignable { input: "-ii"            output: "iː" }
+alignable { input: "-u"             output: "u" }
+alignable { input: "-uu"            output: "uː" }
+alignable { input: "-ri"            output: "r u" }
+alignable { input: "-e"             output: "e" }
+alignable { input: "-ee"            output: "eː" }
+alignable { input: "-ai"            output: "a y" }
+alignable { input: "-o"             output: "o" }
+alignable { input: "-oo"            output: "oː" }
+alignable { input: "-au"            output: "a w" }
+alignable { input: "-rri"           output: "r uː" }

@@ -143,6 +143,8 @@ output_symbol { key: "f"   value: 40 }
 alignable { input: "anusvara"       output: "ŋ" }
 alignable { input: "visarga"        output: "h" }
 
+# Independent vowel letters
+
 alignable { input: "a"              output: "a" }
 alignable { input: "aa"             output: "aː" }
 alignable { input: "ae"             output: "æ" }
@@ -159,11 +161,12 @@ alignable { input: "o"              output: "o" }
 alignable { input: "oo"             output: "oː" }
 alignable { input: "au"             output: "a w" }
 
+# Simple consonants
+
 alignable { input: "ka"             output: "k" }
 alignable { input: "kha"            output: "k" }
 alignable { input: "ga"             output: "g" }
 alignable { input: "gha"            output: "g" }
-alignable { input: "nga"            output: "ŋ" }
 alignable { input: "nnga"           output: "ᵑg" }
 alignable { input: "ca"             output: "c" }
 alignable { input: "cha"            output: "c" }
@@ -200,9 +203,13 @@ alignable { input: "ha"             output: "h" }
 alignable { input: "lla"            output: "l" }
 alignable { input: "fa"             output: "f" }
 
+# Conjunct forms
+
 alignable { input: "yansaya"        output: "y" }
 alignable { input: "rakaransaya"    output: "r" }
 alignable { input: "repaya"         output: "r" }
+
+# Dependent vowel signs
 
 alignable { input: "virama"         output: "" }
 
@@ -224,3 +231,8 @@ alignable { input: "-o"             output: "o" }
 alignable { input: "-oo"            output: "oː" }
 alignable { input: "-au"            output: "a w" }
 alignable { input: "-rri"           output: "r uː" }
+
+# Typos
+
+alignable { input: "nga"            output: "ɖ" }    # ඞ <nga> ~ ඩ <dda>
+alignable { input: "sa -ri"         output: "r i" }  # සෘ <sa -ri> ~ ඍ <ri>

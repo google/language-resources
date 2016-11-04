@@ -168,6 +168,7 @@ alignable { input: "au"             output: "o w" }
 # Simple consonants
 
 alignable { input: "ka"             output: "k" }
+alignable { input: "ka virama ssa"  output: "ʃ" }  # word-initially
 alignable { input: "kha"            output: "k" }
 alignable { input: "ga"             output: "g" }
 alignable { input: "gha"            output: "g" }
@@ -178,6 +179,7 @@ alignable { input: "ja"             output: "ɟ" }
 alignable { input: "jha"            output: "ɟ" }
 alignable { input: "nya"            output: "ɲ" }
 alignable { input: "jnya"           output: "k ɲ" }
+alignable { input: "jnya"           output: "ɲ" }  # word-initially
 alignable { input: "tta"            output: "ʈ" }
 alignable { input: "ttha"           output: "ʈ" }
 alignable { input: "dda"            output: "ɖ" }
@@ -189,12 +191,14 @@ alignable { input: "tha"            output: "t" }
 alignable { input: "da"             output: "d" }
 alignable { input: "dha"            output: "d" }
 alignable { input: "na"             output: "n" }
+alignable { input: "na virama"      output: "ŋ" }  # word-finally
 alignable { input: "nda"            output: "ⁿd" }
 alignable { input: "pa"             output: "p" }
 alignable { input: "pha"            output: "p" }
 alignable { input: "ba"             output: "b" }
 alignable { input: "bha"            output: "b" }
 alignable { input: "ma"             output: "m" }
+alignable { input: "ma virama"      output: "ŋ" }  # word-finally
 alignable { input: "mba"            output: "ᵐb" }
 alignable { input: "ya"             output: "y" }
 alignable { input: "ra"             output: "r" }

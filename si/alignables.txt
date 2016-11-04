@@ -160,6 +160,7 @@ alignable { input: "ai"             output: "a y" }
 alignable { input: "o"              output: "o" }
 alignable { input: "oo"             output: "oː" }
 alignable { input: "au"             output: "a w" }
+alignable { input: "au"             output: "o w" }
 
 # Simple consonants
 
@@ -215,6 +216,7 @@ alignable { input: "virama"         output: "" }
 
 alignable { input: "-a"             output: "ə" }
 alignable { input: "-a"             output: "a" }
+alignable { input: "-a"             output: "əː" }
 
 alignable { input: "-aa"            output: "aː" }
 alignable { input: "-ae"            output: "æ" }
@@ -224,12 +226,19 @@ alignable { input: "-ii"            output: "iː" }
 alignable { input: "-u"             output: "u" }
 alignable { input: "-uu"            output: "uː" }
 alignable { input: "-ri"            output: "r u" }
+alignable { input: "-ri"            output: "r uː" }
+alignable { input: "-ri"            output: "u r" }
+alignable { input: "-ri ta virama"  output: "u r" }
+alignable { input: "-ri da virama"  output: "u r" }
+alignable { input: "-ri"            output: "r ə" }
+alignable { input: "-ri"            output: "ə r" }
 alignable { input: "-e"             output: "e" }
 alignable { input: "-ee"            output: "eː" }
 alignable { input: "-ai"            output: "a y" }
 alignable { input: "-o"             output: "o" }
 alignable { input: "-oo"            output: "oː" }
 alignable { input: "-au"            output: "a w" }
+alignable { input: "-au"            output: "o w" }
 alignable { input: "-rri"           output: "r uː" }
 
 # Typos

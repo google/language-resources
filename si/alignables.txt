@@ -210,6 +210,29 @@ alignable { input: "yansaya"        output: "y" }
 alignable { input: "rakaransaya"    output: "r" }
 alignable { input: "repaya"         output: "r" }
 
+# Geminate consonants
+
+alignable { input: "ka"             output: "k k" }
+alignable { input: "kha"            output: "k k" }
+alignable { input: "ga"             output: "g g" }
+alignable { input: "ja"             output: "ɟ ɟ" }
+alignable { input: "jnya"           output: "ɲ ɲ" }
+alignable { input: "tta"            output: "ʈ ʈ" }
+alignable { input: "nna"            output: "n n" }
+alignable { input: "ta"             output: "t t" }
+alignable { input: "tha"            output: "t t" }
+alignable { input: "da"             output: "d d" }
+alignable { input: "dha"            output: "d d" }
+alignable { input: "na"             output: "n n" }
+alignable { input: "pa"             output: "p p" }
+alignable { input: "bha"            output: "b b" }
+alignable { input: "ma"             output: "m m" }
+alignable { input: "la"             output: "l l" }
+alignable { input: "va"             output: "w w" }
+alignable { input: "sha"            output: "ʃ ʃ" }
+alignable { input: "ssa"            output: "ʃ ʃ" }
+alignable { input: "sa"             output: "s s" }
+
 # Dependent vowel signs
 
 alignable { input: "virama"         output: "" }

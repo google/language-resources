@@ -146,6 +146,7 @@ alignable { input: "visarga"        output: "h" }
 # Independent vowel letters
 
 alignable { input: "a"              output: "a" }
+alignable { input: "a"              output: "əː" }
 alignable { input: "aa"             output: "aː" }
 alignable { input: "ae"             output: "æ" }
 alignable { input: "aae"            output: "æː" }
@@ -154,10 +155,12 @@ alignable { input: "ii"             output: "iː" }
 alignable { input: "u"              output: "u" }
 alignable { input: "uu"             output: "uː" }
 alignable { input: "ri"             output: "r i" }
+alignable { input: "ri"             output: "i r" }
 alignable { input: "e"              output: "e" }
 alignable { input: "ee"             output: "eː" }
 alignable { input: "ai"             output: "a y" }
 alignable { input: "o"              output: "o" }
+alignable { input: "o"              output: "oː" }  # in loanwords
 alignable { input: "oo"             output: "oː" }
 alignable { input: "au"             output: "a w" }
 alignable { input: "au"             output: "o w" }
@@ -210,7 +213,7 @@ alignable { input: "yansaya"        output: "y" }
 alignable { input: "rakaransaya"    output: "r" }
 alignable { input: "repaya"         output: "r" }
 
-# Geminate consonants
+# Gemination
 
 alignable { input: "ka"             output: "k k" }
 alignable { input: "kha"            output: "k k" }
@@ -233,6 +236,10 @@ alignable { input: "sha"            output: "ʃ ʃ" }
 alignable { input: "ssa"            output: "ʃ ʃ" }
 alignable { input: "sa"             output: "s s" }
 
+# Degemination
+
+alignable { input: "ta virama ta"   output: "t" }
+
 # Dependent vowel signs
 
 alignable { input: "virama"         output: "" }
@@ -242,12 +249,19 @@ alignable { input: "-a"             output: "a" }
 alignable { input: "-a"             output: "əː" }
 
 alignable { input: "-aa"            output: "aː" }
+alignable { input: "-aa"            output: "a" }  # word-finally
 alignable { input: "-ae"            output: "æ" }
+alignable { input: "-ae"            output: "ə" }  # TODO: check this
 alignable { input: "-aae"           output: "æː" }
+alignable { input: "-aae"           output: "æ" }  # word-finally
 alignable { input: "-i"             output: "i" }
+alignable { input: "-i"             output: "iː" }  # in loanwords
 alignable { input: "-ii"            output: "iː" }
+alignable { input: "-ii"            output: "i" }  # word-finally
 alignable { input: "-u"             output: "u" }
+alignable { input: "-u"             output: "uː" }
 alignable { input: "-uu"            output: "uː" }
+alignable { input: "-uu"            output: "u" }  # word-finally
 alignable { input: "-ri"            output: "r u" }
 alignable { input: "-ri"            output: "r uː" }
 alignable { input: "-ri"            output: "u r" }
@@ -257,14 +271,18 @@ alignable { input: "-ri"            output: "r ə" }
 alignable { input: "-ri"            output: "ə r" }
 alignable { input: "-e"             output: "e" }
 alignable { input: "-ee"            output: "eː" }
+alignable { input: "-ee"            output: "e" }  # word-finally
 alignable { input: "-ai"            output: "a y" }
 alignable { input: "-o"             output: "o" }
+alignable { input: "-o"             output: "oː" }  # in loanwords
 alignable { input: "-oo"            output: "oː" }
+alignable { input: "-oo"            output: "o" }  # word-finally
 alignable { input: "-au"            output: "a w" }
 alignable { input: "-au"            output: "o w" }
 alignable { input: "-rri"           output: "r uː" }
+alignable { input: "-rri"           output: "r u" }  # word-finally
 
 # Typos
 
-alignable { input: "nga"            output: "ɖ" }    # ඞ <nga> ~ ඩ <dda>
-alignable { input: "sa -ri"         output: "r i" }  # සෘ <sa -ri> ~ ඍ <ri>
+alignable { input: "nga"            output: "ɖ" }     # ඞ nga -> ඩ dda
+alignable { input: "sa -ri"         output: "r i" }   # සෘ sri -> ඍ ri

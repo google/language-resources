@@ -23,7 +23,7 @@ base_path = "si/textnorm/classifier/"
     grm_regression_test(
         name = test_rules + "_tests",
         far_file_path = base_path,
-        test_file_path = base_path + "testdata/",
+        test_file_path = base_path,
         far_file = test_rules + ".far",
         test_file = "testdata/" + test_rules + ".tsv",
     )

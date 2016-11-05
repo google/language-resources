@@ -53,14 +53,25 @@ int main(int argc, char *argv[]) {
   Transducer input_fst;
   int error = 0;
   std::ifstream file(FLAGS_test_file);
+  int line_no = 0;
+
+  if (!file) {
+    throw std::runtime_error(("failed reading file \"" + FLAGS_test_file + "\"").c_str());
+  }
 
   for (std::string line; std::getline(file, line); ) {
+    line_no++;
+
     // Line is a comment.
-    if (line.length() != 0 && line[0] == '#') {
+    if (line == "" || line.length() == 0 || line[0] == '#') {
       continue;
     }
 
     const auto segments = thrax::Split(line, "\t");
+
+    if (segments.size() != 3) {
+      continue;
+    }
 
     if (!compiler_->operator()(segments[1], &input_fst)) {
       LOG(ERROR) << "Unable to parse input: " << segments[1];
@@ -69,14 +80,20 @@ int main(int argc, char *argv[]) {
     }
 
     if (!grm_manager.RewriteBytes(segments[0], input_fst, &output, "", "")) {
-      LOG(ERROR) << "REWRITE_FAILED";
+      LOG(ERROR) << "REWRITE_FAILED in line - " << line_no
+                 << "\n line text: " + line
+                 << "\n segment 0: " + segments[0]
+                 << "\n segment 1: " + segments[1]
+                 << "\n segment 2: " + segments[2];
+
       error = 1;
       continue;
     }
 
     if (output != segments[2]) {
       error = 1;
-      LOG(WARNING) << "Error testing expected - " << segments[2] << " but actually - " << output;
+      LOG(WARNING) << "Error in line " << line_no << " expected - "
+                   << segments[2] << " but actually - " << output;
     }
   }
   return error;

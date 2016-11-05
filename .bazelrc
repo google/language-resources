@@ -1,0 +1,1 @@
+build --copt=-DUTIL_GTL_USE_SHARED_PTR

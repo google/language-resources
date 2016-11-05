@@ -1,4 +1,4 @@
-#! /usr/bin/python2 -u
+#! /usr/bin/python -u
 # -*- coding: utf-8 -*-
 #
 # Copyright 2016 Google Inc. All Rights Reserved.

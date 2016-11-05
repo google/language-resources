@@ -141,6 +141,8 @@ output_symbol { key: "f"   value: 40 }
 
 
 alignable { input: "anusvara"       output: "ŋ" }
+alignable { input: "anusvara"       output: "ɲ" }  # place assimiliation
+alignable { input: "anusvara"       output: "n" }  # place assimiliation
 alignable { input: "visarga"        output: "h" }
 
 # Independent vowel letters
@@ -191,6 +193,7 @@ alignable { input: "tha"            output: "t" }
 alignable { input: "da"             output: "d" }
 alignable { input: "dha"            output: "d" }
 alignable { input: "na"             output: "n" }
+alignable { input: "na virama"      output: "ɲ" }  # place assimiliation
 alignable { input: "na virama"      output: "ŋ" }  # word-finally
 alignable { input: "nda"            output: "ⁿd" }
 alignable { input: "pa"             output: "p" }

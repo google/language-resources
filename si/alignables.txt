@@ -289,6 +289,18 @@ alignable { input: "-au"            output: "o w" }
 alignable { input: "-rri"           output: "r uː" }
 alignable { input: "-rri"           output: "r u" }  # word-finally
 
+# YA
+
+alignable { input: "ya"             output: "" }   # no on-glide before /i/
+
+alignable { input: "ya -i"          output: "y" }  # off-glide in diphthong
+
+# VA
+
+alignable { input: "va"             output: "" }   # no on-glide before /u/
+
+alignable { input: "va -u"          output: "w" }  # off-glide in diphthong
+
 # Typos
 
 alignable { input: "nga"            output: "ɖ" }     # ඞ nga -> ඩ dda

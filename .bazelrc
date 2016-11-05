@@ -1,1 +1,1 @@
-build --copt=-DUTIL_GTL_USE_SHARED_PTR
+build --copt=-DUTIL_GTL_USE_STD_SHARED_PTR=1

@@ -110,17 +110,6 @@ cc_binary(
     ],
 )
 
-cc_library(
-    name = "grm_tester_lib",
-    srcs = ["grm_tester.cc"],
-    deps = [
-        "//festus:fst-util",
-        "//festus:string-util",
-        "@openfst//:fst",
-        "@thrax//:grm-manager",
-    ],
-)
-
 cc_binary(
     name = "lm-scores",
     srcs = ["lm-scores.cc"],

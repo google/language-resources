@@ -1,1 +1,2 @@
 build --copt=-DUTIL_GTL_USE_STD_SHARED_PTR=1
+build --host_copt=-DUTIL_GTL_USE_STD_SHARED_PTR=1

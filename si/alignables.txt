@@ -301,6 +301,8 @@ alignable { input: "va"             output: "" }   # no on-glide before /u/
 
 alignable { input: "va -u"          output: "w" }  # off-glide in diphthong
 
+alignable { input: "va virama"      output: "u"}   # transcription problem?
+
 # Typos
 
 alignable { input: "o"              output: "ᵐb ə" }  # ඔ o -> ඹ mba
@@ -308,4 +310,5 @@ alignable { input: "nga"            output: "ɖ" }     # ඞ nga -> ඩ dda
 alignable { input: "nnga"           output: "g" }     # ඟ nnga -> ග ga
 alignable { input: "da"             output: "ⁿd" }    # ද da -> ඳ nda
 alignable { input: "nda"            output: "d" }     # ඳ nda -> ද da
+alignable { input: "va virama"      output: "w i" }   # ව් v -> වි vi
 alignable { input: "sa -ri"         output: "r i" }   # සෘ sri -> ඍ ri

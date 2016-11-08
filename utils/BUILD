@@ -119,6 +119,7 @@ cc_library(
         "@openfst//:fst",
         "@thrax//:grm-manager",
     ],
+    testonly = 1,
 )
 
 cc_binary(

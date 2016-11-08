@@ -30,10 +30,11 @@ universal_deps = [
     grm_regression_test(
         name = test_rules + "_tests",
         far_file_path = base_path,
-        test_file_path = base_path + "testdata/",
+        test_file_path = base_path,
         far_file = test_rules + ".far",
         test_file = "testdata/" + test_rules + ".tsv",
     )
+    
 for test_rules in ["address",  "cardinal",  "connector", "date", "decimal",
                             "digit", "electronic", "emoticons", "fraction", "lseq",
                             "measure",  "money",  "ordinal", "telephone",
@@ -104,8 +105,7 @@ thrax_compile_grm(
     deps = [
         "cardinal.far",
         "cardinal.grm",
-        "digit.far",
-        "digit.grm",
+
         "number_names_rules.far",
         "number_names_rules.grm",
     ] + universal_deps,

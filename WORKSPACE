@@ -37,20 +37,20 @@ new_git_repository(
 new_git_repository(
     name = "googletest",
     build_file = "googletest.BUILD",
-    commit = "ec44c6c1675c25b9827aacd08c02433cccde7780",
+    commit = "3447fc31b4eea1fbcb86fa0e2f5d9ed9f38776bf",
     remote = "https://github.com/google/googletest.git",
 )
 
 git_repository(
     name = "protobuf",
     remote = "https://github.com/google/protobuf.git",
-    tag = "v3.0.2",
+    tag = "v3.1.0",
 )
 
 new_git_repository(
     name = "farmhash",
     build_file = "farmhash.BUILD",
-    commit = "34c13ddfab0e35422f4c3979f360635a8c050260",
+    commit = "92e897b282426729f4724d91a637596c7e2fe28f",
     remote = "https://github.com/google/farmhash.git",
 )
 
@@ -69,6 +69,6 @@ bind(
 new_git_repository(
     name = "sparrowhawk",
     build_file = "sparrowhawk.BUILD",
+    commit = "eb97411535e9ab280982bae18c99d6a2c933e162",
     remote = "https://github.com/google/sparrowhawk.git",
-    tag = "0.1",
 )

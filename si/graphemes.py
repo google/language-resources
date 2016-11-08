@@ -47,10 +47,10 @@ CODEPOINT_TO_SYMBOL = {
     0x0D8A: 'ii',
     0x0D8B: 'u',
     0x0D8C: 'uu',
-    0x0D8D: 'ru',
-    0x0D8E: 'rru',
-    0x0D8F: 'lu',
-    0x0D90: 'llu',
+    0x0D8D: 'ri',
+    0x0D8E: 'rri',
+    0x0D8F: 'li',
+    0x0D90: 'lli',
     0x0D91: 'e',
     0x0D92: 'ee',
     0x0D93: 'ai',
@@ -115,7 +115,7 @@ CODEPOINT_TO_SYMBOL = {
     # 0x0DD5 <reserved>
     0x0DD6: '-uu',
     # 0x0DD7 <reserved>
-    0x0DD8: '-ru',
+    0x0DD8: '-ri',
     0x0DD9: '-e',
     0x0DDA: '-ee',
     0x0DDB: '-ai',
@@ -124,7 +124,7 @@ CODEPOINT_TO_SYMBOL = {
     0x0DDD: '-oo',
     0x0DDE: '-au',
     # Dependent vowel sign
-    0x0DDF: '-lu',
+    0x0DDF: '-li',
     # Astrological digits
     0x0DE6: 'lith_0',
     0x0DE7: 'lith_1',
@@ -137,14 +137,20 @@ CODEPOINT_TO_SYMBOL = {
     0x0DEE: 'lith_8',
     0x0DEF: 'lith_9',
     # Additional dependent vowel signs
-    0x0DF2: '-rru',
-    0x0DF3: '-llu',
+    0x0DF2: '-rri',
+    0x0DF3: '-lli',
     # Punctuation
     0x0DF4: 'kunddaliya',
 
     # Zero-width non-joiner and zero-width joiner
     0x200C: 'ZWNJ',
     0x200D: 'ZWJ',
+
+    # Private-use characters
+    0xE000: '-a',           # inherent vowel
+    0xE001: 'yansaya',      # medial ya
+    0xE002: 'rakaransaya',  # medial ra
+    0xE003: 'repaya',       # reph
 
     # Sinhala Archaic Numbers Unicode block, per Unicode Standard version 8.0
     #

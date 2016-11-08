@@ -23,15 +23,15 @@ DATE_MARKUP	date { year: 1412 month: 3 style: 2 }	එක් දහස් හා�
 DATE_MARKUP	date { year: 74 month: 1 style: 2 }	හැත්තෑ හතරේ ජනවාරි
 
 # mm_dd_style.
-DATE_MARKUP	date { month: 11 day: 5 style: 1 }	නොවැම්බර් පහ
-DATE_MARKUP	date { month: 1 day: 15 style: 1 }	ජනවාරි පහළොව
-DATE_MARKUP	date { month: 2 day: 18 style: 1 }	පෙබරවාරි දහඅට
-DATE_MARKUP	date { month: 3 day: 30 style: 1 }	මාර්තු තිහ
-DATE_MARKUP	date { month: 4 day: 24 style: 1 }	අප්‍රේල් විසි හතර
-DATE_MARKUP	date { month: 5 day: 2 style: 1 }	මැයි දෙක
-DATE_MARKUP	date { month: 6 day: 9 style: 1 }	ජුනි නවය
-DATE_MARKUP	date { month: 7 day: 11 style: 1 }	ජූලි එකොළහ
-DATE_MARKUP	date { month: 8 day: 28 style: 1 }	අගෝස්තු විසි අට
+DATE_MARKUP	date { month: 11 day: 5 style: 2 }	නොවැම්බර් පහ
+DATE_MARKUP	date { month: 1 day: 15 style: 2 }	ජනවාරි පහළොව
+DATE_MARKUP	date { month: 2 day: 18 style: 2 }	පෙබරවාරි දහඅට
+DATE_MARKUP	date { month: 3 day: 30 style: 2 }	මාර්තු තිහ
+DATE_MARKUP	date { month: 4 day: 24 style: 2 }	අප්‍රේල් විසි හතර
+DATE_MARKUP	date { month: 5 day: 2 style: 2 }	මැයි දෙක
+DATE_MARKUP	date { month: 6 day: 9 style: 2 }	ජුනි නවය
+DATE_MARKUP	date { month: 7 day: 11 style: 2 }	ජූලි එකොළහ
+DATE_MARKUP	date { month: 8 day: 28 style: 2 }	අගෝස්තු විසි අට
 
 # With era.
 DATE_MARKUP	date { era: "AD" year: 1210 style: 2 }	ක්‍රිස්තු වර්ෂ එක් දහස් දෙ සිය දහයේ

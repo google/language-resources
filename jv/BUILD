@@ -93,6 +93,7 @@ genrule(
           $(location tokenize.py) \
             2> $(location jv_bad_tokens.txt) |
           $(location //utils:freq) |
+          cut -f1 |
           $(location //utils:thrax_g2p) \
             --far=$(location javanese.far) \
             --phoneme_syms=$(location phoneme.syms) |

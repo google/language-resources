@@ -1,4 +1,4 @@
-# bn/BUILD
+# si/BUILD
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,31 +18,32 @@
 package(default_visibility = ["//visibility:public"])
 
 sh_test(
-    name = "ipa_phonemes_are_uniquely_decodable",
+    name = "phonemes_are_uniquely_decodable",
     timeout = "short",
     srcs = ["//utils:eval.sh"],
     args = [
         """
-        cut -f 2 $(location phonemes.txt) |
+        cut -f1 $(location phoneme.syms) |
+        fgrep -v epsilon |
         $(location //utils:uniquely_decodable)
         """,
     ],
     data = [
-        "phonemes.txt",
+        "phoneme.syms",
         "//utils:uniquely_decodable",
     ],
 )
 
 genrule(
-    name = "compile_bengali_grm",
+    name = "compile_sinhala_grm",
     srcs = [
-        "bengali.grm",
+        "sinhala.grm",
         "grapheme.syms",
     ],
-    outs = ["bengali.far"],
+    outs = ["sinhala.far"],
     cmd = """
         $(location @thrax//:thraxcompiler) \
-          --input_grammar=$(location bengali.grm) \
+          --input_grammar=$(location sinhala.grm) \
           --output_far=$@
         """,
     tools = ["@thrax//:thraxcompiler"],
@@ -56,32 +57,23 @@ sh_test(
         """
         cut -f 1 $(location graphemes_test.tsv) |
         $(location //utils:thrax_g2p) \
-          --far=$(location bengali.far) \
+          --far=$(location sinhala.far) \
           --far_g2p_key=CODEPOINTS_TO_GRAPHEMES \
           --phoneme_syms=$(location grapheme.syms) |
         diff -U0 - $(location graphemes_test.tsv)
         """,
     ],
     data = [
-        "bengali.far",
+        "sinhala.far",
         "grapheme.syms",
         "graphemes_test.tsv",
         "//utils:thrax_g2p",
     ],
 )
 
-cc_binary(
-    name = "lexicon-diagnostics",
-    srcs = ["lexicon-diagnostics.cc"],
-    deps = [
-        "@openfst//:fst",
-        "//festus:lexicon-processor",
-    ],
-)
-
 genrule(
     name = "make_string2graphemes_fst",
-    srcs = ["bengali.far"],
+    srcs = ["sinhala.far"],
     outs = [
         "UTF8_TO_GRAPHEMES.fst",
         "string2graphemes.fst",
@@ -91,7 +83,7 @@ genrule(
           --filename_prefix=$(@D)/ \
           --keys=UTF8_TO_GRAPHEMES \
           --filename_suffix=.fst \
-          $(location bengali.far) &&
+          $(location sinhala.far) &&
         $(location @openfst//:fstmap) \
           --map_type=to_log64 \
           $(location UTF8_TO_GRAPHEMES.fst) \
@@ -109,16 +101,16 @@ sh_test(
     srcs = ["//utils:eval.sh"],
     args = [
         """
-        grep '^[^#a-z]' $(location data/lexicon.tsv) |
-        $(location :lexicon-diagnostics) \
+        grep '^[^#]' $(location lexicon_test.tsv) |
+        $(location //bn:lexicon-diagnostics) \
           --alignables=$(location alignables.txt) \
           --string2graphemes=$(location string2graphemes.fst)
         """,
     ],
     data = [
         "alignables.txt",
-        "data/lexicon.tsv",
+        "lexicon_test.tsv",
         "string2graphemes.fst",
-        ":lexicon-diagnostics",
+        "//bn:lexicon-diagnostics",
     ],
 )

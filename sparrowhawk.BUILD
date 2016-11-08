@@ -135,7 +135,10 @@ cc_library(
         "src/include/sparrowhawk/protobuf_serializer.h",
     ],
     copts = ["-Wno-sign-compare"],
-    includes = ["src/include"],
+    includes = [
+        ".",
+        "src/include",
+    ],
     deps = [
         "@openfst//:base",
         "@thrax//:grm-manager",

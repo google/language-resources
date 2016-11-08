@@ -293,9 +293,15 @@ alignable { input: "-rri"           output: "r u" }  # word-finally
 
 # YA
 
+alignable { input: "ya -a ya"       output: "y" }  # on-glide
+alignable { input: "ya yansaya"     output: "y" }  # on-glide
+alignable { input: "yansaya -a ya"  output: "y" }  # medial/haplology
+
 alignable { input: "ya"             output: "" }   # no on-glide before /i/
 
 alignable { input: "ya -i"          output: "y" }  # off-glide in diphthong
+
+alignable { input: "-i ya -i"       output: "iː" }  # fusion
 
 # VA
 

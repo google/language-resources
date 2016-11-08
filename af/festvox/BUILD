@@ -65,3 +65,19 @@ genrule(
           """,
     tools = ["prepare_prompts.py"],
 )
+
+"""
+Usage
+    bazel run af/festvox:build_tiny_voice -- /tmp/af_tiny_voice
+"""
+sh_binary(
+    name = "build_tiny_voice",
+    srcs = ["build_tiny_voice.sh"],
+    data = [
+        ":make_lexicon_scm",
+        ":make_txt_done_data",
+        "//utils:apply_phonology",
+        "//utils:sh_utter",
+        "phonology.json",
+    ]
+)

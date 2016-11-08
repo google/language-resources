@@ -195,6 +195,7 @@ alignable { input: "dha"            output: "d" }
 alignable { input: "na"             output: "n" }
 alignable { input: "na virama"      output: "ɲ" }  # place assimiliation
 alignable { input: "na virama"      output: "ŋ" }  # word-finally
+alignable { input: "na virama ga"   output: "ŋ" }  # loans w/ English spelling
 alignable { input: "nda"            output: "ⁿd" }
 alignable { input: "pa"             output: "p" }
 alignable { input: "pha"            output: "p" }
@@ -205,6 +206,7 @@ alignable { input: "ma virama"      output: "ŋ" }  # word-finally
 alignable { input: "mba"            output: "ᵐb" }
 alignable { input: "ya"             output: "y" }
 alignable { input: "ra"             output: "r" }
+alignable { input: "ra virama"      output: "" }  # in non-rhotic English loans
 alignable { input: "la"             output: "l" }
 alignable { input: "va"             output: "w" }
 alignable { input: "sha"            output: "ʃ" }

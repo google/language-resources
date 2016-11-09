@@ -2,7 +2,7 @@ sudo: required
 dist: trusty
 
 env:
-  - BAZEL=0.3.2
+  - BAZEL=0.4.0
 
 before_install:
   - sudo apt-get update -qq
@@ -23,9 +23,4 @@ before_install:
   - echo y | /usr/local/android-sdk/tools/android update sdk --no-ui --all --filter android-24
 
 script:
-  #- bazel test //af/... //bn/... //festus/... //hi_ur/... //my/... //Mymr/... //si/... //xh/... //zu/...
-  - bazel test //xh/... //zu/...
-
-after_failure:
-  - cat /home/travis/.cache/bazel/_bazel_*/*/execroot/language-resources/bazel-out/local-fastbuild/testlogs/xh/pronunciation_rules_match_nchlt_dictionary/test.log
-  - cat /home/travis/.cache/bazel/_bazel_*/*/execroot/language-resources/bazel-out/local-fastbuild/testlogs/zu/pronunciation_rules_match_nchlt_dictionary/test.log
+  - bazel test //af/... //bn/... //festus/... //hi_ur/... //my/... //Mymr/... //si/... //xh/... //zu/...

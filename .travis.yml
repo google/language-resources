@@ -27,5 +27,6 @@ script:
   - bazel test //xh/... //zu/...
 
 after_failure:
+  - /usr/bin/env python --version
   - cat /home/travis/.cache/bazel/_bazel_travis/*/execroot/language-resources/bazel-out/local-fastbuild/testlogs/xh/pronunciation_rules_match_nchlt_dictionary/test.log
-    - cat /home/travis/.cache/bazel/_bazel_travis/*/execroot/language-resources/bazel-out/local-fastbuild/testlogs/zu/pronunciation_rules_match_nchlt_dictionary/test.log
+  - cat /home/travis/.cache/bazel/_bazel_travis/*/execroot/language-resources/bazel-out/local-fastbuild/testlogs/zu/pronunciation_rules_match_nchlt_dictionary/test.log

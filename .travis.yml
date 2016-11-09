@@ -24,8 +24,8 @@ before_install:
 
 script:
   #- bazel test //af/... //bn/... //festus/... //hi_ur/... //my/... //Mymr/... //si/... //xh/... //zu/...
-  - bazel --batch test --verbose_failures //xh/...
+  - bazel test //xh/... //zu/...
 
 after_failure:
   - cat /home/travis/.cache/bazel/_bazel_*/*/execroot/language-resources/bazel-out/local-fastbuild/testlogs/xh/pronunciation_rules_match_nchlt_dictionary/test.log
-  - ls -lR /home/travis/.cache/bazel/_bazel_*/*/bazel-sandbox/*/execroot/language-resources/bazel-out/local-fastbuild/
+  - cat /home/travis/.cache/bazel/_bazel_*/*/execroot/language-resources/bazel-out/local-fastbuild/testlogs/zu/pronunciation_rules_match_nchlt_dictionary/test.log

@@ -293,24 +293,23 @@ alignable { input: "-rri"           output: "r u" }  # word-finally
 
 # YA
 
-alignable { input: "ya -a ya"       output: "y" }  # on-glide
-alignable { input: "ya yansaya"     output: "y" }  # on-glide
-alignable { input: "yansaya -a ya"  output: "y" }  # medial/haplology
+alignable { input: "ya"             output: "" }      # no on-glide before /i/
 
-alignable { input: "ya"             output: "" }   # no on-glide before /i/
+alignable { input: "ya -i"          output: "y" }     # off-glide in diphthong
 
-alignable { input: "ya -i"          output: "y" }  # off-glide in diphthong
+alignable { input: "-i ya -i"       output: "iː" }    # fusion
 
-alignable { input: "-i ya -i"       output: "iː" }  # fusion
+alignable { input: "ya -a ya"       output: "y" }     # haplology
+alignable { input: "yansaya -a ya"  output: "y" }     # haplology
 
 # VA
 
-alignable { input: "va"             output: "" }   # no on-glide before /u/
+alignable { input: "va"             output: "" }      # no on-glide before /u/
 
-alignable { input: "va -u"          output: "w" }  # off-glide in diphthong
+alignable { input: "va -u"          output: "w" }     # off-glide in diphthong
 
-alignable { input: "va -ri"         output: "w u" }
-alignable { input: "va virama"      output: "u"}   # transcription problem?
+alignable { input: "va -ri"         output: "w u" }   # simplification
+alignable { input: "va virama"      output: "u"}      # transcription problem?
 
 # Typos
 

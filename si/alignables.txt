@@ -248,6 +248,7 @@ alignable { input: "sa"             output: "s s" }
 # Degemination
 
 alignable { input: "ta virama ta"   output: "t" }
+alignable { input: "da virama dha"  output: "d" }
 
 # Dependent vowel signs
 
@@ -259,6 +260,7 @@ alignable { input: "-a"             output: "əː" }
 
 alignable { input: "-aa"            output: "aː" }
 alignable { input: "-aa"            output: "a" }  # word-finally
+alignable { input: "-aa"            output: "əː" }
 alignable { input: "-ae"            output: "æ" }
 alignable { input: "-ae"            output: "ə" }  # TODO: check this
 alignable { input: "-aae"           output: "æː" }
@@ -274,8 +276,6 @@ alignable { input: "-uu"            output: "u" }  # word-finally
 alignable { input: "-ri"            output: "r u" }
 alignable { input: "-ri"            output: "r uː" }
 alignable { input: "-ri"            output: "u r" }
-alignable { input: "-ri ta virama"  output: "u r" }
-alignable { input: "-ri da virama"  output: "u r" }
 alignable { input: "-ri"            output: "r ə" }
 alignable { input: "-ri"            output: "ə r" }
 alignable { input: "-e"             output: "e" }
@@ -322,3 +322,4 @@ alignable { input: "ra -ae"         output: "r u" }   # රැ rae -> රු ru
 alignable { input: "ra -aae"        output: "r uː" }  # රෑ raae -> රූ ruu
 alignable { input: "va virama"      output: "w i" }   # ව් v -> වි vi
 alignable { input: "sa -ri"         output: "r i" }   # සෘ sri -> ඍ ri
+alignable { input: "sa -ri"         output: "i r" }   # සෘ sri -> ඍ ri

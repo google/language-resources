@@ -58,7 +58,7 @@ new_git_repository(
     name = "com_googlesource_code_re2",
     build_file = "re2.BUILD",
     remote = "https://github.com/google/re2.git",
-    tag = "2016-08-01",
+    tag = "2016-11-01",
 )
 
 bind(

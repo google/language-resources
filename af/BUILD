@@ -106,9 +106,6 @@ sh_binary(
     srcs = ["prepare-g2p-data.sh"],
     data = [
         "@openfst//:farcompilestrings",
-        "alignables.txt",
-        "lex_regular.txt",
-        "test_words.txt",
         "//festus:lexicon-diagnostics",
         "//festus:make-alignable-symbols",
     ],
@@ -116,12 +113,23 @@ sh_binary(
 
 genrule(
     name = "make_g2p_data",
+    srcs = [
+        "alignables.txt",
+        "lex_regular.txt",
+        "test_words.txt",
+    ],
     outs = [
         "g2p_test.tsv",
         "g2p_train.far",
         "graphone.syms",
     ],
-    cmd = "$(location :prepare-g2p-data) $(@D)",
+    cmd = """
+          $(location :prepare-g2p-data) \
+            $(location lex_regular.txt) \
+            $(location alignables.txt) \
+            $(location test_words.txt) \
+            $(@D)
+          """,
     tools = [":prepare-g2p-data"],
 )
 

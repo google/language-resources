@@ -101,7 +101,7 @@ sh_test(
     srcs = ["//utils:eval.sh"],
     args = [
         """
-        grep '^[^#]' $(location lexicon_test.tsv) |
+        grep '^[^#a-z]' $(location data/lexicon.tsv) |
         $(location //bn:lexicon-diagnostics) \
           --alignables=$(location alignables.txt) \
           --string2graphemes=$(location string2graphemes.fst)
@@ -109,7 +109,7 @@ sh_test(
     ],
     data = [
         "alignables.txt",
-        "lexicon_test.tsv",
+        "data/lexicon.tsv",
         "string2graphemes.fst",
         "//bn:lexicon-diagnostics",
     ],

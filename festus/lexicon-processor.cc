@@ -21,11 +21,14 @@
 #include <iostream>
 
 #include <fst/compat.h>
+#include <fst/compose.h>
 #include <fst/determinize.h>
 #include <fst/fst.h>
 #include <fst/intersect.h>
 #include <fst/map.h>
 #include <fst/minimize.h>
+#include <fst/project.h>
+#include <fst/rmepsilon.h>
 #include <fst/topsort.h>
 
 #include "festus/alignables-util.h"
@@ -35,9 +38,10 @@
 #include "festus/runtime/fst-util.h"
 
 DEFINE_string(alignables, "", "Path to alignables spec");
-DEFINE_bool(filter, false, "If true, echo lines that pass checks to stdout");
+DEFINE_string(string2graphemes, "", "Optional path to string2graphemes FST");
 DEFINE_int32(input_index, 0, "Column index of the input field");
 DEFINE_int32(output_index, 1, "Column index of the output field");
+DEFINE_bool(filter, false, "If true, echo lines that pass checks to stdout");
 DEFINE_bool(unique_alignments, false, "Whether alignments must be unique");
 
 namespace festus {
@@ -45,14 +49,31 @@ namespace festus {
 bool LexiconProcessor::Init() {
   util_ = AlignablesUtil::FromFile(FLAGS_alignables);
   if (!util_) return false;
+  if (!FLAGS_string2graphemes.empty()) {
+    string2graphemes_.reset(fst::Fst<Arc>::Read(FLAGS_string2graphemes));
+    if (!string2graphemes_) return false;
+  }
   if (FLAGS_input_index >= 0) input_index_ = FLAGS_input_index;
   if (FLAGS_output_index >= 0) output_index_ = FLAGS_output_index;
   return true;
 }
 
 bool LexiconProcessor::MakeInputFst(Entry *entry) {
-  entry->input_fst = util_->MakeInputFst(
-      entry->fields.at(input_index_).ToString());
+  const auto &input = entry->fields.at(input_index_);
+  if (!string2graphemes_) {
+    entry->input_fst = util_->MakeInputFst(input.ToString());
+  } else {
+    const unsigned char *begin =
+        reinterpret_cast<const unsigned char *>(input.data());
+    const unsigned char *end = begin + input.size();
+    CompactStringFst<Arc> string_fst;
+    string_fst.SetCompactElements(begin, end);
+    auto *graphemes = &entry->input_fst;
+    fst::Compose(string_fst, *string2graphemes_, graphemes);
+    fst::Project(graphemes, fst::PROJECT_OUTPUT);
+    DCHECK(graphemes->Properties(fst::kString, true));
+    fst::RmEpsilon(graphemes);
+  }
   return true;
 }
 

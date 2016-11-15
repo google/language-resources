@@ -68,6 +68,7 @@ class LexiconProcessor {
 
  protected:
   std::unique_ptr<AlignablesUtil> util_;
+  std::unique_ptr<fst::Fst<Arc>> string2graphemes_;
   std::size_t input_index_ = 0;
   std::size_t output_index_ = 1;
 };

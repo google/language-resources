@@ -70,15 +70,6 @@ sh_test(
     ],
 )
 
-cc_binary(
-    name = "lexicon-diagnostics",
-    srcs = ["lexicon-diagnostics.cc"],
-    deps = [
-        "@openfst//:fst",
-        "//festus:lexicon-processor",
-    ],
-)
-
 genrule(
     name = "make_string2graphemes_fst",
     srcs = ["bengali.far"],
@@ -110,7 +101,7 @@ sh_test(
     args = [
         """
         grep '^[^#a-z]' $(location data/lexicon.tsv) |
-        $(location :lexicon-diagnostics) \
+        $(location //festus:lexicon-diagnostics) \
           --alignables=$(location alignables.txt) \
           --string2graphemes=$(location string2graphemes.fst)
         """,
@@ -119,6 +110,6 @@ sh_test(
         "alignables.txt",
         "data/lexicon.tsv",
         "string2graphemes.fst",
-        ":lexicon-diagnostics",
+        "//festus:lexicon-diagnostics",
     ],
 )

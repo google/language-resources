@@ -43,10 +43,17 @@ DEFINE_bool(unique_alignments, false, "Whether alignments must be unique");
 namespace festus {
 
 bool LexiconProcessor::Init() {
+  util_ = AlignablesUtil::FromFile(FLAGS_alignables);
+  if (!util_) return false;
   if (FLAGS_input_index >= 0) input_index_ = FLAGS_input_index;
   if (FLAGS_output_index >= 0) output_index_ = FLAGS_output_index;
-  util_ = AlignablesUtil::FromFile(FLAGS_alignables);
-  return util_ != nullptr;
+  return true;
+}
+
+bool LexiconProcessor::MakeInputFst(Entry *entry) {
+  entry->input_fst = util_->MakeInputFst(
+      entry->fields.at(input_index_).ToString());
+  return true;
 }
 
 bool LexiconProcessor::AlignmentDiagnostics(Entry *entry,

@@ -54,11 +54,7 @@ class LexiconProcessor {
 
   virtual bool Init();
 
-  virtual bool MakeInputFst(Entry *entry) {
-    entry->input_fst = util_->MakeInputFst(
-        entry->fields.at(input_index_).ToString());
-    return true;
-  }
+  virtual bool MakeInputFst(Entry *entry);
 
   virtual bool MakeOutputFst(Entry *entry) {
     entry->output_fst = util_->MakeOutputFst(

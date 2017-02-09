@@ -51,11 +51,20 @@ def main(args):
 
   for phone in phonology['phones']:
     feature_list = feature_types.get(phone[1])
+    phoneme = phone[0]
+
+    expected_feature_list = len(feature_list) + 2
+
+    if not len(phone) == len(feature_list) + 2:
+      STDERR.write("Phoneme %s dose not match its feature types, expected features %s", phoneme, expected_feature_list)
+      is_valid = False
 
     for x in xrange(2, len(phone)):
-      feature_options = features.get(feature_list[x - 2])
+      feature_type = feature_list[x - 2]
+      feature_options = features.get(feature_type)
+
       if phone[x] not in feature_options:
-        STDERR.write('Phone %s not int %s\n' %(phone[x], str(feature_options)))
+        STDERR.write('Phoneme "%s" given feature "%s" value "%s" not found in list %s\n' %(phoneme, feature_type, phone[x], str(feature_options)))
         is_valid = False
 
   if not is_valid:

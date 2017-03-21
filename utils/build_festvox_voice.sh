@@ -1,0 +1,71 @@
+#! /bin/bash
+# Copyright 2016 Google Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Used to train festvox voices.
+#
+# Example usage -
+#	./utils/build_festvox_voice.sh ~/Desktop/audio/si_lk/ si ~/si_lk_2/
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+if [[ $# -ne 3 ]]; then
+    echo "Usage: ./utils/build_festvox_voice.sh <path to wavs> <lang> <voice_dir>"
+    exit 1
+fi
+
+PATH_TO_WAVS=$1
+LANG=$2
+VOICE_DIR=$3
+
+# Check required env variables.
+echo "${FESTVOXDIR?Set env variable FESTVOXDIR}"
+
+# Set up the Festvox Clustergen build:
+CWD=${PWD}
+mkdir -p "${VOICE_DIR}"
+cd "${VOICE_DIR}"
+git init
+"${FESTVOXDIR}/src/clustergen/setup_cg" goog "${LANG}" unison
+
+# Commit the current state of the directory.
+git add --all
+git commit -q -m "Setup for Clustergen complete."
+cd "${CWD}"
+
+# Symlink wavs
+rm -rf "${VOICE_DIR}/wav"
+ln -sf "${PATH_TO_WAVS}" "${VOICE_DIR}/wav"
+
+# Copy prompts
+cp "${LANG}/festvox/txt.done.data" "${VOICE_DIR}/etc/"
+
+# Generate festvox lexicon file.
+cat "${LANG}/data/lexicon.tsv" | python utils/festival_lexicon_from_tsv.py \
+> "${VOICE_DIR}/festvox/lexicon.scm"
+
+# Generate various festvox files.
+python utils/apply_phonology.py "${LANG}/festvox/ipa_phonology.json" "${VOICE_DIR}"
+
+# Commit the final setup.
+cd "${VOICE_DIR}"
+git add --all
+git commit -q -m "Setup for ${LANG} complete."
+
+# Run the Festvox Clustergen build. This will take couple of hours to complete. 
+# Total running time depends heavily on the number of CPU cores available.
+echo "Training festvox ${LANG} voice"
+time bin/build_cg_voice

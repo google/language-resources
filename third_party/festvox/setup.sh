@@ -37,6 +37,10 @@
 ##                                                                       ##
 ###########################################################################
 
+# Modification - To setup tools at a given directory
+cd $FESTIVAL_SUIT_PATH
+echo "Setting up at festival at ${FESTIVAL_SUIT_PATH:?Set env variable FESTIVAL_SUIT_PATH}"
+
 # Download the code and voices, if not already downloaded
 if [ ! -d packed ]
 then
@@ -193,19 +197,3 @@ tar jxvf rms100.tar.bz2
 nohup ./bin/build_cg_rfs_voice
 
 $FLITEDIR/bin/flite -voice flite/cmu_us_rms100.flitevox "This is a voice from 100 utterances" hw.wav
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

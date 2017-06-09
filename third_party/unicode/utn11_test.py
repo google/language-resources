@@ -5,6 +5,9 @@ import unittest
 import utn11
 
 CANONICAL_PAIRS = [
+  ('\u1010\u102D\u103A', '\u1010\u103A\u102D'),
+  ('\u1010\u103A\u102D', '\u1010\u103A\u102D'),
+
   ('\u101B\u1031\u1037\u103E', '\u101B\u103E\u1031\u1037'),
   ('\u101B\u1031\u103E\u1037', '\u101B\u103E\u1031\u1037'),
   ('\u101B\u1037\u1031\u103E', '\u101B\u103E\u1031\u1037'),
@@ -56,6 +59,7 @@ class TestUtn11(unittest.TestCase):
   def TestCanonicalization(self):
     for raw, canonical in CANONICAL_PAIRS:
       self.assertEqual(canonical, utn11.Canonicalize(raw))
+      self.assertTrue(utn11.CLUSTER.match(canonical) is not None)
     return
 
 

@@ -41,6 +41,9 @@ def main(unused_args):
   STDOUT.write('MNCL\n')
   for line in GetlineUnbuffered():
     line = line.rstrip('\n')
+    # Skip comments
+    if len(line) == 0 or line[0] == "#":
+      continue
     fields = line.split('\t')
     assert len(fields) >= 2
     orth = fields[0]

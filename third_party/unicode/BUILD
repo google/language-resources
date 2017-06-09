@@ -25,6 +25,7 @@ py_library(
 
 py_test(
     name = "utn11_test",
+    timeout = "short",
     srcs = ["utn11_test.py"],
     deps = [":utn11"],
 )

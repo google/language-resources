@@ -9,10 +9,12 @@ Run the following command.
 ## Voice
 
 1. Download recordings from http://www.openslr.org/resources/30/si_lk.tar
-
+  ```
+  mkdir -p wav && wget http://www.openslr.org/resources/30/si_lk.tar && tar xzf si_lk.tar -C wav/
+  ```
 2. Train TTS Voice 
 
-	```./utils/build_festvox_voice.sh <path to wavs> si <path_to_build_voice>```
+  ```./utils/build_festvox_voice.sh <path to wavs> si <path_to_build_voice>```
     
 3. Synthesize one example sentence.
 

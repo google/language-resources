@@ -38,12 +38,8 @@ echo "${FESTVOXDIR?Set env variable FESTVOXDIR}"
 CWD=${PWD}
 mkdir -p "${VOICE_DIR}"
 cd "${VOICE_DIR}"
-git init
 "${FESTVOXDIR}/src/clustergen/setup_cg" goog "${LANG}" unison
 
-# Commit the current state of the directory.
-git add --all
-git commit -q -m "Setup for Clustergen complete."
 cd "${CWD}"
 
 # Symlink wavs
@@ -62,10 +58,8 @@ python utils/apply_phonology.py "${LANG}/festvox/ipa_phonology.json" "${VOICE_DI
 
 # Commit the final setup.
 cd "${VOICE_DIR}"
-git add --all
-git commit -q -m "Setup for ${LANG} complete."
 
-# Run the Festvox Clustergen build. This will take couple of hours to complete. 
+# Run the Festvox Clustergen build. This will take couple of hours to complete.
 # Total running time depends heavily on the number of CPU cores available.
 echo "Training festvox ${LANG} voice"
 time bin/build_cg_voice

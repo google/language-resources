@@ -49,9 +49,8 @@ ln -sf "${PATH_TO_WAVS}" "${VOICE_DIR}/wav"
 # Copy prompts
 cp "${LANG}/festvox/txt.done.data" "${VOICE_DIR}/etc/"
 
-# Generate festvox lexicon file.
-cat "${LANG}/data/lexicon.tsv" | python utils/festival_lexicon_from_tsv.py \
-> "${VOICE_DIR}/festvox/lexicon.scm"
+# Copy festvox lexicon file.
+cp "${LANG}/festvox/lexicon.scm" "${VOICE_DIR}/festvox/lexicon.scm"
 
 # Generate various festvox files.
 python utils/apply_phonology.py "${LANG}/festvox/ipa_phonology.json" "${VOICE_DIR}"

@@ -194,9 +194,8 @@ wget http://tts.speech.cs.cmu.edu/awb/short_arctic/rms100.tar.bz2
 tar jxvf rms100.tar.bz2
 
 # Build the voice (may take some time)
-./bin/build_cg_rfs_voice
+echo "Run ./bin/build_cg_rfs_voice to build the voice"
 
-$FLITEDIR/bin/flite -voice flite/cmu_us_rms100.flitevox "This is a voice from 100 utterances" hw.wav
 
 # Modification - To notice a user to export environment variables
 echo "Please add the following lines to your environment setting (.bashrc, .zshrc, etc.)"

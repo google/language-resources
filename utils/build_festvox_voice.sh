@@ -52,8 +52,15 @@ cp "${LANG}/festvox/txt.done.data" "${VOICE_DIR}/etc/"
 # Copy festvox lexicon file.
 cp "${LANG}/festvox/lexicon.scm" "${VOICE_DIR}/festvox/lexicon.scm"
 
+# Setup the phonology.
+PHONOLOGY="${LANG}/festvox/ipa_phonology.json"
+if [ ! -f $PHONOLOGY ];
+then
+  PHONOLOGY="${LANG}/festvox/phonology.json"
+fi
+
 # Generate various festvox files.
-python utils/apply_phonology.py "${LANG}/festvox/ipa_phonology.json" "${VOICE_DIR}"
+python utils/apply_phonology.py "${PHONOLOGY}" "${VOICE_DIR}"
 
 # Commit the final setup.
 cd "${VOICE_DIR}"

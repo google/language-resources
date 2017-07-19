@@ -19,11 +19,10 @@ package(default_visibility = ["//visibility:public"])
 
 """
 Usage
-    bazel test si/festvox:valid_phonology_file
-
+    bazel test //si/festvox:phonology_test
 """
 sh_test(
-    name = "valid_phonology_file",
+    name = "phonology_test",
     timeout = "short",
     srcs = ["//utils:eval.sh"],
     args = [
@@ -35,4 +34,18 @@ sh_test(
         "ipa_phonology.json",
         "//utils:phonology_json_validator",
     ],
+)
+
+"""
+Usage
+    bazel build //si/festvox:make_lexicon_scm
+"""
+genrule(
+    name = "make_lexicon_scm",
+    srcs = ["//si/data:lexicon.tsv"],
+    outs = ["lexicon.scm"],
+    cmd = """
+          $(location //utils:festival_lexicon_from_tsv) < $(location //si/data:lexicon.tsv) > $@
+          """,
+    tools = ["//utils:festival_lexicon_from_tsv"],
 )

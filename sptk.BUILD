@@ -1,6 +1,13 @@
 package(default_visibility = ["//visibility:public"])
 
-COPTS = ["-DFORMAT=\\\"float\\\""]
+COPTS = [
+    "-DFORMAT=\\\"float\\\"",
+    "-DHAVE_BZERO=1",
+    "-DHAVE_MEMSET=1",
+    "-DHAVE_STRING_H=1",
+    "-DHAVE_STRRCHR=1",
+    "-DPACKAGE_VERSION=\\\"3.10\\\"",
+]
 
 cc_library(
     name = "sptk",
@@ -35,6 +42,20 @@ cc_library(
 cc_binary(
     name = "mcep",
     srcs = ["bin/mcep/mcep.c"],
+    copts = COPTS,
+    deps = [":sptk"],
+)
+
+cc_binary(
+    name = "sopr",
+    srcs = ["bin/sopr/sopr.c"],
+    copts = COPTS,
+    deps = [":sptk"],
+)
+
+cc_binary(
+    name = "x2x",
+    srcs = ["bin/x2x/x2x.c"],
     copts = COPTS,
     deps = [":sptk"],
 )

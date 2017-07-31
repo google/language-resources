@@ -73,11 +73,19 @@ new_git_repository(
     remote = "https://github.com/google/sparrowhawk.git",
 )
 
-# World vocoder
+# World, SPTK, etc.
 
 new_git_repository(
     name = "world",
     build_file = "world.BUILD",
     commit = "30c95a8a8072687b3e01d6c961159ec3490611de",
     remote = "https://github.com/mmorise/World.git",
+)
+
+new_http_archive(
+    name = "sptk",
+    build_file = "sptk.BUILD",
+    sha256 = "a9bf59df6eb798eed3c6c08dac0443db25e4675e700235486add45a17d4ed9fe",
+    strip_prefix = "SPTK-3.10",
+    url = "http://downloads.sourceforge.net/sp-tk/SPTK-3.10.tar.gz",
 )

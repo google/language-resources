@@ -72,3 +72,12 @@ new_git_repository(
     commit = "eb97411535e9ab280982bae18c99d6a2c933e162",
     remote = "https://github.com/google/sparrowhawk.git",
 )
+
+# World vocoder
+
+new_git_repository(
+    name = "world",
+    build_file = "world.BUILD",
+    commit = "30c95a8a8072687b3e01d6c961159ec3490611de",
+    remote = "https://github.com/mmorise/World.git",
+)

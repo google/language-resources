@@ -30,4 +30,20 @@ def make_festvox_prompts(prompts, lexicon, name="make_txt_done_data"):
       tools = ["//festival_utils:prepare_prompts.py"],
     )
 
-
+# This macro is used to test jphonology.json files.
+def json_phonology_test(phonology, name="phonology_test"):
+  native.sh_test(
+      name = name,
+      timeout = "short",
+      srcs = ["//utils:eval.sh"],
+      args = [
+          """
+          $(location //utils:phonology_json_validator) \
+          $(location """ + phonology + """)
+          """,
+      ],
+      data = [
+          phonology,
+          "//utils:phonology_json_validator",
+      ],
+  )

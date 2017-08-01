@@ -19,11 +19,11 @@ package(default_visibility = ["//visibility:public"])
 
 """
 Usage
-    bazel test jv/festvox:valid_phonology_file
+    bazel test jv/festvox:phonology_test
 
 """
 sh_test(
-    name = "valid_phonology_file",
+    name = "phonology_test",
     timeout = "short",
     srcs = ["//utils:eval.sh"],
     args = [

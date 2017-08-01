@@ -17,6 +17,8 @@
 
 package(default_visibility = ["//visibility:public"])
 
+load("//festival_utils:festvox.bzl", "make_festvox_prompts")
+
 """
 Usage
     bazel test //af/festvox:phonology_test
@@ -53,18 +55,8 @@ genrule(
 Usage
     bazel build //af/festvox:make_txt_done_data
 """
-genrule(
-    name = "make_txt_done_data",
-    srcs = [
-        "//af/data:prompts.tsv",
-        "//af:lex_full.txt",
-    ],
-    outs = ["txt.done.data"],
-    cmd = """
-          $(location //festival_utils:prepare_prompts.py) \
-            $(location //af:lex_full.txt) \
-            < $(location //af/data:prompts.tsv) \
-            > $@
-          """,
-    tools = ["//festival_utils:prepare_prompts.py"],
+
+make_festvox_prompts(
+    prompts = "//af/data:prompts.tsv",
+    lexicon = "//af:lex_full.txt",
 )

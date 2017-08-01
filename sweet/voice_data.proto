@@ -25,8 +25,11 @@ message WorldFrame {
   float end = 2;
 
   float lf0 = 3;
-  repeated float mgc = 4 [packed = true];
-  repeated float bap = 5 [packed = true];
+
+  repeated double sp = 4 [packed = true];
+  repeated float mgc = 5 [packed = true];
+
+  repeated float bap = 6 [packed = true];
 }
 
 message WorldData {

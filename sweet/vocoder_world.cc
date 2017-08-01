@@ -21,6 +21,7 @@
 #include <vector>
 
 #include <tools/audioio.h>
+#include <world/cheaptrick.h>
 #include <world/dio.h>
 #include <world/stonemask.h>
 
@@ -71,6 +72,22 @@ class Analysis {
               f0_.data());
   }
 
+  void Spectrogram() {
+    CheapTrickOption cheap_trick_option;
+    InitializeCheapTrickOption(sample_rate_, &cheap_trick_option);
+    cheap_trick_option.q1 = -0.15;  // TODO: Double-check.
+    fft_size_ = GetFFTSizeForCheapTrick(sample_rate_, &cheap_trick_option);
+    const int fft_dim = fft_size_ / 2 + 1;
+    spectrogram_storage_.resize(num_frames_, std::vector<double>(fft_dim));
+    spectrogram_.resize(num_frames_);
+    for (size_t f = 0; f < num_frames_; ++f) {
+      spectrogram_[f] = spectrogram_storage_[f].data();
+    }
+    CheapTrick(samples_.data(), samples_.size(), sample_rate_,
+               temporal_positions_.data(), f0_.data(), f0_.size(),
+               &cheap_trick_option, spectrogram_.data());
+  }
+
   void SetFrames(sweet::WorldData *world_data) {
     auto *frames = world_data->mutable_frame();
     frames->Reserve(num_frames_);
@@ -83,6 +100,14 @@ class Analysis {
         y = std::log(x);
       }
       frame->set_lf0(y);
+      // Set spectrogram for debugging:
+      const auto &spectrum = spectrogram_storage_.at(f);
+      const int fft_dim = fft_size_ / 2 + 1;
+      auto *sp = frame->mutable_sp();
+      sp->Resize(fft_dim, 0.0);
+      for (int s = 0; s < fft_dim; ++s) {
+        sp->Set(s, spectrum.at(s));
+      }
     }
   }
 
@@ -95,6 +120,9 @@ class Analysis {
   std::vector<double> temporal_positions_;
   size_t num_frames_;
   std::vector<double> f0_;
+  int fft_size_;
+  std::vector<std::vector<double>> spectrogram_storage_;
+  std::vector<double *> spectrogram_;
 };
 
 }  // namespace
@@ -109,6 +137,7 @@ int main(int argc, char *argv[]) {
   Analysis analysis(path, 5.0);
   analysis.PrintSummary(std::cerr);
   analysis.F0();
+  analysis.Spectrogram();
 
   sweet::WorldData world_data;
   world_data.set_frame_shift_s(analysis.FrameShiftInSeconds());

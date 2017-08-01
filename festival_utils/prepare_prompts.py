@@ -15,7 +15,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Prepare Festival prompts file for Afrikaans.
+"""Prepare Festival prompts file.
+
+Removes prompts without full lexicon coverage.
 """
 
 from __future__ import unicode_literals

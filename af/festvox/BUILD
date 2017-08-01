@@ -57,10 +57,10 @@ genrule(
     ],
     outs = ["txt.done.data"],
     cmd = """
-          $(location prepare_prompts.py) \
+          $(location //festival_utils:prepare_prompts.py) \
             $(location //af:lex_full.txt) \
             < $(location prompts.tsv) \
             > $@
           """,
-    tools = ["prepare_prompts.py"],
+    tools = ["//festival_utils:prepare_prompts.py"],
 )

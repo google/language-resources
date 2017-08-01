@@ -37,6 +37,7 @@ class Analysis {
         num_samples_(GetAudioLength(path)) {
     if (num_samples_ <= 0) return;
     samples_.resize(num_samples_);
+    temporal_positions_.resize(num_samples_);
     wavread(path, &sample_rate_, &bit_depth_, samples_.data());
     num_frames_ = GetSamplesForDIO(sample_rate_, num_samples_, frame_shift_ms_);
   }
@@ -56,24 +57,32 @@ class Analysis {
     return strm;
   }
 
-  void GetF0(sweet::WorldData *world_data) const {
+  void F0() {
     DioOption dio_option;
     InitializeDioOption(&dio_option);
     dio_option.frame_period = frame_shift_ms_;
     std::vector<double> temporal_positions(num_samples_);
-    std::vector<double> f0(num_frames_);
-    std::vector<double> rf0(num_frames_);
+    std::vector<double> dio_f0(num_frames_);
     Dio(samples_.data(), samples_.size(), sample_rate_, &dio_option,
-        temporal_positions.data(), f0.data());
+        temporal_positions_.data(), dio_f0.data());
+    f0_.resize(num_frames_);
     StoneMask(samples_.data(), samples_.size(), sample_rate_,
-              temporal_positions.data(), f0.data(), f0.size(), rf0.data());
+              temporal_positions_.data(), dio_f0.data(), dio_f0.size(),
+              f0_.data());
+  }
+
+  void SetFrames(sweet::WorldData *world_data) {
+    auto *frames = world_data->mutable_frame();
+    frames->Reserve(num_frames_);
     for (size_t f = 0; f < num_frames_; ++f) {
-      double x = rf0[f];
+      auto *frame = frames->Add();
+      // Set log-F0:
+      double x = f0_.at(f);
       float y = -1e10f;
       if (x > 0) {
         y = std::log(x);
       }
-      world_data->mutable_frame(f)->set_lf0(y);
+      frame->set_lf0(y);
     }
   }
 
@@ -83,7 +92,9 @@ class Analysis {
   int sample_rate_;
   int bit_depth_;
   std::vector<double> samples_;
+  std::vector<double> temporal_positions_;
   size_t num_frames_;
+  std::vector<double> f0_;
 };
 
 }  // namespace
@@ -97,19 +108,13 @@ int main(int argc, char *argv[]) {
 
   Analysis analysis(path, 5.0);
   analysis.PrintSummary(std::cerr);
+  analysis.F0();
 
   sweet::WorldData world_data;
   world_data.set_frame_shift_s(analysis.FrameShiftInSeconds());
   world_data.set_num_samples(analysis.num_samples());
   world_data.set_sample_rate_hz(analysis.sample_rate());
-
-  auto *frames = world_data.mutable_frame();
-  frames->Reserve(analysis.num_frames());
-  for (int i = 0; i < analysis.num_frames(); ++i) {
-    frames->Add();
-  }
-
-  analysis.GetF0(&world_data);
+  analysis.SetFrames(&world_data);
 
   // Generate debug output.
   const double duration_s = world_data.num_samples() /

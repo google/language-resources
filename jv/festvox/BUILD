@@ -17,22 +17,12 @@
 
 package(default_visibility = ["//visibility:public"])
 
+load("//festival_utils:festvox.bzl", "json_phonology_test")
+
 """
 Usage
     bazel test jv/festvox:phonology_test
-
 """
-sh_test(
-    name = "phonology_test",
-    timeout = "short",
-    srcs = ["//utils:eval.sh"],
-    args = [
-        """
-        $(location //utils:phonology_json_validator) $(location phonology.json)
-        """,
-    ],
-    data = [
-        "phonology.json",
-        "//utils:phonology_json_validator",
-    ],
+json_phonology_test(
+    phonology="phonology.json"
 )

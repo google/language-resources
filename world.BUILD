@@ -32,3 +32,17 @@ cc_library(
     ],
     includes = ["src"],
 )
+
+cc_library(
+    name = "tools",
+    srcs = [
+        "tools/audioio.cpp",
+        "tools/parameterio.cpp",
+    ],
+    hdrs = [
+        "tools/audioio.h",
+        "tools/parameterio.h",
+    ],
+    copts = ["-Wno-unused-result"],
+    includes = ["."],
+)

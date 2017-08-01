@@ -49,17 +49,21 @@ genrule(
     tools = ["//utils:festival_lexicon_from_tsv"],
 )
 
+"""
+Usage
+    bazel build //af/festvox:make_txt_done_data
+"""
 genrule(
     name = "make_txt_done_data",
     srcs = [
-        "prompts.tsv",
+        "//af/data:prompts.tsv",
         "//af:lex_full.txt",
     ],
     outs = ["txt.done.data"],
     cmd = """
           $(location //festival_utils:prepare_prompts.py) \
             $(location //af:lex_full.txt) \
-            < $(location prompts.tsv) \
+            < $(location //af/data:prompts.tsv) \
             > $@
           """,
     tools = ["//festival_utils:prepare_prompts.py"],

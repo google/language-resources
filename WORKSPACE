@@ -9,6 +9,42 @@ android_sdk_repository(
     path = "/usr/local/android-sdk",
 )
 
+# Protobuf
+
+git_repository(
+    name = "protobuf",
+    remote = "https://github.com/google/protobuf.git",
+    tag = "v3.1.0",
+)
+
+# Google fundamental libraries
+
+new_git_repository(
+    name = "googletest",
+    build_file = "googletest.BUILD",
+    commit = "3447fc31b4eea1fbcb86fa0e2f5d9ed9f38776bf",
+    remote = "https://github.com/google/googletest.git",
+)
+
+new_git_repository(
+    name = "farmhash",
+    build_file = "farmhash.BUILD",
+    commit = "92e897b282426729f4724d91a637596c7e2fe28f",
+    remote = "https://github.com/google/farmhash.git",
+)
+
+new_git_repository(
+    name = "com_googlesource_code_re2",
+    build_file = "re2.BUILD",
+    remote = "https://github.com/google/re2.git",
+    tag = "2016-11-01",
+)
+
+bind(
+    name = "re2",
+    actual = "@com_googlesource_code_re2//:re2",
+)
+
 # OpenFst, OpenGrm NGram & Thrax
 
 new_git_repository(
@@ -32,39 +68,7 @@ new_git_repository(
     remote = "https://github.com/mjansche/thrax.git",
 )
 
-# Google Test & Protocol Buffers
-
-new_git_repository(
-    name = "googletest",
-    build_file = "googletest.BUILD",
-    commit = "3447fc31b4eea1fbcb86fa0e2f5d9ed9f38776bf",
-    remote = "https://github.com/google/googletest.git",
-)
-
-git_repository(
-    name = "protobuf",
-    remote = "https://github.com/google/protobuf.git",
-    tag = "v3.1.0",
-)
-
-new_git_repository(
-    name = "farmhash",
-    build_file = "farmhash.BUILD",
-    commit = "92e897b282426729f4724d91a637596c7e2fe28f",
-    remote = "https://github.com/google/farmhash.git",
-)
-
-new_git_repository(
-    name = "com_googlesource_code_re2",
-    build_file = "re2.BUILD",
-    remote = "https://github.com/google/re2.git",
-    tag = "2016-11-01",
-)
-
-bind(
-    name = "re2",
-    actual = "@com_googlesource_code_re2//:re2",
-)
+# Sparrowhawk
 
 new_git_repository(
     name = "sparrowhawk",

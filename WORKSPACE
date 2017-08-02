@@ -14,7 +14,23 @@ android_sdk_repository(
 git_repository(
     name = "protobuf",
     remote = "https://github.com/google/protobuf.git",
-    tag = "v3.1.0",
+    tag = "v3.3.2",
+)
+
+# proto_library rules depend on @com_google_protobuf//:protoc
+http_archive(
+    name = "com_google_protobuf",
+    sha256 = "8b8e442becbeff637f160c1ef4a3a56769c50ba7c9ff939ccc94086530ff00e4",
+    strip_prefix = "protobuf-3.3.2",
+    urls = ["https://github.com/google/protobuf/archive/v3.3.2.tar.gz"],
+)
+
+# cc_proto_library rules depend on @com_google_protobuf_cc//:cc_toolchain
+http_archive(
+    name = "com_google_protobuf_cc",
+    sha256 = "8b8e442becbeff637f160c1ef4a3a56769c50ba7c9ff939ccc94086530ff00e4",
+    strip_prefix = "protobuf-3.3.2",
+    urls = ["https://github.com/google/protobuf/archive/v3.3.2.tar.gz"],
 )
 
 # Google fundamental libraries

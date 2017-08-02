@@ -46,3 +46,21 @@ cc_library(
     copts = ["-Wno-unused-result"],
     includes = ["."],
 )
+
+cc_binary(
+    name = "analysis",
+    srcs = ["examples/analysis_synthesis/analysis.cpp"],
+    deps = [
+        ":tools",
+        ":world",
+    ],
+)
+
+cc_binary(
+    name = "synthesis",
+    srcs = ["examples/analysis_synthesis/synthesis.cpp"],
+    deps = [
+        ":tools",
+        ":world",
+    ],
+)

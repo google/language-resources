@@ -2,7 +2,7 @@ sudo: required
 dist: trusty
 
 env:
-  - BAZEL=0.4.0
+  - BAZEL=0.5.3
 
 before_install:
   - sudo apt-get update -qq

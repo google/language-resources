@@ -57,10 +57,10 @@ cc_test(
     timeout = "short",
     srcs = ["real-weight-test.cc"],
     deps = [
-        "@googletest//:gtest",
-        "@openfst//:weight-tester",
         ":real-weight",
         ":weight-test-lib",
+        "@googletest//:gtest",
+        "@openfst//:weight-tester",
     ],
 )
 
@@ -75,10 +75,10 @@ cc_test(
     timeout = "short",
     srcs = ["modular-int-semiring-test.cc"],
     deps = [
-        "@googletest//:gtest_main",
         ":modular-int-semiring",
         ":weight",
         ":weight-test-lib",
+        "@googletest//:gtest_main",
     ],
 )
 
@@ -93,10 +93,10 @@ cc_test(
     timeout = "short",
     srcs = ["max-times-semiring-test.cc"],
     deps = [
-        "@googletest//:gtest_main",
         ":max-times-semiring",
         ":weight",
         ":weight-test-lib",
+        "@googletest//:gtest_main",
     ],
 )
 
@@ -104,8 +104,8 @@ cc_library(
     name = "quaternion-semiring",
     hdrs = ["quaternion-semiring.h"],
     deps = [
-        "@openfst//:base",
         ":weight",
+        "@openfst//:base",
     ],
 )
 
@@ -114,11 +114,11 @@ cc_test(
     timeout = "short",
     srcs = ["quaternion-semiring-test.cc"],
     deps = [
-        "@googletest//:gtest_main",
-        "@openfst//:weight",
         ":quaternion-semiring",
         ":real-weight",
         ":weight-test-lib",
+        "@googletest//:gtest_main",
+        "@openfst//:weight",
     ],
 )
 
@@ -127,10 +127,10 @@ cc_test(
     timeout = "short",
     srcs = ["star-test.cc"],
     deps = [
-        "@googletest//:gtest_main",
-        "@openfst//:weight",
         ":float-weight-star",
         ":real-weight",
+        "@googletest//:gtest_main",
+        "@openfst//:weight",
     ],
 )
 
@@ -146,11 +146,11 @@ cc_test(
     srcs = ["matrix-test.cc"],
     linkopts = ["-lm"],
     deps = [
-        "@googletest//:gtest_main",
-        "@openfst//:fst",
         ":float-weight-star",
         ":matrix",
         ":real-weight",
+        "@googletest//:gtest_main",
+        "@openfst//:fst",
     ],
 )
 
@@ -179,8 +179,8 @@ cc_test(
     timeout = "short",
     srcs = ["string-util-test.cc"],
     deps = [
-        "@googletest//:gtest_main",
         ":string-util",
+        "@googletest//:gtest_main",
     ],
 )
 
@@ -189,9 +189,9 @@ cc_library(
     srcs = ["label-maker.cc"],
     hdrs = ["label-maker.h"],
     deps = [
+        ":string-util",
         "@openfst//:base",
         "@openfst//:symbol-table",
-        ":string-util",
     ],
 )
 
@@ -199,8 +199,8 @@ cc_library(
     name = "fst-util",
     hdrs = ["fst-util.h"],
     deps = [
-        "@openfst//:fst",
         ":label-maker",
+        "@openfst//:fst",
     ],
 )
 
@@ -215,8 +215,8 @@ cc_test(
     timeout = "short",
     srcs = ["iterator-test.cc"],
     deps = [
-        "@googletest//:gtest_main",
         ":iterator",
+        "@googletest//:gtest_main",
     ],
 )
 
@@ -231,10 +231,10 @@ cc_test(
     timeout = "short",
     srcs = ["topsort-test.cc"],
     deps = [
-        "@googletest//:gtest_main",
-        "@openfst//:fst",
         ":iterator",
         ":topsort",
+        "@googletest//:gtest_main",
+        "@openfst//:fst",
     ],
 )
 
@@ -254,9 +254,9 @@ cc_test(
     timeout = "short",
     srcs = ["arc-test.cc"],
     deps = [
-        "@openfst//:fst",
         ":arc",
         ":real-weight",
+        "@openfst//:fst",
     ],
 )
 
@@ -275,10 +275,10 @@ cc_library(
     srcs = ["alignables-util.cc"],
     hdrs = ["alignables-util.h"],
     deps = [
-        "@openfst//:fst",
         ":alignables",
         ":label-maker",
         ":proto-util",
+        "@openfst//:fst",
     ],
 )
 
@@ -287,11 +287,11 @@ cc_library(
     srcs = ["lexicon-processor.cc"],
     hdrs = ["lexicon-processor.h"],
     deps = [
-        "@openfst//:fst",
         ":alignables-util",
         ":fst-util",
         ":string-util",
         "//festus/runtime:fst-util",
+        "@openfst//:fst",
     ],
 )
 
@@ -314,13 +314,13 @@ cc_binary(
     name = "make-runtime-fsts",
     srcs = ["make-runtime-fsts.cc"],
     deps = [
-        "@openfst//:fst",
-        "@openfst//:fstscript_info",
         ":alignables-util",
         ":iterator",
         ":types",
         "//festus/runtime:compact",
         "//festus/runtime:fst-util",
+        "@openfst//:fst",
+        "@openfst//:fstscript_info",
     ],
 )
 
@@ -328,8 +328,8 @@ cc_binary(
     name = "make-alignable-symbols",
     srcs = ["make-alignable-symbols.cc"],
     deps = [
-        "@openfst//:fst",
         ":alignables-util",
+        "@openfst//:fst",
     ],
 )
 
@@ -344,8 +344,8 @@ cc_library(
     name = "expression-node",
     hdrs = ["expression-node.h"],
     deps = [
-        "@openfst//:weight",
         ":expression",
+        "@openfst//:weight",
     ],
 )
 
@@ -359,9 +359,9 @@ cc_library(
     name = "term-semiring",
     hdrs = ["term-semiring.h"],
     deps = [
-        "@openfst//:base",
         ":expression",
         ":weight",
+        "@openfst//:base",
     ],
 )
 
@@ -370,11 +370,11 @@ cc_test(
     timeout = "short",
     srcs = ["term-semiring-test.cc"],
     deps = [
-        "@googletest//:gtest_main",
-        "@openfst//:weight",
         ":term-semiring",
         ":weight",
         ":weight-test-lib",
+        "@googletest//:gtest_main",
+        "@openfst//:weight",
     ],
 )
 
@@ -391,8 +391,6 @@ cc_test(
     timeout = "short",
     srcs = ["algebraic-path-test.cc"],
     deps = [
-        "@googletest//:gtest",
-        "@openfst//:fst",
         ":algebraic-path",
         ":arc",
         ":float-weight-star",
@@ -401,6 +399,8 @@ cc_test(
         ":quaternion-semiring",
         ":real-weight",
         ":weight",
+        "@googletest//:gtest",
+        "@openfst//:fst",
     ],
 )
 
@@ -408,11 +408,11 @@ cc_binary(
     name = "fst2re",
     srcs = ["fst2re.cc"],
     deps = [
-        "@openfst//:fst",
         ":algebraic-path",
         ":arc",
         ":expression",
         ":term-semiring",
         ":weight",
+        "@openfst//:fst",
     ],
 )

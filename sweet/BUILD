@@ -17,20 +17,21 @@ package(default_visibility = ["//visibility:public"])
 
 licenses(["notice"])  # Apache 2.0
 
-load("@protobuf//:protobuf.bzl", "cc_proto_library")
+proto_library(
+    name = "voice_data_proto",
+    srcs = ["voice_data.proto"],
+)
 
 cc_proto_library(
-    name = "voice_data",
-    srcs = ["voice_data.proto"],
-    default_runtime = "@protobuf//:protobuf",
-    protoc = "@protobuf//:protoc",
+    name = "voice_data_cc_proto",
+    deps = [":voice_data_proto"],
 )
 
 cc_binary(
     name = "vocoder_world",
     srcs = ["vocoder_world.cc"],
     deps = [
-        ":voice_data",
+        ":voice_data_cc_proto",
         "@world//:tools",
         "@world//:world",
     ],

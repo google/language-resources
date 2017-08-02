@@ -44,7 +44,10 @@ cc_library(
         "tools/parameterio.h",
     ],
     copts = ["-Wno-unused-result"],
-    includes = ["."],
+    includes = [
+        ".",
+        "tools",
+    ],
 )
 
 cc_binary(

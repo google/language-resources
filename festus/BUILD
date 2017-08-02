@@ -264,7 +264,7 @@ cc_test(
 load("@protobuf//:protobuf.bzl", "cc_proto_library")
 
 cc_proto_library(
-    name = "alignables",
+    name = "alignables_cc_proto",
     srcs = ["alignables.proto"],
     default_runtime = "@protobuf//:protobuf",
     protoc = "@protobuf//:protoc",
@@ -275,7 +275,7 @@ cc_library(
     srcs = ["alignables-util.cc"],
     hdrs = ["alignables-util.h"],
     deps = [
-        ":alignables",
+        ":alignables_cc_proto",
         ":label-maker",
         ":proto-util",
         "@openfst//:fst",
@@ -334,7 +334,7 @@ cc_binary(
 )
 
 cc_proto_library(
-    name = "expression",
+    name = "expression_cc_proto",
     srcs = ["expression.proto"],
     default_runtime = "@protobuf//:protobuf",
     protoc = "@protobuf//:protoc",
@@ -344,7 +344,7 @@ cc_library(
     name = "expression-node",
     hdrs = ["expression-node.h"],
     deps = [
-        ":expression",
+        ":expression_cc_proto",
         "@openfst//:weight",
     ],
 )
@@ -359,7 +359,7 @@ cc_library(
     name = "term-semiring",
     hdrs = ["term-semiring.h"],
     deps = [
-        ":expression",
+        ":expression_cc_proto",
         ":weight",
         "@openfst//:base",
     ],
@@ -410,7 +410,7 @@ cc_binary(
     deps = [
         ":algebraic-path",
         ":arc",
-        ":expression",
+        ":expression_cc_proto",
         ":term-semiring",
         ":weight",
         "@openfst//:fst",

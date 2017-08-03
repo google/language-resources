@@ -16,6 +16,7 @@
 // \file
 // Analysis and synthesis with the World vocoder.
 
+#include <cassert>
 #include <cmath>
 #include <iostream>
 #include <vector>
@@ -88,6 +89,48 @@ class Analysis {
                &cheap_trick_option, spectrogram_.data());
   }
 
+  bool Mgc(sweet::WorldData *world_data) {
+    double alpha;
+    if (sample_rate_ == 48000) {
+      assert(fft_size_ == 2048);
+      alpha = 0.77;
+    } else if (sample_rate_ == 16000) {
+      assert(fft_size_ == 1024);
+      alpha = 0.58;
+    } else {
+      return false;
+    }
+    const int fft_dim = fft_size_ / 2 + 1;
+    const int mel_cepstrum_order = 59;
+    const int itype = 3;
+    const int itr1 = 2;
+    const int itr2 = 100;
+    const double mindet = 0.0;
+    const int etype = 1;
+    const double e = 1e-8;
+    const double end = 0.001;
+    std::vector<double> mc(mel_cepstrum_order + 1);
+    for (size_t f = 0; f < num_frames_; ++f) {
+      auto &spectrum = spectrogram_storage_.at(f);
+      for (int s = 0; s < fft_dim; ++s) {
+        assert(spectrum[s] >= 0);
+        spectrum[s] = 32768 * std::sqrt(spectrum[s]);
+      }
+      int res = mcep(spectrum.data(), fft_size_, mc.data(),
+                     mel_cepstrum_order, alpha, itr1, itr2, end,
+                     etype, e, mindet, itype);
+      if (res != 0) {
+        std::cerr << "WARNING: mcep() returned abnormally." << std::endl;
+      }
+      auto *mgc = world_data->mutable_frame(f)->mutable_mgc();
+      mgc->Resize(mel_cepstrum_order + 1, 1.0);
+      for (int c = 0; c <= mel_cepstrum_order; ++c) {
+        mgc->Set(c, mc.at(c));
+      }
+    }
+    return true;
+  }
+
   void SetFrames(sweet::WorldData *world_data) {
     auto *frames = world_data->mutable_frame();
     frames->Reserve(num_frames_);
@@ -103,6 +146,7 @@ class Analysis {
       // Set spectrogram for debugging:
       const auto &spectrum = spectrogram_storage_.at(f);
       const int fft_dim = fft_size_ / 2 + 1;
+      assert(spectrum.size() == fft_dim);
       auto *sp = frame->mutable_sp();
       sp->Resize(fft_dim, 0.0);
       for (int s = 0; s < fft_dim; ++s) {
@@ -144,6 +188,7 @@ int main(int argc, char *argv[]) {
   world_data.set_num_samples(analysis.num_samples());
   world_data.set_sample_rate_hz(analysis.sample_rate());
   analysis.SetFrames(&world_data);
+  analysis.Mgc(&world_data);
 
   // Generate debug output.
   const double duration_s = world_data.num_samples() /

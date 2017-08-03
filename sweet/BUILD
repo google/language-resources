@@ -17,6 +17,8 @@ package(default_visibility = ["//visibility:public"])
 
 licenses(["notice"])  # Apache 2.0
 
+load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
+
 proto_library(
     name = "voice_data_proto",
     srcs = ["voice_data.proto"],
@@ -27,6 +29,13 @@ cc_proto_library(
     deps = [":voice_data_proto"],
 )
 
+py_proto_library(
+    name = "voice_data_py_proto",
+    srcs = ["voice_data.proto"],
+    default_runtime = "@com_google_protobuf//:protobuf_python",
+    protoc = "@com_google_protobuf//:protoc",
+)
+
 cc_binary(
     name = "vocoder_world",
     srcs = ["vocoder_world.cc"],
@@ -35,5 +44,14 @@ cc_binary(
         "@sptk//:sptk",
         "@world//:tools",
         "@world//:world",
+    ],
+)
+
+py_binary(
+    name = "visualize_world",
+    srcs = ["visualize_world.py"],
+    default_python_version = "PY2",
+    deps = [
+        ":voice_data_py_proto",
     ],
 )

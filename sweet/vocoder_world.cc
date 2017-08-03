@@ -201,7 +201,9 @@ int main(int argc, char *argv[]) {
     frame->set_start(start);
     frame->set_end(end);
   }
-  std::cout << world_data.Utf8DebugString();
+
+  std::cout << world_data.SerializeAsString();
+  std::cout.flush();
 
   return 0;
 }

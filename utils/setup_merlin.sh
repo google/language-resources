@@ -69,8 +69,8 @@ rm -rf mfc/
 rm -f mono_align.mlf
 rm -f mono_phone.list
 rm -f phoneme_map.dict
-rm -rf prompt-utt/full/
-rm -rf prompt-utt/mono
+rm -rf prompt-lab/full/
+rm -rf prompt-lab/mono
 
 MERLIN_DATA_PATH_WAV="${MERLIN_DATA_PATH}/wav"
 
@@ -127,7 +127,7 @@ FESTIVAL_LABEL_PHONE_ALIGN="${FESTIVAL_VOICE_PATH}/prompt-lab/full"
 
 echo "Generating labels."
 ${TMP_MERLIN_SCRIPTS_PATH}/make_labels \
-  "${FESTIVAL_LABEL_PHONE_ALIGN}" \
+  "${FESTIVAL_VOICE_PATH}/prompt-lab" \
   "${FESTIVAL_VOICE_PATH}/festival/utts" \
   "${FESTIVALDIR}/examples/dumpfeats" \
   "${TMP_MERLIN_SCRIPTS_PATH}"
@@ -144,7 +144,7 @@ sed -i -r "s/  */ /g" "${FESTIVAL_LABEL_PHONE_ALIGN}"/*.lab
 MERLIN_LABEL_PHONE_ALIGN="${MERLIN_DATA_PATH}/label_phone_align"
 
 echo "Copying phone labels to ${MERLIN_LABEL_PHONE_ALIGN}"
-cp "${FESTIVAL_VOICE_PATH}/prompt-lab/full/"*.lab "${MERLIN_LABEL_PHONE_ALIGN}"
+cp "${FESTIVAL_LABEL_PHONE_ALIGN}"/*.lab "${MERLIN_LABEL_PHONE_ALIGN}"
 
 # TODO(pasindu): Check in these files for each langauge.
 echo "Generating HTS questions"

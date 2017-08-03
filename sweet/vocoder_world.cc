@@ -20,11 +20,11 @@
 #include <iostream>
 #include <vector>
 
-#include <tools/audioio.h>
-#include <world/cheaptrick.h>
-#include <world/dio.h>
-#include <world/stonemask.h>
-
+#include "external/sptk/sptk.h"
+#include "external/world/cheaptrick.h"
+#include "external/world/dio.h"
+#include "external/world/stonemask.h"
+#include "external/world/tools/audioio.h"
 #include "sweet/voice_data.pb.h"
 
 namespace {

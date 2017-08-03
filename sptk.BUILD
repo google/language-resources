@@ -7,7 +7,19 @@ COPTS = [
     "-DHAVE_STRING_H=1",
     "-DHAVE_STRRCHR=1",
     "-DPACKAGE_VERSION=\\\"3.10\\\"",
+    "-Iexternal/sptk/include",
 ]
+
+genrule(
+    name = "make_cplusplus_header",
+    srcs = ["include/SPTK.h"],
+    outs = ["sptk.h"],
+    cmd = """
+        echo 'extern "C" {' > $@
+        egrep -v 'wavread|wavwrite' $< >> $@
+        echo '}  // extern "C"' >> $@
+    """,
+)
 
 cc_library(
     name = "sptk",
@@ -17,6 +29,7 @@ cc_library(
         "bin/freqt/_freqt.c",
         "bin/ifftr/_ifftr.c",
         "bin/mcep/_mcep.c",
+        "include/SPTK.h",
         "lib/agexp.c",
         "lib/cholesky.c",
         "lib/fileio.c",
@@ -33,10 +46,9 @@ cc_library(
         "lib/toeplitz.c",
     ],
     hdrs = [
-        "include/SPTK.h",
+        "sptk.h",
     ],
     copts = COPTS,
-    includes = ["include"],
 )
 
 cc_binary(

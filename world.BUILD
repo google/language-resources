@@ -14,6 +14,19 @@ cc_library(
         "src/stonemask.cpp",
         "src/synthesis.cpp",
         "src/synthesisrealtime.cpp",
+        "src/world/cheaptrick.h",
+        "src/world/codec.h",
+        "src/world/common.h",
+        "src/world/constantnumbers.h",
+        "src/world/d4c.h",
+        "src/world/dio.h",
+        "src/world/fft.h",
+        "src/world/harvest.h",
+        "src/world/macrodefinitions.h",
+        "src/world/matlabfunctions.h",
+        "src/world/stonemask.h",
+        "src/world/synthesis.h",
+        "src/world/synthesisrealtime.h",
     ],
     hdrs = [
         "src/world/cheaptrick.h",
@@ -30,7 +43,10 @@ cc_library(
         "src/world/synthesis.h",
         "src/world/synthesisrealtime.h",
     ],
+    copts = ["-Iexternal/world/src"],
     includes = ["src"],
+    include_prefix = "external/world",
+    strip_include_prefix = "src/world",
 )
 
 cc_library(
@@ -43,16 +59,16 @@ cc_library(
         "tools/audioio.h",
         "tools/parameterio.h",
     ],
-    copts = ["-Wno-unused-result"],
-    includes = [
-        ".",
-        "tools",
+    copts = [
+        "-Iexternal/world/tools",
+        "-Wno-unused-result",
     ],
 )
 
 cc_binary(
     name = "analysis",
     srcs = ["examples/analysis_synthesis/analysis.cpp"],
+    copts = ["-Iexternal/world/tools"],
     deps = [
         ":tools",
         ":world",
@@ -62,6 +78,17 @@ cc_binary(
 cc_binary(
     name = "synthesis",
     srcs = ["examples/analysis_synthesis/synthesis.cpp"],
+    copts = ["-Iexternal/world/tools"],
+    deps = [
+        ":tools",
+        ":world",
+    ],
+)
+
+cc_binary(
+    name = "test",
+    srcs = ["test/test.cpp"],
+    copts = ["-Iexternal/world/tools"],
     deps = [
         ":tools",
         ":world",

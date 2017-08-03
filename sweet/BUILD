@@ -32,6 +32,7 @@ cc_binary(
     srcs = ["vocoder_world.cc"],
     deps = [
         ":voice_data_cc_proto",
+        "@sptk//:sptk",
         "@world//:tools",
         "@world//:world",
     ],

@@ -33,6 +33,19 @@ http_archive(
     urls = ["https://github.com/google/protobuf/archive/v3.3.2.tar.gz"],
 )
 
+new_http_archive(
+    name = "six_1_10_0",
+    build_file = "six.BUILD",
+    sha256 = "105f8d68616f8248e24bf0e9372ef04d3cc10104f1980f54d57b2ce73a5ad56a",
+    strip_prefix = "six-1.10.0",
+    urls = ["https://pypi.python.org/packages/source/s/six/six-1.10.0.tar.gz"],
+)
+
+bind(
+    name = "six",
+    actual = "@six_1_10_0//:six",
+)
+
 # Google fundamental libraries
 
 new_git_repository(

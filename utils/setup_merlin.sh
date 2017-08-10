@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# This script creates all the resources need for a merlin voice.
+# This script creates all the resources needed for a merlin voice.
 # This script requires an already existing festival setup to generate HTS labels and audio data.
 #
 #   - Create directories needed by merlin.
@@ -33,7 +33,7 @@ set -o nounset
 set -o pipefail
 
 if [[ $# -ne 6 ]]; then
-    echo "./utils/setup_merlin.sh <FESTIVAL_VOICE_PATH> <MERLIN_PATH> <WAV_PATH> <LANGUAGE> \
+    echo "./utils/setup_merlin.sh <FESTIVAL_VOICE_PATH> <ABSOLUTE_MERLIN_PATH> <WAV_PATH> <LANGUAGE> \
 <LOCALE> <SAMPLE_RATE>"
     exit 1
 fi

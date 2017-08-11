@@ -9,6 +9,11 @@ export FESTIVAL_SUIT_PATH=<your desired path to install Festival>
 mkdir ${FESTIVAL_SUIT_PATH} && ./third_party/festvox/setup.sh
 ```
 
+## Preparing the data
+
+- Lexicon - ```bazel build //si/festvox:make_lexicon_scm```
+- Festival prompts -  ```bazel build //si/festvox:make_txt_done_data```
+
 ## Training the Voice
 
 1. Download recordings from http://www.openslr.org/resources/30/si_lk.tar

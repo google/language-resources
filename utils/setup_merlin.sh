@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# This script creates all the resources need for a merlin voice.
+# This script creates all the resources needed for a merlin voice.
 # This script requires an already existing festival setup to generate HTS labels and audio data.
 #
 #   - Create directories needed by merlin.
@@ -33,7 +33,7 @@ set -o nounset
 set -o pipefail
 
 if [[ $# -ne 6 ]]; then
-    echo "./utils/setup_merlin.sh <FESTIVAL_VOICE_PATH> <MERLIN_PATH> <WAV_PATH> <LANGUAGE> \
+    echo "./utils/setup_merlin.sh <FESTIVAL_VOICE_PATH> <ABSOLUTE_MERLIN_PATH> <WAV_PATH> <LANGUAGE> \
 <LOCALE> <SAMPLE_RATE>"
     exit 1
 fi
@@ -98,7 +98,7 @@ cp "${FESTIVAL_VOICE_PATH}"/wav/*.wav "${MERLIN_DATA_PATH_WAV}"
 
 # TODO(pasindu): Switch to python script.
 echo "Extracting acoustic features."
-"${MERLIN_PATH}/misc/scripts/vocoder/world/extract_features_for_merlin.sh" "${MERLIN_PATH}" \
+python "${MERLIN_PATH}/misc/scripts/vocoder/world/extract_features_for_merlin.py" "${MERLIN_PATH}" \
   "${WAV_PATH}" "${MERLIN_DATA_PATH}" "${SAMPLE_RATE}"
 
 echo "Preparing to generate HTS labels files from the given festival voice."
@@ -171,16 +171,18 @@ echo "TEST_ACOUSTIC_CONF_FILE - ${TEST_ACOUSTIC_CONF_FILE}"
 
 sed -i "s|MERLIN_PATH|${MERLIN_PATH}|g" "${ACOUSTIC_CONF_FILE}"
 sed -i "s|MERLIN_TOPLEVEL_PATH|${MERLIN_VOICE_PATH}|g" "${ACOUSTIC_CONF_FILE}"
+sed -i "s|SAMPLE_RATE|${SAMPLE_RATE}|g" "${ACOUSTIC_CONF_FILE}"
 
 sed -i "s|MERLIN_PATH|${MERLIN_PATH}|g" "${DURATION_CONF_FILE}"
 sed -i "s|MERLIN_TOPLEVEL_PATH|${MERLIN_VOICE_PATH}|g" "${DURATION_CONF_FILE}"
+sed -i "s|SAMPLE_RATE|${SAMPLE_RATE}|g" "${DURATION_CONF_FILE}"
 
 sed -i "s|MERLIN_PATH|${MERLIN_PATH}|g" "${TEST_DURATION_CONF_FILE}"
 sed -i "s|MERLIN_TOPLEVEL_PATH|${MERLIN_VOICE_PATH}|g" "${TEST_DURATION_CONF_FILE}"
 
 sed -i "s|MERLIN_PATH|${MERLIN_PATH}|g" "${TEST_ACOUSTIC_CONF_FILE}"
 sed -i "s|MERLIN_TOPLEVEL_PATH|${MERLIN_VOICE_PATH}|g" "${TEST_ACOUSTIC_CONF_FILE}"
-
+sed -i "s|SAMPLE_RATE|${SAMPLE_RATE}|g" "${TEST_ACOUSTIC_CONF_FILE}"
 
 MERLIN_FILE_LIST_PATH="${MERLIN_DATA_PATH}/file_id_list.scp"
 echo "Copying filelist ${FESTIVAL_VOICE_FILE_LIST_PATH}."

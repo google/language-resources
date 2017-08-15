@@ -195,7 +195,7 @@ tar jxvf rms100.tar.bz2
 
 # Build the voice (may take some time)
 echo "Run ./bin/build_cg_rfs_voice to build the voice"
-
+cd ..
 
 # Modification - To notice a user to export environment variables
 echo "Please add the following lines to your environment setting (.bashrc, .zshrc, etc.)"

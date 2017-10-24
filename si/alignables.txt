@@ -327,8 +327,9 @@ alignable { input: "va virama"      output: "w i" }   # ව් v -> වි vi
 alignable { input: "sa -ri"         output: "r i" }   # සෘ sri -> ඍ ri
 alignable { input: "sa -ri"         output: "i r" }   # සෘ sri -> ඍ ri
 
-# Exceptions?
+# Exceptions, foreign words, etc.
 
-alignable { input: "ta virama da"   output: "d d" }
-alignable { input: "-i ya -u"       output: "y u" }
-alignable { input: "-i va -u"       output: "y u" }
+alignable { input: "dda virama tta" output: "ʈ" }     # වෙන්ඩ්ට්
+alignable { input: "ta virama da"   output: "d d" }   # අත්දැකීමක්
+alignable { input: "-i ya -u"       output: "y u" }   # දියුණුවට
+alignable { input: "-i va -u"       output: "y u" }   # නිවුස්

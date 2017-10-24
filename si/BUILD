@@ -64,16 +64,19 @@ sh_test(
         """,
     ],
     data = [
-        "sinhala.far",
         "grapheme.syms",
         "graphemes_test.tsv",
+        "sinhala.far",
         "//utils:thrax_g2p",
     ],
 )
 
 genrule(
     name = "make_string2graphemes_fst",
-    srcs = ["sinhala.far"],
+    srcs = [
+        "grapheme.syms",
+        "sinhala.far",
+    ],
     outs = [
         "UTF8_TO_GRAPHEMES.fst",
         "string2graphemes.fst",
@@ -86,12 +89,16 @@ genrule(
           $(location sinhala.far) &&
         $(location @openfst//:fstmap) \
           --map_type=to_log64 \
-          $(location UTF8_TO_GRAPHEMES.fst) \
+          $(location UTF8_TO_GRAPHEMES.fst) |
+        $(location @openfst//:fstsymbols) \
+          --osymbols=$(location grapheme.syms) \
+          - \
           $(location string2graphemes.fst)
         """,
     tools = [
         "@openfst//:farextract",
         "@openfst//:fstmap",
+        "@openfst//:fstsymbols",
     ],
 )
 
@@ -109,8 +116,8 @@ sh_test(
     ],
     data = [
         "alignables.txt",
-        "//si/data:lexicon.tsv",
         "string2graphemes.fst",
         "//festus:lexicon-diagnostics",
+        "//si/data:lexicon.tsv",
     ],
 )

@@ -121,3 +121,21 @@ sh_test(
         "//si/data:lexicon.tsv",
     ],
 )
+
+sh_test(
+    name = "prompt_words_in_lexicon",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        "$(location prompt_words_in_lexicon.py)" \
+          "$(location //si/data:prompts.tsv)" \
+          "$(location //si/data:lexicon.tsv)"
+        """,
+    ],
+    data = [
+        "prompt_words_in_lexicon.py",
+        "//si/data:lexicon.tsv",
+        "//si/data:prompts.tsv",
+    ],
+)

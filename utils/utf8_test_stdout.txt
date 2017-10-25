@@ -1,0 +1,9 @@
+hello world
+hello world
+hello world
+hello world
+¡Hola! ¡mundo!
+¡Hola! ¡mundo!
+¡Hola! ¡mundo!
+¡Hola! ¡mundo!
+b'\xa1' Hola!

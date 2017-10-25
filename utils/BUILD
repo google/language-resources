@@ -112,6 +112,7 @@ cc_binary(
 
 cc_library(
     name = "grm_tester_lib",
+    testonly = 1,
     srcs = ["grm_tester.cc"],
     deps = [
         "//festus:fst-util",
@@ -119,7 +120,6 @@ cc_library(
         "@openfst//:fst",
         "@thrax//:grm-manager",
     ],
-    testonly = 1,
 )
 
 cc_binary(
@@ -143,4 +143,32 @@ py_binary(
     name = "freq",
     srcs = ["freq.py"],
     default_python_version = "PY2",
+)
+
+py_library(
+    name = "utf8",
+    srcs = ["utf8.py"],
+    srcs_version = "PY2AND3",
+)
+
+# Ordinarily, one would simply use a py_test build target, but here we want to
+# test consistent behavior of utf8.py for both PY2 and PY3, hence a non-standard
+# inline sh_test.
+sh_test(
+    name = "utf8_test",
+    srcs = ["eval.sh"],
+    args = [
+        """
+        for py in python2 python3; do
+          which $$py &&
+          $$py $(location utf8_test.py) |
+          diff -u - $(location utf8_test_stdout.txt)
+        done
+        """,
+    ],
+    data = [
+        "utf8.py",
+        "utf8_test.py",
+        "utf8_test_stdout.txt",
+    ],
 )

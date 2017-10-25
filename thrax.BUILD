@@ -97,6 +97,20 @@ cc_library(
 )
 
 cc_library(
+    name = "algo",
+    hdrs = [
+        prefix_dir + "include/thrax/algo/cdrewrite.h",
+        prefix_dir + "include/thrax/algo/optimize.h",
+        prefix_dir + "include/thrax/algo/prefix_tree.h",
+    ],
+    includes = [prefix_dir + "include"],
+    deps = [
+        ":compat",
+        openfst + ":fst",
+    ],
+)
+
+cc_library(
     name = "grm-manager",
     srcs = [
         prefix_dir + "lib/main/grm-manager.cc",
@@ -123,9 +137,6 @@ cc_library(
         prefix_dir + "lib/walker/symbols.cc",
     ],
     hdrs = [
-        prefix_dir + "include/thrax/algo/cdrewrite.h",
-        prefix_dir + "include/thrax/algo/optimize.h",
-        prefix_dir + "include/thrax/algo/prefix_tree.h",
         prefix_dir + "include/thrax/compat/oneof.h",
         prefix_dir + "include/thrax/datatype.h",
         prefix_dir + "include/thrax/fst-node.h",  # for FstNodeType
@@ -168,6 +179,7 @@ cc_library(
     includes = [prefix_dir + "include"],
     visibility = ["//visibility:private"],
     deps = [
+        ":algo",
         ":compat",
         openfst + ":far_base",
         openfst + ":fst",

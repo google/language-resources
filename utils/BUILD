@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright 2016 Google, Inc.
+# Copyright 2016, 2017 Google, Inc.
 # Author: mjansche@google.com (Martin Jansche)
 
 package(default_visibility = ["//visibility:public"])
@@ -36,7 +36,8 @@ py_binary(
 py_binary(
     name = "uniquely_decodable",
     srcs = ["uniquely_decodable.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = [":utf8"],
 )
 
 py_binary(
@@ -48,7 +49,8 @@ py_binary(
 py_binary(
     name = "eval_dictionary_simple",
     srcs = ["eval_dictionary_simple.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = [":utf8"],
 )
 
 py_binary(
@@ -81,7 +83,8 @@ cc_binary(
 py_binary(
     name = "merge_lexicons",
     srcs = ["merge_lexicons.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = [":utf8"],
 )
 
 py_binary(

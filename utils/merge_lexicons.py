@@ -1,7 +1,4 @@
-#! /usr/bin/python2
-# -*- coding: utf-8 -*-
-#
-# Copyright 2016 Google Inc. All Rights Reserved.
+# Copyright 2016, 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,12 +24,12 @@ list of corrections.
 
 from __future__ import unicode_literals
 
-import codecs
 import sys
 
-STDIN = codecs.getreader('utf-8')(sys.stdin)
-STDOUT = codecs.getwriter('utf-8')(sys.stdout)
-STDERR = codecs.getwriter('utf-8')(sys.stderr)
+import utf8
+
+STDIN = utf8.stdin
+STDOUT = utf8.stdout
 
 
 def ReadTsvLexicon(reader):
@@ -58,11 +55,9 @@ def main(argv):
     if path == '-':
       lex.update(ReadTsvLexicon(STDIN))
     else:
-      with codecs.open(path, 'r', 'utf-8') as reader:
+      with utf8.open(path) as reader:
         lex.update(ReadTsvLexicon(reader))
-  words = lex.keys()
-  words.sort()
-  for orth in words:
+  for orth in sorted(lex):
     for pron in lex[orth]:
       STDOUT.write('%s\t%s\n' % (orth, pron))
   return

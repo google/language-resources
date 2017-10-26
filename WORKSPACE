@@ -14,23 +14,23 @@ android_sdk_repository(
 git_repository(
     name = "protobuf",
     remote = "https://github.com/google/protobuf.git",
-    tag = "v3.3.2",
+    tag = "v3.4.1",
 )
 
 # proto_library rules depend on @com_google_protobuf//:protoc
 http_archive(
     name = "com_google_protobuf",
-    sha256 = "8b8e442becbeff637f160c1ef4a3a56769c50ba7c9ff939ccc94086530ff00e4",
-    strip_prefix = "protobuf-3.3.2",
-    urls = ["https://github.com/google/protobuf/archive/v3.3.2.tar.gz"],
+    sha256 = "8e0236242106e680b4f9f576cc44b8cd711e948b20a9fc07769b0a20ceab9cc4",
+    strip_prefix = "protobuf-3.4.1",
+    urls = ["https://github.com/google/protobuf/archive/v3.4.1.tar.gz"],
 )
 
 # cc_proto_library rules depend on @com_google_protobuf_cc//:cc_toolchain
 http_archive(
     name = "com_google_protobuf_cc",
-    sha256 = "8b8e442becbeff637f160c1ef4a3a56769c50ba7c9ff939ccc94086530ff00e4",
-    strip_prefix = "protobuf-3.3.2",
-    urls = ["https://github.com/google/protobuf/archive/v3.3.2.tar.gz"],
+    sha256 = "8e0236242106e680b4f9f576cc44b8cd711e948b20a9fc07769b0a20ceab9cc4",
+    strip_prefix = "protobuf-3.4.1",
+    urls = ["https://github.com/google/protobuf/archive/v3.4.1.tar.gz"],
 )
 
 new_http_archive(

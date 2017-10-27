@@ -1,0 +1,34 @@
+# https://www.sil.org/resources/publications/entry/42321
+$bow = [-\ $] ;  # Beginning of word.
+
+::NFC;
+::Lower;
+a → æ;
+b → b;
+c → ʔ;
+d → d;
+e → ɛ;
+f → f;
+g → g;
+h → h;
+i → i;
+# Phonemic
+#$bow } j → ʒ;
+#i } j { [$] → ʒ;
+#[aeiou] } j { i → ʒ;
+j → j;
+k → k;
+l → l;
+m → m;
+n → n;
+o → ɔ;
+q → g͜b;
+s → s;
+t → t;
+u → u;
+#Phonemic
+#wi → ʋi;
+#we → ʋɛ;
+#i } w { [$] → ʋ;
+w → w;
+::NFC;

@@ -1,0 +1,27 @@
+$bow = [-\ $] ;  # Beginning of word.
+
+::NFC;
+::Lower;
+
+wh → f;
+h → h;
+k → k;
+m → m;
+ng → ŋ;
+n → n;
+p → p;
+r → ɾ;
+t → t;
+w → w;
+au → au;
+ā → aː;
+a → a;
+ē → ɛː;
+e → ɛ;
+ī → iː;
+i → i;
+ō → ɔː;
+o → ɔ;
+ū → ʉː;
+u → ʉ;
+::NFC;

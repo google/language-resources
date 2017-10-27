@@ -1,0 +1,31 @@
+# http://www-01.sil.org/pacific/png/pubs/928474542284/Usan.pdf
+$bow = [-\ $] ;  # Beginning of word.
+
+::NFC;
+::Lower;
+a → ɑ;
+â → ʌ;
+b → b;
+d → d;
+r → d;
+e → ɛ;
+g → g;
+h → h;
+i → i;
+mb → ᵐb;
+nd → ⁿd;
+m → m;
+ng → ᵑɡ;
+n → n;
+o → ɔ;
+p → p;
+q → ʔ;
+s → s;
+t → t;
+u → u;
+w → w;
+y → j;
+::Null;
+
+
+::NFC;

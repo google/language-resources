@@ -162,10 +162,11 @@ sh_test(
     srcs = ["eval.sh"],
     args = [
         """
-        for py in python2 python3; do
-          which $$py &&
-          $$py $(location utf8_test.py) |
-          diff -u - $(location utf8_test_stdout.txt)
+        for py in python python2 python3; do
+          if which $$py; then
+            $$py $(location utf8_test.py) |
+            diff -u - $(location utf8_test_stdout.txt)
+          fi
         done
         """,
     ],

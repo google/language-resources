@@ -54,3 +54,11 @@ py_binary(
     srcs_version = "PY2AND3",
     deps = ["//utils:utf8"],
 )
+
+py_binary(
+    name = "hi2ur",
+    srcs = ["hi2ur.py"],
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
+    # Also depends non-hermetically on PyICU.
+)

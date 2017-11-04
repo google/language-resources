@@ -36,3 +36,10 @@ sh_test(
         "//festus:lexicon-diagnostics",
     ],
 )
+
+py_binary(
+    name = "symbolize",
+    srcs = ["symbolize.py"],
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
+)

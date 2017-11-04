@@ -12,10 +12,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright 2016 Google, Inc.
+# Copyright 2016, 2017 Google, Inc.
 # Author: mjansche@google.com (Martin Jansche)
 
 package(default_visibility = ["//visibility:public"])
+
+py_binary(
+    name = "symbolize",
+    srcs = ["symbolize.py"],
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
+)
+
+py_binary(
+    name = "tsv2html",
+    srcs = ["tsv2html.py"],
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
+)
+
+py_binary(
+    name = "hi2ur",
+    srcs = ["hi2ur.py"],
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
+    # Also depends non-hermetically on PyICU.
+)
 
 sh_test(
     name = "alignment_test",
@@ -41,24 +63,21 @@ sh_test(
     ],
 )
 
-py_binary(
-    name = "symbolize",
-    srcs = ["symbolize.py"],
-    srcs_version = "PY2AND3",
-    deps = ["//utils:utf8"],
-)
-
-py_binary(
-    name = "tsv2html",
-    srcs = ["tsv2html.py"],
-    srcs_version = "PY2AND3",
-    deps = ["//utils:utf8"],
-)
-
-py_binary(
-    name = "hi2ur",
-    srcs = ["hi2ur.py"],
-    srcs_version = "PY2AND3",
-    deps = ["//utils:utf8"],
-    # Also depends non-hermetically on PyICU.
+sh_test(
+    name = "hi2ur_test",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        cat $(location hi_ur_core.tsv) $(location hi_ur_other.tsv) |
+        $(location :hi2ur) $(location hi-ur.txt)
+        """,
+    ],
+    data = [
+        "hi-ur.txt",
+        "hi_ur_core.tsv",
+        "hi_ur_other.tsv",
+        ":hi2ur",
+    ],
+    tags = ["manual"],  # Test is not hermetic due to dependency on PyICU.
 )

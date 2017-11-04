@@ -47,3 +47,10 @@ py_binary(
     srcs_version = "PY2AND3",
     deps = ["//utils:utf8"],
 )
+
+py_binary(
+    name = "tsv2html",
+    srcs = ["tsv2html.py"],
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
+)

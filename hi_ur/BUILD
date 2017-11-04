@@ -18,21 +18,25 @@
 package(default_visibility = ["//visibility:public"])
 
 sh_test(
-    name = "wikidata_names_test",
+    name = "alignment_test",
     timeout = "short",
     srcs = ["//utils:eval.sh"],
     args = [
         """
-        sed 1d $(location data/wikidata_20150427.tsv) |
-        $(location //festus:lexicon-diagnostics) \
-          --alignables=$(location alignables.txt) \
-          --input_index=3 \
-          --output_index=4
+        for c in 1 2; do
+          $(location symbolize) 0 $$c \
+            < $(location hi_ur_core.tsv) |
+          $(location //festus:lexicon-diagnostics) \
+            --alignables=$(location alignables.txt) \
+            --input_index=1 \
+            --output_index=2
+        done
         """,
     ],
     data = [
         "alignables.txt",
-        "data/wikidata_20150427.tsv",
+        "hi_ur_core.tsv",
+        ":symbolize",
         "//festus:lexicon-diagnostics",
     ],
 )

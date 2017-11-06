@@ -80,6 +80,7 @@ $start_of_word { औ → آوْ;
 
 # Consonants modified with NUKTA
 
+क़्क़ → قّ;
 क़ → ق;
 ख़ → خ;
 ग़ → غ;
@@ -125,7 +126,7 @@ $start_of_word { औ → آوْ;
 ब्भ → بّھ;
 म्म → مّ;
 
-# य्य unseen
+य्य → یّ;
 र्र → رّ;
 ल्ल → لّ;
 व्व → وّ;

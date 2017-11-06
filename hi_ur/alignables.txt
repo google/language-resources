@@ -150,15 +150,15 @@ alignable { input: "anusvara"         output: "N" }
 alignable { input: "anusvara"         output: "m" }
 alignable { input: "visarga"          output: "" }
 
-alignable { input: "a"                output: "| a" }    # initially
-alignable { input: "a"                output: "|" }      # initially
+alignable { input: "a"                output: "| a" }       # initially
+alignable { input: "a"                output: "|" }         # initially
 alignable { input: "a"                output: "ain a" }
 alignable { input: "a"                output: "ain" }
-alignable { input: "aa"               output: "AA" }     # initially
-alignable { input: "aa"               output: "|" }      # medially
-alignable { input: "i"                output: "| i" }    # initially
-alignable { input: "i"                output: "|" }      # initially
-alignable { input: "i"                output: "'y" }     # medially
+alignable { input: "aa"               output: "AA" }        # initially
+alignable { input: "aa"               output: "|" }         # medially
+alignable { input: "i"                output: "| i" }       # initially
+alignable { input: "i"                output: "|" }         # initially
+alignable { input: "i"                output: "'y" }        # medially
 
 alignable { input: "ii"               output: "| i y 0" }
 alignable { input: "ii"               output: "| i y" }
@@ -175,6 +175,7 @@ alignable { input: "uu"               output: "| w" }       # initially
 alignable { input: "uu"               output: "'w" }        # medially
 alignable { input: "ri"               output: "r" }
 alignable { input: "ri"               output: "r i" }
+alignable { input: "candra_e"         output: "| y" }       # initially
 alignable { input: "ee"               output: "| Y" }       # isolated
 alignable { input: "ee"               output: "| y 0" }     # initially
 alignable { input: "ee"               output: "| y" }       # initially
@@ -221,6 +222,8 @@ alignable { input: "-ai"              output: "Y" }         # finally
 alignable { input: "-ai"              output: "a y 0" }
 alignable { input: "-ai"              output: "a y" }
 alignable { input: "-ai"              output: "y" }
+alignable { input: "-candra_o"        output: "w 0" }
+alignable { input: "-candra_o"        output: "w" }
 alignable { input: "-oo"              output: "w 0" }
 alignable { input: "-oo"              output: "w" }
 alignable { input: "-au"              output: "a w 0" }
@@ -231,6 +234,7 @@ alignable { input: "ka"               output: "k" }
 alignable { input: "ka virama ka"     output: "k :" }
 alignable { input: "ka virama ka"     output: "k" }
 alignable { input: "ka nukta"         output: "q" }
+alignable { input: "ka nukta virama ka nukta"  output: "q" }
 alignable { input: "kha"              output: "k +h" }
 alignable { input: "ka virama kha"    output: "k : +h" }
 alignable { input: "ka virama kha"    output: "k +h" }
@@ -296,6 +300,8 @@ alignable { input: "ma virama ma"     output: "m :" }
 alignable { input: "ma virama ma"     output: "m" }
 
 alignable { input: "ya"               output: "y" }
+alignable { input: "ya virama ya"     output: "y :" }
+alignable { input: "ya virama ya"     output: "y" }
 alignable { input: "ya"               output: "y h" }       # finally
 alignable { input: "ra"               output: "r" }
 alignable { input: "ra virama ra"     output: "r :" }

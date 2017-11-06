@@ -18,10 +18,30 @@
 package(default_visibility = ["//visibility:public"])
 
 py_binary(
-    name = "symbolize",
-    srcs = ["symbolize.py"],
+    name = "hi2ur",
+    srcs = ["hi2ur.py"],
     srcs_version = "PY2AND3",
     deps = ["//utils:utf8"],
+    # Also depends non-hermetically on PyICU.
+)
+
+sh_test(
+    name = "hi2ur_test",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        cat $(location hi_ur_core.tsv) $(location hi_ur_other.tsv) |
+        $(location :hi2ur) $(location hi-ur.txt)
+        """,
+    ],
+    data = [
+        "hi-ur.txt",
+        "hi_ur_core.tsv",
+        "hi_ur_other.tsv",
+        ":hi2ur",
+    ],
+    tags = ["manual"],  # Test is not hermetic due to dependency on PyICU.
 )
 
 py_binary(
@@ -32,15 +52,14 @@ py_binary(
 )
 
 py_binary(
-    name = "hi2ur",
-    srcs = ["hi2ur.py"],
+    name = "symbolize",
+    srcs = ["symbolize.py"],
     srcs_version = "PY2AND3",
     deps = ["//utils:utf8"],
-    # Also depends non-hermetically on PyICU.
 )
 
 sh_test(
-    name = "alignment_test",
+    name = "core_alignment_test",
     timeout = "short",
     srcs = ["//utils:eval.sh"],
     args = [
@@ -61,23 +80,4 @@ sh_test(
         ":symbolize",
         "//festus:lexicon-diagnostics",
     ],
-)
-
-sh_test(
-    name = "hi2ur_test",
-    timeout = "short",
-    srcs = ["//utils:eval.sh"],
-    args = [
-        """
-        cat $(location hi_ur_core.tsv) $(location hi_ur_other.tsv) |
-        $(location :hi2ur) $(location hi-ur.txt)
-        """,
-    ],
-    data = [
-        "hi-ur.txt",
-        "hi_ur_core.tsv",
-        "hi_ur_other.tsv",
-        ":hi2ur",
-    ],
-    tags = ["manual"],  # Test is not hermetic due to dependency on PyICU.
 )

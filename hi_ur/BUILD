@@ -81,3 +81,25 @@ sh_test(
         "//festus:lexicon-diagnostics",
     ],
 )
+
+sh_test(
+    name = "extended_alignment_test",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        $(location symbolize) 0 1 \
+          < $(location hi_ur_extended.tsv) |
+        $(location //festus:lexicon-diagnostics) \
+          --alignables=$(location alignables.txt) \
+          --input_index=1 \
+          --output_index=2
+        """,
+    ],
+    data = [
+        "alignables.txt",
+        "hi_ur_extended.tsv",
+        ":symbolize",
+        "//festus:lexicon-diagnostics",
+    ],
+)

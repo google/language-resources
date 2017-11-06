@@ -321,3 +321,113 @@ alignable { input: "ha"               output: "h" }
 
 alignable { input: "virama"           output: "0" }
 alignable { input: "virama"           output: "" }
+
+# Irregular correspondences and correspondences in extended vocabulary
+
+## Loanwords from Arabic, Persian, Marathi, etc.
+
+alignable { input: "ii"               output: "ain y" }
+alignable { input: "u"                output: "ain" }
+alignable { input: "au"               output: "ain w" }
+
+alignable { input: "ja nukta"         output: "zal" }
+alignable { input: "ta"               output: "toe" }
+alignable { input: "ya"               output: "Y" }
+alignable { input: "lla"              output: "l" }
+alignable { input: "sa"               output: "swad" }
+alignable { input: "ha"               output: "bari_he" }
+
+alignable { input: "-aa"              output: "| '" }      # rare
+alignable { input: "-aa"              output: "| h" }      # finally
+alignable { input: "-aa"              output: "h" }        # finally
+alignable { input: "-ee"              output: "y h" }      # finally
+alignable { input: "-ee"              output: "h" }        # finally
+
+# Scrambled order near hamzah
+
+alignable { input: "-i ya"            output: "'y y" }  # "y 'y" expected
+
+alignable { input: "candrabindu va"   output: "'w N" }  # "N w" expected
+alignable { input: "anusvara va"      output: "'w N" }  # "N w" expected
+alignable { input: "-uu a"            output: "'w" }    # "w '|" expected
+
+## Vowel length mismatches
+
+### Irregular shortening
+
+alignable { input: "ii"               output: "'y" }
+alignable { input: "-aa"              output: "" }
+alignable { input: "-ii"              output: "" }
+alignable { input: "-ee"              output: "" }
+alignable { input: "-oo"              output: "" }
+
+### Irregular lengthening
+
+alignable { input: "a"                output: "AA" }
+alignable { input: "i"                output: "| y" }
+alignable { input: "i"                output: "'y y" }
+alignable { input: "u"                output: "| w" }
+alignable { input: "ee"               output: "'y y" }
+
+alignable { input: "ka"               output: "k |" }
+alignable { input: "ka virama ka"     output: "k |" }
+alignable { input: "ka nukta"         output: "q |" }
+alignable { input: "ka"               output: "q |" }
+alignable { input: "kha"              output: "k +h |" }
+alignable { input: "kha nukta"        output: "Kh |" }
+alignable { input: "ga"               output: "g |" }
+alignable { input: "ga nukta"         output: "Gh |" }
+alignable { input: "gha"              output: "g +h |" }
+alignable { input: "ca"               output: "c |" }
+alignable { input: "cha"              output: "c +h |" }
+alignable { input: "ja"               output: "j |" }
+alignable { input: "jha"              output: "j +h |" }
+alignable { input: "tta"              output: "tt |" }
+alignable { input: "ttha"             output: "tt +h |" }
+alignable { input: "dda"              output: "dd |" }
+alignable { input: "ddha"             output: "dd +h |" }
+alignable { input: "nna"              output: "n |" }
+alignable { input: "ta"               output: "t |" }
+alignable { input: "tha"              output: "t +h |" }
+alignable { input: "da"               output: "d |" }
+alignable { input: "dha"              output: "d +h |" }
+alignable { input: "na"               output: "n |" }
+alignable { input: "na virama na"     output: "n |" }
+alignable { input: "pa"               output: "p |" }
+alignable { input: "pha"              output: "p +h |" }
+alignable { input: "ba"               output: "b |" }
+alignable { input: "bha"              output: "b +h |" }
+alignable { input: "ma"               output: "m |" }
+alignable { input: "ya"               output: "y |" }
+alignable { input: "ra"               output: "r |" }
+alignable { input: "la"               output: "l |" }
+alignable { input: "la virama la"     output: "l |" }
+alignable { input: "va"               output: "w |" }
+alignable { input: "sa"               output: "s |" }
+alignable { input: "ha"               output: "h |" }
+alignable { input: "ha"               output: "bari_he |" }
+
+alignable { input: "-i"               output: "y" }
+alignable { input: "-u"               output: "w" }
+
+## Missing nukta
+
+alignable { input: "ka"               output: "q" }
+alignable { input: "kha"              output: "Kh" }
+alignable { input: "ga"               output: "Gh" }
+alignable { input: "ja"               output: "z" }
+alignable { input: "jha"              output: "zh" }
+alignable { input: "pha"              output: "f" }
+
+## Miscellaneous
+
+alignable { input: "ya"               output: "'y Y" }      # finally
+alignable { input: "ya"               output: "'y" }
+alignable { input: "ra"               output: "r h" }       # finally
+alignable { input: "la virama la"     output: "h l" }       # Delhi
+alignable { input: "la virama ha"     output: "l +h" }
+alignable { input: "sa"               output: "z" }         # Times etc.
+alignable { input: "ha"               output: "" }
+
+alignable { input: "-aa ba -aa da"    output: "AA b | d" }  # in toponyms
+alignable { input: "-candra_o"        output: "|" }

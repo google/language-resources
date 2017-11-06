@@ -64,8 +64,8 @@ input_symbol { value: 0x092D key: "bha" }
 input_symbol { value: 0x092E key: "ma" }
 input_symbol { value: 0x092F key: "ya" }
 input_symbol { value: 0x0930 key: "ra" }
-input_symbol { value: 0x0931 key: "rra" }
 input_symbol { value: 0x0932 key: "la" }
+input_symbol { value: 0x0933 key: "lla" }
 input_symbol { value: 0x0935 key: "va" }
 input_symbol { value: 0x0936 key: "sha" }
 input_symbol { value: 0x0937 key: "ssa" }
@@ -78,9 +78,7 @@ input_symbol { value: 0x0940 key: "-ii" }
 input_symbol { value: 0x0941 key: "-u" }
 input_symbol { value: 0x0942 key: "-uu" }
 input_symbol { value: 0x0943 key: "-ri" }
-input_symbol { value: 0x0944 key: "-rri" }
 input_symbol { value: 0x0945 key: "-candra_e" }
-input_symbol { value: 0x0946 key: "-short_e" }
 input_symbol { value: 0x0947 key: "-ee" }
 input_symbol { value: 0x0948 key: "-ai" }
 input_symbol { value: 0x0949 key: "-candra_o" }
@@ -100,7 +98,7 @@ output_symbol { value: 0x062C key: "j" }
 output_symbol { value: 0x062D key: "bari_he" }
 output_symbol { value: 0x062E key: "Kh" }
 output_symbol { value: 0x062F key: "d" }
-output_symbol { value: 0x0630 key: "thal" }
+output_symbol { value: 0x0630 key: "zal" }
 output_symbol { value: 0x0631 key: "r" }
 output_symbol { value: 0x0632 key: "z" }
 output_symbol { value: 0x0633 key: "s" }

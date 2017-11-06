@@ -73,8 +73,8 @@ DEVA_CODEPOINT_TO_SYMBOL = {
     0x092E: "ma",
     0x092F: "ya",
     0x0930: "ra",
-    0x0931: "rra",
     0x0932: "la",
+    0x0933: "lla",
     0x0935: "va",
     0x0936: "sha",
     0x0937: "ssa",
@@ -89,9 +89,7 @@ DEVA_CODEPOINT_TO_SYMBOL = {
     0x0941: "-u",
     0x0942: "-uu",
     0x0943: "-ri",
-    0x0944: "-rri",
     0x0945: "-candra_e",
-    0x0946: "-short_e",
     0x0947: "-ee",
     0x0948: "-ai",
     0x0949: "-candra_o",
@@ -153,7 +151,7 @@ ARAB_CODEPOINT_TO_SYMBOL = {
     # Letters used in loanwords from Arabic etc. have longer symbol names:
     0x062B: "se",       # s̱e (ARABIC LETTER THEH)
     0x062D: "bari_he",  # baṛī ḥe (ARABIC LETTER HAH)
-    0x0630: "thal",     # ẕāl (ARABIC LETTER THAL)
+    0x0630: "zal",      # ẕāl (ARABIC LETTER THAL)
     0x0635: "swad",     # ṣwād (ARABIC LETTER SAD)
     0x0636: "dwad",     # ẓwād (ARABIC LETTER DAD)
     0x0637: "toe",      # t̤o'e (ARABIC LETTER TAH)
@@ -207,7 +205,7 @@ def main(argv):
     fields = line.split("\t")
     assert len(fields) > max(deva_index, arab_index)
     deva = fields[deva_index]
-    arab = fields[arab_index].replace("\u0652", "")
+    arab = fields[arab_index].replace(" ", "")
     try:
       deva_sym = Symbolize(deva, DEVA_CODEPOINT_TO_SYMBOL)
       arab_sym = Symbolize(arab, ARAB_CODEPOINT_TO_SYMBOL)

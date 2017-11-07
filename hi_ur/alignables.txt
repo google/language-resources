@@ -152,8 +152,6 @@ alignable { input: "visarga"          output: "" }
 
 alignable { input: "a"                output: "| a" }       # initially
 alignable { input: "a"                output: "|" }         # initially
-alignable { input: "a"                output: "ain a" }
-alignable { input: "a"                output: "ain" }
 alignable { input: "aa"               output: "AA" }        # initially
 alignable { input: "aa"               output: "|" }         # medially
 alignable { input: "i"                output: "| i" }       # initially
@@ -203,11 +201,15 @@ alignable { input: "au"               output: "| w" }       # initially
 alignable { input: "-aa"              output: "|" }
 alignable { input: "-i"               output: "i" }
 alignable { input: "-i"               output: "" }
+alignable { input: "-i"               output: "i y" }       # finally
+alignable { input: "-i"               output: "y" }         # finally
 alignable { input: "-ii"              output: "i y 0" }
 alignable { input: "-ii"              output: "i y" }
 alignable { input: "-ii"              output: "y" }
 alignable { input: "-u"               output: "u" }
 alignable { input: "-u"               output: "" }
+alignable { input: "-u"               output: "u w" }       # finally
+alignable { input: "-u"               output: "w" }         # finally
 alignable { input: "-uu"              output: "u w 0" }
 alignable { input: "-uu"              output: "u w" }
 alignable { input: "-uu"              output: "w" }
@@ -326,22 +328,35 @@ alignable { input: "virama"           output: "" }
 
 ## Loanwords from Arabic, Persian, Marathi, etc.
 
+alignable { input: "a"                output: "ain a" }
+alignable { input: "a"                output: "ain" }
+alignable { input: "aa"               output: "ain |" }
+alignable { input: "aa"               output: "ain h" }  # finally
+alignable { input: "i"                output: "ain" }
 alignable { input: "ii"               output: "ain y" }
 alignable { input: "u"                output: "ain" }
 alignable { input: "au"               output: "ain w" }
 
 alignable { input: "ja nukta"         output: "zal" }
+alignable { input: "ja nukta"         output: "zoe" }
 alignable { input: "ta"               output: "toe" }
+alignable { input: "ta virama ta"     output: "toe" }
 alignable { input: "ya"               output: "Y" }
 alignable { input: "lla"              output: "l" }
 alignable { input: "sa"               output: "swad" }
 alignable { input: "ha"               output: "bari_he" }
+alignable { input: "ha"               output: "bari_he |" }
 
 alignable { input: "-aa"              output: "| '" }      # rare
+alignable { input: "-aa"              output: "| ain" }
 alignable { input: "-aa"              output: "| h" }      # finally
+alignable { input: "-aa"              output: "ain" }      # finally
+alignable { input: "-aa"              output: "ain h" }    # finally
 alignable { input: "-aa"              output: "h" }        # finally
+alignable { input: "-uu"              output: "w ain" }
 alignable { input: "-ee"              output: "y h" }      # finally
 alignable { input: "-ee"              output: "h" }        # finally
+alignable { input: "-ee"              output: "ain" }
 
 # Scrambled order near hamzah
 
@@ -405,10 +420,6 @@ alignable { input: "la virama la"     output: "l |" }
 alignable { input: "va"               output: "w |" }
 alignable { input: "sa"               output: "s |" }
 alignable { input: "ha"               output: "h |" }
-alignable { input: "ha"               output: "bari_he |" }
-
-alignable { input: "-i"               output: "y" }
-alignable { input: "-u"               output: "w" }
 
 ## Missing nukta
 

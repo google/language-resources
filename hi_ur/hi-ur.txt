@@ -194,16 +194,18 @@ $halant य } $end_of_word → $jazm یہ;  # halant ya → jazm choti-ye choti-
 
 # Dependent vowels
 
-\u093E → ا;         # -aa → alif
-\u093F → $zer;      # -i  → zer
-\u0940 → $zer یْ;    # -ii → zer ye
-\u0941 → $pesh;     # -u  → pesh
-\u0942 → $pesh وْ;   # -uu → pesh vaw
-\u0943 → $jazm رِ;   # -ri → jazam re zer, e.g. سنسکرت
-\u0947 → ے;         # -ee → bari-ye
-\u0948 → $zabar ے;  # -ai → zabar bari-ye
-\u094B → وْ;         # -oo → vaw
-\u094C → $zabar وْ;  # -au → zabar vaw
+\u093E                → ا;         # -aa → alif
+\u093F } $end_of_word → $zer یْ;    # -i  → zer ye at end of word
+\u093F                → $zer;      # -i  → zer
+\u0940                → $zer یْ;    # -ii → zer ye
+\u0941 } $end_of_word → $pesh وْ;   # -u  → pesh vaw at end of word
+\u0941                → $pesh;     # -u  → pesh
+\u0942                → $pesh وْ;   # -uu → pesh vaw
+\u0943                → $jazm رِ;   # -ri → jazam re zer, e.g. سنسکرت
+\u0947                → ے;         # -ee → bari-ye
+\u0948                → $zabar ے;  # -ai → zabar bari-ye
+\u094B                → وْ;         # -oo → vaw
+\u094C                → $zabar وْ;  # -au → zabar vaw
 
 $halant → $jazm;
 

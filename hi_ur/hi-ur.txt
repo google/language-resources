@@ -46,6 +46,9 @@ $not_deva_word { ($deva_word) → $start_of_word $1;
 
 # Various signs
 
+# At the end of a word CANDRABINDU + VA becomes WAW WITH HAMZA + NOON GHUNNA:
+\u0901 व } $end_of_word → ؤ $noon_ghunna;
+
 $bindus } [प-भ] → م;     # (CANDRA)BINDU → MEEM before labials
 $bindus → $noon_ghunna;  # (CANDRA)BINDU → NOON + GHUNNA
 
@@ -168,10 +171,10 @@ $start_of_word { औ → آوْ;
 भ → بھ;
 म → م;
 
-# When YA occurs at the end of a word and the inherent schwa is pronounced, Urdu
-# adds choti-he to indicate that the word does not end in /i/ or /ii/. Here we
-# heuristically decide that a schwa is pronounced when YA occurs as the last
-# element of a final cluster.
+# When YA occurs at the end of a word and the inherent schwa is pronounced,
+# Urdu adds choti-he to indicate that the word does not end in /i/ or /ii/.
+# Here we heuristically decide that a schwa is pronounced when YA occurs as
+# the last element of a final cluster.
 
 $halant य } $end_of_word → $jazm یہ;  # halant ya → jazm choti-ye choti-he
 य → ی;
@@ -180,7 +183,14 @@ $halant य } $end_of_word → $jazm یہ;  # halant ya → jazm choti-ye choti-
 ल → ل;
 ळ → ل;  # used in e.g. Marathi but not in Hindi; Urdu does not use ۻ
 # ऴ unseen, not used in Hindi; Urdu does not use ڎ
+
+# Similar to YA above, when VA occurs at the end of a word and the inherent
+# schwa is pronounced, an explicit alif indicates that the word does not end
+# in /u/, /uu/, /oo/, or /au/.
+
+$halant व } $end_of_word → $jazm وا;
 व → و;
+
 श → ش;
 ष → ش;
 स → س;
@@ -215,7 +225,8 @@ $halant → $jazm;
 
 # Punctuation
 
-[।॥] → ۔;  # (DOUBLE) DANDA → ARABIC FULL STOP
+। → ۔;  # DANDA → ARABIC FULL STOP
+॥ → ※;
 
 ',' → \u060C;  # ARABIC COMMA
 ';' → \u061B;  # ARABIC SEMICOLON

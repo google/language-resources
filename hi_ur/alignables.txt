@@ -104,7 +104,7 @@ output_symbol { value: 0x0632 key: "z" }
 output_symbol { value: 0x0633 key: "s" }
 output_symbol { value: 0x0634 key: "sh" }
 output_symbol { value: 0x0635 key: "swad" }
-output_symbol { value: 0x0636 key: "dwad" }
+output_symbol { value: 0x0636 key: "zwad" }
 output_symbol { value: 0x0637 key: "toe" }
 output_symbol { value: 0x0638 key: "zoe" }
 output_symbol { value: 0x0639 key: "ain" }
@@ -338,11 +338,13 @@ alignable { input: "u"                output: "ain" }
 alignable { input: "au"               output: "ain w" }
 
 alignable { input: "ja nukta"         output: "zal" }
+alignable { input: "ja nukta"         output: "zwad" }
 alignable { input: "ja nukta"         output: "zoe" }
 alignable { input: "ta"               output: "toe" }
 alignable { input: "ta virama ta"     output: "toe" }
 alignable { input: "ya"               output: "Y" }
 alignable { input: "lla"              output: "l" }
+alignable { input: "sa"               output: "se" }
 alignable { input: "sa"               output: "swad" }
 alignable { input: "ha"               output: "bari_he" }
 alignable { input: "ha"               output: "bari_he |" }

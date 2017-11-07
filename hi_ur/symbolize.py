@@ -153,7 +153,7 @@ ARAB_CODEPOINT_TO_SYMBOL = {
     0x062D: "bari_he",  # baṛī ḥe (ARABIC LETTER HAH)
     0x0630: "zal",      # ẕāl (ARABIC LETTER THAL)
     0x0635: "swad",     # ṣwād (ARABIC LETTER SAD)
-    0x0636: "dwad",     # ẓwād (ARABIC LETTER DAD)
+    0x0636: "zwad",     # ẓwād (ARABIC LETTER DAD)
     0x0637: "toe",      # t̤o'e (ARABIC LETTER TAH)
     0x0638: "zoe",      # z̤o'e (ARABIC LETTER ZAH)
     0x0639: "ain",      # ʿain (ARABIC LETTER AIN)

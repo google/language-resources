@@ -23,6 +23,7 @@
 
 #include "external/sptk/sptk.h"
 #include "external/world/cheaptrick.h"
+#include "external/world/d4c.h"
 #include "external/world/dio.h"
 #include "external/world/stonemask.h"
 #include "external/world/tools/audioio.h"
@@ -73,6 +74,29 @@ class Analysis {
               f0_.data());
   }
 
+  void Bap(sweet::WorldData *world_data){
+    const int fft_dim = fft_size_ / 2 + 1;
+    double **aperiodicity = new double *[num_frames_];
+    for (int i = 0; i < num_frames_; ++i) {
+      aperiodicity[i] = new double[fft_dim];
+    }
+
+    D4COption d4c_option;
+    InitializeD4COption(&d4c_option);
+    d4c_option.threshold = 0.85;
+
+    D4C(samples_.data(), samples_.size(), sample_rate_, temporal_positions_.data(),
+            f0_.data(), f0_.size(), fft_size_, &d4c_option, aperiodicity);
+
+    for (size_t f = 0; f < num_frames_; ++f) {
+      auto *bap = world_data->mutable_frame(f)->mutable_bap();
+      bap->Resize(num_frames_, 0);
+      for (int c = 0; c <= fft_dim; ++c) {
+        bap->Set(c, aperiodicity[f][c]);
+      }
+    }
+  }
+
   void Spectrogram() {
     CheapTrickOption cheap_trick_option;
     InitializeCheapTrickOption(sample_rate_, &cheap_trick_option);
@@ -88,6 +112,7 @@ class Analysis {
                temporal_positions_.data(), f0_.data(), f0_.size(),
                &cheap_trick_option, spectrogram_.data());
   }
+
 
   bool Mgc(sweet::WorldData *world_data) {
     double alpha;
@@ -188,6 +213,7 @@ int main(int argc, char *argv[]) {
   world_data.set_num_samples(analysis.num_samples());
   world_data.set_sample_rate_hz(analysis.sample_rate());
   analysis.SetFrames(&world_data);
+  analysis.Bap(&world_data);
   analysis.Mgc(&world_data);
 
   // Generate debug output.

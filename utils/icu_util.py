@@ -1,7 +1,4 @@
-#! /usr/bin/env python2
-# -*- coding: utf-8 -*-
-#
-# Copyright 2015 Google Inc. All Rights Reserved.
+# Copyright 2015, 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,14 +17,16 @@
 Assumes PyICU is installed somewhere in sys.path.
 """
 
-import codecs
 import sys
 
-import icu  # Debian/Ubuntu: apt-get install python-pyicu
+import icu  # Debian/Ubuntu: apt-get install python-pyicu python3-icu
+
+from utils import utf8
 
 
 def LoadTransliterationRules(path, transform_name):
-  rules = codecs.open(path, 'r', 'utf-8').read()
+  with utf8.open(path) as reader:
+    rules = reader.read()
   transliterator = icu.Transliterator.createFromRules(
       transform_name, rules, icu.UTransDirection.FORWARD)
   return transliterator
@@ -46,16 +45,11 @@ def TestRulesInteractively(path):
     path: Path to file containing transliteration rules.
 
   """
-  stdout = codecs.lookup('utf-8').streamwriter(sys.stdout)
-  while True:
-    line = sys.stdin.readline()
-    if not line:
-      break
-    line = line.decode('utf-8')
+  for line in utf8.stdin:
     transliterator = LoadTransliterationRules(path, 'foo-bar')
     result = transliterator.transliterate(line)
-    stdout.write(result)
-    stdout.flush()
+    utf8.stdout.write(result)
+    utf8.stdout.flush()
   return
 
 

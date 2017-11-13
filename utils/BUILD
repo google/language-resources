@@ -73,6 +73,20 @@ py_binary(
     deps = [":utf8"],
 )
 
+py_binary(
+    name = "icu_util",
+    srcs = ["icu_util.py"],
+    srcs_version = "PY2AND3",
+    deps = [":utf8"],
+)
+
+py_library(
+    name = "grapheme_util",
+    srcs = ["grapheme_util.py"],
+    srcs_version = "PY2AND3",
+    deps = [":utf8"],
+)
+
 cc_binary(
     name = "thrax_g2p",
     srcs = ["thrax_g2p.cc"],

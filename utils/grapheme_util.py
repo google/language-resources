@@ -1,7 +1,4 @@
-#! /usr/bin/env python2
-# -*- coding: utf-8 -*-
-#
-# Copyright 2015 Google Inc. All Rights Reserved.
+# Copyright 2015, 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,12 +21,12 @@ Unicode characters and short symbolic names.
 
 from __future__ import unicode_literals
 
-import codecs
 import re
-import sys
 
-STDOUT = codecs.lookup('utf-8').streamwriter(sys.stdout)
-STDERR = codecs.lookup('utf-8').streamwriter(sys.stderr)
+from utils import utf8
+
+STDOUT = utf8.stdout
+STDERR = utf8.stderr
 
 
 def WriteSymbolTable(writer, int2sym, epsilon='<epsilon>'):
@@ -44,7 +41,7 @@ def WriteSymbolTable(writer, int2sym, epsilon='<epsilon>'):
 
 
 def MakeSymbolToCharDict(codepoint_to_symbol):
-  return dict((v, unichr(k)) for (k, v) in codepoint_to_symbol.items())
+  return dict((v, '%c' % k) for (k, v) in codepoint_to_symbol.items())
 
 
 def CharToSymbol(char, cp2sym):
@@ -65,18 +62,9 @@ def SymbolsToString(symbols, sym2ch):
   return s
 
 
-def GetlineUnbuffered(f=sys.stdin):
-  while True:
-    line = f.readline()
-    if not line:
-      break
-    yield line.decode('utf-8')
-  return
-
-
 def TransliterateInteractively(codepoint_to_symbol):
   symbol_to_char = MakeSymbolToCharDict(codepoint_to_symbol)
-  for line in GetlineUnbuffered():
+  for line in utf8.stdin:
     line = line.rstrip('\r\n')
     if all(ord(c) in codepoint_to_symbol for c in line):
       orig = line
@@ -93,7 +81,7 @@ def TransliterateInteractively(codepoint_to_symbol):
 
 
 def TokenizeAndTransliterate(token_re, codepoint_to_symbol):
-  for line in GetlineUnbuffered():
+  for line in utf8.stdin:
     for token in re.findall(token_re, line):
       xlit = StringToSymbols(token, codepoint_to_symbol)
       STDOUT.write('%s\t%s\n' % (token, xlit))

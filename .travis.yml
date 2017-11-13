@@ -17,10 +17,9 @@ before_install:
   # Install Android SDK:
   - sudo mkdir -p /usr/local/android-sdk
   - sudo chmod 1777 /usr/local/android-sdk
-  - wget https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
-  - tar xzf android-sdk_r24.4.1-linux.tgz -C /usr/local/android-sdk --strip-components=1
-  - echo y | /usr/local/android-sdk/tools/android update sdk --no-ui --all --filter build-tools-24.0.3
-  - echo y | /usr/local/android-sdk/tools/android update sdk --no-ui --all --filter android-24
+  - wget https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
+  - unzip sdk-tools-linux-3859397.zip -d /usr/local/android-sdk
+  - echo y | /usr/local/android-sdk/tools/bin/sdkmanager 'build-tools;26.0.3' 'platforms;android-24'
 
 script:
   - bazel test //af/... //bn/... //festus/... //hi_ur/... //my/... //Mymr/... //si/... //xh/... //zu/...

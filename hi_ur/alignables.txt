@@ -115,6 +115,7 @@ output_symbol { value: 0x0644 key: "l" }
 output_symbol { value: 0x0645 key: "m" }
 output_symbol { value: 0x0646 key: "n" }
 output_symbol { value: 0x0648 key: "w" }
+output_symbol { value: 0x064B key: "tanwin" }
 output_symbol { value: 0x064E key: "a" }
 output_symbol { value: 0x064F key: "u" }
 output_symbol { value: 0x0650 key: "i" }
@@ -157,7 +158,6 @@ alignable { input: "aa"               output: "|" }         # medially
 alignable { input: "i"                output: "| i" }       # initially
 alignable { input: "i"                output: "|" }         # initially
 alignable { input: "i"                output: "'y" }        # medially
-
 alignable { input: "ii"               output: "| i y 0" }
 alignable { input: "ii"               output: "| i y" }
 alignable { input: "ii"               output: "| y" }
@@ -337,6 +337,17 @@ alignable { input: "ii"               output: "ain y" }
 alignable { input: "u"                output: "ain" }
 alignable { input: "au"               output: "ain w" }
 
+alignable { input: "-aa"              output: "| '" }      # rare
+alignable { input: "-aa"              output: "| ain" }
+alignable { input: "-aa"              output: "| h" }      # finally
+alignable { input: "-aa"              output: "ain" }      # finally
+alignable { input: "-aa"              output: "ain h" }    # finally
+alignable { input: "-aa"              output: "h" }        # finally
+alignable { input: "-uu"              output: "w ain" }
+alignable { input: "-ee"              output: "y h" }      # finally
+alignable { input: "-ee"              output: "h" }        # finally
+alignable { input: "-ee"              output: "ain" }
+
 alignable { input: "ja nukta"         output: "zal" }
 alignable { input: "ja nukta"         output: "zwad" }
 alignable { input: "ja nukta"         output: "zoe" }
@@ -348,17 +359,6 @@ alignable { input: "sa"               output: "se" }
 alignable { input: "sa"               output: "swad" }
 alignable { input: "ha"               output: "bari_he" }
 alignable { input: "ha"               output: "bari_he |" }
-
-alignable { input: "-aa"              output: "| '" }      # rare
-alignable { input: "-aa"              output: "| ain" }
-alignable { input: "-aa"              output: "| h" }      # finally
-alignable { input: "-aa"              output: "ain" }      # finally
-alignable { input: "-aa"              output: "ain h" }    # finally
-alignable { input: "-aa"              output: "h" }        # finally
-alignable { input: "-uu"              output: "w ain" }
-alignable { input: "-ee"              output: "y h" }      # finally
-alignable { input: "-ee"              output: "h" }        # finally
-alignable { input: "-ee"              output: "ain" }
 
 # Scrambled order near hamzah
 

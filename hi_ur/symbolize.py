@@ -148,7 +148,8 @@ ARAB_CODEPOINT_TO_SYMBOL = {
     0x0654: "-'",  # HAMZA ABOVE Modifier
     0x0670: "-|",  # SUPERSCRIPT ALEF Modifier
 
-    # Letters used in loanwords from Arabic etc. have longer symbol names:
+    # Characters used in loanwords from Arabic etc. have longer symbol names:
+    0x064B: "tanwin",   # tanwīn (ARABIC FATHATAN)
     0x062B: "se",       # s̱e (ARABIC LETTER THEH)
     0x062D: "bari_he",  # baṛī ḥe (ARABIC LETTER HAH)
     0x0630: "zal",      # ẕāl (ARABIC LETTER THAL)

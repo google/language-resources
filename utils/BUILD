@@ -24,13 +24,15 @@ exports_files(["eval.sh"])
 py_binary(
     name = "apply_phonology",
     srcs = ["apply_phonology.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = [":utf8"],
 )
 
 py_binary(
     name = "phonology_json_validator",
     srcs = ["phonology_json_validator.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = [":utf8"],
 )
 
 py_binary(
@@ -93,7 +95,15 @@ py_binary(
 py_binary(
     name = "festival_lexicon_from_tsv",
     srcs = ["festival_lexicon_from_tsv.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = [":utf8"],
+)
+
+py_binary(
+    name = "festival_prompts_from_tsv",
+    srcs = ["festival_prompts_from_tsv.py"],
+    srcs_version = "PY2AND3",
+    deps = [":utf8"],
 )
 
 cc_binary(

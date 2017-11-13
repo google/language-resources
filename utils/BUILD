@@ -43,7 +43,8 @@ py_binary(
 py_binary(
     name = "evaluate_pronunciation_rules",
     srcs = ["evaluate_pronunciation_rules.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = [":utf8"],
 )
 
 py_binary(
@@ -59,13 +60,15 @@ py_binary(
         "edist.py",
         "eval_lex.py",
     ],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = [":utf8"],
 )
 
 py_binary(
     name = "test_icu_transform",
     srcs = ["test_icu_transform.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = [":utf8"],
 )
 
 cc_binary(
@@ -139,13 +142,15 @@ cc_binary(
 py_binary(
     name = "sample",
     srcs = ["sample.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = [":utf8"],
 )
 
 py_binary(
     name = "freq",
     srcs = ["freq.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = [":utf8"],
 )
 
 py_library(

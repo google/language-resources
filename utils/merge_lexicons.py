@@ -26,7 +26,7 @@ from __future__ import unicode_literals
 
 import sys
 
-import utf8
+from utils import utf8
 
 STDIN = utf8.stdin
 STDOUT = utf8.stdout

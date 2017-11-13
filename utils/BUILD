@@ -155,20 +155,14 @@ py_library(
 )
 
 # Ordinarily, one would simply use a py_test build target, but here we want to
-# test consistent behavior of utf8.py for both PY2 and PY3, hence a non-standard
-# inline sh_test.
+# test consistent behavior of utf8.py for both PY2 and PY3 and under different
+# environment conditions, hence a non-standard sh_test.
 sh_test(
     name = "utf8_test",
-    srcs = ["eval.sh"],
+    srcs = ["utf8_test.sh"],
     args = [
-        """
-        for py in python python2 python3; do
-          if which $$py; then
-            $$py $(location utf8_test.py) |
-            diff -u - $(location utf8_test_stdout.txt)
-          fi
-        done
-        """,
+        "$(location utf8_test.py)",
+        "$(location utf8_test_stdout.txt)",
     ],
     data = [
         "utf8.py",

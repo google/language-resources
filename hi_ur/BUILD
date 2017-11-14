@@ -21,8 +21,10 @@ py_binary(
     name = "hi2ur",
     srcs = ["hi2ur.py"],
     srcs_version = "PY2AND3",
-    deps = ["//utils:utf8"],
-    # Also depends non-hermetically on PyICU.
+    deps = [
+        "//utils:icu_util",   # Depends non-hermetically on PyICU.
+        "//utils:utf8",
+    ],
 )
 
 sh_test(

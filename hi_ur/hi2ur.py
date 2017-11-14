@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Copyright 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,8 +32,7 @@ from __future__ import unicode_literals
 import sys
 import unicodedata
 
-import icu  # Debian/Ubuntu: apt-get install python-pyicu python3-icu
-
+from utils import icu_util
 from utils import utf8
 
 
@@ -60,9 +57,7 @@ Observed:
   return equal
 
 
-REMOVE_TASHKIL = icu.Transliterator.createInstance(
-    '[\u064B-\u065F]Remove',
-    icu.UTransDirection.FORWARD)
+REMOVE_TASHKIL = icu_util.CreateTransliterator('[\u064B-\u065F]Remove')
 
 
 def StrEqualIgnoringTashkil(str1, str2, context=None):
@@ -72,10 +67,7 @@ def StrEqualIgnoringTashkil(str1, str2, context=None):
 
 
 def main(argv):
-  with utf8.open(argv[1]) as reader:
-    rules = reader.read()
-  hi_ur = icu.Transliterator.createFromRules(
-      'hi-ur', rules, icu.UTransDirection.FORWARD)
+  hi_ur = icu_util.LoadTransliterationRules(argv[1], 'hi-ur')
   success = True
   for line in utf8.stdin:
     line = line.rstrip('\n')

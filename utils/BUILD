@@ -46,7 +46,10 @@ py_binary(
     name = "evaluate_pronunciation_rules",
     srcs = ["evaluate_pronunciation_rules.py"],
     srcs_version = "PY2AND3",
-    deps = ["//utils:utf8"],
+    deps = [
+        "//utils:icu_util",
+        "//utils:utf8",
+    ],
 )
 
 py_binary(
@@ -70,7 +73,10 @@ py_binary(
     name = "test_icu_transform",
     srcs = ["test_icu_transform.py"],
     srcs_version = "PY2AND3",
-    deps = ["//utils:utf8"],
+    deps = [
+        "//utils:icu_util",
+        "//utils:utf8",
+    ],
 )
 
 py_binary(

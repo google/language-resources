@@ -19,20 +19,12 @@ from __future__ import unicode_literals
 
 import sys
 
-import icu  # Debian/Ubuntu: apt-get install python-pyicu python3-icu
-
+from utils import icu_util
 from utils import utf8
 
 EXCEPTIONAL_WORDS = frozenset([
     'apreli',  # known exception in the NCHLT isiXhosa dictionary
     ])
-
-
-def GetPronunciationRules(path, name):
-  rules = utf8.GetContents(path)
-  transliterator = icu.Transliterator.createFromRules(
-      name, rules, icu.UTransDirection.FORWARD)
-  return transliterator
 
 
 def GetSampaToIpaMapping(path):
@@ -80,10 +72,10 @@ def ApplyPronunciationRules(xltor):
 
 def main(args):
   if len(args) == 2:
-    xltor = GetPronunciationRules(args[1], 'foo-bar')
+    xltor = icu_util.LoadTransliterationRules(args[1], 'foo-bar')
     ApplyPronunciationRules(xltor)
   elif len(args) == 4:
-    xltor = GetPronunciationRules(args[1], 'foo-bar')
+    xltor = icu_util.LoadTransliterationRules(args[1], 'foo-bar')
     mapping = GetSampaToIpaMapping(args[2])
     if TestPronunciationRules(xltor, mapping, args[3]):
       utf8.Print('PASS')

@@ -24,10 +24,14 @@ import icu  # Debian/Ubuntu: apt-get install python-pyicu python3-icu
 from utils import utf8
 
 
-def LoadTransliterationRules(path, transform_name):
+def LoadTransliterationRules(path, name, direction=icu.UTransDirection.FORWARD):
   rules = utf8.GetContents(path)
-  transliterator = icu.Transliterator.createFromRules(
-      transform_name, rules, icu.UTransDirection.FORWARD)
+  transliterator = icu.Transliterator.createFromRules(name, rules, direction)
+  return transliterator
+
+
+def CreateTransliterator(identifier, direction=icu.UTransDirection.FORWARD):
+  transliterator = icu.Transliterator.createInstance(identifier, direction)
   return transliterator
 
 

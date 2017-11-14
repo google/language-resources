@@ -3,6 +3,7 @@ dist: trusty
 
 env:
   - BAZEL=0.7.0
+  - ANDROID_SDK=3859397
 
 before_install:
   - sudo apt-get update -qq
@@ -15,11 +16,11 @@ before_install:
   - sha256sum -c third_party/bazel-${BAZEL}-installer-linux-x86_64.sh.sha256
   - bash bazel-${BAZEL}-installer-linux-x86_64.sh --user
   # Install Android SDK:
-  - sudo mkdir -p /usr/local/android-sdk
-  - sudo chmod 1777 /usr/local/android-sdk
-  - wget https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
-  - unzip sdk-tools-linux-3859397.zip -d /usr/local/android-sdk
+  - wget https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK}.zip
+  - sha256sum -c third_party/sdk-tools-linux-${ANDROID_SDK}.zip.sha256
+  - sudo mkdir -p -m 1777 /usr/local/android-sdk
+  - unzip sdk-tools-linux-${ANDROID_SDK}.zip -d /usr/local/android-sdk
   - echo y | /usr/local/android-sdk/tools/bin/sdkmanager 'build-tools;26.0.3' 'platforms;android-24'
 
 script:
-  - bazel test //af/... //bn/... //festus/... //hi_ur/... //my/... //Mymr/... //si/... //xh/... //zu/...
+  - bazel test --nodistinct_host_configuration //...

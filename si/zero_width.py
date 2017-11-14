@@ -1,7 +1,7 @@
-#! /usr/bin/python
+#! /usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2015, 2016 Google Inc. All Rights Reserved.
+# Copyright 2015, 2016, 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,8 +24,8 @@ $ python3 -m unittest zero_width
 
 from __future__ import unicode_literals
 
+import io
 import re
-import sys
 import unittest
 
 SINHALA_TEXT = re.compile(r'''
@@ -58,7 +58,7 @@ LIKELY_RAKARANSAYA = re.compile(
     r'(?<=[%s]\u0dca)(?=\u0dbb)' % ''.join(CONSONANT_RAKARANSAYA_ONSETS))
 
 
-def RemoveOptionalZW_aux(match):
+def RemoveOptionalZeroWidthInMatch(match):
   text = match.group(1)
   # standardize_zero_width
   text = ZERO_WIDTH.sub('\u200d', text)
@@ -96,9 +96,8 @@ def RemoveOptionalZW(text):
 
   Returns:
     The text with all non-obligatory occurrences of ZWNJ and ZWJ removed.
-
   """
-  return SINHALA_TEXT.sub(RemoveOptionalZW_aux, text)
+  return SINHALA_TEXT.sub(RemoveOptionalZeroWidthInMatch, text)
 
 
 def RemoveRepaya(text):
@@ -119,6 +118,12 @@ def ForceRakaransaya(text):
   sometimes due to ZWJ having been removed too eagerly, which turns the
   rakaransaya in ශ්‍රී (one visual unit) into ශ්රී (two visual units). Here we
   heuristically insert ZWJ in this context to restore the rakaransaya.
+
+  Args:
+    text: The text to which the heuristics will be applied.
+
+  Returns:
+    The modified text.
   """
   return LIKELY_RAKARANSAYA.sub('\u200d', text)
 
@@ -153,7 +158,7 @@ class TestSinhalaZeroWidth(unittest.TestCase):
 
 
 if __name__ == '__main__':
-  for line in sys.stdin:
-    line = line.decode('utf-8')
-    line = RemoveOptionalZW(line)
-    sys.stdout.write(line.encode('utf-8'))
+  stdin = io.open(0, mode='rt', encoding='utf-8', closefd=False)
+  stdout = io.open(1, mode='wt', encoding='utf-8', closefd=False)
+  for line in stdin:
+    stdout.write(RemoveOptionalZW(line))

@@ -25,10 +25,8 @@ from utils import utf8
 STDERR = utf8.stderr
 
 
-def main(args):
-  file_name = args[1]
-  with utf8.open(file_name) as reader:
-    contents = reader.read()
+def main(argv):
+  contents = utf8.GetContents(argv[1])
   phonology = json.loads(contents)
 
   feature_types = {}

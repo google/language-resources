@@ -25,35 +25,35 @@ py_binary(
     name = "apply_phonology",
     srcs = ["apply_phonology.py"],
     srcs_version = "PY2AND3",
-    deps = [":utf8"],
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
     name = "phonology_json_validator",
     srcs = ["phonology_json_validator.py"],
     srcs_version = "PY2AND3",
-    deps = [":utf8"],
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
     name = "uniquely_decodable",
     srcs = ["uniquely_decodable.py"],
     srcs_version = "PY2AND3",
-    deps = [":utf8"],
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
     name = "evaluate_pronunciation_rules",
     srcs = ["evaluate_pronunciation_rules.py"],
     srcs_version = "PY2AND3",
-    deps = [":utf8"],
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
     name = "eval_dictionary_simple",
     srcs = ["eval_dictionary_simple.py"],
     srcs_version = "PY2AND3",
-    deps = [":utf8"],
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
@@ -63,28 +63,28 @@ py_binary(
         "eval_lex.py",
     ],
     srcs_version = "PY2AND3",
-    deps = [":utf8"],
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
     name = "test_icu_transform",
     srcs = ["test_icu_transform.py"],
     srcs_version = "PY2AND3",
-    deps = [":utf8"],
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
     name = "icu_util",
     srcs = ["icu_util.py"],
     srcs_version = "PY2AND3",
-    deps = [":utf8"],
+    deps = ["//utils:utf8"],
 )
 
 py_library(
     name = "grapheme_util",
     srcs = ["grapheme_util.py"],
     srcs_version = "PY2AND3",
-    deps = [":utf8"],
+    deps = ["//utils:utf8"],
 )
 
 cc_binary(
@@ -103,21 +103,21 @@ py_binary(
     name = "merge_lexicons",
     srcs = ["merge_lexicons.py"],
     srcs_version = "PY2AND3",
-    deps = [":utf8"],
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
     name = "festival_lexicon_from_tsv",
     srcs = ["festival_lexicon_from_tsv.py"],
     srcs_version = "PY2AND3",
-    deps = [":utf8"],
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
     name = "festival_prompts_from_tsv",
     srcs = ["festival_prompts_from_tsv.py"],
     srcs_version = "PY2AND3",
-    deps = [":utf8"],
+    deps = ["//utils:utf8"],
 )
 
 cc_binary(
@@ -167,14 +167,14 @@ py_binary(
     name = "sample",
     srcs = ["sample.py"],
     srcs_version = "PY2AND3",
-    deps = [":utf8"],
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
     name = "freq",
     srcs = ["freq.py"],
     srcs_version = "PY2AND3",
-    deps = [":utf8"],
+    deps = ["//utils:utf8"],
 )
 
 py_library(

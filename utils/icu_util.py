@@ -25,8 +25,7 @@ from utils import utf8
 
 
 def LoadTransliterationRules(path, transform_name):
-  with utf8.open(path) as reader:
-    rules = reader.read()
+  rules = utf8.GetContents(path)
   transliterator = icu.Transliterator.createFromRules(
       transform_name, rules, icu.UTransDirection.FORWARD)
   return transliterator

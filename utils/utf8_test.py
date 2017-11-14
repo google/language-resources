@@ -16,7 +16,7 @@ from __future__ import print_function
 
 import sys
 
-# Special unqualified local import, for use with utf8_py2and3_test:
+# Special unqualified local import, for use with utf8_test.sh:
 import utf8
 
 

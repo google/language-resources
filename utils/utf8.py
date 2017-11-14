@@ -79,6 +79,12 @@ def open(filename, mode='r'):  # pylint: disable=redefined-builtin
   return
 
 
+def GetContents(filename):  # pylint: disable=invalid-name
+  with open(filename) as reader:
+    contents = reader.read()
+  return contents
+
+
 def _str(value, depth=0):
   assert depth <= 2
   # The recommended style of isinstance() would not be portable, because the

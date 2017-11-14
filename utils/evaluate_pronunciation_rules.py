@@ -17,8 +17,9 @@
 
 from __future__ import unicode_literals
 
-import icu  # Debian/Ubuntu: apt-get install python-pyicu python3-icu
 import sys
+
+import icu  # Debian/Ubuntu: apt-get install python-pyicu python3-icu
 
 from utils import utf8
 
@@ -28,10 +29,10 @@ EXCEPTIONAL_WORDS = frozenset([
 
 
 def GetPronunciationRules(path, name):
-  with utf8.open(path) as reader:
-    rules = reader.read()
-  return icu.Transliterator.createFromRules(
+  rules = utf8.GetContents(path)
+  transliterator = icu.Transliterator.createFromRules(
       name, rules, icu.UTransDirection.FORWARD)
+  return transliterator
 
 
 def GetSampaToIpaMapping(path):

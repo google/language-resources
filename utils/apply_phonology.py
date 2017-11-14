@@ -39,8 +39,7 @@ NO_OF_FEATURES = 8
 
 
 def ReadPhonology(path):
-  with utf8.open(path) as reader:
-    contents = reader.read()
+  contents = utf8.GetContents(path)
   return json.loads(contents)
 
 

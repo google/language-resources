@@ -17,8 +17,9 @@
 
 from __future__ import unicode_literals
 
-import icu  # Debian/Ubuntu: apt-get install python-pyicu python3-icu
 import sys
+
+import icu  # Debian/Ubuntu: apt-get install python-pyicu python3-icu
 
 from utils import utf8
 
@@ -28,8 +29,7 @@ def main(argv):
     utf8.Print('Usage: %s RULES DICTIONARY' % argv[0])
     sys.exit(2)
 
-  with utf8.open(argv[1]) as reader:
-    rules = reader.read()
+  rules = utf8.GetContents(argv[1])
   xltor = icu.Transliterator.createFromRules(
       'foo-bar', rules, icu.UTransDirection.FORWARD)
 

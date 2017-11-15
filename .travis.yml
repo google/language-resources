@@ -2,15 +2,19 @@ sudo: required
 dist: trusty
 
 env:
-  - BAZEL=0.7.0
-  - ANDROID_SDK=3859397
+  global:
+    - BAZEL=0.7.0
+    - ANDROID_SDK=3859397
+  matrix:
+    - PY=2 TARGETS='//...'
+    - PY=3 TARGETS='//... -//Mymr/...'
 
 before_install:
   - sudo apt-get update -qq
   # Bazel dependencies:
   - sudo apt-get install -qq pkg-config zip g++ zlib1g-dev unzip
   # Project dependencies:
-  - sudo apt-get install -qq python-pyicu
+  - sudo apt-get install -qq python python-pyicu python3 python3-icu
   # Install Bazel:
   - wget https://github.com/bazelbuild/bazel/releases/download/${BAZEL}/bazel-${BAZEL}-installer-linux-x86_64.sh
   - sha256sum -c third_party/bazel-${BAZEL}-installer-linux-x86_64.sh.sha256
@@ -23,4 +27,4 @@ before_install:
   - echo y | /usr/local/android-sdk/tools/bin/sdkmanager 'build-tools;26.0.3' 'platforms;android-24'
 
 script:
-  - bazel test --nodistinct_host_configuration //...
+  - bazel test --python_path="$(which python$PY)" -- $TARGETS

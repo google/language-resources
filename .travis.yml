@@ -27,4 +27,4 @@ before_install:
   - echo y | /usr/local/android-sdk/tools/bin/sdkmanager 'build-tools;26.0.3' 'platforms;android-24'
 
 script:
-  - bazel test --python_path="$(which python$PY)" -- $TARGETS
+  - bazel test --nodistinct_host_configuration --python_path="$(which python$PY)" -- $TARGETS

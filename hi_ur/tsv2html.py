@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Copyright 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,17 +28,17 @@ HEADER = r'''<!DOCTYPE html>
 <meta charset="utf-8">
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css?family=Vesper+Libre');
-@import url('https://fonts.googleapis.com/earlyaccess/notonastaliqurdudraft.css');
+@import url('https://fonts.googleapis.com/earlyaccess/notonastaliqurdu.css');
 .arab {
     color: #006600;
     direction: rtl;
-    font-family: 'Noto Nastaliq Urdu Draft', serif;
+    font-family: 'Noto Nastaliq Urdu', serif;
     font-size: 32pt;
 }
 .deva {
     color: #000080;
     direction: ltr;
-    font-family: 'Vesper Libre', serif;
+    font-family: 'Vesper Libre', 'Noto Serif Devanagari', serif;
     font-size: 32pt;
 }
 .table {

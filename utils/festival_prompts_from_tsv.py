@@ -1,7 +1,4 @@
-#! /usr/bin/python2 -u
-# -*- coding: utf-8 -*-
-#
-# Copyright 2016 Google Inc. All Rights Reserved.
+# Copyright 2016, 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,34 +17,20 @@
 
 from __future__ import unicode_literals
 
-import codecs
-import sys
-
-STDIN = codecs.getreader('utf-8')(sys.stdin)
-STDOUT = codecs.getwriter('utf-8')(sys.stdout)
-STDERR = codecs.getwriter('utf-8')(sys.stderr)
-
-
-def GetlineUnbuffered(f=sys.stdin):
-  while True:
-    line = f.readline()
-    if not line:
-      break
-    yield line.decode('utf-8')
-  return
+from utils import utf8
 
 
 def main(unused_args):
-  for line in GetlineUnbuffered():
+  for line in utf8.stdin:
     line = line.rstrip('\n')
     fields = line.split('\t')
     assert len(fields) >= 2
     utterance_id = fields[0]
     prompt_text = fields[1]
     assert '"' not in prompt_text
-    STDOUT.write('( %s "%s" )\n' % (utterance_id, prompt_text))
+    utf8.Print('( %s "%s" )' % (utterance_id, prompt_text))
   return
 
 
 if __name__ == '__main__':
-  main(sys.argv)
+  main(None)

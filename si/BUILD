@@ -12,10 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright 2016 Google, Inc.
+# Copyright 2016, 2017 Google, Inc.
 # Author: mjansche@google.com (Martin Jansche)
 
 package(default_visibility = ["//visibility:public"])
+
+sh_test(
+    name = "zero_width_test",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        cd $$(dirname $(location zero_width.py))
+        for py in python python2 python3; do
+          if which $$py; then
+            $$py -m unittest zero_width
+          fi
+        done
+        """,
+    ],
+    data = ["zero_width.py"],
+)
 
 sh_test(
     name = "phonemes_are_uniquely_decodable",
@@ -64,16 +81,19 @@ sh_test(
         """,
     ],
     data = [
-        "sinhala.far",
         "grapheme.syms",
         "graphemes_test.tsv",
+        "sinhala.far",
         "//utils:thrax_g2p",
     ],
 )
 
 genrule(
     name = "make_string2graphemes_fst",
-    srcs = ["sinhala.far"],
+    srcs = [
+        "grapheme.syms",
+        "sinhala.far",
+    ],
     outs = [
         "UTF8_TO_GRAPHEMES.fst",
         "string2graphemes.fst",
@@ -86,12 +106,16 @@ genrule(
           $(location sinhala.far) &&
         $(location @openfst//:fstmap) \
           --map_type=to_log64 \
-          $(location UTF8_TO_GRAPHEMES.fst) \
+          $(location UTF8_TO_GRAPHEMES.fst) |
+        $(location @openfst//:fstsymbols) \
+          --osymbols=$(location grapheme.syms) \
+          - \
           $(location string2graphemes.fst)
         """,
     tools = [
         "@openfst//:farextract",
         "@openfst//:fstmap",
+        "@openfst//:fstsymbols",
     ],
 )
 
@@ -109,8 +133,26 @@ sh_test(
     ],
     data = [
         "alignables.txt",
-        "//si/data:lexicon.tsv",
         "string2graphemes.fst",
         "//festus:lexicon-diagnostics",
+        "//si/data:lexicon.tsv",
+    ],
+)
+
+sh_test(
+    name = "prompt_words_in_lexicon",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        "$(location prompt_words_in_lexicon.py)" \
+          "$(location //si/data:prompts.tsv)" \
+          "$(location //si/data:lexicon.tsv)"
+        """,
+    ],
+    data = [
+        "prompt_words_in_lexicon.py",
+        "//si/data:lexicon.tsv",
+        "//si/data:prompts.tsv",
     ],
 )

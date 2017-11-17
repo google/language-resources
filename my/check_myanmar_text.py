@@ -1,6 +1,4 @@
-#! /usr/bin/python2 -u
-#
-# Copyright 2016 Google Inc. All Rights Reserved.
+# Copyright 2016, 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,39 +17,26 @@
 
 from __future__ import unicode_literals
 
-import codecs
 import re
 import sys
 
 from third_party.unicode import utn11
-
-STDIN = codecs.getreader('utf-8')(sys.stdin)
-STDOUT = codecs.getwriter('utf-8')(sys.stdout)
-STDERR = codecs.getwriter('utf-8')(sys.stderr)
+from utils import utf8
 
 MYANMAR_TEXT = re.compile(r'[\u1000-\u109F\uAA60-\uAA7F\uA9E0-\uA9FF]+')
 
 
-def GetlineUnbuffered(f=sys.stdin):
-  while True:
-    line = f.readline()
-    if not line:
-      break
-    yield line.decode('utf-8')
-  return
-
-
 def main(unused_args):
   all_ok = True
-  for line in GetlineUnbuffered():
+  for line in utf8.stdin:
     line_ok = True
     for span in MYANMAR_TEXT.findall(line):
       if not utn11.CLUSTERS.match(span):
-        STDERR.write('"%s" is not in canonical storage order in line %s'
-                     % (span, line))
+        utf8.stderr.write('"%s" is not in canonical storage order in line %s'
+                          % (span, line))
         line_ok = False
     if line_ok:
-      STDOUT.write(line)
+      utf8.stdout.write(line)
     else:
       all_ok = False
   sys.exit(0 if all_ok else 1)

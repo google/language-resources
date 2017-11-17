@@ -1,7 +1,4 @@
-#! /usr/bin/python
-# -*- coding: utf-8 -*-
-#
-# Copyright 2016 Google Inc. All Rights Reserved.
+# Copyright 2016, 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the 'License');
 # you may not use this file except in compliance with the License.
@@ -20,18 +17,16 @@
 Reads phonology.json file and validates the phoneme inventory.
 """
 
-import codecs
 import json
 import sys
 
-STDIN = codecs.getreader('utf-8')(sys.stdin)
-STDOUT = codecs.getwriter('utf-8')(sys.stdout)
-STDERR = codecs.getwriter('utf-8')(sys.stderr)
+from utils import utf8
+
+STDERR = utf8.stderr
 
 
-def main(args):
-  file_name = args[1]
-  contents = codecs.open(file_name, 'r', 'utf-8').read()
+def main(argv):
+  contents = utf8.GetContents(argv[1])
   phonology = json.loads(contents)
 
   feature_types = {}
@@ -44,7 +39,7 @@ def main(args):
   for feat_type in phonology['feature_types']:
     for feat in feat_type[1:]:
       if not features.get(feat):
-        STDERR.write('Feature %s not in %s\n' %(feat, str(features)))
+        STDERR.write('Feature %s not in %s\n' % (feat, str(features)))
         is_valid = False
 
     feature_types.update({feat_type[0]: feat_type[1:]})
@@ -59,7 +54,7 @@ def main(args):
       STDERR.write("Phoneme %s dose not match its feature types, expected features %s", phoneme, expected_feature_list)
       is_valid = False
 
-    for x in xrange(2, len(phone)):
+    for x in range(2, len(phone)):
       feature_type = feature_list[x - 2]
       feature_options = features.get(feature_type)
 
@@ -67,8 +62,9 @@ def main(args):
         STDERR.write('Phoneme "%s" given feature "%s" value "%s" not found in list %s\n' %(phoneme, feature_type, phone[x], str(feature_options)))
         is_valid = False
 
-  if not is_valid:
-    sys.exit(0)
+  sys.exit(0 if is_valid else 1)
+  return
+
 
 if __name__ == '__main__':
   main(sys.argv)

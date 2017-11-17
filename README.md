@@ -31,6 +31,15 @@ datasets. These tools are written in C++ and Python and are built with
 [install a recent version of Bazel](http://bazel.io/docs/install.html)
 (minimally Bazel release 0.2.0 is required).
 
+## Opensourced Audio Data
+| Resource | Link |
+|-----------|--------------------|
+| Sinhala TTS recordings (~3K) | [http://www.openslr.org/30/](http://www.openslr.org/30/)      |
+| TTS recordings for four South African languages (af, st, tn, xh) | [http://www.openslr.org/32/](http://www.openslr.org/32/)  |
+| Large Javanese ASR training data set (~185K)	| [http://www.openslr.org/35/](http://www.openslr.org/35/) |
+| Large Sundanese ASR training data set	(~220K)| [http://www.openslr.org/36/](http://www.openslr.org/36/) |
+
+
 
 ## License
 

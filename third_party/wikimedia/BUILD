@@ -6,4 +6,5 @@ exports_files([
     "LICENSE",
     "jv_wiki_cleaned.txt",
     "simple_wiktionary.txt",
+    "wp_my_tiger.txt",
 ])

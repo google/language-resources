@@ -1,7 +1,4 @@
-#! /usr/bin/python2
-# -*- coding: utf-8 -*-
-#
-# Copyright 2016 Google Inc. All Rights Reserved.
+# Copyright 2016, 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +20,8 @@ all other lines to stderr.
 
 import random
 import sys
+
+from utils import utf8
 
 
 def Sample(iterable, n, rng):
@@ -55,14 +54,14 @@ def Sample(iterable, n, rng):
 
 def main(argv):
   if len(argv) != 2:
-    sys.stdout.write('Usage: %s SAMPLE_SIZE\n' % argv[0])
+    utf8.Print('Usage: %s SAMPLE_SIZE' % argv[0])
     sys.exit(2)
   n = int(argv[1])
-  for in_sample, line in Sample(sys.stdin, n, random.Random()):
+  for in_sample, line in Sample(utf8.stdin, n, random.Random()):
     if in_sample:
-      sys.stdout.write(line)
+      utf8.stdout.write(line)
     else:
-      sys.stderr.write(line)
+      utf8.stderr.write(line)
   return
 
 

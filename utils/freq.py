@@ -1,7 +1,4 @@
-#! /usr/bin/python2
-# -*- coding: utf-8 -*-
-#
-# Copyright 2016 Google Inc. All Rights Reserved.
+# Copyright 2016, 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,25 +22,19 @@ Writes sorted tokens to stdout (one per line).
 
 from __future__ import unicode_literals
 
-import codecs
-import sys
-
-STDIN = codecs.getreader('utf-8')(sys.stdin)
-STDOUT = codecs.getwriter('utf-8')(sys.stdout)
-STDERR = codecs.getwriter('utf-8')(sys.stderr)
+from utils import utf8
 
 
 def main(unused_argv):
   token_count = {}
-  for line in STDIN:
+  for line in utf8.stdin:
     token = line.rstrip('\n')
     token_count[token] = token_count.get(token, 0) + 1
-  items = token_count.items()
-  items.sort(key = lambda (token, count): (-count, token))
-  for token, count in items:
-    STDOUT.write('%s\t%d\n' % (token, count))
+  items = [(-count, token) for token, count in token_count.items()]
+  for negative_count, token in sorted(items):
+    utf8.Print('%s\t%d' % (token, -negative_count))
   return
 
 
 if __name__ == '__main__':
-  main(sys.argv)
+  main(None)

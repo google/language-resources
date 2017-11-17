@@ -1,7 +1,4 @@
-#! /usr/bin/python2 -u
-# -*- coding: utf-8 -*-
-#
-# Copyright 2016 Google Inc. All Rights Reserved.
+# Copyright 2016, 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,26 +17,19 @@
 
 from __future__ import unicode_literals
 
-import codecs
-import icu  # Debian/Ubuntu: apt-get install python-pyicu
 import sys
 
-STDOUT = codecs.getwriter('utf-8')(sys.stdout)
+from utils import icu_util
+from utils import utf8
 
 EXCEPTIONAL_WORDS = frozenset([
     'apreli',  # known exception in the NCHLT isiXhosa dictionary
     ])
 
 
-def GetPronunciationRules(path, name):
-  rules = codecs.open(path, 'r', 'utf-8').read()
-  return icu.Transliterator.createFromRules(
-      name, rules, icu.UTransDirection.FORWARD)
-
-
 def GetSampaToIpaMapping(path):
   mapping = {}
-  with codecs.open(path, 'r', 'utf-8') as reader:
+  with utf8.open(path) as reader:
     for line in reader:
       line = line.rstrip('\n')
       fields = line.split('\t')
@@ -53,7 +43,7 @@ def GetSampaToIpaMapping(path):
 def TestPronunciationRules(xltor, mapping, dictionary):
   # Batch testing against a dictionary.
   success = True
-  with codecs.open(dictionary, 'r', 'utf-8') as reader:
+  with utf8.open(dictionary) as reader:
     for line in reader:
       line = line.rstrip('\n')
       fields = line.split('\t')
@@ -65,41 +55,38 @@ def TestPronunciationRules(xltor, mapping, dictionary):
         continue
       predicted = xltor.transliterate(orth)
       if predicted != ipa:
-        STDOUT.write('%s\t%s\t%s != %s\n' %
-                     (orth, ' '.join(sampa), ipa, predicted))
+        utf8.Print('%s\t%s\t%s != %s' %
+                   (orth, ' '.join(sampa), ipa, predicted))
         success = False
   return success
 
 
 def ApplyPronunciationRules(xltor):
   # For interactive use.
-  while True:
-    line = sys.stdin.readline()
-    if not line:
-      break
-    line = line.decode('utf-8')
+  for line in utf8.stdin:
     for orth in line.split():
       predicted = xltor.transliterate(orth)
-      STDOUT.write('%s\t%s\n' % (orth, predicted))
+      utf8.Print('%s\t%s' % (orth, predicted))
   return
 
 
 def main(args):
   if len(args) == 2:
-    xltor = GetPronunciationRules(args[1], 'foo-bar')
+    xltor = icu_util.LoadTransliterationRules(args[1], 'foo-bar')
     ApplyPronunciationRules(xltor)
   elif len(args) == 4:
-    xltor = GetPronunciationRules(args[1], 'foo-bar')
+    xltor = icu_util.LoadTransliterationRules(args[1], 'foo-bar')
     mapping = GetSampaToIpaMapping(args[2])
     if TestPronunciationRules(xltor, mapping, args[3]):
-      STDOUT.write('PASS\n')
+      utf8.Print('PASS')
       sys.exit(0)
     else:
-      STDOUT.write('FAIL\n')
+      utf8.Print('FAIL')
       sys.exit(1)
   else:
-    STDOUT.write('Usage: %s RULES [MAPPING DICTIONARY]\n' % args[0])
-    sys.exit(1)
+    utf8.Print('Usage: %s RULES [MAPPING DICTIONARY]' % args[0])
+    sys.exit(2)
+  return
 
 
 if __name__ == '__main__':

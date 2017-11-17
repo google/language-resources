@@ -96,7 +96,6 @@ fi
 echo "Copying wav from festival to Merlin."
 cp "${FESTIVAL_VOICE_PATH}"/wav/*.wav "${MERLIN_DATA_PATH_WAV}"
 
-# TODO(pasindu): Switch to python script.
 echo "Extracting acoustic features."
 python "${MERLIN_PATH}/misc/scripts/vocoder/world/extract_features_for_merlin.py" "${MERLIN_PATH}" \
   "${WAV_PATH}" "${MERLIN_DATA_PATH}" "${SAMPLE_RATE}"

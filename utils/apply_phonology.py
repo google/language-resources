@@ -1,7 +1,4 @@
-#! /usr/bin/python2
-# -*- coding: utf-8 -*-
-#
-# Copyright 2016 Google Inc. All Rights Reserved.
+# Copyright 2016, 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,25 +23,25 @@ decision trees.
 
 from __future__ import unicode_literals
 
-import codecs
 import glob
 import json
 import os.path
 import re
 import sys
 
-STDIN = codecs.getreader('utf-8')(sys.stdin)
-STDOUT = codecs.getwriter('utf-8')(sys.stdout)
-STDERR = codecs.getwriter('utf-8')(sys.stderr)
+from utils import utf8
+
+STDERR = utf8.stderr
 
 INST_LANG_VOX = re.compile(r'.*/([^_]+_[^_]+)_([^_]+)_phoneset.scm$')
 
 NO_OF_FEATURES = 8
 
+
 def ReadPhonology(path):
-  with codecs.open(path, 'r', 'utf-8') as reader:
-    contents = reader.read()
+  contents = utf8.GetContents(path)
   return json.loads(contents)
+
 
 def MakePhonesetScm(writer, phonology, inst_lang, vox):
   writer.write(';;; Automatically generated. Edit with caution.\n\n')
@@ -115,6 +112,7 @@ Reset phone set for %s."
        inst_lang, vox)
   )
   return
+
 
 def MakeLexiconScm(writer, inst_lang, vox):
   writer.write(r''';;; Automatically generated. Edit with caution.
@@ -729,8 +727,7 @@ R:segstate.parent.R:SylStructure.parent.parent.phr_pos
 
 def main(argv):
   if len(argv) != 3:
-    sys.stdout.write('Usage: %s phonology.json path/to/tts/build/dir\n' %
-                     argv[0])
+    utf8.Print('Usage: %s phonology.json path/to/tts/build/dir' % argv[0])
     sys.exit(2)
 
   phonology = ReadPhonology(argv[1])
@@ -744,11 +741,11 @@ def main(argv):
   inst_lang = match.group(1)
   vox = match.group(2)
 
-  with codecs.open(phoneset_path, 'w', 'utf-8') as writer:
+  with utf8.open(phoneset_path, mode='w') as writer:
     MakePhonesetScm(writer, phonology, inst_lang, vox)
 
-  with codecs.open('%s/festvox/%s_%s_lexicon.scm' % (build_dir, inst_lang, vox),
-                   'w', 'utf-8') as writer:
+  with utf8.open('%s/festvox/%s_%s_lexicon.scm' % (build_dir, inst_lang, vox),
+                 mode='w') as writer:
     MakeLexiconScm(writer, inst_lang, vox)
 
   phones = [phone[0] for phone in phonology['phones']]
@@ -759,15 +756,15 @@ def main(argv):
     STDERR.write('feature %s: %s\n' % (k, vs))
 
   fpath = '%s/festival' % build_dir
-  with codecs.open('%s/clunits/all.desc' % fpath, 'w', 'utf-8') as writer:
+  with utf8.open('%s/clunits/all.desc' % fpath, mode='w') as writer:
     MakeAllDesc(writer, phones, features)
-  with codecs.open('%s/clunits/mcep.desc' % fpath, 'w', 'utf-8') as writer:
+  with utf8.open('%s/clunits/mcep.desc' % fpath, mode='w') as writer:
     MakeMcepDesc(writer, phones, features)
-  with codecs.open('%s/clunits/mceptraj.desc' % fpath, 'w', 'utf-8') as writer:
+  with utf8.open('%s/clunits/mceptraj.desc' % fpath, mode='w') as writer:
     MakeMceptrajDesc(writer, phones, features)
-  with codecs.open('%s/dur/etc/dur.feats' % fpath, 'w', 'utf-8') as writer:
+  with utf8.open('%s/dur/etc/dur.feats' % fpath, mode='w') as writer:
     MakeDurFeats(writer, phones, features)
-  with codecs.open('%s/dur/etc/statedur.feats' % fpath, 'w', 'utf-8') as writer:
+  with utf8.open('%s/dur/etc/statedur.feats' % fpath, mode='w') as writer:
     MakeStatedurFeats(writer, phones, features)
   return
 

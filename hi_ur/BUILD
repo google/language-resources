@@ -12,27 +12,96 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright 2016 Google, Inc.
+# Copyright 2016, 2017 Google, Inc.
 # Author: mjansche@google.com (Martin Jansche)
 
 package(default_visibility = ["//visibility:public"])
 
+py_binary(
+    name = "hi2ur",
+    srcs = ["hi2ur.py"],
+    srcs_version = "PY2AND3",
+    deps = [
+        "//utils:icu_util",   # Depends non-hermetically on PyICU.
+        "//utils:utf8",
+    ],
+)
+
 sh_test(
-    name = "wikidata_names_test",
+    name = "hi2ur_test",
     timeout = "short",
     srcs = ["//utils:eval.sh"],
     args = [
         """
-        sed 1d $(location data/wikidata_20150427.tsv) |
-        $(location //festus:lexicon-diagnostics) \
-          --alignables=$(location alignables.txt) \
-          --input_index=3 \
-          --output_index=4
+        cat $(location hi_ur_core.tsv) $(location hi_ur_other.tsv) |
+        $(location :hi2ur) $(location hi-ur.txt)
+        """,
+    ],
+    data = [
+        "hi-ur.txt",
+        "hi_ur_core.tsv",
+        "hi_ur_other.tsv",
+        ":hi2ur",
+    ],
+    tags = ["manual"],  # Test is not hermetic due to dependency on PyICU.
+)
+
+py_binary(
+    name = "tsv2html",
+    srcs = ["tsv2html.py"],
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
+)
+
+py_binary(
+    name = "symbolize",
+    srcs = ["symbolize.py"],
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
+)
+
+sh_test(
+    name = "core_alignment_test",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        for c in 1 2; do
+          $(location symbolize) 0 $$c \
+            < $(location hi_ur_core.tsv) |
+          $(location //festus:lexicon-diagnostics) \
+            --alignables=$(location alignables.txt) \
+            --input_index=1 \
+            --output_index=2
+        done
         """,
     ],
     data = [
         "alignables.txt",
-        "data/wikidata_20150427.tsv",
+        "hi_ur_core.tsv",
+        ":symbolize",
+        "//festus:lexicon-diagnostics",
+    ],
+)
+
+sh_test(
+    name = "extended_alignment_test",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        $(location symbolize) 0 1 \
+          < $(location hi_ur_extended.tsv) |
+        $(location //festus:lexicon-diagnostics) \
+          --alignables=$(location alignables.txt) \
+          --input_index=1 \
+          --output_index=2
+        """,
+    ],
+    data = [
+        "alignables.txt",
+        "hi_ur_extended.tsv",
+        ":symbolize",
         "//festus:lexicon-diagnostics",
     ],
 )

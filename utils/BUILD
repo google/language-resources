@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright 2016 Google, Inc.
+# Copyright 2016, 2017 Google, Inc.
 # Author: mjansche@google.com (Martin Jansche)
 
 package(default_visibility = ["//visibility:public"])
@@ -24,31 +24,39 @@ exports_files(["eval.sh"])
 py_binary(
     name = "apply_phonology",
     srcs = ["apply_phonology.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
     name = "phonology_json_validator",
     srcs = ["phonology_json_validator.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
     name = "uniquely_decodable",
     srcs = ["uniquely_decodable.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
     name = "evaluate_pronunciation_rules",
     srcs = ["evaluate_pronunciation_rules.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = [
+        "//utils:icu_util",
+        "//utils:utf8",
+    ],
 )
 
 py_binary(
     name = "eval_dictionary_simple",
     srcs = ["eval_dictionary_simple.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
@@ -57,13 +65,32 @@ py_binary(
         "edist.py",
         "eval_lex.py",
     ],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
     name = "test_icu_transform",
     srcs = ["test_icu_transform.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = [
+        "//utils:icu_util",
+        "//utils:utf8",
+    ],
+)
+
+py_binary(
+    name = "icu_util",
+    srcs = ["icu_util.py"],
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
+)
+
+py_library(
+    name = "grapheme_util",
+    srcs = ["grapheme_util.py"],
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
 )
 
 cc_binary(
@@ -81,13 +108,22 @@ cc_binary(
 py_binary(
     name = "merge_lexicons",
     srcs = ["merge_lexicons.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
     name = "festival_lexicon_from_tsv",
     srcs = ["festival_lexicon_from_tsv.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
+)
+
+py_binary(
+    name = "festival_prompts_from_tsv",
+    srcs = ["festival_prompts_from_tsv.py"],
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
 )
 
 cc_binary(
@@ -112,6 +148,7 @@ cc_binary(
 
 cc_library(
     name = "grm_tester_lib",
+    testonly = 1,
     srcs = ["grm_tester.cc"],
     deps = [
         "//festus:fst-util",
@@ -119,7 +156,6 @@ cc_library(
         "@openfst//:fst",
         "@thrax//:grm-manager",
     ],
-    testonly = 1,
 )
 
 cc_binary(
@@ -136,11 +172,36 @@ cc_binary(
 py_binary(
     name = "sample",
     srcs = ["sample.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
     name = "freq",
     srcs = ["freq.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
+)
+
+py_library(
+    name = "utf8",
+    srcs = ["utf8.py"],
+    srcs_version = "PY2AND3",
+)
+
+# Ordinarily, one would simply use a py_test build target, but here we want to
+# test consistent behavior of utf8.py for both PY2 and PY3 and under different
+# environment conditions, hence a non-standard sh_test.
+sh_test(
+    name = "utf8_test",
+    srcs = ["utf8_test.sh"],
+    args = [
+        "$(location utf8_test.py)",
+        "$(location utf8_test_stdout.txt)",
+    ],
+    data = [
+        "utf8.py",
+        "utf8_test.py",
+        "utf8_test_stdout.txt",
+    ],
 )

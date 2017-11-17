@@ -17,6 +17,16 @@
 
 package(default_visibility = ["//visibility:public"])
 
+alias(
+    name = "gtest",
+    actual = "@googletest//:gtest",
+)
+
+alias(
+    name = "gtest_main",
+    actual = "@googletest//:gtest_main",
+)
+
 cc_library(
     name = "float-weight-star",
     hdrs = [
@@ -40,7 +50,7 @@ cc_library(
 cc_library(
     name = "weight-test-lib",
     hdrs = ["weight-test-lib.h"],
-    deps = ["@googletest//:gtest"],
+    deps = [":gtest"],
 )
 
 cc_library(
@@ -59,7 +69,7 @@ cc_test(
     deps = [
         ":real-weight",
         ":weight-test-lib",
-        "@googletest//:gtest",
+        ":gtest",
         "@openfst//:weight-tester",
     ],
 )
@@ -78,7 +88,7 @@ cc_test(
         ":modular-int-semiring",
         ":weight",
         ":weight-test-lib",
-        "@googletest//:gtest_main",
+        ":gtest_main",
     ],
 )
 
@@ -96,7 +106,7 @@ cc_test(
         ":max-times-semiring",
         ":weight",
         ":weight-test-lib",
-        "@googletest//:gtest_main",
+        ":gtest_main",
     ],
 )
 
@@ -117,7 +127,7 @@ cc_test(
         ":quaternion-semiring",
         ":real-weight",
         ":weight-test-lib",
-        "@googletest//:gtest_main",
+        ":gtest_main",
         "@openfst//:weight",
     ],
 )
@@ -129,7 +139,7 @@ cc_test(
     deps = [
         ":float-weight-star",
         ":real-weight",
-        "@googletest//:gtest_main",
+        ":gtest_main",
         "@openfst//:weight",
     ],
 )
@@ -149,7 +159,7 @@ cc_test(
         ":float-weight-star",
         ":matrix",
         ":real-weight",
-        "@googletest//:gtest_main",
+        ":gtest_main",
         "@openfst//:fst",
     ],
 )
@@ -180,7 +190,7 @@ cc_test(
     srcs = ["string-util-test.cc"],
     deps = [
         ":string-util",
-        "@googletest//:gtest_main",
+        ":gtest_main",
     ],
 )
 
@@ -216,7 +226,7 @@ cc_test(
     srcs = ["iterator-test.cc"],
     deps = [
         ":iterator",
-        "@googletest//:gtest_main",
+        ":gtest_main",
     ],
 )
 
@@ -233,7 +243,7 @@ cc_test(
     deps = [
         ":iterator",
         ":topsort",
-        "@googletest//:gtest_main",
+        ":gtest_main",
         "@openfst//:fst",
     ],
 )
@@ -373,7 +383,7 @@ cc_test(
         ":term-semiring",
         ":weight",
         ":weight-test-lib",
-        "@googletest//:gtest_main",
+        ":gtest_main",
         "@openfst//:weight",
     ],
 )
@@ -399,7 +409,7 @@ cc_test(
         ":quaternion-semiring",
         ":real-weight",
         ":weight",
-        "@googletest//:gtest",
+        ":gtest",
         "@openfst//:fst",
     ],
 )

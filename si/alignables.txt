@@ -93,6 +93,8 @@ input_symbol { key: "-o"           value: 0x0DDC }
 input_symbol { key: "-oo"          value: 0x0DDD }
 input_symbol { key: "-au"          value: 0x0DDE }
 input_symbol { key: "-rri"         value: 0x0DF2 }
+input_symbol { key: "ZWNJ"         value: 0x200C }
+input_symbol { key: "ZWJ"          value: 0x200D }
 input_symbol { key: "-a"           value: 0xE000 }
 input_symbol { key: "yansaya"      value: 0xE001 }
 input_symbol { key: "rakaransaya"  value: 0xE002 }
@@ -319,7 +321,15 @@ alignable { input: "nnga"           output: "g" }     # ඟ nnga -> ග ga
 alignable { input: "da"             output: "ⁿd" }    # ද da -> ඳ nda
 alignable { input: "nda"            output: "d" }     # ඳ nda -> ද da
 alignable { input: "ra -ae"         output: "r u" }   # රැ rae -> රු ru
+alignable { input: "ra -u"          output: "r æ" }   # රැ rae <- රු ru
 alignable { input: "ra -aae"        output: "r uː" }  # රෑ raae -> රූ ruu
 alignable { input: "va virama"      output: "w i" }   # ව් v -> වි vi
 alignable { input: "sa -ri"         output: "r i" }   # සෘ sri -> ඍ ri
 alignable { input: "sa -ri"         output: "i r" }   # සෘ sri -> ඍ ri
+
+# Exceptions, foreign words, etc.
+
+alignable { input: "dda virama tta" output: "ʈ" }     # වෙන්ඩ්ට්
+alignable { input: "ta virama da"   output: "d d" }   # අත්දැකීමක්
+alignable { input: "-i ya -u"       output: "y u" }   # දියුණුවට
+alignable { input: "-i va -u"       output: "y u" }   # නිවුස්

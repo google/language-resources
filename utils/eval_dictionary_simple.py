@@ -1,7 +1,4 @@
-#! /usr/bin/python2 -u
-# -*- coding: utf-8 -*-
-#
-# Copyright 2016 Google Inc. All Rights Reserved.
+# Copyright 2016, 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,12 +17,13 @@
 
 from __future__ import unicode_literals
 
-import codecs
 import sys
 
-STDIN = codecs.getreader('utf-8')(sys.stdin)
-STDOUT = codecs.getwriter('utf-8')(sys.stdout)
-STDERR = codecs.getwriter('utf-8')(sys.stderr)
+from utils import utf8
+
+STDIN = utf8.stdin
+STDOUT = utf8.stdout
+STDERR = utf8.stderr
 
 
 def ReadTSV(reader):
@@ -51,7 +49,7 @@ def main(args):
     target = -1
 
   golden = {}
-  with codecs.open(args[1], 'r', 'utf-8') as reader:
+  with utf8.open(args[1]) as reader:
     for key, val in ReadTSV(reader):
       if key not in golden:
         golden[key] = []

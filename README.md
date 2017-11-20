@@ -39,6 +39,10 @@ datasets. These tools are written in C++ and Python and are built with
 | Large Javanese ASR training data set (~185K)	| [http://www.openslr.org/35/](http://www.openslr.org/35/) |
 | Large Sundanese ASR training data set	(~220K)| [http://www.openslr.org/36/](http://www.openslr.org/36/) |
 
+## Other reading resources
+
+SLTU 2016 Tutorial - [https://sites.google.com/site/sltututorial/overview](https://sites.google.com/site/sltututorial/overview)
+
 
 
 ## License

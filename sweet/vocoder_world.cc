@@ -31,6 +31,16 @@
 
 namespace {
 
+template <class T>
+std::vector<T *> AsPtrVector(std::vector<std::vector<T>> *vecvec) {
+  std::vector<T *> ptrvec;
+  ptrvec.reserve(vecvec->size());
+  for (auto &vec : *vecvec) {
+    ptrvec.emplace_back(vec.data());
+  }
+  return ptrvec;
+}
+
 class Analysis {
  public:
   Analysis() = delete;
@@ -52,6 +62,10 @@ class Analysis {
   int sample_rate() const { return sample_rate_; }
 
   int num_frames() const { return num_frames_; }
+
+  int fft_size() const { return fft_size_; }
+
+  int FftDimension() const { return fft_size_ / 2 + 1; }
 
   std::ostream &PrintSummary(std::ostream &strm) const {
     strm << "Audio length: " << num_samples_ << " samples" << std::endl;
@@ -102,30 +116,27 @@ class Analysis {
     InitializeCheapTrickOption(sample_rate_, &cheap_trick_option);
     cheap_trick_option.q1 = -0.15;  // TODO: Double-check.
     fft_size_ = GetFFTSizeForCheapTrick(sample_rate_, &cheap_trick_option);
-    const int fft_dim = fft_size_ / 2 + 1;
+    const int fft_dim = FftDimension();
     spectrogram_storage_.resize(num_frames_, std::vector<double>(fft_dim));
-    spectrogram_.resize(num_frames_);
-    for (size_t f = 0; f < num_frames_; ++f) {
-      spectrogram_[f] = spectrogram_storage_[f].data();
-    }
+    std::vector<double *> spectrogram = AsPtrVector(&spectrogram_storage_);
     CheapTrick(samples_.data(), samples_.size(), sample_rate_,
                temporal_positions_.data(), f0_.data(), f0_.size(),
-               &cheap_trick_option, spectrogram_.data());
+               &cheap_trick_option, spectrogram.data());
   }
 
 
   bool Mgc(sweet::WorldData *world_data) {
     double alpha;
     if (sample_rate_ == 48000) {
-      assert(fft_size_ == 2048);
+      assert(fft_size() == 2048);
       alpha = 0.77;
     } else if (sample_rate_ == 16000) {
-      assert(fft_size_ == 1024);
+      assert(fft_size() == 1024);
       alpha = 0.58;
     } else {
       return false;
     }
-    const int fft_dim = fft_size_ / 2 + 1;
+    const int fft_dim = FftDimension();
     const int mel_cepstrum_order = 59;
     const int itype = 3;
     const int itr1 = 2;
@@ -141,7 +152,7 @@ class Analysis {
         assert(spectrum[s] >= 0);
         spectrum[s] = 32768 * std::sqrt(spectrum[s]);
       }
-      int res = mcep(spectrum.data(), fft_size_, mc.data(),
+      int res = mcep(spectrum.data(), fft_size(), mc.data(),
                      mel_cepstrum_order, alpha, itr1, itr2, end,
                      etype, e, mindet, itype);
       if (res != 0) {
@@ -170,7 +181,7 @@ class Analysis {
       frame->set_lf0(y);
       // Set spectrogram for debugging:
       const auto &spectrum = spectrogram_storage_.at(f);
-      const int fft_dim = fft_size_ / 2 + 1;
+      const int fft_dim = FftDimension();
       assert(spectrum.size() == fft_dim);
       auto *sp = frame->mutable_sp();
       sp->Resize(fft_dim, 0.0);
@@ -191,7 +202,6 @@ class Analysis {
   std::vector<double> f0_;
   int fft_size_;
   std::vector<std::vector<double>> spectrogram_storage_;
-  std::vector<double *> spectrogram_;
 };
 
 }  // namespace

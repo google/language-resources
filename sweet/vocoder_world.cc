@@ -109,25 +109,21 @@ class Analysis {
               f0_.data());
   }
 
-  void Bap(sweet::WorldData *world_data){
-    const int fft_dim = fft_size_ / 2 + 1;
-    double **aperiodicity = new double *[num_frames_];
-    for (int i = 0; i < num_frames_; ++i) {
-      aperiodicity[i] = new double[fft_dim];
-    }
-
+  void Bap(sweet::WorldData *world_data) {
+    const int bap_dim = FftDimension() + 1;  // TODO: Triple-check!
+    aperiodicity_.Reset(num_frames_, bap_dim);
     D4COption d4c_option;
     InitializeD4COption(&d4c_option);
     d4c_option.threshold = 0.85;
-
-    D4C(samples_.data(), samples_.size(), sample_rate_, temporal_positions_.data(),
-            f0_.data(), f0_.size(), fft_size_, &d4c_option, aperiodicity);
-
+    D4C(samples_.data(), samples_.size(), sample_rate_,
+        temporal_positions_.data(), f0_.data(), f0_.size(), fft_size(),
+        &d4c_option, aperiodicity_.AsArray());
     for (size_t f = 0; f < num_frames_; ++f) {
+      const auto &frame_aperiodicity = aperiodicity_.Row(f);
       auto *bap = world_data->mutable_frame(f)->mutable_bap();
-      bap->Resize(num_frames_, 0);
-      for (int c = 0; c <= fft_dim; ++c) {
-        bap->Set(c, aperiodicity[f][c]);
+      bap->Resize(bap_dim, 0);
+      for (int c = 0; c < bap_dim; ++c) {
+        bap->Set(c, frame_aperiodicity.at(c));
       }
     }
   }
@@ -222,6 +218,7 @@ class Analysis {
   std::vector<double> f0_;
   int fft_size_;
   MatrixHelper<double> spectrogram_;
+  MatrixHelper<double> aperiodicity_;
 };
 
 }  // namespace

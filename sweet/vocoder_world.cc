@@ -32,14 +32,35 @@
 namespace {
 
 template <class T>
-std::vector<T *> AsPtrVector(std::vector<std::vector<T>> *vecvec) {
-  std::vector<T *> ptrvec;
-  ptrvec.reserve(vecvec->size());
-  for (auto &vec : *vecvec) {
-    ptrvec.emplace_back(vec.data());
+class MatrixHelper {
+ public:
+  void Reset(int dim1, int dim2, T value=T()) {
+    vecvec_.clear();
+    ptrvec_.clear();
+    vecvec_.reserve(dim1);
+    ptrvec_.reserve(dim1);
+    for (int i = 0; i < dim1; ++i) {
+      vecvec_.emplace_back(dim2, value);
+      ptrvec_.emplace_back(vecvec_.back().data());
+    }
   }
-  return ptrvec;
-}
+
+  T **AsArray() {
+    return ptrvec_.data();
+  }
+
+  std::vector<T> &Row(int i) {
+    return vecvec_.at(i);
+  }
+
+  T &At(int i, int j) {
+    return vecvec_.at(i).at(j);
+  }
+
+ private:
+  std::vector<std::vector<T>> vecvec_;
+  std::vector<T *> ptrvec_;
+};
 
 class Analysis {
  public:
@@ -117,11 +138,10 @@ class Analysis {
     cheap_trick_option.q1 = -0.15;  // TODO: Double-check.
     fft_size_ = GetFFTSizeForCheapTrick(sample_rate_, &cheap_trick_option);
     const int fft_dim = FftDimension();
-    spectrogram_storage_.resize(num_frames_, std::vector<double>(fft_dim));
-    std::vector<double *> spectrogram = AsPtrVector(&spectrogram_storage_);
+    spectrogram_.Reset(num_frames_, fft_dim);
     CheapTrick(samples_.data(), samples_.size(), sample_rate_,
                temporal_positions_.data(), f0_.data(), f0_.size(),
-               &cheap_trick_option, spectrogram.data());
+               &cheap_trick_option, spectrogram_.AsArray());
   }
 
 
@@ -147,10 +167,10 @@ class Analysis {
     const double end = 0.001;
     std::vector<double> mc(mel_cepstrum_order + 1);
     for (size_t f = 0; f < num_frames_; ++f) {
-      auto &spectrum = spectrogram_storage_.at(f);
+      auto &spectrum = spectrogram_.Row(f);
       for (int s = 0; s < fft_dim; ++s) {
-        assert(spectrum[s] >= 0);
-        spectrum[s] = 32768 * std::sqrt(spectrum[s]);
+        assert(spectrum.at(s) >= 0);
+        spectrum.at(s) = 32768 * std::sqrt(spectrum.at(s));
       }
       int res = mcep(spectrum.data(), fft_size(), mc.data(),
                      mel_cepstrum_order, alpha, itr1, itr2, end,
@@ -180,7 +200,7 @@ class Analysis {
       }
       frame->set_lf0(y);
       // Set spectrogram for debugging:
-      const auto &spectrum = spectrogram_storage_.at(f);
+      const auto &spectrum = spectrogram_.Row(f);
       const int fft_dim = FftDimension();
       assert(spectrum.size() == fft_dim);
       auto *sp = frame->mutable_sp();
@@ -201,7 +221,7 @@ class Analysis {
   size_t num_frames_;
   std::vector<double> f0_;
   int fft_size_;
-  std::vector<std::vector<double>> spectrogram_storage_;
+  MatrixHelper<double> spectrogram_;
 };
 
 }  // namespace

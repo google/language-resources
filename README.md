@@ -29,7 +29,7 @@ We are including a few tools for working with the natural language
 datasets. These tools are written in C++ and Python and are built with
 [Bazel](http://bazel.io). To compile and use these tools,
 [install a recent version of Bazel](http://bazel.io/docs/install.html)
-(minimally Bazel release 0.2.0 is required).
+(minimally Bazel release 0.4.5 is required).
 
 ## Opensourced Audio Data
 | Resource | Link |

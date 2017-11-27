@@ -19,12 +19,12 @@ package(default_visibility = ["//visibility:public"])
 
 alias(
     name = "gtest",
-    actual = "@googletest//:gtest",
+    actual = "@com_google_googletest//:gtest",
 )
 
 alias(
     name = "gtest_main",
-    actual = "@googletest//:gtest_main",
+    actual = "@com_google_googletest//:gtest_main",
 )
 
 cc_library(

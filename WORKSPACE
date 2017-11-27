@@ -47,11 +47,22 @@ bind(
 
 # Google fundamental libraries
 
-new_git_repository(
-    name = "googletest",
-    build_file = "googletest.BUILD",
-    commit = "3447fc31b4eea1fbcb86fa0e2f5d9ed9f38776bf",
-    remote = "https://github.com/google/googletest.git",
+http_archive(
+    name = "com_google_googletest",
+    sha256 = "39a708e81cf68af02ca20cad879d1dbd055364f3ae5588a5743c919a51d7ad46",
+    strip_prefix = "googletest-d175c8bf823e709d570772b038757fadf63bc632",
+    urls = ["https://github.com/google/googletest/archive/d175c8bf823e709d570772b038757fadf63bc632.tar.gz"],
+)
+
+# DEPRECATED. Aliases in //external referenced by @com_google_protobuf:
+bind(
+    name = "gtest",
+    actual = "@com_google_googletest//:gtest",
+)
+
+bind(
+    name = "gtest_main",
+    actual = "@com_google_googletest//:gtest_main",
 )
 
 new_git_repository(

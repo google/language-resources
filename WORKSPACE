@@ -11,26 +11,25 @@ android_sdk_repository(
 
 # Protobuf
 
-git_repository(
-    name = "protobuf",
-    remote = "https://github.com/google/protobuf.git",
-    tag = "v3.4.1",
-)
+protobuf_version = "3.4.1"
+protobuf_sha256 = "8e0236242106e680b4f9f576cc44b8cd711e948b20a9fc07769b0a20ceab9cc4"
 
-# proto_library rules depend on @com_google_protobuf//:protoc
+# proto_library and related rules implicitly depend on @com_google_protobuf.
 http_archive(
     name = "com_google_protobuf",
-    sha256 = "8e0236242106e680b4f9f576cc44b8cd711e948b20a9fc07769b0a20ceab9cc4",
-    strip_prefix = "protobuf-3.4.1",
-    urls = ["https://github.com/google/protobuf/archive/v3.4.1.tar.gz"],
+    sha256 = protobuf_sha256,
+    strip_prefix = "protobuf-%s" % protobuf_version,
+    urls = ["https://github.com/google/protobuf/archive/v%s.tar.gz"
+            % protobuf_version],
 )
 
-# cc_proto_library rules depend on @com_google_protobuf_cc//:cc_toolchain
+# DEPREACTED. For backwards compatibility with older versions of Bazel:
 http_archive(
     name = "com_google_protobuf_cc",
-    sha256 = "8e0236242106e680b4f9f576cc44b8cd711e948b20a9fc07769b0a20ceab9cc4",
-    strip_prefix = "protobuf-3.4.1",
-    urls = ["https://github.com/google/protobuf/archive/v3.4.1.tar.gz"],
+    sha256 = protobuf_sha256,
+    strip_prefix = "protobuf-%s" % protobuf_version,
+    urls = ["https://github.com/google/protobuf/archive/v%s.tar.gz"
+            % protobuf_version],
 )
 
 new_http_archive(
@@ -48,11 +47,22 @@ bind(
 
 # Google fundamental libraries
 
-new_git_repository(
-    name = "googletest",
-    build_file = "googletest.BUILD",
-    commit = "3447fc31b4eea1fbcb86fa0e2f5d9ed9f38776bf",
-    remote = "https://github.com/google/googletest.git",
+http_archive(
+    name = "com_google_googletest",
+    sha256 = "39a708e81cf68af02ca20cad879d1dbd055364f3ae5588a5743c919a51d7ad46",
+    strip_prefix = "googletest-d175c8bf823e709d570772b038757fadf63bc632",
+    urls = ["https://github.com/google/googletest/archive/d175c8bf823e709d570772b038757fadf63bc632.tar.gz"],
+)
+
+# DEPRECATED. Aliases in //external referenced by @com_google_protobuf:
+bind(
+    name = "gtest",
+    actual = "@com_google_googletest//:gtest",
+)
+
+bind(
+    name = "gtest_main",
+    actual = "@com_google_googletest//:gtest_main",
 )
 
 new_git_repository(

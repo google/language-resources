@@ -1,45 +1,45 @@
 package(default_visibility = ["//visibility:public"])
 
-load("@protobuf//:protobuf.bzl", "cc_proto_library")
+load("@com_google_protobuf//:protobuf.bzl", "cc_proto_library")
 
 cc_proto_library(
     name = "sparrowhawk_configuration_cc_proto",
     srcs = ["src/proto/sparrowhawk_configuration.proto"],
     include = "src/proto",
-    default_runtime = "@protobuf//:protobuf",
-    protoc = "@protobuf//:protoc",
+    default_runtime = "@com_google_protobuf//:protobuf",
+    protoc = "@com_google_protobuf//:protoc",
 )
 
 cc_proto_library(
     name = "rule_order_cc_proto",
     srcs = ["src/proto/rule_order.proto"],
     include = "src/proto",
-    default_runtime = "@protobuf//:protobuf",
-    protoc = "@protobuf//:protoc",
+    default_runtime = "@com_google_protobuf//:protobuf",
+    protoc = "@com_google_protobuf//:protoc",
 )
 
 cc_proto_library(
     name = "links_cc_proto",
     srcs = ["src/proto/links.proto"],
     include = "src/proto",
-    default_runtime = "@protobuf//:protobuf",
-    protoc = "@protobuf//:protoc",
+    default_runtime = "@com_google_protobuf//:protobuf",
+    protoc = "@com_google_protobuf//:protoc",
 )
 
 cc_proto_library(
     name = "semiotic_classes_cc_proto",
     srcs = ["src/proto/semiotic_classes.proto"],
     include = "src/proto",
-    default_runtime = "@protobuf//:protobuf",
-    protoc = "@protobuf//:protoc",
+    default_runtime = "@com_google_protobuf//:protobuf",
+    protoc = "@com_google_protobuf//:protoc",
 )
 
 cc_proto_library(
     name = "items_cc_proto",
     srcs = ["src/proto/items.proto"],
     include = "src/proto",
-    default_runtime = "@protobuf//:protobuf",
-    protoc = "@protobuf//:protoc",
+    default_runtime = "@com_google_protobuf//:protobuf",
+    protoc = "@com_google_protobuf//:protoc",
     deps = [
         ":links_cc_proto",
         ":semiotic_classes_cc_proto",

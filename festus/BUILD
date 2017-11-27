@@ -12,19 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright 2015, 2016 Google, Inc.
+# Copyright 2015, 2016, 2017 Google, Inc.
 # Author: mjansche@google.com (Martin Jansche)
 
 package(default_visibility = ["//visibility:public"])
 
 alias(
     name = "gtest",
-    actual = "@googletest//:gtest",
+    actual = "@com_google_googletest//:gtest",
 )
 
 alias(
     name = "gtest_main",
-    actual = "@googletest//:gtest_main",
+    actual = "@com_google_googletest//:gtest_main",
 )
 
 cc_library(
@@ -170,7 +170,7 @@ cc_library(
     hdrs = ["proto-util.h"],
     deps = [
         "@openfst//:base",
-        "@protobuf//:protobuf",
+        "@com_google_protobuf//:protobuf",
     ],
 )
 
@@ -180,7 +180,7 @@ cc_library(
     hdrs = ["string-util.h"],
     deps = [
         "@openfst//:base",
-        "@protobuf//:protobuf_lite",
+        "@com_google_protobuf//:protobuf_lite",
     ],
 )
 
@@ -270,14 +270,14 @@ cc_test(
     ],
 )
 
-# Requires Bazel >= 0.1.4.
-load("@protobuf//:protobuf.bzl", "cc_proto_library")
+proto_library(
+    name = "alignables_proto",
+    srcs = ["alignables.proto"],
+)
 
 cc_proto_library(
     name = "alignables_cc_proto",
-    srcs = ["alignables.proto"],
-    default_runtime = "@protobuf//:protobuf",
-    protoc = "@protobuf//:protoc",
+    deps = [":alignables_proto"],
 )
 
 cc_library(
@@ -343,11 +343,14 @@ cc_binary(
     ],
 )
 
+proto_library(
+    name = "expression_proto",
+    srcs = ["expression.proto"],
+)
+
 cc_proto_library(
     name = "expression_cc_proto",
-    srcs = ["expression.proto"],
-    default_runtime = "@protobuf//:protobuf",
-    protoc = "@protobuf//:protoc",
+    deps = [":expression_proto"],
 )
 
 cc_library(

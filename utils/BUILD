@@ -22,6 +22,12 @@ licenses(["notice"])  # Apache 2.0
 exports_files(["eval.sh"])
 
 py_binary(
+    name = "python_version",
+    srcs = ["python_version.py"],
+    srcs_version = "PY2AND3",
+)
+
+py_binary(
     name = "apply_phonology",
     srcs = ["apply_phonology.py"],
     srcs_version = "PY2AND3",

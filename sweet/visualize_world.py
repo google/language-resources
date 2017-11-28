@@ -1,23 +1,63 @@
+# Copyright 2017 Google Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+"""Visualize WORLD vocoder data."""
+
+import io
 import sys
 
 # Non-hermetic dependencies: apt-get install python-numpy python-matplotlib
-import numpy
 from matplotlib import colors
 from matplotlib import pyplot
+import numpy
 
 from sweet import voice_data_pb2
 
-world_data = voice_data_pb2.WorldData.FromString(sys.stdin.read())
-f0 = numpy.exp([f.lf0 for f in world_data.frame])
-sp = numpy.array([list(f.sp) for f in world_data.frame]).transpose()
 
-inf = 1e300 * 1e300
-nan = inf - inf
+def GetBinaryProto(filename, message):
+  """Read serialized binary proto message data from the given file."""
+  with io.open(filename, mode='rb') as istream:
+    contents = istream.read()
+  message.ParseFromString(contents)
+  assert message.IsInitialized()
+  return
 
-fig, ax = pyplot.subplots(2, sharex=True)
-ax[0].plot([x if x > 1 else nan for x in f0])
-ax[1].matshow(sp, origin='lower', aspect='auto', interpolation='none',
-              cmap='Greys', norm=colors.PowerNorm(0.15, sp.min(), sp.max()))
-fig.subplots_adjust(hspace=0.25)
 
-pyplot.show()
+def PlotWorldData(world_data):
+  """Visualize the given WorldData message."""
+  f0 = numpy.exp([f.lf0 for f in world_data.frame])
+  sp = numpy.array([list(f.sp) for f in world_data.frame]).transpose()
+
+  inf = 1e300 * 1e300
+  nan = inf - inf
+
+  fig, ax = pyplot.subplots(2, sharex=True)
+  ax[0].plot([x if x > 1 else nan for x in f0])
+  ax[1].matshow(sp, origin='lower', aspect='auto', interpolation='none',
+                cmap='Greys', norm=colors.PowerNorm(0.15, sp.min(), sp.max()))
+  fig.subplots_adjust(hspace=0.25)
+
+  pyplot.show()
+  return
+
+
+def main(argv):
+  world_data = voice_data_pb2.WorldData()
+  GetBinaryProto(argv[1], world_data)
+  PlotWorldData(world_data)
+  return
+
+
+if __name__ == '__main__':
+  main(sys.argv)

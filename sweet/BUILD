@@ -50,7 +50,7 @@ cc_binary(
 py_binary(
     name = "visualize_world",
     srcs = ["visualize_world.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
     deps = [
         ":voice_data_py_proto",
     ],

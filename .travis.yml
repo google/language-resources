@@ -5,6 +5,7 @@ language: python
 python:
   - "2.7"
   - "3.5"
+  - "3.6"
 
 env:
   global:
@@ -12,11 +13,14 @@ env:
     - BAZEL_STRATEGY='--nodistinct_host_configuration'
   matrix:
     - BAZEL=0.4.5
+    - BAZEL=0.5.4
+    - BAZEL=0.6.1
     - BAZEL=0.7.0
+    - BAZEL=0.8.0
 
 before_install:
+  # Install necessary additional apt packages:
   - sudo apt-get update -qq
-  # Project dependencies:
   - sudo apt-get install -qq libicu-dev
   # Install Android SDK:
   - wget https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK}.zip
@@ -34,5 +38,5 @@ script:
   - sha256sum -c third_party/bazel-${BAZEL}-installer-linux-x86_64.sh.sha256
   - bash bazel-${BAZEL}-installer-linux-x86_64.sh --user
   # Use Bazel to run tests:
-  - bazel test  $BAZEL_STRATEGY //hi_ur/... //Mymr/... //third_party/... //xh/... //zu/...
+  - bazel test  $BAZEL_STRATEGY //...
   - bazel run   $BAZEL_STRATEGY //utils:python_version

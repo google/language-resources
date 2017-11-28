@@ -1,5 +1,4 @@
-#! /usr/bin/python2 -u
-# -*- coding: utf-8 -*-
+#! /usr/bin/env python
 #
 # Copyright 2016 Google Inc. All Rights Reserved.
 #

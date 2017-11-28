@@ -19,7 +19,7 @@ before_install:
   # Bazel dependencies:
   - sudo apt-get install -qq pkg-config zip g++ zlib1g-dev unzip
   # Project dependencies:
-  - sudo apt-get install -qq python python-pyicu python3 python3-icu
+  - sudo apt-get install -qq libicu-dev python-dev python3-dev
   # Install Android SDK:
   - wget https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK}.zip
   - sha256sum -c third_party/sdk-tools-linux-${ANDROID_SDK}.zip.sha256
@@ -27,11 +27,14 @@ before_install:
   - unzip sdk-tools-linux-${ANDROID_SDK}.zip -d /usr/local/android-sdk
   - echo y | /usr/local/android-sdk/tools/bin/sdkmanager 'build-tools;26.0.3' 'platforms;android-24'
 
+install:
+  - pip install PyICU
+
 script:
   # Install Bazel:
   - wget https://github.com/bazelbuild/bazel/releases/download/${BAZEL}/bazel-${BAZEL}-installer-linux-x86_64.sh
   - sha256sum -c third_party/bazel-${BAZEL}-installer-linux-x86_64.sh.sha256
   - bash bazel-${BAZEL}-installer-linux-x86_64.sh --user
   # Use Bazel to run tests:
-  - bazel test  $BAZEL_STRATEGY //third_party/unicode:all
+  - bazel test  $BAZEL_STRATEGY //third_party/unicode:all //zu:pronunciation_rules_match_nchlt_dictionary
   - bazel run   $BAZEL_STRATEGY //utils:python_version

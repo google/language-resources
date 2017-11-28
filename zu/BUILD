@@ -51,5 +51,9 @@ sh_test(
         "//third_party/nchlt_inlang:release/dictionaries/nchlt_zul.dict",
         "//utils:evaluate_pronunciation_rules",
     ],
-    tags = ["manual"],  # Test is not hermetic due to dependency on PyICU.
+    tags = [
+        # Test is not hermetic due to dependency on PyICU.
+        "local",
+        "manual",
+    ],
 )

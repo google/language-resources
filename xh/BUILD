@@ -51,5 +51,4 @@ sh_test(
         "//third_party/nchlt_inlang:release/dictionaries/nchlt_xho.dict",
         "//utils:evaluate_pronunciation_rules",
     ],
-    tags = ["manual"],  # Test is not hermetic due to dependency on PyICU.
 )

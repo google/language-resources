@@ -22,7 +22,7 @@ py_binary(
     srcs = ["hi2ur.py"],
     srcs_version = "PY2AND3",
     deps = [
-        "//utils:icu_util",   # Depends non-hermetically on PyICU.
+        "//utils:icu_util",
         "//utils:utf8",
     ],
 )
@@ -43,7 +43,6 @@ sh_test(
         "hi_ur_other.tsv",
         ":hi2ur",
     ],
-    tags = ["manual"],  # Test is not hermetic due to dependency on PyICU.
 )
 
 py_binary(

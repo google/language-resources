@@ -15,5 +15,4 @@ def transform_test(language):
         "%s-fonipa-t-%s.txt" % (language, language),
         "//utils:test_icu_transform",
     ],
-    tags = ["manual"],  # Test is not hermetic due to dependency on PyICU.
 )

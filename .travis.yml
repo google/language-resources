@@ -34,5 +34,5 @@ script:
   - sha256sum -c third_party/bazel-${BAZEL}-installer-linux-x86_64.sh.sha256
   - bash bazel-${BAZEL}-installer-linux-x86_64.sh --user
   # Use Bazel to run tests:
-  - bazel test  $BAZEL_STRATEGY //third_party/unicode:all //xh:pronunciation_rules_match_nchlt_dictionary //zu:pronunciation_rules_match_nchlt_dictionary
+  - bazel test  $BAZEL_STRATEGY //hi_ur/... //Mymr/... //third_party/... //xh/... //zu/...
   - bazel run   $BAZEL_STRATEGY //utils:python_version

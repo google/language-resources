@@ -19,7 +19,10 @@ Assumes PyICU is installed somewhere in sys.path.
 
 import sys
 
-import icu  # Debian/Ubuntu: apt-get install python-pyicu python3-icu
+# Non-hermetic dependency on PyICU. Install this in one of several ways:
+# * pip install PyICU
+# * apt-get install python-pyicu python3-icu
+import icu
 
 from utils import utf8
 

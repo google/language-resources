@@ -4,13 +4,11 @@ language: python
 
 python:
   - "2.7"
-  - "3.5"
-  - "3.6"
+  - "3.3"
 
 env:
   global:
     - ANDROID_SDK=3859397
-    - BAZEL_STRATEGY='--nodistinct_host_configuration'
   matrix:
     - BAZEL=0.4.5
     - BAZEL=0.5.4
@@ -30,13 +28,12 @@ before_install:
   - echo y | /usr/local/android-sdk/tools/bin/sdkmanager 'build-tools;26.0.3' 'platforms;android-24'
 
 install:
-  - pip install PyICU
-
-script:
   # Install Bazel:
   - wget https://github.com/bazelbuild/bazel/releases/download/${BAZEL}/bazel-${BAZEL}-installer-linux-x86_64.sh
   - sha256sum -c third_party/bazel-${BAZEL}-installer-linux-x86_64.sh.sha256
   - bash bazel-${BAZEL}-installer-linux-x86_64.sh --user
-  # Use Bazel to run tests:
-  - bazel test  $BAZEL_STRATEGY //...
-  - bazel run   $BAZEL_STRATEGY //utils:python_version
+  # Install necessary additional Python modules:
+  - pip install PyICU
+
+script:
+  - ./travis_script.sh

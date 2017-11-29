@@ -59,10 +59,9 @@ then
   PHONOLOGY="${LANG}/festvox/phonology.json"
 fi
 
-# Generate various festvox files.
+# Generate various festvox files (wagon description files for (mcep,f0,dur), festvox phoneset etc).
 python utils/apply_phonology.py "${PHONOLOGY}" "${VOICE_DIR}"
 
-# Commit the final setup.
 cd "${VOICE_DIR}"
 
 # Run the Festvox Clustergen build. This will take couple of hours to complete.

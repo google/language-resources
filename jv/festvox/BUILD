@@ -23,6 +23,7 @@ load("//festival_utils:festvox.bzl", "json_phonology_test")
 Usage
     bazel test jv/festvox:phonology_test
 """
+
 json_phonology_test(
-    phonology="phonology.json"
+    phonology = "phonology.json",
 )

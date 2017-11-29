@@ -12,6 +12,7 @@ android_sdk_repository(
 # Protobuf
 
 protobuf_version = "3.5.0"
+
 protobuf_sha256 = "0cc6607e2daa675101e9b7398a436f09167dffb8ca0489b0307ff7260498c13c"
 
 # proto_library and related rules implicitly depend on @com_google_protobuf.
@@ -19,8 +20,8 @@ http_archive(
     name = "com_google_protobuf",
     sha256 = protobuf_sha256,
     strip_prefix = "protobuf-%s" % protobuf_version,
-    urls = ["https://github.com/google/protobuf/archive/v%s.tar.gz"
-            % protobuf_version],
+    urls = ["https://github.com/google/protobuf/archive/v%s.tar.gz" %
+            protobuf_version],
 )
 
 # DEPREACTED. For backwards compatibility with older versions of Bazel:
@@ -28,8 +29,8 @@ http_archive(
     name = "com_google_protobuf_cc",
     sha256 = protobuf_sha256,
     strip_prefix = "protobuf-%s" % protobuf_version,
-    urls = ["https://github.com/google/protobuf/archive/v%s.tar.gz"
-            % protobuf_version],
+    urls = ["https://github.com/google/protobuf/archive/v%s.tar.gz" %
+            protobuf_version],
 )
 
 new_http_archive(

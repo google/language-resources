@@ -21,10 +21,10 @@ cc_binary(
     name = "g2p-lookup",
     srcs = ["g2p-lookup.cc"],
     deps = [
-        "@openfst//:fst",
-        "@openfst//:ngram",
         ":compact",
         ":g2p",
+        "@openfst//:fst",
+        "@openfst//:ngram",
     ],
 )
 
@@ -32,8 +32,8 @@ cc_library(
     name = "g2p",
     hdrs = ["g2p.h"],
     deps = [
-        "@openfst//:fst",
         ":fst-util",
+        "@openfst//:fst",
     ],
 )
 
@@ -53,9 +53,9 @@ cc_binary(
     name = "total-weight",
     srcs = ["total-weight.cc"],
     deps = [
+        ":fst-util",
         "@openfst//:fst",
         "@openfst//:ngram",
-        ":fst-util",
     ],
 )
 

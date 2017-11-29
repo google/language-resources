@@ -7,8 +7,8 @@ cc_library(
         "re2/stringpiece.h",
     ],
     includes = ["."],
-    deps = ["re2-impl"],
     visibility = ["//visibility:public"],
+    deps = ["re2-impl"],
 )
 
 cc_library(

@@ -24,8 +24,9 @@ load("//festival_utils:festvox.bzl", "json_phonology_test")
 Usage
     bazel test //af/festvox:phonology_test
 """
+
 json_phonology_test(
-    phonology="phonology.json"
+    phonology = "phonology.json",
 )
 
 genrule(
@@ -47,6 +48,6 @@ Usage
 """
 
 make_festvox_prompts(
-    prompts = "//af/data:prompts.tsv",
     lexicon = "//af:lex_full.txt",
+    prompts = "//af/data:prompts.tsv",
 )

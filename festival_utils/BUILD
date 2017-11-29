@@ -15,4 +15,7 @@
 # Copyright 2016 Google, Inc.
 # Author: pasindu@google.com (Pasindu De Silva)
 
-exports_files(["prepare_prompts.py", "festvox.bzl"])
+exports_files([
+    "prepare_prompts.py",
+    "festvox.bzl",
+])

@@ -67,9 +67,9 @@ cc_test(
     timeout = "short",
     srcs = ["real-weight-test.cc"],
     deps = [
+        ":gtest",
         ":real-weight",
         ":weight-test-lib",
-        ":gtest",
         "@openfst//:weight-tester",
     ],
 )
@@ -85,10 +85,10 @@ cc_test(
     timeout = "short",
     srcs = ["modular-int-semiring-test.cc"],
     deps = [
+        ":gtest_main",
         ":modular-int-semiring",
         ":weight",
         ":weight-test-lib",
-        ":gtest_main",
     ],
 )
 
@@ -103,10 +103,10 @@ cc_test(
     timeout = "short",
     srcs = ["max-times-semiring-test.cc"],
     deps = [
+        ":gtest_main",
         ":max-times-semiring",
         ":weight",
         ":weight-test-lib",
-        ":gtest_main",
     ],
 )
 
@@ -124,10 +124,10 @@ cc_test(
     timeout = "short",
     srcs = ["quaternion-semiring-test.cc"],
     deps = [
+        ":gtest_main",
         ":quaternion-semiring",
         ":real-weight",
         ":weight-test-lib",
-        ":gtest_main",
         "@openfst//:weight",
     ],
 )
@@ -138,8 +138,8 @@ cc_test(
     srcs = ["star-test.cc"],
     deps = [
         ":float-weight-star",
-        ":real-weight",
         ":gtest_main",
+        ":real-weight",
         "@openfst//:weight",
     ],
 )
@@ -157,9 +157,9 @@ cc_test(
     linkopts = ["-lm"],
     deps = [
         ":float-weight-star",
+        ":gtest_main",
         ":matrix",
         ":real-weight",
-        ":gtest_main",
         "@openfst//:fst",
     ],
 )
@@ -169,8 +169,8 @@ cc_library(
     srcs = ["proto-util.cc"],
     hdrs = ["proto-util.h"],
     deps = [
-        "@openfst//:base",
         "@com_google_protobuf//:protobuf",
+        "@openfst//:base",
     ],
 )
 
@@ -179,8 +179,8 @@ cc_library(
     srcs = ["string-util.cc"],
     hdrs = ["string-util.h"],
     deps = [
-        "@openfst//:base",
         "@com_google_protobuf//:protobuf_lite",
+        "@openfst//:base",
     ],
 )
 
@@ -189,8 +189,8 @@ cc_test(
     timeout = "short",
     srcs = ["string-util-test.cc"],
     deps = [
-        ":string-util",
         ":gtest_main",
+        ":string-util",
     ],
 )
 
@@ -225,8 +225,8 @@ cc_test(
     timeout = "short",
     srcs = ["iterator-test.cc"],
     deps = [
-        ":iterator",
         ":gtest_main",
+        ":iterator",
     ],
 )
 
@@ -241,9 +241,9 @@ cc_test(
     timeout = "short",
     srcs = ["topsort-test.cc"],
     deps = [
+        ":gtest_main",
         ":iterator",
         ":topsort",
-        ":gtest_main",
         "@openfst//:fst",
     ],
 )
@@ -383,10 +383,10 @@ cc_test(
     timeout = "short",
     srcs = ["term-semiring-test.cc"],
     deps = [
+        ":gtest_main",
         ":term-semiring",
         ":weight",
         ":weight-test-lib",
-        ":gtest_main",
         "@openfst//:weight",
     ],
 )
@@ -407,12 +407,12 @@ cc_test(
         ":algebraic-path",
         ":arc",
         ":float-weight-star",
+        ":gtest",
         ":max-times-semiring",
         ":modular-int-semiring",
         ":quaternion-semiring",
         ":real-weight",
         ":weight",
-        ":gtest",
         "@openfst//:fst",
     ],
 )

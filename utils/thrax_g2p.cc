@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Copyright 2016 Google, Inc.
+// Copyright 2016, 2017 Google, Inc.
 // Author: mjansche@google.com (Martin Jansche)
 //
 // \file
@@ -20,8 +20,8 @@
 
 #include <iostream>
 #include <memory>
+#include <sstream>
 #include <string>
-#include <vector>
 
 #include <fst/arc.h>
 #include <fst/compact-fst.h>
@@ -91,22 +91,26 @@ int main(int argc, char *argv[]) {
   festus::SymbolLabelMaker output_label_maker(phoneme_syms.get(), " ");
   StdVectorFst lattice;
   for (string line; std::getline(std::cin, line); ) {
-    std::cout << line << "\t";
+    std::ostringstream output;
+    output << line << "\t";
+    bool success = true;
     bool at_start = true;
     for (const auto phrase : festus::Split(line, " ")) {
       if (at_start) {
         at_start = false;
       } else {
-        std::cout << " | ";
+        output << " | ";
       }
       fst::StdCompactStringFst graphemes;
       if (!input_label_maker.StringToCompactFst(phrase, &graphemes)) {
-        std::cout << "ERROR_compiling_input: " << phrase;
+        output << "ERROR_compiling_input: " << phrase;
+        success = false;
         continue;
       }
       fst::Compose(graphemes, *fst, &lattice);
       if (fst::kNoStateId == lattice.Start()) {
-        std::cout << "ERROR_empty_composition: " << phrase;
+        output << "ERROR_empty_composition: " << phrase;
+        success = false;
         continue;
       }
       fst::Project(&lattice, fst::PROJECT_OUTPUT);
@@ -115,14 +119,15 @@ int main(int argc, char *argv[]) {
       } else {
         fst::Prune(&lattice, 0.1);
         if (!lattice.Properties(fst::kString, true)) {
-          std::cout << "ERROR_ambiguous_output: " << phrase;
+          output << "ERROR_ambiguous_output: " << phrase;
+          success = false;
           continue;
         }
       }
       fst::RmEpsilon(&lattice);
-      std::cout << festus::OneString(lattice, output_label_maker);
+      output << festus::OneString(lattice, output_label_maker);
     }
-    std::cout << std::endl;
+    (success ? std::cout : std::cerr) << output.str() << std::endl;
   }
 
   return 0;

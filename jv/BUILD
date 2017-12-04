@@ -103,8 +103,7 @@ genrule(
           cut -f1 |
           $(location //utils:thrax_g2p) \
             --far=$(location javanese.far) \
-            --phoneme_syms=$(location phoneme.syms) |
-          awk '{print > "/dev/std" (/ERROR/ ? "err" : "out")}' \
+            --phoneme_syms=$(location phoneme.syms) \
             1> $(location jv_lexicon.txt) \
             2> $(location jv_unpronouncable.txt)
           """,
@@ -135,8 +134,7 @@ genrule(
           $(location //utils:freq) |
           $(location //utils:thrax_g2p) \
             --far=$(location javanese.far) \
-            --phoneme_syms=$(location phoneme.syms) |
-          awk '{print > "/dev/std" (/ERROR/ ? "err" : "out")}' \
+            --phoneme_syms=$(location phoneme.syms) \
             2> $(location en_unpronouncable.txt) |
           $(location //utils:merge_lexicons) \
             - \

@@ -14,7 +14,7 @@ env:
     - BAZEL=0.5.4
     - BAZEL=0.6.1
     - BAZEL=0.7.0
-    - BAZEL=0.8.0
+    - BAZEL=0.8.1
 
 before_install:
   # Install necessary additional apt packages:

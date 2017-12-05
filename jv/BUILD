@@ -100,7 +100,7 @@ genrule(
           $(location :tokenize) \
             2> $(location jv_bad_tokens.txt) |
           $(location //utils:freq) |
-          cut -f1 |
+          cut -f 1 |
           $(location //utils:thrax_g2p) \
             --far=$(location javanese.far) \
             --phoneme_syms=$(location phoneme.syms) \
@@ -132,6 +132,7 @@ genrule(
             < $(location //third_party/wikimedia:simple_wiktionary.txt) \
             2> $(location en_bad_tokens.txt) |
           $(location //utils:freq) |
+          cut -f 1 |
           $(location //utils:thrax_g2p) \
             --far=$(location javanese.far) \
             --phoneme_syms=$(location phoneme.syms) \

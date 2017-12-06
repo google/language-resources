@@ -12,8 +12,6 @@ env:
   matrix:
     - BAZEL=0.4.5
     - BAZEL=0.5.4
-    - BAZEL=0.6.1
-    - BAZEL=0.7.0
     - BAZEL=0.8.1
 
 before_install:
@@ -36,4 +34,4 @@ install:
   - pip install PyICU
 
 script:
-  - ./travis_script.sh
+  - travis/script.sh

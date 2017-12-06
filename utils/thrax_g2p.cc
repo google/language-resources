@@ -37,9 +37,9 @@
 #include <fst/vector-fst.h>
 #include <thrax/grm-manager.h>
 
+#include "absl/strings/str_split.h"
 #include "festus/fst-util.h"
 #include "festus/label-maker.h"
-#include "festus/string-util.h"
 
 using fst::StdVectorFst;
 using fst::SymbolTable;
@@ -95,7 +95,8 @@ int main(int argc, char *argv[]) {
     output << line << "\t";
     bool success = true;
     bool at_start = true;
-    for (const auto phrase : festus::Split(line, " ")) {
+    std::vector<string> phrases = absl::StrSplit(line, ' ');
+    for (const auto &phrase : phrases) {
       if (at_start) {
         at_start = false;
       } else {

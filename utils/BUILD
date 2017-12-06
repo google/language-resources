@@ -105,7 +105,7 @@ cc_binary(
     deps = [
         "//festus:fst-util",
         "//festus:label-maker",
-        "//festus:string-util",
+        "@com_google_absl//absl/strings",
         "@openfst//:fst",
         "@thrax//:grm-manager",
     ],

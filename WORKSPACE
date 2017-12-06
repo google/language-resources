@@ -50,9 +50,8 @@ bind(
 
 http_archive(
     name = "com_google_googletest",
-    sha256 = "39a708e81cf68af02ca20cad879d1dbd055364f3ae5588a5743c919a51d7ad46",
-    strip_prefix = "googletest-d175c8bf823e709d570772b038757fadf63bc632",
-    urls = ["https://github.com/google/googletest/archive/d175c8bf823e709d570772b038757fadf63bc632.tar.gz"],
+    strip_prefix = "googletest-master",
+    urls = ["https://github.com/google/googletest/archive/master.zip"],
 )
 
 # DEPRECATED. Aliases in //external referenced by @com_google_protobuf:
@@ -83,6 +82,19 @@ new_git_repository(
 bind(
     name = "re2",
     actual = "@com_googlesource_code_re2//:re2",
+)
+
+http_archive(
+    name = "com_google_absl",
+    strip_prefix = "abseil-cpp-master",
+    urls = ["https://github.com/abseil/abseil-cpp/archive/master.zip"],
+)
+
+# Time-zone framework, required by Abseil
+http_archive(
+    name = "com_googlesource_code_cctz",
+    strip_prefix = "cctz-master",
+    urls = ["https://github.com/google/cctz/archive/master.zip"],
 )
 
 # OpenFst, OpenGrm NGram & Thrax

@@ -59,12 +59,85 @@ STOPWORDS = frozenset([
     'VOWEL',
 ])
 
+DIGITS = {
+    'DIGIT ZERO': '0',
+    'DIGIT ONE': '1',
+    'DIGIT TWO': '2',
+    'DIGIT THREE': '3',
+    'DIGIT FOUR': '4',
+    'DIGIT FIVE': '5',
+    'DIGIT SIX': '6',
+    'DIGIT SEVEN': '7',
+    'DIGIT EIGHT': '8',
+    'DIGIT NINE': '9',
+}
+
 EXCEPTIONS = {
     0x09F2: 'rupee_mark',
+    0x09F3: 'rupee_sign',
     0x0BFA: 'number',
     0x109E: 'symbol_shan_one',
     0xA8EB: '-letter_u',
+    0x110BD: 'number',
+    0x11131: '-o_mark',
+    0x11132: '-au_mark',
+    0x111CB: 'vowel_modifier',
 }
+
+BRAHMIC = [
+    'Deva',
+    'Beng',
+    'Guru',
+    'Gujr',
+    'Orya',
+    'Taml',
+    'Telu',
+    'Knda',
+    'Mlym',
+    'Sinh',
+    'Thai',
+    'Laoo',
+    'Tibt',
+    'Mymr',
+    'Tglg',
+    'Hano',
+    'Buhd',
+    'Tagb',
+    'Khmr',
+    'Limb',
+    'Tale',
+    'Talu',
+    'Bugi',
+    'Lana',
+    'Bali',
+    'Sund',
+    'Batk',
+    'Lepc',
+    'Sylo',
+    'Phag',
+    'Saur',
+    'Rjng',
+    'Java',
+    'Cham',
+    'Tavt',
+    'Mtei',
+    'Kthi',
+    'Cakm',
+    'Mahj',
+    'Shrd',
+    'Khoj',
+    'Mult',
+    'Sind',
+    'Gran',
+    'Newa',
+    'Tirh',
+    'Sidd',
+    'Modi',
+    'Takr',
+    'Ahom',
+    'Bhks',
+    'Marc',
+]
 
 
 def SymbolNames(script, include_script_code=False):
@@ -82,6 +155,8 @@ def SymbolNames(script, include_script_code=False):
     if name.startswith(prefix):
       name = name[len(prefix):]
     assert name
+    for old, new in DIGITS.items():
+      name = name.replace(old, new)
     components = [t for t in name.split() if t not in STOPWORDS]
     short_name = '_'.join(components).lower()
     assert short_name, ('Empty symbolic name for %04X (%s)' %
@@ -135,13 +210,17 @@ def WriteOpenFstSymbolTable(writer, syms):
 
 
 def main(argv):
-  success = True
-  if len(argv) == 1:
-    scripts = ('Deva', 'Beng', 'Guru',
-               'Gujr', 'Orya', 'Taml',
-               'Telu', 'Knda', 'Mlym')
+  if len(argv) < 2:
+    STDOUT.write('Usage: %s [Script...]\n' % argv[0])
+    sys.exit(2)
+
+  if argv[1] == '--brahmic':
+    scripts = BRAHMIC + argv[2:]
+  elif argv[1] == '--india':
+    scripts = BRAHMIC[:9] + argv[2:]
   else:
     scripts = argv[1:]
+  success = True
   for s in scripts:
     script = GetScript(s)
     if not script:

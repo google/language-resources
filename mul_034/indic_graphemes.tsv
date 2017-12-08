@@ -1,0 +1,94 @@
+a	a	a
+ā	aa	aa
+æ	ae	ae
+ǣ	aee	aae
+i	i	i
+ī	ii	ii
+u	u	u
+ū	uu	uu
+ŭ	^u
+r̥	,r	ri
+r̥̄	,rr	rri
+l̥	,l	li
+l̥̄	,ll	lli
+e	e
+ē	ee
+ê	^e
+ai	ai	ai
+o	o
+ō	oo
+ô	^o
+au	au	au
+ṁ	;m	anusvara
+ṃ	.m
+m̐	~m	candrabindu
+n̆	^n
+m̆	^m
+ḥ	.h	visarga
+ẖ	_h
+ḫ	^h
+ḵ	_k		# merge into .h ?
+k	k	ka
+kh	kh	kha
+g	g	ga
+gh	gh	gha
+ṅ	;n	nga
+n̆g	^ng	nnga
+c	c	ca
+ch	ch	cha
+j	j	ja
+jh	jh	jha
+ñ	~n	nya
+n̆j	^nj	jnya
+ṭ	.t	tta
+ṭh	.th	ttha
+ḍ	.d	dda
+ṛ	.r	rra
+ḍh	.dh	ddha
+ṛh	.rh	rrha
+ṇ	.n	nna
+n̆ḍ	^n.d	nndda
+t	t	ta
+th	th	tha
+d	d	da
+dh	dh	dha
+n	n	na
+n̆d	^nd	nda
+p	p	pa
+ph	ph	pha
+b	b	ba
+bh	bh	bha
+m	m	ma
+m̆b	^mb	mba
+ṟ	_r
+ṯ	_t
+ṉ	_n
+ḻ	_l	llla
+y	y	ya
+ẏ	;y	yya
+r	r	ra
+r̆	^r
+l	l	la
+ḷ	.l	lla
+v	v	va
+ś	;s	sha
+ṣ	.s	ssa
+s	s	sa
+h	h	ha
+’	'
+q	q	qa
+k͟h	_kh	khha
+ġ	.g	ghha
+ĉ	^c
+z	z	za
+f	f	fa
+w	w
+s̱	_s
+h̤	,h
+ẕ	_z
+z̆	^z
+s̤	,s
+ż	;z
+t̤	,t
+ẓ	.z
+‘	`

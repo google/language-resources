@@ -146,31 +146,31 @@ def SymbolNames(script, include_script_code=False):
   script_chars = icu.UnicodeSet(r'\p{%s}' % script_name)
   for c in script_chars:
     if ord(c) in EXCEPTIONS:
-      yield c, EXCEPTIONS[ord(c)]
-      continue
-    name = icu.Char.charName(c)
-    if not name:
-      continue
-    prefix = script_name.upper().replace('_', ' ')
-    if name.startswith(prefix):
-      name = name[len(prefix):]
-    assert name
-    for old, new in DIGITS.items():
-      name = name.replace(old, new)
-    components = [t for t in name.split() if t not in STOPWORDS]
-    short_name = '_'.join(components).lower()
-    assert short_name, ('Empty symbolic name for %04X (%s)' %
-                        (ord(c), icu.Char.charName(c)))
-    if short_name.startswith('-'):
-      short_name = "'%s" % short_name[1:]
-    if 'VOCALIC' in name:
-      short_name += 'i'
-    if ('VOWEL SIGN' in name or 'CONSONANT SIGN' in name or 'MARK' in name or
-        'MEDIAL' in name or 'COMBINING' in name or 'SUBJOINED' in name or
-        'SARA' in name):
-      short_name = '-%s' % short_name
+      short_name = EXCEPTIONS[ord(c)]
+    else:
+      name = icu.Char.charName(c)
+      if not name:
+        continue
+      prefix = script_name.upper().replace('_', ' ')
+      if name.startswith(prefix):
+        name = name[len(prefix):]
+      assert name
+      for old, new in DIGITS.items():
+        name = name.replace(old, new)
+      components = [t for t in name.split() if t not in STOPWORDS]
+      short_name = '_'.join(components).lower()
+      assert short_name, ('Empty symbolic name for %04X (%s)' %
+                          (ord(c), icu.Char.charName(c)))
+      if short_name.startswith('-'):
+        short_name = "'%s" % short_name[1:]
+      if 'VOCALIC' in name:
+        short_name += 'i'
+      if ('VOWEL SIGN' in name or 'CONSONANT SIGN' in name or 'MARK' in name or
+          'MEDIAL' in name or 'COMBINING' in name or 'SUBJOINED' in name or
+          'SARA' in name):
+        short_name = '-%s' % short_name
     if include_script_code:
-      short_name = '%s_%s' % (short_name, script.getShortName())
+      short_name = '%s:%s' % (script.getShortName(), short_name)
     yield c, short_name
   return
 

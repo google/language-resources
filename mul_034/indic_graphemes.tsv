@@ -11,23 +11,23 @@ r̥	,r	ri
 r̥̄	,rr	rri
 l̥	,l	li
 l̥̄	,ll	lli
-e	e
-ē	ee
-ê	^e
+e	e	e
+ē	ee	ee Deva:e Beng:e Guru:e Gujr:e Orya:e
+ê	^e	candra_e
 ai	ai	ai
-o	o
-ō	oo
-ô	^o
+o	o	o
+ō	oo	oo Deva:o Beng:o Guru:o Gujr:o Orya:o
+ô	^o	candra_o
 au	au	au
-ṁ	;m	anusvara
-ṃ	.m
-m̐	~m	candrabindu
+ṁ	;m	anusvara Guru:bindi
+ṃ	.m	Guru:tippi
+m̐	~m	candrabindu Guru:adak_bindi
 n̆	^n
 m̆	^m
 ḥ	.h	visarga
-ẖ	_h
-ḫ	^h
-ḵ	_k		# merge into .h ?
+ẖ	_h	Knda:jihvamuliya
+ḫ	^h	Knda:upadhmaniya
+ḵ	_k	Taml:visarga	# merge into .h ?
 k	k	ka
 kh	kh	kha
 g	g	ga
@@ -39,11 +39,12 @@ ch	ch	cha
 j	j	ja
 jh	jh	jha
 ñ	~n	nya
-n̆j	^nj	jnya
+jn̆	j~n	jnya
+n̆j	^nj	nyja
 ṭ	.t	tta
 ṭh	.th	ttha
 ḍ	.d	dda
-ṛ	.r	rra
+ṛ	.r	Deva:dddha Beng:rra Guru:rra Orya:rra
 ḍh	.dh	ddha
 ṛh	.rh	rrha
 ṇ	.n	nna
@@ -60,14 +61,14 @@ b	b	ba
 bh	bh	bha
 m	m	ma
 m̆b	^mb	mba
-ṟ	_r
-ṯ	_t
-ṉ	_n
-ḻ	_l	llla
+ṟ	_r	Taml:rra Telu:rra Knda:rra Mlym:rra
+ṯ	_t	Mlym:ttta
+ṉ	_n	Taml:nnna
+ḻ	_l	llla Knda:fa
 y	y	ya
 ẏ	;y	yya
 r	r	ra
-r̆	^r
+r̆	^r	Deva:rra+virama
 l	l	la
 ḷ	.l	lla
 v	v	va
@@ -75,14 +76,14 @@ v	v	va
 ṣ	.s	ssa
 s	s	sa
 h	h	ha
-’	'
+’	'	avagraha
 q	q	qa
 k͟h	_kh	khha
 ġ	.g	ghha
-ĉ	^c
-z	z	za
+ĉ	^c	tsa
+z	z	za Telu:dza
 f	f	fa
-w	w
+w	w	wa
 s̱	_s
 h̤	,h
 ẕ	_z

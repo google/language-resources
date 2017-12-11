@@ -1,0 +1,11 @@
+set -x 
+
+USERNAME="ppasindud"
+
+for IMAGE_NAME in language-resources festival merlin; do
+  cd ${IMAGE_NAME}
+  IMAGE_NAME="base-${IMAGE_NAME}"
+  docker build -t ${USERNAME}/${IMAGE_NAME}:latest .
+  docker push ${USERNAME}/${IMAGE_NAME}
+  cd ../
+done

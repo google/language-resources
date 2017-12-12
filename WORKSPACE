@@ -11,9 +11,9 @@ android_sdk_repository(
 
 # Protobuf
 
-protobuf_version = "3.5.0"
+protobuf_version = "3.5.0.1"
 
-protobuf_sha256 = "0cc6607e2daa675101e9b7398a436f09167dffb8ca0489b0307ff7260498c13c"
+protobuf_sha256 = "86be71e61c76575c60839452a4f265449a6ea51570d7983cb929f06ad294b5f5"
 
 # proto_library and related rules implicitly depend on @com_google_protobuf.
 http_archive(

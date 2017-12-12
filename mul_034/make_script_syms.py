@@ -230,8 +230,8 @@ def CharName(c):
 
 def SymbolNames(script, include_script_code=False):
   """Yields short symbolic names for all characters in the given script."""
-  script_name = script.getName()
-  script_chars = icu.UnicodeSet(r'\p{%s}' % script_name)
+  script_chars = icu.UnicodeSet(r'\p{%s}' % script.getName())
+  prefix = script.getName().upper().replace('_', ' ')
   for c in script_chars:
     if ord(c) in EXCEPTIONS:
       short_name = EXCEPTIONS[ord(c)]
@@ -239,7 +239,6 @@ def SymbolNames(script, include_script_code=False):
       name = CharName(c)
       if not name:
         continue
-      prefix = script_name.upper().replace('_', ' ')
       if name.startswith(prefix):
         name = name[len(prefix):]
       assert name
@@ -318,7 +317,7 @@ def main(argv):
     if not IsBijectiveMapping(syms):
       success = False
       continue
-    filename = '%s.syms' % script.getName()
+    filename = '%s.syms' % script.getShortName()
     with io.open(filename, mode='wt', encoding='utf-8') as writer:
       WriteOpenFstSymbolTable(writer, syms)
     STDERR.write('Wrote %s\n' % filename)

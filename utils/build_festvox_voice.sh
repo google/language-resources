@@ -27,6 +27,8 @@ if [[ $# -ne 3 ]]; then
     exit 1
 fi
 
+BASEDIR=$(dirname "$0")
+
 PATH_TO_WAVS=$1
 LANG=$2
 VOICE_DIR=$3
@@ -60,7 +62,7 @@ then
 fi
 
 # Generate various festvox files (wagon description files for (mcep,f0,dur), festvox phoneset etc).
-python utils/apply_phonology.py "${PHONOLOGY}" "${VOICE_DIR}"
+python ${BASEDIR}/apply_phonology.py "${PHONOLOGY}" "${VOICE_DIR}"
 
 cd "${VOICE_DIR}"
 

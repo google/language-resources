@@ -1,3 +1,5 @@
+@	@		# private-use: inherent vowel
+:	joiner	ZWJ
 a	a	a
 ā	aa	aa
 æ	ae	ae
@@ -7,26 +9,26 @@ i	i	i
 u	u	u
 ū	uu	uu
 ŭ	^u
-r̥	,r	ri
-r̥̄	,rr	rri
-l̥	,l	li
-l̥̄	,ll	lli
-e	e	e
+r̥	,r	vocalic_r
+r̥̄	,rr	vocalic_rr
+l̥	,l	vocalic_l
+l̥̄	,ll	vocalic_ll
+e	e	e Deva:short_e
 ē	ee	ee Deva:e Beng:e Guru:e Gujr:e Orya:e
 ê	^e	candra_e
 ai	ai	ai
-o	o	o
+o	o	o Deva:short_o
 ō	oo	oo Deva:o Beng:o Guru:o Gujr:o Orya:o
 ô	^o	candra_o
 au	au	au
-ṁ	;m	anusvara Guru:bindi
-ṃ	.m	Guru:tippi
-m̐	~m	candrabindu Guru:adak_bindi
+ṁ	;m	anusvara bindi
+ṃ	.m	tippi
+m̐	~m	candrabindu adak_bindi
 n̆	^n
 m̆	^m
 ḥ	.h	visarga
-ẖ	_h	Knda:jihvamuliya
-ḫ	^h	Knda:upadhmaniya
+ẖ	_h	jihvamuliya
+ḫ	^h	upadhmaniya
 ḵ	_k	Taml:visarga	# merge into .h ?
 k	k	ka
 kh	kh	kha
@@ -44,7 +46,7 @@ n̆j	^nj	nyja
 ṭ	.t	tta
 ṭh	.th	ttha
 ḍ	.d	dda
-ṛ	.r	Deva:dddha Beng:rra Guru:rra Orya:rra
+ṛ	.r	dddha Beng:rra Guru:rra Orya:rra
 ḍh	.dh	ddha
 ṛh	.rh	rrha
 ṇ	.n	nna
@@ -61,14 +63,15 @@ b	b	ba
 bh	bh	bha
 m	m	ma
 m̆b	^mb	mba
-ṟ	_r	Taml:rra Telu:rra Knda:rra Mlym:rra
-ṯ	_t	Mlym:ttta
-ṉ	_n	Taml:nnna
+ṟ	_r	rra
+ṯ	_t	ttta
+ṉ	_n	nnna
 ḻ	_l	llla Knda:fa
 y	y	ya
+ỹ	~y		# Beng:ZWJ+virama+ya Sinh:virama+ZWJ+ya
 ẏ	;y	yya
 r	r	ra
-r̆	^r	Deva:rra+virama
+r̆	^r		# Deva:rra+virama
 l	l	la
 ḷ	.l	lla
 v	v	va

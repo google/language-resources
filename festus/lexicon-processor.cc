@@ -19,6 +19,8 @@
 
 #include <cstring>
 #include <iostream>
+#include <utility>
+#include <vector>
 
 #include <fst/compat.h>
 #include <fst/compose.h>
@@ -123,6 +125,14 @@ bool LexiconProcessor::AlignmentDiagnostics(Entry *entry,
   if (fst::kNoStateId == entry->alignment_lattice.Start()) {
     LOG(ERROR) << logging_prefix << ":" << entry->line_number
                << ": Alignment lattice is empty for line: " << entry->line;
+    if (string2graphemes_ && string2graphemes_->OutputSymbols()) {
+      std::vector<std::pair<string, float>> paths =
+          ShortestPathsToVector(entry->input_fst);
+      for (const auto &path : paths) {
+        LOG(ERROR) << "  graphemes: " << path.first;
+        LOG(ERROR) << "   phonemes: " << entry->fields.at(output_index_);
+      }
+    }
     return false;
   }
 
@@ -139,8 +149,8 @@ int LexiconProcessor::AlignmentDiagnosticsMain(int argc, char *argv[]) {
       R"(Alignment diagnostics for an input/output lexicon.
 
 The lexicon must be in tab-separated value (TSV) format.
-The first column (orthography) is used as the input string for alignment.
-The second column (pronunciation) is used as the output string for alignment.
+The column at --input_index is used as the input string for alignment.
+The column at --output_index is used as the output string for alignment.
 Any other columns are ignored.
 
 Usage:

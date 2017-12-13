@@ -58,6 +58,16 @@ STOPWORDS = frozenset([
     'VOWEL',
 ])
 
+DEPENDENT = (
+    'COMBINING',
+    'CONSONANT SIGN',
+    'MARK',
+    'MEDIAL',
+    'SARA',
+    'SUBJOINED',
+    'VOWEL SIGN',
+)
+
 DIGITS = {
     'DIGIT ZERO': '0',
     'DIGIT ONE': '1',
@@ -165,7 +175,7 @@ SINHALA_CHAR_NAMES = {
     0x0DF3: 'sinhala vowel sign vocalic ll',
 }
 
-BRAHMIC = [
+BRAHMIC_OFFICIAL_INDIA = [
     'Deva',
     'Beng',
     'Guru',
@@ -175,6 +185,9 @@ BRAHMIC = [
     'Telu',
     'Knda',
     'Mlym',
+]
+
+BRAHMIC_OTHER = [
     'Sinh',
     'Thai',
     'Laoo',
@@ -229,12 +242,12 @@ def CharName(c):
 
 
 def SymbolNames(script, include_script_code=False):
-  """Yields short symbolic names for all characters in the given script."""
+  """Yields short symbol names for all characters in the given script."""
   script_chars = icu.UnicodeSet(r'\p{%s}' % script.getName())
   prefix = script.getName().upper().replace('_', ' ')
   for c in script_chars:
     if ord(c) in EXCEPTIONS:
-      short_name = EXCEPTIONS[ord(c)]
+      symbol_name = EXCEPTIONS[ord(c)]
     else:
       name = CharName(c)
       if not name:
@@ -245,25 +258,23 @@ def SymbolNames(script, include_script_code=False):
       for old, new in DIGITS.items():
         name = name.replace(old, new)
       components = [t for t in name.split() if t not in STOPWORDS]
-      short_name = '_'.join(components).lower()
-      assert short_name, ('Empty symbolic name for %04X (%s)' %
+      symbol_name = '_'.join(components).lower()
+      assert symbol_name, ('Empty symbol name for %04X (%s)' %
                           (ord(c), CharName(c)))
-      if short_name.startswith('-'):
-        short_name = "'%s" % short_name[1:]
-      if ('VOWEL SIGN' in name or 'CONSONANT SIGN' in name or 'MARK' in name or
-          'MEDIAL' in name or 'COMBINING' in name or 'SUBJOINED' in name or
-          'SARA' in name):
-        short_name = '-%s' % short_name
+      if symbol_name.startswith('-'):
+        symbol_name = "'%s" % symbol_name[1:]
+      if any(substr in name for substr in DEPENDENT):
+        symbol_name = '-%s' % symbol_name
     if include_script_code:
-      short_name = '%s:%s' % (script.getShortName(), short_name)
-    yield c, short_name
+      symbol_name = '%s:%s' % (script.getShortName(), symbol_name)
+    yield c, symbol_name
   yield '\u200C', 'ZWNJ'
   yield '\u200D', 'ZWJ'
   return
 
 
 def GetScript(raw_script_name):
-  """Returns the canonical long script name for a given raw name."""
+  """Returns an icu Script object for a given script name."""
   script_codes = icu.Script.getCode(raw_script_name)
   if len(script_codes) != 1:
     STDERR.write('Unknown or ambiguous script name: %s\n' % raw_script_name)
@@ -302,9 +313,9 @@ def main(argv):
     sys.exit(2)
 
   if argv[1] == '--brahmic':
-    scripts = BRAHMIC + argv[2:]
+    scripts = BRAHMIC_OFFICIAL_INDIA + BRAHMIC_OTHER + argv[2:]
   elif argv[1] == '--india':
-    scripts = BRAHMIC[:9] + argv[2:]
+    scripts = BRAHMIC_OFFICIAL_INDIA + argv[2:]
   else:
     scripts = argv[1:]
   success = True

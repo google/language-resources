@@ -268,8 +268,8 @@ def SymbolNames(script, include_script_code=False):
     if include_script_code:
       symbol_name = '%s:%s' % (script.getShortName(), symbol_name)
     yield c, symbol_name
-  yield '\u200C', 'ZWNJ'
-  yield '\u200D', 'ZWJ'
+  yield '\u200C', 'non-joiner'
+  yield '\u200D', 'joiner'
   return
 
 

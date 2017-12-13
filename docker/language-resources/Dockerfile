@@ -16,6 +16,9 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /usr/local/src
 RUN git clone https://github.com/googlei18n/language-resources
 
+# Load language resources python modules.
+ENV PYTHONPATH="/usr/local/src/language-resources"
+
 # Install python pip.
 WORKDIR /opt
 RUN curl -k https://bootstrap.pypa.io/get-pip.py > get-pip.py && ls -l && python get-pip.py

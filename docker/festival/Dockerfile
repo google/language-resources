@@ -33,6 +33,8 @@ ENV ESTDIR /usr/local/src/tools/speech_tools
 ENV FESTVOXDIR /usr/local/src/tools/festvox
 ENV FESTIVALDIR /usr/local/src/tools/festival
 ENV FLITEDIR /usr/local/src/tools/flite
-ENV SPTKDIR /usr/local/src/tools/bin
+ENV SPTKDIR /usr/local/src/tools/
 ENV EXDIR /usr/local/src/tools/examples
 
+# Add festival to path.
+ENV PATH="/usr/local/src/tools/festival/bin:${PATH}"

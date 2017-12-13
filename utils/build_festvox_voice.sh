@@ -22,13 +22,26 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
+# Whether to run festvox TTS training.
+TRAIN=true
+
+while getopts ":t" opt; do
+  case ${opt} in
+    t ) # Option to disable training.
+      TRAIN=false
+      echo "Disable festvox training"
+      ;;
+  esac
+done
+shift $((OPTIND-1))
+
 if [[ $# -ne 3 ]]; then
     echo "Usage: ./utils/build_festvox_voice.sh <path to wavs> <lang> <voice_dir>"
     exit 1
 fi
 
-BASEDIR=$(dirname "$0")
 
+BASEDIR=$(dirname "$0")
 PATH_TO_WAVS=$1
 LANG=$2
 VOICE_DIR=$3
@@ -66,7 +79,9 @@ python ${BASEDIR}/apply_phonology.py "${PHONOLOGY}" "${VOICE_DIR}"
 
 cd "${VOICE_DIR}"
 
-# Run the Festvox Clustergen build. This will take couple of hours to complete.
-# Total running time depends heavily on the number of CPU cores available.
-echo "Training festvox ${LANG} voice"
-time bin/build_cg_voice
+if [[ ${TRAIN} == true ]]; then
+  # Run the Festvox Clustergen build. This will take couple of hours to complete.
+  # Total running time depends heavily on the number of CPU cores available.
+  echo "Training festvox ${LANG} voice"
+  time bin/build_cg_voice
+fi

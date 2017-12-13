@@ -22,10 +22,23 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
+
 if [[ $# -ne 3 ]]; then
     echo "Usage: ./utils/build_festvox_voice.sh <path to wavs> <lang> <voice_dir>"
     exit 1
 fi
+
+# Whether to run festvox TTS training.
+TRAIN=true
+
+while getopts ":t" opt; do
+  case ${opt} in
+    t ) # Option to disable training.
+      TRAIN=false
+      ;;
+  esac
+done
+
 
 PATH_TO_WAVS=$1
 LANG=$2
@@ -54,7 +67,7 @@ cp "${LANG}/festvox/lexicon.scm" "${VOICE_DIR}/festvox/lexicon.scm"
 
 # Setup the phonology.
 PHONOLOGY="${LANG}/festvox/ipa_phonology.json"
-if [ ! -f $PHONOLOGY ];
+if [ ! -f "${PHONOLOGY}" ];
 then
   PHONOLOGY="${LANG}/festvox/phonology.json"
 fi
@@ -62,10 +75,12 @@ fi
 # Generate various festvox files.
 python utils/apply_phonology.py "${PHONOLOGY}" "${VOICE_DIR}"
 
-# Commit the final setup.
+# Goto voice dir.
 cd "${VOICE_DIR}"
 
-# Run the Festvox Clustergen build. This will take couple of hours to complete.
-# Total running time depends heavily on the number of CPU cores available.
-echo "Training festvox ${LANG} voice"
-time bin/build_cg_voice
+if [[ ${TRAIN} ]]; then
+  # Run the Festvox Clustergen build. This will take couple of hours to complete.
+  # Total running time depends heavily on the number of CPU cores available.
+  echo "Training festvox ${LANG} voice"
+  time bin/build_cg_voice
+fi

@@ -42,6 +42,7 @@ fi
 export FESTIVAL_VOICE_PATH=$1
 export MERLIN_PATH=$2
 export WAV_PATH=$3
+BASEDIR=$(dirname "$0")
 LANGUAGE=$4
 LOCALE=$5
 SAMPLE_RATE=$6
@@ -147,7 +148,7 @@ cp "${FESTIVAL_LABEL_PHONE_ALIGN}"/*.lab "${MERLIN_LABEL_PHONE_ALIGN}"
 
 # TODO(pasindu): Check in these files for each langauge.
 echo "Generating HTS questions"
-./utils/generate_hts_questions.py "${LANGUAGE}/festvox/ipa_phonology.json" \
+${BASEDIR}/generate_hts_questions.py "${LANGUAGE}/festvox/ipa_phonology.json" \
   > "${MERLIN_DATA_PATH}/question/auto_generated_questions.hed"
 
 # TODO(pasindu): Replace this with a python script.

@@ -17,12 +17,13 @@
 
 from __future__ import unicode_literals
 
-from utils import utf8
+import io
 
+STDIN = io.open(0, mode='rt', encoding='utf-8', closefd=False)
 
 def main(unused_args):
-  utf8.Print('MNCL')
-  for line in utf8.stdin:
+  STDOUT.write('MNCL\n')
+  for line in STDIN:
     line = line.rstrip('\n')
     # Skip comments
     if not line or line.startswith('#'):
@@ -32,7 +33,7 @@ def main(unused_args):
     orth = fields[0]
     pron = fields[1]
     sylls = ' '.join('((%s) 1)' % s for s in pron.split(' . '))
-    utf8.Print('("%s" nil (%s))' % (orth, sylls))
+    STDOUT.write('("%s" nil (%s))\n' % (orth, sylls))
   return
 
 

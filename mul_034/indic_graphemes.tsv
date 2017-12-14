@@ -1,4 +1,5 @@
 @	@		# private-use: inherent vowel
+⬛	ERROR		# private-use: signals an error
 |	non-joiner	non-joiner
 +	joiner	joiner
 ˘	^	virama
@@ -43,7 +44,7 @@ cʰ	ch	cha
 j	j	ja
 jʰ	jh	jha
 ñ	~n	nya
-j͜n̆	j~n	jnya
+j͜ñ	j~n	jnya
 n̆j	^nj	nyja
 ṭ	.t	tta
 ṭʰ	.th	ttha

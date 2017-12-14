@@ -1,5 +1,6 @@
 #! /usr/bin/env python
-# Copyright 2016, 2017 Google Inc. All Rights Reserved.
+
+# Copyright 2016, 2017 Google LLC. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the 'License');
 # you may not use this file except in compliance with the License.
@@ -18,15 +19,15 @@
 Reads phonology.json file and validates the phoneme inventory.
 """
 
+import io
 import json
 import sys
-import io
 
 STDERR = io.open(2, mode='wt', encoding='utf-8', closefd=False)
 
 
 def main(argv):
-  with open(argv[1]) as reader:
+  with io.open(argv[1], mode='rt', encoding='utf-8') as reader:
     contents = reader.read()
   phonology = json.loads(contents)
 
@@ -51,8 +52,10 @@ def main(argv):
 
     expected_feature_list = len(feature_list) + 2
 
-    if not len(phone) == len(feature_list) + 2:
-      STDERR.write("Phoneme %s dose not match its feature types, expected features %s", phoneme, expected_feature_list)
+    if len(phone) != len(feature_list) + 2:
+      STDERR.write(
+          'Phoneme %s does not match its feature types, expected features %s\n'
+          % (phoneme, expected_feature_list))
       is_valid = False
 
     for x in range(2, len(phone)):
@@ -60,7 +63,9 @@ def main(argv):
       feature_options = features.get(feature_type)
 
       if phone[x] not in feature_options:
-        STDERR.write('Phoneme "%s" given feature "%s" value "%s" not found in list %s\n' %(phoneme, feature_type, phone[x], str(feature_options)))
+        STDERR.write(
+            'Phoneme "%s" given feature "%s" value "%s" not found in list %s\n'
+            % (phoneme, feature_type, phone[x], str(feature_options)))
         is_valid = False
 
   sys.exit(0 if is_valid else 1)

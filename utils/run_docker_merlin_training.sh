@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 # Copyright 2016 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,12 +24,16 @@ CONF_PATH="egs/locale/s1/conf/"
 
 # Whether to run merlin TTS training.
 TRAIN=true
+SAMPLE_RATE=48000
 
 while getopts ":t" opt; do
   case ${opt} in
     t ) # Option to disable training.
       TRAIN=false
       echo "Disable merlin training"
+      ;;
+    r) # Set sample rate.
+      SAMPLE_RATE="${OPTARG}"
       ;;
   esac
 done
@@ -42,7 +46,7 @@ cd /usr/local/src/voice
 /usr/local/src/voice/data/festvox/wavs/ \
 data \
 locale \
-16000
+"${SAMPLE_RATE}"
 
 # Setup required paths.
 mkdir -p ${BASE_VOICE_PATH}/models/duration_model
@@ -51,13 +55,13 @@ mkdir -p ${BASE_VOICE_PATH}/models/test_synthesis
 
 
 # Fix merlin conf files.
-COUNT=$(cat ${BASE_VOICE_PATH}/data/file_id_list.scp | wc -l)
+COUNT=$(wc -l < ${BASE_VOICE_PATH}/data/file_id_list.scp)
 
 for conf in acoustic_dnn duration_dnn; do
   S=${CONF_PATH}/_${conf}.conf
   D=${CONF_PATH}/${conf}.conf
   mv  ${D} ${S}
-  python ${PY_MERLIN_CONF} ${S} ${COUNT} > ${D}
+  python ${PY_MERLIN_CONF} ${S} "${COUNT}" > ${D}
 done
 
 # Run merlin training.

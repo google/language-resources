@@ -1,6 +1,6 @@
 set -x 
 
-USERNAME="ppasindud"
+USERNAME="langtech"
 
 for IMAGE_NAME in language-resources festival merlin; do
   cd ${IMAGE_NAME}

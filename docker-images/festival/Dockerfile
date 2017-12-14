@@ -1,4 +1,4 @@
-FROM ppasindud/base-language-resources
+FROM langtech/base-language-resources
 
 RUN apt-get update && apt-get install -y \
       automake \

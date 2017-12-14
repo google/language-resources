@@ -1,4 +1,4 @@
-FROM ppasindud/base-merlin
+FROM langtech/base-merlin
 
 WORKDIR /usr/local/src/voice/data/festvox
 
@@ -10,8 +10,8 @@ RUN sed -i '/sin_9228*/!d' txt.done.data
 RUN cp /usr/local/src/language-resources/si/festvox/ipa_phonology.json .
 
 # Download sinhala wavs
-RUN mkdir wavs && cd wavs && wget http://www.openslr.org/resources/30/si_lk.tar && \
-tar -xf si_lk.tar && \
+RUN mkdir wavs && cd wavs && wget http://www.openslr.org/resources/30/si_lk.tar.gz && \
+tar -xf si_lk.tar.gz && \
 find . -type f -not -name 'sin_9228*' -print0 | xargs -0 rm --
 
 # Setup festvox for given data
@@ -31,3 +31,4 @@ RUN cd lab && ls *.lab -1 | sed -e 's/\.lab$//' > ../file_id_list.scp
 # Setup merlin
 WORKDIR /usr/local/src/voice/training
 RUN /usr/local/src/language-resources/utils/run_docker_merlin_training.sh -t
+

@@ -53,8 +53,8 @@ mkdir -p ${BASE_VOICE_PATH}/models/duration_model
 mkdir -p ${BASE_VOICE_PATH}/models/acoustic_model
 mkdir -p ${BASE_VOICE_PATH}/models/test_synthesis
 
-
 # Fix merlin conf files.
+cd /usr/local/src/merlin
 COUNT=$(wc -l < ${BASE_VOICE_PATH}/data/file_id_list.scp)
 
 for conf in acoustic_dnn duration_dnn; do

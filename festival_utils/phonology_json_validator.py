@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Validate phonology.json files.
 
 Reads phonology.json file and validates the phoneme inventory.
@@ -52,7 +51,9 @@ def main(argv):
     expected_feature_list = len(feature_list) + 2
 
     if not len(phone) == len(feature_list) + 2:
-      STDERR.write("Phoneme %s dose not match its feature types, expected features %s", phoneme, expected_feature_list)
+      STDERR.write(
+          'Phoneme %s dose not match its feature types, expected features %s',
+          phoneme, expected_feature_list)
       is_valid = False
 
     for x in range(2, len(phone)):
@@ -60,7 +61,9 @@ def main(argv):
       feature_options = features.get(feature_type)
 
       if phone[x] not in feature_options:
-        STDERR.write('Phoneme "%s" given feature "%s" value "%s" not found in list %s\n' %(phoneme, feature_type, phone[x], str(feature_options)))
+        STDERR.write(
+            'Phoneme "%s" given feature "%s" value "%s" not found in list %s\n'
+            % (phoneme, feature_type, phone[x], str(feature_options)))
         is_valid = False
 
   sys.exit(0 if is_valid else 1)

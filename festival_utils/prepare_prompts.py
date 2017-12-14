@@ -14,7 +14,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Prepare Festival prompts file.
 
 Removes prompts without full lexicon coverage.
@@ -34,7 +33,8 @@ def ReadWords(path):
   with io.open(path, mode='rt', encoding='utf-8') as reader:
     for line in reader:
       fields = line.split()
-      if not fields: continue
+      if not fields:
+        continue
       yield fields[0]
   return
 
@@ -51,7 +51,7 @@ def main(argv):
     fields = line.split('\t')
     assert len(fields) >= 2
     utterance_id = fields[0]
-    words = [w if w != "'n" else "ŉ" for w in fields[1].split() if w != '?']
+    words = [w if w != "'n" else 'ŉ' for w in fields[1].split() if w != '?']
     oov = False
     for word in words:
       if not word in vocabulary:

@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Converts a prompts file in TSV format to Festival's Scheme format.
 """
 
@@ -22,6 +21,7 @@ import io
 
 STDIN = io.open(0, mode='rt', encoding='utf-8', closefd=False)
 STDOUT = io.open(1, mode='wt', encoding='utf-8', closefd=False)
+
 
 def main(unused_args):
   for line in STDIN:

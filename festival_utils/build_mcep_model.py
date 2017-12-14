@@ -20,8 +20,8 @@ import io
 import os
 import sys
 
-STDOUT = io.open(1, mode='wt', encoding='utf-8', closefd=False)
-STDERR = io.open(2, mode='wt', encoding='utf-8', closefd=False)
+STDOUT = io.open(1, mode="wt", encoding="utf-8", closefd=False)
+STDERR = io.open(2, mode="wt", encoding="utf-8", closefd=False)
 
 # F0 wagon description file.
 F0_DESCRIPTION_FILE = "festival/clunits/mcep.desc"
@@ -78,8 +78,9 @@ def BuildWagonCommand(state):
   """
 
   cmd = "%s -desc %s " % (WAGON_BIN, F0_DESCRIPTION_FILE)
-  cmd += "-track_feats %s -vertex_output %s %s %s " % (
-      TRACK_FEATS, VERTEX_OUTPUT, BALANCE, STOP)
+  cmd += "-track_feats %s -vertex_output %s %s %s " % (TRACK_FEATS,
+                                                       VERTEX_OUTPUT, BALANCE,
+                                                       STOP)
   cmd += "-data %s%s%s " % (FESTIVAL_FEATS_PATH, state, FEATS_FILE_EXTENSION)
   cmd += "-track %s%s%s " % (DISTLABS_PATH, state, MCEP_FILE_EXTENSION)
   cmd += "-test %s%s%s " % (FESTIVAL_FEATS_PATH, state, FEATS_FILE_EXTENSION)
@@ -87,7 +88,7 @@ def BuildWagonCommand(state):
                                 OUTPUT_TREE_FILE_EXTENSION)
 
   STDOUT.write("[INFO] Generating tree for state %s\n" % (state))
-  STDOUT.write("[INFO] \n %s \n" %(cmd))
+  STDOUT.write("[INFO] \n %s \n" % (cmd))
 
   os.system(cmd)
   return

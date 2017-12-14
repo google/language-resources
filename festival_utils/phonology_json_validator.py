@@ -1,5 +1,6 @@
 #! /usr/bin/env python
-# Copyright 2016, 2017 Google Inc. All Rights Reserved.
+
+# Copyright 2016, 2017 Google LLC. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the 'License');
 # you may not use this file except in compliance with the License.
@@ -17,15 +18,15 @@
 Reads phonology.json file and validates the phoneme inventory.
 """
 
+import io
 import json
 import sys
-import io
 
 STDERR = io.open(2, mode='wt', encoding='utf-8', closefd=False)
 
 
 def main(argv):
-  with open(argv[1]) as reader:
+  with io.open(argv[1], mode='rt', encoding='utf-8') as reader:
     contents = reader.read()
   phonology = json.loads(contents)
 
@@ -50,10 +51,10 @@ def main(argv):
 
     expected_feature_list = len(feature_list) + 2
 
-    if not len(phone) == len(feature_list) + 2:
+    if len(phone) != len(feature_list) + 2:
       STDERR.write(
-          'Phoneme %s dose not match its feature types, expected features %s',
-          phoneme, expected_feature_list)
+          'Phoneme %s does not match its feature types, expected features %s\n'
+          % (phoneme, expected_feature_list))
       is_valid = False
 
     for x in range(2, len(phone)):

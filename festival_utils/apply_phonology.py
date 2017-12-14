@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+#
 # Copyright 2016, 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,10 +30,9 @@ import json
 import os.path
 import re
 import sys
+import io
 
-from utils import utf8
-
-STDERR = utf8.stderr
+STDERR = io.open(2, mode='wt', encoding='UTF-8', closefd=False)
 
 INST_LANG_VOX = re.compile(r'.*/([^_]+_[^_]+)_([^_]+)_phoneset.scm$')
 

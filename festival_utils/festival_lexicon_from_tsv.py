@@ -1,7 +1,5 @@
-#! /usr/bin/python2 -u
-# -*- coding: utf-8 -*-
-#
-# Copyright 2016 Google Inc. All Rights Reserved.
+#! /usr/bin/env python
+# Copyright 2016, 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,40 +12,32 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-"""Converts a prompts file in TSV format to Festival's Scheme format.
+"""Converts a pronunciation lexicon in TSV format to Festival lexicon format.
 """
 
 from __future__ import unicode_literals
 
-import codecs
-import sys
+import io
 
-STDIN = codecs.getreader('utf-8')(sys.stdin)
-STDOUT = codecs.getwriter('utf-8')(sys.stdout)
-STDERR = codecs.getwriter('utf-8')(sys.stderr)
-
-
-def GetlineUnbuffered(f=sys.stdin):
-  while True:
-    line = f.readline()
-    if not line:
-      break
-    yield line.decode('utf-8')
-  return
+STDIN = io.open(0, mode='rt', encoding='utf-8', closefd=False)
+STDOUT = io.open(1, mode='wt', encoding='utf-8', closefd=False)
 
 
 def main(unused_args):
-  for line in GetlineUnbuffered():
+  STDOUT.write('MNCL\n')
+  for line in STDIN:
     line = line.rstrip('\n')
+    # Skip comments
+    if not line or line.startswith('#'):
+      continue
     fields = line.split('\t')
     assert len(fields) >= 2
-    utterance_id = fields[0]
-    prompt_text = fields[1]
-    assert '"' not in prompt_text
-    STDOUT.write('( %s "%s" )\n' % (utterance_id, prompt_text))
+    orth = fields[0]
+    pron = fields[1]
+    sylls = ' '.join('((%s) 1)' % s for s in pron.split(' . '))
+    STDOUT.write('("%s" nil (%s))\n' % (orth, sylls))
   return
 
 
 if __name__ == '__main__':
-  main(sys.argv)
+  main(None)

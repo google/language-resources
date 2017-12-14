@@ -81,6 +81,7 @@ Usage:
 )";
 
 DEFINE_string(alignables, "", "Path to alignables spec");
+DEFINE_bool(compactify, true, "Store FSTs in compact format");
 
 int main(int argc, char *argv[]) {
   SET_FLAGS(kUsage, &argc, &argv, true);
@@ -104,15 +105,27 @@ int main(int argc, char *argv[]) {
   // TODO: Also remove forbidden factors on the output side.
   fst.SetInputSymbols(nullptr);
   fst.SetOutputSymbols(nullptr);
-  Compactify(fst, out1);
-  std::cerr << string(80, '-') << std::endl;
+  if (FLAGS_compactify) {
+    Compactify(fst, out1);
+    std::cerr << string(80, '-') << std::endl;
+  } else {
+    fst::VectorFst<fst::LogArc> log_fst;
+    festus::ConvertWeight(fst, &log_fst);
+    log_fst.Write(out1);
+  }
 
   fst = util->PairToOutputFst();
   fst.SetInputSymbols(nullptr);
   CHECK(fst.OutputSymbols() != nullptr);
   fst::Invert(&fst);
   fst::ArcSort(&fst, fst::OLabelCompare<ARC_TYPE(fst)>());
-  Compactify(fst, out2);
+  if (FLAGS_compactify) {
+    Compactify(fst, out2);
+  } else {
+    fst::VectorFst<fst::LogArc> log_fst;
+    festus::ConvertWeight(fst, &log_fst);
+    log_fst.Write(out2);
+  }
 
   return 0;
 }

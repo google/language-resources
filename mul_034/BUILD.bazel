@@ -1,7 +1,4 @@
-#! /usr/bin/env python2
-# -*- coding: utf-8 -*-
-#
-# Copyright 2015 Google Inc. All Rights Reserved.
+# Copyright 2017 Google LLC. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,15 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import importlib
-import sys
+package(default_visibility = ["//visibility:public"])
 
-from utils import grapheme_util
-
-if len(sys.argv) <= 1:
-  sys.stderr.write('Usage: %s LANGUAGE\n' % sys.argv[0])
-  sys.exit(1)
-
-lang = sys.argv[1]
-graphemes = importlib.import_module(lang + '.graphemes')
-grapheme_util.TransliterateInteractively(graphemes.CODEPOINT_TO_SYMBOL)
+sh_test(
+    name = "display_graphemes_are_uniquely_decodable",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        grep '^[^#]' $(location indic_graphemes.tsv) |
+        cut -f 1 |
+        $(location //utils:uniquely_decodable)
+        """,
+    ],
+    data = [
+        "indic_graphemes.tsv",
+        "//utils:uniquely_decodable",
+    ],
+)

@@ -22,35 +22,33 @@ licenses(["notice"])  # Apache 2.0
 exports_files(["eval.sh"])
 
 py_binary(
-    name = "apply_phonology",
-    srcs = ["apply_phonology.py"],
-    default_python_version = "PY2",
-)
-
-py_binary(
-    name = "phonology_json_validator",
-    srcs = ["phonology_json_validator.py"],
-    default_python_version = "PY2",
+    name = "python_version",
+    srcs = ["python_version.py"],
+    srcs_version = "PY2AND3",
 )
 
 py_binary(
     name = "uniquely_decodable",
     srcs = ["uniquely_decodable.py"],
     srcs_version = "PY2AND3",
-    deps = [":utf8"],
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
     name = "evaluate_pronunciation_rules",
     srcs = ["evaluate_pronunciation_rules.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = [
+        "//utils:icu_util",
+        "//utils:utf8",
+    ],
 )
 
 py_binary(
     name = "eval_dictionary_simple",
     srcs = ["eval_dictionary_simple.py"],
     srcs_version = "PY2AND3",
-    deps = [":utf8"],
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
@@ -59,13 +57,32 @@ py_binary(
         "edist.py",
         "eval_lex.py",
     ],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
     name = "test_icu_transform",
     srcs = ["test_icu_transform.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = [
+        "//utils:icu_util",
+        "//utils:utf8",
+    ],
+)
+
+py_binary(
+    name = "icu_util",
+    srcs = ["icu_util.py"],
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
+)
+
+py_library(
+    name = "grapheme_util",
+    srcs = ["grapheme_util.py"],
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
 )
 
 cc_binary(
@@ -74,7 +91,7 @@ cc_binary(
     deps = [
         "//festus:fst-util",
         "//festus:label-maker",
-        "//festus:string-util",
+        "@com_google_absl//absl/strings",
         "@openfst//:fst",
         "@thrax//:grm-manager",
     ],
@@ -84,13 +101,7 @@ py_binary(
     name = "merge_lexicons",
     srcs = ["merge_lexicons.py"],
     srcs_version = "PY2AND3",
-    deps = [":utf8"],
-)
-
-py_binary(
-    name = "festival_lexicon_from_tsv",
-    srcs = ["festival_lexicon_from_tsv.py"],
-    default_python_version = "PY2",
+    deps = ["//utils:utf8"],
 )
 
 cc_binary(
@@ -139,13 +150,15 @@ cc_binary(
 py_binary(
     name = "sample",
     srcs = ["sample.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
 )
 
 py_binary(
     name = "freq",
     srcs = ["freq.py"],
-    default_python_version = "PY2",
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
 )
 
 py_library(
@@ -155,19 +168,14 @@ py_library(
 )
 
 # Ordinarily, one would simply use a py_test build target, but here we want to
-# test consistent behavior of utf8.py for both PY2 and PY3, hence a non-standard
-# inline sh_test.
+# test consistent behavior of utf8.py for both PY2 and PY3 and under different
+# environment conditions, hence a non-standard sh_test.
 sh_test(
     name = "utf8_test",
-    srcs = ["eval.sh"],
+    srcs = ["utf8_test.sh"],
     args = [
-        """
-        for py in python2 python3; do
-          which $$py &&
-          $$py $(location utf8_test.py) |
-          diff -u - $(location utf8_test_stdout.txt)
-        done
-        """,
+        "$(location utf8_test.py)",
+        "$(location utf8_test_stdout.txt)",
     ],
     data = [
         "utf8.py",

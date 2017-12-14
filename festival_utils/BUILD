@@ -15,4 +15,22 @@
 # Copyright 2016 Google, Inc.
 # Author: pasindu@google.com (Pasindu De Silva)
 
-exports_files(["prepare_prompts.py", "festvox.bzl"])
+package(default_visibility = ["//visibility:public"])
+
+exports_files([
+    "prepare_prompts.py",
+    "festvox.bzl",
+])
+
+py_binary(
+    name = "phonology_json_validator",
+    srcs = ["phonology_json_validator.py"],
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
+)
+
+py_binary(
+    name = "festival_lexicon_from_tsv",
+    srcs = ["festival_lexicon_from_tsv.py"],
+    srcs_version = "PY2AND3",
+)

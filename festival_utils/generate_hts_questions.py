@@ -1,5 +1,4 @@
-#! /usr/bin/python2
-# -*- coding: utf-8 -*-
+#! /usr/bin/env python
 #
 # Copyright 2016 Google Inc. All Rights Reserved.
 #
@@ -16,21 +15,23 @@
 # limitations under the License.
 r"""Generate HTS question file from json phonology.
 
-Questions are generated according to the [1] format with support for Merlin CQS tags.
+Questions are generated according to the [1] format with support for Merlin CQS
+tags.
 
-[1] - https://wiki.inf.ed.ac.uk/twiki/pub/CSTR/F0parametrisation/hts_lab_format.pdf
+[1] -
+https://wiki.inf.ed.ac.uk/twiki/pub/CSTR/F0parametrisation/hts_lab_format.pdf
 
 Usage
-  ./utils/generate_hts_questions.py si/festvox/ipa_phonology.json
+  ./festival_utils/generate_hts_questions.py si/festvox/ipa_phonology.json
 """
 
-__author__ = 'pasindu@google.com (Pasindu De Silva)'
+__author__ = "pasindu@google.com (Pasindu De Silva)"
 
-import codecs
+import io
 import json
 import sys
 
-STDOUT = codecs.getwriter("utf-8")(sys.stdout)
+STDOUT = io.open(1, mode="wt", encoding="utf-8", closefd=False)
 
 STATIC_QUESTIONS = r"""QS "C-Syl_Vowel==x"      {|x/C:}
 QS "C-Syl_Vowel==no"    {|novowel/C:}
@@ -143,14 +144,14 @@ def main(argv):
   # Example phoneme feature question.
   # - QS "C-Vowel"  {-aa+,-ae+,-ah+}
   for x in qs_list:
-    content += "QS \"C-" + x + "\"\t\t\t\t{%s}\n" % (",".join([(
-        "-%s+") % y for y in qs_list.get(x)]))
+    content += "QS \"C-" + x + "\"\t\t\t\t{%s}\n" % (
+        ",".join([("-%s+") % y for y in qs_list.get(x)]))
 
   # Add syllabification questions.
   # Example - QS "C-Syl_aa"  {|aa/C:}
   for x in qs_list:
-    content += "QS \"C-Syl-" + x + "\"\t\t\t\t{%s}\n" % (",".join([(
-        "|%s/C:") % y for y in qs_list.get(x)]))
+    content += "QS \"C-Syl-" + x + "\"\t\t\t\t{%s}\n" % (
+        ",".join([("|%s/C:") % y for y in qs_list.get(x)]))
 
   content += STATIC_QUESTIONS
 

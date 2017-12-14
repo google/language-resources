@@ -23,7 +23,7 @@ from __future__ import unicode_literals
 
 import sys
 
-import utf8
+from utils import utf8
 
 
 def LeftQuotientOfWord(ps, w):

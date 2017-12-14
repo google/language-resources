@@ -22,14 +22,23 @@ base_path = "si/textnorm/classifier/"
 [
     grm_regression_test(
         name = test_rules + "_tests",
-        far_file_path = base_path,
-        test_file_path = base_path,
         far_file = test_rules + ".far",
+        far_file_path = base_path,
         test_file = "testdata/" + test_rules + ".tsv",
+        test_file_path = base_path,
     )
-for test_rules in ["address",   "connector", "date",
-                            "measure", "money", "ordinal", 
-                            "roman_numeral", "time", "tokenize_and_classify"]]
+    for test_rules in [
+        "address",
+        "connector",
+        "date",
+        "measure",
+        "money",
+        "ordinal",
+        "roman_numeral",
+        "time",
+        "tokenize_and_classify",
+    ]
+]
 
 thrax_compile_grm(
     name = "universal_rules",
@@ -45,25 +54,33 @@ thrax_compile_grm(
 )
 
 universal_deps = [
-        "universal_func.far",
-        "universal_func.grm",
-        "universal_rules.far",
-        "universal_rules.grm",
+    "universal_func.far",
+    "universal_func.grm",
+    "universal_rules.far",
+    "universal_rules.grm",
 ]
 
-[ 
+[
     thrax_compile_grm(
         name = rule_name,
         deps = universal_deps,
     )
-for rule_name in ["address", "date", "money", "ordinal", "time", "sinhala"]]
+    for rule_name in [
+        "address",
+        "date",
+        "money",
+        "ordinal",
+        "time",
+        "sinhala",
+    ]
+]
 
 thrax_compile_grm(
     name = "measure",
     deps = [
         "money.far",
         "money.grm",
-    ]  + universal_deps,
+    ] + universal_deps,
 )
 
 thrax_compile_grm(
@@ -133,5 +150,5 @@ thrax_compile_grm(
         "sinhala.grm",
         "time.far",
         "time.grm",
-    ] + universal_deps, 
+    ] + universal_deps,
 )

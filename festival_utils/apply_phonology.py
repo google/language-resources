@@ -1,7 +1,6 @@
-#! /usr/bin/python2
-# -*- coding: utf-8 -*-
+#! /usr/bin/env python
 #
-# Copyright 2016 Google Inc. All Rights Reserved.
+# Copyright 2016, 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +13,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Tweaks a directory tree set up for a Festvox Clustergen build.
 
 Reads a phonology description and writes/updates several files in a
@@ -26,25 +24,24 @@ decision trees.
 
 from __future__ import unicode_literals
 
-import codecs
 import glob
 import json
 import os.path
 import re
 import sys
+import io
 
-STDIN = codecs.getreader('utf-8')(sys.stdin)
-STDOUT = codecs.getwriter('utf-8')(sys.stdout)
-STDERR = codecs.getwriter('utf-8')(sys.stderr)
+STDERR = io.open(2, mode='wt', encoding='UTF-8', closefd=False)
 
 INST_LANG_VOX = re.compile(r'.*/([^_]+_[^_]+)_([^_]+)_phoneset.scm$')
 
 NO_OF_FEATURES = 8
 
+
 def ReadPhonology(path):
-  with codecs.open(path, 'r', 'utf-8') as reader:
-    contents = reader.read()
+  contents = utf8.GetContents(path)
   return json.loads(contents)
+
 
 def MakePhonesetScm(writer, phonology, inst_lang, vox):
   writer.write(';;; Automatically generated. Edit with caution.\n\n')
@@ -59,39 +56,39 @@ def MakePhonesetScm(writer, phonology, inst_lang, vox):
   silences = []
 
   for feature_type in phonology['feature_types']:
-    types_of_features.append([ feature_type[0]] + feature_type[1:])
+    types_of_features.append([feature_type[0]] + feature_type[1:])
 
   no_of_features = len(phonology['features'])
 
   for phone in phonology['phones']:
-      labels = []
-      labels.append(phone[0])
-      labels.append(phone[1])
-      if phone[1] == 'silence':
-        silences.append(phone[0])
+    labels = []
+    labels.append(phone[0])
+    labels.append(phone[1])
+    if phone[1] == 'silence':
+      silences.append(phone[0])
 
-      phone_features = []
+    phone_features = []
 
-      for types_of_feature in types_of_features:
-        if phone[1] == types_of_feature[0]:
-          phone_features = types_of_feature[1:]
-          break
+    for types_of_feature in types_of_features:
+      if phone[1] == types_of_feature[0]:
+        phone_features = types_of_feature[1:]
+        break
 
-      next_entry = 2
-      for feature in phonology['features'][1:]:
-        if feature[0] in phone_features:
-          labels.append(phone[next_entry])
-          next_entry +=1
-        else:
-          labels.append("0")
-      label_str = " ".join(labels).rstrip()
-      phone_line_str = ("(%s)") % (label_str)
-      assert no_of_features == len(label_str.split(" ")[1:])
-      writer.write(phone_line_str + "\n")
+    next_entry = 2
+    for feature in phonology['features'][1:]:
+      if feature[0] in phone_features:
+        labels.append(phone[next_entry])
+        next_entry += 1
+      else:
+        labels.append('0')
+    label_str = ' '.join(labels).rstrip()
+    phone_line_str = ('(%s)') % (label_str)
+    assert no_of_features == len(label_str.split(' ')[1:])
+    writer.write(phone_line_str + '\n')
 
   writer.write('  )\n)\n\n')
   writer.write("(PhoneSet.silences '(%s))\n\n" % ' '.join(silences))
-  writer.write(r'''(define (%s_%s::select_phoneset)
+  writer.write(r"""(define (%s_%s::select_phoneset)
   "(%s_%s::select_phoneset)
 Set up phone set for %s."
   (Parameter.set 'PhoneSet '%s)
@@ -104,20 +101,14 @@ Reset phone set for %s."
 )
 
 (provide '%s_%s_phoneset)
-''' % (inst_lang, vox,
-       inst_lang, vox,
-       inst_lang,
-       phonology['name'],
-       phonology['name'],
-       inst_lang, vox,
-       inst_lang, vox,
-       inst_lang,
-       inst_lang, vox)
-  )
+""" % (inst_lang, vox, inst_lang, vox, inst_lang, phonology['name'],
+       phonology['name'], inst_lang, vox, inst_lang, vox, inst_lang, inst_lang,
+       vox))
   return
 
+
 def MakeLexiconScm(writer, inst_lang, vox):
-  writer.write(r''';;; Automatically generated. Edit with caution.
+  writer.write(r""";;; Automatically generated. Edit with caution.
 
 (lex.create "%s")
 (lex.set.phoneset "%s")
@@ -135,17 +126,8 @@ Reset lexicon information."
   t
 )
 (provide '%s_%s_lexicon)
-''' % (inst_lang,
-       inst_lang,
-       inst_lang,
-       inst_lang, vox,
-       inst_lang, vox,
-       inst_lang,
-       inst_lang,
-       inst_lang, vox,
-       inst_lang, vox,
-       inst_lang, vox)
-  )
+""" % (inst_lang, inst_lang, inst_lang, inst_lang, vox, inst_lang, vox,
+       inst_lang, inst_lang, inst_lang, vox, inst_lang, vox, inst_lang, vox))
   return
 
 
@@ -166,7 +148,7 @@ def MakeAllDesc(writer, phones, features):
   for k, vs in features:
     writer.write('( n.ph_%s %s )\n' % (k, vs))
 
-  writer.write(r'''( segment_duration ignore float)
+  writer.write(r"""( segment_duration ignore float)
 ( seg_pitch ignore float )
 ( p.seg_pitch ignore float )
 ( n.seg_pitch ignore float )
@@ -232,7 +214,7 @@ single
 final
 mid
 )
-''')
+""")
 
   writer.write('( pp.name ignore 0 ')
   writer.write(' '.join('"%s"' % p for p in phones))
@@ -241,7 +223,7 @@ mid
   for k, vs in features:
     writer.write('( pp.ph_%s ignore %s )\n' % (k, vs))
 
-  writer.write(r'''( n.lisp_is_pau 0 1)
+  writer.write(r"""( n.lisp_is_pau 0 1)
 ( p.lisp_is_pau 0 1)
 ( R:SylStructure.parent.parent.gpos
 0
@@ -283,12 +265,12 @@ wp
 punc
 )
 )
-''')
+""")
   return
 
 
 def MakeMcepDesc(writer, phones, features):
-  writer.write(r'''(
+  writer.write(r"""(
 ( occurid vector )
 ( R:mcep_link.parent.name
 state names
@@ -306,23 +288,24 @@ state names
 phone names
 "0"
 )
-''')
+""")
 
   for k, vs in features:
-    writer.write('( R:mcep_link.parent.R:segstate.parent.p.ph_%s %s )\n'
-                 % (k, vs))
+    writer.write('( R:mcep_link.parent.R:segstate.parent.p.ph_%s %s )\n' % (k,
+                                                                            vs))
 
-  writer.write(r'''( R:mcep_link.parent.R:segstate.parent.n.name ignore
+  writer.write(r"""( R:mcep_link.parent.R:segstate.parent.n.name ignore
 phone names
 "0"
 )
-''')
+""")
 
   for k, vs in features:
-    writer.write('( R:mcep_link.parent.R:segstate.parent.n.ph_%s %s )\n'
-                 % (k, vs))
+    writer.write('( R:mcep_link.parent.R:segstate.parent.n.ph_%s %s )\n' % (k,
+                                                                            vs))
 
-  writer.write(r'''( R:mcep_link.parent.R:segstate.parent.segment_duration ignore float)
+  writer.write(
+      r"""( R:mcep_link.parent.R:segstate.parent.segment_duration ignore float)
 ( R:mcep_link.parent.lisp_cg_duration float)
 ( R:mcep_link.parent.R:segstate.n.lisp_cg_duration float)
 ( R:mcep_link.parent.R:segstate.p.lisp_cg_duration float)
@@ -395,13 +378,14 @@ mid
 phone names
 "0"
 )
-''')
+""")
 
   for k, vs in features:
-    writer.write('( R:mcep_link.parent.R:segstate.parent.pp.ph_%s ignore %s )\n'
-                 % (k, vs))
+    writer.write(
+        '( R:mcep_link.parent.R:segstate.parent.pp.ph_%s ignore %s )\n' % (k,
+                                                                           vs))
 
-  writer.write(r'''( R:mcep_link.parent.R:segstate.parent.n.lisp_is_pau 0 1)
+  writer.write(r"""( R:mcep_link.parent.R:segstate.parent.n.lisp_is_pau 0 1)
 ( R:mcep_link.parent.R:segstate.parent.p.lisp_is_pau 0 1)
 ( R:mcep_link.parent.R:segstate.parent.R:SylStructure.parent.parent.gpos
 0
@@ -443,12 +427,12 @@ wp
 punc
 )
 )
-''')
+""")
   return
 
 
 def MakeMceptrajDesc(writer, phones, features):
-  writer.write(r'''(
+  writer.write(r"""(
 ( occurid trajectory )
 ( num_frames ignore int)
 ( name
@@ -467,23 +451,21 @@ state names
 phone names
 "0"
 )
-''')
+""")
 
   for k, vs in features:
-    writer.write('( R:segstate.parent.p.ph_%s %s )\n'
-                 % (k, vs))
+    writer.write('( R:segstate.parent.p.ph_%s %s )\n' % (k, vs))
 
-  writer.write(r'''( R:segstate.parent.n.name ignore
+  writer.write(r"""( R:segstate.parent.n.name ignore
 phone names
 "0"
 )
-''')
+""")
 
   for k, vs in features:
-    writer.write('( R:segstate.parent.n.ph_%s %s )\n'
-                 % (k, vs))
+    writer.write('( R:segstate.parent.n.ph_%s %s )\n' % (k, vs))
 
-  writer.write(r'''( R:segstate.parent.segment_duration ignore float)
+  writer.write(r"""( R:segstate.parent.segment_duration ignore float)
 ( lisp_cg_duration float)
 ( n.lisp_cg_duration float)
 ( p.lisp_cg_duration float)
@@ -548,13 +530,12 @@ mid
 phone names
 "0"
 )
-''')
+""")
 
   for k, vs in features:
-    writer.write('( R:segstate.parent.pp.ph_%s ignore %s )\n'
-                 % (k, vs))
+    writer.write('( R:segstate.parent.pp.ph_%s ignore %s )\n' % (k, vs))
 
-  writer.write(r'''( R:segstate.parent.n.lisp_is_pau 0 1)
+  writer.write(r"""( R:segstate.parent.n.lisp_is_pau 0 1)
 ( R:segstate.parent.p.lisp_is_pau 0 1)
 ( R:segstate.parent.R:SylStructure.parent.parent.gpos
 0
@@ -593,12 +574,12 @@ to
 wp
 )
 )
-''')
+""")
   return
 
 
 def MakeDurFeats(writer, phones, features):
-  writer.write(r'''
+  writer.write(r"""
 lisp_zscore_dur
 name
 p.name
@@ -616,13 +597,13 @@ R:SylStructure.parent.pos_in_word
 p.seg_onsetcoda
 seg_onsetcoda
 n.seg_onsetcoda
-''')
+""")
 
   for k, _ in features:
     for prefix in ('pp.', 'p.', '', 'n.', 'nn.'):
       writer.write('%sph_%s\n' % (prefix, k))
 
-  writer.write(r'''R:SylStructure.parent.R:Syllable.pp.accented
+  writer.write(r"""R:SylStructure.parent.R:Syllable.pp.accented
 R:SylStructure.parent.R:Syllable.p.accented
 R:SylStructure.parent.accented
 R:SylStructure.parent.R:Syllable.n.accented
@@ -657,12 +638,12 @@ lisp_coda_glide
 R:SylStructure.parent.parent.pos
 R:SylStructure.parent.parent.gpos
 R:SylStructure.parent.parent.phr_pos
-''')
+""")
   return
 
 
 def MakeStatedurFeats(writer, phones, features):
-  writer.write(r'''lisp_zscore_dur
+  writer.write(r"""lisp_zscore_dur
 name
 p.name
 n.name
@@ -682,13 +663,14 @@ R:segstate.parent.R:SylStructure.parent.pos_in_word
 R:segstate.parent.p.seg_onsetcoda
 R:segstate.parent.seg_onsetcoda
 R:segstate.parent.n.seg_onsetcoda
-''')
+""")
 
   for k, _ in features:
     for prefix in ('pp.', 'p.', '', 'n.', 'nn.'):
       writer.write('R:segstate.parent.%sph_%s\n' % (prefix, k))
 
-  writer.write(r'''R:segstate.parent.R:SylStructure.parent.R:Syllable.pp.accented
+  writer.write(
+      r"""R:segstate.parent.R:SylStructure.parent.R:Syllable.pp.accented
 R:segstate.parent.R:SylStructure.parent.R:Syllable.p.accented
 R:segstate.parent.R:SylStructure.parent.accented
 R:segstate.parent.R:SylStructure.parent.R:Syllable.n.accented
@@ -723,14 +705,13 @@ R:segstate.parent.lisp_coda_glide
 R:segstate.parent.R:SylStructure.parent.parent.pos
 R:segstate.parent.R:SylStructure.parent.parent.gpos
 R:segstate.parent.R:SylStructure.parent.parent.phr_pos
-''')
+""")
   return
 
 
 def main(argv):
   if len(argv) != 3:
-    sys.stdout.write('Usage: %s phonology.json path/to/tts/build/dir\n' %
-                     argv[0])
+    utf8.Print('Usage: %s phonology.json path/to/tts/build/dir' % argv[0])
     sys.exit(2)
 
   phonology = ReadPhonology(argv[1])
@@ -744,11 +725,12 @@ def main(argv):
   inst_lang = match.group(1)
   vox = match.group(2)
 
-  with codecs.open(phoneset_path, 'w', 'utf-8') as writer:
+  with utf8.open(phoneset_path, mode='w') as writer:
     MakePhonesetScm(writer, phonology, inst_lang, vox)
 
-  with codecs.open('%s/festvox/%s_%s_lexicon.scm' % (build_dir, inst_lang, vox),
-                   'w', 'utf-8') as writer:
+  with utf8.open(
+      '%s/festvox/%s_%s_lexicon.scm' % (build_dir, inst_lang, vox),
+      mode='w') as writer:
     MakeLexiconScm(writer, inst_lang, vox)
 
   phones = [phone[0] for phone in phonology['phones']]
@@ -759,15 +741,15 @@ def main(argv):
     STDERR.write('feature %s: %s\n' % (k, vs))
 
   fpath = '%s/festival' % build_dir
-  with codecs.open('%s/clunits/all.desc' % fpath, 'w', 'utf-8') as writer:
+  with utf8.open('%s/clunits/all.desc' % fpath, mode='w') as writer:
     MakeAllDesc(writer, phones, features)
-  with codecs.open('%s/clunits/mcep.desc' % fpath, 'w', 'utf-8') as writer:
+  with utf8.open('%s/clunits/mcep.desc' % fpath, mode='w') as writer:
     MakeMcepDesc(writer, phones, features)
-  with codecs.open('%s/clunits/mceptraj.desc' % fpath, 'w', 'utf-8') as writer:
+  with utf8.open('%s/clunits/mceptraj.desc' % fpath, mode='w') as writer:
     MakeMceptrajDesc(writer, phones, features)
-  with codecs.open('%s/dur/etc/dur.feats' % fpath, 'w', 'utf-8') as writer:
+  with utf8.open('%s/dur/etc/dur.feats' % fpath, mode='w') as writer:
     MakeDurFeats(writer, phones, features)
-  with codecs.open('%s/dur/etc/statedur.feats' % fpath, 'w', 'utf-8') as writer:
+  with utf8.open('%s/dur/etc/statedur.feats' % fpath, mode='w') as writer:
     MakeStatedurFeats(writer, phones, features)
   return
 

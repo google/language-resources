@@ -1,3 +1,4 @@
+True 42 3.14 None [] Foo
 hello world
 hello world
 hello world
@@ -6,4 +7,5 @@ hello world
 ¡Hola! ¡mundo!
 ¡Hola! ¡mundo!
 ¡Hola! ¡mundo!
-b'\xa1' Hola!
+�Hola! ¡mundo!
+�Hola! ¡mundo!

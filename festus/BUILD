@@ -12,10 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright 2015, 2016 Google, Inc.
+# Copyright 2015, 2016, 2017 Google, Inc.
 # Author: mjansche@google.com (Martin Jansche)
 
 package(default_visibility = ["//visibility:public"])
+
+alias(
+    name = "gtest",
+    actual = "@com_google_googletest//:gtest",
+)
+
+alias(
+    name = "gtest_main",
+    actual = "@com_google_googletest//:gtest_main",
+)
 
 cc_library(
     name = "float-weight-star",
@@ -40,7 +50,7 @@ cc_library(
 cc_library(
     name = "weight-test-lib",
     hdrs = ["weight-test-lib.h"],
-    deps = ["@googletest//:gtest"],
+    deps = [":gtest"],
 )
 
 cc_library(
@@ -57,9 +67,9 @@ cc_test(
     timeout = "short",
     srcs = ["real-weight-test.cc"],
     deps = [
+        ":gtest",
         ":real-weight",
         ":weight-test-lib",
-        "@googletest//:gtest",
         "@openfst//:weight-tester",
     ],
 )
@@ -75,10 +85,10 @@ cc_test(
     timeout = "short",
     srcs = ["modular-int-semiring-test.cc"],
     deps = [
+        ":gtest_main",
         ":modular-int-semiring",
         ":weight",
         ":weight-test-lib",
-        "@googletest//:gtest_main",
     ],
 )
 
@@ -93,10 +103,10 @@ cc_test(
     timeout = "short",
     srcs = ["max-times-semiring-test.cc"],
     deps = [
+        ":gtest_main",
         ":max-times-semiring",
         ":weight",
         ":weight-test-lib",
-        "@googletest//:gtest_main",
     ],
 )
 
@@ -114,10 +124,10 @@ cc_test(
     timeout = "short",
     srcs = ["quaternion-semiring-test.cc"],
     deps = [
+        ":gtest_main",
         ":quaternion-semiring",
         ":real-weight",
         ":weight-test-lib",
-        "@googletest//:gtest_main",
         "@openfst//:weight",
     ],
 )
@@ -128,8 +138,8 @@ cc_test(
     srcs = ["star-test.cc"],
     deps = [
         ":float-weight-star",
+        ":gtest_main",
         ":real-weight",
-        "@googletest//:gtest_main",
         "@openfst//:weight",
     ],
 )
@@ -147,9 +157,9 @@ cc_test(
     linkopts = ["-lm"],
     deps = [
         ":float-weight-star",
+        ":gtest_main",
         ":matrix",
         ":real-weight",
-        "@googletest//:gtest_main",
         "@openfst//:fst",
     ],
 )
@@ -159,8 +169,8 @@ cc_library(
     srcs = ["proto-util.cc"],
     hdrs = ["proto-util.h"],
     deps = [
+        "@com_google_protobuf//:protobuf",
         "@openfst//:base",
-        "@protobuf//:protobuf",
     ],
 )
 
@@ -169,8 +179,8 @@ cc_library(
     srcs = ["string-util.cc"],
     hdrs = ["string-util.h"],
     deps = [
+        "@com_google_protobuf//:protobuf_lite",
         "@openfst//:base",
-        "@protobuf//:protobuf_lite",
     ],
 )
 
@@ -179,8 +189,8 @@ cc_test(
     timeout = "short",
     srcs = ["string-util-test.cc"],
     deps = [
+        ":gtest_main",
         ":string-util",
-        "@googletest//:gtest_main",
     ],
 )
 
@@ -215,8 +225,8 @@ cc_test(
     timeout = "short",
     srcs = ["iterator-test.cc"],
     deps = [
+        ":gtest_main",
         ":iterator",
-        "@googletest//:gtest_main",
     ],
 )
 
@@ -231,9 +241,9 @@ cc_test(
     timeout = "short",
     srcs = ["topsort-test.cc"],
     deps = [
+        ":gtest_main",
         ":iterator",
         ":topsort",
-        "@googletest//:gtest_main",
         "@openfst//:fst",
     ],
 )
@@ -260,14 +270,14 @@ cc_test(
     ],
 )
 
-# Requires Bazel >= 0.1.4.
-load("@protobuf//:protobuf.bzl", "cc_proto_library")
+proto_library(
+    name = "alignables_proto",
+    srcs = ["alignables.proto"],
+)
 
 cc_proto_library(
     name = "alignables_cc_proto",
-    srcs = ["alignables.proto"],
-    default_runtime = "@protobuf//:protobuf",
-    protoc = "@protobuf//:protoc",
+    deps = [":alignables_proto"],
 )
 
 cc_library(
@@ -333,11 +343,14 @@ cc_binary(
     ],
 )
 
+proto_library(
+    name = "expression_proto",
+    srcs = ["expression.proto"],
+)
+
 cc_proto_library(
     name = "expression_cc_proto",
-    srcs = ["expression.proto"],
-    default_runtime = "@protobuf//:protobuf",
-    protoc = "@protobuf//:protoc",
+    deps = [":expression_proto"],
 )
 
 cc_library(
@@ -370,10 +383,10 @@ cc_test(
     timeout = "short",
     srcs = ["term-semiring-test.cc"],
     deps = [
+        ":gtest_main",
         ":term-semiring",
         ":weight",
         ":weight-test-lib",
-        "@googletest//:gtest_main",
         "@openfst//:weight",
     ],
 )
@@ -394,12 +407,12 @@ cc_test(
         ":algebraic-path",
         ":arc",
         ":float-weight-star",
+        ":gtest",
         ":max-times-semiring",
         ":modular-int-semiring",
         ":quaternion-semiring",
         ":real-weight",
         ":weight",
-        "@googletest//:gtest",
         "@openfst//:fst",
     ],
 )

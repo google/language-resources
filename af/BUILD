@@ -105,9 +105,9 @@ sh_binary(
     name = "prepare-g2p-data",
     srcs = ["prepare-g2p-data.sh"],
     data = [
-        "@openfst//:farcompilestrings",
         "//festus:lexicon-diagnostics",
         "//festus:make-alignable-symbols",
+        "@openfst//:farcompilestrings",
     ],
 )
 
@@ -137,10 +137,10 @@ sh_binary(
     name = "train-graphone-model",
     srcs = ["train-graphone-model.sh"],
     data = [
+        "//festus:ngramfinalize",
         "@opengrm_ngram//:ngramcount",
         "@opengrm_ngram//:ngrammake",
         "@opengrm_ngram//:ngramshrink",
-        "//festus:ngramfinalize",
     ],
 )
 

@@ -1,7 +1,6 @@
-#! /usr/bin/python
-# -*- coding: utf-8 -*-
-#
-# Copyright 2016 Google Inc. All Rights Reserved.
+#! /usr/bin/env python
+
+# Copyright 2016, 2017 Google LLC. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the 'License');
 # you may not use this file except in compliance with the License.
@@ -14,24 +13,21 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Validate phonology.json files.
 
 Reads phonology.json file and validates the phoneme inventory.
 """
 
-import codecs
+import io
 import json
 import sys
 
-STDIN = codecs.getreader('utf-8')(sys.stdin)
-STDOUT = codecs.getwriter('utf-8')(sys.stdout)
-STDERR = codecs.getwriter('utf-8')(sys.stderr)
+STDERR = io.open(2, mode='wt', encoding='utf-8', closefd=False)
 
 
-def main(args):
-  file_name = args[1]
-  contents = codecs.open(file_name, 'r', 'utf-8').read()
+def main(argv):
+  with io.open(argv[1], mode='rt', encoding='utf-8') as reader:
+    contents = reader.read()
   phonology = json.loads(contents)
 
   feature_types = {}
@@ -44,7 +40,7 @@ def main(args):
   for feat_type in phonology['feature_types']:
     for feat in feat_type[1:]:
       if not features.get(feat):
-        STDERR.write('Feature %s not in %s\n' %(feat, str(features)))
+        STDERR.write('Feature %s not in %s\n' % (feat, str(features)))
         is_valid = False
 
     feature_types.update({feat_type[0]: feat_type[1:]})
@@ -55,20 +51,25 @@ def main(args):
 
     expected_feature_list = len(feature_list) + 2
 
-    if not len(phone) == len(feature_list) + 2:
-      STDERR.write("Phoneme %s dose not match its feature types, expected features %s", phoneme, expected_feature_list)
+    if len(phone) != len(feature_list) + 2:
+      STDERR.write(
+          'Phoneme %s does not match its feature types, expected features %s\n'
+          % (phoneme, expected_feature_list))
       is_valid = False
 
-    for x in xrange(2, len(phone)):
+    for x in range(2, len(phone)):
       feature_type = feature_list[x - 2]
       feature_options = features.get(feature_type)
 
       if phone[x] not in feature_options:
-        STDERR.write('Phoneme "%s" given feature "%s" value "%s" not found in list %s\n' %(phoneme, feature_type, phone[x], str(feature_options)))
+        STDERR.write(
+            'Phoneme "%s" given feature "%s" value "%s" not found in list %s\n'
+            % (phoneme, feature_type, phone[x], str(feature_options)))
         is_valid = False
 
-  if not is_valid:
-    sys.exit(0)
+  sys.exit(0 if is_valid else 1)
+  return
+
 
 if __name__ == '__main__':
   main(sys.argv)

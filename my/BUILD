@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright 2016 Google, Inc.
+# Copyright 2016, 2017 Google, Inc.
 # Author: mjansche@google.com (Martin Jansche)
 
 package(default_visibility = ["//visibility:public"])
@@ -196,7 +196,28 @@ sh_binary(
 py_binary(
     name = "check_myanmar_text",
     srcs = ["check_myanmar_text.py"],
-    deps = ["//third_party/unicode:utn11"],
+    srcs_version = "PY2AND3",
+    deps = [
+        "//third_party/unicode:utn11",
+        "//utils:utf8",
+    ],
+)
+
+sh_test(
+    name = "check_maynmar_text_test",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        $(location :check_myanmar_text) \
+          <$(location //third_party/wikimedia:wp_my_tiger.txt) \
+          >/dev/null
+        """,
+    ],
+    data = [
+        ":check_myanmar_text",
+        "//third_party/wikimedia:wp_my_tiger.txt",
+    ],
 )
 
 android_library(

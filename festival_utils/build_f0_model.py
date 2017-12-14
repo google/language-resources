@@ -1,5 +1,4 @@
-#! /usr/bin/python2
-# -*- coding: utf-8 -*-
+#! /usr/bin/env python
 #
 # Copyright 2016 Google Inc. All Rights Reserved.
 #
@@ -17,12 +16,12 @@
 """Script is used to build F0 tree model.
 """
 
-import codecs
+import io
 import os
 import sys
 
-STDOUT = codecs.getwriter("utf-8")(sys.stdout)
-STDERR = codecs.getwriter("utf-8")(sys.stderr)
+STDOUT = io.open(1, mode="wt", encoding="utf-8", closefd=False)
+STDERR = io.open(2, mode="wt", encoding="utf-8", closefd=False)
 
 # F0 wagon description file.
 F0_DESCRIPTION_FILE = "festival/clunits/f0.desc"

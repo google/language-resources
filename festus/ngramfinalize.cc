@@ -32,7 +32,7 @@ namespace festus {
 // OpenFst < 1.5.0 lacks the method fst::Matcher::Final(), so it cannot
 // correctly compute the true final weight (via backoff) of states that don't
 // have an explicit final weight. To work around this, compute all final
-// weights ahead of time: for every non-final state, follow its backup path to
+// weights ahead of time: for every non-final state, follow its backoff path to
 // a final state and multiply the weights along the backoff path.
 template <class Arc>
 bool MakeAllStatesFinal(fst::MutableFst<Arc> *fst,

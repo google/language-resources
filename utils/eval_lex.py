@@ -1,6 +1,4 @@
-#! /usr/bin/python2
-#
-# Copyright 2008, 2009, 2016 Google Inc. All Rights Reserved.
+# Copyright 2008, 2009, 2016, 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,17 +21,16 @@ Mean Reciprocal Rank.
 
 __author__ = 'mjansche@google.com (Martin Jansche)'
 
-import codecs
 import math
 import optparse
 import sys
 
 import edist
 
+from utils import utf8
 
-_stdin  = codecs.lookup('utf_8')[2](sys.stdin)
-_stdout = codecs.lookup('utf_8')[3](sys.stdout)
-_stderr = codecs.lookup('utf_8')[3](sys.stderr)
+_stdout = utf8.stdout
+_stderr = utf8.stderr
 
 
 _INF = 1e300 * 1e300
@@ -304,16 +301,14 @@ def main(argv):
     _stderr.write('Not enough arguments. Use --help for usage information.\n')
     sys.exit(1)
 
-  reader = codecs.open(argv[1], 'r', 'utf_8')
-  golden = ReadLexicon(reader)
-  reader.close()
+  with utf8.open(argv[1]) as reader:
+    golden = ReadLexicon(reader)
 
   if len(argv) == 3:
-    reader = codecs.open(argv[2], 'r', 'utf_8')
+    with utf8.open(argv[2]) as reader:
+      predicted = ReadLexicon(reader)
   else:
-    reader = _stdin
-  predicted = ReadLexicon(reader)
-  reader.close()
+    predicted = ReadLexicon(utf8.stdin)
 
   CompareLexica(golden, predicted, _stdout)  # Uses oracle.
   # Alternatively, CompareLexica(golden, predicted, _stdout, 1, 1)

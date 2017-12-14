@@ -5,32 +5,32 @@ workspace(name = "language_resources")
 android_sdk_repository(
     name = "androidsdk",
     api_level = 24,
-    build_tools_version = "24.0.3",
+    build_tools_version = "26.0.3",
     path = "/usr/local/android-sdk",
 )
 
 # Protobuf
 
-git_repository(
-    name = "protobuf",
-    remote = "https://github.com/google/protobuf.git",
-    tag = "v3.4.1",
-)
+protobuf_version = "3.5.0.1"
 
-# proto_library rules depend on @com_google_protobuf//:protoc
+protobuf_sha256 = "86be71e61c76575c60839452a4f265449a6ea51570d7983cb929f06ad294b5f5"
+
+# proto_library and related rules implicitly depend on @com_google_protobuf.
 http_archive(
     name = "com_google_protobuf",
-    sha256 = "8e0236242106e680b4f9f576cc44b8cd711e948b20a9fc07769b0a20ceab9cc4",
-    strip_prefix = "protobuf-3.4.1",
-    urls = ["https://github.com/google/protobuf/archive/v3.4.1.tar.gz"],
+    sha256 = protobuf_sha256,
+    strip_prefix = "protobuf-%s" % protobuf_version,
+    urls = ["https://github.com/google/protobuf/archive/v%s.tar.gz" %
+            protobuf_version],
 )
 
-# cc_proto_library rules depend on @com_google_protobuf_cc//:cc_toolchain
+# DEPREACTED. For backwards compatibility with older versions of Bazel:
 http_archive(
     name = "com_google_protobuf_cc",
-    sha256 = "8e0236242106e680b4f9f576cc44b8cd711e948b20a9fc07769b0a20ceab9cc4",
-    strip_prefix = "protobuf-3.4.1",
-    urls = ["https://github.com/google/protobuf/archive/v3.4.1.tar.gz"],
+    sha256 = protobuf_sha256,
+    strip_prefix = "protobuf-%s" % protobuf_version,
+    urls = ["https://github.com/google/protobuf/archive/v%s.tar.gz" %
+            protobuf_version],
 )
 
 new_http_archive(
@@ -48,11 +48,21 @@ bind(
 
 # Google fundamental libraries
 
-new_git_repository(
-    name = "googletest",
-    build_file = "googletest.BUILD",
-    commit = "3447fc31b4eea1fbcb86fa0e2f5d9ed9f38776bf",
-    remote = "https://github.com/google/googletest.git",
+http_archive(
+    name = "com_google_googletest",
+    strip_prefix = "googletest-master",
+    urls = ["https://github.com/google/googletest/archive/master.zip"],
+)
+
+# DEPRECATED. Aliases in //external referenced by @com_google_protobuf:
+bind(
+    name = "gtest",
+    actual = "@com_google_googletest//:gtest",
+)
+
+bind(
+    name = "gtest_main",
+    actual = "@com_google_googletest//:gtest_main",
 )
 
 new_git_repository(
@@ -72,6 +82,19 @@ new_git_repository(
 bind(
     name = "re2",
     actual = "@com_googlesource_code_re2//:re2",
+)
+
+http_archive(
+    name = "com_google_absl",
+    strip_prefix = "abseil-cpp-master",
+    urls = ["https://github.com/abseil/abseil-cpp/archive/master.zip"],
+)
+
+# Time-zone framework, required by Abseil
+http_archive(
+    name = "com_googlesource_code_cctz",
+    strip_prefix = "cctz-master",
+    urls = ["https://github.com/google/cctz/archive/master.zip"],
 )
 
 # OpenFst, OpenGrm NGram & Thrax

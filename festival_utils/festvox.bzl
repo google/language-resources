@@ -38,12 +38,12 @@ def json_phonology_test(phonology, name="phonology_test"):
       srcs = ["//utils:eval.sh"],
       args = [
           """
-          $(location //utils:phonology_json_validator) \
+          $(location //festival_utils:phonology_json_validator) \
           $(location """ + phonology + """)
           """,
       ],
       data = [
           phonology,
-          "//utils:phonology_json_validator",
+          "//festival_utils:phonology_json_validator",
       ],
   )

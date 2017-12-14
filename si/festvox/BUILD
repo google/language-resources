@@ -24,22 +24,24 @@ load("//festival_utils:festvox.bzl", "json_phonology_test")
 Usage
     bazel test //si/festvox:phonology_test
 """
+
 json_phonology_test(
-    phonology="ipa_phonology.json"
+    phonology = "ipa_phonology.json",
 )
 
 """
 Usage
     bazel build //si/festvox:make_lexicon_scm
 """
+
 genrule(
     name = "make_lexicon_scm",
     srcs = ["//si/data:lexicon.tsv"],
     outs = ["lexicon.scm"],
     cmd = """
-          $(location //utils:festival_lexicon_from_tsv) < $(location //si/data:lexicon.tsv) > $@
+          $(location //festival_utils:festival_lexicon_from_tsv) < $(location //si/data:lexicon.tsv) > $@
           """,
-    tools = ["//utils:festival_lexicon_from_tsv"],
+    tools = ["//festival_utils:festival_lexicon_from_tsv"],
 )
 
 """
@@ -48,6 +50,6 @@ Usage
 """
 
 make_festvox_prompts(
-    prompts = "//si/data:prompts.tsv",
     lexicon = "//si/data:lexicon.tsv",
+    prompts = "//si/data:prompts.tsv",
 )

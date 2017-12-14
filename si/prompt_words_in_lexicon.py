@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/env python
 
 """Checks that all words in a prompt file occur in the corresponding lexicon.
 """

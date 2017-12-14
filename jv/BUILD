@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright 2016 Google, Inc.
+# Copyright 2016, 2017 Google, Inc.
 # Author: mjansche@google.com (Martin Jansche)
 
 package(default_visibility = ["//visibility:public"])
@@ -74,6 +74,13 @@ genrule(
     tools = ["@thrax//:thraxcompiler"],
 )
 
+py_binary(
+    name = "tokenize",
+    srcs = ["tokenize.py"],
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
+)
+
 genrule(
     name = "make_jv_lexicon",
     srcs = [
@@ -90,19 +97,18 @@ genrule(
     cmd = """
           cat $(location //third_party/wikimedia:jv_wiki_cleaned.txt) \
               $(location data/prompts.txt) |
-          $(location tokenize.py) \
+          $(location :tokenize) \
             2> $(location jv_bad_tokens.txt) |
           $(location //utils:freq) |
-          cut -f1 |
+          cut -f 1 |
           $(location //utils:thrax_g2p) \
             --far=$(location javanese.far) \
-            --phoneme_syms=$(location phoneme.syms) |
-          awk '{print > "/dev/std" (/ERROR/ ? "err" : "out")}' \
+            --phoneme_syms=$(location phoneme.syms) \
             1> $(location jv_lexicon.txt) \
             2> $(location jv_unpronouncable.txt)
           """,
     tools = [
-        "tokenize.py",
+        ":tokenize",
         "//utils:freq",
         "//utils:thrax_g2p",
     ],
@@ -122,14 +128,14 @@ genrule(
         "en_lexicon.txt",
     ],
     cmd = """
-          $(location tokenize.py) \
+          $(location :tokenize) \
             < $(location //third_party/wikimedia:simple_wiktionary.txt) \
             2> $(location en_bad_tokens.txt) |
           $(location //utils:freq) |
+          cut -f 1 |
           $(location //utils:thrax_g2p) \
             --far=$(location javanese.far) \
-            --phoneme_syms=$(location phoneme.syms) |
-          awk '{print > "/dev/std" (/ERROR/ ? "err" : "out")}' \
+            --phoneme_syms=$(location phoneme.syms) \
             2> $(location en_unpronouncable.txt) |
           $(location //utils:merge_lexicons) \
             - \
@@ -137,7 +143,7 @@ genrule(
             > $(location en_lexicon.txt)
           """,
     tools = [
-        "tokenize.py",
+        ":tokenize",
         "//utils:freq",
         "//utils:merge_lexicons",
         "//utils:thrax_g2p",

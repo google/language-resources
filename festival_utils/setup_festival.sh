@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Setup festival tools.
 
-cd $FESTIVAL_SUIT_PATH
+cd "${FESTIVAL_SUIT_PATH}"
 echo "Setting up at festival at ${FESTIVAL_SUIT_PATH:?Set env variable FESTIVAL_SUIT_PATH}"
 
 echo "Downloading up festival and friends."
@@ -41,9 +41,9 @@ cd "${FESTIVAL_SUIT_PATH}/festvox"
 ./configure && make
 
 echo "Please add the following lines to your environment setting (.bashrc, .zshrc, etc.)"
-echo "export ESTDIR=`pwd`/speech_tools"
-echo "export FESTVOXDIR=`pwd`/festvox"
-echo "export FESTIVALDIR=`pwd`/festival"
-echo "export FLITEDIR=`pwd`/flite"
-echo "export SPTKDIR=`pwd`/SPTK"
-echo "export EXDIR=`pwd`/examples"
+echo "export ESTDIR=$(pwd)/speech_tools"
+echo "export FESTVOXDIR=$(pwd)/festvox"
+echo "export FESTIVALDIR=$(pwd)/festival"
+echo "export FLITEDIR=$(pwd)/flite"
+echo "export SPTKDIR=$(pwd)/SPTK"
+echo "export EXDIR=$(pwd)/examples"

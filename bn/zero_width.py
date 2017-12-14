@@ -1,7 +1,7 @@
-#! /usr/bin/python
+#! /usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2015 Google Inc. All Rights Reserved.
+# Copyright 2015, 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,8 +24,8 @@ $ python3 -m unittest zero_width
 
 from __future__ import unicode_literals
 
+import io
 import re
-import sys
 import unittest
 
 
@@ -72,7 +72,7 @@ class TestBanglaZeroWidth(unittest.TestCase):
 
 
 if __name__ == '__main__':
-  for line in sys.stdin:
-    line = line.decode('utf-8')
-    line = RemoveOptionalZW(line)
-    sys.stdout.write(line.encode('utf-8'))
+  stdin = io.open(0, mode='rt', encoding='utf-8', closefd=False)
+  stdout = io.open(1, mode='wt', encoding='utf-8', closefd=False)
+  for line in stdin:
+    stdout.write(RemoveOptionalZW(line))

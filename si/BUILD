@@ -12,10 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Copyright 2016 Google, Inc.
+# Copyright 2016, 2017 Google, Inc.
 # Author: mjansche@google.com (Martin Jansche)
 
 package(default_visibility = ["//visibility:public"])
+
+sh_test(
+    name = "zero_width_test",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        cd $$(dirname $(location zero_width.py))
+        for py in python python2 python3; do
+          if which $$py; then
+            $$py -m unittest zero_width
+          fi
+        done
+        """,
+    ],
+    data = ["zero_width.py"],
+)
 
 sh_test(
     name = "phonemes_are_uniquely_decodable",

@@ -1,4 +1,4 @@
 exports_files([
-  "lexicon.tsv",
-  "prompts.tsv",
+    "lexicon.tsv",
+    "prompts.tsv",
 ])

@@ -24,8 +24,9 @@ load("//festival_utils:festvox.bzl", "json_phonology_test")
 Usage
     bazel test //af/festvox:phonology_test
 """
+
 json_phonology_test(
-    phonology="phonology.json"
+    phonology = "phonology.json",
 )
 
 genrule(
@@ -36,9 +37,9 @@ genrule(
     # to prevent Festival/SIOD from choking on the backslash.
     cmd = """
           sed 's/h\\\\/h/g' $(location //af:lex_full.txt) |
-          $(location //utils:festival_lexicon_from_tsv) > $@
+          $(location //festival_utils:festival_lexicon_from_tsv) > $@
           """,
-    tools = ["//utils:festival_lexicon_from_tsv"],
+    tools = ["//festival_utils:festival_lexicon_from_tsv"],
 )
 
 """
@@ -47,6 +48,6 @@ Usage
 """
 
 make_festvox_prompts(
-    prompts = "//af/data:prompts.tsv",
     lexicon = "//af:lex_full.txt",
+    prompts = "//af/data:prompts.tsv",
 )

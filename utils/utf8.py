@@ -76,25 +76,25 @@ def open(filename, mode='r'):  # pylint: disable=redefined-builtin
     return io.open(filename, mode='at', encoding=encoding)
   else:
     raise ValueError("invalid mode: '%s'" % mode)
+  return
 
 
-def _str(value):
-  # pylint: disable=unidiomatic-typecheck
+def GetContents(filename):  # pylint: disable=invalid-name
+  with open(filename) as reader:
+    contents = reader.read()
+  return contents
+
+
+def _str(value, depth=0):
+  assert depth <= 2
   # The recommended style of isinstance() would not be portable, because the
   # type names of u'' and b'' differ between Python 2 and 3.
-  if type(value) == type(u''):
+  if type(value) == type(u''):  # pylint: disable=unidiomatic-typecheck
     return value
-  elif type(value) == type(b''):
-    try:
-      return value.decode(encoding)
-    except UnicodeDecodeError:
-      s = repr(value)
-      if s.startswith("'"):
-        return 'b' + s
-      else:
-        return s
+  elif type(value) == type(b''):  # pylint: disable=unidiomatic-typecheck
+    return value.decode(encoding, errors='replace')
   else:
-    return repr(value)
+    return _str(str(value), depth + 1)
 
 
 def Print(*values, **kwargs):  # pylint: disable=invalid-name

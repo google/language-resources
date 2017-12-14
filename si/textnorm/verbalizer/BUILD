@@ -20,25 +20,39 @@ load("//:thrax.bzl", "grm_regression_test")
 base_path = "si/textnorm/verbalizer/"
 
 universal_deps = [
-        "universal_func.far",
-        "universal_func.grm",
-        "universal_rules.far",
-        "universal_rules.grm"
-    ]
+    "universal_func.far",
+    "universal_func.grm",
+    "universal_rules.far",
+    "universal_rules.grm",
+]
 
 [
     grm_regression_test(
         name = test_rules + "_tests",
-        far_file_path = base_path,
-        test_file_path = base_path,
         far_file = test_rules + ".far",
+        far_file_path = base_path,
         test_file = "testdata/" + test_rules + ".tsv",
+        test_file_path = base_path,
     )
-    
-for test_rules in ["address",  "cardinal",  "connector", "date", "decimal",
-                            "digit", "electronic", "emoticons", "fraction", "lseq",
-                            "measure",  "money",  "ordinal", "telephone",
-                            "time", "verbatim"]]
+    for test_rules in [
+        "address",
+        "cardinal",
+        "connector",
+        "date",
+        "decimal",
+        "digit",
+        "electronic",
+        "emoticons",
+        "fraction",
+        "lseq",
+        "measure",
+        "money",
+        "ordinal",
+        "telephone",
+        "time",
+        "verbatim",
+    ]
+]
 
 thrax_compile_grm(
     name = "universal_rules",
@@ -105,7 +119,6 @@ thrax_compile_grm(
     deps = [
         "cardinal.far",
         "cardinal.grm",
-
         "number_names_rules.far",
         "number_names_rules.grm",
     ] + universal_deps,

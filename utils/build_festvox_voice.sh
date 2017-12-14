@@ -69,13 +69,13 @@ cp "${LANG}/festvox/lexicon.scm" "${VOICE_DIR}/festvox/lexicon.scm"
 
 # Setup the phonology.
 PHONOLOGY="${LANG}/festvox/ipa_phonology.json"
-if [ ! -f $PHONOLOGY ];
+if [ ! -f "${PHONOLOGY}" ];
 then
   PHONOLOGY="${LANG}/festvox/phonology.json"
 fi
 
 # Generate various festvox files (wagon description files for (mcep,f0,dur), festvox phoneset etc).
-python ${BASEDIR}/apply_phonology.py "${PHONOLOGY}" "${VOICE_DIR}"
+python "${BASEDIR}/apply_phonology.py" "${PHONOLOGY}" "${VOICE_DIR}"
 
 cd "${VOICE_DIR}"
 

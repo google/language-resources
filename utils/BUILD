@@ -28,13 +28,6 @@ py_binary(
 )
 
 py_binary(
-    name = "phonology_json_validator",
-    srcs = ["phonology_json_validator.py"],
-    srcs_version = "PY2AND3",
-    deps = ["//utils:utf8"],
-)
-
-py_binary(
     name = "uniquely_decodable",
     srcs = ["uniquely_decodable.py"],
     srcs_version = "PY2AND3",
@@ -107,20 +100,6 @@ cc_binary(
 py_binary(
     name = "merge_lexicons",
     srcs = ["merge_lexicons.py"],
-    srcs_version = "PY2AND3",
-    deps = ["//utils:utf8"],
-)
-
-py_binary(
-    name = "festival_lexicon_from_tsv",
-    srcs = ["festival_lexicon_from_tsv.py"],
-    srcs_version = "PY2AND3",
-    deps = ["//utils:utf8"],
-)
-
-py_binary(
-    name = "festival_prompts_from_tsv",
-    srcs = ["festival_prompts_from_tsv.py"],
     srcs_version = "PY2AND3",
     deps = ["//utils:utf8"],
 )

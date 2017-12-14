@@ -39,9 +39,9 @@ genrule(
     srcs = ["//si/data:lexicon.tsv"],
     outs = ["lexicon.scm"],
     cmd = """
-          $(location //utils:festival_lexicon_from_tsv) < $(location //si/data:lexicon.tsv) > $@
+          $(location //festival_utils:festival_lexicon_from_tsv) < $(location //si/data:lexicon.tsv) > $@
           """,
-    tools = ["//utils:festival_lexicon_from_tsv"],
+    tools = ["//festival_utils:festival_lexicon_from_tsv"],
 )
 
 """

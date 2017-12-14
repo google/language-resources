@@ -37,9 +37,9 @@ genrule(
     # to prevent Festival/SIOD from choking on the backslash.
     cmd = """
           sed 's/h\\\\/h/g' $(location //af:lex_full.txt) |
-          $(location //utils:festival_lexicon_from_tsv) > $@
+          $(location //festival_utils:festival_lexicon_from_tsv) > $@
           """,
-    tools = ["//utils:festival_lexicon_from_tsv"],
+    tools = ["//festival_utils:festival_lexicon_from_tsv"],
 )
 
 """

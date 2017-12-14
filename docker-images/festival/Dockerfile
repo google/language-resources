@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y \
 # Fetch and prepare Festival & friends
 WORKDIR /usr/local/src/tools
 ENV FESTIVAL_SUIT_PATH /usr/local/src/tools
-RUN wget https://raw.githubusercontent.com/googlei18n/language-resources/master/utils/setup_festival.sh && sh setup_festival.sh
+RUN wget https://raw.githubusercontent.com/googlei18n/language-resources/master/festival_utils/setup_festival.sh && sh setup_festival.sh
 
 # Set env variables
 ENV ESTDIR /usr/local/src/tools/speech_tools

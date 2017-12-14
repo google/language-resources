@@ -20,6 +20,7 @@ from __future__ import unicode_literals
 import io
 
 STDIN = io.open(0, mode='rt', encoding='utf-8', closefd=False)
+STDOUT = io.open(1, mode='wt', encoding='utf-8', closefd=False)
 
 def main(unused_args):
   STDOUT.write('MNCL\n')

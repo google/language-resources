@@ -16,7 +16,7 @@ find . -type f -not -name 'sin_9228*' -print0 | xargs -0 rm --
 
 # Setup festvox for given data
 WORKDIR /usr/local/src/voice
-RUN ls data/festvox && mkdir training && /usr/local/src/language-resources/utils/build_festvox_voice.sh -t \
+RUN ls data/festvox && mkdir training && /usr/local/src/language-resources/festival_utils/build_festvox_voice.sh -t \
 /usr/local/src/voice/data/festvox/wavs/ \
 data \
 training
@@ -30,5 +30,5 @@ RUN cd lab && ls *.lab -1 | sed -e 's/\.lab$//' > ../file_id_list.scp
 
 # Setup merlin
 WORKDIR /usr/local/src/voice/training
-RUN /usr/local/src/language-resources/utils/run_docker_merlin_training.sh -t
+RUN /usr/local/src/language-resources/festival_utils/run_docker_merlin_training.sh -t
 

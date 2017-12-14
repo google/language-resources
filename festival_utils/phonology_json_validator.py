@@ -19,14 +19,14 @@ Reads phonology.json file and validates the phoneme inventory.
 
 import json
 import sys
-
-from utils import utf8
+import io
 
 STDERR = io.open(2, mode='wt', encoding='utf-8', closefd=False)
 
 
 def main(argv):
-  contents = utf8.GetContents(argv[1])
+  with open(argv[1]) as reader:
+    contents = reader.read()
   phonology = json.loads(contents)
 
   feature_types = {}

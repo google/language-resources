@@ -28,13 +28,6 @@ py_binary(
 )
 
 py_binary(
-    name = "apply_phonology",
-    srcs = ["apply_phonology.py"],
-    srcs_version = "PY2AND3",
-    deps = ["//utils:utf8"],
-)
-
-py_binary(
     name = "phonology_json_validator",
     srcs = ["phonology_json_validator.py"],
     srcs_version = "PY2AND3",

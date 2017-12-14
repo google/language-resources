@@ -18,7 +18,7 @@
 
 set -x 
 
-PY_MERLIN_CONF="/usr/local/src/language-resources/utils/merlin_confs.py"
+PY_MERLIN_CONF="/usr/local/src/language-resources/festival_utils/merlin_confs.py"
 BASE_VOICE_PATH="/usr/local/src/merlin//egs/locale/s1"
 CONF_PATH="egs/locale/s1/conf/"
 
@@ -40,7 +40,7 @@ done
 
 # Setup merlin files.
 cd /usr/local/src/voice
-/usr/local/src/language-resources/utils/setup_merlin.sh \
+/usr/local/src/language-resources/festival_utils/setup_merlin.sh \
 /usr/local/src/voice/training \
 /usr/local/src/merlin/ \
 /usr/local/src/voice/data/festvox/wavs/ \

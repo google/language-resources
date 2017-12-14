@@ -22,7 +22,7 @@ import sys
 
 from utils import utf8
 
-STDERR = utf8.stderr
+STDERR = io.open(2, mode='wt', encoding='utf-8', closefd=False)
 
 
 def main(argv):

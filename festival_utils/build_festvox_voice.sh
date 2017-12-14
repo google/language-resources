@@ -16,7 +16,7 @@
 # Used to train festvox voices.
 #
 # Example usage -
-#	./utils/build_festvox_voice.sh ~/Desktop/audio/si_lk/ si ~/si_lk_2/
+#	./festival_utils/build_festvox_voice.sh ~/Desktop/audio/si_lk/ si ~/si_lk_2/
 
 set -o errexit
 set -o pipefail
@@ -36,7 +36,7 @@ done
 shift $((OPTIND-1))
 
 if [[ $# -ne 3 ]]; then
-    echo "Usage: ./utils/build_festvox_voice.sh <path to wavs> <lang> <voice_dir>"
+    echo "Usage: ./festival_utils/build_festvox_voice.sh <path to wavs> <lang> <voice_dir>"
     exit 1
 fi
 

@@ -16,7 +16,7 @@ mkdir ${FESTIVAL_SUIT_PATH} && ./third_party/festvox/setup.sh
 
 ## Training the Voice
 
-1. Download recordings from http://www.openslr.org/resources/30/si_lk.tar
+1. Download recordings from http://www.openslr.org/resources/30/si_lk.tar.gz
   ```
   export WAV_FOLDER=<your desired path to store downloaded wav files>
   mkdir -p ${WAV_FOLDER} && wget http://www.openslr.org/resources/30/si_lk.tar.gz && tar xzf si_lk.tar.gz -C ${WAV_FOLDER}

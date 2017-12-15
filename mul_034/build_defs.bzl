@@ -47,3 +47,27 @@ def compile_grm(src=None, out=None, data=[]):
       cmd = "$(location %s) $< $@" % tool_name,
       tools = [tool_name],
   )
+
+def script_test(script):
+  native.sh_test(
+      name = "%s_test" % script,
+      timeout = "short",
+      srcs = ["//utils:eval.sh"],
+      args = [
+          """
+          cut -f 1 $(location %s_test.tsv) |
+          $(location //utils:thrax_g2p) \
+          --far=$(location %s.far) \
+          --far_g2p_key=CODEPOINTS_TO_GRAPHEMES \
+          --phoneme_syms=$(location grapheme.syms) |
+          diff -U0 - $(location %s_test.tsv)
+          """ % (script, script, script),
+      ],
+      data = [
+          "%s.far" % script,
+          "%s.syms" % script,
+          "%s_test.tsv" % script,
+          "grapheme.syms",
+          "//utils:thrax_g2p",
+      ],
+  )

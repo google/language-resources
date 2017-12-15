@@ -79,7 +79,7 @@ genrule(
     tools = [":make_grapheme_syms"],
 )
 
-load("build_defs", "compile_grm")
+load("build_defs", "compile_grm", "script_test")
 
 compile_grm(
     src = "Sinh.grm",
@@ -88,3 +88,5 @@ compile_grm(
         "grapheme.syms",
     ],
 )
+
+script_test(script = "Sinh")

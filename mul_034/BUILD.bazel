@@ -78,3 +78,13 @@ genrule(
     cmd = "$(location :make_grapheme_syms) $(OUTS)",
     tools = [":make_grapheme_syms"],
 )
+
+load("build_defs", "compile_grm")
+
+compile_grm(
+    src = "Sinh.grm",
+    data = [
+        "Sinh.syms",
+        "grapheme.syms",
+    ],
+)

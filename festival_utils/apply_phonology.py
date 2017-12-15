@@ -34,6 +34,7 @@ import io
 encoding = 'UTF-8'
 
 STDERR = io.open(2, mode='wt', encoding='UTF-8', closefd=False)
+STDOUT = io.open(1, mode='wt', encoding=encoding, closefd=False)
 
 INST_LANG_VOX = re.compile(r'.*/([^_]+_[^_]+)_([^_]+)_phoneset.scm$')
 
@@ -716,7 +717,7 @@ def Print(*values, **kwargs):  # pylint: disable=invalid-name
   """Print values to a textual stream, or stdout by default."""
   sep = kwargs.get('sep', u' ')
   end = kwargs.get('end', u'\n')
-  f = kwargs.get('file', stdout)
+  f = kwargs.get('file', STDOUT)
   s = sep.join(_str(v) for v in values)
   s += end
   f.write(s)

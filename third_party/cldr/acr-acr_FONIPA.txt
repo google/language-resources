@@ -1,0 +1,36 @@
+# https://www.omniglot.com/writing/achi.htm
+::NFC;
+::Lower;
+
+aa → aː ;
+a → ɐ ;
+b\' → pʼ ;
+ch\' → tʃʼ ;
+ch → tʃ ;
+d → d ;
+ee → eː ;
+e → ɛ ;
+ii → iː ;
+i → ɪ ;
+j → χ ;
+k\' → kʼ ;
+k → k ;
+l → l ;
+m → m ;
+n → n ;
+oo → oː ;
+o → ɔ ;
+p → p ;
+q\' → qʼ ;
+q → q ;
+r → ɾ ;
+s → s ;
+tz\' → tsʼ ;
+tz → ts ;
+t → tʰ ;
+uu → uː ;
+u → ʊ ;
+w → w ;
+x → ʃ ;
+y → j ;
+\' → ʔ ;

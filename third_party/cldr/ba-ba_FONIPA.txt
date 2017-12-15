@@ -1,0 +1,55 @@
+# https://en.wikipedia.org/wiki/Bashkir_language#Phonology
+# https://www.omniglot.com/writing/bashkir.htm
+# https://ru.wikipedia.org/wiki/Башкирская_письменность
+# tweaked based on what's used on en.wiktionary and ru.wiktionary
+
+::NFC;
+::Lower;
+
+а → ɑ ;
+б → b ;
+в → w ;
+г → ɡ ;
+# or ʁ or ɣ
+ғ → ɢ̞ ;
+д → d ;
+ҙҙ → ðː ;
+ҙ → ð ;
+# or ɪ̞
+[$] } e → jɪ̞ ;
+е → ɪ̞ ;
+ё → jo ;
+ж → ʐ ;
+з → z ;
+и → i ;
+й → j ;
+к → k ;
+ҡ → q ;
+л → ɫ ;
+м → m ;
+н → n ;
+ң → ŋ ;
+# or o
+о → ʊ̞ ;
+ө → ø ;
+п → p ;
+р → r ;
+с → s ;
+ҫ → θ ;
+т → t ;
+у → u ;
+ү → y ;
+ф → f ;
+х → χ ;
+һ → h ;
+ц → t͡s ;
+ч → t͡ʂ ;
+ш → ʂ ;
+щ → ɕ ;
+ъ → ʔ ;
+ы → ɯ̞ ;
+ь → ʲ ;
+э → e ;
+ә → æ ;
+ю → ju ;
+я → ja ;

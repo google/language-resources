@@ -280,7 +280,8 @@ def GetScript(raw_script_name):
   """Returns an icu Script object for a given script name."""
   script_codes = icu.Script.getCode(raw_script_name)
   if len(script_codes) != 1:
-    STDERR.write('Error: Unknown or ambiguous script: %s\n' % raw_script_name)
+    utf8.stderr.write('Error: Unknown or ambiguous script: %s\n' %
+                      raw_script_name)
     return None
   return icu.Script(script_codes[0])
 
@@ -320,4 +321,29 @@ def SymbolsToFile(filename, symbols_and_labels):
     WriteOpenFstSymbolTable(writer, symbols_and_labels)
   utf8.stderr.write('Wrote %s with %d symbols\n' %
                     (filename, len(symbols_and_labels)))
+  return
+
+
+def ReadGraphemeDataFromFile(path):
+  with utf8.open(path, mode='r') as reader:
+    label = 0xF000
+    for line in reader:
+      line = line.strip('\n')
+      if not line or line.startswith('#'):
+        continue
+      fields = line.split('\t')
+      assert len(fields) >= 2
+      if len(fields) > 2:
+        codepoints = fields[2]
+      else:
+        codepoints = ''
+      yield fields[0], fields[1], codepoints, label
+      label += 1
+  return
+
+
+def ReadGraphemeDataDefault(sibling=sys.argv[0]):
+  path = os.path.join(os.path.dirname(sibling), 'indic_graphemes.tsv')
+  for row in ReadGraphemeDataFromFile(path):
+    yield row
   return

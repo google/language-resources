@@ -1,4 +1,4 @@
-FROM ppasindud/base-festival
+FROM langtech/base-festival
 
 # Required by run_merlin.py
 ENV USER root

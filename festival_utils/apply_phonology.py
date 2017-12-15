@@ -41,7 +41,7 @@ INST_LANG_VOX = re.compile(r'.*/([^_]+_[^_]+)_([^_]+)_phoneset.scm$')
 NO_OF_FEATURES = 8
 
 
-def ReadPhonology(path):
+def ReadPhonology(filename):
   with open(filename) as reader:
     contents = reader.read()
     return json.loads(contents)

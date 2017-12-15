@@ -49,3 +49,12 @@ py_binary(
     srcs = ["make_grapheme_syms.py"],
     deps = [":script_util"],
 )
+
+py_binary(
+    name = "make_grm_fragment",
+    srcs = ["make_grm_fragment.py"],
+    deps = [
+        ":script_util",
+        "//utils:utf8",
+    ],
+)

@@ -31,6 +31,8 @@ import re
 import sys
 import io
 
+encoding = 'UTF-8'
+
 STDERR = io.open(2, mode='wt', encoding='UTF-8', closefd=False)
 
 INST_LANG_VOX = re.compile(r'.*/([^_]+_[^_]+)_([^_]+)_phoneset.scm$')
@@ -39,8 +41,9 @@ NO_OF_FEATURES = 8
 
 
 def ReadPhonology(path):
-  contents = utf8.GetContents(path)
-  return json.loads(contents)
+  with open(filename) as reader:
+    contents = reader.read()
+    return json.loads(contents)
 
 
 def MakePhonesetScm(writer, phonology, inst_lang, vox):
@@ -709,9 +712,22 @@ R:segstate.parent.R:SylStructure.parent.parent.phr_pos
   return
 
 
+def Print(*values, **kwargs):  # pylint: disable=invalid-name
+  """Print values to a textual stream, or stdout by default."""
+  sep = kwargs.get('sep', u' ')
+  end = kwargs.get('end', u'\n')
+  f = kwargs.get('file', stdout)
+  s = sep.join(_str(v) for v in values)
+  s += end
+  f.write(s)
+  if kwargs.get('flush', False):
+    f.flush()
+  return
+
+
 def main(argv):
   if len(argv) != 3:
-    utf8.Print('Usage: %s phonology.json path/to/tts/build/dir' % argv[0])
+    Print('Usage: %s phonology.json path/to/tts/build/dir' % argv[0])
     sys.exit(2)
 
   phonology = ReadPhonology(argv[1])
@@ -725,12 +741,10 @@ def main(argv):
   inst_lang = match.group(1)
   vox = match.group(2)
 
-  with utf8.open(phoneset_path, mode='w') as writer:
+  with io.open(phoneset_path, mode='wt', encoding=encoding) as writer:
     MakePhonesetScm(writer, phonology, inst_lang, vox)
 
-  with utf8.open(
-      '%s/festvox/%s_%s_lexicon.scm' % (build_dir, inst_lang, vox),
-      mode='w') as writer:
+  with io.open('%s/festvox/%s_%s_lexicon.scm' % (build_dir, inst_lang, vox), mode='wt', encoding=encoding) as writer:
     MakeLexiconScm(writer, inst_lang, vox)
 
   phones = [phone[0] for phone in phonology['phones']]
@@ -741,15 +755,15 @@ def main(argv):
     STDERR.write('feature %s: %s\n' % (k, vs))
 
   fpath = '%s/festival' % build_dir
-  with utf8.open('%s/clunits/all.desc' % fpath, mode='w') as writer:
+  with io.open('%s/clunits/all.desc' % fpath, mode='wt', encoding=encoding) as writer:
     MakeAllDesc(writer, phones, features)
-  with utf8.open('%s/clunits/mcep.desc' % fpath, mode='w') as writer:
+  with io.open('%s/clunits/mcep.desc' % fpath, mode='wt', encoding=encoding) as writer:
     MakeMcepDesc(writer, phones, features)
-  with utf8.open('%s/clunits/mceptraj.desc' % fpath, mode='w') as writer:
+  with io.open('%s/clunits/mceptraj.desc' % fpath, mode='wt', encoding=encoding) as writer:
     MakeMceptrajDesc(writer, phones, features)
-  with utf8.open('%s/dur/etc/dur.feats' % fpath, mode='w') as writer:
+  with io.open('%s/dur/etc/dur.feats' % fpath, mode='wt', encoding=encoding)  as writer:
     MakeDurFeats(writer, phones, features)
-  with utf8.open('%s/dur/etc/statedur.feats' % fpath, mode='w') as writer:
+  with io.open('%s/dur/etc/statedur.feats' % fpath, mode='wt', encoding=encoding) as writer:
     MakeStatedurFeats(writer, phones, features)
   return
 

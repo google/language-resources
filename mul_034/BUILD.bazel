@@ -58,3 +58,23 @@ py_binary(
         "//utils:utf8",
     ],
 )
+
+genrule(
+    name = "gen_script_syms",
+    outs = [
+        "Beng.syms",
+        "Sinh.syms",
+    ],
+    cmd = "$(location :make_script_syms) --genrule $(OUTS)",
+    tools = [":make_script_syms"],
+)
+
+genrule(
+    name = "gen_grapheme_syms",
+    outs = [
+        "display_grapheme.syms",
+        "grapheme.syms",
+    ],
+    cmd = "$(location :make_grapheme_syms) $(OUTS)",
+    tools = [":make_grapheme_syms"],
+)

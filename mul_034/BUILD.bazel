@@ -30,3 +30,16 @@ sh_test(
         "//utils:uniquely_decodable",
     ],
 )
+
+py_library(
+    name = "script_util",
+    srcs = ["script_util.py"],
+    data = ["indic_graphemes.tsv"],
+    deps = ["//utils:utf8"],
+)
+
+py_binary(
+    name = "make_script_syms",
+    srcs = ["make_script_syms.py"],
+    deps = [":script_util"],
+)

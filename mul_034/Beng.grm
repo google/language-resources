@@ -1,0 +1,178 @@
+# bn/bengali.grm
+# -*- Thrax -*-
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2016 Google Inc. All Rights Reserved.
+# Author: mjansche@google.com (Martin Jansche)
+
+g = SymbolTable['bn/grapheme.syms'];
+
+utf8_to_codepoint = Optimize[
+  ("[0x27]" : "apostrophe".g)                   # APOSTROPHE
+| ("[0x2D]" : "hyphen".g)                       # HYPHEN-MINUS
+| ("[0xCA][0xBC]" : "urdha_comma".g)            # MODIFIER LETTER APOSTROPHE
+| ("[0xE0][0xA6][0x81]" : "candrabindu".g)      # BENGALI SIGN CANDRABINDU
+| ("[0xE0][0xA6][0x82]" : "anusvara".g)         # BENGALI SIGN ANUSVARA
+| ("[0xE0][0xA6][0x83]" : "visarga".g)          # BENGALI SIGN VISARGA
+| ("[0xE0][0xA6][0x85]" : "a".g)                # BENGALI LETTER A
+| ("[0xE0][0xA6][0x86]" : "aa".g)               # BENGALI LETTER AA
+| ("[0xE0][0xA6][0x87]" : "i".g)                # BENGALI LETTER I
+| ("[0xE0][0xA6][0x88]" : "ii".g)               # BENGALI LETTER II
+| ("[0xE0][0xA6][0x89]" : "u".g)                # BENGALI LETTER U
+| ("[0xE0][0xA6][0x8A]" : "uu".g)               # BENGALI LETTER UU
+| ("[0xE0][0xA6][0x8B]" : "ri".g)               # BENGALI LETTER VOCALIC R
+| ("[0xE0][0xA6][0x8C]" : "li".g)               # BENGALI LETTER VOCALIC L
+| ("[0xE0][0xA6][0x8F]" : "e".g)                # BENGALI LETTER E
+| ("[0xE0][0xA6][0x90]" : "ai".g)               # BENGALI LETTER AI
+| ("[0xE0][0xA6][0x93]" : "o".g)                # BENGALI LETTER O
+| ("[0xE0][0xA6][0x94]" : "au".g)               # BENGALI LETTER AU
+| ("[0xE0][0xA6][0x95]" : "ka".g)               # BENGALI LETTER KA
+| ("[0xE0][0xA6][0x96]" : "kha".g)              # BENGALI LETTER KHA
+| ("[0xE0][0xA6][0x97]" : "ga".g)               # BENGALI LETTER GA
+| ("[0xE0][0xA6][0x98]" : "gha".g)              # BENGALI LETTER GHA
+| ("[0xE0][0xA6][0x99]" : "nga".g)              # BENGALI LETTER NGA
+| ("[0xE0][0xA6][0x9A]" : "ca".g)               # BENGALI LETTER CA
+| ("[0xE0][0xA6][0x9B]" : "cha".g)              # BENGALI LETTER CHA
+| ("[0xE0][0xA6][0x9C]" : "ja".g)               # BENGALI LETTER JA
+| ("[0xE0][0xA6][0x9D]" : "jha".g)              # BENGALI LETTER JHA
+| ("[0xE0][0xA6][0x9E]" : "nya".g)              # BENGALI LETTER NYA
+| ("[0xE0][0xA6][0x9F]" : "tta".g)              # BENGALI LETTER TTA
+| ("[0xE0][0xA6][0xA0]" : "ttha".g)             # BENGALI LETTER TTHA
+| ("[0xE0][0xA6][0xA1]" : "dda".g)              # BENGALI LETTER DDA
+| ("[0xE0][0xA6][0xA2]" : "ddha".g)             # BENGALI LETTER DDHA
+| ("[0xE0][0xA6][0xA3]" : "nna".g)              # BENGALI LETTER NNA
+| ("[0xE0][0xA6][0xA4]" : "ta".g)               # BENGALI LETTER TA
+| ("[0xE0][0xA6][0xA5]" : "tha".g)              # BENGALI LETTER THA
+| ("[0xE0][0xA6][0xA6]" : "da".g)               # BENGALI LETTER DA
+| ("[0xE0][0xA6][0xA7]" : "dha".g)              # BENGALI LETTER DHA
+| ("[0xE0][0xA6][0xA8]" : "na".g)               # BENGALI LETTER NA
+| ("[0xE0][0xA6][0xAA]" : "pa".g)               # BENGALI LETTER PA
+| ("[0xE0][0xA6][0xAB]" : "pha".g)              # BENGALI LETTER PHA
+| ("[0xE0][0xA6][0xAC]" : "ba".g)               # BENGALI LETTER BA
+| ("[0xE0][0xA6][0xAD]" : "bha".g)              # BENGALI LETTER BHA
+| ("[0xE0][0xA6][0xAE]" : "ma".g)               # BENGALI LETTER MA
+| ("[0xE0][0xA6][0xAF]" : "ya".g)               # BENGALI LETTER YA
+| ("[0xE0][0xA6][0xB0]" : "ra".g)               # BENGALI LETTER RA
+| ("[0xE0][0xA6][0xB2]" : "la".g)               # BENGALI LETTER LA
+| ("[0xE0][0xA6][0xB6]" : "sha".g)              # BENGALI LETTER SHA
+| ("[0xE0][0xA6][0xB7]" : "ssa".g)              # BENGALI LETTER SSA
+| ("[0xE0][0xA6][0xB8]" : "sa".g)               # BENGALI LETTER SA
+| ("[0xE0][0xA6][0xB9]" : "ha".g)               # BENGALI LETTER HA
+| ("[0xE0][0xA6][0xBC]" : "nukta".g)            # BENGALI SIGN NUKTA
+| ("[0xE0][0xA6][0xBE]" : "-aa".g)              # BENGALI VOWEL SIGN AA
+| ("[0xE0][0xA6][0xBF]" : "-i".g)               # BENGALI VOWEL SIGN I
+| ("[0xE0][0xA7][0x80]" : "-ii".g)              # BENGALI VOWEL SIGN II
+| ("[0xE0][0xA7][0x81]" : "-u".g)               # BENGALI VOWEL SIGN U
+| ("[0xE0][0xA7][0x82]" : "-uu".g)              # BENGALI VOWEL SIGN UU
+| ("[0xE0][0xA7][0x83]" : "-ri".g)              # BENGALI VOWEL SIGN VOCALIC R
+| ("[0xE0][0xA7][0x84]" : "-rri".g)             # BENGALI VOWEL SIGN VOCALIC RR
+| ("[0xE0][0xA7][0x87]" : "-e".g)               # BENGALI VOWEL SIGN E
+| ("[0xE0][0xA7][0x88]" : "-ai".g)              # BENGALI VOWEL SIGN AI
+| ("[0xE0][0xA7][0x8B]" : "-o".g)               # BENGALI VOWEL SIGN O
+| ("[0xE0][0xA7][0x8C]" : "-au".g)              # BENGALI VOWEL SIGN AU
+| ("[0xE0][0xA7][0x8D]" : "hasant".g)           # BENGALI SIGN VIRAMA
+| ("[0xE0][0xA7][0x8E]" : "t".g)                # BENGALI LETTER KHANDA TA
+| ("[0xE0][0xA7][0x97]" : "-au_length_mark".g)  # BENGALI AU LENGTH MARK
+| ("[0xE0][0xA7][0x9C]" : "rra".g)              # BENGALI LETTER RRA
+| ("[0xE0][0xA7][0x9D]" : "rha".g)              # BENGALI LETTER RHA
+| ("[0xE0][0xA7][0x9F]" : "yya".g)              # BENGALI LETTER YYA
+| ("[0xE0][0xA7][0xA0]" : "rri".g)              # BENGALI LETTER VOCALIC RR
+| ("[0xE0][0xA7][0xA1]" : "lli".g)              # BENGALI LETTER VOCALIC LL
+| ("[0xE0][0xA7][0xA2]" : "-li".g)              # BENGALI VOWEL SIGN VOCALIC L
+| ("[0xE0][0xA7][0xA3]" : "-lli".g)             # BENGALI VOWEL SIGN VOCALIC LL
+| ("[0xE2][0x80][0x8C]" : "ZWNJ".g)             # ZERO WIDTH NON-JOINER
+| ("[0xE2][0x80][0x8D]" : "ZWJ".g)              # ZERO WIDTH JOINER
+];
+
+grapheme = Project[utf8_to_codepoint, 'output'] | "-a".g | "ya_phalaa".g;
+
+gstar = Optimize[grapheme*];
+
+vowels_to_nfc_aux =
+  ("-e -aa".g : "-o".g)
+| ("-e -au_length_mark".g : "-au".g)
+;
+
+vowels_to_nfc = CDRewrite[vowels_to_nfc_aux, "".g, "".g, gstar];
+
+compose_dotted_aux =
+  ("dda nukta".g : "rra".g)
+| ("ddha nukta".g : "rha".g)
+| ("ya nukta".g : "yya".g)
+;
+
+compose_dotted = CDRewrite[compose_dotted_aux, "".g, "".g, gstar];
+
+zw = "ZWNJ".g | "ZWJ".g;
+
+# E.g. in ক্র্যাশ (crash) or ডেমোক্র্যাট (democrat).
+ins_ya_phalaa_after_non_initial_ra = CDRewrite[
+    zw? "hasant ya".g : "ya_phalaa".g, "hasant ra".g, "".g, gstar];
+
+# E.g. in র্যাশ (rash). Strictly speaking, ZWJ is obligatory after "ra", but not
+# all input methods generate it properly.
+ins_ya_phalaa_after_initial_ra = CDRewrite[
+    zw? "hasant ya".g : "ya_phalaa".g, "[BOS]" "ra".g, "".g, gstar];
+
+# E.g. in র্যাশ (rash). Note zw (strictly speaking, ZWJ) is obligatory here.
+ins_ya_phalaa_after_ra = CDRewrite[
+    zw "hasant ya".g : "ya_phalaa".g, "ra".g, "".g, gstar];
+
+ins_ya_phalaa = CDRewrite[
+    zw? "hasant ya".g : "ya_phalaa".g, grapheme - "ra".g, "".g, gstar];
+
+del_zero_width = CDRewrite[zw : "".g, "".g, "".g, gstar];
+
+normalize_separators = CDRewrite[
+    ("apostrophe".g | "urdha_comma".g) : "hyphen".g, "".g, "".g, gstar];
+
+simple_consonant_letter =
+  "ka".g  | "kha".g  | "ga".g  | "gha".g  | "nga".g
+| "ca".g  | "cha".g  | "ja".g  | "jha".g  | "nya".g
+| "tta".g | "ttha".g | "dda".g | "ddha".g | "nna".g
+| "ta".g  | "tha".g  | "da".g  | "dha".g  | "na".g
+| "pa".g  | "pha".g  | "ba".g  | "bha".g  | "ma".g
+| "ya".g | "ra".g | "la".g | "sha".g | "ssa".g | "sa".g | "ha".g
+;
+
+consonant_graphemes =
+  simple_consonant_letter | "rra".g | "rha".g | "yya".g | "ya_phalaa".g
+;
+
+explicit_vowel =
+  "-aa".g | "-i".g | "-ii".g | "-u".g | "-uu".g | "-ri".g | "-rri".g
+| "-e".g | "-ai".g | "-o".g | "-au".g | "-li".g | "-lli".g
+| "hasant".g | "ya_phalaa".g
+;
+
+ins_schwa = CDRewrite["".g : "-a".g, consonant_graphemes, "".g, gstar];
+del_schwa = CDRewrite["-a".g : "".g, "".g, explicit_vowel, gstar];
+
+export CODEPOINTS_TO_GRAPHEMES = Optimize[
+  vowels_to_nfc
+@ compose_dotted
+@ ins_ya_phalaa_after_non_initial_ra
+@ ins_ya_phalaa_after_initial_ra
+@ ins_ya_phalaa_after_ra
+@ ins_ya_phalaa
+@ del_zero_width
+@ normalize_separators
+@ ins_schwa
+@ del_schwa
+];
+
+export UTF8_TO_GRAPHEMES = Optimize[
+  utf8_to_codepoint*
+@ CODEPOINTS_TO_GRAPHEMES
+];

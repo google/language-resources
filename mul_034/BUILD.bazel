@@ -30,3 +30,61 @@ sh_test(
         "//utils:uniquely_decodable",
     ],
 )
+
+py_library(
+    name = "script_util",
+    srcs = ["script_util.py"],
+    data = ["indic_graphemes.tsv"],
+    deps = ["//utils:utf8"],
+)
+
+py_binary(
+    name = "make_script_syms",
+    srcs = ["make_script_syms.py"],
+    deps = [":script_util"],
+)
+
+py_binary(
+    name = "make_grapheme_syms",
+    srcs = ["make_grapheme_syms.py"],
+    deps = [":script_util"],
+)
+
+py_binary(
+    name = "make_grm_fragment",
+    srcs = ["make_grm_fragment.py"],
+    deps = [
+        ":script_util",
+        "//utils:utf8",
+    ],
+)
+
+genrule(
+    name = "gen_script_syms",
+    outs = [
+        "Beng.syms",
+        "Sinh.syms",
+    ],
+    cmd = "$(location :make_script_syms) --genrule $(OUTS)",
+    tools = [":make_script_syms"],
+)
+
+genrule(
+    name = "gen_grapheme_syms",
+    outs = [
+        "display_grapheme.syms",
+        "grapheme.syms",
+    ],
+    cmd = "$(location :make_grapheme_syms) $(OUTS)",
+    tools = [":make_grapheme_syms"],
+)
+
+load("build_defs", "compile_grm")
+
+compile_grm(
+    src = "Sinh.grm",
+    data = [
+        "Sinh.syms",
+        "grapheme.syms",
+    ],
+)

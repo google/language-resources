@@ -18,6 +18,7 @@
 # Example usage -
 #	./festival_utils/build_festvox_voice.sh ~/Desktop/audio/si_lk/ si ~/si_lk_2/
 
+set -x
 set -o errexit
 set -o pipefail
 set -o nounset

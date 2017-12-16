@@ -17,6 +17,7 @@
 c = SymbolTable['mul_034/Sinh.syms'];
 g = SymbolTable['mul_034/grapheme.syms'];
 
+# TODO: Decide whether to allow apostrophe, hyphen, "f" or "z" in words.
 codepoint_to_grapheme =
   ("anusvara".c : ";m".g)
 | ("visarga".c : ".h".g)
@@ -106,6 +107,33 @@ grapheme = Optimize[
 ];
 
 star = Optimize[(codepoint | grapheme)*];
+
+# Note that "sa -vocalic_r".c is not included in the following list of typos.
+# It is often a typo for "vocalic_r".c, but not in all situations. For example,
+# "sa -vocalic_r ga virama".c is a typo for "vocalic_r ga virama".c (ṛg as in
+# Rigveda), but "aa sa -vocalic_r ta".c is one way of writing /āsruta/
+# (distilled).
+typos =
+  ("a -aa".c : "aa".c)
+| ("a -ae".c : "ae".c)
+| ("a -aae".c : "aae".c)
+| ("u".c ("-vocalic_l".c | "-vocalic_ll".c) : "uu".c)
+| (("e".c | "ee".c) "virama".c : "ee".c)
+| (("e".c | "ee".c) "-e".c : "ai".c)
+| (("o".c | "oo".c | "mba".c) "virama".c : "oo".c)
+| (("o".c | "oo".c | "mba".c) ("-vocalic_l".c | "-vocalic_ll".c) : "au".c)
+| ("-e virama".c : "-ee".c)  # handled by NFC
+| ("-e -e".c : "-ai".c)      # handled by NFC
+| ("-e -aa".c : "-o".c)      # handled by NFC
+| ("-aa -e".c : "-o".c)
+| ("-e -aa virama".c : "-oo".c)  # handled by NFC
+| ("-aa -e virama".c : "-oo".c)
+| ("-e".c ("-vocalic_l".c | "-vocalic_ll".c) : "au".c)
+| (("-vocalic_l".c | "-vocalic_ll".c) "-e".c : "au".c)
+| ("-vocalic_r -vocalic_r".c : "-vocalic_rr".c)
+;
+
+fix_typos = CDRewrite[typos, "", "", star];
 
 # Change (non-standard, legacy?) ZWNJ to ZWJ everywhere.
 # Collapse multiple adjacent ZW(N)Js into a single ZWJ.
@@ -212,6 +240,7 @@ to_graphemes = CDRewrite[
 
 export CODEPOINTS_TO_GRAPHEMES = Optimize[
   codepoint*
+@ fix_typos
 @ process_zero_width
 @ ins_inherent_vowel
 @ del_inherent_vowel

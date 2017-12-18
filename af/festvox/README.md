@@ -31,7 +31,7 @@ This step will take couple of hours to finish.
 
   ```
   export OUTPUT_VOICE_FOLDER=<your desired path to store output voice>
-  ./utils/build_festvox_voice.sh ${WAV_FOLDER} af ${OUTPUT_VOICE_FOLDER}
+  ./festival_utils/build_festvox_voice.sh ${WAV_FOLDER} af ${OUTPUT_VOICE_FOLDER}
   ```
 
 4. Synthesize one example sentence (This always needs to be run from the produced output voice directory).

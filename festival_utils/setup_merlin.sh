@@ -33,7 +33,7 @@ set -o nounset
 set -o pipefail
 
 if [[ $# -ne 6 ]]; then
-    echo "./utils/setup_merlin.sh <FESTIVAL_VOICE_PATH> <ABSOLUTE_MERLIN_PATH> <WAV_PATH> <LANGUAGE> \
+    echo "./festival_utils/setup_merlin.sh <FESTIVAL_VOICE_PATH> <ABSOLUTE_MERLIN_PATH> <WAV_PATH> <LANGUAGE> \
 <LOCALE> <SAMPLE_RATE>"
     exit 1
 fi

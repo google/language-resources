@@ -67,6 +67,6 @@ done
 # Run merlin training.
 if [[ ${TRAIN} == true ]]; then
   echo "Training merlin ${LANG} voice"
-  time python src/run_merlin.py egs/local/s1/conf/duration_dnn.conf
-  time python src/run_merlin.py egs/local/s1/conf/acoustic_dnn.conf
+  time python src/run_merlin.py egs/locale/s1/conf/duration_dnn.conf
+  time python src/run_merlin.py egs/locale/s1/conf/acoustic_dnn.conf
 fi

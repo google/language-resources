@@ -1,0 +1,129 @@
+# য-ফলা (ya-phalā, jo-fola)
+ব্যক্তি	b ~y a k t i
+বাক্য	b aa k ~y a
+# By default "ra ya" means conjunct-ra (রেফ reph) followed by full য (ya)
+সূর্য	s uu r^ y a
+# In words like "DRAM", ya-phalā + aa indicates the vowel /æ/. This is actually
+# full ra (র) followed by ya-phalā plus aa. To block the default interpretation
+# of "ra virama" as reph, the codepoint sequence is "ra joiner virama ya".
+ডির‍্যাম	.d i r ~y aa m a
+# In words like "rash" that start with /r/, the codepoint sequence should still
+# be "ra joiner virama ya". Even though "ra" cannot be intended as reph at the
+# beginning of a word, rendering algorithms in practice will render it as a
+# reph in the absence of a joiner to block this interpretation.
+র‍্যাশ	r ~y aa ;s a
+ক্র্যাশ	k r ~y aa ;s a
+ডেমোক্র্যাট	.d ee m oo k r ~y aa .t a
+অফট্র্যাক	a ph a .t r ~y aa k a
+গভর্ন্যান্স	g a bh a r^ n ~y aa n s a
+অ্যাটলাস	a ~y aa .t a l aa s a
+এ্যাপোলো	ee ~y aa p oo l oo
+অয্য	a y ~y a
+সফটওয়্যার	s a ph a .t a oo ;y ~y aa r a
+ধৈর্য্য	dh ai r^ y ~y a
+
+# ক্ষ (kṣ, khiyo)
+ক্ষমা	k .s a m aa
+পক্ষ	p a k .s a
+অণুবীক্ষণ	a .n u b ii k .s a .n a
+লক্ষ্মী	l a k .s m ii
+সাক্ষ্য	s aa k .s ~y a
+# The following is a contrived example (not how "autoriksha" is normally
+# spelled), show how the kṣ ligature can be blocked:
+অটোরিক্‌ষা	a .t oo r i k non-joiner .s aa
+
+# Codepoints, in Unicode order
+
+# Various signs
+পাঁচ	p aa ~m c a
+বংলাদেশ	b a ;m l aa d ee ;s a
+দুঃখ	d u .h kh a
+
+# Independent vowels
+অক্ষর	a k .s a r a
+আকাশ	aa k aa ;s a
+ইতিহাস	i t i h aa s a
+উট	u .t a
+ঊনিশ	uu n i ;s a
+ঋতু	,r t u
+এক	ee k a
+ঐতিহ্য	ai t i h ~y a
+ওঝা	oo jh aa
+ঔষধ	au .s a dh a
+
+# Consonants
+করা	k a r aa
+খাদ্য	kh aa d ~y a
+গন্ডার	g a n .d aa r a
+ঘটনা	gh a .t a n aa
+বাঙালি	b aa ;n aa l i
+চাঁদ	c aa ~m d a
+ছয়	ch a ;y a
+জঙ্গল	j a ;n g a l a
+ঝাড়খণ্ড	jh aa .r a kh a .n .d a
+বিজ্ঞান	b i j ~n aa n a
+টাকা	.t aa k aa
+ঠাকুর	.th aa k u r a
+ডালিম	.d aa l i m a
+ঢাকা	.dh aa k aa
+ঋণ	,r .n a
+তড়িৎ	t a .r i t^
+থালা	th aa l aa
+দ্বার	d b aa r a
+ধর্ম	dh a r^ m a
+নাম	n aa m a
+পদার্থ	p a d aa r^ th a
+ফল	ph a l a
+বাল	b aa l a
+ভালুক	bh aa l u k a
+মেঘ	m ee gh a
+যুক্ত	y u k t a
+রক্ত	r a k t a
+লিপি	l i p i
+ব্যাকরণ	b ~y aa k a r a .n a
+শর্করা	;s a r^ k a r aa
+ষাট	.s aa .t a
+স্বামী	s b aa m ii
+হৃদয়	h ,r d a ;y a
+
+# Nukta, for additional letters in e.g. Pali
+কাল়	k aa .l a
+
+# Dependent vowels
+বাঘ	b aa gh a
+বিন্দু	b i n d u
+বীমা	b ii m aa
+বুঝি	b u jh i
+পূর্ব	p uu r^ b a
+বৃষ্টি	b ,r .s .t i
+বেচা	b ee c aa
+বৈশিষ্ট্য	b ai ;s i .s .t ~y a
+বোঝা	b oo jh aa
+পৌত্তলিক	p au t t a l i k a
+
+# Virama
+জ্ঞাত	j ~n aa t a
+স্বর	s b a r a
+হ্রাস	h r aa s a
+
+# খণ্ড ত (khanḍa ta)
+যকৃৎ	y a k ,r t^
+জ্যোৎস্না	j ~y oo t^ s n aa
+
+# Fully composed / fully decomposed pairs:
+বোঝা	b oo jh aa
+বোঝা	b oo jh aa
+পৌত্তলিক	p au t t a l i k a
+পৌত্তলিক	p au t t a l i k a
+বিড়াল	b i .r aa l a
+বিড়াল	b i .r aa l a
+আষাঢ়	aa .s aa .rh a
+আষাঢ়	aa .s aa .rh a
+ময়মনসিংহ	m a ;y a m a n a s i ;m h a
+ময়মনসিংহ	m a ;y a m a n a s i ;m h a
+
+# Additions for Assamese
+ৰং	r a ;m
+ৰৌ	r au
+ৱিকিপিডিয়া	w i k i p i .d i ;y aa
+ব্যৱহাৰ	b ~y a w a h aa r a

@@ -82,6 +82,17 @@ genrule(
 load("build_defs", "compile_grm", "script_test")
 
 compile_grm(
+    src = "Beng.grm",
+    data = [
+        "Beng.syms",
+        "extra.syms",
+        "grapheme.syms",
+    ],
+)
+
+script_test(script = "Beng")
+
+compile_grm(
     src = "Sinh.grm",
     data = [
         "Sinh.syms",

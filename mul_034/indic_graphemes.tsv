@@ -77,7 +77,7 @@ m̆b	^mb	mba
 y	y	ya
 ỹ	~y		# Beng:ZWJ+virama+ya Sinh:virama+ZWJ+ya
 ẏ	;y	yya
-r	r	ra
+r	r	ra ra_with_middle_diagonal
 ʳ	r^	dot_reph
 r̆	^r		# Deva:rra+virama
 l	l	la
@@ -96,7 +96,7 @@ k͟h	_kh	khha
 ĉ	^c	tsa
 z	z	za Telu:dza
 f	f	fa
-w	w	wa Beng:ra_with_lower_diagonal
+w	w	wa ra_with_lower_diagonal
 s̱	_s
 h̤	,h
 ẕ	_z

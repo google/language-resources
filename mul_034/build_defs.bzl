@@ -55,13 +55,13 @@ def script_test(script):
       srcs = ["//utils:eval.sh"],
       args = [
           """
-          grep . $(location %s_test.tsv) |
+          grep '^[^#]' $(location %s_test.tsv) |
           cut -f 1 |
           $(location //utils:thrax_g2p) \
           --far=$(location %s.far) \
           --far_g2p_key=CODEPOINTS_TO_GRAPHEMES \
           --phoneme_syms=$(location grapheme.syms) |
-          diff -B -U0 - $(location %s_test.tsv)
+          diff -B -I '^#' -U0 - $(location %s_test.tsv)
           """ % (script, script, script),
       ],
       data = [

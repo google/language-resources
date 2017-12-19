@@ -12,6 +12,7 @@ BAZEL_EXECUTABLE="${BAZEL_EXECUTABLE:-$(which bazel)}"
 # library, compiled for target) only need to be built once. For a one-shot
 # continuous integration build, this saves a little bit of total build time.
 BAZEL_STRATEGY='--nodistinct_host_configuration'
+BAZEL_STRATEGY+=' --test_timeout_filters=-long'
 
 BAZEL_PYTHON="$("$BAZEL_EXECUTABLE" canonicalize-flags -- \
   --python_path="$PYTHON_EXECUTABLE" 2>/dev/null)"

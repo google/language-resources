@@ -79,7 +79,7 @@ genrule(
     tools = [":make_grapheme_syms"],
 )
 
-load("build_defs", "compile_grm", "script_test")
+load(":build_defs.bzl", "compile_grm", "script_test")
 
 compile_grm(
     src = "Beng.grm",

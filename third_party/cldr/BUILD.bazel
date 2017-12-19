@@ -8,7 +8,7 @@ exports_files([
     "zu-zu_FONIPA.txt",
 ])
 
-load("build_defs", "transform_test")
+load(":build_defs.bzl", "transform_test")
 
 transform_test("ta")
 

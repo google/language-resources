@@ -98,15 +98,52 @@ codepoint_to_grapheme =
 
 codepoint = Optimize[
   Project[codepoint_to_grapheme, 'input']
-| "virama".c | "non-joiner".c | "joiner".c
+| "virama".c
+| "non-joiner".c
+| "joiner".c
 ];
 
 grapheme = Optimize[
   Project[codepoint_to_grapheme, 'output']
-| "@".g | "ERROR".g | "joiner".g | "r^".g
+| "@".g
+| "ERROR".g
+| "joiner".g
+| "r^".g
 ];
 
 star = Optimize[(codepoint | grapheme)*];
+
+consonant =
+  "ka".c  | "kha".c  | "ga".c  | "gha".c  | "nga".c | "nnga".c
+| "ca".c  | "cha".c  | "ja".c  | "jha".c  | "nya".c | "nyja".c  | "jnya".c
+| "tta".c | "ttha".c | "dda".c | "ddha".c | "nna".c | "nndda".c
+| "ta".c  | "tha".c  | "da".c  | "dha".c  | "na".c  | "nda".c
+| "pa".c  | "pha".c  | "ba".c  | "bha".c  | "ma".c  | "mba".c
+| "ya".c  | "ra".c   | "la".c  | "va".c
+| "sha".c | "ssa".c  | "sa".c  | "ha".c
+| "lla".c | "fa".c
+;
+
+dependent_vowel =
+                   "-aa".c
+| "-ae".c        | "-aae".c
+| "-i".c         | "-ii".c
+| "-u".c         | "-uu".c
+| "-vocalic_r".c | "-vocalic_rr".c
+| "-e".c         | "-ee".c         | "-ai".c
+| "-o".c         | "-oo".c         | "-au".c
+| "-vocalic_l".c | "-vocalic_ll".c
+;
+
+independent_vowel =
+  "a".c  | "aa".c
+| "ae".c | "aae".c
+| "i".c  | "ii".c
+| "u".c  | "uu".c
+| "vocalic_r".c
+| "e".c  | "ee".c | "ai".c
+| "o".c  | "oo".c | "au".c
+;
 
 # Note that "sa -vocalic_r".c is not included in the following list of typos.
 # It is often a typo for "vocalic_r".c, but not in all situations. For example,
@@ -142,7 +179,7 @@ standardize_zero_wdith = CDRewrite[
 ];
 
 # Change <ra virama ZWJ> to <r^> (repaya, i.e. reph).
-ins_repaya = CDRewrite["ra virama joiner".c : "r^".g, "", "", star];
+ins_reph = CDRewrite["ra virama joiner".c : "r^".g, "", "", star];
 
 # Change <virama ZWJ ya> to <virama joiner ya> (yansaya)
 # and    <virama ZWJ ra> to <virama joiner ra> (rakaransaya).
@@ -158,63 +195,28 @@ del_zwj = CDRewrite["joiner".c : "", "", "", star];
 
 process_zero_width = Optimize[
   standardize_zero_wdith
-@ ins_repaya
+@ ins_reph
 @ ins_medials
 @ del_zwj
 ];
 
-consonant_c =
-  "ka".c  | "kha".c  | "ga".c  | "gha".c  | "nga".c | "nnga".c
-| "ca".c  | "cha".c  | "ja".c  | "jha".c  | "nya".c | "nyja".c  | "jnya".c
-| "tta".c | "ttha".c | "dda".c | "ddha".c | "nna".c | "nndda".c
-| "ta".c  | "tha".c  | "da".c  | "dha".c  | "na".c  | "nda".c
-| "pa".c  | "pha".c  | "ba".c  | "bha".c  | "ma".c  | "mba".c
-| "ya".c  | "ra".c   | "la".c  | "va".c
-| "sha".c | "ssa".c  | "sa".c  | "ha".c
-| "lla".c | "fa".c
-;
-
-dependent_vowel_c =
-            "-aa".c
-| "-ae".c | "-aae".c
-| "-i".c  | "-ii".c
-| "-u".c  | "-uu".c
-| "-vocalic_r".c
-| "-e".c  | "-ee".c  | "-ai".c
-| "-o".c  | "-oo".c  | "-au".c
-|           "-vocalic_rr".c
-;
-
-independent_vowel_c =
-  "a".c  | "aa".c
-| "ae".c | "aae".c
-| "i".c  | "ii".c
-| "u".c  | "uu".c
-| "vocalic_r".c
-| "e".c  | "ee".c | "ai".c
-| "o".c  | "oo".c | "au".c
-;
-
 # Provisionally insert an inherent vowel after every consonant letter.
-ins_inherent_vowel = CDRewrite["" : "@".g, consonant_c, "", star];
+ins_inherent_vowel = CDRewrite["" : "@".g, consonant, "", star];
+
+explicit_vowel_or_virama = dependent_vowel | "virama".c;
 
 # Delete the inherent vowel before a dependent vowel sign or virama.
-del_inherent_vowel = CDRewrite[
-  "@".g : "",
-  "",
-  dependent_vowel_c | "virama".c,
-  star
-];
+del_inherent_vowel = CDRewrite["@".g : "", "", explicit_vowel_or_virama, star];
 
 # Modifiers that follow all and only consonants.
-consonant_modifier = "@".g | dependent_vowel_c | "virama".c;
+consonant_modifier = "@".g | dependent_vowel | "virama".c;
 
 # Check that every consonant letter is followed by either a dependent
 # vowel sign (including the inherent vowel "@"), or virama.
 # Where that is not the case, insert ERROR as a marker for debugging.
 check_consonants = CDRewrite[
   "" : "ERROR".g,
-  consonant_c,
+  consonant,
   (codepoint | grapheme) - consonant_modifier,
   star
 ];
@@ -224,7 +226,7 @@ check_consonants = CDRewrite[
 # Where that is not the case, insert ERROR as a marker for debugging.
 check_independent_vowels = CDRewrite[
   "" : "ERROR".g,
-  independent_vowel_c,
+  independent_vowel,
   consonant_modifier,
   star
 ];
@@ -247,4 +249,5 @@ export CODEPOINTS_TO_GRAPHEMES = Optimize[
 @ check_consonants
 @ check_independent_vowels
 @ to_graphemes
+@ grapheme*
 ];

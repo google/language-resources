@@ -63,6 +63,7 @@ genrule(
     name = "gen_script_syms",
     outs = [
         "Beng.syms",
+        "Deva.syms",
         "Sinh.syms",
     ],
     cmd = "$(location :make_script_syms) --genrule $(OUTS)",
@@ -91,6 +92,16 @@ compile_grm(
 )
 
 script_test(script = "Beng")
+
+compile_grm(
+    src = "Deva.grm",
+    data = [
+        "Deva.syms",
+        "grapheme.syms",
+    ],
+)
+
+script_test(script = "Deva")
 
 compile_grm(
     src = "Sinh.grm",

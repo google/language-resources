@@ -1,0 +1,176 @@
+# -*- Thrax -*-
+
+# Copyright 2016, 2017 Google LLC. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+c = SymbolTable['mul_034/Deva.syms'];
+g = SymbolTable['mul_034/grapheme.syms'];
+
+codepoint_to_grapheme =
+  ("candrabindu".c : "~m".g)
+| ("anusvara".c : ";m".g)
+| ("visarga".c : ".h".g)
+# TODO: Is "short_a".c needed?
+| ("a".c : "a".g)
+| ("aa".c : "aa".g)
+| ("i".c : "i".g)
+| ("ii".c : "ii".g)
+| ("u".c : "u".g)
+| ("uu".c : "uu".g)
+| ("vocalic_r".c : ",r".g)
+| ("vocalic_l".c : ",l".g)
+| ("candra_e".c : "^e".g)
+| ("short_e".c : "e".g)
+| ("e".c : "ee".g)
+| ("ai".c : "ai".g)
+| ("candra_o".c : "^o".g)
+| ("short_o".c : "o".g)
+| ("o".c : "oo".g)
+| ("au".c : "au".g)
+| ("ka".c : "k".g)
+| ("kha".c : "kh".g)
+| ("ga".c : "g".g)
+| ("gha".c : "gh".g)
+| ("nga".c : ";n".g)
+| ("ca".c : "c".g)
+| ("cha".c : "ch".g)
+| ("ja".c : "j".g)
+| ("jha".c : "jh".g)
+| ("nya".c : "~n".g)
+| ("tta".c : ".t".g)
+| ("ttha".c : ".th".g)
+| ("dda".c : ".d".g)
+| ("ddha".c : ".dh".g)
+| ("nna".c : ".n".g)
+| ("ta".c : "t".g)
+| ("tha".c : "th".g)
+| ("da".c : "d".g)
+| ("dha".c : "dh".g)
+| ("na".c : "n".g)
+| ("nnna".c : "_n".g)
+| ("pa".c : "p".g)
+| ("pha".c : "ph".g)
+| ("ba".c : "b".g)
+| ("bha".c : "bh".g)
+| ("ma".c : "m".g)
+| ("ya".c : "y".g)
+| ("ra".c : "r".g)
+| ("rra".c : "_r".g)
+| ("la".c : "l".g)
+| ("lla".c : ".l".g)
+| ("llla".c : "_l".g)
+| ("va".c : "v".g)
+| ("sha".c : ";s".g)
+| ("ssa".c : ".s".g)
+| ("sa".c : "s".g)
+| ("ha".c : "h".g)
+| ("avagraha".c : "'".g)
+| ("-aa".c : "aa".g)
+| ("-i".c : "i".g)
+| ("-ii".c : "ii".g)
+| ("-u".c : "u".g)
+| ("-uu".c : "uu".g)
+| ("-vocalic_r".c : ",r".g)
+| ("-vocalic_rr".c : ",rr".g)
+| ("-candra_e".c : "^e".g)
+| ("-short_e".c : "e".g)
+| ("-e".c : "ee".g)
+| ("-ai".c : "ai".g)
+| ("-candra_o".c : "^o".g)
+| ("-short_o".c : "o".g)
+| ("-o".c : "oo".g)
+| ("-au".c : "au".g)
+| ("qa".c : "q".g)
+| ("khha".c : "_kh".g)
+| ("ghha".c : ".g".g)
+| ("za".c : "z".g)
+| ("dddha".c : ".r".g)
+| ("rha".c : ".rh".g)
+| ("fa".c : "f".g)
+| ("yya".c : ";y".g)
+| ("vocalic_rr".c : ",rr".g)
+| ("vocalic_ll".c : ",ll".g)
+| ("-vocalic_l".c : ",l".g)
+| ("-vocalic_ll".c : ",ll".g)
+| ("non-joiner".c : "non-joiner".g)
+| ("joiner".c : "joiner".g)
+;
+
+codepoint = Optimize[
+  Project[codepoint_to_grapheme, 'input']
+| "nukta".c
+| "virama".c
+| "non-joiner".c
+| "joiner".c
+];
+
+grapheme = Optimize[
+  Project[codepoint_to_grapheme, 'output']
+| "@".g
+| "ERROR".g
+| "non-joiner".g
+| "joiner".g
+];
+
+star = Optimize[(codepoint | grapheme)*];
+
+consonant =
+  "ka".c  | "kha".c  | "ga".c  | "gha".c  | "nga".c
+| "ca".c  | "cha".c  | "ja".c  | "jha".c  | "nya".c
+| "tta".c | "ttha".c | "dda".c | "ddha".c | "nna".c
+| "ta".c  | "tha".c  | "da".c  | "dha".c  | "na".c
+| "nnna".c
+| "pa".c  | "pha".c  | "ba".c  | "bha".c  | "ma".c
+| "ya".c  | "ra".c   | "rra".c
+| "la".c  | "lla".c  | "llla".c
+| "va".c
+| "sha".c | "ssa".c  | "sa".c  | "ha".c
+| "qa".c  | "khha".c | "ghha".c| "za".c
+| "dddha".c | "rha".c | "fa".c | "yya".c
+;
+
+dependent_vowel =
+                   "-aa".c
+| "-i".c         | "-ii".c
+| "-u".c         | "-uu".c
+| "-vocalic_r".c | "-vocalic_rr".c
+| "-candra_e".c  | "-short_e".c    | "-e".c | "-ai".c
+| "-candra_o".c  | "-short_o".c    | "-o".c | "-au".c
+| "-vocalic_l".c | "-vocalic_ll".c
+;
+
+ins_inherent_vowel = CDRewrite["" : "@".g, consonant, "", star];
+
+explicit_vowel_or_virama = dependent_vowel | "virama".c;
+
+del_inherent_vowel = CDRewrite["@".g : "", "", explicit_vowel_or_virama, star];
+
+# Replace codepoints with graphemes, replace inherent vowel "@" with "a",
+# and delete virama etc.
+to_graphemes_aux =
+  codepoint_to_grapheme
+| ("@".g : "a".g)
+| ("virama".c : "")
+| ("nukta".c : "")
+;
+
+to_graphemes = CDRewrite[to_graphemes_aux, "", "", star];
+
+export CODEPOINTS_TO_GRAPHEMES = Optimize[
+  codepoint*
+@ ins_inherent_vowel
+@ del_inherent_vowel
+@ to_graphemes
+@ grapheme*
+];

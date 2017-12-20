@@ -231,14 +231,15 @@ check_independent_vowels = CDRewrite[
   star
 ];
 
-# Delete virama, replace inherent vowel "@" with short "a", and replace
-# codepoints with graphemes.
-to_graphemes = CDRewrite[
-  ("virama".c : "") | ("@".g : "a".g) | codepoint_to_grapheme,
-  "",
-  "",
-  star
-];
+# Replace codepoints with graphemes, replace inherent vowel "@" with "a",
+# and delete virama etc.
+to_graphemes_aux =
+  codepoint_to_grapheme
+| ("@".g : "a".g)
+| ("virama".c : "")
+;
+
+to_graphemes = CDRewrite[to_graphemes_aux, "", "", star];
 
 export CODEPOINTS_TO_GRAPHEMES = Optimize[
   codepoint*

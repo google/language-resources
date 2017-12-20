@@ -196,13 +196,13 @@ explicit_vowel_or_virama = dependent_vowel | "virama".c | ya_phalaa;
 
 del_inherent_vowel = CDRewrite["@".g : "", "", explicit_vowel_or_virama, star];
 
-# Replace replace inherent vowel "@" with short "a", replace codepoints with
-# graphemes, and delete various characters.
+# Replace codepoints with graphemes, replace inherent vowel "@" with "a",
+# and delete virama etc.
 to_graphemes_aux =
-  ("@".g : "a".g)
-| codepoint_to_grapheme
-| ("nukta".c : "")
+  codepoint_to_grapheme
+| ("@".g : "a".g)
 | ("virama".c : "")
+| ("nukta".c : "")
 | (separator : "")
 ;
 

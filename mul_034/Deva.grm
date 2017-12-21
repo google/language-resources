@@ -115,12 +115,17 @@ codepoint = Optimize[
 | "joiner".c
 ];
 
+eyelash_ra = "^r".g;
+zhe = "^z".g;
+
 grapheme = Optimize[
   Project[codepoint_to_grapheme, 'output']
 | "@".g
 | "ERROR".g
 | "non-joiner".g
 | "joiner".g
+| eyelash_ra
+| zhe
 ];
 
 star = Optimize[(codepoint | grapheme)*];
@@ -138,6 +143,7 @@ consonant =
 | "sha".c | "ssa".c  | "sa".c  | "ha".c
 | "qa".c  | "khha".c | "ghha".c| "za".c
 | "dddha".c | "rha".c | "fa".c | "yya".c
+| eyelash_ra | zhe
 ;
 
 dependent_vowel =
@@ -150,11 +156,30 @@ dependent_vowel =
 | "-vocalic_l".c | "-vocalic_ll".c
 ;
 
+compose_dotted_aux =
+  ("ka nukta".c : "qa".c)
+| ("kha nukta".c : "khha".c)
+| ("ga nukta".c : "ghha".c)
+| ("ja nukta".c : "za".c)
+| ("jha nukta".c : zhe)  # non-standard, corresponds to Urdu ژ
+| ("dda nukta".c : "dddha".c)
+| ("ddha nukta".c : "rha".c)
+| ("na nukta".c : "nnna".c)
+| ("pha nukta".c : "fa".c)
+| ("ya nukta".c : "yya".c)
+| ("ra nukta".c : "rra".c)
+| ("lla nukta".c : "llla".c)
+;
+
+compose_dotted = CDRewrite[compose_dotted_aux, "", "", star];
+
 ins_inherent_vowel = CDRewrite["" : "@".g, consonant, "", star];
 
 explicit_vowel_or_virama = dependent_vowel | "virama".c;
 
 del_inherent_vowel = CDRewrite["@".g : "", "", explicit_vowel_or_virama, star];
+
+ins_eyelash_ra = CDRewrite["rra".c : eyelash_ra, "", "virama".c, star];
 
 # Replace codepoints with graphemes, replace inherent vowel "@" with "a",
 # and delete virama etc.
@@ -169,8 +194,10 @@ to_graphemes = CDRewrite[to_graphemes_aux, "", "", star];
 
 export CODEPOINTS_TO_GRAPHEMES = Optimize[
   codepoint*
+@ compose_dotted
 @ ins_inherent_vowel
 @ del_inherent_vowel
+@ ins_eyelash_ra
 @ to_graphemes
 @ grapheme*
 ];

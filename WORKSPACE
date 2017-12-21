@@ -65,11 +65,11 @@ bind(
     actual = "@com_google_googletest//:gtest_main",
 )
 
-new_git_repository(
+new_http_archive(
     name = "farmhash",
+    strip_prefix = "farmhash-master",
     build_file = "farmhash.BUILD",
-    commit = "92e897b282426729f4724d91a637596c7e2fe28f",
-    remote = "https://github.com/google/farmhash.git",
+    urls = ["https://github.com/google/farmhash/archive/master.zip"],
 )
 
 new_git_repository(

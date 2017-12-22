@@ -30,6 +30,7 @@ codepoint_to_grapheme =
 | ("u".c : "u".g)
 | ("uu".c : "uu".g)
 | ("vocalic_r".c : ",r".g)
+| ("vocalic_rr".c : ",rr".g)
 | ("e".c : "e".g)
 | ("ee".c : "ee".g)
 | ("ai".c : "ai".g)
@@ -130,19 +131,19 @@ dependent_vowel =
 | "-i".c         | "-ii".c
 | "-u".c         | "-uu".c
 | "-vocalic_r".c | "-vocalic_rr".c
+| "-vocalic_l".c | "-vocalic_ll".c
 | "-e".c         | "-ee".c         | "-ai".c
 | "-o".c         | "-oo".c         | "-au".c
-| "-vocalic_l".c | "-vocalic_ll".c
 ;
 
 independent_vowel =
-  "a".c  | "aa".c
-| "ae".c | "aae".c
-| "i".c  | "ii".c
-| "u".c  | "uu".c
-| "vocalic_r".c
-| "e".c  | "ee".c | "ai".c
-| "o".c  | "oo".c | "au".c
+  "a".c          | "aa".c
+| "ae".c         | "aae".c
+| "i".c          | "ii".c
+| "u".c          | "uu".c
+| "vocalic_r".c  | "vocalic_rr".c
+| "e".c          | "ee".c          | "ai".c
+| "o".c          | "oo".c          | "au".c
 ;
 
 # Note that "sa -vocalic_r".c is not included in the following list of typos.
@@ -211,9 +212,9 @@ del_inherent_vowel = CDRewrite["@".g : "", "", explicit_vowel_or_virama, star];
 # Modifiers that follow all and only consonants.
 consonant_modifier = "@".g | dependent_vowel | "virama".c;
 
-# Check that every consonant letter is followed by either a dependent
-# vowel sign (including the inherent vowel "@"), or virama.
-# Where that is not the case, insert ERROR as a marker for debugging.
+# Check that every consonant letter is followed by either a dependent vowel
+# sign (including the inherent vowel "@"), or virama. Where that is not the
+# case, insert ERROR as a marker for debugging.
 check_consonants = CDRewrite[
   "" : "ERROR".g,
   consonant,
@@ -221,9 +222,9 @@ check_consonants = CDRewrite[
   star
 ];
 
-# Check that no independent vowel letter is followed by a dependent
-# vowel sign (including the inherent vowel "@"), or virama.
-# Where that is not the case, insert ERROR as a marker for debugging.
+# Check that no independent vowel letter is followed by a dependent vowel
+# sign (including the inherent vowel "@"), or virama. Where that is not the
+# case, insert ERROR as a marker for debugging.
 check_independent_vowels = CDRewrite[
   "" : "ERROR".g,
   independent_vowel,

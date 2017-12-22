@@ -28,7 +28,6 @@ codepoint_to_grapheme =
 | ("u".c : "u".g)
 | ("uu".c : "uu".g)
 | ("vocalic_r".c : ",r".g)
-| ("vocalic_l".c : ",l".g)
 | ("candra_e".c : "^e".g)
 | ("short_e".c : "e".g)
 | ("e".c : "ee".g)
@@ -100,7 +99,6 @@ codepoint_to_grapheme =
 | ("fa".c : "f".g)
 | ("yya".c : ";y".g)
 | ("vocalic_rr".c : ",rr".g)
-| ("vocalic_ll".c : ",ll".g)
 | ("-vocalic_l".c : ",l".g)
 | ("-vocalic_ll".c : ",ll".g)
 | ("candra_a".c : "ae".g)  # maybe define and use "^a".g instead?
@@ -158,30 +156,48 @@ dependent_vowel =
 | "-i".c         | "-ii".c
 | "-u".c         | "-uu".c
 | "-vocalic_r".c | "-vocalic_rr".c
-| "-candra_e".c  | "-short_e".c    | "-e".c | "-ai".c
-| "-candra_o".c  | "-short_o".c    | "-o".c | "-au".c
 | "-vocalic_l".c | "-vocalic_ll".c
+| "-short_e".c   | "-e".c          | "-ai".c | "-candra_e".c
+| "-short_o".c   | "-o".c          | "-au".c | "-candra_o".c
+;
+
+independent_vowel =
+  "a".c          | "aa".c
+| "short_a".c | "candra_a".c
+| "i".c          | "ii".c
+| "u".c          | "uu".c
+| "vocalic_r".c  | "vocalic_rr".c
+| "short_e".c    | "e".c           | "ai".c  | "candra_e".c
+| "short_o".c    | "o".c           | "au".c  | "candra_o".c
 ;
 
 typos =
   ("a -short_e".c : "short_a".c)
-| ("a -aa".c : "aa".c)
 | ("ra virama i".c : "ii".c)
 | ("u -u".c : "uu".c)
 | ("u -uu".c : "uu".c)
 | ("e -candra_e".c : "candra_e".c)
 | ("e -short_e".c : "short_e".c)
 | ("e -e".c : "ai".c)
+| ("e -ai".c : "ai".c)
+| ("ai -e".c : "ai".c)
+| ("ai -ai".c : "ai".c)
 | ("a -candra_o".c : "candra_o".c)
 | ("aa -candra_e".c : "candra_o".c)
 | ("candra_a -aa".c : "candra_o".c)
+| ("candra_o -candra_e".c : "candra_o".c)
 | ("a -short_o".c : "short_o".c)
 | ("aa -short_e".c : "short_o".c)
 | ("short_a -aa".c : "short_o".c)
+| ("a -e".c : "o".c)
 | ("a -o".c : "o".c)
 | ("aa -e".c : "o".c)
+| ("o -e".c : "o".c)
+| ("a -ai".c : "au".c)
 | ("a -au".c : "au".c)
 | ("aa -ai".c : "au".c)
+| ("au -e".c : "au".c)
+| ("au -ai".c : "au".c)
 | ("vocalic_r -vocalic_r".c : "vocalic_rr".c)
 | ("vocalic_r -vocalic_rr".c : "vocalic_rr".c)
 | ("a -candra_e".c : "candra_a".c)
@@ -190,9 +206,16 @@ typos =
 | ("-candra_o -candra_e".c : "-candra_o".c)
 | ("-aa -short_e".c : "-short_o".c)
 | ("-short_e -aa".c : "-short_o".c)
+| ("-aa -e".c : "-o".c)
+| ("-e -aa".c : "-o".c)
+| ("-aa -ai".c : "-au".c)
+| ("-ai -aa".c : "-au".c)
 ;
 
-fix_typos = CDRewrite[typos, "", "", star];
+fix_typos =
+  CDRewrite["a -aa".c : "aa".c, "", "", star]
+@ CDRewrite[typos, "", "", star]
+;
 
 compose_dotted_aux =
   ("ka nukta".c : "qa".c)
@@ -207,7 +230,7 @@ compose_dotted_aux =
 | ("ya nukta".c : "yya".c)
 | ("ra nukta".c : "rra".c)
 | ("lla nukta".c : "llla".c)
-| ("ssa nukta".c : "llla".c)
+| ("ssa nukta".c : "llla".c)  # non-standard, transliteration of Mlym:llla
 ;
 
 compose_dotted = CDRewrite[compose_dotted_aux, "", "", star];
@@ -217,6 +240,29 @@ ins_inherent_vowel = CDRewrite["" : "@".g, consonant, "", star];
 explicit_vowel_or_virama = dependent_vowel | "virama".c;
 
 del_inherent_vowel = CDRewrite["@".g : "", "", explicit_vowel_or_virama, star];
+
+# Modifiers that follow all and only consonants.
+consonant_modifier = "@".g | dependent_vowel | "virama".c;
+
+# Check that every consonant letter is followed by either a dependent vowel
+# sign (including the inherent vowel "@"), or virama. Where that is not the
+# case, insert ERROR as a marker for debugging.
+check_consonants = CDRewrite[
+  "" : "ERROR".g,
+  consonant,
+  (codepoint | grapheme) - consonant_modifier,
+  star
+];
+
+# Check that no independent vowel letter is followed by a dependent vowel
+# sign (including the inherent vowel "@"), or virama. Where that is not the
+# case, insert ERROR as a marker for debugging.
+check_independent_vowels = CDRewrite[
+  "" : "ERROR".g,
+  independent_vowel,
+  consonant_modifier,
+  star
+];
 
 ins_eyelash_ra = CDRewrite["rra".c : eyelash_ra, "", "virama".c, star];
 
@@ -237,6 +283,8 @@ export CODEPOINTS_TO_GRAPHEMES = Optimize[
 @ compose_dotted
 @ ins_inherent_vowel
 @ del_inherent_vowel
+@ check_consonants
+@ check_independent_vowels
 @ ins_eyelash_ra
 @ to_graphemes
 @ grapheme*

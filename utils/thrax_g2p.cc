@@ -22,6 +22,7 @@
 #include <memory>
 #include <sstream>
 #include <string>
+#include <utility>
 
 #include <fst/arc.h>
 #include <fst/compact-fst.h>
@@ -48,7 +49,31 @@ using std::string;
 DEFINE_string(fst, "", "Path to G2P FST.");
 DEFINE_string(far, "", "Path to FAR file containing G2P FST.");
 DEFINE_string(far_g2p_key, "G2P", "Name of G2P FST within the FAR file.");
-DEFINE_string(phoneme_syms, "", "Path to phoneme symbols.");
+
+DEFINE_string(input_labels, "UNICODE",
+              "Input label type. "
+              "Either \"BYTE\", or \"UNICODE\", or a SymbolTable text file.");
+DEFINE_string(output_labels, "",
+              "Output label type. "
+              "Either \"BYTE\", or \"UNICODE\", or a SymbolTable text file.");
+DEFINE_string(phoneme_syms, "", "Path to phoneme symbols. [DEPRECATED]");
+
+DEFINE_bool(phrases, true, "Whether input lines consist of multiple phrases.");
+
+std::unique_ptr<festus::LabelMaker> GetLabelMaker(const string &ltype) {
+  std::unique_ptr<festus::LabelMaker> result;
+  if (ltype.empty() || ltype == "UNICODE") {
+    result.reset(new festus::UnicodeLabelMaker());
+  } else if (ltype == "BYTE") {
+    result.reset(new festus::ByteLabelMaker());
+  } else {
+    std::unique_ptr<SymbolTable> syms(SymbolTable::ReadText(ltype));
+    if (syms) {
+      result.reset(new festus::SymbolLabelMaker(syms.get(), " "));
+    }
+  }
+  return result;
+}
 
 int main(int argc, char *argv[]) {
   SET_FLAGS(argv[0], &argc, &argv, true);
@@ -79,23 +104,37 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  if (FLAGS_phoneme_syms.empty()) {
-    LOG(ERROR) << "--phoneme_syms not specified";
-    return 1;
-  }
-  std::unique_ptr<SymbolTable> phoneme_syms(
-      SymbolTable::ReadText(FLAGS_phoneme_syms));
-  if (!phoneme_syms) return 1;
+  const auto input_label_maker = GetLabelMaker(FLAGS_input_labels);
+  if (!input_label_maker) return 1;
 
-  festus::UnicodeLabelMaker input_label_maker;
-  festus::SymbolLabelMaker output_label_maker(phoneme_syms.get(), " ");
+  std::unique_ptr<festus::LabelMaker> output_label_maker;
+  if (!FLAGS_output_labels.empty()) {
+    if (!FLAGS_phoneme_syms.empty()) {
+      LOG(WARNING) << "Both --output_labels and --phoneme_syms specified; "
+                      "ignoring --phoneme_syms";
+    }
+    output_label_maker = GetLabelMaker(FLAGS_output_labels);
+  } else {
+    if (FLAGS_phoneme_syms.empty()) {
+      LOG(ERROR) << "--phoneme_syms not specified";
+      return 1;
+    }
+    output_label_maker = GetLabelMaker(FLAGS_phoneme_syms);
+  }
+  if (!output_label_maker) return 1;
+
   StdVectorFst lattice;
-  for (string line; std::getline(std::cin, line); ) {
+  for (string line; std::getline(std::cin, line);) {
     std::ostringstream output;
     output << line << "\t";
     bool success = true;
     bool at_start = true;
-    std::vector<string> phrases = absl::StrSplit(line, ' ');
+    std::vector<string> phrases;
+    if (FLAGS_phrases) {
+      phrases = absl::StrSplit(line, ' ');
+    } else {
+      phrases.emplace_back(std::move(line));
+    }
     for (const auto &phrase : phrases) {
       if (at_start) {
         at_start = false;
@@ -103,7 +142,7 @@ int main(int argc, char *argv[]) {
         output << " | ";
       }
       fst::StdCompactStringFst graphemes;
-      if (!input_label_maker.StringToCompactFst(phrase, &graphemes)) {
+      if (!input_label_maker->StringToCompactFst(phrase, &graphemes)) {
         output << "ERROR_compiling_input: " << phrase;
         success = false;
         continue;
@@ -126,7 +165,7 @@ int main(int argc, char *argv[]) {
         }
       }
       fst::RmEpsilon(&lattice);
-      output << festus::OneString(lattice, output_label_maker);
+      output << festus::OneString(lattice, *output_label_maker);
     }
     (success ? std::cout : std::cerr) << output.str() << std::endl;
   }

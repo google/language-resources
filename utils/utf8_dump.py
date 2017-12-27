@@ -185,12 +185,12 @@ def CodepointName(cp):
       0xF0000 <= cp <= 0xFFFFD or
       0x100000 <= cp <= 0x10FFFD):
     return '<Private Use>'
-  elif IsHighSurrogate(cp):
+  elif IsHighSurrogateCodepoint(cp):
     return '<%sPrivate Use High Surrogate %X>' % (
         'Non ' if cp <= 0xDB7F else '', SurrogatePayload(cp))
-  elif IsLowSurrogate(cp):
+  elif IsLowSurrogateCodepoint(cp):
     return '<Low Surrogate %03X>' % SurrogatePayload(cp)
-  elif (0xFDD0 <= cp <= 0xFDEF or (cp & 0xFFFF) >= 0xFFFE):
+  elif 0xFDD0 <= cp <= 0xFDEF or (cp & 0xFFFF) >= 0xFFFE:
     return '<Noncharacter>'
   return ''
 
@@ -314,11 +314,9 @@ def Dump(bstream):
       name = CharName(char)
       if not name:
         name = CodepointName(codepoint)
+      deco = Decomposition(char)
       Write(_STDOUT, '%s\t%s\t%s\t%s\n',
-            printable,
-            ('%04X' % codepoint).rjust(6),
-            name,
-            Decomposition(uchr))
+            printable, ('%04X' % codepoint).rjust(6), name, deco)
     else:
       Write(_STDERR, '\t%X\t<Invalid Codepoint>\n', codepoint)
   return

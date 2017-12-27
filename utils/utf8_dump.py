@@ -133,8 +133,39 @@ CHAR_NAME = {
 }
 
 
-def Escape(uchr):
-  cp = ord(uchr)
+def IsHighSurrogateCodepoint(cp):
+  return 0xD800 <= cp <= 0xDBFF
+
+
+def IsLowSurrogateCodepoint(cp):
+  return 0xDC00 <= cp <= 0xDFFF
+
+
+def SurrogatePayload(cp):
+  payload = cp & ((1 << 10) - 1)
+  if IsHighSurrogateCodepoint(cp):
+    return 0x10000 + (payload << 10)
+  elif IsLowSurrogateCodepoint(cp):
+    return payload
+  raise ValueError('SurrogatePayload() arg is not a surrogate: %X' % cp)
+
+
+def CharToCodepoint(char):
+  if len(char) == 1:
+    return ord(char)
+  elif len(char) == 2:
+    hi = ord(char[0])
+    lo = ord(char[1])
+    if IsHighSurrogateCodepoint(hi) and IsLowSurrogateCodepoint(lo):
+      return SurrogatePayload(hi) | SurrogatePayload(lo)
+  raise TypeError('CharToCodepoint expected a character or surrogate pair')
+
+
+def CodepointToChar(codepoint):
+  return ('\\U%08X' % codepoint).encode('ascii').decode('unicode-escape')
+
+
+def EscapeCodepoint(cp):
   if cp in CHAR_ESCAPE:
     return CHAR_ESCAPE[cp]
   elif cp <= 0xFF:
@@ -145,18 +176,8 @@ def Escape(uchr):
     return '\\U%08x' % cp
 
 
-def PrintableVersion(uchr):
-  if IsPrintable(uchr):
-    return uchr
-  return Escape(uchr)
-
-
-def NameThatChar(uchr):
-  """Return a printable name for the given character."""
-  name = CharName(uchr)
-  if name:
-    return name
-  cp = ord(uchr)
+def CodepointName(cp):
+  """Return a printable name for the given codepoint."""
   name = CHAR_NAME.get(cp, '')
   if name:
     return name
@@ -164,14 +185,12 @@ def NameThatChar(uchr):
       0xF0000 <= cp <= 0xFFFFD or
       0x100000 <= cp <= 0x10FFFD):
     return '<Private Use>'
-  elif 0xD800 <= cp <= 0xDBFF:
+  elif IsHighSurrogate(cp):
     return '<%sPrivate Use High Surrogate %X>' % (
-        'Non ' if cp <= 0xDB7F else '',
-        ((cp & 0x3FF) << 10) + 0x10000)
-  elif 0xDC00 <= cp <= 0xDFFF:
-    return '<Low Surrogate %03X>' % (cp & 0x3FF)
-  elif (0xFDD0 <= cp <= 0xFDEF or
-        (cp & 0xFFFF) >= 0xFFFE):
+        'Non ' if cp <= 0xDB7F else '', SurrogatePayload(cp))
+  elif IsLowSurrogate(cp):
+    return '<Low Surrogate %03X>' % SurrogatePayload(cp)
+  elif (0xFDD0 <= cp <= 0xFDEF or (cp & 0xFFFF) >= 0xFFFE):
     return '<Noncharacter>'
   return ''
 
@@ -287,11 +306,18 @@ def Dump(bstream):
   """Dump information about the binary stream suspected to be UTF-8."""
   for codepoint in CodepointStream(bstream, _STDERR):
     if 0 <= codepoint <= 0x10FFFF:
-      uchr = ('\\U%08X' % codepoint).encode('ascii').decode('unicode-escape')
+      char = CodepointToChar(codepoint)
+      if IsPrintable(char):
+        printable = char
+      else:
+        printable = EscapeCodepoint(codepoint)
+      name = CharName(char)
+      if not name:
+        name = CodepointName(codepoint)
       Write(_STDOUT, '%s\t%s\t%s\t%s\n',
-            PrintableVersion(uchr),
+            printable,
             ('%04X' % codepoint).rjust(6),
-            NameThatChar(uchr),
+            name,
             Decomposition(uchr))
     else:
       Write(_STDERR, '\t%X\t<Invalid Codepoint>\n', codepoint)

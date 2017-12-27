@@ -51,4 +51,4 @@ cd /usr/local/src/voice/training
 
 # Package the voice
 cd /usr/local/src/voice/data/festvox
-tar --absolute-names -zcvf built-voice.tar.gz /usr/local/src/merlin/egs/locale /usr/local/voice/training
+tar --absolute-names -zcvf built-voice.tar.gz /usr/local/src/merlin/egs/locale /usr/local/src/voice/training

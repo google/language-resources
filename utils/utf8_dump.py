@@ -1,6 +1,13 @@
 #! /usr/bin/env python
 
-"""Pretty print a byte stream suspected to be UTF-8 text."""
+"""Pretty print a byte stream suspected to be UTF-8 text.
+
+This should work with most versions of Python on Posix systems. In particular
+it works with CPython 2.6, CPython 2.7, and CPython 3.3+, on Linux and Darwin,
+with narrow (16 bits per character) and wide (21 or more bits per character)
+Unicode strings, and with the native unicodedata module or the icu module
+provided by PyICU.
+"""
 
 from __future__ import unicode_literals
 
@@ -92,10 +99,10 @@ CHAR_NAME = {
     0x19: 'END OF MEDIUM',
     0x1A: 'SUBSTITUTE',
     0x1B: 'ESCAPE',
-    0x1C: 'INFORMATION SEPARATOR FOUR',
-    0x1D: 'INFORMATION SEPARATOR THREE',
-    0x1E: 'INFORMATION SEPARATOR TWO',
-    0x1F: 'INFORMATION SEPARATOR ONE',
+    0x1C: 'INFORMATION SEPARATOR FOUR (FILE)',
+    0x1D: 'INFORMATION SEPARATOR THREE (GROUP)',
+    0x1E: 'INFORMATION SEPARATOR TWO (RECORD)',
+    0x1F: 'INFORMATION SEPARATOR ONE (UNIT)',
     0x7F: 'DELETE',
     # C1 controls
     0x80: 'XXX',
@@ -241,7 +248,7 @@ def FormatByteSequence(byte_sequence):
 
 
 def CodepointStream(bstream, writer):
-  """Decoder for Thompson and Pike's FSS-UTF encoding."""
+  """Decoder for Thompson and Pike's FSS-UTF encoding that yields codepoints."""
   for utf8_bytes in Utf8ChunkedStream(bstream):
     assert utf8_bytes
     byte = utf8_bytes[0]
@@ -270,23 +277,23 @@ def CodepointStream(bstream, writer):
       min_payload = 0x4000000
       utf8_length = 6
     elif 0b11111110 <= byte:
-      Write(writer, 'Error: Illegal start of UTF-8 sequence %s: '
+      Write(writer, 'Error: Invalid UTF-8 sequence %s: '
             'lead byte too large\n',
             FormatByteSequence(utf8_bytes))
       continue
     else:
       assert IsFollowByte(byte)
-      Write(writer, 'Error: Illegal start of UTF-8 sequence %s: '
+      Write(writer, 'Error: Invalid UTF-8 sequence %s: '
             'first byte is a follow byte\n',
             FormatByteSequence(utf8_bytes))
       continue
     if len(utf8_bytes) != utf8_length:
-      Write(writer, 'Error: Unexpected length of UTF-8 sequence %s: '
+      Write(writer, 'Error: Invalid UTF-8 sequence %s: '
             'expected %d bytes but found %d\n',
             FormatByteSequence(utf8_bytes), utf8_length, len(utf8_bytes))
       continue
     if utf8_length > 4:
-      Write(writer, 'Warning: Overly long UTF-8 sequence %s: '
+      Write(writer, 'Warning: Unexpected UTF-8 sequence %s: '
             'expected at most 4 bytes but found %d\n',
             FormatByteSequence(utf8_bytes), utf8_length)
     payload = lead_payload
@@ -296,25 +303,36 @@ def CodepointStream(bstream, writer):
     assert 0 <= payload <= 0x7FFFFFFF
     if payload < min_payload:
       Write(writer, 'Warning: Unexpected UTF-8 sequence %s: '
-            'overly long encoding of payload %X\n',
+            'overlong encoding of payload %X\n',
+            FormatByteSequence(utf8_bytes), payload)
+    if IsHighSurrogateCodepoint(payload) or IsLowSurrogateCodepoint(payload):
+      Write(writer, 'Warning: Unexpected UTF-8 sequence %s: '
+            'surrogate codepoint %X encoded as UTF-8\n',
             FormatByteSequence(utf8_bytes), payload)
     yield payload
   return
 
 
 def Dump(bstream):
-  """Dump information about the binary stream suspected to be UTF-8."""
+  """Dump information about a byte stream suspected to be UTF-8."""
   for codepoint in CodepointStream(bstream, _STDERR):
     if 0 <= codepoint <= 0x10FFFF:
-      char = CodepointToChar(codepoint)
-      if IsPrintable(char):
-        printable = char
-      else:
+      # First, work around platform/PyICU bugs in handling surrogates:
+      if (IsHighSurrogateCodepoint(codepoint) or
+          IsLowSurrogateCodepoint(codepoint)):
         printable = EscapeCodepoint(codepoint)
-      name = CharName(char)
-      if not name:
         name = CodepointName(codepoint)
-      deco = Decomposition(char)
+        deco = ''
+      else:
+        char = CodepointToChar(codepoint)
+        if IsPrintable(char):
+          printable = char
+        else:
+          printable = EscapeCodepoint(codepoint)
+        name = CharName(char)
+        if not name:
+          name = CodepointName(codepoint)
+        deco = Decomposition(char)
       Write(_STDOUT, '%s\t%s\t%s\t%s\n',
             printable, ('%04X' % codepoint).rjust(6), name, deco)
     else:
@@ -324,7 +342,7 @@ def Dump(bstream):
 
 def SanityCheck(writer):
   Write(writer, INFO)
-  if CharName('\U00010310') != 'OLD ITALIC LETTER PE':
+  if CharName('\U00010300') != 'OLD ITALIC LETTER A':
     Write(writer, 'Warning: Unicode data too old (< 3.1.0, 2001) or broken\n')
   return
 

@@ -2,6 +2,8 @@
 
 set -o nounset
 
+../docker-images/test-merlin/setup_test.sh
+
 PYTHON_EXECUTABLE="${PYTHON_EXECUTABLE:-$(which python)}"
 
 BAZEL_EXECUTABLE="${BAZEL_EXECUTABLE:-$(which bazel)}"

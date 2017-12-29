@@ -44,5 +44,4 @@ install:
   # - pip install PyICU
 
 script:
-  - setup_test.sh
-  # - travis/script.sh
+  - travis/script.sh

@@ -30,6 +30,7 @@ REMOTE_TEST_DIR="${CONTAINER_ID}:/usr/local/src/"
 
 # Copy required resources.
 docker cp ../merlin/entry.sh ${REMOTE_TEST_DIR}/entry.sh
+docker cp tests.sh ${REMOTE_TEST_DIR}/tests.sh
 
 for data in testdata/*.txt; do
   basename=$( basename ${data} )
@@ -39,3 +40,6 @@ done
 
 # Run merlin setup on the test data.
 docker exec ${CONTAINER_ID} sh /usr/local/src/entry.sh
+
+# Run tests.
+docker exec ${CONTAINER_ID} sh /usr/local/src/tests.sh

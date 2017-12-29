@@ -44,5 +44,5 @@ install:
   # - pip install PyICU
 
 script:
-  - docker-images/test-merlin/setup_test.sh
+  - setup_test.sh
   # - travis/script.sh

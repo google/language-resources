@@ -6,18 +6,9 @@ python:
   - "2.7"
   - "3.3"
 
-env:
-  global:
-    - ANDROID_SDK=3859397
-  matrix:
-    - BAZEL=0.4.5
-    - BAZEL=0.5.4
-    - BAZEL=0.8.1
-
 matrix:
   exclude:
     - python: "3.3"
-      env: BAZEL=0.4.5
 service:
   - docker
 
@@ -25,17 +16,8 @@ before_install:
   # Install necessary additional apt packages:
   - cd docker-images/test-merlin
   - docker build -t test-merlin .
-  # - sudo apt-get update -qq
-  # - sudo apt-get install -qq libicu-dev
-  # # Install Android SDK:
-  # - wget https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK}.zip
-  # - sha256sum -c third_party/sdk-tools-linux-${ANDROID_SDK}.zip.sha256
-  # - sudo mkdir -p -m 1777 /usr/local/android-sdk
-  # - unzip sdk-tools-linux-${ANDROID_SDK}.zip -d /usr/local/android-sdk
-  # - echo y | /usr/local/android-sdk/tools/bin/sdkmanager 'build-tools;26.0.3' 'platforms;android-24'
 
 install:
-  # Install Bazel:
   - echo `pwd`
   - bash setup_test.sh
   # - wget https://github.com/bazelbuild/bazel/releases/download/${BAZEL}/bazel-${BAZEL}-installer-linux-x86_64.sh
@@ -45,4 +27,4 @@ install:
   # - pip install PyICU
 
 script:
-  - `pwd`
+  - $(pwd)

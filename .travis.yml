@@ -36,6 +36,7 @@ before_install:
 
 install:
   # Install Bazel:
+  - echo `pwd`
   # - wget https://github.com/bazelbuild/bazel/releases/download/${BAZEL}/bazel-${BAZEL}-installer-linux-x86_64.sh
   # - sha256sum -c third_party/bazel-${BAZEL}-installer-linux-x86_64.sh.sha256
   # - bash bazel-${BAZEL}-installer-linux-x86_64.sh --user
@@ -43,5 +44,5 @@ install:
   # - pip install PyICU
 
 script:
-  - setup_test.sh
+  - docker-images/test-merlin/setup_test.sh
   # - travis/script.sh

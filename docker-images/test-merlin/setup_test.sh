@@ -14,7 +14,8 @@
 # Copyright 2017 Google, Inc.
 
 set -x
-set -eo pipefail
+set -o errexit
+set -o xtrace
 
 IMAGE_ID="$(docker images -q test-merlin)"
 CONTAINER_NAME=merlin-test-box

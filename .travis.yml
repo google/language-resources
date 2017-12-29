@@ -13,18 +13,11 @@ service:
   - docker
 
 before_install:
-  # Install necessary additional apt packages:
   - cd docker-images/test-merlin
   - docker build -t test-merlin .
 
 install:
   - echo `pwd`
-  - bash setup_test.sh
-  # - wget https://github.com/bazelbuild/bazel/releases/download/${BAZEL}/bazel-${BAZEL}-installer-linux-x86_64.sh
-  # - sha256sum -c third_party/bazel-${BAZEL}-installer-linux-x86_64.sh.sha256
-  # - bash bazel-${BAZEL}-installer-linux-x86_64.sh --user
-  # # Install necessary additional Python modules:
-  # - pip install PyICU
 
 script:
-  - $(pwd)
+  - bash setup_test.sh

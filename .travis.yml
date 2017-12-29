@@ -18,9 +18,13 @@ matrix:
   exclude:
     - python: "3.3"
       env: BAZEL=0.4.5
+service:
+  - docker
 
 before_install:
   # Install necessary additional apt packages:
+  - cd docker-images/test-merlin
+  - docker build -t test-merlin .
   - sudo apt-get update -qq
   - sudo apt-get install -qq libicu-dev
   # Install Android SDK:

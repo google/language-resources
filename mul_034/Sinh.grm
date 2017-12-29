@@ -104,12 +104,16 @@ codepoint = Optimize[
 | "joiner".c
 ];
 
+virama = "^".g;
+reph = "r^".g;
+
 grapheme = Optimize[
   Project[codepoint_to_grapheme, 'output']
 | "@".g
 | "ERROR".g
 | "joiner".g
-| "r^".g
+| virama
+| reph
 ];
 
 star = Optimize[(codepoint | grapheme)*];
@@ -180,7 +184,7 @@ standardize_zero_wdith = CDRewrite[
 ];
 
 # Change <ra virama ZWJ> to <r^> (repaya, i.e. reph).
-ins_reph = CDRewrite["ra virama joiner".c : "r^".g, "", "", star];
+ins_reph = CDRewrite["ra virama joiner".c : reph, "", "", star];
 
 # Change <virama ZWJ ya> to <virama joiner ya> (yansaya)
 # and    <virama ZWJ ra> to <virama joiner ra> (rakaransaya).
@@ -232,6 +236,8 @@ check_independent_vowels = CDRewrite[
   star
 ];
 
+keep_virama = CDRewrite["virama".c : virama, "", independent_vowel, star];
+
 # Replace codepoints with graphemes, replace inherent vowel "@" with "a",
 # and delete virama etc.
 to_graphemes_aux =
@@ -250,6 +256,7 @@ export CODEPOINTS_TO_GRAPHEMES = Optimize[
 @ del_inherent_vowel
 @ check_consonants
 @ check_independent_vowels
+@ keep_virama
 @ to_graphemes
 @ grapheme*
 ];

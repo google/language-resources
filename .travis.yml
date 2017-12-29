@@ -25,22 +25,23 @@ before_install:
   # Install necessary additional apt packages:
   - cd docker-images/test-merlin
   - docker build -t test-merlin .
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq libicu-dev
-  # Install Android SDK:
-  - wget https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK}.zip
-  - sha256sum -c third_party/sdk-tools-linux-${ANDROID_SDK}.zip.sha256
-  - sudo mkdir -p -m 1777 /usr/local/android-sdk
-  - unzip sdk-tools-linux-${ANDROID_SDK}.zip -d /usr/local/android-sdk
-  - echo y | /usr/local/android-sdk/tools/bin/sdkmanager 'build-tools;26.0.3' 'platforms;android-24'
+  # - sudo apt-get update -qq
+  # - sudo apt-get install -qq libicu-dev
+  # # Install Android SDK:
+  # - wget https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK}.zip
+  # - sha256sum -c third_party/sdk-tools-linux-${ANDROID_SDK}.zip.sha256
+  # - sudo mkdir -p -m 1777 /usr/local/android-sdk
+  # - unzip sdk-tools-linux-${ANDROID_SDK}.zip -d /usr/local/android-sdk
+  # - echo y | /usr/local/android-sdk/tools/bin/sdkmanager 'build-tools;26.0.3' 'platforms;android-24'
 
 install:
   # Install Bazel:
-  - wget https://github.com/bazelbuild/bazel/releases/download/${BAZEL}/bazel-${BAZEL}-installer-linux-x86_64.sh
-  - sha256sum -c third_party/bazel-${BAZEL}-installer-linux-x86_64.sh.sha256
-  - bash bazel-${BAZEL}-installer-linux-x86_64.sh --user
-  # Install necessary additional Python modules:
-  - pip install PyICU
+  # - wget https://github.com/bazelbuild/bazel/releases/download/${BAZEL}/bazel-${BAZEL}-installer-linux-x86_64.sh
+  # - sha256sum -c third_party/bazel-${BAZEL}-installer-linux-x86_64.sh.sha256
+  # - bash bazel-${BAZEL}-installer-linux-x86_64.sh --user
+  # # Install necessary additional Python modules:
+  # - pip install PyICU
 
 script:
-  - travis/script.sh
+  - setup_test.sh
+  # - travis/script.sh

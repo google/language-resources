@@ -16,7 +16,7 @@
 cd /usr/local/src/voice/data/festvox
 
 # Temp test sentence.
-echo "aaron" > /tmp/text.txt
+echo "අංකය" > /tmp/text.txt
 
 # Copied from https://github.com/googlei18n/language-resources/blob/abb8ca9746d67293d0b09bca71b2eb06261386e0/festival_utils/setup_merlin.sh#L123
 TMP_MERLIN_SCRIPTS_PATH="/tmp/merlin_scripts/"

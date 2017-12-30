@@ -77,8 +77,6 @@ DIGITS = {
 }
 
 EXCEPTIONS = {
-    0x09F2: 'rupee_mark',
-    0x09F3: 'rupee_sign',
     0x0BFA: 'number',
     0x109E: 'symbol_shan_one',
     0xA8EB: '-letter_u',
@@ -89,7 +87,17 @@ EXCEPTIONS = {
     0x111CB: 'vowel_modifier',
 }
 
-SINHALA_CHAR_NAMES = {
+ALIASES = {
+    # % NORMATIVE ALIASES / corrections from NameAliases
+    0x0CDE: 'KANNADA LETTER LLLA',
+    0x0E9D: 'LAO LETTER FO FON',
+    0x0E9F: 'LAO LETTER FO FAY',
+    0x0EA3: 'LAO LETTER RO',
+    0x0EA5: 'LAO LETTER LO',
+    0x0FD0: 'TIBETAN MARK BKA- SHOG GI MGO RGYAN',
+    # = informative aliases
+    0x09F2: 'taka',
+    0x09F3: 'Bangladeshi taka',
     0x0D82: 'sinhala sign anusvara',
     0x0D83: 'sinhala sign visarga',
     0x0D85: 'sinhala letter a',
@@ -241,8 +249,8 @@ EPSILON = '<epsilon>'
 
 def CharName(c):
   cp = ord(c)
-  if cp in SINHALA_CHAR_NAMES:
-    return SINHALA_CHAR_NAMES[cp].upper()
+  if cp in ALIASES:
+    return ALIASES[cp].upper()
   return icu.Char.charName(c)
 
 

@@ -68,8 +68,7 @@
 \u0E2E → \u0EAE ;  #            HO NOKHUK       ho hyan
 
 # Sign
-\u0E2F → \u0EAF ;  # little_    ellipsis        ELLIPSIS
-                   # section
+\u0E2F → \u0EAF ;  #            ellipsis        ELLIPSIS
 
 # Vowels
 \u0E30 → \u0EB0 ;  # visarga    A               A

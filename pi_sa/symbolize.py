@@ -78,19 +78,36 @@ def RemoveSuffix(string, suffix):
     return string
 
 
+class Symbolizer(object):
+
+  def __init__(self, paths):
+    self.codepoint2symbol = {}
+    self.script2stc = {}
+    for path in paths:
+      sym2cp, cp2sym = ReadSymbolTable(path, skip_epsilon=True)
+      for cp, sym in cp2sym.items():
+        assert self.codepoint2symbol.get(cp, sym) == sym, cp
+      self.codepoint2symbol.update(cp2sym)
+      script = RemoveSuffix(os.path.basename(path), '.syms').lower()
+      assert script not in self.script2stc
+      self.script2stc[script] = sym2cp
+    return
+
+  def IsScript(self, script):
+    return script.lower() in self.script2stc
+
+  def SymbolsToString(self, script, tokens):
+    sym2cp = self.script2stc[script.lower()]
+    return ''.join(ToScript(sym, sym2cp) for sym in tokens)
+
+  def StringToSymbols(self, line):
+    return ' '.join(FromScript(line, self.codepoint2symbol))
+
+
 def main(argv):
   paths = glob.glob(os.path.join(os.path.dirname(argv[0]), '*.syms'))
   paths.extend(argv[1:])
-  codepoint2symbol = {}
-  script2stc = {}
-  for path in paths:
-    sym2cp, cp2sym = ReadSymbolTable(path, skip_epsilon=True)
-    for cp, sym in cp2sym.items():
-      assert codepoint2symbol.get(cp, sym) == sym, cp
-    codepoint2symbol.update(cp2sym)
-    script = RemoveSuffix(os.path.basename(path), '.syms').lower()
-    assert script not in script2stc
-    script2stc[script] = sym2cp
+  symbolizer = Symbolizer(paths)
 
   for line in STDIN:
     line = line.rstrip('\n')
@@ -98,11 +115,10 @@ def main(argv):
     if not tokens:
       continue
     maybe_script = tokens[0].lower()
-    if maybe_script in script2stc:
-      sym2cp = script2stc[maybe_script]
-      result = ''.join(ToScript(sym, sym2cp) for sym in tokens[1:])
+    if symbolizer.IsScript(maybe_script):
+      result = symbolizer.SymbolsToString(maybe_script, tokens[1:])
     else:
-      result = ' '.join(FromScript(line, codepoint2symbol))
+      result = symbolizer.StringToSymbols(line)
     STDOUT.write('%s\n' % result)
     STDOUT.flush()
   return

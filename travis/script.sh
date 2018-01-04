@@ -1,15 +1,17 @@
 #! /bin/bash
 
-set -o nounset
 set -x
+
+if [ ${RUN_DOCKER} == true ]; then
+  ../docker-images/test-merlin/setup_test.sh
+fi
+
+set -o nounset
 
 PYTHON_EXECUTABLE="${PYTHON_EXECUTABLE:-$(which python)}"
 
 BAZEL_EXECUTABLE="${BAZEL_EXECUTABLE:-$(which bazel)}"
 
-if [ ${RUN_DOCKER} == true ]; then
-  ../docker-images/test-merlin/setup_test.sh
-fi
 
 
 # Not having a host configuration which is distinct from the target

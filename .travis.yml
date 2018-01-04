@@ -20,7 +20,7 @@ service:
 matrix:
   exclude:
     - python: "3.3"
-      env: BAZEL=0.4.5
+      env: BAZEL=0.4.5 RUN_DOCKER=true
 
 before_install:
   # Install necessary additional apt packages:

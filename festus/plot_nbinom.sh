@@ -23,7 +23,7 @@ echo "
   pdf('$PLOT')
   plot(h, type='h', col='blue', lwd=5)
   lines(h\$V1, dnbinom(h\$V1, size=$SIZE, mu=$MU), type='l', col='red', lwd=3)
-  readline()
+  dev.off()
 " |
   R --vanilla --quiet
 

@@ -20,7 +20,7 @@ service:
 matrix:
   exclude:
     - python: "3.3"
-      env: BAZEL=0.4.5 RUN_DOCKER=false
+      env: BAZEL=0.4.5
 
 before_install:
   # Install necessary additional apt packages:
@@ -40,7 +40,6 @@ install:
   - bash bazel-${BAZEL}-installer-linux-x86_64.sh --user
   # Install necessary additional Python modules:
   - pip install PyICU
-  - $([ $RUN_DOCKER  == true ] && cd docker-images/test-merlin && docker build -t test-merlin . && cd ../../)
 
 script:
   - env $RUN_DOCKER travis/script.sh

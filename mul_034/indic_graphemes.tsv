@@ -1,5 +1,5 @@
-@	@		# private-use: inherent vowel
-⬛	ERROR		# private-use: signals an error
+⒜	@		# inherent vowel
+⬛	ERROR		# signals an error
 |	non-joiner	non-joiner
 +	joiner	joiner
 ˘	^	virama

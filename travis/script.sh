@@ -12,6 +12,7 @@ if [ ${RUN_DOCKER} == true ]; then
   cd docker-images/test-merlin
   docker build -t test-merlin .
   cd ${current_dir}
+
 fi
 
 # Not having a host configuration which is distinct from the target

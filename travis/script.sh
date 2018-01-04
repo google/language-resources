@@ -1,10 +1,18 @@
 #! /bin/bash
 
 set -o nounset
+set -x
 
 PYTHON_EXECUTABLE="${PYTHON_EXECUTABLE:-$(which python)}"
 
 BAZEL_EXECUTABLE="${BAZEL_EXECUTABLE:-$(which bazel)}"
+
+if [ ${RUN_DOCKER} == true ]; then
+  current_dir=$(pwd)
+  cd docker-images/test-merlin
+  docker build -t test-merlin .
+  cd ${current_dir}
+fi
 
 # Not having a host configuration which is distinct from the target
 # configuration means that portions of tools (e.g. protobuf) that are shared

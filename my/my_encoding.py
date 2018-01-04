@@ -55,13 +55,12 @@ designed to be used for language detection. Examples (all in Unicode):
 
 from __future__ import unicode_literals
 
-import codecs
+import io
 import re
 import sys
 
-STDIN = codecs.getreader('utf-8')(sys.stdin)
-STDOUT = codecs.getwriter('utf-8')(sys.stdout)
-STDERR = codecs.getwriter('utf-8')(sys.stderr)
+STDIN = io.open(0, mode='rt', encoding='utf-8', closefd=False)
+STDOUT = io.open(1, mode='wt', encoding='utf-8', closefd=False)
 
 EITHER = re.compile(r'''
 ( [-()]
@@ -127,15 +126,6 @@ ZAWGYI = re.compile(r'''
 ''', re.VERBOSE)
 
 
-def GetlineUnbuffered(f=sys.stdin):
-  while True:
-    line = f.readline()
-    if not line:
-      break
-    yield line.decode('utf-8')
-  return
-
-
 def ClassifyCharset(text):
   if not EITHER.match(text):
     return 'Not Myanmar'
@@ -157,7 +147,7 @@ def ClassifyCharset(text):
 
 
 def main(unused_argv):
-  for line in GetlineUnbuffered():
+  for line in STDIN:
     line = line.rstrip('\n')
     label = ClassifyCharset(line)
     STDOUT.write('%s\t%s\n' % (label, line))

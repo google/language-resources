@@ -247,8 +247,21 @@ BRAHMIC_OTHER = [
 EPSILON = '<epsilon>'
 
 
+def CharToCodepoint(char):
+  if len(char) == 1:
+    return ord(char)
+  elif len(char) == 2:
+    hi = ord(char[0])
+    lo = ord(char[1])
+    if hi & 0xFC00 == 0xD800 and lo & 0xFC00 == 0xDC00:
+      hi &= 0x3FF
+      lo &= 0x3FF
+      return 0x10000 + (hi << 10) + lo
+  raise TypeError('CharToCodepoint() expected a character or surrogate pair')
+
+
 def CharName(c):
-  cp = ord(c)
+  cp = CharToCodepoint(c)
   if cp in ALIASES:
     return ALIASES[cp].upper()
   return icu.Char.charName(c)
@@ -269,7 +282,7 @@ def ScriptSymbols(script, include_script_code=False):
                     (len(script_chars), script_name, script.getShortName()))
   prefix = script_name.upper()
   for c in script_chars:
-    label = ord(c)
+    label = CharToCodepoint(c)
     if label in EXCEPTIONS:
       symbol_name = EXCEPTIONS[label]
     else:

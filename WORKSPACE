@@ -11,9 +11,9 @@ android_sdk_repository(
 
 # Protobuf
 
-protobuf_version = "3.5.0.1"
+protobuf_version = "3.5.1.1"
 
-protobuf_sha256 = "86be71e61c76575c60839452a4f265449a6ea51570d7983cb929f06ad294b5f5"
+protobuf_sha256 = "56b5d9e1ab2bf4f5736c4cfba9f4981fbc6976246721e7ded5602fbaee6d6869"
 
 # proto_library and related rules implicitly depend on @com_google_protobuf.
 http_archive(
@@ -34,16 +34,16 @@ http_archive(
 )
 
 new_http_archive(
-    name = "six_1_10_0",
+    name = "six_archive",
     build_file = "six.BUILD",
-    sha256 = "105f8d68616f8248e24bf0e9372ef04d3cc10104f1980f54d57b2ce73a5ad56a",
-    strip_prefix = "six-1.10.0",
-    urls = ["https://pypi.python.org/packages/source/s/six/six-1.10.0.tar.gz"],
+    sha256 = "70e8a77beed4562e7f14fe23a786b54f6296e34344c23bc42f07b15018ff98e9",
+    strip_prefix = "six-1.11.0",
+    urls = ["https://pypi.python.org/packages/16/d8/bc6316cf98419719bd59c91742194c111b6f2e85abac88e496adefaf7afe/six-1.11.0.tar.gz#md5=d12789f9baf7e9fb2524c0c64f1773f8"],
 )
 
 bind(
     name = "six",
-    actual = "@six_1_10_0//:six",
+    actual = "@six_archive//:six",
 )
 
 # Google fundamental libraries
@@ -90,7 +90,7 @@ http_archive(
     urls = ["https://github.com/abseil/abseil-cpp/archive/master.zip"],
 )
 
-# Time-zone framework, required by Abseil
+# Time-zone framework, required by abseil-cpp
 http_archive(
     name = "com_googlesource_code_cctz",
     strip_prefix = "cctz-master",

@@ -14,9 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import argparse
 import ConfigParser
-import re
 import sys
 
 if __name__ == "__main__":

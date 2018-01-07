@@ -101,15 +101,15 @@ class ILabelTermMapper {
 
   void Next() { aiter_->Next(); }
 
-  constexpr fst::MapSymbolsAction InputSymbolsAction() {
+  constexpr fst::MapSymbolsAction InputSymbolsAction() const {
     return fst::MAP_COPY_SYMBOLS;
   }
 
-  constexpr fst::MapSymbolsAction OutputSymbolsAction() {
+  constexpr fst::MapSymbolsAction OutputSymbolsAction() const {
     return fst::MAP_COPY_SYMBOLS;
   }
 
-  constexpr uint64 Properties(uint64 props) {
+  constexpr uint64 Properties(uint64 props) const {
     return (props & fst::kWeightInvariantProperties) | fst::kWeighted;
   }
 

@@ -1,12 +1,4 @@
 #! /bin/bash
-
-if [ ${RUN_DOCKER} == true ]; then
-  echo "Running docker tests"
-  docker-images/test-merlin/setup_test.sh
-else
-  echo "Not running docker tests"
-fi
-
 set -o nounset
 
 PYTHON_EXECUTABLE="${PYTHON_EXECUTABLE:-$(which python)}"

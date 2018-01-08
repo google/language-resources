@@ -42,5 +42,8 @@ install:
   - pip install PyICU
   - cd docker-images/test-merlin  && docker build -t test-merlin .  && cd ../../
 
+before_script:
+  - docker-images/test-merlin/setup_test.sh
+
 script:
   - env $RUN_DOCKER travis/script.sh

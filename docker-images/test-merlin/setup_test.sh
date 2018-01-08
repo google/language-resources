@@ -15,6 +15,7 @@
 
 set -x
 set -eo pipefail
+CUR_PATH=$(pwd)
 BASEDIR=$(dirname "$0")
 cd $BASEDIR
 
@@ -46,3 +47,5 @@ docker exec "${CONTAINER_ID}" sh /usr/local/src/entry.sh
 
 # Run tests.
 docker exec "${CONTAINER_ID}" sh /usr/local/src/tests.sh
+
+cd ${CUR_PATH}

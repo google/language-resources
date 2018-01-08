@@ -15,6 +15,8 @@
 
 set -x
 set -eo pipefail
+BASEDIR=$(dirname "$0")
+cd $BASEDIR
 
 IMAGE_ID="$(docker images -q test-merlin)"
 CONTAINER_NAME=merlin-test-box

@@ -40,7 +40,6 @@ install:
   - bash bazel-${BAZEL}-installer-linux-x86_64.sh --user
   # Install necessary additional Python modules:
   - pip install PyICU
-  - cd docker-images/test-merlin  && docker build -t test-merlin .  && cd ../../
 
 script:
   - travis/script.sh

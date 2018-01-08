@@ -1,6 +1,8 @@
 #! /bin/bash
 
 if [ ${RUN_DOCKER} == true ]; then
+  echo "Building docker image."
+  cd docker-images/test-merlin  && docker build -t test-merlin .  && cd ../../
   echo "Running docker tests."
   docker-images/test-merlin/setup_test.sh
 fi

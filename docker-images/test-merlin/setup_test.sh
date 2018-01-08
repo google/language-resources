@@ -15,6 +15,7 @@
 
 set -x
 set -eo pipefail
+
 CUR_PATH=$(pwd)
 BASEDIR=$(dirname "$0")
 cd $BASEDIR

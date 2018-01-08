@@ -43,7 +43,7 @@ install:
   - cd docker-images/test-merlin  && docker build -t test-merlin .  && cd ../../
 
 before_script:  
-  - cat travis/script.sh && env $RUN_DOCKER travis/script.sh
+  - cat travis/script.sh &&  docker-images/test-merlin/setup_test.sh
 
 script:
   - env $RUN_DOCKER travis/script.sh

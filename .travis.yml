@@ -23,6 +23,7 @@ before_install:
   # Install necessary additional apt packages:
   - sudo apt-get update -qq
   - sudo apt-get install -qq libicu-dev
+  - icuinfo || /bin/true
   # Install Android SDK:
   - wget https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK}.zip
   - sha256sum -c third_party/sdk-tools-linux-${ANDROID_SDK}.zip.sha256
@@ -36,7 +37,7 @@ install:
   - sha256sum -c third_party/bazel-${BAZEL}-installer-linux-x86_64.sh.sha256
   - bash bazel-${BAZEL}-installer-linux-x86_64.sh --user
   # Install necessary additional Python modules:
-  - pip install PyICU
+  - pip install -t travis/requirements.txt
 
 script:
   - travis/script.sh

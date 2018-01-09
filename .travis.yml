@@ -37,7 +37,7 @@ install:
   - sha256sum -c third_party/bazel-${BAZEL}-installer-linux-x86_64.sh.sha256
   - bash bazel-${BAZEL}-installer-linux-x86_64.sh --user
   # Install necessary additional Python modules:
-  - pip install -t travis/requirements.txt
+  - pip install -r travis/requirements.txt
 
 script:
   - travis/script.sh

@@ -21,9 +21,10 @@ matrix:
       env: BAZEL=0.4.5
 
 before_install:
-  # Install necessary additional apt packages:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq libicu-dev
+  # Install ICU (backported to Trusty; fix this when Xenial becomes available):
+  - sudo add-apt-repository ppa:suawekk/trusty-backports -y
+  - sudo apt-get update -q
+  - sudo apt-get install libicu-dev -y
   - icuinfo || /bin/true
   # Install Android SDK:
   - wget https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK}.zip

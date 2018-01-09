@@ -97,6 +97,27 @@ http_archive(
     urls = ["https://github.com/google/cctz/archive/master.zip"],
 )
 
+http_archive(
+    name = "com_google_absl_py",
+    strip_prefix = "abseil-py-master",
+    urls = ["https://github.com/abseil/abseil-py/archive/master.zip"],
+)
+
+bind(
+    name = "absl/app",
+    actual = "@com_google_absl_py//absl:app",
+)
+
+bind(
+    name = "absl/flags",
+    actual = "@com_google_absl_py//absl/flags",
+)
+
+bind(
+    name = "absl/logging",
+    actual = "@com_google_absl_py//absl/logging",
+)
+
 # OpenFst, OpenGrm NGram & Thrax
 
 new_git_repository(

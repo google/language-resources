@@ -17,11 +17,18 @@
 
 from __future__ import unicode_literals
 
-import argparse
 import os.path
 import sys
 
+from absl import app
+from absl import flags
 from mul_034 import script_util
+
+FLAGS = flags.FLAGS
+
+flags.DEFINE_bool('brahmic', False, 'Include all Brahmic scripts')
+flags.DEFINE_bool('india', False, 'Include the 9 official scripts of India')
+flags.DEFINE_bool('genrule', False, 'For use as a genrule tool')
 
 
 def BasenameWithoutSuffix(path):
@@ -33,29 +40,18 @@ def FilenamesForScripts(scripts):
   return [(s, '%s.syms' % s) for s in scripts]
 
 
-def main():
-  parser = argparse.ArgumentParser(
-      description='Writes OpenFST symbol tables for various scripts.')
-  parser.add_argument('--brahmic', action='store_const', const=True,
-                      help='Include all Brahmic scripts')
-  parser.add_argument('--india', action='store_const', const=True,
-                      help='Include the 9 official scripts of India')
-  parser.add_argument('--genrule', action='store_const', const=True,
-                      help='For use as a genrule tool')
-  parser.add_argument('script', nargs='*', help='script name or code')
-  args = parser.parse_args()
-
+def main(argv):
   scripts_paths = []
-  if args.genrule:
+  if FLAGS.genrule:
     scripts_paths.extend(
-        [(BasenameWithoutSuffix(path), path) for path in args.script])
+        [(BasenameWithoutSuffix(path), path) for path in argv[1:]])
   else:
-    if args.india or args.brahmic:
+    if FLAGS.india or FLAGS.brahmic:
       scripts_paths.extend(
           FilenamesForScripts(script_util.BRAHMIC_OFFICIAL_INDIA))
-    if args.brahmic:
+    if FLAGS.brahmic:
       scripts_paths.extend(FilenamesForScripts(script_util.BRAHMIC_OTHER))
-    scripts_paths.extend(FilenamesForScripts(args.script))
+    scripts_paths.extend(FilenamesForScripts(argv[1:]))
 
   success = True
   for s, path in scripts_paths:
@@ -73,4 +69,4 @@ def main():
 
 
 if __name__ == '__main__':
-  main()
+  app.run(main)

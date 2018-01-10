@@ -19,11 +19,11 @@
 
 from __future__ import unicode_literals
 
-import collections
 import io
+import unicodedata
 
 # IPA Handbook, Table 3
-IPA_LETTERS = {
+IPA_BASE_LETTERS = {
     'a': 'open front unrounded vowel',
     'ɐ': 'near-open central vowel',
     'ɑ': 'open back unrounded vowel',
@@ -120,7 +120,7 @@ IPA_LETTERS = {
     'v': 'voiced labiodental fricative',
     'ʋ': 'voiced labiodental approximant',
     'ʌ': 'open-mid back unrounded vowel',
-    'ⱱ': 'labiodental flap',
+    'ⱱ': 'voiced labiodental flap',
     'w': 'voiced bilabial velar approximant',  # was: labial
     # 'ʷ' see below
     'ʍ': 'voiceless bilabial velar fricative',  # was: labial
@@ -134,18 +134,18 @@ IPA_LETTERS = {
     'ʑ': 'voiced alveolo-palatal fricative',
     'ʐ': 'voiced retroflex fricative',
     'ʒ': 'voiced postalveolar fricative',
-    'ʔ': 'glottal plosive',
-    'ʡ': 'epiglottal plosive',
+    'ʔ': 'voiceless glottal plosive',     # added: voiceless as a default
+    'ʡ': 'voiceless epiglottal plosive',  # added: voiceless as a default
     'ʕ': 'voiced pharyngeal fricative',  # was: or approximant; cf. IPA chart
     # 'ˤ' see below
     'ʢ': 'voiced epiglottal fricative',  # was: or approximant; cf. IPA chart
     'ǀ': 'dental click',
-    'ǂ': 'alveolo-palatal click',  # was: palatoalveolar
+    'ǂ': 'palatal click',  # was: palatoalveolar
     'ǁ': 'alveolar lateral click',
-    'ǃ': 'postalveolar click',  # was: (post)alveolar; cf. 'ʗ' postalveolar
+    'ǃ': 'alveolar click',  # was: (post)alveolar
 }
 
-IPA_MODIFIERS = {
+IPA_MODIFIER_LETTERS = {
     'ᵊ': 'mid central vowel release',
     'ˠ': 'velarized',
     'ʰ': 'aspirated',
@@ -160,7 +160,7 @@ IPA_MODIFIERS = {
     'ʱ': 'breathy voiced aspirated',
     'ʼ': 'ejective',
     'ʽ': 'weakly aspirated',
-    'ˀ': "glo'alized",
+    'ˀ': "glottalized",
 }
 
 REPLACEMENTS = {
@@ -170,8 +170,10 @@ REPLACEMENTS = {
     'ȵ': 'ɲ',   # Curly-tail (alveolo-palatal) N: Left-tail (palatal) N
     'ɿ': 'z̩',   # "apical dental vowel"; [z̩], [ɨ], or [ɯ]
     'ʅ': 'ʐ̩',   # "apical retroflex vowel"; [ʐ̩], [ɨ˞], or [ɨ]
+    'ˁ': 'ˤ',   # REVERSED GLOTTAL STOP: SMALL REVERSED GLOTTAL STOP
     'γ': 'ɣ',   # Greek gamma: Latin gamma
     'φ': 'ɸ',   # Greek phi: Latin phi
+    'ϐ': 'β',   # Greek beta symbol: Greek beta
     'ϑ': 'θ',   # Greek theta symbol: Greek theta
     'ѳ': 'θ',   # Cyrillic fita: Greek theta
     'ᴣ': 'ʒ',   # LAT. LETTER SMALL CAPITAL EZH: LATIN SMALL LETTER EZH
@@ -252,105 +254,113 @@ REPLACEMENTS = {
     'ʖ': 'ǁ',   # Inverted glottal stop: Double pipe (LAT. LETTER LATERAL CLICK)
 }
 
-
 CONSONANT_FEATURE = {
-    'voiced': 'phonation',
-    'voiceless': 'phonation',
+    'voiced': 'Voicing',
+    'voiceless': 'Voicing',
 
-    'bilabial': 'place',
-    'labiodental': 'place',
-    'dental': 'place',
-    'dental|alveolar': 'place',
-    'alveolar': 'place',
-    'postalveolar': 'place',
-    'retroflex': 'place',
-    'alveolo-palatal': 'place',
-    'palatal': 'place',
-    'velar': 'place',
-    'uvular': 'place',
-    'pharyngeal': 'place',
-    'epiglottal': 'place',
-    'glottal': 'place',
+    'bilabial': 'Place',
+    'labiodental': 'Place',
+    'dental': 'Place',
+    'dental|alveolar': 'Place',
+    'alveolar': 'Place',
+    'postalveolar': 'Place',
+    'retroflex': 'Place',
+    'alveolo-palatal': 'Place',
+    'palatal': 'Place',
+    'velar': 'Place',
+    'uvular': 'Place',
+    'pharyngeal': 'Place',
+    'epiglottal': 'Place',
+    'glottal': 'Place',
 
-    'lateral': 'centrality',
+    'lateral': 'Centrality',
 
-    'approximant': 'manner',
-    'trill': 'manner',
-    'flap': 'manner',
-    'fricative': 'manner',
-    'nasal': 'manner',
-    'plosive': 'manner',
-    'implosive': 'manner',
-    'click': 'manner',
+    'approximant': 'Manner',
+    'trill': 'Manner',
+    'flap': 'Manner',
+    'fricative': 'Manner',
+    'nasal': 'Manner',
+    'plosive': 'Manner',
+    'implosive': 'Manner',
+    'click': 'Manner',
 }
 
 VOWEL_FEATURE = {
-    'close': 'height',
-    'near-close': 'height',
-    'close-mid': 'height',
-    'mid': 'height',
-    'open-mid': 'height',
-    'near-open': 'height',
-    'open': 'height',
+    'close': 'Height',
+    'near-close': 'Height',
+    'close-mid': 'Height',
+    'mid': 'Height',
+    'open-mid': 'Height',
+    'near-open': 'Height',
+    'open': 'Height',
 
-    'front': 'backness',
-    'near-front': 'backness',
-    'central': 'backness',
-    'near-back': 'backness',
-    'back': 'backness',
+    'front': 'Backness',
+    'near-front': 'Backness',
+    'central': 'Backness',
+    'near-back': 'Backness',
+    'back': 'Backness',
 
-    'unrounded': 'roundedness',
-    'rounded': 'roundedness',
+    'unrounded': 'Roundedness',
+    'rounded': 'Roundedness',
 }
 
 
 def CheckDescription(ipa, description, writer):
   """Check that the description of the given IPA symbol is well-formed."""
-  result = collections.defaultdict(lambda: [])
-  features = description.split()
-  assert features
-  if features[-1] == 'vowel':
-    for f in features[:-1]:
-      if f not in VOWEL_FEATURE:
-        writer.write('Unknown vowel feature %s in [%s] %s\n' %
-                     (f, ipa, description))
+  result = {}
+  terms = description.split()
+  assert terms
+  if terms[-1] == 'vowel':
+    assert not any(t in CONSONANT_FEATURE for t in terms)
+    for term in terms[:-1]:
+      if term not in VOWEL_FEATURE:
+        writer.write('Unknown term %s describing vowel [%s] %s\n' %
+                     (term, ipa, description))
       else:
-        feature_name = VOWEL_FEATURE[f]
-        result[feature_name].append(f)
-    assert not any(f in CONSONANT_FEATURE for f in features)
+        feature_name = VOWEL_FEATURE[term]
+        assert feature_name not in result
+        result[feature_name] = term
   else:
-    for f in features:
-      if f not in CONSONANT_FEATURE:
-        writer.write('Unknown consonant feature %s in [%s] %s\n' %
-                     (f, ipa, description))
+    assert not any(t in VOWEL_FEATURE for t in terms)
+    for term in terms:
+      if term not in CONSONANT_FEATURE:
+        writer.write('Unknown term %s describing consonant [%s] %s\n' %
+                     (term, ipa, description))
       else:
-        feature_name = CONSONANT_FEATURE[f]
-        result[feature_name].append(f)
-    assert not any(f in VOWEL_FEATURE for f in features)
+        feature_name = CONSONANT_FEATURE[term]
+        if feature_name == 'Place':
+          places = result.get(feature_name, [])
+          places.append(term)
+          result[feature_name] = places
+        else:
+          assert feature_name not in result
+          result[feature_name] = term
+    places = result.get('Place', [])
+    assert 1 <= len(places) <= 2
   return result
 
 
-def CheckDescriptions(writer):
-  for ipa, description in IPA_LETTERS.items():
-    features = CheckDescription(ipa, description, writer)
-    for feature_name, values in features.items():
-      assert values
-      if len(values) > 1:
-        assert feature_name == 'place'
-        assert len(values) == 2
+def IntegrityChecks(writer):
+  for ipa, description in IPA_BASE_LETTERS.items():
+    assert len(ipa) == 1
+    assert unicodedata.category(ipa) in ('Ll', 'Lo')
+    CheckDescription(ipa, description, writer)
+  for ipa in IPA_MODIFIER_LETTERS:
+    assert len(ipa) == 1
+    assert unicodedata.category(ipa) == 'Lm'
   return
 
 
 def PrintCharTable(writer):
   """Prints a table of known phonetic symbols."""
-  letters = frozenset(IPA_LETTERS)
-  modifiers = frozenset(IPA_MODIFIERS)
+  letters = frozenset(IPA_BASE_LETTERS)
+  modifiers = frozenset(IPA_MODIFIER_LETTERS)
   replacements = frozenset(REPLACEMENTS)
   assert not letters & modifiers
   assert not letters & replacements
   assert not modifiers & replacements
-  ipa = IPA_LETTERS.copy()
-  ipa.update(IPA_MODIFIERS)
+  ipa = IPA_BASE_LETTERS.copy()
+  ipa.update(IPA_MODIFIER_LETTERS)
   for char in sorted(letters | modifiers | replacements):
     if char in replacements:
       writer.write('%04X\t%s\t→ %s\n' % (ord(char), char, REPLACEMENTS[char]))
@@ -361,5 +371,5 @@ def PrintCharTable(writer):
 
 if __name__ == '__main__':
   stdout = io.open(1, mode='wt', encoding='utf-8', closefd=False)
-  CheckDescriptions(stdout)
+  IntegrityChecks(stdout)
   PrintCharTable(stdout)

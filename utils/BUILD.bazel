@@ -24,6 +24,14 @@ py_binary(
     srcs_version = "PY2AND3",
 )
 
+py_test(
+    name = "python_version_test",
+    timeout = "short",
+    main = "python_version.py",
+    srcs = ["python_version.py"],
+    srcs_version = "PY2AND3",
+)
+
 py_binary(
     name = "uniquely_decodable",
     srcs = ["uniquely_decodable.py"],

@@ -5,7 +5,7 @@
 ˘	^	virama
 a	a	a
 ā	aa	aa
-æ	ae	ae
+æ	ae	ae candra_a
 ǣ	aee	aae
 i	i	i
 ī	ii	ii
@@ -78,7 +78,7 @@ y	y	ya
 ỹ	~y		# Beng:ZWJ+virama+ya Sinh:virama+ZWJ+ya
 ẏ	;y	yya
 r	r	ra ra_with_middle_diagonal
-ʳ	r^	dot_reph
+ʳ	r^	reph
 r̆	^r		# Deva:rra+virama
 l	l	la
 lⸯ	l^	chillu_l

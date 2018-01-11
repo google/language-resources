@@ -77,7 +77,10 @@ DIGITS = {
 }
 
 EXCEPTIONS = {
+    0x09F2: 'taka',
+    0x09F3: 'bangladeshi_taka',
     0x0BFA: 'number',
+    0x0D4E: 'reph',
     0x109E: 'symbol_shan_one',
     0xA8EB: '-letter_u',
     0x1107F: 'number_joiner',
@@ -95,9 +98,7 @@ ALIASES = {
     0x0EA3: 'LAO LETTER RO',
     0x0EA5: 'LAO LETTER LO',
     0x0FD0: 'TIBETAN MARK BKA- SHOG GI MGO RGYAN',
-    # = informative aliases
-    0x09F2: 'taka',
-    0x09F3: 'Bangladeshi taka',
+    # = informative aliases / Sanskritic names for Sinhala characters
     0x0D82: 'sinhala sign anusvara',
     0x0D83: 'sinhala sign visarga',
     0x0D85: 'sinhala letter a',

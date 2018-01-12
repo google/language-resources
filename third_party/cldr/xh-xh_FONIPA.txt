@@ -36,7 +36,7 @@ gr → ɣ;
 gx → ɡ͡ǁ;
 hl → ɬ;
 kh → kʰ;
-kr → k͡x;
+kr → k͡xʼ;
 mh } [^l] → mʰ;  # <mhl> denotes /mɬ/ instead
 nh → nʰ;
 ny → ɲ;

@@ -32,7 +32,7 @@ gx → ɡ͡ǁ;
 hh → ɦ;  # To investigate: /ɦ/ and /h/ may be switched in the NCHLT dictionary.
 hl → ɬ;
 kh → kʰ;
-kl → k͡ɬ;
+kl → k͡ɬʼ;
 ny → ɲ;
 ph → pʰ;
 qh → ǃʰ;

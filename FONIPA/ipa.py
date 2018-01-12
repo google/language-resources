@@ -145,27 +145,67 @@ IPA_BASE_LETTERS = {
     'ǃ': 'alveolar click',  # was: (post)alveolar
 }
 
+# Modifier letters and symbols from the IPA Handbook
 IPA_MODIFIER_LETTERS = {
-    'ᵊ': 'mid central vowel release',
-    'ˠ': 'velarized',
-    'ʰ': 'aspirated',
-    'ʲ': 'palatalized',
-    'ˡ': 'lateral release',
-    'ⁿ': 'nasal release',
-    'ᶿ': 'voiceless dental fricative release',
-    'ʷ': 'labialized',
-    'ˣ': 'voiceless velar fricative release',
-    'ˤ': 'pharyngealized',
-
-    'ʱ': 'breathy voiced aspirated',
+    # 400-series from Table 4
     'ʼ': 'ejective',
-    'ʽ': 'weakly aspirated',
-    'ˀ': "glottalized",
+    'ʰ': 'aspirated',
+    '˞': 'rhoticity',
+    'ʷ': 'labialized',
+    'ʲ': 'palatalized',
+    'ˠ': 'velarized',
+    'ˤ': 'pharyngealized',
+    'ⁿ': 'nasal release',
+    'ˡ': 'lateral release',
+    '˔': 'raised',
+    '˕': 'lowered',
+
+    # 200-series from Table 3
+    'ᵊ': 'mid central vowel release',
+    'ᶿ': 'voiceless dental fricative release',
+    'ˣ': 'voiceless velar fricative release',
+
+    # Widely used, but not mentioned in the IPA Handbook
+    'ʱ': 'breathy voiced aspirated',
+    'ˀ': 'glottalized',
+    'ᵐ': 'bilabial prenasalization',
+    'ᵑ': 'velar prenasalization',
+}
+
+# Combining marks from the IPA Handbook, Table 4
+IPA_COMBINING_MARKS = {
+    '\u0325': 'voiceless',
+    '\u030A': 'voiceless',
+    '\u032C': 'voiced',
+    '\u0339': 'more rounded',
+    '\u031C': 'less rounded',
+    '\u031F': 'advanced',
+    '\u0320': 'retracted',
+    '\u0308': 'centralized',
+    '\u0338': 'mid-centralized',
+    '\u0329': 'syllabic',
+    '\u032F': 'non-syllabic',
+    '\u0324': 'breathy voiced',
+    '\u0330': 'creaky voiced',
+    '\u033C': 'linguolabial',
+    '\u032A': 'dental',
+    '\u033A': 'apical',
+    '\u033B': 'laminal',
+    '\u0303': 'nasalized',
+    '\u031A': 'no audible release',
+    '\u0334': 'velarized or pharyngealized',
+    '\u031D': 'raised',
+    '\u031E': 'lowered',
+    '\u0318': 'advanced tongue root',
+    '\u0319': 'retracted tongue root',
+    '\u0361': 'affricate or double articulation',
 }
 
 REPLACEMENTS = {
     # Compatibility
     '!': 'ǃ',   # EXCLAMATION MARK: LATIN LETTER RETROFLEX CLICK
+    "'": 'ʼ',   # APOSTROPHE: MODIFIER LETTER APOSTROPHE
+    ':': 'ː',   # COLON: MODIFIER LETTER TRIANGULAR COLON
     'ƾ': 'ts',  # LATIN LETTER INVERTED GLOTTAL STOP WITH STROKE: t + s
     'ȵ': 'ɲ',   # Curly-tail (alveolo-palatal) N: Left-tail (palatal) N
     'ɿ': 'z̩',   # "apical dental vowel"; [z̩], [ɨ], or [ɯ]
@@ -181,6 +221,7 @@ REPLACEMENTS = {
     'ꞎ': 'ɭ̊˔',  # "voiceless lateral retroflex fricative"
     'ꞵ': 'β',   # Latin beta: Greek beta
     'ꭓ': 'χ',   # Latin chi: Greek chi
+    'ⱴ': 'ⱱ',   # V WITH CURL: V WITH RIGHT HOOK
 
     # Latin letters with palatal hook
     'ᶀ': 'bʲ',
@@ -216,7 +257,7 @@ REPLACEMENTS = {
     'ᶙ': 'u˞',
     'ᶚ': 'ʐ',
 
-    # Deprecated symbols discussed in the IPA Handbook
+    # Deprecated letters discussed in the IPA Handbook
     'ƈ': 'ʄ̊',   # Hooktop C: Hooktop barred dotless J + Over-ring
     'č': 'tʃ',  # C wedge (not IPA usage): t + esh
     'ʗ': 'ǃ',   # Stretched C: Exclamation point (LATIN LETTER RETROFLEX CLICK)
@@ -232,7 +273,7 @@ REPLACEMENTS = {
     'ǰ': 'dʒ',  # J wedge (not IPA usage): d + ezh
     'ƙ': 'ɠ̊',   # Hooktop K: Hooktop G + Over-ring
     'ʞ': None,  # Turned K (withdrawn 1979)
-    'λ': 'ɮ',   # Greek lambda: L-Ezh ligature
+    'λ': 'ɬ',   # Greek lambda: Belted L
     'ƛ': 'tɬ',  # Barred lambda: t + Belted L
     'ƞ': 'n̩',   # Right-leg N: n + syllabicity mark
     'ɷ': 'ʊ',   # Closed omega: Upsilon
@@ -249,9 +290,21 @@ REPLACEMENTS = {
     'ʨ': 'tɕ',  # T-Curly-tail-C ligature: t + curly-tail c
     'ʇ': 'ǀ',   # Turned T: Pipe (LATIN LETTER DENTAL CLICK)
     'ž': 'ʒ',   # Z wedge (not IPA usage): Ezh
-    'ʓ': 'ʑ',  # Curly-taile ezh (withdrawn 1989): Curly-tail z
+    'ʓ': 'ʑ',   # Curly-taile ezh (withdrawn 1989): Curly-tail z
     'ƻ': 'dz',  # Barred two (withdrawn 1976)
     'ʖ': 'ǁ',   # Inverted glottal stop: Double pipe (LAT. LETTER LATERAL CLICK)
+
+    # Deprecated modifiers and combining marks discussed in the IPA Handbook
+    '\u0322': '˞',       # Subscript right hook: Right hook
+    ',': None,           # Comma (not IPA usage)
+    'ʻ': None,           # Reversed apostrophe (withdrawn 1979)
+    '\u0307': None,      # Over-dot (withdrawn 1979)
+    '˗': '\u0320',       # Minus sign
+    '˖': '\u031F',       # Plus sign
+    'ʸ': None,           # Superscript Y (not IPA usage)
+    '\u0323': '\u031D',  # Under-dot: Raising sign
+    '\u0321': 'ʲ',       # Subscript left hook: Superscript J
+    '\u032B': 'ʷ',       # Subscript W: Superscript W
 }
 
 CONSONANT_FEATURE = {
@@ -341,13 +394,17 @@ def CheckDescription(ipa, description, writer):
 
 
 def IntegrityChecks(writer):
+  """Perform basic data integrity checks on the embedded tables."""
   for ipa, description in IPA_BASE_LETTERS.items():
     assert len(ipa) == 1
     assert unicodedata.category(ipa) in ('Ll', 'Lo')
     CheckDescription(ipa, description, writer)
   for ipa in IPA_MODIFIER_LETTERS:
     assert len(ipa) == 1
-    assert unicodedata.category(ipa) == 'Lm'
+    assert unicodedata.category(ipa) in ('Lm', 'Sk')
+  for ipa in IPA_COMBINING_MARKS:
+    assert len(ipa) == 1
+    assert unicodedata.category(ipa) == 'Mn'
   return
 
 

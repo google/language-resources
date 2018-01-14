@@ -6,8 +6,7 @@
 set -o errexit
 set -o nounset
 
-for py in /usr/bin/python /usr/bin/python2.6 /usr/bin/python2.7 \
-          python python2 python2.6 python2.7 python3; do
+for py in /usr/bin/python{,2.6,2.7} python{,2,2.6,2.7,3,3.{3..7}}; do
   if which $py; then
     py_binary="$(which $py)"
     for e in '' '-' 'LC_CTYPE=C' 'PYTHONIOENCODING=ASCII' \

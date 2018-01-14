@@ -12,6 +12,7 @@ env:
     - ANDROID_SDK=3859397
 
 matrix:
+  fast_finish: true
   include:
     - os: linux
       python: 2.7
@@ -24,8 +25,6 @@ matrix:
     - os: osx
       env: PY=python3
   allow_failures:
-    - os: linux
-      python: nightly
     - os: osx
       env: PY=/usr/bin/python2.7
     - os: osx

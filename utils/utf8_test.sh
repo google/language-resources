@@ -13,6 +13,7 @@ for py in /usr/bin/python{,2.6,2.7} python{,2,2.6,2.7,3,3.{3..7}}; do
   py_binary="$(which $py)"
   if [ -n "$py_binary" ] && "$py_binary" -c pass; then
     echo "$py_binary"
+    "$py_binary" --version
     for e in '' '-' 'LC_CTYPE=C' 'PYTHONIOENCODING=ASCII' \
       'PYTHONIOENCODING=Latin-1'; do
       env $e "$py_binary" -c 'import sys; print(sys.stdout.encoding)'

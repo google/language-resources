@@ -26,4 +26,3 @@ if [ -z "$ANDROID_HOME" ]; then
 fi
 
 echo ANDROID_HOME="$ANDROID_HOME"
-"$ANDROID_HOME/tools/bin/sdkmanager" --version

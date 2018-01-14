@@ -4,9 +4,7 @@ workspace(name = "language_resources")
 
 android_sdk_repository(
     name = "androidsdk",
-    api_level = 24,
-    build_tools_version = "26.0.3",
-    path = "/usr/local/android-sdk",
+    # Uses the SDK referenced by the environment variable ANDROID_HOME.
 )
 
 # Protobuf

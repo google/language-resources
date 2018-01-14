@@ -1,0 +1,3 @@
+brew "bazel"
+brew "icu4c", link: true
+brew "python3"

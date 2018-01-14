@@ -3,42 +3,45 @@ dist: trusty
 group: travis_latest
 language: python
 
-python:
-  - "2.7"
-  - "3.3"
+branches:
+  except:
+    - docker-integration
+    - docker-test
 
 env:
   global:
     - ANDROID_SDK=3859397
-  matrix:
-    - BAZEL=0.4.5
-    - BAZEL=0.5.4
-    - BAZEL=0.8.1
 
 matrix:
-  exclude:
-    - python: "3.3"
-      env: BAZEL=0.4.5
+  include:
+    - os: linux
+      python: 2.7
+    - os: linux
+      python: 3.3
+    - os: linux
+      python: nightly
+    - os: osx
+      language: generic
+      env: PYTHON_EXECUTABLE=/usr/bin/python2.7
+    - os: osx
+      language: generic
+      env: PYTHON_EXECUTABLE=/usr/local/bin/python3
+  allow_failures:
+    - os: linux
+      python: nightly
+    - os: osx
+      language: generic
+      env: PYTHON_EXECUTABLE=/usr/bin/python2.7
+    - os: osx
+      language: generic
+      env: PYTHON_EXECUTABLE=/usr/local/bin/python3
 
 before_install:
-  # Install ICU (backported to Trusty; fix this when Xenial becomes available):
-  - sudo add-apt-repository ppa:suawekk/trusty-backports -y
-  - sudo apt-get update -q
-  - sudo apt-get install libicu-dev -y
-  - icuinfo || /bin/true
-  # Install Android SDK:
-  - wget https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK}.zip
-  - sha256sum -c third_party/sdk-tools-linux-${ANDROID_SDK}.zip.sha256
-  - sudo mkdir -p -m 1777 /usr/local/android-sdk
-  - unzip sdk-tools-linux-${ANDROID_SDK}.zip -d /usr/local/android-sdk
-  - echo y | /usr/local/android-sdk/tools/bin/sdkmanager 'build-tools;26.0.3' 'platforms;android-24'
+  - . travis/before_install.sh
 
 install:
-  # Install Bazel:
-  - wget https://github.com/bazelbuild/bazel/releases/download/${BAZEL}/bazel-${BAZEL}-installer-linux-x86_64.sh
-  - sha256sum -c third_party/bazel-${BAZEL}-installer-linux-x86_64.sh.sha256
-  - bash bazel-${BAZEL}-installer-linux-x86_64.sh --user
-  # Install necessary additional Python modules:
+  - yes | "$ANDROID_HOME/tools/bin/sdkmanager" 'build-tools;26.0.3' 'platforms;android-24'
+  - pip --version
   - pip install -r travis/requirements.txt
 
 script:

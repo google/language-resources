@@ -16,6 +16,7 @@ set -o nounset
 # continuous integration build, this saves a little bit of total build time.
 STRATEGY='--nodistinct_host_configuration'
 STRATEGY+=' --test_timeout_filters=-long'
+STRATEGY+=' --jobs=2'
 
 SHOW='--nocache_test_results --test_output=all'
 
@@ -29,4 +30,5 @@ set -o xtrace
 "$BAZEL_EXECUTABLE" info release
 "$BAZEL_EXECUTABLE" run   $STRATEGY       //utils:python_version
 "$BAZEL_EXECUTABLE" test  $STRATEGY $SHOW //utils:python_version_test
-"$BAZEL_EXECUTABLE" test  $STRATEGY       //...
+"$BAZEL_EXECUTABLE" test  $STRATEGY $SHOW //utils:utf8_test
+#"$BAZEL_EXECUTABLE" test  $STRATEGY       //...

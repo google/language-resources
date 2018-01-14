@@ -2,6 +2,8 @@
 
 """Print Python interpreter path and version."""
 
+from __future__ import unicode_literals
+
 import sys
 
 sys.stdout.write('%s\n' % sys.executable)
@@ -16,11 +18,13 @@ else:
 
 try:
   import icu  # pylint: disable=g-import-not-at-top
-  sys.stdout.write('Unicode %s (ICU %s) via module icu\n' %
-                   (icu.UNICODE_VERSION, icu.ICU_VERSION))
+  sys.stdout.write('Unicode %s (ICU %s) via module icu %s\n' %
+                   (icu.UNICODE_VERSION, icu.ICU_VERSION, icu.VERSION))
+  assert icu.Char.charName('\U00010300') == 'OLD ITALIC LETTER A'
 except ImportError:
-  import unicodedata  # pylint: disable=g-import-not-at-top
-  sys.stdout.write('Unicode %s via module unicodedata\n' %
-                   unicodedata.unidata_version)
+  pass
 
-sys.stdout.flush()
+import unicodedata  # pylint: disable=g-import-not-at-top
+sys.stdout.write('Unicode %s via module unicodedata\n' %
+                 unicodedata.unidata_version)
+assert unicodedata.name('\U00010300') == 'OLD ITALIC LETTER A'

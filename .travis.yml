@@ -22,24 +22,25 @@ matrix:
       python: nightly
     - os: osx
       language: generic
-      env: PYTHON_EXECUTABLE=/usr/bin/python2.7
+      env: PY=/usr/bin/python2.7
     - os: osx
       language: generic
-      env: PYTHON_EXECUTABLE=/usr/local/bin/python3
+      env: PY=python3
   allow_failures:
     - os: linux
       python: nightly
     - os: osx
       language: generic
-      env: PYTHON_EXECUTABLE=/usr/bin/python2.7
+      env: PY=/usr/bin/python2.7
     - os: osx
       language: generic
-      env: PYTHON_EXECUTABLE=/usr/local/bin/python3
+      env: PY=python3
 
 before_install:
   - . travis/before_install.sh
 
 install:
+  - "$ANDROID_HOME/tools/bin/sdkmanager" --version
   - yes | "$ANDROID_HOME/tools/bin/sdkmanager" 'build-tools;26.0.3' 'platforms;android-24'
   - pip --version
   - pip install -r travis/requirements.txt

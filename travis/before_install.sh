@@ -3,7 +3,7 @@ if [ "$TRAVIS_OS_NAME" = osx -o "$(uname)" = Darwin ]; then
   brew update
   brew bundle --file=travis/Brewfile
   if [ -z "$VIRTUAL_ENV" ]; then
-    virtualenv -p "${PYTHON_EXECUTABLE:-python}" venv
+    virtualenv -p "$(which "$PY")" venv
     . venv/bin/activate
   fi
 else
@@ -22,7 +22,7 @@ if [ -z "$ANDROID_HOME" ]; then
   export ANDROID_HOME="$HOME/Android/Sdk"
   mkdir -p "$ANDROID_HOME"
   curl "https://dl.google.com/android/repository/sdk-tools-${MY_OS}-${ANDROID_SDK}.zip" > sdk-tools.zip
-  unzip sdk-tools.zip -d "$ANDROID_HOME"
+  unzip -q sdk-tools.zip -d "$ANDROID_HOME"
 fi
+
 echo ANDROID_HOME="$ANDROID_HOME"
-yes | "$ANDROID_HOME/tools/bin/sdkmanager" 'build-tools;26.0.3' 'platforms;android-24'

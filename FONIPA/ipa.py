@@ -262,9 +262,26 @@ COMBINING_MARKS = {
 # decomposes its argument into NFD form, then combines all occurrences of 'c'
 # and 0327 within the same grapheme cluster into 'ç'.
 
-C_CEDILLA = re.compile(r'c([\u0300-\u036F\u1AB0-\u1AFF\u1DC0-\u1DFF]*)\u0327')
+class Rewrite(object):
 
-SCHWA_HOOK = re.compile(r'ɚ([\u0300-\u036F\u1AB0-\u1AFF\u1DC0-\u1DFF]*)')
+  def __init__(self, pattern, replacement):
+    self.pattern = pattern
+    self.replacement = replacement
+    return
+
+  def rewrite(self, string):
+    return re.sub(self.pattern, self.replacement, string)
+
+
+C_CEDILLA = Rewrite(
+    re.compile(r'c([\u0300-\u036F\u1AB0-\u1AFF\u1DC0-\u1DFF]*)\u0327'),
+    r'ç\1')
+
+NONRHOTIC = {'ɚ': 'ə', 'ɝ': 'ɜ'}
+
+RHOTIC_VOWEL = Rewrite(
+    re.compile(r'([ɚɝ])([\u0300-\u036F\u1AB0-\u1AFF\u1DC0-\u1DFF]*)'),
+    lambda m: '%s%s˞' % (NONRHOTIC.get(m.group(1)), m.group(2)))
 
 
 def Decompose(string):
@@ -299,11 +316,13 @@ def Decompose(string):
   True
   >>> Decompose('\u025A\u0301') == '\u0259\u0301\u02DE'
   True
+  >>> Decompose('\u025D\u0303\u0330') == '\u025C\u0330\u0303\u02DE'
+  True
   """
-  string = SCHWA_HOOK.sub(r'ə\1˞', string)
+  string = RHOTIC_VOWEL.rewrite(string)
   string = unicodedata.normalize('NFD', string)
   string = string.replace('ɡ', 'g')
-  string = C_CEDILLA.sub(r'ç\1', string)
+  string = C_CEDILLA.rewrite(string)
   return string
 
 
@@ -515,8 +534,13 @@ def IntegrityChecks():
     assert len(char) == 1
     assert unicodedata.category(char) in ('Ll', 'Lo')
     CheckDescription(char, description)
+  ancient = unicodedata.unidata_version.split('.')[:2] <= ['5', '1']
   for char in MODIFIER_LETTERS:
     assert len(char) == 1
+    if ancient and char == 'ⁿ':
+      # Unicode 5.1 has a category inconsistency for certain superscript
+      # letters, categorizing them as Ll instead of Lm.
+      continue
     assert unicodedata.category(char) in ('Lm', 'Sk', 'Sm', 'So', 'Pc', 'Po')
   for char in COMBINING_MARKS:
     assert len(char) == 1

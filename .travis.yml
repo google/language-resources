@@ -21,13 +21,17 @@ matrix:
     - os: linux
       python: nightly
     - os: osx
+      language: cpp
       env: PY=/usr/bin/python2.7
     - os: osx
+      language: cpp
       env: PY=python3
   allow_failures:
     - os: osx
+      language: cpp
       env: PY=/usr/bin/python2.7
     - os: osx
+      language: cpp
       env: PY=python3
 
 before_install:

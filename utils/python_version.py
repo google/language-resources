@@ -1,20 +1,21 @@
 #! /usr/bin/env python
 
-"""Print Python interpreter path and version."""
+"""Print Python interpreter path, version and Unicode-related diagnostics."""
 
 from __future__ import unicode_literals
 
 import sys
 
-sys.stdout.write('%s\n' % sys.executable)
-sys.stdout.write('%s\n' % sys.version)
+sys.stdout.write('executable: %s\n' % sys.executable)
+sys.stdout.write('version: %s\n' % sys.version)
+sys.stdout.write('stdout encoding: %s\n' % sys.stdout.encoding)
 
 if sys.maxunicode == 0xFFFF:
-  sys.stdout.write('Narrow (ucs2) Unicode build\n')
+  sys.stdout.write('--enable-unicode=ucs2 ("narrow")\n')
 elif sys.maxunicode == 0x10FFFF:
-  sys.stdout.write('Wide (ucs4) Unicode build\n')
+  sys.stdout.write('--enable-unicode=ucs4 ("wide")\n')
 else:
-  sys.stdout.write('Unknown Unicode build\n')
+  sys.stdout.write('Unknown Unicode build; this cannot happen\n')
 
 try:
   import icu  # pylint: disable=g-import-not-at-top

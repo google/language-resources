@@ -5,6 +5,8 @@ if [ "$TRAVIS_OS_NAME" = osx -o "$(uname)" = Darwin ]; then
   if [ -z "$VIRTUAL_ENV" ]; then
     virtualenv -p "$(which "$PY")" venv
     . venv/bin/activate
+    python --version
+    pip --version
   fi
 else
   MY_OS=linux

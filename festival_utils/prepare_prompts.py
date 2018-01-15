@@ -45,6 +45,8 @@ def main(argv):
     sys.exit(2)
 
   vocabulary = frozenset(ReadWords(argv[1]))
+  oov_count = {}
+  ooverbose = False
 
   for line in STDIN:
     line = line.rstrip('\n')
@@ -55,12 +57,15 @@ def main(argv):
     oov = False
     for word in words:
       if not word in vocabulary:
-        STDERR.write('Skipping %s due to OOV %s\n' % (utterance_id, word))
+        oov_count[word] = oov_count.get(word, 0) + 1
+        if ooverbose:
+          STDERR.write('Skipping %s due to OOV %s\n' % (utterance_id, word))
         oov = True
     prompt_text = ' '.join(words)
     assert '"' not in prompt_text
     if not oov:
       STDOUT.write('( %s "%s" )\n' % (utterance_id, prompt_text))
+  STDERR.write('Skipped %d out-of-vocabulary words\n' % len(oov_count))
   return
 
 

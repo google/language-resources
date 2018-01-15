@@ -1,4 +1,4 @@
-# Copyright 2016, 2017 Google LLC. All Rights Reserved.
+# Copyright 2016, 2017, 2018 Google LLC. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,6 +22,22 @@ py_binary(
     name = "python_version",
     srcs = ["python_version.py"],
     srcs_version = "PY2AND3",
+)
+
+py_test(
+    name = "python_version_test",
+    timeout = "short",
+    main = "python_version.py",
+    srcs = ["python_version.py"],
+    srcs_version = "PY2AND3",
+)
+
+sh_test(
+    name = "python_version_sh_test",
+    timeout = "short",
+    srcs = ["eval.sh"],
+    args = ["python $(location //utils:python_version.py)"],
+    data = ["python_version.py"],
 )
 
 py_binary(

@@ -1,8 +1,10 @@
 #! /bin/bash
 
-set -o nounset
-
-PYTHON_EXECUTABLE="${PYTHON_EXECUTABLE:-$(which python)}"
+if [ -z "$ANDROID_HOME" ]; then
+  echo "Building this project with Bazel requires ANDROID_HOME to be set."
+  echo "It should point to the Android SDK, e.g. in $HOME/Android/Sdk"
+  exit 1
+fi
 
 BAZEL_EXECUTABLE="${BAZEL_EXECUTABLE:-$(which bazel)}"
 
@@ -11,19 +13,21 @@ BAZEL_EXECUTABLE="${BAZEL_EXECUTABLE:-$(which bazel)}"
 # between build time (protoc, compiled for host) and runtime (protobuf runtime
 # library, compiled for target) only need to be built once. For a one-shot
 # continuous integration build, this saves a little bit of total build time.
-BAZEL_STRATEGY='--nodistinct_host_configuration'
-BAZEL_STRATEGY+=' --test_timeout_filters=-long'
+STRATEGY='--nodistinct_host_configuration'
+STARTUP=''
 
-BAZEL_PYTHON="$("$BAZEL_EXECUTABLE" canonicalize-flags -- \
-  --python_path="$PYTHON_EXECUTABLE" 2>/dev/null)"
+if [ -n "$TRAVIS" ]; then
+  STARTUP+=' --batch'
+  STRATEGY+=' --jobs=2'
+  STRATEGY+=' --noshow_progress'
+  STRATEGY+=' --test_timeout_filters=-long'
+fi
 
-# As of this writing (Bazel 0.8.0 was released a few days ago), Bazel's Android
-# tools (@bazel_tools//tools/android/...) do not work with Python 3, so we build
-# Android targets in //Mymr/... without setting --python_path (configured by
-# $BAZEL_PYTHON).
+SHOW='--nocache_test_results --test_output=all'
 
 set -o errexit
 set -o xtrace
-"$BAZEL_EXECUTABLE" run   $BAZEL_STRATEGY $BAZEL_PYTHON //utils:python_version
-"$BAZEL_EXECUTABLE" build $BAZEL_STRATEGY                         //Mymr/...
-"$BAZEL_EXECUTABLE" test  $BAZEL_STRATEGY $BAZEL_PYTHON -- //... -//Mymr/...
+"$BAZEL_EXECUTABLE" info release
+"$BAZEL_EXECUTABLE" run  $STRATEGY       //utils:python_version
+"$BAZEL_EXECUTABLE" test $STRATEGY $SHOW //utils:python_version{,_sh}_test
+"$BAZEL_EXECUTABLE" $STARTUP test $STRATEGY //...

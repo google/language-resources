@@ -20,10 +20,11 @@
 from __future__ import unicode_literals
 
 import io
+import re
 import unicodedata
 
-# IPA Handbook, Table 3
-IPA_BASE_LETTERS = {
+# Base letters from the IPA Handbook, mostly Table 3
+BASE_LETTERS = {
     'a': 'open front unrounded vowel',
     'ɐ': 'near-open central vowel',
     'ɑ': 'open back unrounded vowel',
@@ -49,8 +50,9 @@ IPA_BASE_LETTERS = {
     'ɜ': 'open-mid central unrounded vowel',
     'ɞ': 'open-mid central rounded vowel',
     'f': 'voiceless labiodental fricative',
-    'g': 'voiced velar plosive',
+    'ɡ': 'voiced velar plosive',  # IPA Number 110
     'ɠ': 'voiced velar implosive',
+    'g': 'voiced velar plosive',  # IPA Number 210
     'ɢ': 'voiced uvular plosive',
     'ʛ': 'voiced uvular implosive',
     'ɣ': 'voiced velar fricative',
@@ -61,6 +63,7 @@ IPA_BASE_LETTERS = {
     'ħ': 'voiceless pharyngeal fricative',
     'ɦ': 'voiced glottal fricative',
     'ɧ': 'voiceless postalveolar velar fricative',
+    # was: simultaneous voiceless postalveolar and velar fricative
     'ɥ': 'voiced bilabial palatal approximant',  # was: labial
     'ʜ': 'voiceless epiglottal fricative',
     'i': 'close front unrounded vowel',
@@ -145,39 +148,189 @@ IPA_BASE_LETTERS = {
     'ǃ': 'alveolar click',  # was: (post)alveolar
 }
 
-IPA_MODIFIER_LETTERS = {
-    'ᵊ': 'mid central vowel release',
-    'ˠ': 'velarized',
-    'ʰ': 'aspirated',
-    'ʲ': 'palatalized',
-    'ˡ': 'lateral release',
-    'ⁿ': 'nasal release',
-    'ᶿ': 'voiceless dental fricative release',
-    'ʷ': 'labialized',
-    'ˣ': 'voiceless velar fricative release',
-    'ˤ': 'pharyngealized',
-
-    'ʱ': 'breathy voiced aspirated',
+# Modifier letters and symbols from the IPA Handbook
+MODIFIER_LETTERS = {
+    # 400-series from Table 4
     'ʼ': 'ejective',
-    'ʽ': 'weakly aspirated',
-    'ˀ': "glottalized",
+    'ʰ': 'aspirated',
+    '˞': 'rhoticity',
+    'ʷ': 'labialized',
+    'ʲ': 'palatalized',
+    'ˠ': 'velarized',
+    'ˤ': 'pharyngealized',
+    'ⁿ': 'nasal release',
+    'ˡ': 'lateral release',
+    '˔': 'raised',
+    '˕': 'lowered',
+
+    'ˈ': 'primary stress',
+    'ˌ': 'secondary stress',
+    'ː': 'long',
+    'ˑ': 'half-long',
+    '.': 'syllable break',
+    '|': 'minor group',
+    '‖': 'major group',
+    '‿': 'linking',
+
+    '˥': 'extra high level',
+    '˦': 'high level',
+    '˧': 'mid level',
+    '˨': 'low level',
+    '˩': 'extra low level',
+    # Contours (IPA 529-533) can be formed by combinations of tone letters.
+    '↓': 'downstep',
+    '↑': 'upstep',
+    '↗': 'global rise',
+    '↘': 'global fall',
+
+    # 200-series from Table 3
+    'ᵊ': 'mid central vowel release',
+    'ᶿ': 'voiceless dental fricative release',
+    'ˣ': 'voiceless velar fricative release',
+
+    # Widely used, but not mentioned in the IPA Handbook
+    'ʱ': 'breathy voiced aspirated',
+    'ˀ': 'glottalized',
+    'ᵐ': 'bilabial prenasalization',
+    'ᵑ': 'velar prenasalization',
 }
+
+# Combining marks from the IPA Handbook, Table 4
+COMBINING_MARKS = {
+    '\u0325': 'voiceless',
+    '\u030A': 'voiceless',
+    '\u032C': 'voiced',
+    '\u0339': 'more rounded',
+    '\u031C': 'less rounded',
+    '\u031F': 'advanced',
+    '\u0320': 'retracted',
+    '\u0308': 'centralized',
+    '\u0338': 'mid-centralized',
+    '\u0329': 'syllabic',
+    '\u032F': 'non-syllabic',
+    '\u0324': 'breathy voiced',
+    '\u0330': 'creaky voiced',
+    '\u033C': 'linguolabial',
+    '\u032A': 'dental',
+    '\u033A': 'apical',
+    '\u033B': 'laminal',
+    '\u0303': 'nasalized',
+    '\u031A': 'no audible release',
+    '\u0334': 'velarized or pharyngealized',
+    '\u031D': 'raised',
+    '\u031E': 'lowered',
+    '\u0318': 'advanced tongue root',
+    '\u0319': 'retracted tongue root',
+    '\u0361': 'affricate or double articulation',
+    '\u035C': 'affricate or double articulation',  # per the IPA chart
+
+    '\u0306': 'extra-short',
+
+    '\u030B': 'extra high level',
+    '\u0301': 'high level',
+    '\u0304': 'mid level',
+    '\u0300': 'low level',
+    '\u030F': 'extra low level',
+    '\u030C': 'rising contour',
+    '\u0302': 'falling contour',
+    '\u1DC4': 'high rising contour',
+    '\u1DC5': 'low rising contour',
+    '\u1DC8': 'rising-falling contour',
+}
+
+# It is often helpful to decompose a Unicode string holding IPA transcriptions
+# before comparing it against the tables above. Many letter+diacritic
+# combinations used in IPA transcription can be encoded as individual Unicode
+# characters or as a combination of a base character and a combining mark. For
+# example [ṍ] (close-mid back rounded nasal vowel in high level tone) can be
+# represented as any of the following Unicode character strings:
+#
+#   1E4D
+#   00F5 0301
+#   006F 0303 0301
+#
+# The last representation is often convenient for analyzing the meaning of the
+# composed notation symbol, however encoded, since all components can be
+# easily looked up in the tables above. This generally corresponds to Unicode
+# Normalization Form D (NFD), with the exception of c-cedilla [ç], which
+# decomposes to <c 0327>. In IPA [ç] is a voiceless palatal fricative and [c]
+# is a voiceless palatal plosive, but 0327 is not intended to be a fortition
+# diacritic that would turn a fricative into a corresponding plosive. Instead
+# [ç] should be treated atomically.
+#
+# The function Decompose() defined below is intended as a solution. It first
+# decomposes its argument into NFD form, then combines all occurrences of 'c'
+# and 0327 within the same grapheme cluster into 'ç'.
+
+C_CEDILLA = re.compile(r'c([\u0300-\u036F\u1AB0-\u1AFF\u1DC0-\u1DFF]*)\u0327')
+
+SCHWA_HOOK = re.compile(r'ɚ([\u0300-\u036F\u1AB0-\u1AFF\u1DC0-\u1DFF]*)')
+
+
+def Decompose(string):
+  r"""Convert an IPA string into a convenient decomposed form.
+
+  Essentially this means conversion to Unicode NFD form. However, there
+  are a few differences:
+
+  First, c-cedilla 'ç' is not decomposed into its NFD form but is left
+  intact.
+
+  Second, character combinations that the IPA Handbook designates as
+  equivalent have identical decompositions. In particular Opentail G
+  (IPA Number 110) and Looptail G (IPA Number 220) decompose
+  identically; and Right-hook schwa (IPA Number 327) decomposes into its
+  equivalent representation Schwa + Right hook (IPA Numbers 322 + 419).
+
+  Args:
+    string: string to be decomposed
+
+  Returns:
+    the decomposed string
+
+  For example '\u0107\u0327' ('ḉ') decomposes to '\u00E7\u0301' ('ḉ'):
+  >>> Decompose('\u0107\u0327') == '\u00E7\u0301'
+  True
+  >>> Decompose('\u0261') == Decompose('g')
+  True
+  >>> Decompose('\u0261\u0306') == Decompose('\u011F') == 'g\u0306'
+  True
+  >>> Decompose('\u025A') == Decompose('\u0259\u02DE')
+  True
+  >>> Decompose('\u025A\u0301') == '\u0259\u0301\u02DE'
+  True
+  """
+  string = SCHWA_HOOK.sub(r'ə\1˞', string)
+  string = unicodedata.normalize('NFD', string)
+  string = string.replace('ɡ', 'g')
+  string = C_CEDILLA.sub(r'ç\1', string)
+  return string
+
 
 REPLACEMENTS = {
     # Compatibility
     '!': 'ǃ',   # EXCLAMATION MARK: LATIN LETTER RETROFLEX CLICK
+    "'": 'ʼ',   # APOSTROPHE: MODIFIER LETTER APOSTROPHE
+    ':': 'ː',   # COLON: MODIFIER LETTER TRIANGULAR COLON
+    'ƒ': 'ʄ',   # F WITH HOOK: DOTLESS J WITH STROKE AND HOOK
     'ƾ': 'ts',  # LATIN LETTER INVERTED GLOTTAL STOP WITH STROKE: t + s
     'ȵ': 'ɲ',   # Curly-tail (alveolo-palatal) N: Left-tail (palatal) N
     'ɿ': 'z̩',   # "apical dental vowel"; [z̩], [ɨ], or [ɯ]
     'ʅ': 'ʐ̩',   # "apical retroflex vowel"; [ʐ̩], [ɨ˞], or [ɨ]
     'ˁ': 'ˤ',   # REVERSED GLOTTAL STOP: SMALL REVERSED GLOTTAL STOP
     'γ': 'ɣ',   # Greek gamma: Latin gamma
+    'ε': 'ɛ',   # Greek epsilon: Latin epsilon
     'φ': 'ɸ',   # Greek phi: Latin phi
     'ϐ': 'β',   # Greek beta symbol: Greek beta
     'ϑ': 'θ',   # Greek theta symbol: Greek theta
     'ѳ': 'θ',   # Cyrillic fita: Greek theta
-    'ᴣ': 'ʒ',   # LAT. LETTER SMALL CAPITAL EZH: LATIN SMALL LETTER EZH
-    'ᵿ': 'ʉ',   # LAT. SMALL LETTER UPSILON WITH STROKE: LAT. SMALL LETTER U BAR
+    'ә': 'ə',   # Cyrillic schwa: Latin schwa
+    'ᴈ': 'ɜ',   # TURNED OPEN E: REVERSED OPEN E
+    'ᴐ': 'ɔ',   # SMALL CAPITAL OPEN O: SMALL LETTER OPEN O
+    'ᴚ': 'ʁ',   # SMALL CAPITAL TURNED R: SMALL CAPITAL INVERTED R
+    'ᴣ': 'ʒ',   # SMALL CAPITAL EZH: SMALL LETTER EZH
+    'ᵿ': 'ʉ',   # UPSILON WITH STROKE: U BAR
+    'ⱴ': 'ⱱ',   # V WITH CURL: V WITH RIGHT HOOK
     'ꞎ': 'ɭ̊˔',  # "voiceless lateral retroflex fricative"
     'ꞵ': 'β',   # Latin beta: Greek beta
     'ꭓ': 'χ',   # Latin chi: Greek chi
@@ -216,7 +369,7 @@ REPLACEMENTS = {
     'ᶙ': 'u˞',
     'ᶚ': 'ʐ',
 
-    # Deprecated symbols discussed in the IPA Handbook
+    # Deprecated letters discussed in the IPA Handbook
     'ƈ': 'ʄ̊',   # Hooktop C: Hooktop barred dotless J + Over-ring
     'č': 'tʃ',  # C wedge (not IPA usage): t + esh
     'ʗ': 'ǃ',   # Stretched C: Exclamation point (LATIN LETTER RETROFLEX CLICK)
@@ -226,13 +379,12 @@ REPLACEMENTS = {
     'ɚ': 'ə˞',  # Right-hook schwa: schwa + right-hook
     'ʚ': 'ɞ',   # Closed epsilon: Closed reversed epsilon
     'ɝ': 'ɜ˞',  # Right-hook reversed epsilon: reversed epsilon + right-hook
-    'ɡ': 'g',   # Opentail or script g: looptail or ASCII g
     'ı': 'ɪ',   # Undotted I (not IPA usage): Small capital I (alt. ɨ or ɯ)
     'ɩ': 'ɪ',   # Iota: Small capital I
     'ǰ': 'dʒ',  # J wedge (not IPA usage): d + ezh
     'ƙ': 'ɠ̊',   # Hooktop K: Hooktop G + Over-ring
     'ʞ': None,  # Turned K (withdrawn 1979)
-    'λ': 'ɮ',   # Greek lambda: L-Ezh ligature
+    'λ': 'ɬ',   # Greek lambda: Belted L
     'ƛ': 'tɬ',  # Barred lambda: t + Belted L
     'ƞ': 'n̩',   # Right-leg N: n + syllabicity mark
     'ɷ': 'ʊ',   # Closed omega: Upsilon
@@ -249,9 +401,28 @@ REPLACEMENTS = {
     'ʨ': 'tɕ',  # T-Curly-tail-C ligature: t + curly-tail c
     'ʇ': 'ǀ',   # Turned T: Pipe (LATIN LETTER DENTAL CLICK)
     'ž': 'ʒ',   # Z wedge (not IPA usage): Ezh
-    'ʓ': 'ʑ',  # Curly-taile ezh (withdrawn 1989): Curly-tail z
+    'ʓ': 'ʑ',   # Curly-tail ezh (withdrawn 1989): Curly-tail z
     'ƻ': 'dz',  # Barred two (withdrawn 1976)
     'ʖ': 'ǁ',   # Inverted glottal stop: Double pipe (LAT. LETTER LATERAL CLICK)
+
+    # Deprecated modifiers and combining marks discussed in the IPA Handbook
+    '\u0322': '˞',       # Subscript right hook: Right hook
+    ',': None,           # Comma (not IPA usage)
+    'ʻ': None,           # Reversed apostrophe (withdrawn 1979)
+    '\u0307': None,      # Over-dot (withdrawn 1979)
+    '˗': '\u0320',       # Minus sign
+    '˖': '\u031F',       # Plus sign
+    'ʸ': None,           # Superscript Y (not IPA usage)
+    '\u0323': '\u031D',  # Under-dot: Raising sign
+    '\u0321': 'ʲ',       # Subscript left hook: Superscript J
+    '\u032B': 'ʷ',       # Subscript W: Superscript W
+    '\u0311': None,      # Superscript arch (not IPA usage)
+    'ˇ': '˧˨˧',          # Wedge (usage redefined): falling-rising contour
+    'ˆ': '˧˦˧',          # Circumflex (usage redefined): rising-falling contour
+    'ˎ': '˧˩',           # Subscript grave accent: low falling contour
+    '\u0316': '˧˩',      # Combining subscript grave accent: ditto
+    'ˏ': '˩˧',           # Subscript acute accent: low rising contour
+    '\u0317': '˩˧'       # Combining subscript acute accent: ditto
 }
 
 CONSONANT_FEATURE = {
@@ -305,7 +476,7 @@ VOWEL_FEATURE = {
 }
 
 
-def CheckDescription(ipa, description, writer):
+def CheckDescription(ipa, description):
   """Check that the description of the given IPA symbol is well-formed."""
   result = {}
   terms = description.split()
@@ -313,63 +484,133 @@ def CheckDescription(ipa, description, writer):
   if terms[-1] == 'vowel':
     assert not any(t in CONSONANT_FEATURE for t in terms)
     for term in terms[:-1]:
-      if term not in VOWEL_FEATURE:
-        writer.write('Unknown term %s describing vowel [%s] %s\n' %
-                     (term, ipa, description))
-      else:
-        feature_name = VOWEL_FEATURE[term]
-        assert feature_name not in result
-        result[feature_name] = term
+      assert term in VOWEL_FEATURE, (
+          'Unknown term %s describing vowel [%s] %s\n' %
+          (term, ipa, description))
+      feature_name = VOWEL_FEATURE[term]
+      assert feature_name not in result
+      result[feature_name] = term
   else:
     assert not any(t in VOWEL_FEATURE for t in terms)
     for term in terms:
-      if term not in CONSONANT_FEATURE:
-        writer.write('Unknown term %s describing consonant [%s] %s\n' %
-                     (term, ipa, description))
+      assert term in CONSONANT_FEATURE, (
+          'Unknown term %s describing consonant [%s] %s\n' %
+          (term, ipa, description))
+      feature_name = CONSONANT_FEATURE[term]
+      if feature_name == 'Place':
+        places = result.get(feature_name, [])
+        places.append(term)
+        result[feature_name] = places
       else:
-        feature_name = CONSONANT_FEATURE[term]
-        if feature_name == 'Place':
-          places = result.get(feature_name, [])
-          places.append(term)
-          result[feature_name] = places
-        else:
-          assert feature_name not in result
-          result[feature_name] = term
+        assert feature_name not in result
+        result[feature_name] = term
     places = result.get('Place', [])
     assert 1 <= len(places) <= 2
   return result
 
 
-def IntegrityChecks(writer):
-  for ipa, description in IPA_BASE_LETTERS.items():
-    assert len(ipa) == 1
-    assert unicodedata.category(ipa) in ('Ll', 'Lo')
-    CheckDescription(ipa, description, writer)
-  for ipa in IPA_MODIFIER_LETTERS:
-    assert len(ipa) == 1
-    assert unicodedata.category(ipa) == 'Lm'
+def IntegrityChecks():
+  """Perform basic data integrity checks on the embedded tables."""
+  for char, description in BASE_LETTERS.items():
+    assert len(char) == 1
+    assert unicodedata.category(char) in ('Ll', 'Lo')
+    CheckDescription(char, description)
+  for char in MODIFIER_LETTERS:
+    assert len(char) == 1
+    assert unicodedata.category(char) in ('Lm', 'Sk', 'Sm', 'So', 'Pc', 'Po')
+  for char in COMBINING_MARKS:
+    assert len(char) == 1
+    assert unicodedata.category(char) == 'Mn'
+  chars = set()
+  for table in (BASE_LETTERS, MODIFIER_LETTERS, COMBINING_MARKS, REPLACEMENTS):
+    c = frozenset(table.keys())
+    assert not chars & c
+    chars.update(c)
   return
 
 
 def PrintCharTable(writer):
-  """Prints a table of known phonetic symbols."""
-  letters = frozenset(IPA_BASE_LETTERS)
-  modifiers = frozenset(IPA_MODIFIER_LETTERS)
-  replacements = frozenset(REPLACEMENTS)
-  assert not letters & modifiers
-  assert not letters & replacements
-  assert not modifiers & replacements
-  ipa = IPA_BASE_LETTERS.copy()
-  ipa.update(IPA_MODIFIER_LETTERS)
-  for char in sorted(letters | modifiers | replacements):
-    if char in replacements:
+  """Print a table of known phonetic symbols."""
+  ipa = BASE_LETTERS.copy()
+  ipa.update(MODIFIER_LETTERS)
+  ipa.update(COMBINING_MARKS)
+  chars = set(ipa)
+  chars.update(REPLACEMENTS)
+  for char in sorted(chars):
+    if char in REPLACEMENTS:
       writer.write('%04X\t%s\t→ %s\n' % (ord(char), char, REPLACEMENTS[char]))
     else:
       writer.write('%04X\t%s\t%s\n' % (ord(char), char, ipa[char]))
   return
 
 
+def PrintChart(writer):
+  """Pretty-print the major elements of the IPA chart."""
+  description_to_letter = {}
+  for letter, description in BASE_LETTERS.items():
+    if letter == 'ɡ':
+      continue
+    assert description not in description_to_letter
+    description_to_letter[description] = letter
+
+  places = [
+      'bilabial', 'labiodental', 'dental', 'dental|alveolar', 'alveolar',
+      'postalveolar', 'retroflex', 'palatal', 'velar', 'uvular', 'pharyngeal',
+      # 'epiglottal',
+      'glottal',
+  ]
+  writer.write('┌%s┐\n' % '┬'.join(['─────'] * (len(places) - 1)))
+  for manner in ('plosive', 'nasal', 'trill', 'flap', 'fricative',
+                 'lateral fricative', 'approximant', 'lateral approximant'):
+    row = []
+    for place in places:
+      cell = []
+      for voicing in ('voiceless', 'voiced'):
+        description = '%s %s %s' % (voicing, place, manner)
+        cell.append(description_to_letter.get(description, ' '))
+      row.append(' '.join(cell))
+    if manner != 'fricative':
+      assert not row[2].strip()
+      assert row[3].strip()
+      assert not row[4].strip()
+      assert not row[5].strip()
+      del row[4]
+    else:
+      assert row[2].strip()
+      assert not row[3].strip()
+      assert row[4].strip()
+      assert row[5].strip()
+      del row[3]
+    writer.write('│ %s │\n' % ' │ '.join(row))
+  writer.write('└%s┘\n\n' % '┴'.join(['─────'] * (len(places) - 1)))
+
+  grid = [
+      ' •───────────•─────• ',
+      '  ╲          │     │ ',
+      '   •─────────•─────• ',
+      '    ╲        │     │ ',
+      '     •───────•─────• ',
+      '      ╲      │     │ ',
+      '       •─────┴─────• ',
+  ]
+  for i, height in enumerate(('close', 'near-close', 'close-mid', 'mid',
+                              'open-mid', 'near-open', 'open')):
+    row = [c for c in grid[i]]
+    for j, backness in enumerate(('front', 'near-front', 'central',
+                                  'near-back', 'back')):
+      for k, rvowel in enumerate(('unrounded vowel', 'vowel', 'rounded vowel')):
+        description = '%s %s %s' % (height, backness, rvowel)
+        letter = description_to_letter.get(description, '')
+        if letter:
+          pos = (i if j < 2 else 6) + 3 * j + k
+          row[pos] = letter
+    writer.write('%s\n' % ''.join(row))
+  return
+
+
+IntegrityChecks()
+
 if __name__ == '__main__':
   stdout = io.open(1, mode='wt', encoding='utf-8', closefd=False)
-  IntegrityChecks(stdout)
-  PrintCharTable(stdout)
+  # PrintCharTable(stdout)
+  PrintChart(stdout)

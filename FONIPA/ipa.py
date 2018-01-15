@@ -262,6 +262,7 @@ COMBINING_MARKS = {
 # decomposes its argument into NFD form, then combines all occurrences of 'c'
 # and 0327 within the same grapheme cluster into 'ç'.
 
+
 class Rewrite(object):
 
   def __init__(self, pattern, replacement):
@@ -269,7 +270,7 @@ class Rewrite(object):
     self.replacement = replacement
     return
 
-  def rewrite(self, string):
+  def rewrite(self, string):  # pylint: disable=invalid-name
     return re.sub(self.pattern, self.replacement, string)
 
 
@@ -333,7 +334,9 @@ REPLACEMENTS = {
     ':': 'ː',   # COLON: MODIFIER LETTER TRIANGULAR COLON
     'ƒ': 'ʄ',   # F WITH HOOK: DOTLESS J WITH STROKE AND HOOK
     'ƾ': 'ts',  # LATIN LETTER INVERTED GLOTTAL STOP WITH STROKE: t + s
+    'ǝ': 'ə',   # TURNED E: SCHWA
     'ȵ': 'ɲ',   # Curly-tail (alveolo-palatal) N: Left-tail (palatal) N
+    'Ɂ': 'ʔ',   # CAPITAL GLOTTAL STOP: GLOTTAL STOP
     'ɿ': 'z̩',   # "apical dental vowel"; [z̩], [ɨ], or [ɯ]
     'ʅ': 'ʐ̩',   # "apical retroflex vowel"; [ʐ̩], [ɨ˞], or [ɨ]
     'ˁ': 'ˤ',   # REVERSED GLOTTAL STOP: SMALL REVERSED GLOTTAL STOP
@@ -344,6 +347,7 @@ REPLACEMENTS = {
     'ϑ': 'θ',   # Greek theta symbol: Greek theta
     'ѳ': 'θ',   # Cyrillic fita: Greek theta
     'ә': 'ə',   # Cyrillic schwa: Latin schwa
+    'ӡ': 'ʒ',   # CYRILLIC SMALL LETTER ABKHASIAN DZE: LATIN SMALL LETTER EZH
     'ᴈ': 'ɜ',   # TURNED OPEN E: REVERSED OPEN E
     'ᴐ': 'ɔ',   # SMALL CAPITAL OPEN O: SMALL LETTER OPEN O
     'ᴚ': 'ʁ',   # SMALL CAPITAL TURNED R: SMALL CAPITAL INVERTED R

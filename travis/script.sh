@@ -1,9 +1,8 @@
 #! /bin/bash
 
 if [ -z "$ANDROID_HOME" ]; then
-  echo "Building this project with Bazel requires ANDROID_HOME to be set."
-  echo "It should point to the Android SDK, e.g. in $HOME/Android/Sdk"
-  exit 1
+  echo 'Building the Android parts of this project requires ANDROID_HOME'
+  echo 'to point to the Android SDK, e.g. in $HOME/Android/Sdk'
 fi
 
 BAZEL_EXECUTABLE="${BAZEL_EXECUTABLE:-$(which bazel)}"

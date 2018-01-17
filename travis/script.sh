@@ -6,6 +6,10 @@ if [ -z "$ANDROID_HOME" ]; then
 fi
 
 BAZEL_EXECUTABLE="${BAZEL_EXECUTABLE:-$(which bazel)}"
+if [ -z "$BAZEL_EXECUTABLE" ]; then
+  echo 'No bazel executable found or configured.'
+  exit 1
+fi
 
 # Not having a host configuration which is distinct from the target
 # configuration means that portions of tools (e.g. protobuf) that are shared

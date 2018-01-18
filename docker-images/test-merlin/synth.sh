@@ -13,10 +13,22 @@
 #
 # Copyright 2017 Google, Inc.
 
+set -x
+
+TEST_MERLIN=true
+
+TEXT="ප්‍රධානියා ලෙස කල යුතු දෑ කිරීමට"
+
+if [[ ! ${TEST_MERLIN} ]]; then
+  read txt; TEXT=${txt};
+fi
+
 cd /usr/local/src/voice/data/festvox
 
 # Temp test sentence.
-echo "අංකය" > /tmp/text.txt
+FILENAME=$RANDOM
+FILEPATH="/tmp/${FILENAME}.txt"
+echo ${FILENAME} "( ' ${TEXT} ' )" > ${FILEPATH}
 
 # Copied from https://github.com/googlei18n/language-resources/blob/abb8ca9746d67293d0b09bca71b2eb06261386e0/festival_utils/setup_merlin.sh#L123
 TMP_MERLIN_SCRIPTS_PATH="/tmp/merlin_scripts/"
@@ -46,14 +58,14 @@ sed -i  '49s|$|'"$LOAD_PHONESET_SCRIPT"'|' \
 cd /usr/local/src/voice
 rm -rf ${SYNTH_DIR}
 mkdir -p ${SYNTH_DIR}
-cat /tmp/text.txt > ${SYNTH_DIR}/text.txt
+cat "${FILEPATH}" > ${SYNTH_DIR}/${FILENAME}.txt
 echo "synth" >  ${SYNTH_DIR}/file_id.scp
 
 cd /usr/local/src/voice/training
 
 # Generator festival scripts to generator festival utt.
 python "${MERLIN_PATH}"/misc/scripts/frontend/utils/genScmFile.py \
-"${SYNTH_DIR}" \
+"${FILEPATH}" \
 "${SYNTH_DIR}"/ \
 "${SYNTH_DIR}"/utt_generator.scm \
 "${SYNTH_DIR}"/file_id.scp
@@ -78,9 +90,10 @@ sed -i -r "s/  */ /g" "${FESTIVAL_LABEL_PHONE_ALIGN}"/*.lab
 # Copy generated labels and test list.
 cd /usr/local/src/voice/training
 mkdir -p /usr/local/src/merlin/egs/locale/s1/models/test_synthesis/wav
+ls ${SYNTH_DIR}
+ls ${SYNTH_DIR}/full/
 cp "${SYNTH_DIR}/file_id.scp" /usr/local/src/merlin/egs/locale/s1/data/test_id_list.scp
-cp "${SYNTH_DIR}/full/text.lab" /usr/local/src/merlin/egs/locale/s1/data/label_phone_align/ 
-
+cp "${SYNTH_DIR}/full/${FILENAME}.lab" /usr/local/src/merlin/egs/locale/s1/data/label_phone_align/
 
 cd /usr/local/src/merlin
 
@@ -91,4 +104,4 @@ python src/run_merlin.py egs/locale/s1/conf/test_dur_synth.conf
 python src/run_merlin.py egs/locale/s1/conf/test_synth.conf
 
 # Generated wav.
-ls -l /usr/local/src/merlin/egs/locale/s1/models/test_synthesis/wav/text.wav
+ls -l /usr/local/src/merlin/egs/locale/s1/models/test_synthesis/wav/"${FILENAME}".wav

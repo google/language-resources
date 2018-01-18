@@ -42,7 +42,7 @@
   },
   {
     "key": "acoustic.Architecture.hidden_layer_type",
-    "value": "['TANH', 'TANH', 'TANH']",
+    "value": "['TANH', 'TANH', 'TANH']"
   },
   {
     "key": "acoustic.Architecture.optimizer",

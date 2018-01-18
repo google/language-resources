@@ -1,4 +1,4 @@
-True 42 3.14 None [] Foo
+𐌀 True 42 3.14 None [] Foo
 hello world
 hello world
 hello world

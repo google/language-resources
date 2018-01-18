@@ -1,4 +1,4 @@
-# festus/BUILD
+# Copyright 2015-2018 Google LLC. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,9 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# Copyright 2015, 2016, 2017 Google, Inc.
-# Author: mjansche@google.com (Martin Jansche)
 
 package(default_visibility = ["//visibility:public"])
 
@@ -427,5 +424,34 @@ cc_binary(
         ":term-semiring",
         ":weight",
         "@openfst//:fst",
+    ],
+)
+
+cc_library(
+    name = "nbinom",
+    srcs = ["nbinom.h"],
+    deps = ["@openfst//:base"],
+)
+
+cc_binary(
+    name = "fstnbinom",
+    srcs = ["fstnbinom.cc"],
+    deps = [
+        ":nbinom",
+        "@openfst//:fst",
+    ],
+)
+
+sh_binary(
+    name = "plot_nbinom",
+    srcs = ["plot_nbinom.sh"],
+    data = [
+        ":fstnbinom",
+        "@openfst//:fstdeterminize",
+        "@openfst//:fstminimize",
+        "@openfst//:fstprint",
+        "@openfst//:fstpush",
+        "@openfst//:fstrandgen",
+        "@openfst//:fstrmepsilon",
     ],
 )

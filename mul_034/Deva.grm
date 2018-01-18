@@ -119,6 +119,7 @@ codepoint = Optimize[
 | "joiner".c
 ];
 
+virama = "^".g;
 eyelash_ra = "^r".g;
 zhe = "^z".g;
 
@@ -128,6 +129,7 @@ grapheme = Optimize[
 | "ERROR".g
 | "non-joiner".g
 | "joiner".g
+| virama
 | eyelash_ra
 | zhe
 ];
@@ -266,6 +268,8 @@ check_independent_vowels = CDRewrite[
 
 ins_eyelash_ra = CDRewrite["rra".c : eyelash_ra, "", "virama".c, star];
 
+keep_virama = CDRewrite["virama".c : virama, "", independent_vowel, star];
+
 # Replace codepoints with graphemes, replace inherent vowel "@" with "a",
 # and delete virama etc.
 to_graphemes_aux =
@@ -286,6 +290,7 @@ export CODEPOINTS_TO_GRAPHEMES = Optimize[
 @ check_consonants
 @ check_independent_vowels
 @ ins_eyelash_ra
+@ keep_virama
 @ to_graphemes
 @ grapheme*
 ];

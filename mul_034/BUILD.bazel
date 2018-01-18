@@ -41,7 +41,11 @@ py_library(
 py_binary(
     name = "make_script_syms",
     srcs = ["make_script_syms.py"],
-    deps = [":script_util"],
+    deps = [
+        ":script_util",
+        "//external:absl/app",
+        "//external:absl/flags",
+    ],
 )
 
 py_binary(
@@ -65,6 +69,7 @@ genrule(
         "Beng.syms",
         "Deva.syms",
         "Sinh.syms",
+        "Taml.syms",
     ],
     cmd = "$(location :make_script_syms) --genrule $(OUTS)",
     tools = [":make_script_syms"],

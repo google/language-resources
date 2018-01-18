@@ -77,18 +77,28 @@ DIGITS = {
 }
 
 EXCEPTIONS = {
-    0x09F2: 'rupee_mark',
-    0x09F3: 'rupee_sign',
+    0x09F2: 'taka',
+    0x09F3: 'bangladeshi_taka',
     0x0BFA: 'number',
+    0x0D4E: 'reph',
     0x109E: 'symbol_shan_one',
     0xA8EB: '-letter_u',
+    0x1107F: 'number_joiner',
     0x110BD: 'number',
     0x11131: '-o_mark',
     0x11132: '-au_mark',
     0x111CB: 'vowel_modifier',
 }
 
-SINHALA_CHAR_NAMES = {
+ALIASES = {
+    # % NORMATIVE ALIASES / corrections from NameAliases
+    0x0CDE: 'KANNADA LETTER LLLA',
+    0x0E9D: 'LAO LETTER FO FON',
+    0x0E9F: 'LAO LETTER FO FAY',
+    0x0EA3: 'LAO LETTER RO',
+    0x0EA5: 'LAO LETTER LO',
+    0x0FD0: 'TIBETAN MARK BKA- SHOG GI MGO RGYAN',
+    # = informative aliases / Sanskritic names for Sinhala characters
     0x0D82: 'sinhala sign anusvara',
     0x0D83: 'sinhala sign visarga',
     0x0D85: 'sinhala letter a',
@@ -171,6 +181,7 @@ SINHALA_CHAR_NAMES = {
 }
 
 BRAHMIC_OFFICIAL_INDIA = [
+    # South and Central Asia-I: Official Scripts of India
     'Deva',
     'Beng',
     'Guru',
@@ -183,58 +194,77 @@ BRAHMIC_OFFICIAL_INDIA = [
 ]
 
 BRAHMIC_OTHER = [
+    # South and Central Asia-II: Other Modern Scripts
     'Sinh',
+    'Newa',
+    'Tibt',
+    'Limb',
+    'Mtei',
+    'Cakm',
+    'Lepc',
+    'Saur',
+    # South and Central Asia-III: Ancient Scripts
+    'Brah',
+    'Bhks',
+    'Phag',
+    'Marc',
+    # South and Central Asia-IV: Other Historic Scripts
+    'Sylo',
+    'Kthi',
+    'Shrd',
+    'Takr',
+    'Sidd',
+    'Mahj',
+    'Khoj',
+    'Sind',
+    'Mult',
+    'Tirh',
+    'Modi',
+    'Gran',
+    'Ahom',
+    # Southeast Asia
     'Thai',
     'Laoo',
-    'Tibt',
     'Mymr',
+    'Khmr',
+    'Tale',
+    'Talu',
+    'Lana',
+    'Tavt',
+    'Cham',
+    # Indonesia and Oceania
     'Tglg',
     'Hano',
     'Buhd',
     'Tagb',
-    'Khmr',
-    'Limb',
-    'Tale',
-    'Talu',
     'Bugi',
-    'Lana',
     'Bali',
-    'Sund',
-    'Batk',
-    'Lepc',
-    'Sylo',
-    'Phag',
-    'Saur',
-    'Rjng',
     'Java',
-    'Cham',
-    'Tavt',
-    'Mtei',
-    'Kthi',
-    'Cakm',
-    'Mahj',
-    'Shrd',
-    'Khoj',
-    'Mult',
-    'Sind',
-    'Gran',
-    'Newa',
-    'Tirh',
-    'Sidd',
-    'Modi',
-    'Takr',
-    'Ahom',
-    'Bhks',
-    'Marc',
+    'Rjng',
+    'Batk',
+    'Sund',
 ]
 
 EPSILON = '<epsilon>'
 
 
+def CharToCodepoint(char):
+  if len(char) == 1:
+    return ord(char)
+  elif len(char) == 2:
+    hi = ord(char[0])
+    lo = ord(char[1])
+    if hi & 0xFC00 == 0xD800 and lo & 0xFC00 == 0xDC00:
+      hi &= 0x3FF
+      lo &= 0x3FF
+      return 0x10000 + (hi << 10) + lo
+  raise TypeError('CharToCodepoint() expected a character or surrogate pair')
+
+
 def CharName(c):
-  cp = ord(c)
-  if cp in SINHALA_CHAR_NAMES:
-    return SINHALA_CHAR_NAMES[cp].upper()
+  cp = CharToCodepoint(c)
+  if cp in ALIASES:
+    return ALIASES[cp].upper()
   return icu.Char.charName(c)
 
 
@@ -248,9 +278,12 @@ def RemovePrefix(s, prefix):
 def ScriptSymbols(script, include_script_code=False):
   """Yields short symbol names for all characters in the given script."""
   script_chars = icu.UnicodeSet(r'[\p{%s}\u200C\u200D]' % script.getName())
-  prefix = script.getName().upper().replace('_', ' ')
+  script_name = script.getName().replace('_', ' ')
+  utf8.stderr.write('Found %d characters specific to %s (%s)\n' %
+                    (len(script_chars), script_name, script.getShortName()))
+  prefix = script_name.upper()
   for c in script_chars:
-    label = ord(c)
+    label = CharToCodepoint(c)
     if label in EXCEPTIONS:
       symbol_name = EXCEPTIONS[label]
     else:
@@ -316,11 +349,12 @@ def WriteOpenFstSymbolTable(writer, symbols_and_labels):
   return
 
 
-def SymbolsToFile(filename, symbols_and_labels):
+def SymbolsToFile(filename, symbols_and_labels, print_info=False):
   with utf8.open(filename, mode='w') as writer:
     WriteOpenFstSymbolTable(writer, symbols_and_labels)
-  utf8.stderr.write('Wrote %s with %d symbols\n' %
-                    (filename, len(symbols_and_labels)))
+  if print_info:
+    utf8.stderr.write('Wrote %s with %d symbols\n' %
+                      (filename, len(symbols_and_labels)))
   return
 
 

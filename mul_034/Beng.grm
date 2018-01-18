@@ -104,6 +104,7 @@ codepoint = Optimize[
 
 zw = "non-joiner".c | "joiner".c;
 
+virama = "^".g;
 ya_phalaa = "~y".g;
 reph = "r^".g;
 lla = ".l".g;
@@ -114,6 +115,7 @@ grapheme = Optimize[
 | "ERROR".g
 | "non-joiner".g
 | "joiner".g
+| virama
 | ya_phalaa
 | reph
 | lla
@@ -144,6 +146,16 @@ dependent_vowel =
 | "-vocalic_l".c | "-vocalic_ll".c
 |                  "-e".c          | "-ai".c
 |                  "-o".c          | "-au".c
+;
+
+independent_vowel =
+  "a".c          | "aa".c
+| "i".c          | "ii".c
+| "u".c          | "uu".c
+| "vocalic_r".c  | "vocalic_rr".c
+| "vocalic_l".c  | "vocalic_ll".c
+|                  "e".c           | "ai".c
+|                  "o".c           | "au".c
 ;
 
 vowels_to_nfc_aux =
@@ -197,6 +209,8 @@ explicit_vowel_or_virama = dependent_vowel | "virama".c | ya_phalaa;
 
 del_inherent_vowel = CDRewrite["@".g : "", "", explicit_vowel_or_virama, star];
 
+keep_virama = CDRewrite["virama".c : virama, "", independent_vowel, star];
+
 # Replace codepoints with graphemes, replace inherent vowel "@" with "a",
 # and delete virama etc.
 to_graphemes_aux =
@@ -219,6 +233,7 @@ export CODEPOINTS_TO_GRAPHEMES = Optimize[
 @ del_zero_width
 @ ins_inherent_vowel
 @ del_inherent_vowel
+@ keep_virama
 @ to_graphemes
 @ grapheme*
 ];

@@ -92,7 +92,7 @@ def _str(value, depth=0):
   if type(value) == type(u''):  # pylint: disable=unidiomatic-typecheck
     return value
   elif type(value) == type(b''):  # pylint: disable=unidiomatic-typecheck
-    return value.decode(encoding, errors='replace')
+    return value.decode(encoding, 'replace')
   else:
     return _str(str(value), depth + 1)
 

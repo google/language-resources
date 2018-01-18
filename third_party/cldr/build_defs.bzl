@@ -7,7 +7,7 @@ def transform_test(language):
           """
           $(location //utils:test_icu_transform) \
             $(location %s-%s_FONIPA.txt) \
-            $(location %s-fonipa-t-%s.txt)
+            < $(location %s-fonipa-t-%s.txt)
           """ % (language, language, language, language)
     ],
     data = [

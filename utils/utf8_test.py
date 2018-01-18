@@ -27,7 +27,7 @@ class Foo(object):
 
 
 def test_print(p):
-  p(True, 42, 3.14, None, [], Foo())
+  p(u'\U00010300', True, 42, 3.14, None, [], Foo())
 
   p(u'hello', u'world')
   p(u'hello', b'world')

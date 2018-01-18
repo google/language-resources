@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Test general ICU transforms against a dictionary.
+"""Test general ICU transforms against a list of (source, target) pairs.
 """
 
 from __future__ import unicode_literals
@@ -24,21 +24,20 @@ from utils import utf8
 
 
 def main(argv):
-  if len(argv) != 3:
-    utf8.Print('Usage: %s RULES DICTIONARY' % argv[0])
+  if len(argv) != 2:
+    utf8.Print('Usage: test_icu_transform RULES')
     sys.exit(2)
 
   xltor = icu_util.LoadTransliterationRules(argv[1], 'foo-bar')
   success = True
-  with utf8.open(argv[2]) as reader:
-    for line in reader:
-      fields = line.rstrip('\n').split('\t')
-      assert len(fields) >= 2
-      orth, pron = fields[:2]
-      predicted = xltor.transliterate(orth)
-      if predicted != pron:
-        utf8.Print('%s\t%s != %s' % (orth, pron, predicted))
-        success = False
+  for line in utf8.stdin:
+    fields = line.rstrip('\n').split('\t')
+    assert len(fields) >= 2
+    source, target = fields[:2]
+    predicted = xltor.transliterate(source)
+    if predicted != target:
+      utf8.Print('%s\t%s != %s' % (source, target, predicted))
+      success = False
 
   if success:
     utf8.Print('PASS')

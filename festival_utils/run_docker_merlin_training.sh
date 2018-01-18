@@ -68,8 +68,8 @@ for conf in acoustic_dnn,acoustic duration_dnn,duration; do
   D=${CONF_PATH}/${conf}.conf
   mv  "${D}" "${S}"
 
-  # Usage - python merlin_confs.py data_count conf_file global_config {acoustic,duration}
-  python "${PY_MERLIN_CONF}" "${S}" "${COUNT}" "${MERLIN_GLOBAL_CONFIG}" "${conf_type}" > "${D}"
+  # Usage - python merlin_confs.py [data_count] [conf_file] [global_config] {acoustic,duration}
+  python "${PY_MERLIN_CONF}" "${COUNT}" "${S}" "${MERLIN_GLOBAL_CONFIG}" "${conf_type}" > "${D}"
   rm "${S}"
 done
 

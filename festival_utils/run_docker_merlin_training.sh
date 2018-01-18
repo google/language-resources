@@ -66,11 +66,11 @@ for conf in acoustic_dnn,acoustic duration_dnn,duration; do
   IFS=',' read conf conf_type <<< "${i}"
   S=${CONF_PATH}/_${conf}.conf
   D=${CONF_PATH}/${conf}.conf
-  mv  ${D} ${S}
+  mv  "${D}" "${S}"
 
   # Usage - python merlin_confs.py data_count conf_file global_config {acoustic,duration}
-  python ${PY_MERLIN_CONF} ${S} "${COUNT}" ${MERLIN_GLOBAL_CONFIG} ${conf_type} > ${D}
-  rm ${S}
+  python "${PY_MERLIN_CONF}" "${S}" "${COUNT}" "${MERLIN_GLOBAL_CONFIG}" "${conf_type}" > "${D}"
+  rm "${S}"
 done
 
 # Run merlin training.

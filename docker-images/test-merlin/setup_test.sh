@@ -40,7 +40,7 @@ for data in testdata/*.txt; do
 done
 
 # Run merlin setup on the test data.
-docker exec "${CONTAINER_ID}" sh /usr/local/src/entry.sh
+docker exec "${CONTAINER_ID}" bash /usr/local/src/entry.sh
 
 # Run tests.
-docker exec "${CONTAINER_ID}" sh /usr/local/src/tests.sh
+docker exec "${CONTAINER_ID}" bash /usr/local/src/tests.sh

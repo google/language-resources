@@ -62,15 +62,14 @@ mkdir -p ${BASE_VOICE_PATH}/models/test_synthesis
 cd /usr/local/src/merlin
 COUNT=$(wc -l < ${BASE_VOICE_PATH}/data/file_id_list.scp)
 
-for conf in acoustic_dnn,acoustic duration_dnn,duration; do
-  IFS=',' read conf conf_type <<< "${i}"
+for confs in acoustic_dnn,acoustic duration_dnn,duration; do
+  IFS=',' read conf conf_type <<< "${confs}"
   S=${CONF_PATH}/_${conf}.conf
   D=${CONF_PATH}/${conf}.conf
   mv  "${D}" "${S}"
 
   # Usage - python merlin_confs.py [data_count] [conf_file] [global_config] {acoustic,duration}
   python "${PY_MERLIN_CONF}" "${COUNT}" "${S}" "${MERLIN_GLOBAL_CONFIG}" "${conf_type}" > "${D}"
-  rm "${S}"
 done
 
 # Run merlin training.

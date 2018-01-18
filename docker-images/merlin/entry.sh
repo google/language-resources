@@ -24,7 +24,9 @@ git clone https://github.com/googlei18n/language-resources
 # Untar the wav files.
 mkdir -p /usr/local/src/voice/data/festvox/wavs
 cd /usr/local/src/voice/data/festvox/wavs
-tar -xf ../wav.tar
+if [[ -f ../wav.tar ]]; then
+  tar -xf ../wav.tar
+fi
 
 # Debug information.
 cd /usr/local/src/voice/data/festvox/

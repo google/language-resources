@@ -14,6 +14,7 @@
 # Copyright 2017 Google, Inc.
 
 set -x
+set -e
 
 # Remove inbuilt langauge resources and download new one.
 cd /usr/local/src/

@@ -17,6 +17,7 @@
 #
 
 set -x 
+set -e
 
 PY_MERLIN_CONF="/usr/local/src/language-resources/festival_utils/merlin_confs.py"
 BASE_VOICE_PATH="/usr/local/src/merlin//egs/locale/s1"
@@ -25,6 +26,7 @@ CONF_PATH="egs/locale/s1/conf/"
 # Whether to run merlin TTS training.
 TRAIN=true
 SAMPLE_RATE=48000
+MERLIN_GLOBAL_CONFIG=/usr/local/src/language-resources/docker-images/merlin/small_merlin_params.json
 
 while getopts ":t" opt; do
   case ${opt} in
@@ -34,6 +36,9 @@ while getopts ":t" opt; do
       ;;
     r) # Set sample rate.
       SAMPLE_RATE="${OPTARG}"
+      ;;
+    c) # Path to the merlin global json config.
+      MERLIN_GLOBAL_CONFIG="${OPTARG}"
       ;;
   esac
 done
@@ -57,11 +62,15 @@ mkdir -p ${BASE_VOICE_PATH}/models/test_synthesis
 cd /usr/local/src/merlin
 COUNT=$(wc -l < ${BASE_VOICE_PATH}/data/file_id_list.scp)
 
-for conf in acoustic_dnn duration_dnn; do
+for conf in acoustic_dnn,acoustic duration_dnn,duration; do
+  IFS=',' read conf conf_type <<< "${i}"
   S=${CONF_PATH}/_${conf}.conf
   D=${CONF_PATH}/${conf}.conf
   mv  ${D} ${S}
-  python ${PY_MERLIN_CONF} ${S} "${COUNT}" > ${D}
+
+  # Usage - python merlin_confs.py data_count conf_file global_config {acoustic,duration}
+  python ${PY_MERLIN_CONF} ${S} "${COUNT}" ${MERLIN_GLOBAL_CONFIG} ${conf_type} > ${D}
+  rm ${S}
 done
 
 # Run merlin training.

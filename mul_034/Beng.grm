@@ -188,7 +188,7 @@ ins_reph = CDRewrite[
 ins_medial_ya = CDRewrite[
   "virama ya".c : ya_phalaa,
   "",
-  "[EOS]" | (codepoint - "virama".c),
+  "[EOS]" | (codepoint - "virama".c) | (grapheme - (virama | ya_phalaa)),
   star
 ];
 
@@ -211,11 +211,9 @@ del_inherent_vowel = CDRewrite["@".g : "", "", explicit_vowel_or_virama, star];
 
 keep_virama = CDRewrite["virama".c : virama, "", independent_vowel, star];
 
-# Replace codepoints with graphemes, replace inherent vowel "@" with "a",
-# and delete virama etc.
+# Replace codepoints with graphemes, delete virama etc.
 to_graphemes_aux =
   codepoint_to_grapheme
-| ("@".g : "a".g)
 | ("virama".c : "")
 | ("nukta".c : "")
 | (separator : "")
@@ -223,7 +221,7 @@ to_graphemes_aux =
 
 to_graphemes = CDRewrite[to_graphemes_aux, "", "", star];
 
-export CODEPOINTS_TO_GRAPHEMES = Optimize[
+codepoints_to_graphemes_internal = Optimize[
   codepoint*
 @ vowels_to_nfc
 @ compose_dotted
@@ -235,5 +233,11 @@ export CODEPOINTS_TO_GRAPHEMES = Optimize[
 @ del_inherent_vowel
 @ keep_virama
 @ to_graphemes
+@ grapheme*
+];
+
+export CODEPOINTS_TO_GRAPHEMES = Optimize[
+  codepoints_to_graphemes_internal
+@ CDRewrite[("@".g : "a".g), "", "", star]
 @ grapheme*
 ];

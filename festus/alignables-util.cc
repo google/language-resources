@@ -145,13 +145,15 @@ class SuffixTree {
   std::map<std::vector<Label>, StateId> suffix_;
 };
 
+}  // namespace
+
 void EscapeSymbol(const string &in, string *out) {
   for (auto c : in) {
     switch (c) {
       case ' ':  *out += "__"; break;
       case '\t': *out += "_t"; break;
       case '_':  *out += "_u"; break;
-      case ';':  *out += "_s"; break;
+      case '/':  *out += "_s"; break;
       default:   *out += c; break;
     }
   }
@@ -168,12 +170,13 @@ bool UnescapeSymbol(const string &in, string *out) {
       LOG(ERROR) << "Incomplete escape at end of string: " << in;
       return false;
     }
-    c = in[i + 1];
+    ++i;
+    c = in[i];
     switch (c) {
       case '_': *out += ' '; break;
       case 't': *out += '\t'; break;
       case 'u': *out += '_'; break;
-      case 's': *out += ';'; break;
+      case 's': *out += '/'; break;
       default:
         LOG(ERROR) << "Unknown escape character '" << c << "' in string: "
                    << in;
@@ -183,12 +186,10 @@ bool UnescapeSymbol(const string &in, string *out) {
   return true;
 }
 
-}  // namespace
-
 string AlignablesUtil::MakePairSymbol(const Alignable &alignable) {
   string result;
   EscapeSymbol(alignable.input(), &result);
-  result += ";";
+  result += "/";
   EscapeSymbol(alignable.output(), &result);
   return result;
 }

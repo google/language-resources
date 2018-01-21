@@ -289,6 +289,17 @@ cc_library(
     ],
 )
 
+cc_test(
+    name = "alignables-util-test",
+    timeout = "short",
+    srcs = ["alignables-util-test.cc"],
+    deps = [
+        ":alignables-util",
+        ":gtest_main",
+        "@openfst//:base",
+    ],
+)
+
 cc_library(
     name = "lexicon-processor",
     srcs = ["lexicon-processor.cc"],

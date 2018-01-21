@@ -31,8 +31,12 @@
 লক্ষ্মী	l a k .s m ii
 সাক্ষ্য	s aa k .s ~y a
 # The following is a contrived example (not how "autoriksha" is normally
-# spelled), show how the kṣ ligature can be blocked:
+# spelled) just to show how the kṣ ligature can be blocked:
 অটোরিক্‌ষা	a .t oo r i k non-joiner .s aa
+
+# Non-initial independent vowels
+দুই	d u i
+ভবিষ্যৎই	bh a b i .s ~y a t^ i
 
 # Codepoints, in Unicode order
 

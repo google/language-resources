@@ -1,8 +1,12 @@
-⒜	@		# inherent vowel
 ⬛	ERROR		# signals an error
+(	BOS		# beginning of string
+)	EOS		# end of string
+.	.		# syllable break; can mark independent vowels
+-	-		# separator; visible hyphen or apostrophe
 |	non-joiner	non-joiner
 +	joiner	joiner
 ˘	^	virama
+⒜	@		# inherent vowel
 a	a	a
 ā	aa	aa
 æ	ae	ae candra_a
@@ -11,7 +15,7 @@ i	i	i
 ī	ii	ii
 u	u	u
 ū	uu	uu
-ŭ	^u
+ŭ	^u		# epenthetic light vowel in Malayalam
 r̥	,r	vocalic_r
 r̥̄	,rr	vocalic_rr
 l̥	,l	vocalic_l
@@ -79,7 +83,7 @@ y	y	ya
 ẏ	;y	yya
 r	r	ra ra_with_middle_diagonal
 ʳ	r^	reph
-r̆	^r		# Deva:rra+virama
+r̆	^r		# Deva:rra+virama (eyelash_ra)
 l	l	la
 lⸯ	l^	chillu_l
 ḷ	.l	lla

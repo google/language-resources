@@ -90,7 +90,7 @@ codepoint_to_grapheme =
 | ("ra_with_lower_diagonal".c : "w".g)
 ;
 
-separator = "apostrophe".e | "hyphen".e | "letter_apostrophe".e;
+separator_c = "apostrophe".e | "hyphen".e | "letter_apostrophe".e;
 
 codepoint = Optimize[
   Project[codepoint_to_grapheme, 'input']
@@ -99,12 +99,12 @@ codepoint = Optimize[
 | "-au_length".c
 | "non-joiner".c
 | "joiner".c
-| separator
+| separator_c
 ];
 
 zw = "non-joiner".c | "joiner".c;
 
-virama = "^".g;
+virama_g = "^".g;
 ya_phalaa = "~y".g;
 reph = "r^".g;
 lla = ".l".g;
@@ -113,9 +113,11 @@ grapheme = Optimize[
   Project[codepoint_to_grapheme, 'output']
 | "@".g
 | "ERROR".g
+| "-".g
+| ".".g
 | "non-joiner".g
 | "joiner".g
-| virama
+| virama_g
 | ya_phalaa
 | reph
 | lla
@@ -188,7 +190,7 @@ ins_reph = CDRewrite[
 ins_medial_ya = CDRewrite[
   "virama ya".c : ya_phalaa,
   "",
-  "[EOS]" | (codepoint - "virama".c) | (grapheme - (virama | ya_phalaa)),
+  "[EOS]" | (codepoint - "virama".c) | (grapheme - (virama_g | ya_phalaa)),
   star
 ];
 
@@ -209,18 +211,6 @@ explicit_vowel_or_virama = dependent_vowel | "virama".c | ya_phalaa;
 
 del_inherent_vowel = CDRewrite["@".g : "", "", explicit_vowel_or_virama, star];
 
-keep_virama = CDRewrite["virama".c : virama, "", independent_vowel, star];
-
-# Replace codepoints with graphemes, delete virama etc.
-to_graphemes_aux =
-  codepoint_to_grapheme
-| ("virama".c : "")
-| ("nukta".c : "")
-| (separator : "")
-;
-
-to_graphemes = CDRewrite[to_graphemes_aux, "", "", star];
-
 codepoints_to_graphemes_internal = Optimize[
   codepoint*
 @ vowels_to_nfc
@@ -231,13 +221,50 @@ codepoints_to_graphemes_internal = Optimize[
 @ del_zero_width
 @ ins_inherent_vowel
 @ del_inherent_vowel
-@ keep_virama
-@ to_graphemes
-@ grapheme*
 ];
+
+# Add "." before independent vowels after a virama.
+minimally_mark_independent_vowel = CDRewrite[
+  "" : ".".g,
+  "virama".c,
+  independent_vowel,
+  star
+];
+
+always_mark_independent_vowel = CDRewrite[
+  "" : ".".g,
+  "",
+  independent_vowel,
+  star
+];
+
+# Delete virama after consonants.
+del_virama = CDRewrite["virama".c : "", consonant, "", star];
+
+# Replace codepoints with graphemes.
+to_graphemes_aux =
+  codepoint_to_grapheme
+| ("virama".c : virama_g)
+| ("nukta".c : "ERROR".g)
+| (separator_c : "-".g)
+;
+
+to_graphemes = CDRewrite[to_graphemes_aux, "", "", star];
 
 export CODEPOINTS_TO_GRAPHEMES = Optimize[
   codepoints_to_graphemes_internal
-@ CDRewrite[("@".g : "a".g), "", "", star]
+@ minimally_mark_independent_vowel
+@ del_virama
+@ to_graphemes
+@ CDRewrite["@".g : "a".g, "", "", star]
 @ grapheme*
+];
+
+export G2P_PREPROCESS = Optimize[
+  codepoints_to_graphemes_internal
+@ always_mark_independent_vowel
+@ del_virama
+@ to_graphemes
+@ CDRewrite[reph : "r".g, "", "", star]
+@ ("": "BOS".g) grapheme* ("" : "EOS".g)
 ];

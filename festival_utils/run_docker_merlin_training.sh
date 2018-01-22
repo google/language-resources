@@ -25,7 +25,7 @@ CONF_PATH="egs/locale/s1/conf/"
 
 # Whether to run merlin TTS training.
 TRAIN=true
-SAMPLE_RATE=48000
+SAMPLE_RATE=16000
 MERLIN_GLOBAL_CONFIG=/usr/local/src/language-resources/docker-images/merlin/small_merlin_params.json
 
 while getopts ":t" opt; do

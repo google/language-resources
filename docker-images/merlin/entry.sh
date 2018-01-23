@@ -27,6 +27,9 @@ cd /usr/local/src/voice/data/festvox/wavs
 if [[ -f ../wav.tar ]]; then
   tar -xf ../wav.tar
 fi
+if [[ -f ../wav.tar.gz ]]; then
+  tar -xvzf ../wav.tar.gz
+fi
 
 # Debug information.
 cd /usr/local/src/voice/data/festvox/

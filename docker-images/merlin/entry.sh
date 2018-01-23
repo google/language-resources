@@ -50,7 +50,7 @@ cd /usr/local/src/voice/training
 ./bin/do_build parallel build_prompts
 ./bin/do_build label
 ./bin/do_clustergen parallel build_utts
-cd lab && ls *.lab -1 | sed -e 's/\.lab$//' | head -n 30 > ../file_id_list.scp
+cd lab && ls *.lab -1 | sed -e 's/\.lab$//' > ../file_id_list.scp
 
 # Setup merlin
 cd /usr/local/src/voice/training

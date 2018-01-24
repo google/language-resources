@@ -1,12 +1,12 @@
 package(default_visibility = ["//visibility:public"])
 
-licenses(["notice"])  # MIT License in LICENSE.txt
+licenses(["notice"])  # MIT License in file "LICENSE.txt"
 
 exports_files(glob(["panphon/data/*"]))
 
 py_library(
     name = "panphon_data",
-    srcs = ["panphon/__init__.py"],
+    srcs = ["panphon/__init__.py"],  # pro forma only, cannot be imported
     data = glob(["panphon/data/*"]),
 )
 

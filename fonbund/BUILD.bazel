@@ -17,16 +17,20 @@ package(default_visibility = ["//visibility:public"])
 load("@subpar//:subpar.bzl", "par_binary")
 
 py_library(
-    name = "panphon_util",
-    srcs = ["panphon_util.py"],
-    deps = ["@PanPhon//:panphon_data"],
+    name = "segments",
+    srcs = ["segments.py"],
+    deps = [
+        "@PanPhon//:panphon_data",
+        "@clld_phoible//:phoible_data",
+    ],
 )
 
 par_binary(
-    name = "show_panphon",
-    srcs = ["show_panphon.py"],
+    name = "show_segments",
+    srcs = ["show_segments.py"],
     deps = [
-        ":panphon_util",
+        ":segments",
         "@io_abseil_py//absl:app",
+        "@io_abseil_py//absl/flags",
     ],
 )

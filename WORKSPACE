@@ -8,13 +8,20 @@ git_repository(
     tag = "1.1.0",
 )
 
-# PanPhon
+# PanPhon and PHOIBLE
 
 new_http_archive(
     name = "PanPhon",
     build_file = "bazel/panphon.BUILD",
     strip_prefix = "panphon-master",
     urls = ["https://github.com/dmort27/panphon/archive/master.zip"],
+)
+
+new_http_archive(
+    name = "clld_phoible",
+    build_file = "bazel/clld_phoible.BUILD",
+    strip_prefix = "phoible-master",
+    urls = ["https://github.com/clld/phoible/archive/master.zip"],
 )
 
 # Protobuf

@@ -1,12 +1,5 @@
 workspace(name = "language_resources")
 
-# Android SDK
-
-android_sdk_repository(
-    name = "androidsdk",
-    # Uses the SDK referenced by the environment variable ANDROID_HOME.
-)
-
 # Protobuf
 
 protobuf_version = "3.5.1.1"

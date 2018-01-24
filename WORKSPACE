@@ -1,5 +1,22 @@
 workspace(name = "language_resources")
 
+# Subpar
+
+git_repository(
+    name = "subpar",
+    remote = "https://github.com/google/subpar",
+    tag = "1.1.0",
+)
+
+# PanPhon
+
+new_http_archive(
+    name = "PanPhon",
+    build_file = "bazel/panphon.BUILD",
+    strip_prefix = "panphon-master",
+    urls = ["https://github.com/dmort27/panphon/archive/master.zip"],
+)
+
 # Protobuf
 
 protobuf_version = "3.5.1.1"

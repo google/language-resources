@@ -65,8 +65,8 @@ bind(
 
 new_http_archive(
     name = "farmhash",
-    strip_prefix = "farmhash-master",
     build_file = "farmhash.BUILD",
+    strip_prefix = "farmhash-master",
     urls = ["https://github.com/google/farmhash/archive/master.zip"],
 )
 
@@ -96,24 +96,24 @@ http_archive(
 )
 
 http_archive(
-    name = "com_google_absl_py",
+    name = "io_abseil_py",
     strip_prefix = "abseil-py-master",
     urls = ["https://github.com/abseil/abseil-py/archive/master.zip"],
 )
 
 bind(
     name = "absl/app",
-    actual = "@com_google_absl_py//absl:app",
+    actual = "@io_abseil_py//absl:app",
 )
 
 bind(
     name = "absl/flags",
-    actual = "@com_google_absl_py//absl/flags",
+    actual = "@io_abseil_py//absl/flags",
 )
 
 bind(
     name = "absl/logging",
-    actual = "@com_google_absl_py//absl/logging",
+    actual = "@io_abseil_py//absl/logging",
 )
 
 # OpenFst, OpenGrm NGram & Thrax

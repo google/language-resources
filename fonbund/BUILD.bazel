@@ -14,6 +14,7 @@
 
 package(default_visibility = ["//visibility:public"])
 
+load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
 load("@subpar//:subpar.bzl", "par_binary")
 
 py_library(
@@ -32,5 +33,25 @@ par_binary(
         ":segments",
         "@io_abseil_py//absl:app",
         "@io_abseil_py//absl/flags",
+    ],
+)
+
+py_proto_library(
+    name = "ipa_symbols_py_proto",
+    srcs = ["ipa_symbols.proto"],
+    default_runtime = "@com_google_protobuf//:protobuf_python",
+    protoc = "@com_google_protobuf//:protoc",
+)
+
+par_binary(
+    name = "show_ipa_symbols",
+    srcs = ["show_ipa_symbols.py"],
+    data = [
+        "ipa_symbols.textproto",
+    ],
+    deps = [
+        ":ipa_symbols_py_proto",
+        "@io_abseil_py//absl:app",
+        "@six_archive//:six",
     ],
 )

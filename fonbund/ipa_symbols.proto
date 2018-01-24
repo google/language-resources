@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package fonbund;
+
+message IpaSymbols {
+  repeated IpaSymbol symbol = 1;
+}
+
+message IpaSymbol {
+  string symbol = 1;
+  string symbol_name = 2;
+  string description = 3;
+  int32 ipa_number = 4;
+  int32 ucs_code = 5;
+  oneof status {
+    int32 withdrawn = 6;
+    Redirect equivalent_to = 7;
+    Redirect superseded_by = 8;
+    Redirect not_ipa_usage = 9;
+  }
+}
+
+message Redirect {
+  repeated int32 ipa_number = 1;
+}

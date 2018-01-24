@@ -1,0 +1,57 @@
+symbol {
+  symbol: "p"
+  symbol_name: "lower-case p"
+  description: "voiceless bilabial plosive"
+  ipa_number: 101
+  ucs_code: 0x70
+}
+
+symbol {
+  symbol: "b"
+  symbol_name: "lower-case b"
+  description: "voiced bilabial plosive"
+  ipa_number: 102
+  ucs_code: 0x62
+}
+
+symbol {
+  symbol: "ɡ"
+  symbol_name: "opentail g"
+  description: "voiced velar plosive"
+  ipa_number: 110
+  ucs_code: 0x0261
+  equivalent_to {
+    ipa_number: 210
+  }
+}
+
+symbol {
+  symbol: "ƥ"
+  symbol_name: "hooktop p"
+  description: "voiceless bilabial implosive"
+  ipa_number: 159
+  ucs_code: 0x01A5
+  withdrawn: 1993
+}
+
+symbol {
+  symbol: "ʇ"
+  symbol_name: "turned t"
+  description: "dental click"
+  ipa_number: 201
+  ucs_code: 0x0287
+  superseded_by {
+    ipa_number: 177
+  }
+}
+
+symbol {
+  symbol: "g"
+  symbol_name: "looptail g"
+  description: "voiced velar plosive"
+  ipa_number: 210
+  ucs_code: 0x67
+  equivalent_to {
+    ipa_number: 110
+  }
+}

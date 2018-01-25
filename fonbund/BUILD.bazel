@@ -86,3 +86,33 @@ py_test(
         ":segment_normalizer",
     ],
 )
+
+py_proto_library(
+    name = "segment_repository_config_py_proto",
+    srcs = ["segment_repository_config.proto"],
+    default_runtime = "@com_google_protobuf//:protobuf_python",
+    protoc = "@com_google_protobuf//:protoc",
+    deps = [":segment_normalizer_config_py_proto"],
+)
+
+py_library(
+    name = "segment_repository_reader",
+    srcs = ["segment_repository_reader.py"],
+    deps = [
+        ":segment_normalizer",
+        ":segment_repository_config_py_proto",
+        "@io_abseil_py//absl/logging",
+        "@six_archive//:six",
+    ],
+)
+
+py_test(
+    name = "segment_repository_reader_test",
+    size = "small",
+    srcs = ["segment_repository_reader_test.py"],
+    data = ["testdata/tiny_panphon_example.csv"],
+    deps = [
+        ":segment_repository_config_py_proto",
+        ":segment_repository_reader",
+    ],
+)

@@ -38,21 +38,51 @@ par_binary(
 )
 
 py_proto_library(
+    name = "segment_normalizer_config_py_proto",
+    srcs = ["segment_normalizer_config.proto"],
+    default_runtime = "@com_google_protobuf//:protobuf_python",
+    protoc = "@com_google_protobuf//:protoc",
+)
+
+py_library(
+    name = "segment_normalizer",
+    srcs = ["segment_normalizer.py"],
+    deps = [":segment_normalizer_config_py_proto"],
+)
+
+py_test(
+    name = "segment_normalizer_test",
+    size = "small",
+    srcs = ["segment_normalizer_test.py"],
+    deps = [":segment_normalizer"],
+)
+
+py_proto_library(
     name = "ipa_symbols_py_proto",
     srcs = ["ipa_symbols.proto"],
     default_runtime = "@com_google_protobuf//:protobuf_python",
     protoc = "@com_google_protobuf//:protoc",
 )
 
-par_binary(
-    name = "show_ipa_symbols",
-    srcs = ["show_ipa_symbols.py"],
-    data = [
-        "ipa_symbols.textproto",
-    ],
+py_library(
+    name = "ipa_symbols_repository",
+    srcs = ["ipa_symbols_repository.py"],
+    data = ["config/ipa_symbols.textproto"],
     deps = [
         ":ipa_symbols_py_proto",
-        "@io_abseil_py//absl:app",
+        ":segment_normalizer",
+        "@io_abseil_py//absl/logging",
         "@six_archive//:six",
+    ],
+)
+
+py_test(
+    name = "ipa_symbols_repository_test",
+    size = "small",
+    srcs = ["ipa_symbols_repository_test.py"],
+    data = ["testdata/phoible_segments.txt"],
+    deps = [
+        ":ipa_symbols_repository",
+        ":segment_normalizer",
     ],
 )

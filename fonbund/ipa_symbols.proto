@@ -1,25 +1,44 @@
-syntax = "proto3";
+// Representation of IPA symbol table as a protocol message.
+
+syntax = "proto2";
+
+option cc_api_version = 2;
 
 package fonbund;
 
-message IpaSymbols {
-  repeated IpaSymbol symbol = 1;
-}
-
+// Unicode representation of IPA symbol expressed in Universal
+// Character Set (UCS).
 message IpaSymbol {
-  string symbol = 1;
-  string symbol_name = 2;
-  string description = 3;
-  int32 ipa_number = 4;
-  int32 ucs_code = 5;
-  oneof status {
-    int32 withdrawn = 6;
-    Redirect equivalent_to = 7;
-    Redirect superseded_by = 8;
-    Redirect not_ipa_usage = 9;
-  }
+  // Decimal code describing the symbol (e.g. 97 for "a").
+  optional int32 decimal_code = 1;
+
+  // Hexadecimal code for the symbol represented as string (e.g. "0061"
+  // for "a").
+  optional string hex_code = 2;
+
+  // Example rendering(s), as string (e.g. for "breathy voiced" diacritic
+  // this will be "b̤,a̤").
+  optional string example_rendering = 3;
+
+  // Description for this symbol (e.g. "open front unrounded vowel").
+  optional string description = 4;
+
+  // Some useful precomposed characters don't fit into the "official" IPA.
+  // For such characters the following flag should be enabled.
+  optional bool unofficial = 5;
+
+  // The sequence of decimal codes this symbol maps to.
+  repeated int32 maps_to_decimal_code = 6;
+
+  // The sequence of hex codes this symbol maps to.
+  repeated string maps_to_hex_code = 7;
 }
 
-message Redirect {
-  repeated int32 ipa_number = 1;
+message IpaSymbols {
+  // List of IPA symbols.
+  repeated IpaSymbol symbol = 1;
+
+  // Allow precomposed characters, such as 'ʧ', that don't fit into the
+  // official IPA.
+  optional bool allow_unofficial_characters = 2;
 }

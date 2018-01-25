@@ -1,0 +1,1479 @@
+# Copyright 2018 Google LLC. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Definitions of IPA symbols.
+#
+# The current official standard seems to be revision of 2015:
+#   http://www.phon.ox.ac.uk/jcoleman/IPA_Kiel_2015.pdf
+#
+# This file is based on the contents of the page "The International Phonetic
+# Alphabet in Unicode" authored by John Wells <j.wells@ucl.ac.uk> from UCL
+# Psychology and Language Sciences Department:
+#
+#   http://www.phon.ucl.ac.uk/home/wells/ipa-unicode.htm
+#
+# Additional sources of information:
+#   - Alan Wood’s Unicode Resources:
+#       http://www.alanwood.net/unicode/ipa_extensions.html
+#   - http://linguistlist.org/unicode/ipa.html
+#
+# Each symbol is described in terms of:
+#   - Example Rendering(s)
+#   - Decimal
+#   - Hexadecimal
+#   - Description
+#
+# The proto definition is in ../ipa_symbols.proto.
+
+# Allow characters not in the ``official`` IPA.
+allow_unofficial_characters: true
+
+# ------------------------------------------------------------------------------
+# Basic Latin alphabetic characters:
+# ------------------------------------------------------------------------------
+
+symbol {
+  example_rendering: "a"
+  decimal_code: 97
+  hex_code: "0061"
+  description: "open front unrounded vowel"
+}
+
+symbol {
+  example_rendering: "b"
+  decimal_code: 98
+  hex_code: "0062"
+  description: "voiced bilabial plosive"
+}
+
+symbol {
+  example_rendering: "c"
+  decimal_code: 99
+  hex_code: "0063"
+  description: "voiceless palatal plosive"
+}
+
+symbol {
+  example_rendering: "d"
+  decimal_code: 100
+  hex_code: "0064"
+  description: "voiced alveolar plosive"
+}
+
+symbol {
+  example_rendering: "e"
+  decimal_code: 101
+  hex_code: "0065"
+  description: "close-mid front unrounded vowel"
+}
+
+symbol {
+  example_rendering: "f"
+  decimal_code: 102
+  hex_code: "0066"
+  description: "voiceless labiodental fricative"
+}
+
+symbol {
+  example_rendering: "h"
+  decimal_code: 104
+  hex_code: "0068"
+  description: "voiceless glottal fricative"
+}
+
+symbol {
+  example_rendering: "i"
+  decimal_code: 105
+  hex_code: "0069"
+  description: "close front unrounded vowel"
+}
+
+symbol {
+  example_rendering: "j"
+  decimal_code: 106
+  hex_code: "006A"
+  description: "voiced palatal approximant"
+}
+
+symbol {
+  example_rendering: "k"
+  decimal_code: 107
+  hex_code: "006B"
+  description: "voiceless velar plosive"
+}
+
+symbol {
+  example_rendering: "l"
+  decimal_code: 108
+  hex_code: "006C"
+  description: "voiced alveolar lateral approximant"
+}
+
+symbol {
+  example_rendering: "m"
+  decimal_code: 109
+  hex_code: "006D"
+  description: "voiced bilabial nasal"
+}
+
+symbol {
+  example_rendering: "n"
+  decimal_code: 110
+  hex_code: "006E"
+  description: "voiced alveolar nasal"
+}
+
+symbol {
+  example_rendering: "o"
+  decimal_code: 111
+  hex_code: "006F"
+  description: "close-mid back rounded vowel"
+}
+
+symbol {
+  example_rendering: "p"
+  decimal_code: 112
+  hex_code: "0070"
+  description: "voiceless bilabial plosive"
+}
+
+symbol {
+  example_rendering: "q"
+  decimal_code: 113
+  hex_code: "0071"
+  description: "voiceless uvular plosive"
+}
+
+symbol {
+  example_rendering: "r"
+  decimal_code: 114
+  hex_code: "0072"
+  description: "voiced alveolar trill"
+}
+
+symbol {
+  example_rendering: "s"
+  decimal_code: 115
+  hex_code: "0073"
+  description: "voiceless alveolar fricative"
+}
+
+symbol {
+  example_rendering: "t"
+  decimal_code: 116
+  hex_code: "0074"
+  description: "voiceless alveolar plosive"
+}
+
+symbol {
+  example_rendering: "u"
+  decimal_code: 117
+  hex_code: "0075"
+  description: "close back rounded vowel"
+}
+
+symbol {
+  example_rendering: "v"
+  decimal_code: 118
+  hex_code: "0076"
+  description: "voiced labiodental fricative"
+}
+
+symbol {
+  example_rendering: "w"
+  decimal_code: 119
+  hex_code: "0077"
+  description: "voiced labio-velar approximant"
+}
+
+symbol {
+  example_rendering: "x"
+  decimal_code: 120
+  hex_code: "0078"
+  description: "voicless velar fricative"
+}
+
+symbol {
+  example_rendering: "y"
+  decimal_code: 121
+  hex_code: "0079"
+  description: "close front rounded vowel"
+}
+
+symbol {
+  example_rendering: "z"
+  decimal_code: 122
+  hex_code: "007A"
+  description: "voiced alveolar fricative"
+}
+
+# ------------------------------------------------------------------------------
+# Alphabetic:
+# ------------------------------------------------------------------------------
+
+symbol {
+  example_rendering: "ä"
+  decimal_code: 228
+  hex_code: "00E4"
+  description: "open central unrounded vowel"
+}
+
+symbol {
+  example_rendering: "õ"
+  decimal_code: 245
+  hex_code: "00F5"
+  description: "nasal close-mid back rounded vowel"
+}
+
+symbol {
+  example_rendering: "ɑ"
+  decimal_code: 593
+  hex_code: "0251"
+  description: "open back unrounded"
+}
+
+symbol {
+  example_rendering: "ɐ"
+  decimal_code: 592
+  hex_code: "0250"
+  description: "open-mid schwa"
+}
+
+symbol {
+  example_rendering: "ɒ"
+  decimal_code: 594
+  hex_code: "0252"
+  description: "open back rounded"
+}
+
+symbol {
+  example_rendering: "æ"
+  decimal_code: 230
+  hex_code: "00E6"
+  description: "raised open front unrounded"
+}
+
+symbol {
+  example_rendering: "ɓ"
+  decimal_code: 595
+  hex_code: "0253"
+  description: "voiced bilabial implosive"
+}
+
+symbol {
+  example_rendering: "ʙ"
+  decimal_code: 665
+  hex_code: "0299"
+  description: "voiced bilabial trill"
+}
+
+symbol {
+  example_rendering: "β"
+  decimal_code: 946
+  hex_code: "03B2"
+  description: "voiced bilabial fricative"
+}
+
+symbol {
+  example_rendering: "ɔ"
+  decimal_code: 596
+  hex_code: "0254"
+  description: "open-mid back rounded"
+}
+
+symbol {
+  example_rendering: "ɕ"
+  decimal_code: 597
+  hex_code: "0255"
+  description: "voiceless alveolopalatal fricative"
+}
+
+symbol {
+  example_rendering: "ç"
+  decimal_code: 231
+  hex_code: "00E7"
+  description: "voiceless palatal fricative"
+}
+
+symbol {
+  example_rendering: "ɗ"
+  decimal_code: 599
+  hex_code: "0257"
+  description: "voiced alveolar implosive"
+}
+
+symbol {
+  example_rendering: "ɖ"
+  decimal_code: 598
+  hex_code: "0256"
+  description: "voiced retroflex plosive"
+}
+
+symbol {
+  example_rendering: "ð"
+  decimal_code: 240
+  hex_code: "00F0"
+  description: "voiced dental fricative"
+}
+
+symbol {
+  example_rendering: "ʣ"
+  decimal_code: 675
+  hex_code: "02A3"
+  description: "voiced alveolar affricate"
+  # This symbol maps to "dz".
+  unofficial: true
+  maps_to_decimal_code: 100 maps_to_decimal_code: 122
+  maps_to_hex_code: "0064" maps_to_hex_code: "007A"
+}
+
+symbol {
+  example_rendering: "ʤ"
+  decimal_code: 676
+  hex_code: "02A4"
+  description: "voiced postalveolar affricate"
+}
+
+symbol {
+  example_rendering: "ə"
+  decimal_code: 601
+  hex_code: "0259"
+  description: "schwa"
+}
+
+symbol {
+  example_rendering: "ɘ"
+  decimal_code: 600
+  hex_code: "0258"
+  description: "close-mid schwa"
+}
+
+symbol {
+  example_rendering: "ɚ"
+  decimal_code: 602
+  hex_code: "025A"
+  description: "rhotacized schwa"
+}
+
+symbol {
+  example_rendering: "ɛ"
+  decimal_code: 603
+  hex_code: "025B"
+  description: "open-mid front unrounded"
+}
+
+symbol {
+  example_rendering: "ɜ"
+  decimal_code: 604
+  hex_code: "025C"
+  description: "open-mid central"
+}
+
+symbol {
+  example_rendering: "ɝ"
+  decimal_code: 605
+  hex_code: "025D"
+  description: "rhotacized open-mid central"
+}
+
+symbol {
+  example_rendering: "ɞ"
+  decimal_code: 606
+  hex_code: "025E"
+  description: "open-mid central rounded"
+}
+
+symbol {
+  example_rendering: "ɟ"
+  decimal_code: 607
+  hex_code: "025F"
+  description: "voiced palatal plosive"
+}
+
+symbol {
+  example_rendering: "ʄ"
+  decimal_code: 644
+  hex_code: "0284"
+  description: "voiced palatal implosive"
+}
+
+symbol {
+  example_rendering: "ɡ"
+  decimal_code: 609
+  hex_code: "0261"
+  description: "voiced velar plosive (but the IPA has ruled that an ordinary g is also acceptable)"
+}
+
+symbol {
+  example_rendering: "ɠ"
+  decimal_code: 608
+  hex_code: "0260"
+  description: "voiced velar implosive"
+}
+
+symbol {
+  example_rendering: "ɢ"
+  decimal_code: 610
+  hex_code: "0262"
+  description: "voiced uvular plosive"
+}
+
+symbol {
+  example_rendering: "ʛ"
+  decimal_code: 667
+  hex_code: "029B"
+  description: "voiced uvular implosive"
+}
+
+symbol {
+  example_rendering: "ɦ"
+  decimal_code: 614
+  hex_code: "0266"
+  description: "voiced glottal fricative"
+}
+
+symbol {
+  example_rendering: "ɧ"
+  decimal_code: 615
+  hex_code: "0267"
+  description: "voiceless multiple-place fricative"
+}
+
+symbol {
+  example_rendering: "ħ"
+  decimal_code: 295
+  hex_code: "0127"
+  description: "voiceless pharyngeal fricative"
+}
+
+symbol {
+  example_rendering: "ɥ"
+  decimal_code: 613
+  hex_code: "0265"
+  description: "labial-palatal approximant"
+}
+
+symbol {
+  example_rendering: "ʜ"
+  decimal_code: 668
+  hex_code: "029C"
+  description: "voiceless epiglottal fricative"
+}
+
+symbol {
+  example_rendering: "ɨ"
+  decimal_code: 616
+  hex_code: "0268"
+  description: "close central unrounded"
+}
+
+symbol {
+  example_rendering: "ɪ"
+  decimal_code: 618
+  hex_code: "026A"
+  description: "lax close front unrounded"
+}
+
+symbol {
+  example_rendering: "ʝ"
+  decimal_code: 669
+  hex_code: "029D"
+  description: "voiced palatal fricative"
+}
+
+symbol {
+  example_rendering: "ɭ"
+  decimal_code: 621
+  hex_code: "026D"
+  description: "voiced retroflex lateral"
+}
+
+symbol {
+  example_rendering: "ɬ"
+  decimal_code: 620
+  hex_code: "026C"
+  description: "voiceless alveolar lateral fricative"
+}
+
+symbol {
+  example_rendering: "ɫ"
+  decimal_code: 619
+  hex_code: "026B"
+  description: "velarized voiced alveolar lateral"
+}
+
+symbol {
+  example_rendering: "ɮ"
+  decimal_code: 622
+  hex_code: "026E"
+  description: "voiced alveolar lateral fricative"
+}
+
+symbol {
+  example_rendering: "ʟ"
+  decimal_code: 671
+  hex_code: "029F"
+  description: "voiced velar lateral"
+}
+
+symbol {
+  example_rendering: "ɱ"
+  decimal_code: 625
+  hex_code: "0271"
+  description: "voiced labiodental nasal"
+}
+
+symbol {
+  example_rendering: "ɯ"
+  decimal_code: 623
+  hex_code: "026F"
+  description: "close back unrounded"
+}
+
+symbol {
+  example_rendering: "ɰ"
+  decimal_code: 624
+  hex_code: "0270"
+  description: "velar approximant"
+}
+
+symbol {
+  example_rendering: "ŋ"
+  decimal_code: 331
+  hex_code: "014B"
+  description: "voiced velar nasal"
+}
+
+symbol {
+  example_rendering: "ɳ"
+  decimal_code: 627
+  hex_code: "0273"
+  description: "voiced retroflex nasal"
+}
+
+symbol {
+  example_rendering: "ɲ"
+  decimal_code: 626
+  hex_code: "0272"
+  description: "voiced palatal nasal"
+}
+
+symbol {
+  example_rendering: "ȵ"
+  decimal_code: 565
+  hex_code: "0235"
+  description: "alveolo-palatal nasal (NOTE: this is non-IPA but used by sinologists)"
+}
+
+symbol {
+  example_rendering: "ɴ"
+  decimal_code: 628
+  hex_code: "0274"
+  description: "voiced uvular nasal"
+}
+
+symbol {
+  example_rendering: "ø"
+  decimal_code: 248
+  hex_code: "00F8"
+  description: "front close-mid rounded"
+}
+
+symbol {
+  example_rendering: "ɵ"
+  decimal_code: 629
+  hex_code: "0275"
+  description: "rounded schwa"
+}
+
+symbol {
+  example_rendering: "ɸ"
+  decimal_code: 632
+  hex_code: "0278"
+  description: "voiceless bilabial fricative"
+}
+
+symbol {
+  example_rendering: "θ"
+  decimal_code: 952
+  hex_code: "03B8"
+  description: "voiceless dental fricative"
+}
+
+symbol {
+  example_rendering: "œ"
+  decimal_code: 339
+  hex_code: "0153"
+  description: "front open-mid rounded"
+}
+
+symbol {
+  example_rendering: "ɶ"
+  decimal_code: 630
+  hex_code: "0276"
+  description: "front open rounded"
+}
+
+symbol {
+  example_rendering: "ʘ"
+  decimal_code: 664
+  hex_code: "0298"
+  description: "bilabial click"
+}
+
+symbol {
+  example_rendering: "ɹ"
+  decimal_code: 633
+  hex_code: "0279"
+  description: "voiced (post)alveolar approximant"
+}
+
+symbol {
+  example_rendering: "ɺ"
+  decimal_code: 634
+  hex_code: "027A"
+  description: "voiced alveolar lateral flap"
+}
+
+symbol {
+  example_rendering: "ɾ"
+  decimal_code: 638
+  hex_code: "027E"
+  description: "voiced alveolar tap"
+}
+
+symbol {
+  example_rendering: "ɻ"
+  decimal_code: 635
+  hex_code: "027B"
+  description: "voiced retroflex approximant"
+}
+
+symbol {
+  example_rendering: "ʀ"
+  decimal_code: 640
+  hex_code: "0280"
+  description: "voiced uvular trill"
+}
+
+symbol {
+  example_rendering: "ʁ"
+  decimal_code: 641
+  hex_code: "0281"
+  description: "voiced uvular fricative"
+}
+
+symbol {
+  example_rendering: "ɽ"
+  decimal_code: 637
+  hex_code: "027D"
+  description: "voiced retroflex flap"
+}
+
+symbol {
+  example_rendering: "ʂ"
+  decimal_code: 642
+  hex_code: "0282"
+  description: "voiceless retroflex fricative"
+}
+
+symbol {
+  example_rendering: "ʃ"
+  decimal_code: 643
+  hex_code: "0283"
+  description: "voiceless postalveolar fricative"
+}
+
+symbol {
+  example_rendering: "ʈ"
+  decimal_code: 648
+  hex_code: "0288"
+  description: "voiceless retroflex plosive"
+}
+
+symbol {
+  example_rendering: "ʦ"
+  decimal_code: 678
+  hex_code: "02A6"
+  description: "voiceless alveolar affricate"
+  # This symbol maps to "ts".
+  unofficial: true
+  maps_to_decimal_code: 116 maps_to_decimal_code: 115
+  maps_to_hex_code: "0074" maps_to_hex_code: "0073"
+}
+
+symbol {
+  example_rendering: "ʧ"
+  decimal_code: 679
+  hex_code: "02A7"
+  description: "voiceless postalveolar affricate"
+  # This symbol maps to "tʃ".
+  unofficial: true
+  maps_to_decimal_code: 116 maps_to_decimal_code: 643
+  maps_to_hex_code: "0074" maps_to_hex_code: "0283"
+}
+
+symbol {
+  example_rendering: "ʉ"
+  decimal_code: 649
+  hex_code: "0289"
+  description: "close central rounded"
+}
+
+symbol {
+  example_rendering: "ʊ"
+  decimal_code: 650
+  hex_code: "028A"
+  description: "lax close back rounded"
+}
+
+symbol {
+  example_rendering: "ʋ"
+  decimal_code: 651
+  hex_code: "028B"
+  description: "voiced labiodental approximant"
+}
+
+symbol {
+  example_rendering: "ⱱ"
+  decimal_code: 11377
+  hex_code: "2C71"
+  description: "voiced labiodental flap"
+}
+
+symbol {
+  example_rendering: "ʌ"
+  decimal_code: 652
+  hex_code: "028C"
+  description: "open-mid back unrounded"
+}
+
+symbol {
+  example_rendering: "ɣ"
+  decimal_code: 611
+  hex_code: "0263"
+  description: "voiced velar fricative"
+}
+
+symbol {
+  example_rendering: "ɤ"
+  decimal_code: 612
+  hex_code: "0264"
+  description: "close-mid back unrounded"
+}
+
+symbol {
+  example_rendering: "ʍ"
+  decimal_code: 653
+  hex_code: "028D"
+  description: "voiceless labial-velar fricative"
+}
+
+symbol {
+  example_rendering: "χ"
+  decimal_code: 967
+  hex_code: "03C7"
+  description: "voiceless uvular fricative"
+}
+
+symbol {
+  example_rendering: "ʎ"
+  decimal_code: 654
+  hex_code: "028E"
+  description: "voiced palatal lateral"
+}
+
+symbol {
+  example_rendering: "ʏ"
+  decimal_code: 655
+  hex_code: "028F"
+  description: "lax close front rounded"
+}
+
+symbol {
+  example_rendering: "ʑ"
+  decimal_code: 657
+  hex_code: "0291"
+  description: "voiced alveolopalatal fricative"
+}
+
+symbol {
+  example_rendering: "ʐ"
+  decimal_code: 656
+  hex_code: "0290"
+  description: "voiced retroflex fricative"
+}
+
+symbol {
+  example_rendering: "ʒ"
+  decimal_code: 658
+  hex_code: "0292"
+  description: "voiced postalveolar fricative"
+}
+
+symbol {
+  example_rendering: "ʔ"
+  decimal_code: 660
+  hex_code: "0294"
+  description: "glottal plosive"
+}
+
+symbol {
+  example_rendering: "ʡ"
+  decimal_code: 673
+  hex_code: "02A1"
+  description: "voiced epiglottal plosive"
+}
+
+symbol {
+  example_rendering: "ʕ"
+  decimal_code: 661
+  hex_code: "0295"
+  description: "voiced pharyngeal fricative"
+}
+
+symbol {
+  example_rendering: "ʢ"
+  decimal_code: 674
+  hex_code: "02A2"
+  description: "voiced epiglottal fricative"
+}
+
+symbol {
+  example_rendering: "ǀ"
+  decimal_code: 448
+  hex_code: "01C0"
+  description: "dental click"
+}
+
+symbol {
+  example_rendering: "ǁ"
+  decimal_code: 449
+  hex_code: "01C1"
+  description: "alveolar lateral click"
+}
+
+symbol {
+  example_rendering: "ǂ"
+  decimal_code: 450
+  hex_code: "01C2"
+  description: "alveolar click"
+}
+
+symbol {
+  example_rendering: "ǃ"
+  decimal_code: 451
+  hex_code: "01C3"
+  description: "retroflex click"
+}
+
+# ----------------------------------------------------------------------------
+# Spacing diacritics and suprasegmentals:
+#
+# Note the ready-made characters /ɚ/ (602 025A) (combining /ə/ 601 0259 and
+# /˞/ 734 02DE) and /ɝ/ (605 025D) (combining /ɜ/ 604 025C and /˞/ 734 02DE).
+# ----------------------------------------------------------------------------
+
+symbol {
+  example_rendering: "ˈ"
+  decimal_code: 712
+  hex_code: "02C8"
+  description: "(primary) stress mark"
+}
+
+symbol {
+  example_rendering: "ˌ"
+  decimal_code: 716
+  hex_code: "02CC"
+  description: "secondary stress"
+}
+
+symbol {
+  example_rendering: "ː"
+  decimal_code: 720
+  hex_code: "02D0"
+  description: "length mark"
+}
+
+symbol {
+  example_rendering: "ˑ"
+  decimal_code: 721
+  hex_code: "02D1"
+  description: "half-length"
+}
+
+symbol {
+  example_rendering: "ʼ"
+  decimal_code: 700
+  hex_code: "02BC"
+  description: "ejective"
+}
+
+symbol {
+  example_rendering: "ʴ"
+  decimal_code: 692
+  hex_code: "02B4"
+  description: "rhotacized"
+}
+
+symbol {
+  example_rendering: "ʰ"
+  decimal_code: 688
+  hex_code: "02B0"
+  description: "aspirated"
+}
+
+symbol {
+  example_rendering: "ʱ"
+  decimal_code: 689
+  hex_code: "02B1"
+  description: "breathy-voice-aspirated"
+}
+
+symbol {
+  example_rendering: "ʲ"
+  decimal_code: 690
+  hex_code: "02B2"
+  description: "palatalized"
+}
+
+symbol {
+  example_rendering: "ᵐ"
+  decimal_code: 7504
+  hex_code: "1D50"
+  description: "nasal release or prenasalization (labial)"
+}
+
+symbol {
+  example_rendering: "ⁿ"
+  decimal_code: 8319
+  hex_code: "207F"
+  description: "nasal release or prenasalization (alveolar)"
+}
+
+symbol {
+  example_rendering: "ᵑ"
+  decimal_code: 7505
+  hex_code: "1D51"
+  description: "nasal release or prenasalization (velar)"
+}
+
+symbol {
+  example_rendering: "ʷ"
+  decimal_code: 695
+  hex_code: "02B7"
+  description: "labialized"
+}
+
+symbol {
+  example_rendering: "ˠ"
+  decimal_code: 736
+  hex_code: "02E0"
+  description: "velarized"
+}
+
+symbol {
+  example_rendering: "ˤ"
+  decimal_code: 740
+  hex_code: "02E4"
+  description: "pharyngealized"
+}
+
+symbol {
+  example_rendering: "ˀ"
+  decimal_code: 704
+  hex_code: "02C0"
+  description: "glottalization"
+}
+
+symbol {
+  example_rendering: "ᶣ"
+  decimal_code: 7587
+  hex_code: "1DA3"
+  description: "labio-palatalization"
+}
+
+symbol {
+  example_rendering: "˞"
+  decimal_code: 734
+  hex_code: "02DE"
+  description: "rhotacized"
+}
+
+symbol {
+  example_rendering: "ɡˡ"
+  decimal_code: 737
+  hex_code: "02E1"
+  description: "lateral release"
+}
+
+symbol {
+  example_rendering: "~"
+  decimal_code: 126
+  hex_code: "007E"
+  description: "range hack? (Korean: sʰ~ɕʰ, tɕ~dʑ)"
+}
+
+# ---------------------------------------------------------------------
+# A series of iconic tone letters based on a musical staff was
+# invented by Yuen Ren Chao and adopted into the IPA.
+#
+# Combinations of these tone letters are schematics of the pitch
+# contour of a tone, mapping the pitch in the letter space and ending
+# in a vertical bar. For example, [ma˨˩˦] represents the mid-dipping
+# pitch contour of the Chinese word for horse, 马 mǎ. Single tone
+# letters differentiate up to five pitch levels: ˥ 'extra high' or
+# 'top', ˦ 'high', ˧ 'mid', ˨ 'low', and ˩ 'extra low' or 'bottom'.
+#
+# With the possible exception of the Omotic languages of Ethiopia, no
+# language is known to depend on more than five levels of pitch.
+#
+# Example use in describing pitch contours(Chinese):
+#    low dipping: ma˨˩˦: 馬 (horse)
+#   high falling:  ma˥˩: 罵 (scold)
+# ---------------------------------------------------------------------
+
+symbol {
+  example_rendering: "˥"
+  decimal_code: 741
+  hex_code: "02E5"
+  description: "pitch level: extra high (ma˥, 媽 - mother)"
+}
+
+symbol {
+  example_rendering: "˦"
+  decimal_code: 742
+  hex_code: "02E6"
+  description: "pitch level: high"
+}
+
+symbol {
+  example_rendering: "˧"
+  decimal_code: 743
+  hex_code: "02E7"
+  description: "pitch level: mid"
+}
+
+symbol {
+  example_rendering: "˨"
+  decimal_code: 744
+  hex_code: "02E8"
+  description: "pitch level: low"
+}
+
+symbol {
+  example_rendering: "˩"
+  decimal_code: 745
+  hex_code: "02E9"
+  description: "pitch level: extra low"
+}
+
+# ---------------------------------------------------------------------
+# Non-spacing diacritics and suprasegmentals and examples of their use:
+# ---------------------------------------------------------------------
+
+symbol {
+  example_rendering: "n̥,d̥"
+  decimal_code: 805
+  hex_code: "0325"
+  description: "voiceless"
+}
+
+symbol {
+  example_rendering: "ŋ̊"
+  decimal_code: 778
+  hex_code: "030A"
+  description: "voiceless (use if character has descender)"
+}
+
+symbol {
+  example_rendering: "b̤,a̤"
+  decimal_code: 804
+  hex_code: "0324"
+  description: "breathy voiced"
+}
+
+symbol {
+  example_rendering: "t̪,d̪"
+  decimal_code: 810
+  hex_code: "032A"
+  description: "dental"
+}
+
+symbol {
+  example_rendering: "s̬,t̬"
+  decimal_code: 812
+  hex_code: "032C"
+  description: "voiced"
+}
+
+symbol {
+  example_rendering: "b̰,a̰"
+  decimal_code: 816
+  hex_code: "0330"
+  description: "creaky voiced"
+}
+
+symbol {
+  example_rendering: "t̺,d̺"
+  decimal_code: 826
+  hex_code: "033A"
+  description: "apical"
+}
+
+symbol {
+  example_rendering: "t̼,d̼"
+  decimal_code: 828
+  hex_code: "033C"
+  description: "linguolabial"
+}
+
+symbol {
+  example_rendering: "t̻,d̻"
+  decimal_code: 827
+  hex_code: "033B"
+  description: "laminal"
+}
+
+symbol {
+  example_rendering: "t̚"
+  decimal_code: 794
+  hex_code: "031A"
+  description: "not audibly released"
+}
+
+symbol {
+  example_rendering: "ɔ̹"
+  decimal_code: 825
+  hex_code: "0339"
+  description: "more rounded"
+}
+
+symbol {
+  example_rendering: "ẽ"
+  decimal_code: 771
+  hex_code: "0303"
+  description: "nasalized"
+}
+
+symbol {
+  example_rendering: "ɔ̜"
+  decimal_code: 796
+  hex_code: "031C"
+  description: "less rounded"
+}
+
+symbol {
+  example_rendering: "u̟"
+  decimal_code: 799
+  hex_code: "031F"
+  description: "advanced"
+}
+
+symbol {
+  example_rendering: "e̠"
+  decimal_code: 800
+  hex_code: "0320"
+  description: "retracted"
+}
+
+symbol {
+  example_rendering: "ë"
+  decimal_code: 776
+  hex_code: "0308"
+  description: "centralized"
+}
+
+symbol {
+  example_rendering: "l̴,n̴"
+  decimal_code: 820
+  hex_code: "0334"
+  description: "velarized or pharyngealized"
+}
+
+symbol {
+  example_rendering: "e̽"
+  decimal_code: 829
+  hex_code: "033D"
+  description: "mid-centralized"
+}
+
+# See the notes on frictionalized diacritic (0353 COMBINING X BELOW)
+# in Phoible (http://phoible.github.io/conventions).
+symbol {
+  example_rendering: "u͓"
+  decimal_code: 851
+  hex_code: "0353"
+  description: "frictionalized"
+}
+
+# Languages described as having a sibilant/non-sibilant distinction among coronal
+# fricatives and affricates are handled using (0347 COMBINING EQUALS SIGN BELOW)
+# to mark non-sibilant phoneme. See http://phoible.github.io/conventions.
+symbol {
+  example_rendering: "z͇"
+  decimal_code: 839
+  hex_code: "0347"
+  description: "sibilant contrast in fricatives and affricates"
+}
+
+symbol {
+  example_rendering: "e̝,ɹ̝"
+  decimal_code: 797
+  hex_code: "031D"
+  description: "raised"
+}
+
+symbol {
+  example_rendering: "m̩,n̩,l̩"
+  decimal_code: 809
+  hex_code: "0329"
+  description: "syllabic"
+}
+
+symbol {
+  example_rendering: "e̞,β̞"
+  decimal_code: 798
+  hex_code: "031E"
+  description: "lowered"
+}
+
+symbol {
+  example_rendering: "e̯"
+  decimal_code: 815
+  hex_code: "032F"
+  description: "non-syllabic"
+}
+
+symbol {
+  example_rendering: "e̘"
+  decimal_code: 792
+  hex_code: "0318"
+  description: "advanced tongue root"
+}
+
+symbol {
+  example_rendering: "e̙"
+  decimal_code: 793
+  hex_code: "0319"
+  description: "retracted tongue root"
+}
+
+symbol {
+  example_rendering: "ĕ"
+  decimal_code: 774
+  hex_code: "0306"
+  description: "extra-short"
+}
+
+symbol {
+  example_rendering: "e̋"
+  decimal_code: 779
+  hex_code: "030B"
+  description: "extra high tone"
+}
+
+symbol {
+  example_rendering: "é"
+  decimal_code: 769
+  hex_code: "0301"
+  description: "high tone"
+}
+
+symbol {
+  example_rendering: "ē"
+  decimal_code: 772
+  hex_code: "0304"
+  description: "mid tone"
+}
+
+symbol {
+  example_rendering: "è"
+  decimal_code: 768
+  hex_code: "0300"
+  description: "low tone"
+}
+
+symbol {
+  example_rendering: "ȅ"
+  decimal_code: 783
+  hex_code: "030F"
+  description: "extra low tone"
+}
+
+symbol {
+  example_rendering: "x͜x"
+  decimal_code: 860
+  hex_code: "035C"
+  description: "tie bar below"
+}
+
+symbol {
+  example_rendering: "x͡x"
+  decimal_code: 865
+  hex_code: "0361"
+  description: "tie bar above"
+}
+
+symbol {
+  example_rendering: "t͈,s͈,tɕ͈"
+  decimal_code: 840
+  hex_code: "0348"
+  description: "Strong articulation (not necessarily fortis)"
+}
+
+symbol {
+  example_rendering: "v͉"
+  decimal_code: 841
+  hex_code: "0349"
+  description: "Weak articulation (not necessarily lenis)"
+}
+
+# -----------------------------------------------------------------------------
+# Composed vowels+diacritics
+# Alternatively, decompose incoming strings to NFD in ipa_symbols_repository.cc
+# -----------------------------------------------------------------------------
+
+symbol {
+  example_rendering: "à"
+  decimal_code: 224
+  hex_code: "00E0"
+  description: "open front unrounded vowel with low tone"
+}
+
+symbol {
+  example_rendering: "á"
+  decimal_code: 225
+  hex_code: "00E1"
+  description: "open front unrounded vowel with high tone"
+}
+
+symbol {
+  example_rendering: "è"
+  decimal_code: 232
+  hex_code: "00E8"
+  description: "close-mid front unrounded vowel with low tone"
+}
+
+symbol {
+  example_rendering: "é"
+  decimal_code: 233
+  hex_code: "00E9"
+  description: "close-mid front unrounded vowel with high tone"
+}
+
+symbol {
+  example_rendering: "ì"
+  decimal_code: 236
+  hex_code: "00EC"
+  description: "close front unrounded vowel with low tone"
+}
+
+symbol {
+  example_rendering: "í"
+  decimal_code: 237
+  hex_code: "00ED"
+  description: "close front unrounded vowel with high tone"
+}
+
+symbol {
+  example_rendering: "ò"
+  decimal_code: 242
+  hex_code: "00F2"
+  description: "close-mid back rounded vowel with low tone"
+}
+
+symbol {
+  example_rendering: "ó"
+  decimal_code: 243
+  hex_code: "00F3"
+  description: "close-mid back rounded vowel with high tone"
+}
+
+symbol {
+  example_rendering: "ù"
+  decimal_code: 249
+  hex_code: "00F9"
+  description: "close back rounded vowel with low tone"
+}
+
+symbol {
+  example_rendering: "ú"
+  decimal_code: 250
+  hex_code: "00FA"
+  description: "close back rounded vowel with high tone"
+}
+
+symbol {
+  example_rendering: "ḛ"
+  decimal_code: 7707
+  hex_code: "1E1B"
+  description: "creaky voiced close-mid front unrounded vowel"
+}
+
+symbol {
+  example_rendering: "ḭ"
+  decimal_code: 7725
+  hex_code: "1E2D"
+  description: "creaky voiced close front unrounded vowel"
+}
+
+symbol {
+  example_rendering: "ṵ"
+  decimal_code: 7797
+  hex_code: "1E75"
+  description: "creaky voiced close back rounded vowel"
+}
+
+# Standalone combining cedilla has to be defined if we use the NFD
+# decomposition on the inputs. Note: Not to be confused with regular
+# cedilla (U+00B8) which we disallow.
+symbol {
+  example_rendering: "¸"
+  decimal_code: 807
+  hex_code: "0327"
+  description: "combining cedilla (not in IPA)."
+}
+
+# -------
+# Arrows:
+# -------
+
+symbol {
+  example_rendering: "↓"
+  decimal_code: 8595
+  hex_code: "2193"
+  description: "downstep"
+}
+
+symbol {
+  example_rendering: "↑"
+  decimal_code: 8593
+  hex_code: "2191"
+  description: "upstep"
+}
+
+symbol {
+  example_rendering: "↗"
+  decimal_code: 8599
+  hex_code: "2197"
+  description: "global rise"
+}
+
+symbol {
+  example_rendering: "↘"
+  decimal_code: 8600
+  hex_code: "2198"
+  description: "global fall"
+}

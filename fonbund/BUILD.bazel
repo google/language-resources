@@ -23,6 +23,7 @@ py_library(
     deps = [
         "@PanPhon//:panphon_data",
         "@clld_phoible//:phoible_data",
+	"@phon_class_counts//:phon_class_counts_data",
     ],
 )
 

@@ -8,7 +8,7 @@ git_repository(
     tag = "1.1.0",
 )
 
-# PanPhon and PHOIBLE
+# PanPhon, PHOIBLE and PhonClassCounts databases
 
 new_http_archive(
     name = "PanPhon",
@@ -22,6 +22,13 @@ new_http_archive(
     build_file = "bazel/clld_phoible.BUILD",
     strip_prefix = "phoible-master",
     urls = ["https://github.com/clld/phoible/archive/master.zip"],
+)
+
+new_http_archive(
+    name = "phon_class_counts",
+    build_file = "bazel/phon_class_counts.BUILD",
+    strip_prefix = "phon-class-counts-master",
+    urls = ["https://github.com/ddediu/phon-class-counts/archive/master.zip"],
 )
 
 # Protobuf

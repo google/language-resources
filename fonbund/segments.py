@@ -20,7 +20,8 @@ import pkgutil
 TABLES = {
     'panphon': ('PanPhon', 'panphon/data/ipa_all.csv', ',', 23),
     'phoible': ('clld_phoible', 'data/phoible-segments-features.tsv', '\t', 38),
-    'phoible_fonetikode': {'phon_class_counts', 'input/phoible_Features_Fonetikode.csv', '\t', 16},
+    'phoible_fonetikode': ('phon_class_counts',
+                           'input/phoible_Features_Fonetikode.csv', '\t', 16),
 }
 
 

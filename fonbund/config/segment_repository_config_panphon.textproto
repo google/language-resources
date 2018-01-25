@@ -1,0 +1,105 @@
+# Copyright 2018 Google LLC. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Configuration for PanPhon segment repository.
+#
+# See https://github.com/dmort27/panphon.
+
+name: "PanPhon"
+
+# Field separator.
+field_separator: ","
+
+# First entry is a column description.
+has_column_description: true
+
+# The 0-based offset of the column containing the segment names.
+segment_column_id: 0
+
+# Number of features defined in the repository.
+num_features: 22
+
+# Normalizer configuration.
+normalizer {
+  # Remove ligature ties and underties.
+  remove_tie_bars: true
+
+  # ----------------
+  # Symbol rewrites.
+  # ----------------
+  # Rewites extended IPA.
+  # ---------------------
+  symbol_rewrites { lhs: "ʣ"  rhs: "dz" }
+  symbol_rewrites { lhs: "ʣʲ" rhs: "dzʲ" }
+  symbol_rewrites { lhs: "ʤ"  rhs: "dʒ" }
+  symbol_rewrites { lhs: "ʤʰ" rhs: "dʒʰ" }
+  symbol_rewrites { lhs: "ʤʲ" rhs: "dʒʲ" }
+  symbol_rewrites { lhs: "ʦ"  rhs: "ts" }
+  symbol_rewrites { lhs: "ʦʰ" rhs: "tsʰ" }
+  symbol_rewrites { lhs: "ʦʲ" rhs: "tsʲ" }
+  symbol_rewrites { lhs: "ʦʼ" rhs: "tsʼ" }
+  symbol_rewrites { lhs: "ʧ"  rhs: "tʃ" }
+  symbol_rewrites { lhs: "ʧʰ" rhs: "tʃʰ" }
+  symbol_rewrites { lhs: "ʧʲ" rhs: "tʃʲ" }
+  symbol_rewrites { lhs: "ʧʼ" rhs: "tʃʼ" }
+  # --------------------------
+  # Rewrites R-colored vowels.
+  # --------------------------
+  # These ready-made characters /ɚ/ (602 025A) (combining /ə/ 601 0259 and
+  # /˞/ 734 02DE) and /ɝ/ (605 025D) (combining /ɜ/ 604 025C and /˞/ 734 02DE).
+  symbol_rewrites { lhs: "ɝ"  rhs: "ɜ˞" }
+  symbol_rewrites { lhs: "ɚ"  rhs: "ə˞" }
+  # Rewrites voiceless modifiers on nasals (for languages like Icelandic):
+  symbol_rewrites { lhs: "ŋ̊"  rhs: "ŋ̥" }
+  symbol_rewrites { lhs: "ɲ̊"  rhs: "ɲ̥" }
+
+  # --------------------
+  # Rewrites for Korean:
+  # --------------------
+  # This weird notation for the stops reflects the fact that ASR opts for
+  # voiceless versions while the TTS opts for voiced.
+  symbol_rewrites { lhs: "k~ɡ" rhs: "ɡ" }
+  symbol_rewrites { lhs: "p~b" rhs: "b" }
+  symbol_rewrites { lhs: "t~d" rhs: "d" }
+  # Korean “tense” stops are unique. These don't have a dedicated support in IPA
+  # and no accepted convention for marking them. In addition, we can't use the
+  # "tense" feature which in PanPhon is reserved for vowels. To cope with this
+  # we follow the approach suggested in
+  #    Mi-Ryoung Kim, San Duanmu: “Tense” and “Lax” Stops in Korean.,
+  #    Journal of East Asian Linguistics, January 2004, Volume 13, Issue 1,
+  #    pp 59–104.
+  #    (https://rd.springer.com/article/10.1023/B:JEAL.0000007344.43938.4e).
+  # They argue that
+  #    “ (a) underlyingly "tense" stops are regular voiceless unaspirated stops,
+  #      and "lax" stops are regular voiced stops, (b) there is no compelling
+  #      evidence for a new distinctive feature, and (c) the consonant-tone
+  #      correlation is another case of voiceless-high and voiced-low. We
+  #      conclude that Korean does not have an unusual phonology, and there is
+  #      no need to complicate feature theory.”
+  #
+  # TODO: Alternatively set feature "cg" (constricted glottis) to "+" for tense
+  # stops and to "-" for lax stops. Will involve changing /p͈/ to /pˀ/, etc.
+  symbol_rewrites { lhs: "k͈"  rhs: "k" }
+  symbol_rewrites { lhs: "p͈"  rhs: "p" }
+  symbol_rewrites { lhs: "s͈"  rhs: "s" }
+  symbol_rewrites { lhs: "t͈"  rhs: "t" }
+  # These rewrites will generate /dʑ/ and contrast /t͈ɕ/ with it.
+  symbol_rewrites { lhs: "tɕ~dʑ" rhs: "dʑ" }
+  symbol_rewrites { lhs: "t͈ɕ" rhs: "tɕ" }
+}
+
+# The list below is a blacklist.
+language_list_whitelisted: false
+
+# Following is a list of languages currently banned from processing.

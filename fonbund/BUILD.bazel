@@ -116,3 +116,34 @@ py_test(
         ":segment_repository_reader",
     ],
 )
+
+py_proto_library(
+    name = "distinctive_features_py_proto",
+    srcs = ["distinctive_features.proto"],
+    default_runtime = "@com_google_protobuf//:protobuf_python",
+    protoc = "@com_google_protobuf//:protoc",
+)
+
+py_library(
+    name = "segment_to_features_converter",
+    srcs = ["segment_to_features_converter.py"],
+    deps = [
+        ":distinctive_features_py_proto",
+        ":ipa_symbols_repository",
+        ":segment_repository_reader",
+    ],
+)
+
+py_test(
+    name = "segment_to_features_converter_test",
+    size = "small",
+    srcs = ["segment_to_features_converter_test.py"],
+    data = [
+        "config/segment_repository_config_panphon.textproto",
+        "testdata/tiny_panphon_example.csv",
+    ],
+    deps = [
+        ":distinctive_features_py_proto",
+        ":segment_to_features_converter",
+    ],
+)

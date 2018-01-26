@@ -19,6 +19,7 @@ py_library(
 
 py_test(
     name = "ipa_test",
+    timeout = "short",
     srcs = ["ipa_test.py"],
     deps = [":ipa"],
 )

@@ -1,5 +1,5 @@
 # coding=utf-8
-#
+
 # Copyright 2018 Google LLC. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,6 +22,7 @@ import unicodedata
 
 from fonbund import segment_normalizer_config_pb2
 
+
 class SegmentNormalizer(object):
   """Helper class for normalizing the IPA segments.
 
@@ -31,6 +32,7 @@ class SegmentNormalizer(object):
       (e.g. 'ʧʰ' -> ['tʃʰ', (l_1,...l_n)]), where each rewrite has a possibly
       empty set of language restrictions. Extracted from _config.
   """
+
   def __init__(self, config):
     """Initializes the normalizer given the configuration."""
     self._config = segment_normalizer_config_pb2.SegmentNormalizerConfig()

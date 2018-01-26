@@ -1,5 +1,5 @@
 # coding=utf-8
-#
+
 # Copyright 2018 Google LLC. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +20,7 @@ import unittest
 
 from fonbund import segment_normalizer
 from fonbund import segment_normalizer_config_pb2
+
 
 class TestSegmentNormalizer(unittest.TestCase):
 

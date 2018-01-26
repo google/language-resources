@@ -1,5 +1,3 @@
-# coding=utf-8
-#
 # Copyright 2018 Google LLC. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -51,9 +49,9 @@ def _BinaryFeatureToValue(value):
     # to be decomposed in the phoneme inventory via the "structure" field,
     # here we may want to double-check if the feature is multi-valued and
     # produce a more informative error.
-    logging.error("Invalid binary string feature value: %s", value)
+    logging.error("Invalid binary string feature value: '%s'", value)
     return False, None
-  return True, feature;
+  return True, feature
 
 
 def _MultivaluedFeatureToValue(config, value):
@@ -66,10 +64,11 @@ def _MultivaluedFeatureToValue(config, value):
      Boolean status and distinctive feature value.
   """
   feature = df.DistinctiveFeature()
+  fv = feature.multivalued_value
   if value:
-    feature.multivalued_value.string_value = value
+    fv.string_value = value
   elif config.multivalued_feature_default_value:
-    feature.multivalued_value.string_value = config.multivalued_feature_default_value
+    fv.string_value = config.multivalued_feature_default_value
   else:
     logging.error("Empty multivalued string feature value!")
     return False, None
@@ -122,6 +121,9 @@ class SegmentToFeaturesConverter(object):
   def _DecomposeSegment(self, segment):
     """Decomposes segment into constituent parts (if possible).
 
+    Args:
+       segment: Segment to be decomposed.
+
     Returns:
        List containing segment parts.
     """
@@ -136,6 +138,7 @@ class SegmentToFeaturesConverter(object):
        Boolean status and a list of distinctive features protos.
     """
     config = self._reader.config
+    mvf_default = config.multivalued_feature_default_value
     normalizer = self._reader.normalizer
     segments_to_features = self._reader.segments_to_features
     result = []
@@ -148,15 +151,16 @@ class SegmentToFeaturesConverter(object):
       # Fill the feature list header.
       feature_list = df.DistinctiveFeatures()
       feature_list.source_name = config.name
-      if config.multivalued_feature_default_value:
-        feature_list.multivalued_feature_default_value = config.multivalued_feature_default_value
+      if mvf_default:
+        feature_list.multivalued_feature_default_value = mvf_default
       feature_list.feature_names.extend(self._reader.feature_names)
       # Decompose incoming segment into components and look up their individual
       # features.
       segment_components = self._DecomposeSegment(segment)
       for segment_component in segment_components:
         # Normalize the segment component and make sure it represents sane IPA.
-        status, segment_component = normalizer.FullNormalization("", segment_component)
+        status, segment_component = normalizer.FullNormalization(
+            "", segment_component)
         if not status:
           logging.error("Full normalization failed for %s", segment_component)
           return False, None

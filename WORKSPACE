@@ -68,57 +68,6 @@ bind(
     actual = "@six_archive//:six",
 )
 
-# Google fundamental libraries
-
-http_archive(
-    name = "com_google_googletest",
-    strip_prefix = "googletest-master",
-    urls = ["https://github.com/google/googletest/archive/master.zip"],
-)
-
-# DEPRECATED. Aliases in //external referenced by @com_google_protobuf:
-bind(
-    name = "gtest",
-    actual = "@com_google_googletest//:gtest",
-)
-
-bind(
-    name = "gtest_main",
-    actual = "@com_google_googletest//:gtest_main",
-)
-
-new_http_archive(
-    name = "farmhash",
-    build_file = "bazel/farmhash.BUILD",
-    strip_prefix = "farmhash-master",
-    urls = ["https://github.com/google/farmhash/archive/master.zip"],
-)
-
-new_git_repository(
-    name = "com_googlesource_code_re2",
-    build_file = "bazel/re2.BUILD",
-    remote = "https://github.com/google/re2.git",
-    tag = "2016-11-01",
-)
-
-bind(
-    name = "re2",
-    actual = "@com_googlesource_code_re2//:re2",
-)
-
-http_archive(
-    name = "com_google_absl",
-    strip_prefix = "abseil-cpp-master",
-    urls = ["https://github.com/abseil/abseil-cpp/archive/master.zip"],
-)
-
-# Time-zone framework, required by abseil-cpp
-http_archive(
-    name = "com_googlesource_code_cctz",
-    strip_prefix = "cctz-master",
-    urls = ["https://github.com/google/cctz/archive/master.zip"],
-)
-
 http_archive(
     name = "io_abseil_py",
     strip_prefix = "abseil-py-master",
@@ -138,36 +87,4 @@ bind(
 bind(
     name = "absl/logging",
     actual = "@io_abseil_py//absl/logging",
-)
-
-# OpenFst, OpenGrm NGram & Thrax
-
-new_git_repository(
-    name = "openfst",
-    build_file = "bazel/openfst.BUILD",
-    remote = "https://github.com/mjansche/openfst.git",
-    tag = "1.5.3",
-)
-
-new_git_repository(
-    name = "opengrm_ngram",
-    build_file = "bazel/opengrm-ngram.BUILD",
-    remote = "https://github.com/mjansche/opengrm-ngram.git",
-    tag = "1.3.0",
-)
-
-new_git_repository(
-    name = "thrax",
-    build_file = "bazel/thrax.BUILD",
-    commit = "fa51f84e8bbff730c88df293aacc1041a0e4cf1a",
-    remote = "https://github.com/mjansche/thrax.git",
-)
-
-# Sparrowhawk
-
-new_git_repository(
-    name = "sparrowhawk",
-    build_file = "bazel/sparrowhawk.BUILD",
-    commit = "eb97411535e9ab280982bae18c99d6a2c933e162",
-    remote = "https://github.com/google/sparrowhawk.git",
 )

@@ -1,8 +1,0 @@
-ADDRESS_MARKUP	අංක 123	address { thoroughfare { premises: "අංක" number: "123" } }
-ADDRESS_MARKUP	අංක 80/1	address { thoroughfare { premises: "අංක" number: "80/1" } }
-ADDRESS_MARKUP	අංක 80/1/2	address { thoroughfare { premises: "අංක" number: "80/1/2" } }
-ADDRESS_MARKUP	අංක 1080/89/9	address { thoroughfare { premises: "අංක" number: "1080/89/9" } }
-ADDRESS_MARKUP	නො. 80	address { thoroughfare { premises: "නො." number: "80" } }
-ADDRESS_MARKUP	අංක 300/23	address { thoroughfare { premises: "අංක" number: "300/23" } }
-ADDRESS_MARKUP	නො. 300/23	address { thoroughfare { premises: "නො." number: "300/23" } }
-ADDRESS_MARKUP	නො. 300/23/1	address { thoroughfare { premises: "නො." number: "300/23/1" } }

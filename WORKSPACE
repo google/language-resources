@@ -33,7 +33,7 @@ http_archive(
 
 new_http_archive(
     name = "six_archive",
-    build_file = "six.BUILD",
+    build_file = "bazel/six.BUILD",
     sha256 = "70e8a77beed4562e7f14fe23a786b54f6296e34344c23bc42f07b15018ff98e9",
     strip_prefix = "six-1.11.0",
     urls = ["https://pypi.python.org/packages/16/d8/bc6316cf98419719bd59c91742194c111b6f2e85abac88e496adefaf7afe/six-1.11.0.tar.gz#md5=d12789f9baf7e9fb2524c0c64f1773f8"],
@@ -65,14 +65,14 @@ bind(
 
 new_http_archive(
     name = "farmhash",
-    build_file = "farmhash.BUILD",
+    build_file = "bazel/farmhash.BUILD",
     strip_prefix = "farmhash-master",
     urls = ["https://github.com/google/farmhash/archive/master.zip"],
 )
 
 new_git_repository(
     name = "com_googlesource_code_re2",
-    build_file = "re2.BUILD",
+    build_file = "bazel/re2.BUILD",
     remote = "https://github.com/google/re2.git",
     tag = "2016-11-01",
 )
@@ -120,21 +120,21 @@ bind(
 
 new_git_repository(
     name = "openfst",
-    build_file = "openfst.BUILD",
+    build_file = "bazel/openfst.BUILD",
     remote = "https://github.com/mjansche/openfst.git",
     tag = "1.5.3",
 )
 
 new_git_repository(
     name = "opengrm_ngram",
-    build_file = "opengrm-ngram.BUILD",
+    build_file = "bazel/opengrm-ngram.BUILD",
     remote = "https://github.com/mjansche/opengrm-ngram.git",
     tag = "1.3.0",
 )
 
 new_git_repository(
     name = "thrax",
-    build_file = "thrax.BUILD",
+    build_file = "bazel/thrax.BUILD",
     commit = "fa51f84e8bbff730c88df293aacc1041a0e4cf1a",
     remote = "https://github.com/mjansche/thrax.git",
 )
@@ -143,7 +143,7 @@ new_git_repository(
 
 new_git_repository(
     name = "sparrowhawk",
-    build_file = "sparrowhawk.BUILD",
+    build_file = "bazel/sparrowhawk.BUILD",
     commit = "eb97411535e9ab280982bae18c99d6a2c933e162",
     remote = "https://github.com/google/sparrowhawk.git",
 )

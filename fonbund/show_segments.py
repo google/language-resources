@@ -12,35 +12,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Writes segment inventories as UTF-8 text to stdout.
+"""Display raw segment inventories.
 """
-
-import io
-import sys
 
 from absl import app
 from absl import flags
+from absl import logging
 from fonbund import segments
-
-STDOUT = io.open(1, mode='wt', encoding='utf-8', closefd=False)
-STDERR = io.open(2, mode='wt', encoding='utf-8', closefd=False)
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('db', '', 'Segment inventory, e.g. "panphon", "phoible"')
+flags.DEFINE_string('db', '', 'Segment inventory, e.g.'
+                    ' "panphon", "phoible", "phoible_fonetikode"')
 
 
 def main(unused_argv):
   if not FLAGS.db:
     app.usage(shorthelp=True, exitcode=2)
   if FLAGS.db not in segments.TABLES:
-    STDERR.write('--db="%s" not recognized; possible values are %s\n'
-                 % (FLAGS.db, ', '.join('"%s"' % t for t in segments.TABLES)))
-    sys.exit(2)
-
+    logging.fatal('--db="%s" not recognized; possible values are %s',
+                  FLAGS.db, ', '.join('"%s"' % t for t in segments.TABLES))
   for row in segments.SelectFrom(FLAGS.db):
-    STDOUT.write('%s\t%s\n' % (row[0], ' '.join(row[1:])))
-  STDOUT.flush()
+    print('%s\t%s' % (row[0], ' '.join(row[1:])))
   return
 
 

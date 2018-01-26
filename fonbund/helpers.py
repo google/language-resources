@@ -15,6 +15,7 @@
 """Various helper functions."""
 
 import io
+import pkgutil
 
 import six
 from google.protobuf import text_format
@@ -62,3 +63,31 @@ def EnsureUnicode(bytes_or_string):
   else:
     assert isinstance(bytes_or_string, six.text_type)
     return bytes_or_string
+
+
+def GetResourceAsBytes(package, resource):
+  binary = pkgutil.get_data(package, resource)
+  assert isinstance(binary, six.binary_type)
+  return binary
+
+
+def GetResourceAsText(package, resource):
+  binary = GetResourceAsBytes(package, resource)
+  return binary.decode('utf-8')
+
+
+def GetResourceAsStream(package, resource):
+  binary = GetResourceAsBytes(package, resource)
+  assert binary
+  return io.BytesIO(binary)
+
+
+def GetResourceAsReader(package, resource):
+  text = GetResourceAsText(package, resource)
+  return io.StringIO(text)
+
+
+def GetTextProtoResource(package, resource, message):
+  binary = GetResourceAsBytes(package, resource)
+  assert binary
+  return ParseFromBytes(binary, message)

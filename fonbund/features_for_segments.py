@@ -69,7 +69,7 @@ def main(unused_argv):
     app.usage(shorthelp=True, exitcode=2)
   for db in FLAGS.databases:
     if db not in segments_lib.TABLES:
-      logging.error("Database '%s' not recognized; possible values are %s\n",
+      logging.error("Database '%s' not recognized; possible values are %s",
                     db, ", ".join("'%s'" % t for t in segments_lib.TABLES))
       sys.exit(2)
   if not FLAGS.segments:
@@ -82,8 +82,8 @@ def main(unused_argv):
   converters = {}
   for db in databases:
     converter = converter_lib.SegmentToFeaturesConverter()
-    config_path, contents = segments_lib.GetConfigAndRepositoryContents(db)
-    if not converter.OpenFromContents(config_path, [contents]):
+    config, contents = segments_lib.GetConfigAndRepositoryContents(db)
+    if not converter.OpenFromContents(config, [contents]):
       logging.error("%s: Failed to initialze converter", db)
       sys.exit(2)
     converters[db] = converter

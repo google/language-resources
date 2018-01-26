@@ -15,8 +15,6 @@
 """Utility module for interacting with segment inventory tables."""
 
 import io
-import os
-import pkgutil
 
 from fonbund import helpers
 from fonbund import segment_repository_config_pb2 as config_pb2
@@ -31,6 +29,7 @@ TABLES = {
         'clld_phoible',
         'data/phoible-segments-features.tsv',
         'config/segment_repository_config_phoible.textproto'),
+
     'phoible_fonetikode': (
         'phon_class_counts',
         'input/phoible_Features_Fonetikode.csv',
@@ -42,30 +41,21 @@ def GetConfigAndRepositoryContents(table_name):
   """Returns configuration proto and repository contents."""
   package, resource, config_file = TABLES[table_name]
   # Read configuration.
-  config_path = os.path.join(os.path.dirname(__file__), config_file)
-  config = config_pb2.SegmentRepositoryConfig()
-  assert helpers.GetTextProto(config_path, config)
+  config = helpers.GetTextProtoResource(
+      'fonbund', config_file, config_pb2.SegmentRepositoryConfig())
+  assert config.IsInitialized()
   # Read repository contents.
-  data = pkgutil.get_data(package, resource)
-  assert data
-  repository_lines = []
-  with io.TextIOWrapper(io.BytesIO(data), encoding='utf-8') as reader:
-    repository_lines.extend([line for line in reader])
-  assert len(repository_lines) > 0
-  return config, "".join(repository_lines)
+  repository_contents = helpers.GetResourceAsText(package, resource)
+  assert repository_contents
+  return config, repository_contents
 
 
 def SelectFrom(table_name):
   """Yields rows in the given segment table."""
-  package, resource, config_file = TABLES[table_name]
-  data = pkgutil.get_data(package, resource)
-  assert data
-  config = config_pb2.SegmentRepositoryConfig()
-  assert helpers.GetTextProto(os.path.join(
-      os.path.dirname(__file__), config_file), config)
-  with io.TextIOWrapper(io.BytesIO(data), encoding='utf-8') as reader:
+  config, repository_contents = GetConfigAndRepositoryContents(table_name)
+  with io.StringIO(repository_contents) as reader:
     for line in reader:
-      line = line.rstrip('\n')
+      line = line.rstrip('\r\n')
       row = line.split(config.field_separator)
       assert len(row) == (config.num_features + 1 +
                           len(config.ignore_column_ids))

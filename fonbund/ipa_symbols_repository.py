@@ -1,5 +1,5 @@
 # coding=utf-8
-#
+
 # Copyright 2018 Google LLC. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,15 +18,13 @@
 
 from __future__ import unicode_literals
 
-import io
 import os.path
-import six
 
 from absl import logging
-from google.protobuf import text_format
-
+from fonbund import helpers
 from fonbund import ipa_symbols_pb2
 from fonbund import segment_normalizer
+import six
 
 
 def _GetUnicodeFromIpaSymbolHexCode(hex_code):
@@ -87,15 +85,11 @@ class IpaSymbolsRepository(object):
     return self._unofficial_ipa_symbols
 
   def Init(self):
+    # TODO: Load with pkgutil from embedded resource instead.
     k_ipa_symbols_path = os.path.join(
         os.path.dirname(__file__), "config", "ipa_symbols.textproto")
-    ipa_symbols_data = ipa_symbols_pb2.IpaSymbols()
-    with io.open(k_ipa_symbols_path, "rb") as f:
-      data = f.read()
-      if six.PY3:
-        # Appalling but apparently necessary hack to work around protobuf.
-        data = data.decode('latin-1').encode('utf-8')  # NEVER TRY THIS AT HOME!
-      ipa_symbols_data = text_format.Parse(data, ipa_symbols_pb2.IpaSymbols())
+    ipa_symbols_data = helpers.GetTextProto(k_ipa_symbols_path,
+                                            ipa_symbols_pb2.IpaSymbols())
     return self._Init(ipa_symbols_data)
 
   def _Init(self, ipa_symbols):

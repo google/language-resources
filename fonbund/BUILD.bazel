@@ -37,6 +37,15 @@ par_binary(
     ],
 )
 
+py_library(
+    name = "helpers",
+    srcs = ["helpers.py"],
+    deps = [
+        "@com_google_protobuf//:protobuf_python",
+        "@six_archive//:six",
+    ],
+)
+
 py_proto_library(
     name = "segment_normalizer_config_py_proto",
     srcs = ["segment_normalizer_config.proto"],
@@ -69,6 +78,7 @@ py_library(
     srcs = ["ipa_symbols_repository.py"],
     data = ["config/ipa_symbols.textproto"],
     deps = [
+        ":helpers",
         ":ipa_symbols_py_proto",
         ":segment_normalizer",
         "@io_abseil_py//absl/logging",
@@ -99,6 +109,7 @@ py_library(
     name = "segment_repository_reader",
     srcs = ["segment_repository_reader.py"],
     deps = [
+        ":helpers",
         ":segment_normalizer",
         ":segment_repository_config_py_proto",
         "@io_abseil_py//absl/logging",

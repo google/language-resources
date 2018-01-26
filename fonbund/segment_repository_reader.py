@@ -1,5 +1,5 @@
 # coding=utf-8
-#
+
 # Copyright 2018 Google LLC. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,12 +19,9 @@
 from __future__ import unicode_literals
 
 import io
-import six
-import unicodecsv
 
 from absl import logging
-from google.protobuf import text_format
-
+from fonbund import helpers
 from fonbund import segment_normalizer
 from fonbund import segment_repository_config_pb2
 
@@ -82,13 +79,8 @@ class SegmentRepositoryReader(object):
     Returns:
       Bool indicating success of the operation.
     """
-    with open(config_path, "rb") as f:
-      data = f.read()
-      if six.PY3:
-        # Appalling but apparently necessary hack to work around protobuf.
-        data = data.decode('latin-1').encode('utf-8')  # NEVER TRY THIS AT HOME!
-      self._config = text_format.Parse(
-          data, segment_repository_config_pb2.SegmentRepositoryConfig())
+    self._config = helpers.GetTextProto(
+        config_path, segment_repository_config_pb2.SegmentRepositoryConfig())
     return self.Open(self._config, repository_paths)
 
   def Open(self, config, repository_paths):
@@ -129,7 +121,8 @@ class SegmentRepositoryReader(object):
       self._segments_to_features.update(segments)
     # Check if we have extra repository contents defined in the configuration
     # and augment/override the current segment-to-feature mapping.
-    self._normalizer = segment_normalizer.SegmentNormalizer(self._config.normalizer)
+    self._normalizer = segment_normalizer.SegmentNormalizer(
+        self._config.normalizer)
     for contents in self._config.extra_segment_feature_entries:
       fields = contents.split(self._config.field_separator)
       success = self._ReadRepositoryEntry(fields, self._normalizer,
@@ -202,11 +195,10 @@ class SegmentRepositoryReader(object):
     segments_to_features.clear()
     feature_names[:] = []
 
-    with io.open(repository_path, "rb") as f:
-      parser = unicodecsv.reader(f, delimiter=str(field_separator[0]),
-                                 encoding="utf-8")
+    with io.open(repository_path, "rt", encoding="utf-8") as reader:
       line_counter = 0
-      for line in parser:
+      for raw_line in reader:
+        line = raw_line.rstrip("\n").split(field_separator)
         if self._config.has_column_description and line_counter == 0:
           feature_names[:] = line
           _RemoveIgnoredFields(self._ignored_column_ids,

@@ -21,7 +21,6 @@ from __future__ import unicode_literals
 import io
 
 from absl import logging
-from fonbund import helpers
 from fonbund import segment_normalizer
 from fonbund import segment_repository_config_pb2
 
@@ -64,43 +63,6 @@ class SegmentRepositoryReader(object):
     self._segments_to_features = {}
     self._ignored_column_ids = []
     self._normalizer = None
-
-  def OpenPaths(self, config_path, repository_paths):
-    """Reads segment repository configuration and repository(ies) from files.
-
-    Allows the caller to supply several repositories. The structure of all the
-    given repositories has to match - for each segment, there must be the same
-    number of features of the same type.
-
-    Args:
-      config_path: string, path to segment configuration text proto file.
-      repository_paths: list of strings representing paths for repositories.
-
-    Returns:
-      Bool indicating success of the operation.
-    """
-    self._config = helpers.GetTextProto(
-        config_path, segment_repository_config_pb2.SegmentRepositoryConfig())
-    return self.Open(self._config, repository_paths)
-
-  def Open(self, config, repository_paths):
-    """Reads segment repositories from paths given the configuration.
-
-    Tries not to check-fail.
-
-    Args:
-      config: SegmentRepositoryConfig proto.
-      repository_contents: String buffers representing multiple repositories.
-
-    Returns:
-      Bool indicating success of the operation.
-    """
-    self._config = config
-    repository_contents = []
-    for repository_path in repository_paths:
-      with io.open(repository_path, "rt", encoding="utf-8") as reader:
-        repository_contents.append(reader.read())
-    return self.OpenFromContents(self._config, repository_contents)
 
   def OpenFromContents(self, config, repository_contents):
     """Reads segment repository from contents given the configuration.
@@ -189,13 +151,6 @@ class SegmentRepositoryReader(object):
     language_listed = language_region in language_regions
     return config.language_list_whitelisted != language_listed
 
-  def _LoadRepositoryFromFile(self, repository_path, feature_names,
-                              segments_to_features):
-    """Loads segment repository from file."""
-    with io.open(repository_path, "rt", encoding="utf-8") as reader:
-      contents = reader.read()
-    return self._LoadRepository(contents, feature_names, segments_to_features)
-
   def _LoadRepository(self, repository_contents, feature_names,
                       segments_to_features):
     """Loads segment repository given the configuration.
@@ -222,16 +177,18 @@ class SegmentRepositoryReader(object):
     feature_names[:] = []
 
     line_counter = 0
-    for raw_line in repository_contents.split("\n"):
+    for raw_line in io.StringIO(repository_contents):
+      raw_line = raw_line.rstrip("\r\n")
       if not raw_line:
         continue
-      line = raw_line.rstrip("\n").split(field_separator)
+      line = raw_line.split(field_separator)
       if self._config.has_column_description and line_counter == 0:
         feature_names[:] = line
         _RemoveIgnoredFields(self._ignored_column_ids,
                              self._config.segment_column_id, feature_names)
         if not feature_names:
-          logging.error("Feature names cannot be empty (raw_line: '%s', line: '%s')!",
+          logging.error("Feature names cannot be empty"
+                        " (raw_line: '%s', line: '%s')!",
                         raw_line, line)
           return False
         if len(feature_names) != self._config.num_features:

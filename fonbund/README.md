@@ -129,6 +129,26 @@ features {
       ...
     }
   }
+  representation {
+    source_name: "PHOIBLE-Fonetikode"
+    feature_names: "General Class"
+    feature_names: "V-V."
+    feature_names: "V-H."
+    ...
+    feature_list {
+      feature {
+        multivalued_value {
+          string_value: "c"
+        }
+      }
+      feature {
+        multivalued_value {
+          string_value: "none"
+        }
+      }
+      ...
+    }
+  }
 }
 features {
   segment_name: "d"
@@ -143,6 +163,14 @@ For each phonetic segment in the transcription, there is a protocol buffer
 message containing unified articulatory feature description of this segment
 in all the configured feature systems.
 
+We currently don't provide an automatic way of decomposing *complex* segments
+(i.e., segments corresponding to multiple articulations, such as diphthongs).
+In order to retrieve the features for such segments please pass them to FonBund
+in a decomposed form using the `+` separator. For the following (nonsensical)
+example, instead of passing ~~/m œ t oʊ̯ˀ d/~~,
+pass `/m œ t o+ʊ̯ˀ d/` instead, where the fourth segment (diphthong)
+is properly decomposed manually.
+
 ### Using the API
 
 A reasonably high-level API is provided by the `segment_to_features_converter`
@@ -151,8 +179,6 @@ from a custom phonological segment database and corresponding configuration
 file:
 
 ```python
-import os
-
 from fonbund import distinctive_features_pb2 as df
 from fonbund import segment_to_features_converter as converter_lib
 

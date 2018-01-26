@@ -1,5 +1,5 @@
 # coding=utf-8
-#
+
 # Copyright 2018 Google LLC. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,31 +14,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Simple tests for segment to features converter."""
-
 from __future__ import unicode_literals
 
-import os
 import unittest
 
 from fonbund import distinctive_features_pb2 as df
+from fonbund import helpers
+from fonbund import segment_repository_config_pb2
 from fonbund import segment_to_features_converter as converter_lib
 
 
 class SegmentToFeaturesConverterTest(unittest.TestCase):
 
+  def setUp(self):
+    config = helpers.GetTextProtoResource(
+        "fonbund", "config/segment_repository_config_panphon.textproto",
+        segment_repository_config_pb2.SegmentRepositoryConfig())
+    contents = helpers.GetResourceAsText(
+        "fonbund", "testdata/tiny_panphon_example.csv")
+    self.assertTrue(config.IsInitialized())
+    self.assertTrue(contents)
+    self.converter = converter_lib.SegmentToFeaturesConverter()
+    self.assertTrue(self.converter.OpenFromContents(config, [contents]))
+    return
+
   def test_simple_panphon_features(self):
     """Tests simple segments."""
-    panphon_segments_path = os.path.join(
-        os.path.dirname(__file__), "testdata", "tiny_panphon_example.csv")
-    panphon_config_path = os.path.join(
-        os.path.dirname(__file__), "config",
-        "segment_repository_config_panphon.textproto")
-    converter = converter_lib.SegmentToFeaturesConverter()
-    self.assertTrue(converter.OpenPaths(panphon_config_path,
-                                        [panphon_segments_path]))
     segments = ["ɡᶣ", "ɫ̤ʲ", "ɫ̤ˠ"]
-    status, features = converter.ToFeatures(segments)
+    status, features = self.converter.ToFeatures(segments)
     self.assertTrue(status)
     num_features = 22
     feature_names = [
@@ -68,37 +71,19 @@ class SegmentToFeaturesConverterTest(unittest.TestCase):
 
   def test_bad_segment(self):
     """Tests bad segments."""
-    panphon_segments_path = os.path.join(
-        os.path.dirname(__file__), "testdata", "tiny_panphon_example.csv")
-    panphon_config_path = os.path.join(
-        os.path.dirname(__file__), "config",
-        "segment_repository_config_panphon.textproto")
-    converter = converter_lib.SegmentToFeaturesConverter()
-    self.assertTrue(converter.OpenPaths(panphon_config_path,
-                                        [panphon_segments_path]))
     bad_segments = ["ሜኽ"]
-    status, _ = converter.ToFeatures(bad_segments)
+    status, _ = self.converter.ToFeatures(bad_segments)
     self.assertFalse(status)
-
 
   def test_complex_segments(self):
     """Tests complex segments."""
-    panphon_segments_path = os.path.join(
-        os.path.dirname(__file__), "testdata", "tiny_panphon_example.csv")
-    panphon_config_path = os.path.join(
-        os.path.dirname(__file__), "config",
-        "segment_repository_config_panphon.textproto")
-    converter = converter_lib.SegmentToFeaturesConverter()
-    self.assertTrue(converter.OpenPaths(panphon_config_path,
-                                        [panphon_segments_path]))
-
     # Complex segments should be decomposed using a supplied delimiter.
     complex_segments = ["ɡᶣɫ̤ʲɫ̤ˠ"]
-    status, _ = converter.ToFeatures(complex_segments)
+    status, _ = self.converter.ToFeatures(complex_segments)
     self.assertFalse(status)  # Fails if not delimited.
     complex_segments[0] = converter_lib.COMPLEX_SEGMENT_SEPARATOR.join(
         ["ɡᶣ", "ɫ̤ʲ", "ɫ̤ˠ"])
-    status, _ = converter.ToFeatures(complex_segments)
+    status, _ = self.converter.ToFeatures(complex_segments)
     self.assertTrue(status)
 
 

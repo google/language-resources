@@ -1,5 +1,5 @@
 # coding=utf-8
-#
+
 # Copyright 2018 Google LLC. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,30 +14,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Test that the segment repository reader behaves."""
-
 from __future__ import unicode_literals
 
-import os
 import unittest
 
+from fonbund import helpers
 from fonbund import segment_repository_config_pb2
 from fonbund import segment_repository_reader
 
+
 class SegmentRepositoryReaderTest(unittest.TestCase):
 
+  def setUp(self):
+    self.contents = helpers.GetResourceAsText(
+        "fonbund", "testdata/tiny_panphon_example.csv")
+    self.assertTrue(self.contents)
+    return
+
   def test_read_with_empty_config(self):
-    k_panphon_segments_path = os.path.join(
-        os.path.dirname(__file__), "testdata", "tiny_panphon_example.csv")
     config = segment_repository_config_pb2.SegmentRepositoryConfig()
     config.field_separator = ","
     config.has_column_description = True
     repository_reader = segment_repository_reader.SegmentRepositoryReader()
 
-    success = repository_reader.Open(config, [k_panphon_segments_path,])
+    success = repository_reader.OpenFromContents(config, [self.contents])
     self.assertFalse(success)
     config.num_features = 22  # PanPhon features.
-    success = repository_reader.Open(config, [k_panphon_segments_path,])
+    success = repository_reader.OpenFromContents(config, [self.contents])
     self.assertTrue(success)
     self.assertTrue(repository_reader.feature_names)
     self.assertEqual("syl", repository_reader.feature_names[0])
@@ -64,8 +67,6 @@ class SegmentRepositoryReaderTest(unittest.TestCase):
                                                      k_language_region))
 
   def test_read_with_config_overrides(self):
-    k_panphon_segments_path = os.path.join(
-        os.path.dirname(__file__), "testdata", "tiny_panphon_example.csv")
     k_separator = ","
     k_segment_name = "ɫ̤ʲ"
     k_new_features = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
@@ -76,7 +77,7 @@ class SegmentRepositoryReaderTest(unittest.TestCase):
     config.extra_segment_feature_entries.append(
         k_segment_name + k_separator + k_new_features)
     repository_reader = segment_repository_reader.SegmentRepositoryReader()
-    self.assertTrue(repository_reader.Open(config, [k_panphon_segments_path,]))
+    self.assertTrue(repository_reader.OpenFromContents(config, [self.contents]))
     segments_to_features = repository_reader.segments_to_features
     self.assertIn(k_segment_name, segments_to_features)
     for feature_value in segments_to_features[k_segment_name]:

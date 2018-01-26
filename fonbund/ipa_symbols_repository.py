@@ -18,8 +18,6 @@
 
 from __future__ import unicode_literals
 
-import os.path
-
 from absl import logging
 from fonbund import helpers
 from fonbund import ipa_symbols_pb2
@@ -85,12 +83,9 @@ class IpaSymbolsRepository(object):
     return self._unofficial_ipa_symbols
 
   def Init(self):
-    # TODO: Load with pkgutil from embedded resource instead.
-    k_ipa_symbols_path = os.path.join(
-        os.path.dirname(__file__), "config", "ipa_symbols.textproto")
-    ipa_symbols_data = helpers.GetTextProto(k_ipa_symbols_path,
-                                            ipa_symbols_pb2.IpaSymbols())
-    return self._Init(ipa_symbols_data)
+    ipa_symbols = helpers.GetTextProtoResource(
+        "fonbund", "config/ipa_symbols.textproto", ipa_symbols_pb2.IpaSymbols())
+    return self._Init(ipa_symbols)
 
   def _Init(self, ipa_symbols):
     """Initializes the repository from the proto.

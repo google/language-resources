@@ -1,5 +1,5 @@
 # coding=utf-8
-#
+
 # Copyright 2018 Google LLC. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,10 +16,9 @@
 
 from __future__ import unicode_literals
 
-import io
-import os
 import unittest
 
+from fonbund import helpers
 from fonbund import ipa_symbols_repository
 from fonbund import segment_normalizer
 
@@ -68,11 +67,9 @@ class TestIpaSymbolsRepository(unittest.TestCase):
     self.assertEqual("pharyngealized", description[1])
 
   def test_check_all_phoible_segments(self):
-    segments_file = os.path.join(
-        os.path.dirname(__file__), "testdata/phoible_segments.txt")
-    segments = []
-    with io.open(segments_file, "r", encoding="utf8") as f:
-      segments = f.read().split("\n")
+    with helpers.GetResourceAsReader(
+        "fonbund", "testdata/phoible_segments.txt") as reader:
+      segments = reader.readlines()
     self.assertTrue(segments)
     invalid_segments = set()
     num_segments = 0

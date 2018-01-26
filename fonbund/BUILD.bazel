@@ -172,6 +172,7 @@ par_binary(
     srcs = ["features_for_segments.py"],
     deps = [
         ":distinctive_features_py_proto",
+        ":helpers",
         ":segment_to_features_converter",
         ":segments",
         "@io_abseil_py//absl:app",

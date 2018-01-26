@@ -20,7 +20,15 @@ load("@subpar//:subpar.bzl", "par_binary")
 py_library(
     name = "segments",
     srcs = ["segments.py"],
+    data = [
+        # Segment repository parsing configurations.
+        "config/segment_repository_config_panphon.textproto",
+        "config/segment_repository_config_phoible.textproto",
+        "config/segment_repository_config_phoible_fonetikode.textproto",
+    ],
     deps = [
+        ":helpers",
+        ":segment_repository_config_py_proto",
         "@PanPhon//:panphon_data",
         "@clld_phoible//:phoible_data",
         "@phon_class_counts//:phon_class_counts_data",
@@ -156,5 +164,17 @@ py_test(
     deps = [
         ":distinctive_features_py_proto",
         ":segment_to_features_converter",
+    ],
+)
+
+par_binary(
+    name = "features_for_segments",
+    srcs = ["features_for_segments.py"],
+    deps = [
+        ":distinctive_features_py_proto",
+        ":segment_to_features_converter",
+        ":segments",
+        "@io_abseil_py//absl:app",
+        "@io_abseil_py//absl/flags",
     ],
 )

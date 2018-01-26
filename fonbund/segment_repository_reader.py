@@ -84,19 +84,38 @@ class SegmentRepositoryReader(object):
     return self.Open(self._config, repository_paths)
 
   def Open(self, config, repository_paths):
-    """Reads segment repository from file given the configuration.
+    """Reads segment repositories from paths given the configuration.
 
     Tries not to check-fail.
 
     Args:
       config: SegmentRepositoryConfig proto.
-      repository_paths: list of strings representing paths for repositories.
+      repository_contents: String buffers representing multiple repositories.
 
     Returns:
       Bool indicating success of the operation.
     """
     self._config = config
-    assert repository_paths
+    repository_contents = []
+    for repository_path in repository_paths:
+      with io.open(repository_path, "rt", encoding="utf-8") as reader:
+        repository_contents.append(reader.read())
+    return self.OpenFromContents(self._config, repository_contents)
+
+  def OpenFromContents(self, config, repository_contents):
+    """Reads segment repository from contents given the configuration.
+
+    Tries not to check-fail.
+
+    Args:
+      config: SegmentRepositoryConfig proto.
+      repository_contents: String buffers representing multiple repositories.
+
+    Returns:
+      Bool indicating success of the operation.
+    """
+    self._config = config
+    assert repository_contents
 
     # Cache the IDs of the columns to remove.
     self._ignored_column_ids = list(self._config.ignore_column_ids)
@@ -105,18 +124,18 @@ class SegmentRepositoryReader(object):
     # descriptions match. Also merge all the segment mappings into one.
     previous_feature_names = []
     segments = {}
-    num_repositories = len(repository_paths)
+    num_repositories = len(repository_contents)
     for i in range(num_repositories):
       previous_feature_names = self._feature_names
       success = self._LoadRepository(
-          repository_paths[i], self._feature_names, segments)
+          repository_contents[i], self._feature_names, segments)
       if not success:
-        logging.error("Failed to load repository from " + repository_paths[i])
+        logging.error("Failed to load repository %d", i)
         return False
       if (config.has_column_description and i > 0 and
           previous_feature_names != self._feature_names):
-        logging.error("Repositories " + repository_paths[i - 1] + " and " +
-                      repository_paths[i] + " have mismatching features!")
+        logging.error("Repositories %d and %d have mismatching features!",
+                      i - 1, i)
         return False
       self._segments_to_features.update(segments)
     # Check if we have extra repository contents defined in the configuration
@@ -170,7 +189,14 @@ class SegmentRepositoryReader(object):
     language_listed = language_region in language_regions
     return config.language_list_whitelisted != language_listed
 
-  def _LoadRepository(self, repository_path, feature_names,
+  def _LoadRepositoryFromFile(self, repository_path, feature_names,
+                              segments_to_features):
+    """Loads segment repository from file."""
+    with io.open(repository_path, "rt", encoding="utf-8") as reader:
+      contents = reader.read()
+    return self._LoadRepository(contents, feature_names, segments_to_features)
+
+  def _LoadRepository(self, repository_contents, feature_names,
                       segments_to_features):
     """Loads segment repository given the configuration.
 
@@ -179,7 +205,7 @@ class SegmentRepositoryReader(object):
     <has_column_description> is enabled in the config.
 
     Args:
-      repository_path: list of strings representing repository entry.
+      repository_contents: string buffer with repository contents.
       feature_names: list of string, updated as a result of function.
       segments_to_features: map, updated as a result of function.
 
@@ -195,35 +221,39 @@ class SegmentRepositoryReader(object):
     segments_to_features.clear()
     feature_names[:] = []
 
-    with io.open(repository_path, "rt", encoding="utf-8") as reader:
-      line_counter = 0
-      for raw_line in reader:
-        line = raw_line.rstrip("\n").split(field_separator)
-        if self._config.has_column_description and line_counter == 0:
-          feature_names[:] = line
-          _RemoveIgnoredFields(self._ignored_column_ids,
-                               self._config.segment_column_id, feature_names)
-          if not feature_names:
-            logging.error("Feature names cannot be empty!")
-            return False
-          if len(feature_names) != self._config.num_features:
-            logging.error("Expected " + str(self._config.num_features) +
-                          " features, got " + str(len(feature_names)) +
-                          " instead!")
-            return False
-          line_counter += 1
-          continue
-        success = self._ReadRepositoryEntry(line, normalizer,
-                                            segments_to_features)
-        if not success:
+    line_counter = 0
+    for raw_line in repository_contents.split("\n"):
+      if not raw_line:
+        continue
+      line = raw_line.rstrip("\n").split(field_separator)
+      if self._config.has_column_description and line_counter == 0:
+        feature_names[:] = line
+        _RemoveIgnoredFields(self._ignored_column_ids,
+                             self._config.segment_column_id, feature_names)
+        if not feature_names:
+          logging.error("Feature names cannot be empty (raw_line: '%s', line: '%s')!",
+                        raw_line, line)
+          return False
+        if len(feature_names) != self._config.num_features:
+          logging.error("Expected %d features, got %d instead!",
+                        self._config.num_features, len(feature_names))
           return False
         line_counter += 1
-      if not line_counter:
-        logging.error("Invalid repository!")
+        continue
+      success = self._ReadRepositoryEntry(line, normalizer,
+                                          segments_to_features)
+      if not success:
         return False
+      line_counter += 1
+
+    # Double check that we've scanned something.
+    if not line_counter:
+      logging.error("Invalid repository, no entries scanned!")
+      return False
     if not segments_to_features:
       logging.error("No segments found!")
       return False
+    logging.info("Scanned %s segments.", len(segments_to_features))
     return True
 
   def _ReadRepositoryEntry(self, contents, normalizer, segments_to_features):
@@ -238,7 +268,7 @@ class SegmentRepositoryReader(object):
       Bool indicating success of the operation.
     """
     if len(contents) <= 1:
-      logging.error("Line " + contents + ": Found fewer than two fields!")
+      logging.error("Line '%s': Found fewer than two fields!", contents)
       return False
     fields = contents[:]
     # Normalize the segment name.

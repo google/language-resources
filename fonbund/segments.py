@@ -15,25 +15,59 @@
 """Utility module for interacting with segment inventory tables."""
 
 import io
+import os
 import pkgutil
 
+from fonbund import helpers
+from fonbund import segment_repository_config_pb2 as config_pb2
+
 TABLES = {
-    'panphon': ('PanPhon', 'panphon/data/ipa_all.csv', ',', 23),
-    'phoible': ('clld_phoible', 'data/phoible-segments-features.tsv', '\t', 38),
-    'phoible_fonetikode': ('phon_class_counts',
-                           'input/phoible_Features_Fonetikode.csv', '\t', 16),
+    'panphon': (
+        'PanPhon',
+        'panphon/data/ipa_all.csv',
+        'config/segment_repository_config_panphon.textproto'),
+
+    'phoible': (
+        'clld_phoible',
+        'data/phoible-segments-features.tsv',
+        'config/segment_repository_config_phoible.textproto'),
+    'phoible_fonetikode': (
+        'phon_class_counts',
+        'input/phoible_Features_Fonetikode.csv',
+        'config/segment_repository_config_phoible_fonetikode.textproto'),
 }
+
+
+def GetConfigAndRepositoryContents(table_name):
+  """Returns configuration proto and repository contents."""
+  package, resource, config_file = TABLES[table_name]
+  # Read configuration.
+  config_path = os.path.join(os.path.dirname(__file__), config_file)
+  config = config_pb2.SegmentRepositoryConfig()
+  assert helpers.GetTextProto(config_path, config)
+  # Read repository contents.
+  data = pkgutil.get_data(package, resource)
+  assert data
+  repository_lines = []
+  with io.TextIOWrapper(io.BytesIO(data), encoding='utf-8') as reader:
+    repository_lines.extend([line for line in reader])
+  assert len(repository_lines) > 0
+  return config, "".join(repository_lines)
 
 
 def SelectFrom(table_name):
   """Yields rows in the given segment table."""
-  package, resource, delimiter, columns = TABLES[table_name]
+  package, resource, config_file = TABLES[table_name]
   data = pkgutil.get_data(package, resource)
   assert data
+  config = config_pb2.SegmentRepositoryConfig()
+  assert helpers.GetTextProto(os.path.join(
+      os.path.dirname(__file__), config_file), config)
   with io.TextIOWrapper(io.BytesIO(data), encoding='utf-8') as reader:
     for line in reader:
       line = line.rstrip('\n')
-      row = line.split(delimiter)
-      assert len(row) == columns
+      row = line.split(config.field_separator)
+      assert len(row) == (config.num_features + 1 +
+                          len(config.ignore_column_ids))
       yield row
   return

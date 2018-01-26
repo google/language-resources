@@ -102,14 +102,14 @@ class SegmentToFeaturesConverter(object):
       return False
     return self._reader.OpenPaths(config_path, repository_paths)
 
-  def Open(self, config, repository_paths):
-    """Reads segment repository from file given the configuration.
+  def OpenFromContents(self, config, repository_contents):
+    """Reads segment repository from contents given the configuration.
 
     Tries not to check-fail.
 
     Args:
       config: SegmentRepositoryConfig proto.
-      repository_paths: list of strings representing paths for repositories.
+      repository_contents: list of strings representing repository contents.
 
     Returns:
       Bool indicating success of the operation.
@@ -117,7 +117,7 @@ class SegmentToFeaturesConverter(object):
     if not self._ipa_symbols.Init():
       logging.error("Failed to initialize IPA symbols repository")
       return False
-    return self._reader.Open(config, repository_paths)
+    return self._reader.OpenFromContents(config, repository_contents)
 
   def _DecomposeSegment(self, segment):
     """Decomposes segment into constituent parts (if possible).

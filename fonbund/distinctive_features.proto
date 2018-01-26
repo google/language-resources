@@ -85,3 +85,22 @@ message DistinctiveFeatures {
   // diphthongs or extreme cases such as /kǁ͓xʰ/ (Nama).
   repeated DistinctiveFeatureList feature_list = 4;
 }
+
+// All distinctive feature representations for a given segment.
+//
+// Next available ID: 3
+message DistinctiveFeatureRepresentations {
+  // Name of the segment.
+  optional string segment_name = 1;
+
+  // List of all possible representation for a segment, one for each
+  // phonological segment inventory.
+  repeated DistinctiveFeatures representation = 2;
+}
+
+// List of the above, one for each segment.
+//
+// Next available ID: 2
+message SegmentFeatures {
+  repeated DistinctiveFeatureRepresentations features = 1;
+}

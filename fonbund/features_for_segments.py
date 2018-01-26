@@ -1,3 +1,5 @@
+# coding=utf-8
+#
 # Copyright 2018 Google LLC. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +19,21 @@
 The features for each segment (corresponding to a the supplied combination
 of phoneme segment inventory configurations) are dumped in a protocol
 buffer format.
+
+Example:
+--------
+In the following example, the /z ɑu d aː/ segment string will be rewritten
+to the corresponding feature representations using PHOIBLE, PanPhon and
+PHOIBLE Fonetikode representations:
+
+bazel-bin/fonbund/features_for_segments \
+  --databases phoible,phoible_fonetikode,panphon \
+  --segments z,ɑ+u,d,aː \
+  --output_features_file segments.textproto
+
+Please note that, in the above example, the "complex" segments (such as
+diphthongs) are encoded using a hard-coded FonBund component separator
+"+". This will ensure proper decomposition for such cases.
 """
 
 import io
@@ -28,7 +45,9 @@ from absl import logging
 
 from fonbund import distinctive_features_pb2 as df
 from fonbund import segment_to_features_converter as converter_lib
-from fonbund import segments
+from fonbund import segments as segments_lib
+
+from google.protobuf import text_format
 
 flags.DEFINE_list(
     "databases", [],
@@ -37,6 +56,10 @@ flags.DEFINE_list(
 flags.DEFINE_list(
     "segments", [],
     "List of IPA phonetic segments.")
+
+flags.DEFINE_string(
+    "output_features_file", None,
+    "Output file containing the feature representations.")
 
 FLAGS = flags.FLAGS
 
@@ -47,9 +70,9 @@ def main(unused_argv):
     logging.error("Supply --databases!")
     app.usage(shorthelp=True, exitcode=2)
   for db in FLAGS.databases:
-    if db not in segments.TABLES:
+    if db not in segments_lib.TABLES:
       logging.error("Database '%s' not recognized; possible values are %s\n",
-                    db, ", ".join("'%s'" % t for t in segments.TABLES))
+                    db, ", ".join("'%s'" % t for t in segments_lib.TABLES))
       sys.exit(2)
   if not FLAGS.segments:
     logging.error("Supply --segments!")
@@ -61,14 +84,54 @@ def main(unused_argv):
   converters = {}
   for db in databases:
     converter = converter_lib.SegmentToFeaturesConverter()
-    config_path, contents = segments.GetConfigAndRepositoryContents(db)
+    config_path, contents = segments_lib.GetConfigAndRepositoryContents(db)
     if not converter.OpenFromContents(config_path, [contents]):
-      logging.error("Failed to initialze converter for '%s'", db)
+      logging.error("%s: Failed to initialze converter", db)
       sys.exit(2)
     converters[db] = converter
 
-  # TODO: Iterate over segments. For each segment produce a proto representing the
-  # segment features in all the requested configurations.
+  # For each of the databases produce the feature representation for the
+  # corresponding segments.
+  segments = [unicode(segment, "utf-8") for segment in FLAGS.segments]
+  segment_to_features = {}
+  for segment in segments:
+    segment_to_features[segment] = {}
+  for db in databases:
+    converter = converters[db]
+    logging.info("%s: Converting '%s' ...", db, segments)
+    status, db_features = converter.ToFeatures(segments)
+    if not status:
+      logging.error("%s: Feature conversion failed.", db)
+      sys.exit(2)
+    if len(db_features) != len(segments):
+      logging.error(("%s: Number of feature bundles should match the "
+                     "number of segments"), db)
+      sys.exit(2)
+    # Iterate over all the segments and store the features for that segment
+    # in a dictionary, where the features are database-specific.
+    for segment_id in range(0, len(segments)):
+      segment = segments[segment_id]
+      segment_to_features[segment][db] = db_features[segment_id]
+
+  # Collect for each segment a unified representation of all the features.
+  segment_features = df.SegmentFeatures()
+  for segment in segments:
+    repr = df.DistinctiveFeatureRepresentations()
+    repr.segment_name = segment
+    for db in databases:
+      db_features = segment_to_features[segment][db]
+      db_repr = repr.representation.extend([db_features])
+    segment_features.features.extend([repr])
+
+  # Save to the specified file or dump to stdout.
+  contents = text_format.MessageToString(segment_features, as_utf8=True)
+  if FLAGS.output_features_file:
+    with io.open(FLAGS.output_features_file, "w", encoding="utf-8") as writer:
+      writer.write(unicode(contents, "utf-8"))
+      logging.info("Wrote features to %s.", FLAGS.output_features_file)
+  else:
+    print(contents)
+
   return
 
 

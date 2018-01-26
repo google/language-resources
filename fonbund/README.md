@@ -6,8 +6,6 @@ multiple articulatory feature representations. The library interfaces
 with several existing linguistic typology resources providing phonological
 segment inventories and their corresponding articulatory feature systems.
 
-[TOC]
-
 ## Rationale
 
 The first goal is to facilitate the derivation of articulatory features

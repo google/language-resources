@@ -40,34 +40,39 @@ class SegmentToFeaturesConverterTest(unittest.TestCase):
 
   def test_simple_panphon_features(self):
     """Tests simple segments."""
+    feature_names = [
+        "syl", "son", "cons", "cont", "delrel", "lat", "nas", "strid",
+        "voi", "sg", "cg", "ant", "cor", "distr", "lab", "hi", "lo",
+        "back", "round", "velaric", "tense", "long",
+    ]
+    num_features = len(feature_names)
+    consonant = feature_names.index("cons")
+    nasal = feature_names.index("nas")
+    voiced = feature_names.index("voi")
+    tense = feature_names.index("tense")
+
     segments = ["ɡᶣ", "ɫ̤ʲ", "ɫ̤ˠ"]
     status, features = self.converter.ToFeatures(segments)
     self.assertTrue(status)
-    num_features = 22
-    feature_names = [
-        u'syl', u'son', u'cons', u'cont', u'delrel', u'lat', u'nas', u'strid',
-        u'voi', u'sg', u'cg', u'ant', u'cor', u'distr', u'lab', u'hi', u'lo',
-        u'back', u'round', u'velaric', u'tense', u'long',
-    ]
-    self.assertEqual(3, len(features))
-    self.assertEqual("PanPhon", features[0].source_name)
-    self.assertListEqual(feature_names, list(features[0].feature_names))
-    self.assertEqual(1, len(features[0].feature_list))
-    self.assertEqual(num_features, len(features[0].feature_list[0].feature))
-    self.assertEqual(df.DistinctiveFeature.NEGATIVE,
-                     features[0].feature_list[0].feature[1].binary_value)  # Sonorant.
-    self.assertEqual("PanPhon", features[1].source_name)
-    self.assertListEqual(feature_names, list(features[1].feature_names))
-    self.assertEqual(1, len(features[1].feature_list))
-    self.assertEqual(num_features, len(features[1].feature_list[0].feature))
-    self.assertEqual(df.DistinctiveFeature.POSITIVE,
-                     features[1].feature_list[0].feature[1].binary_value)  # Sonorant.
-    self.assertEqual("PanPhon", features[2].source_name)
-    self.assertListEqual(feature_names, list(features[2].feature_names))
-    self.assertEqual(1, len(features[2].feature_list))
-    self.assertEqual(num_features, len(features[2].feature_list[0].feature))
-    self.assertEqual(df.DistinctiveFeature.POSITIVE,
-                     features[2].feature_list[0].feature[1].binary_value)  # Sonorant.
+    self.assertEqual(len(segments), len(features))
+    for feature in features:
+      self.assertEqual("PanPhon", feature.source_name)
+      self.assertListEqual(feature_names, list(feature.feature_names))
+      self.assertEqual(1, len(feature.feature_list))
+      feature_list = feature.feature_list[0]
+      self.assertEqual(num_features, len(feature_list.feature))
+      # The segment is voiced:
+      self.assertEqual(df.DistinctiveFeature.POSITIVE,
+                       feature_list.feature[voiced].binary_value)
+      # The segment is a consonant:
+      self.assertEqual(df.DistinctiveFeature.POSITIVE,
+                       feature_list.feature[consonant].binary_value)
+      # The segment is not nasal:
+      self.assertEqual(df.DistinctiveFeature.NEGATIVE,
+                       feature_list.feature[nasal].binary_value)
+      # Tenseness (a vowel feature) is not applicable:
+      self.assertEqual(df.DistinctiveFeature.NOT_APPLICABLE,
+                       feature_list.feature[tense].binary_value)
 
   def test_bad_segment(self):
     """Tests bad segments."""

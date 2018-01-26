@@ -19,6 +19,10 @@ segments with the corresponding feature structures.
 
 ## Supported cross-lingual phonological databases
 
+Several phonological segment repositories are supported by FonBund. These
+are located elsewhere and we rely on the remote dependency mechanism of [Bazel](https://bazel.build/)
+to pull the database sources from the remote repositories.
+
 ### PHOIBLE
 
 PHOIBLE [http://phoible.org/](http://phoible.org/) ([Moran & McCloy, 2014](https://www.linguistlist.org/LL/fyi/fyi-details.cfm?submissionid=35958257)) is a
@@ -46,3 +50,7 @@ The `phon-class-counts` [https://github.com/ddediu/phon-class-counts](https://gi
 database ([Dediu & Moisik, 2015](http://pubman.mpdl.mpg.de/pubman/item/escidoc:2327732/component/escidoc:2327739/Dediu_Moisik_LREC_2016_151_Paper.pdf)) provides a multi-valued feature encoding, called *Fonetikode*, for several
 phonlogical segment inventories. At present we support Fonetikode feature
 system representation covering the PHOIBLE database.
+
+## License
+
+The code is distributed under [Apache License Version 2.0](https://github.com/googlei18n/language-resources/blob/master/LICENSE).

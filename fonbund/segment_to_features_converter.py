@@ -26,10 +26,7 @@ from fonbund import segment_repository_reader
 
 # Separator character for marking constituents of complex segments, such as
 # diphthongs.
-_COMPLEX_SEGMENT_SEPARATOR = "+"
-
-class SegmentToFeaturesError(Exception):
-  """Exception class for this module."""
+COMPLEX_SEGMENT_SEPARATOR = "+"
 
 
 def _BinaryFeatureToValue(value):
@@ -38,9 +35,7 @@ def _BinaryFeatureToValue(value):
   Args:
      value: String value.
   Returns:
-     Distinctive feature value.
-  Raises:
-     SegmentToFeaturesError: If value cannot be parsed.
+     Boolean status and distinctive feature value tuple.
   """
   feature = df.DistinctiveFeature()
   if value == "0":
@@ -56,9 +51,9 @@ def _BinaryFeatureToValue(value):
     # to be decomposed in the phoneme inventory via the "structure" field,
     # here we may want to double-check if the feature is multi-valued and
     # produce a more informative error.
-    raise SegmentToFeaturesError(
-        "Invalid binary string feature value: %s" % value)
-  return feature;
+    logging.error("Invalid binary string feature value: %s", value)
+    return False, None
+  return True, feature;
 
 
 def _MultivaluedFeatureToValue(config, value):
@@ -68,9 +63,7 @@ def _MultivaluedFeatureToValue(config, value):
      config: Segment repository configuration.
      value: String value.
   Returns:
-     Distinctive feature value.
-  Raises:
-     SegmentToFeaturesError: If value cannot be parsed.
+     Boolean status and distinctive feature value.
   """
   feature = df.DistinctiveFeature()
   if value:
@@ -78,29 +71,9 @@ def _MultivaluedFeatureToValue(config, value):
   elif config.multivalued_feature_default_value:
     feature.multivalued_value.string_value = config.multivalued_feature_default_value
   else:
-    raise SegmentToFeaturesError("Empty multivalued string feature value!")
-  return feature
-
-
-def _FillDefaultFeature(config, value, feature):
-  """Fills a default feature in-place based on configuration.
-
-  Args:
-     config: Segment repository configuration.
-     value: String value.
-  Returns:
-     Distinctive feature value.
-  Raises:
-     SegmentToFeaturesError: If value cannot be parsed.
-  """
-  feature = df.DistinctiveFeature()
-  if not config.multivalued_features:
-    feature.binary_value = df.DistinctiveFeature.NOT_APPLICABLE
-  elif config.multivalued_feature_default_value:
-    feature.multivalued_value.string_value = config.multivalued_feature_default_value
-  else:
-    raise SegmentToFeaturesError("Expected non-empty string for multivalued default!")
-  return feature
+    logging.error("Empty multivalued string feature value!")
+    return False, None
+  return True, feature
 
 
 class SegmentToFeaturesConverter(object):
@@ -152,7 +125,7 @@ class SegmentToFeaturesConverter(object):
     Returns:
        List containing segment parts.
     """
-    return segment.split(_COMPLEX_SEGMENT_SEPARATOR)
+    return segment.split(COMPLEX_SEGMENT_SEPARATOR)
 
   def ToFeatures(self, segments):
     """Converts each segment in a <segments> list to the corresponding features.
@@ -160,9 +133,7 @@ class SegmentToFeaturesConverter(object):
     Args:
        segments: A list of strings representing segments.
     Returns:
-       A list of distinctive features protos.
-    Raises:
-       SegmentToFeaturesError: If value cannot be parsed.
+       Boolean status and a list of distinctive features protos.
     """
     config = self._reader.config
     normalizer = self._reader.normalizer
@@ -172,7 +143,8 @@ class SegmentToFeaturesConverter(object):
       # Perform very minimal normalization.
       status, segment = normalizer.MinimalNormalization(segment)
       if not status:
-        raise SegmentToFeaturesError("Minimal normalization failed for %s" % segment)
+        logging.error("Minimal normalization failed for %s", segment)
+        return False, None
       # Fill the feature list header.
       feature_list = df.DistinctiveFeatures()
       feature_list.source_name = config.name
@@ -186,23 +158,28 @@ class SegmentToFeaturesConverter(object):
         # Normalize the segment component and make sure it represents sane IPA.
         status, segment_component = normalizer.FullNormalization("", segment_component)
         if not status:
-          raise SegmentToFeaturesError("Full normalization failed for %s" % segment_component)
+          logging.error("Full normalization failed for %s", segment_component)
+          return False, None
         if not self._ipa_symbols.IsValidString(segment_component):
-          raise SegmentToFeaturesError("Component %s is not valid IPA" % segment_component)
+          logging.error("Component %s is not valid IPA", segment_component)
+          return False, None
         # Lookup individual string values for the component.
         if segment_component not in segments_to_features:
-          raise SegmentToFeaturesError("Segment %s not found!" % segment_component)
+          logging.error("Segment %s not found!", segment_component)
+          return False, None
         features = feature_list.feature_list.add()
         feature_strings = segments_to_features[segment_component]
         # Fill in the proto.
         for value_string in feature_strings:
           if not config.multivalued_features:
-            feature = _BinaryFeatureToValue(value_string)
+            status, feature = _BinaryFeatureToValue(value_string)
           else:
-            feature = _MultivaluedFeatureToValue(config, value_string)
+            status, feature = _MultivaluedFeatureToValue(config, value_string)
+          if not status:
+            return False, None
           features.feature.extend([feature])
 
       # Update the result with the feature list filled for the given segment.
       result.append(feature_list)
 
-    return result
+    return True, result

@@ -1,0 +1,31 @@
+sudo: required
+dist: trusty
+language: python
+
+branches:
+  except:
+    - docker-integration
+    - docker-test
+
+matrix:
+  fast_finish: true
+  include:
+    - os: linux
+      python: 2.7
+    - os: linux
+      python: 3.3
+    - os: linux
+      python: 3.7-dev
+    - os: osx
+      language: cpp
+      env: PY=/usr/bin/python2.7
+  allow_failures:
+    - os: osx
+      language: cpp
+      env: PY=/usr/bin/python2.7
+
+before_install:
+  - . travis/before_install.sh
+
+script:
+  - travis/script.sh

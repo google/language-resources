@@ -15,7 +15,7 @@
 package(default_visibility = ["//visibility:public"])
 
 load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
-load("@subpar//:subpar.bzl", "par_binary")
+load("@subpar//:subpar.bzl", "par_binary", "par_test")
 
 py_library(
     name = "segments",
@@ -42,6 +42,7 @@ par_binary(
         ":segments",
         "@io_abseil_py//absl:app",
         "@io_abseil_py//absl/flags",
+        "@io_abseil_py//absl/logging",
     ],
 )
 
@@ -67,7 +68,7 @@ py_library(
     deps = [":segment_normalizer_config_py_proto"],
 )
 
-py_test(
+par_test(
     name = "segment_normalizer_test",
     size = "small",
     srcs = ["segment_normalizer_test.py"],
@@ -94,12 +95,13 @@ py_library(
     ],
 )
 
-py_test(
+par_test(
     name = "ipa_symbols_repository_test",
     size = "small",
     srcs = ["ipa_symbols_repository_test.py"],
     data = ["testdata/phoible_segments.txt"],
     deps = [
+        ":helpers",
         ":ipa_symbols_repository",
         ":segment_normalizer",
     ],
@@ -117,7 +119,6 @@ py_library(
     name = "segment_repository_reader",
     srcs = ["segment_repository_reader.py"],
     deps = [
-        ":helpers",
         ":segment_normalizer",
         ":segment_repository_config_py_proto",
         "@io_abseil_py//absl/logging",
@@ -125,12 +126,13 @@ py_library(
     ],
 )
 
-py_test(
+par_test(
     name = "segment_repository_reader_test",
     size = "small",
     srcs = ["segment_repository_reader_test.py"],
     data = ["testdata/tiny_panphon_example.csv"],
     deps = [
+        ":helpers",
         ":segment_repository_config_py_proto",
         ":segment_repository_reader",
     ],
@@ -153,7 +155,7 @@ py_library(
     ],
 )
 
-py_test(
+par_test(
     name = "segment_to_features_converter_test",
     size = "small",
     srcs = ["segment_to_features_converter_test.py"],
@@ -163,6 +165,7 @@ py_test(
     ],
     deps = [
         ":distinctive_features_py_proto",
+        ":helpers",
         ":segment_to_features_converter",
     ],
 )
@@ -178,4 +181,20 @@ par_binary(
         "@io_abseil_py//absl:app",
         "@io_abseil_py//absl/flags",
     ],
+)
+
+sh_test(
+    name = "features_for_segments_test",
+    size = "small",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        $(location features_for_segments.par) \
+          --databases=phoible,phoible_fonetikode,panphon \
+          --segments='e+i,b,i,s,i,d,i,i' |
+        grep -c '^features ' |
+        diff - <(echo 8)
+        """,
+    ],
+    data = ["features_for_segments.par"],
 )

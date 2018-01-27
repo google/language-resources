@@ -194,6 +194,8 @@ def convert_segments(segments):
   assert len(features) == len(segments)
 ```
 
+Please see the `example` subdirectory for a full working example.
+
 ## License
 
 The code is distributed under [Apache License Version 2.0](https://github.com/googlei18n/language-resources/blob/master/LICENSE).

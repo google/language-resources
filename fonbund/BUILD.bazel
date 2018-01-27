@@ -17,6 +17,16 @@ package(default_visibility = ["//visibility:public"])
 load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
 load("@subpar//:subpar.bzl", "par_binary", "par_test")
 
+exports_files(
+    glob(
+        include = [
+            "*.py",
+            "config/*",
+        ],
+        exclude = ["*_test.py"],
+    ),
+)
+
 py_library(
     name = "segments",
     srcs = ["segments.py"],
@@ -29,8 +39,8 @@ py_library(
     deps = [
         ":helpers",
         ":segment_repository_config_py_proto",
-        "@PanPhon//:panphon_data",
         "@clld_phoible//:phoible_data",
+        "@panphon//:panphon_data",
         "@phon_class_counts//:phon_class_counts_data",
     ],
 )

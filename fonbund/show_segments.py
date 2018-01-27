@@ -22,16 +22,18 @@ from fonbund import segments
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('db', '', 'Segment inventory, e.g.'
-                    ' "panphon", "phoible", "phoible_fonetikode"')
+flags.DEFINE_string('db', '', 'Segment inventory, e.g. "panphon". '
+                    'Use --db=help to show a list of available inventories.')
 
 
 def main(unused_argv):
   if not FLAGS.db:
     app.usage(shorthelp=True, exitcode=2)
-  if FLAGS.db not in segments.TABLES:
-    logging.fatal('--db="%s" not recognized; possible values are %s',
-                  FLAGS.db, ', '.join('"%s"' % t for t in segments.TABLES))
+  available = frozenset(segments.AvailableTables())
+  if FLAGS.db not in available:
+    logging.info('Inventories:\n%s\n',
+                 '\n'.join('  --db="%s"' % t for t in available))
+    app.usage(shorthelp=True, exitcode=2)
   for row in segments.SelectFrom(FLAGS.db):
     print('%s\t%s' % (row[0], ' '.join(row[1:])))
   return

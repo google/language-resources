@@ -70,6 +70,11 @@ def EnsureUnicode(bytes_or_string):
     return bytes_or_string
 
 
+def ResourceAvailable(package, resource):
+  data = pkgutil.get_data(package, resource)
+  return data is not None
+
+
 def GetResourceAsBytes(package, resource):
   binary = pkgutil.get_data(package, resource)
   assert isinstance(binary, six.binary_type)

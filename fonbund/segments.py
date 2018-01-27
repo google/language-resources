@@ -21,8 +21,8 @@ from fonbund import segment_repository_config_pb2 as config_pb2
 
 TABLES = {
     'panphon': (
-        'PanPhon',
-        'panphon/data/ipa_all.csv',
+        'panphon',
+        'data/ipa_all.csv',
         'config/segment_repository_config_panphon.textproto'),
 
     'phoible': (
@@ -35,6 +35,13 @@ TABLES = {
         'input/phoible_Features_Fonetikode.csv',
         'config/segment_repository_config_phoible_fonetikode.textproto'),
 }
+
+
+def AvailableTables():
+  for table_name, (package, resource, _) in TABLES.items():
+    if helpers.ResourceAvailable(package, resource):
+      yield table_name
+  return
 
 
 def GetConfigAndRepositoryContents(table_name):

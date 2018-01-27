@@ -11,7 +11,7 @@ git_repository(
 # PanPhon, PHOIBLE and PhonClassCounts databases
 
 new_http_archive(
-    name = "PanPhon",
+    name = "panphon",
     build_file = "bazel/panphon.BUILD",
     strip_prefix = "panphon-master",
     urls = ["https://github.com/dmort27/panphon/archive/master.zip"],

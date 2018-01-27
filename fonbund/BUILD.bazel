@@ -21,6 +21,7 @@ exports_files(
     glob(
         include = [
             "*.py",
+            "README.md",
             "config/*",
         ],
         exclude = ["*_test.py"],

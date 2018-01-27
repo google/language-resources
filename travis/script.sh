@@ -22,3 +22,11 @@ set -o xtrace
 "$BAZEL_EXECUTABLE" run  $STRATEGY       //utils:python_version
 "$BAZEL_EXECUTABLE" test $STRATEGY $SHOW //utils:python_version{,_sh}_test
 "$BAZEL_EXECUTABLE" $STARTUP test $STRATEGY //...
+
+bazel-bin/setup install
+cd fonbund
+echo ɡᶣ |
+  python example/convert_segments.py \
+    config/segment_repository_config_panphon.textproto \
+    testdata/tiny_panphon_example.csv |
+  fgrep 'cons:+'

@@ -12,12 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Display raw segment inventories.
-"""
+"""Display raw segment inventories."""
+
+import io
 
 from absl import app
 from absl import flags
 from absl import logging
+from fonbund import helpers
 from fonbund import segments
 
 FLAGS = flags.FLAGS
@@ -34,8 +36,11 @@ def main(unused_argv):
     logging.info('Inventories:\n%s\n',
                  '\n'.join('  --db="%s"' % t for t in available))
     app.usage(shorthelp=True, exitcode=2)
+
+  stdout = io.open(1, mode='wt', encoding='utf-8', closefd=False)
   for row in segments.SelectFrom(FLAGS.db):
-    print('%s\t%s' % (row[0], ' '.join(row[1:])))
+    line = '%s\t%s\n' % (row[0], ' '.join(row[1:]))
+    stdout.write(helpers.EnsureUnicode(line))
   return
 
 

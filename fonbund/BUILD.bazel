@@ -50,12 +50,21 @@ par_binary(
     name = "show_segments",
     srcs = ["show_segments.py"],
     deps = [
+        ":helpers",
         ":segments",
         "@io_abseil_py//absl:app",
         "@io_abseil_py//absl/flags",
         "@io_abseil_py//absl/logging",
     ],
 )
+
+load(":show_segments.bzl", "show_segments_test")
+
+show_segments_test(db_name = "phoible")
+
+show_segments_test(db_name = "panphon")
+
+show_segments_test(db_name = "phoible_fonetikode")
 
 py_library(
     name = "helpers",

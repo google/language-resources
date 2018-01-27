@@ -15,6 +15,10 @@
 # Configuration for PHOIBLE segment repository encoded using Fonetikode
 # representation.
 #
+# The protocol buffer message definition for this file is
+# "fonbund.SegmentRepositoryConfig" and can be found under
+# <../segment_repository_config.proto>.
+#
 # For more information see https://github.com/ddediu/phon-class-counts.
 
 name: "PHOIBLE-Fonetikode"

@@ -14,6 +14,10 @@
 
 # Configuration for PHOIBLE segment repository.
 #
+# The protocol buffer message definition for this file is
+# "fonbund.SegmentRepositoryConfig" and can be found under
+# <../segment_repository_config.proto>.
+#
 # See the documentation describing the transcription conventions
 # at http://phoible.github.io.
 

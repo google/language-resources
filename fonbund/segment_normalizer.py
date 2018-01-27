@@ -20,6 +20,7 @@ from __future__ import unicode_literals
 
 import unicodedata
 
+from fonbund import helpers
 from fonbund import segment_normalizer_config_pb2
 
 
@@ -92,6 +93,7 @@ class SegmentNormalizer(object):
 
   def _NormalizeSegment(self, language_region, block_rewrites, segment):
     """Base method for normalization."""
+    segment = helpers.EnsureUnicode(segment)
     segment = SegmentNormalizer.NormalizeToNFD(segment)
     if self._config.remove_tie_bars:
       segment = self._RemoveTieBars(segment)

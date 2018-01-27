@@ -65,7 +65,10 @@ py_proto_library(
 py_library(
     name = "segment_normalizer",
     srcs = ["segment_normalizer.py"],
-    deps = [":segment_normalizer_config_py_proto"],
+    deps = [
+        ":helpers",
+        ":segment_normalizer_config_py_proto",
+    ],
 )
 
 par_test(
@@ -119,10 +122,10 @@ py_library(
     name = "segment_repository_reader",
     srcs = ["segment_repository_reader.py"],
     deps = [
+        ":helpers",
         ":segment_normalizer",
         ":segment_repository_config_py_proto",
         "@io_abseil_py//absl/logging",
-        "@six_archive//:six",
     ],
 )
 
@@ -152,6 +155,7 @@ py_library(
         ":distinctive_features_py_proto",
         ":ipa_symbols_repository",
         ":segment_repository_reader",
+        "@io_abseil_py//absl/logging",
     ],
 )
 
@@ -180,6 +184,7 @@ par_binary(
         ":segments",
         "@io_abseil_py//absl:app",
         "@io_abseil_py//absl/flags",
+        "@io_abseil_py//absl/logging",
     ],
 )
 

@@ -21,8 +21,13 @@ import six
 from google.protobuf import text_format
 
 
+def GetTextContents(filename):
+  with io.open(filename, mode='rt', encoding='utf-8') as reader:
+    return reader.read()
+
+
 def GetTextProto(filename, message):
-  with io.open(filename, 'rb') as stream:
+  with io.open(filename, mode='rb') as stream:
     data = stream.read()
   return ParseFromBytes(data, message)
 

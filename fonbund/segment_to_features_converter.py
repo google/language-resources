@@ -26,6 +26,11 @@ from fonbund import segment_repository_reader
 # diphthongs.
 COMPLEX_SEGMENT_SEPARATOR = "+"
 
+# Forward enum constants for convenient client-code usage.
+NOT_APPLICABLE = df.DistinctiveFeature.NOT_APPLICABLE
+POSITIVE = df.DistinctiveFeature.POSITIVE
+NEGATIVE = df.DistinctiveFeature.NEGATIVE
+
 
 def _BinaryFeatureToValue(value):
   """Converts string value of a binary distinctive feature to an value.

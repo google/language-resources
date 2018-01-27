@@ -21,6 +21,7 @@ from __future__ import unicode_literals
 import io
 
 from absl import logging
+from fonbund import helpers
 from fonbund import segment_normalizer
 from fonbund import segment_repository_config_pb2
 
@@ -63,6 +64,12 @@ class SegmentRepositoryReader(object):
     self._segments_to_features = {}
     self._ignored_column_ids = []
     self._normalizer = None
+
+  def OpenPaths(self, config_path, repository_paths):
+    config = helpers.GetTextProto(config_path, self._config)
+    repository_contents = [helpers.GetTextContents(path)
+                           for path in repository_paths]
+    return self.OpenFromContents(config, repository_contents)
 
   def OpenFromContents(self, config, repository_contents):
     """Reads segment repository from contents given the configuration.

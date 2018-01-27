@@ -22,6 +22,8 @@ from fonbund import helpers
 from fonbund import segment_repository_config_pb2
 from fonbund import segment_repository_reader
 
+# Name for the dummy repository.
+_DUMMY_REPO_NAME = "dummy"
 
 class SegmentRepositoryReaderTest(unittest.TestCase):
 
@@ -33,6 +35,7 @@ class SegmentRepositoryReaderTest(unittest.TestCase):
 
   def test_read_with_empty_config(self):
     config = segment_repository_config_pb2.SegmentRepositoryConfig()
+    config.name = _DUMMY_REPO_NAME
     config.field_separator = ","
     config.has_column_description = True
     repository_reader = segment_repository_reader.SegmentRepositoryReader()
@@ -50,6 +53,7 @@ class SegmentRepositoryReaderTest(unittest.TestCase):
     k_language_region = "foo-FOO"
     # Whitelist check.
     whitelist_config = segment_repository_config_pb2.SegmentRepositoryConfig()
+    whitelist_config.name = _DUMMY_REPO_NAME
     whitelist_config.language_list_whitelisted = True
     repository_reader = segment_repository_reader.SegmentRepositoryReader()
     self.assertTrue(repository_reader.IgnoreLanguage(whitelist_config,
@@ -59,6 +63,7 @@ class SegmentRepositoryReaderTest(unittest.TestCase):
                                                       k_language_region))
     # Blacklist check.
     blacklist_config = segment_repository_config_pb2.SegmentRepositoryConfig()
+    blacklist_config.name = _DUMMY_REPO_NAME
     blacklist_config.language_list_whitelisted = False
     self.assertFalse(repository_reader.IgnoreLanguage(blacklist_config,
                                                       k_language_region))
@@ -71,6 +76,7 @@ class SegmentRepositoryReaderTest(unittest.TestCase):
     k_segment_name = "ɫ̤ʲ"
     k_new_features = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
     config = segment_repository_config_pb2.SegmentRepositoryConfig()
+    config.name = _DUMMY_REPO_NAME
     config.field_separator = k_separator
     config.has_column_description = True
     config.num_features = 22

@@ -50,10 +50,9 @@ def _BinaryFeatureToValue(value):
   else:
     # Complex segments sometimes are represented with multivalued features,
     # e.g. in PHOIBLE, where for diphthongs/triphthongs/etc. the feature may
-    # take multiple values, e.g. "+,-". Since we are requiring such segments
-    # to be decomposed in the phoneme inventory via the "structure" field,
-    # here we may want to double-check if the feature is multi-valued and
-    # produce a more informative error.
+    # take multiple values, e.g. "+,-". Because we require complext segments
+    # to be decomposed using the COMPLEX_SEGMENT_SEPARATOR, we may need
+    # to implement a more complex logic rather than erroring here.
     logging.error("Invalid binary string feature value: '%s'", value)
     return False, None
   return True, feature
@@ -143,6 +142,7 @@ class SegmentToFeaturesConverter(object):
        Boolean status and a list of distinctive features protos.
     """
     config = self._reader.config
+    repo_name = config.name
     mvf_default = config.multivalued_feature_default_value
     normalizer = self._reader.normalizer
     segments_to_features = self._reader.segments_to_features
@@ -174,7 +174,10 @@ class SegmentToFeaturesConverter(object):
           return False, None
         # Lookup individual string values for the component.
         if segment_component not in segments_to_features:
-          logging.error("Segment %s not found!", segment_component)
+          logging.error(("%s: Segment '%s' not found! Please check if this "
+                         "happens to be a complex segment, in which case "
+                         "please decompose it using the '%s' separator."),
+                        repo_name, segment_component, COMPLEX_SEGMENT_SEPARATOR)
           return False, None
         features = feature_list.feature_list.add()
         feature_strings = segments_to_features[segment_component]
@@ -185,6 +188,8 @@ class SegmentToFeaturesConverter(object):
           else:
             status, feature = _MultivaluedFeatureToValue(config, value_string)
           if not status:
+            logging.error("%s: Failed to convert '%s' to a feature value!",
+                          repo_name, value_string)
             return False, None
           features.feature.extend([feature])
 

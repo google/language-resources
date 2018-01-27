@@ -84,6 +84,8 @@ class SegmentRepositoryReader(object):
       Bool indicating success of the operation.
     """
     self._config = config
+    repo_name = self._config.name
+    assert repo_name
     assert repository_contents
 
     # Cache the IDs of the columns to remove.
@@ -99,12 +101,12 @@ class SegmentRepositoryReader(object):
       success = self._LoadRepository(
           repository_contents[i], self._feature_names, segments)
       if not success:
-        logging.error("Failed to load repository %d", i)
+        logging.error("%s: Failed to load repository %d", repo_name, i)
         return False
       if (config.has_column_description and i > 0 and
           previous_feature_names != self._feature_names):
-        logging.error("Repositories %d and %d have mismatching features!",
-                      i - 1, i)
+        logging.error("%s: Repositories %d and %d have mismatching features!",
+                      repo_name, i - 1, i)
         return False
       self._segments_to_features.update(segments)
     # Check if we have extra repository contents defined in the configuration
@@ -116,6 +118,7 @@ class SegmentRepositoryReader(object):
       success = self._ReadRepositoryEntry(fields, self._normalizer,
                                           self._segments_to_features)
       if not success:
+        logging.error("%s: Failed to read repository!", repo_name)
         return False
     return True
 
@@ -217,7 +220,8 @@ class SegmentRepositoryReader(object):
     if not segments_to_features:
       logging.error("No segments found!")
       return False
-    logging.info("Scanned %s segments.", len(segments_to_features))
+    logging.info("%s: Scanned %s segments.", self._config.name,
+                 len(segments_to_features))
     return True
 
   def _ReadRepositoryEntry(self, contents, normalizer, segments_to_features):

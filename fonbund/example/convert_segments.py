@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import io
 import sys
 
 from fonbund import segment_to_features_converter as converter_lib
@@ -51,14 +52,16 @@ def main(argv):
   converter = converter_lib.SegmentToFeaturesConverter()
   assert converter.OpenPaths(config_file_path, segments_db_file_paths)
 
-  for line in sys.stdin:
+  stdin = io.open(0, mode='rt', encoding='utf-8', closefd=False)
+  stdout = io.open(1, mode='wt', encoding='utf-8', closefd=False)
+  for line in stdin:
     segments = line.strip().split()
     features_per_segment = convert_segments(converter, segments)
     if not features_per_segment:
       continue
     for segment, distinctive_features in zip(segments, features_per_segment):
       row = format_features(distinctive_features)
-      print('%s\t%s' % (segment, ' '.join(row)))
+      stdout.write('%s\t%s\n' % (segment, ' '.join(row)))
   return
 
 

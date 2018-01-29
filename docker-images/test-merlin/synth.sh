@@ -17,16 +17,24 @@ set -x
 
 TEST_MERLIN=true
 
-TEXT="ප්‍රධානියා ලෙස කල යුතු දෑ කිරීමට"
-
-if [[ ! ${TEST_MERLIN} ]]; then
-  read txt; TEXT=${txt};
-fi
-
-cd /usr/local/src/voice/data/festvox
-
 # Temp test sentence.
 FILENAME=$RANDOM
+
+# If filename is given, then get text from stdin.
+if [[ $# == 1 ]]; then
+  TEST_MERLIN=false
+  FILENAME=$1
+fi
+
+TEXT="ප්‍රධානියා ලෙස කල යුතු දෑ කිරීමට"
+
+if [[ ${TEST_MERLIN} == false ]]; then
+  echo "Reading data from stdin"
+  read text;
+  TEXT=${text};
+fi
+
+# Tmp file path.
 FILEPATH="/tmp/${FILENAME}.txt"
 echo ${FILENAME} "( ' ${TEXT} ' )" > ${FILEPATH}
 

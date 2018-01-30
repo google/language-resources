@@ -1,4 +1,4 @@
-# hi_ur/BUILD
+# Copyright 2016, 2017, 2018 Google LLC. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,9 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# Copyright 2016, 2017 Google, Inc.
-# Author: mjansche@google.com (Martin Jansche)
 
 package(default_visibility = ["//visibility:public"])
 
@@ -100,6 +97,27 @@ sh_test(
     data = [
         "alignables.txt",
         "hi_ur_extended.tsv",
+        ":symbolize",
+        "//festus:lexicon-diagnostics",
+    ],
+)
+
+sh_test(
+    name = "ur_pron_alignment_test",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        $(location symbolize) 0 1 < $(location hi_ur_pron.tsv) |
+        cut -f 3,5 |
+        tr -d . |
+        $(location //festus:lexicon-diagnostics) \
+          --alignables=$(location ur_pron_alignables.txt)
+        """,
+    ],
+    data = [
+        "hi_ur_pron.tsv",
+        "ur_pron_alignables.txt",
         ":symbolize",
         "//festus:lexicon-diagnostics",
     ],

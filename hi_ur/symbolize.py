@@ -141,7 +141,7 @@ ARAB_CODEPOINT_TO_SYMBOL = {
 
     # Modifier diacritics have short symbol names:
     0x064E: "a",   # zabar (FATHA)
-    0X064F: "u",   # pesh (DAMMA)
+    0x064F: "u",   # pesh (DAMMA)
     0x0650: "i",   # zer (KASRA)
     0x0651: ":",   # tashdīd (SHADDA)
     0x0652: "0",   # jazm (SUKUN)
@@ -151,7 +151,7 @@ ARAB_CODEPOINT_TO_SYMBOL = {
     # Characters used in loanwords from Arabic etc. have longer symbol names:
     0x064B: "tanwin",   # tanwīn (ARABIC FATHATAN)
     0x062B: "se",       # s̱e (ARABIC LETTER THEH)
-    0x062D: "bari_he",  # baṛī ḥe (ARABIC LETTER HAH)
+    0x062D: "H",        # baṛī ḥe (ARABIC LETTER HAH)
     0x0630: "zal",      # ẕāl (ARABIC LETTER THAL)
     0x0635: "swad",     # ṣwād (ARABIC LETTER SAD)
     0x0636: "zwad",     # ẓwād (ARABIC LETTER DAD)
@@ -207,10 +207,12 @@ def main(argv):
     assert len(fields) > max(deva_index, arab_index)
     deva = fields[deva_index]
     arab = fields[arab_index].replace(" ", "")
+    fields.pop(min(deva_index, arab_index))
+    fields.pop(max(deva_index, arab_index) - 1)
     try:
       deva_sym = Symbolize(deva, DEVA_CODEPOINT_TO_SYMBOL)
       arab_sym = Symbolize(arab, ARAB_CODEPOINT_TO_SYMBOL)
-      utf8.Print("\t".join([deva, deva_sym, arab_sym, arab]))
+      utf8.Print("\t".join([deva, deva_sym, arab_sym, arab] + fields))
     except Exception as e:  # pylint: disable=broad-except
       utf8.Print("Error symbolizing line %s: %s" % (line, e),
                  file=utf8.stderr)

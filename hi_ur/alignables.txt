@@ -95,7 +95,7 @@ output_symbol { value: 0x0628 key: "b" }
 output_symbol { value: 0x062A key: "t" }
 output_symbol { value: 0x062B key: "se" }
 output_symbol { value: 0x062C key: "j" }
-output_symbol { value: 0x062D key: "bari_he" }
+output_symbol { value: 0x062D key: "H" }
 output_symbol { value: 0x062E key: "Kh" }
 output_symbol { value: 0x062F key: "d" }
 output_symbol { value: 0x0630 key: "zal" }
@@ -357,8 +357,8 @@ alignable { input: "ya"               output: "Y" }
 alignable { input: "lla"              output: "l" }
 alignable { input: "sa"               output: "se" }
 alignable { input: "sa"               output: "swad" }
-alignable { input: "ha"               output: "bari_he" }
-alignable { input: "ha"               output: "bari_he |" }
+alignable { input: "ha"               output: "H" }
+alignable { input: "ha"               output: "H |" }
 
 # Scrambled order near hamzah
 

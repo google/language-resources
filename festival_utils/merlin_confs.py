@@ -44,8 +44,8 @@ if __name__ == "__main__":
   count = int(opts.data_count)
   config = json.load(open(opts.global_config))
 
-  # Use params key in the given global config if it exists.
-  config = config["params"] if "params" in config else config
+  # Use engine_params key in the given global config if it exists.
+  config = config["engine_params"] if "engine_params" in config else config
 
   # Remove entry which are not of conf_type.
   settings = filter(lambda x: opts.conf_type == x["key"].split(".")[0], config)

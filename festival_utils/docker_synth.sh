@@ -13,10 +13,6 @@
 #
 # Copyright 2017 Google, Inc.
 
-set -v
-set -x
-set -e
-
 # Read text from stdin
 read txt; TEXT=${txt};
 

@@ -23,8 +23,11 @@ read txt; TEXT=${txt};
 # Unique synthesizer ID. 
 SYNTH_ID=$RANDOM
 
-# Call synth.sh to generate wav.
-echo "${txt}" | /usr/local/src/language-resources/docker-images/test-merlin/synth.sh "${SYNTH_ID}"
+# Call synth.sh to generate wav and save the log in /tmp/[synth_id].log.
+echo "${txt}" | /usr/local/src/language-resources/docker-images/test-merlin/synth.sh "${SYNTH_ID}" &>/tmp/${SYNTH_ID}.log
 
 # Stream back the generated wav.
 cat "/usr/local/src/merlin/egs/locale/s1/models/test_synthesis/wav/${SYNTH_ID}.wav"
+
+# Clean up the generated files.
+rm /usr/local/src/merlin/egs/locale/s1/models/test_synthesis/wav/"${SYNTH_ID}"*

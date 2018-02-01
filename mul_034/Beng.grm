@@ -260,11 +260,17 @@ export CODEPOINTS_TO_GRAPHEMES = Optimize[
 @ grapheme*
 ];
 
+g2p_preprocess_aux =
+  ("non-joiner".g : "-".g)
+| ("joiner".g : "-".g)
+| (reph : "r".g)
+;
+
 export G2P_PREPROCESS = Optimize[
   codepoints_to_graphemes_internal
 @ always_mark_independent_vowel
 @ del_virama
 @ to_graphemes
-@ CDRewrite[reph : "r".g, "", "", star]
+@ CDRewrite[g2p_preprocess_aux, "", "", star]
 @ ("": "BOS".g) grapheme* ("" : "EOS".g)
 ];

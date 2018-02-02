@@ -3,71 +3,65 @@
 input_label_type: SYMBOL
 output_label_type: SYMBOL
 
-input_symbol { key: "apostrophe"  value: 0x0027 }
-input_symbol { key: "hyphen"      value: 0x002D }
-input_symbol { key: "candrabindu" value: 0x0981 }
-input_symbol { key: "anusvara"    value: 0x0982 }
-input_symbol { key: "visarga"     value: 0x0983 }
-input_symbol { key: "a"           value: 0x0985 }
-input_symbol { key: "aa"          value: 0x0986 }
-input_symbol { key: "i"           value: 0x0987 }
-input_symbol { key: "ii"          value: 0x0988 }
-input_symbol { key: "u"           value: 0x0989 }
-input_symbol { key: "uu"          value: 0x098A }
-input_symbol { key: "ri"          value: 0x098B }
-input_symbol { key: "e"           value: 0x098F }
-input_symbol { key: "ai"          value: 0x0990 }
-input_symbol { key: "o"           value: 0x0993 }
-input_symbol { key: "au"          value: 0x0994 }
-input_symbol { key: "ka"          value: 0x0995 }
-input_symbol { key: "kha"         value: 0x0996 }
-input_symbol { key: "ga"          value: 0x0997 }
-input_symbol { key: "gha"         value: 0x0998 }
-input_symbol { key: "nga"         value: 0x0999 }
-input_symbol { key: "ca"          value: 0x099A }
-input_symbol { key: "cha"         value: 0x099B }
-input_symbol { key: "ja"          value: 0x099C }
-input_symbol { key: "jha"         value: 0x099D }
-input_symbol { key: "nya"         value: 0x099E }
-input_symbol { key: "tta"         value: 0x099F }
-input_symbol { key: "ttha"        value: 0x09A0 }
-input_symbol { key: "dda"         value: 0x09A1 }
-input_symbol { key: "ddha"        value: 0x09A2 }
-input_symbol { key: "nna"         value: 0x09A3 }
-input_symbol { key: "ta"          value: 0x09A4 }
-input_symbol { key: "tha"         value: 0x09A5 }
-input_symbol { key: "da"          value: 0x09A6 }
-input_symbol { key: "dha"         value: 0x09A7 }
-input_symbol { key: "na"          value: 0x09A8 }
-input_symbol { key: "pa"          value: 0x09AA }
-input_symbol { key: "pha"         value: 0x09AB }
-input_symbol { key: "ba"          value: 0x09AC }
-input_symbol { key: "bha"         value: 0x09AD }
-input_symbol { key: "ma"          value: 0x09AE }
-input_symbol { key: "ya"          value: 0x09AF }
-input_symbol { key: "ra"          value: 0x09B0 }
-input_symbol { key: "la"          value: 0x09B2 }
-input_symbol { key: "sha"         value: 0x09B6 }
-input_symbol { key: "ssa"         value: 0x09B7 }
-input_symbol { key: "sa"          value: 0x09B8 }
-input_symbol { key: "ha"          value: 0x09B9 }
-input_symbol { key: "-aa"         value: 0x09BE }
-input_symbol { key: "-i"          value: 0x09BF }
-input_symbol { key: "-ii"         value: 0x09C0 }
-input_symbol { key: "-u"          value: 0x09C1 }
-input_symbol { key: "-uu"         value: 0x09C2 }
-input_symbol { key: "-ri"         value: 0x09C3 }
-input_symbol { key: "-e"          value: 0x09C7 }
-input_symbol { key: "-ai"         value: 0x09C8 }
-input_symbol { key: "-o"          value: 0x09CB }
-input_symbol { key: "-au"         value: 0x09CC }
-input_symbol { key: "hasant"      value: 0x09CD }
-input_symbol { key: "t"           value: 0x09CE }
-input_symbol { key: "rra"         value: 0x09DC }
-input_symbol { key: "rha"         value: 0x09DD }
-input_symbol { key: "yya"         value: 0x09DF }
-input_symbol { key: "-a"          value: 0xE000 }
-input_symbol { key: "ya_phalaa"   value: 0xE001 }
+input_symbol { key: "BOS" value: 61441 }
+input_symbol { key: "EOS" value: 61442 }
+input_symbol { key: "." value: 61443 }
+input_symbol { key: "-" value: 61444 }
+input_symbol { key: "^" value: 61447 }
+input_symbol { key: "@" value: 61448 }
+input_symbol { key: "a" value: 61449 }
+input_symbol { key: "aa" value: 61450 }
+input_symbol { key: "i" value: 61453 }
+input_symbol { key: "ii" value: 61454 }
+input_symbol { key: "u" value: 61455 }
+input_symbol { key: "uu" value: 61456 }
+input_symbol { key: ",r" value: 61458 }
+input_symbol { key: "ee" value: 61463 }
+input_symbol { key: "ai" value: 61465 }
+input_symbol { key: "oo" value: 61467 }
+input_symbol { key: "au" value: 61469 }
+input_symbol { key: ";m" value: 61471 }
+input_symbol { key: "~m" value: 61473 }
+input_symbol { key: ".h" value: 61474 }
+input_symbol { key: "k" value: 61478 }
+input_symbol { key: "kh" value: 61480 }
+input_symbol { key: "g" value: 61481 }
+input_symbol { key: "gh" value: 61482 }
+input_symbol { key: ";n" value: 61483 }
+input_symbol { key: "c" value: 61485 }
+input_symbol { key: "ch" value: 61486 }
+input_symbol { key: "j" value: 61487 }
+input_symbol { key: "jh" value: 61488 }
+input_symbol { key: "~n" value: 61489 }
+input_symbol { key: ".t" value: 61492 }
+input_symbol { key: ".th" value: 61493 }
+input_symbol { key: ".d" value: 61494 }
+input_symbol { key: ".r" value: 61495 }
+input_symbol { key: ".dh" value: 61496 }
+input_symbol { key: ".rh" value: 61497 }
+input_symbol { key: ".n" value: 61498 }
+input_symbol { key: "t" value: 61501 }
+input_symbol { key: "t^" value: 61502 }
+input_symbol { key: "th" value: 61503 }
+input_symbol { key: "d" value: 61504 }
+input_symbol { key: "dh" value: 61505 }
+input_symbol { key: "n" value: 61506 }
+input_symbol { key: "p" value: 61509 }
+input_symbol { key: "ph" value: 61510 }
+input_symbol { key: "b" value: 61511 }
+input_symbol { key: "bh" value: 61512 }
+input_symbol { key: "m" value: 61513 }
+input_symbol { key: "y" value: 61520 }
+input_symbol { key: "~y" value: 61521 }
+input_symbol { key: ";y" value: 61522 }
+input_symbol { key: "r" value: 61523 }
+input_symbol { key: "l" value: 61526 }
+input_symbol { key: ".l" value: 61528 }
+input_symbol { key: "v" value: 61530 }
+input_symbol { key: ";s" value: 61531 }
+input_symbol { key: ".s" value: 61532 }
+input_symbol { key: "s" value: 61533 }
+input_symbol { key: "h" value: 61534 }
 
 output_symbol { key: "k"  value: 1 }
 output_symbol { key: "kh" value: 2 }
@@ -110,207 +104,210 @@ output_symbol { key: "e^" value: 38 }
 output_symbol { key: "o^" value: 39 }
 output_symbol { key: "."  value: 40 }
 
-# Allow free insertion of syllable boundary.
-alignable { input: ""                 output: "." }
+alignable { input: "BOS"              output: "" }
+alignable { input: "EOS"              output: "" }
+alignable { input: "-"                output: "" }
 
-alignable { input: "apostrophe"       output: "." }
-alignable { input: "hyphen"           output: "." }
-alignable { input: "candrabindu"      output: "" }
-
-alignable { input: "anusvara"         output: "N" }
-
-alignable { input: "visarga"          output: "" }
-
-# Geminates with visarga
-alignable { input: "visarga kha"      output: "k . kh" }
-alignable { input: "visarga sha"      output: "sh . sh" }
-alignable { input: "visarga sa"       output: "sh . sh" }
+alignable { input: "~m"               output: "" }
+alignable { input: ";m"               output: "N" }
+alignable { input: ".h"               output: "" }
+alignable { input: ".h kh"            output: "k kh" }
+alignable { input: ".h ;s"            output: "sh sh" }
+alignable { input: ".h s"             output: "sh sh" }
 
 # Independent vowels
-alignable { input: "a"                output: "O" }
-alignable { input: "a"                output: "o" }
-alignable { input: "a"                output: "a" }  #???
-alignable { input: "a ya_phalaa -aa"  output: "E" }
+alignable { input: ". a"              output: "O" }
+alignable { input: ". a"              output: "o" }
+alignable { input: ". a"              output: "a" }  #??? covers typos?
+alignable { input: ". a ~y aa"        output: "E" }
+alignable { input: ". aa"             output: "a" }
+alignable { input: ". i"              output: "i" }
+alignable { input: ". ii"             output: "i" }
+alignable { input: ". u"              output: "u" }
+alignable { input: ". uu"             output: "u" }
+alignable { input: ". ,r"             output: "r i" }
+alignable { input: ". ee"             output: "e" }
+alignable { input: ". ee"             output: "E" }
+alignable { input: ". ee ~y aa"       output: "E" }
+alignable { input: ". ai"             output: "o i^" }
+alignable { input: ". oo"             output: "o" }
+alignable { input: ". au"             output: "o u^" }
+
+# Non-syllabic (semi-)vowels
+alignable { input: ". i"              output: "i^" }
+alignable { input: ". ii"             output: "i^" }
+alignable { input: ". u"              output: "u^" }
+# For e^ see under ";y" below.
+alignable { input: ". oo"             output: "o^" }
+alignable { input: ". oo"             output: "u^" }  #???
+
+# Dependent vowels
+alignable { input: "@"                output: "" }
+alignable { input: "@"                output: "O" }
+alignable { input: "@"                output: "o" }
+alignable { input: "@"                output: "o^" }
+alignable { input: "@"                output: "a" }  #???
+alignable { input: "@"                output: "E" }
 alignable { input: "aa"               output: "a" }
+alignable { input: "aa"               output: "E" }
 alignable { input: "i"                output: "i" }
 alignable { input: "ii"               output: "i" }
 alignable { input: "u"                output: "u" }
 alignable { input: "uu"               output: "u" }
-alignable { input: "ri"               output: "r i" }
-alignable { input: "e"                output: "e" }
-alignable { input: "e"                output: "E" }
-alignable { input: "e ya_phalaa -aa"  output: "E" }
+alignable { input: ",r"               output: "r i" }
+alignable { input: "ee"               output: "e" }
+alignable { input: "ee"               output: "E" }
 alignable { input: "ai"               output: "o i^" }
-alignable { input: "o"                output: "o" }
+alignable { input: "oo"               output: "o" }
 alignable { input: "au"               output: "o u^" }
+alignable { input: "au"               output: "o o^" }  #???
 
-# Non-syllabic (semi-)vowels
-alignable { input: "i"                output: "i^" }
-alignable { input: "ii"               output: "i^" }
-alignable { input: "u"                output: "u^" }
-# For e^ see under "yya" below.
-alignable { input: "o"                output: "o^" }
-alignable { input: "o"                output: "u^" }  #???
-
-# Dependent vowels
-alignable { input: "-a"               output: "O" }
-alignable { input: "-a"               output: "o" }
-alignable { input: "-a"               output: "" }
-alignable { input: "-a"               output: "a" }  #???
-alignable { input: "-aa"              output: "a" }
-alignable { input: "-aa"              output: "E" }  #???
-alignable { input: "-i"               output: "i" }
-alignable { input: "-ii"              output: "i" }
-alignable { input: "-u"               output: "u" }
-alignable { input: "-uu"              output: "u" }
-alignable { input: "-ri"              output: "r i" }
-alignable { input: "-e"               output: "e" }
-alignable { input: "-e"               output: "E" }
-alignable { input: "-ai"              output: "o i^" }
-alignable { input: "-o"               output: "o" }
-alignable { input: "-au"              output: "o u^" }
-alignable { input: "-au"              output: "o o^" }  #???
-
-alignable { input: "hasant"           output: "" }
-
-# jo-fola ignored in initials:
-alignable { input: "ya_phalaa"        output: "" }
-
-alignable { input: "ya_phalaa -a"     output: "E" }
-alignable { input: "ya_phalaa -aa"    output: "E" }
-
-# Geminates with ya_phalaa
-alignable { input: "ka ya_phalaa"     output: "k . k" }
-alignable { input: "kha ya_phalaa"    output: "k . kh" }
-alignable { input: "ga ya_phalaa"     output: "g . g" }
-alignable { input: "ca ya_phalaa"     output: "c . c" }
-alignable { input: "ja ya_phalaa"     output: "j . j" }
-alignable { input: "tta ya_phalaa"    output: "T . T" }
-alignable { input: "ttha ya_phalaa"   output: "T . Th" }
-alignable { input: "ddha ya_phalaa"   output: "D . Dh" }
-alignable { input: "nna ya_phalaa"    output: "n . n" }
-alignable { input: "ta ya_phalaa"     output: "t . t" }
-alignable { input: "tha ya_phalaa"    output: "t . th" }
-alignable { input: "da ya_phalaa"     output: "d . d" }
-alignable { input: "dha ya_phalaa"    output: "d . dh" }
-alignable { input: "na ya_phalaa"     output: "n . n" }
-alignable { input: "pa ya_phalaa"     output: "p . p" }
-alignable { input: "ba ya_phalaa"     output: "b . b" }
-alignable { input: "bha ya_phalaa"    output: "b . bh" }
-alignable { input: "ma ya_phalaa"     output: "m . m" }
-alignable { input: "ya ya_phalaa"     output: "j . j" }
-alignable { input: "la ya_phalaa"     output: "l . l" }
-alignable { input: "sha ya_phalaa"    output: "sh . sh" }
-alignable { input: "sha ya_phalaa"    output: "s . s" }  # check this
-alignable { input: "ssa ya_phalaa"    output: "sh . sh" }
-alignable { input: "sa ya_phalaa"     output: "sh . sh" }
-alignable { input: "sa ya_phalaa"     output: "s . s" }
-alignable { input: "ha ya_phalaa"     output: "j . j" }
-alignable { input: "ha ya_phalaa"     output: "j . jh" }
+# jo-fola occasionally has no direct impact:
+alignable { input: "~y"               output: "" }
 
 # Consonants
-alignable { input: "ka"               output: "k" }
+alignable { input: "k"                output: "k" }
+alignable { input: "k ~y"             output: "k k" }
+alignable { input: "k b"              output: "k" }
 
-alignable { input: "ka hasant ssa"    output: "kh" }      # initially
-alignable { input: "ka hasant ssa"    output: "k . kh" }  # medially
+alignable { input: "k .s"             output: "kh" }
+alignable { input: "k .s"             output: "k kh" }
+alignable { input: "k .s m"           output: "k kh" }
 
-alignable { input: "kha"              output: "kh" }
+alignable { input: "kh"               output: "kh" }
+alignable { input: "kh ~y"            output: "k kh" }
 
-alignable { input: "ga"               output: "g" }
+alignable { input: "g"                output: "g" }
+alignable { input: "g ~y"             output: "g g" }
 
-alignable { input: "gha"              output: "gh" }
+alignable { input: "gh"               output: "gh" }
 
-alignable { input: "nga"              output: "N" }
+alignable { input: ";n"               output: "N" }
 
-alignable { input: "ja"               output: "j" }
-alignable { input: "ja hasant nya"    output: "g" }
-alignable { input: "ja hasant nya"    output: "g . g" }
+alignable { input: "c"                output: "c" }
+alignable { input: "c ~y"             output: "c c" }
 
-alignable { input: "jha"              output: "jh" }
+alignable { input: "ch"               output: "ch" }
+alignable { input: "ch"               output: "s" }  #???
+alignable { input: "ch b"             output: "ch" }
 
-alignable { input: "ca"               output: "c" }
+alignable { input: "j"                output: "j" }
+alignable { input: "j ~n"             output: "g" }
+alignable { input: "j ~n"             output: "g g" }
+alignable { input: "j ~y"             output: "j j" }
+alignable { input: "j b"              output: "j" }
 
-alignable { input: "cha"              output: "ch" }
-alignable { input: "cha"              output: "s" }  #???
+alignable { input: "jh"               output: "jh" }
 
-alignable { input: "nya"              output: "e^ O" }  # stand-alone letter
-alignable { input: "nya"              output: "n" }
+alignable { input: "~n"               output: "n" }
+alignable { input: "BOS ~n"           output: "e^" }  # stand-alone letter
 
-alignable { input: "tta"              output: "T" }
+alignable { input: ".t"               output: "T" }
+alignable { input: ".t ~y"            output: "T T" }
 
-alignable { input: "ttha"             output: "Th" }
+alignable { input: ".th"              output: "Th" }
+alignable { input: ".th ~y"           output: "T Th" }
 
-alignable { input: "dda"              output: "D" }
+alignable { input: ".d"               output: "D" }
+alignable { input: ".d ~y"            output: "D D" }
 
-alignable { input: "rra"              output: "r" }
+alignable { input: ".r"               output: "r" }
 
-alignable { input: "ddha"             output: "Dh" }
+alignable { input: ".dh"              output: "Dh" }
+alignable { input: ".dh ~y"           output: "D Dh" }
 
-alignable { input: "rha"              output: "r" }
+alignable { input: ".rh"              output: "r" }
 
-alignable { input: "nna"              output: "n" }
+alignable { input: ".n"               output: "n" }
+alignable { input: ".n ~y"            output: "n n" }
 
-alignable { input: "ta"               output: "t" }
-alignable { input: "ta hasant da"     output: "t . t" }
-alignable { input: "ta hasant ba"     output: "t . t" }
-alignable { input: "ta hasant ma"     output: "t . t" }
+alignable { input: "t"                output: "t" }
+alignable { input: "t d"              output: "t t" }
+alignable { input: "t m"              output: "t t" }
+alignable { input: "t m"              output: "t" }  #???
+alignable { input: "t ~y"             output: "t t" }
+alignable { input: "t b"              output: "t t" }
+alignable { input: "t b"              output: "t" }
 
 # খণ্ড-ত
-alignable { input: "t"                output: "t" }
+alignable { input: "t^"               output: "t" }
 
-alignable { input: "tha"              output: "th" }
+alignable { input: "th"               output: "th" }
+alignable { input: "th ~y"            output: "t th" }
 
-alignable { input: "da"               output: "d" }
-alignable { input: "da hasant ba"     output: "d . d" }
+alignable { input: "d"                output: "d" }
+alignable { input: "d ~y"             output: "d d" }
+alignable { input: "d b"              output: "d d" }
+alignable { input: "d b"              output: "d" }
 
-alignable { input: "dha"              output: "dh" }
-alignable { input: "dha hasant ba"    output: "d . dh" }
+alignable { input: "dh"               output: "dh" }
+alignable { input: "dh ~y"            output: "d dh" }
+alignable { input: "dh b"             output: "d dh" }
+alignable { input: "dh b"             output: "dh" }
 
-alignable { input: "na"               output: "n" }
-alignable { input: "na hasant ba"     output: "n . n" }
+alignable { input: "n"                output: "n" }
+alignable { input: "n ~y"             output: "n n" }
+alignable { input: "n b"              output: "n n" }
+alignable { input: "n b"              output: "n" }  # once
 
-alignable { input: "pa"               output: "p" }
+alignable { input: "p"                output: "p" }
+alignable { input: "p ~y"             output: "p p" }
 
-alignable { input: "pha"              output: "f" }
+alignable { input: "ph"               output: "f" }
 
-alignable { input: "ba"               output: "b" }
+alignable { input: "b"                output: "b" }
+alignable { input: "b ~y"             output: "b b" }
+alignable { input: "b b"              output: "b" }
 
-# bo-fola, ignored in initials:
-alignable { input: "hasant ba"        output: "" }
+alignable { input: "bh"               output: "bh" }
+alignable { input: "bh ~y"            output: "b bh" }
 
-alignable { input: "bha"              output: "bh" }
+alignable { input: "m"                output: "m" }
+alignable { input: "m m"              output: "m" }  #???
+alignable { input: "m ~y"             output: "m m" }
 
-alignable { input: "ma"               output: "m" }
+alignable { input: "y"                output: "j" }
+alignable { input: "y ~y"             output: "j j" }
 
-# subjoined ma ignored in complex/initial clusters:
-alignable { input: "hasant ma"        output: "" }
+alignable { input: ";y"               output: "i^" }
+alignable { input: ";y"               output: "e^" }
+alignable { input: ";y"               output: "" }
 
-alignable { input: "ya"               output: "j" }
+alignable { input: "r"                output: "r" }
 
-#alignable { input: "yya"              output: "o" }  # ??ইউরোপীয়
-alignable { input: "yya"              output: "i^" }
-alignable { input: "yya"              output: "e^" }
-alignable { input: "yya"              output: "" }
-alignable { input: "yya -a"           output: "o^" }
+alignable { input: "l"                output: "l" }
+alignable { input: "l ~y"             output: "l l" }
 
-alignable { input: "ra"               output: "r" }
+alignable { input: ";s"               output: "sh" }
+alignable { input: ";s"               output: "s" }
+alignable { input: ";s m"             output: "sh sh" }
+alignable { input: ";s m"             output: "sh" }
+alignable { input: ";s ~y"            output: "sh sh" }
+alignable { input: ";s ~y"            output: "s s" }  #???
+alignable { input: ";s b"             output: "sh sh" }
+alignable { input: ";s b"             output: "sh" }
 
-alignable { input: "la"               output: "l" }
+alignable { input: ".s"               output: "sh" }
+alignable { input: ".s"               output: "s" }
+alignable { input: ".s m"             output: "sh sh" }
+alignable { input: ".s m"             output: "sh" }  # once
+alignable { input: ".s ~y"            output: "sh sh" }
 
-alignable { input: "sha"              output: "sh" }
-alignable { input: "sha"              output: "s" }
-alignable { input: "sha hasant ba"    output: "sh . sh" }
-alignable { input: "sha hasant ma"    output: "sh . sh" }
+alignable { input: "s"                output: "sh" }
+alignable { input: "s"                output: "s" }
+alignable { input: "s m"              output: "sh sh" }
+alignable { input: "s m"              output: "sh" }
+alignable { input: "s m"              output: "s" }
+alignable { input: "s ~y"             output: "sh sh" }
+alignable { input: "s ~y"             output: "s s" }
+alignable { input: "s b"              output: "sh sh" }
+alignable { input: "s b"              output: "sh" }
+alignable { input: "s b"              output: "s" }
 
-alignable { input: "ssa"              output: "sh" }
-alignable { input: "ssa"              output: "s" }
-alignable { input: "ssa hasant ma"    output: "sh . sh" }
-
-alignable { input: "sa"               output: "sh" }
-alignable { input: "sa"               output: "s" }
-alignable { input: "sa hasant ma"     output: "sh . sh" }
-
-alignable { input: "ha"               output: "h" }
-alignable { input: "ha"               output: "" }
-alignable { input: "ha hasant nna"    output: "n . h" }
-alignable { input: "ha hasant na"     output: "n . h" }
+alignable { input: "h"                output: "h" }
+alignable { input: "h"                output: "" }
+alignable { input: "h .n"             output: "n h" }
+alignable { input: "h n"              output: "n h" }
+alignable { input: "h ~y"             output: "j j" }
+alignable { input: "h ~y"             output: "j jh" }
+alignable { input: "h b"              output: "h" }

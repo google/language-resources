@@ -48,60 +48,45 @@ sh_test(
 )
 
 genrule(
-    name = "compile_bengali_grm",
-    srcs = [
-        "bengali.grm",
-        "grapheme.syms",
-    ],
-    outs = ["bengali.far"],
+    name = "preprocess_lexicon",
+    srcs = ["data/lexicon.tsv"],
+    outs = ["preprocessed_lexicon.tsv"],
     cmd = """
-        $(location @thrax//:thraxcompiler) \
-          --input_grammar=$(location bengali.grm) \
-          --output_far=$@
-        """,
-    tools = ["@thrax//:thraxcompiler"],
-)
-
-genrule(
-    name = "make_string2graphemes_fst",
-    srcs = ["bengali.far"],
-    outs = [
-        "UTF8_TO_GRAPHEMES.fst",
-        "string2graphemes.fst",
-    ],
-    cmd = """
-        $(location @openfst//:farextract) \
-          --filename_prefix=$(@D)/ \
-          --keys=UTF8_TO_GRAPHEMES \
-          --filename_suffix=.fst \
-          $(location bengali.far) &&
-        $(location @openfst//:fstmap) \
-          --map_type=to_log64 \
-          $(location UTF8_TO_GRAPHEMES.fst) \
-          $(location string2graphemes.fst)
+        paste <(
+          grep '^[^#a-z]' $< |
+          cut -f 1 |
+          $(location //utils:thrax_g2p) \
+            --far=$(location //mul_034:Beng.far) \
+            --far_g2p_key=G2P_PREPROCESS \
+            --output_labels=$(location //mul_034:grapheme.syms)
+        ) <(
+          grep '^[^#a-z]' $< |
+          cut -f 2 |
+          sed 's/ \.//g'
+        ) > $@
         """,
     tools = [
-        "@openfst//:farextract",
-        "@openfst//:fstmap",
+        "//mul_034:Beng.far",
+        "//mul_034:grapheme.syms",
+        "//utils:thrax_g2p",
     ],
 )
 
 sh_test(
     name = "lexicon_test",
-    timeout = "long",
+    timeout = "moderate",
     srcs = ["//utils:eval.sh"],
     args = [
         """
-        grep '^[^#a-z]' $(location data/lexicon.tsv) |
+        cut -f 2,3 $(location preprocessed_lexicon.tsv) |
         $(location //festus:lexicon-diagnostics) \
           --alignables=$(location alignables.txt) \
-          --string2graphemes=$(location string2graphemes.fst)
+          --unique_alignments
         """,
     ],
     data = [
         "alignables.txt",
-        "data/lexicon.tsv",
-        "string2graphemes.fst",
+        "preprocessed_lexicon.tsv",
         "//festus:lexicon-diagnostics",
     ],
 )

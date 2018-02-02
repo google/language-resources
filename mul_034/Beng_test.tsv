@@ -3,6 +3,7 @@
 বাক্য	b aa k ~y a
 # By default "ra virama ya" means conjunct-ra (রেফ reph) before full য (ya).
 সূর্য	s uu r^ y a
+সূর্য্য	s uu r^ y ~y a
 # In words like "DRAM", ya-phalā + aa indicates the vowel /æ/. This is actually
 # full ra (র) followed by ya-phalā plus aa. To block the default interpretation
 # of "ra virama" as reph, the codepoint sequence is "ra joiner virama ya".
@@ -17,12 +18,16 @@
 অফট্র্যাক	a ph a .t r ~y aa k a
 গভর্ন্যান্স	g a bh a r^ n ~y aa n s a
 অ্যাটলাস	a ~y aa .t a l aa s a
+অ্যাকটিভিটি	a ~y aa k a .t i bh i .t i
 এ্যাপোলো	ee ~y aa p oo l oo
+এ্যালবাম	ee ~y aa l a b aa m a
 ঐতিহ্য	ai t i h ~y a
+ঐতিহ্যে	ai t i h ~y ee
 অয্য	a y ~y a
 সফটওয়্যার	s a ph a .t a oo ;y ~y aa r a
 ধৈর্য্য	dh ai r^ y ~y a
 অভ্যর্থনা	a bh ~y a r^ th a n aa
+ব্যুরো	b ~y u r oo
 
 # ক্ষ (kṣ, khiyo)
 ক্ষমা	k .s a m aa
@@ -120,6 +125,7 @@
 তড়িৎ	t a .r i t^
 যকৃৎ	y a k ,r t^
 জ্যোৎস্না	j ~y oo t^ s n aa
+তাৎক্ষণিক	t aa t^ k .s a .n i k a
 
 # Fully composed / fully decomposed pairs
 বোঝা	b oo jh aa
@@ -132,6 +138,8 @@
 আষাঢ়	aa .s aa .rh a
 ময়মনসিংহ	m a ;y a m a n a s i ;m h a
 ময়মনসিংহ	m a ;y a m a n a s i ;m h a
+ছড়িয়েছে	ch a .r i ;y ee ch ee
+ছড়িয়েছে	ch a .r i ;y ee ch ee
 
 # Additions for Assamese
 ৰং	r a ;m

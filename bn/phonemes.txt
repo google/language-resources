@@ -14,10 +14,10 @@ kh	kʰ
 g	ɡ
 gh	ɡʰ
 N	ŋ
-c	c
-ch	cʰ
-j	ɟ
-jh	ɟʰ
+c	t͡ʃ
+ch	t͡ʃʰ
+j	d͡ʒ
+jh	d͡ʒʰ
 T	ʈ
 Th	ʈʰ
 D	ɖ

@@ -90,7 +90,13 @@ codepoint_to_grapheme =
 | ("ra_with_lower_diagonal".c : "w".g)
 ;
 
-separator_c = "apostrophe".e | "hyphen".e | "letter_apostrophe".e;
+separator_c =
+  "apostrophe".e
+| "hyphen".e
+| "letter_apostrophe".e
+| "lsquo".e
+| "rsquo".e
+;
 
 codepoint = Optimize[
   Project[codepoint_to_grapheme, 'input']
@@ -107,6 +113,7 @@ zw = "non-joiner".c | "joiner".c;
 virama_g = "^".g;
 ya_phalaa = "~y".g;
 reph = "r^".g;
+za = "z".g;
 lla = ".l".g;
 
 grapheme = Optimize[
@@ -120,6 +127,7 @@ grapheme = Optimize[
 | virama_g
 | ya_phalaa
 | reph
+| za
 | lla
 ];
 
@@ -137,7 +145,7 @@ consonant =
 | "sha".c | "ssa".c  | "sa".c  | "ha".c
 | "rra".c | "rha".c  | "yya".c
 | "ra_with_middle_diagonal".c | "ra_with_lower_diagonal".c
-| lla
+| za | lla
 ;
 
 dependent_vowel =
@@ -168,7 +176,8 @@ vowels_to_nfc_aux =
 vowels_to_nfc = CDRewrite[vowels_to_nfc_aux, "", "", star];
 
 compose_dotted_aux =
-  ("dda nukta".c : "rra".c)
+  ("ja nukta".c : za)
+| ("dda nukta".c : "rra".c)
 | ("ddha nukta".c : "rha".c)
 | ("ya nukta".c : "yya".c)
 | ("la nukta".c : lla)
@@ -180,8 +189,8 @@ compose_dotted = CDRewrite[compose_dotted_aux, "", "", star];
 # cluster, i.e. is not preceded by virama and is followed by a consonant.
 ins_reph = CDRewrite[
   "ra virama".c : reph,
-  (codepoint - "virama".c) | lla,
-  consonant | "khanda_ta".c | lla,
+  (codepoint - "virama".c) | za | lla,
+  consonant | "khanda_ta".c | za | lla,
   star
 ];
 

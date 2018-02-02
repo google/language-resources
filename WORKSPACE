@@ -5,7 +5,7 @@ workspace(name = "language_resources")
 git_repository(
     name = "subpar",
     remote = "https://github.com/google/subpar",
-    tag = "1.1.0",
+    tag = "1.2.0",
 )
 
 # PanPhon, PHOIBLE and PhonClassCounts databases

@@ -102,23 +102,56 @@ sh_test(
     ],
 )
 
+py_binary(
+    name = "preprocess_arab",
+    srcs = ["preprocess_arab.py"],
+    srcs_version = "PY2AND3",
+    deps = ["//utils:utf8"],
+)
+
+genrule(
+    name = "preprocess_hi_ur_pron",
+    srcs = ["hi_ur_pron.tsv"],
+    outs = ["preprocessed_hi_ur_pron.tsv"],
+    cmd = """
+        paste <(
+          cut -f 1 $< |
+          $(location //utils:thrax_g2p) \
+            --far=$(location //mul_034:Deva.far) \
+            --far_g2p_key=CODEPOINTS_TO_GRAPHEMES \
+            --output_labels=$(location //mul_034:grapheme.syms)
+        ) <(
+          cut -f 2 $< |
+          $(location preprocess_arab)
+        ) <(
+          cut -f 3 $< |
+          sed 's/ \.//g'
+        ) > $@
+        """,
+    tools = [
+        ":preprocess_arab",
+        "//mul_034:Deva.far",
+        "//mul_034:grapheme.syms",
+        "//utils:thrax_g2p",
+    ],
+)
+
 sh_test(
     name = "ur_pron_alignment_test",
     timeout = "short",
     srcs = ["//utils:eval.sh"],
     args = [
         """
-        $(location symbolize) 0 1 < $(location hi_ur_pron.tsv) |
-        cut -f 3,5 |
-        tr -d . |
+        cut -f 3,4,5 $(location preprocessed_hi_ur_pron.tsv) |
         $(location //festus:lexicon-diagnostics) \
-          --alignables=$(location ur_pron_alignables.txt)
+          --alignables=$(location ur_pron_alignables.txt) \
+          --input_index=1 \
+          --output_index=2
         """,
     ],
     data = [
-        "hi_ur_pron.tsv",
+        "preprocessed_hi_ur_pron.tsv",
         "ur_pron_alignables.txt",
-        ":symbolize",
         "//festus:lexicon-diagnostics",
     ],
 )

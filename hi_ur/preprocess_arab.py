@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-#
-# Copyright 2016, 2017 Google Inc. All Rights Reserved.
+
+# Copyright 2016, 2017, 2018 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Symbolize Hindustani parallel script data (Devanagari/Arabic).
+"""Symbolize Hindustani in Perso-Arabic script (ISO 15924 "Arab").
 """
 
 from __future__ import unicode_literals
@@ -24,80 +24,6 @@ import sys
 import unicodedata
 
 from utils import utf8
-
-
-DEVA_CODEPOINT_TO_SYMBOL = {
-    # Various signs
-    0x0901: "candrabindu",
-    0x0902: "anusvara",
-    0x0903: "visarga",
-    # Independent vowels
-    0x0905: "a",
-    0x0906: "aa",
-    0x0907: "i",
-    0x0908: "ii",
-    0x0909: "u",
-    0x090A: "uu",
-    0x090B: "ri",
-    0x090D: "candra_e",
-    0x090F: "ee",
-    0x0910: "ai",
-    0x0911: "candra_o",
-    0x0913: "oo",
-    0x0914: "au",
-    # Consonants
-    0x0915: "ka",
-    0x0916: "kha",
-    0x0917: "ga",
-    0x0918: "gha",
-    0x0919: "nga",
-    0x091A: "ca",
-    0x091B: "cha",
-    0x091C: "ja",
-    0x091D: "jha",
-    0x091E: "nya",
-    0x091F: "tta",
-    0x0920: "ttha",
-    0x0921: "dda",
-    0x0922: "ddha",
-    0x0923: "nna",
-    0x0924: "ta",
-    0x0925: "tha",
-    0x0926: "da",
-    0x0927: "dha",
-    0x0928: "na",
-    0x092A: "pa",
-    0x092B: "pha",
-    0x092C: "ba",
-    0x092D: "bha",
-    0x092E: "ma",
-    0x092F: "ya",
-    0x0930: "ra",
-    0x0932: "la",
-    0x0933: "lla",
-    0x0935: "va",
-    0x0936: "sha",
-    0x0937: "ssa",
-    0x0938: "sa",
-    0x0939: "ha",
-    # Various signs
-    0x093C: "nukta",
-    # Dependent vowel signs
-    0x093E: "-aa",
-    0x093F: "-i",
-    0x0940: "-ii",
-    0x0941: "-u",
-    0x0942: "-uu",
-    0x0943: "-ri",
-    0x0945: "-candra_e",
-    0x0947: "-ee",
-    0x0948: "-ai",
-    0x0949: "-candra_o",
-    0x094B: "-oo",
-    0x094C: "-au",
-    # Virama
-    0x094D: "virama",
-}
 
 ARAB_CODEPOINT_TO_SYMBOL = {
     # Letters used in Indo-European vocabulary have short symbol names:
@@ -173,7 +99,7 @@ ZERO_WIDTH = re.compile(r"[\u200B-\u200F]+")
 REORDER_SHADDA = re.compile(r"([\u064E-\u0650]+)\u0651")
 
 
-def Symbolize(string, cp2sym):
+def Symbolize(string, cp2sym=ARAB_CODEPOINT_TO_SYMBOL):
   string = ZERO_WIDTH.sub("", string)
   string = REORDER_SHADDA.sub("\u0651\\1", string)
   return " ".join(cp2sym[ord(c)] for c in string)
@@ -186,38 +112,18 @@ def PrintSymbols(symtab, prefix="in"):
   return
 
 
-def main(argv):
-  try:
-    deva_index = int(argv[1])
-  except:  # pylint: disable=bare-except
-    deva_index = 0
-
-  try:
-    arab_index = int(argv[2])
-  except:  # pylint: disable=bare-except
-    arab_index = 1
-
-  success = True
+def main(unused_argv):
   for line in utf8.stdin:
     line = line.rstrip("\n")
     if not line or line.startswith("#"):
       continue
     line = unicodedata.normalize("NFC", line)
     fields = line.split("\t")
-    assert len(fields) > max(deva_index, arab_index)
-    deva = fields[deva_index]
-    arab = fields[arab_index].replace(" ", "")
-    fields.pop(min(deva_index, arab_index))
-    fields.pop(max(deva_index, arab_index) - 1)
-    try:
-      deva_sym = Symbolize(deva, DEVA_CODEPOINT_TO_SYMBOL)
-      arab_sym = Symbolize(arab, ARAB_CODEPOINT_TO_SYMBOL)
-      utf8.Print("\t".join([deva, deva_sym, arab_sym, arab] + fields))
-    except Exception as e:  # pylint: disable=broad-except
-      utf8.Print("Error symbolizing line %s: %s" % (line, e),
-                 file=utf8.stderr)
-      success = False
-  sys.exit(0 if success else 1)
+    assert fields
+    arab = fields[0]
+    arab = arab.replace(" ", "")
+    arab_sym = Symbolize(arab)
+    utf8.Print("\t".join([arab, arab_sym] + fields[1:]))
   return
 
 

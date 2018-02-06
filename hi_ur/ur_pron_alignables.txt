@@ -127,12 +127,12 @@ alignable { input: ""               output: "i" }
 alignable { input: ""               output: "u" }
 alignable { input: ""               output: "E" }
 
-alignable { input: "|"              output: "a" }
-alignable { input: "|"              output: "aa" }
+alignable { input: "|"              output: "a" }     # initially
+alignable { input: "|"              output: "aa" }    # medially
 alignable { input: "|"              output: "i" }
 alignable { input: "|"              output: "u" }
 alignable { input: "|"              output: "E" }
-alignable { input: "|"              output: "O" }  # in English loans
+alignable { input: "|"              output: "O" }     # in English loans
 alignable { input: "| y"            output: "ii" }
 alignable { input: "| y"            output: "e" }
 alignable { input: "| y"            output: "E" }
@@ -171,6 +171,7 @@ alignable { input: "t"              output: "t t" }
 alignable { input: "t +h"           output: "th" }
 alignable { input: "d"              output: "d" }
 alignable { input: "d +h"           output: "dh" }
+alignable { input: "d +h"           output: "d dh" }
 alignable { input: "n"              output: "ng" }
 alignable { input: "n"              output: "n" }
 alignable { input: "n"              output: "n n" }
@@ -195,12 +196,12 @@ alignable { input: "'y"             output: "y" }
 alignable { input: "'y"             output: "i" }
 alignable { input: "'y"             output: "ii" }
 alignable { input: "'y"             output: "e" }
-alignable { input: "'y y"           output: "i" }  # rare; exceptional?
+alignable { input: "'y y"           output: "i" }     # rare; exceptional?
 alignable { input: "'y y"           output: "ii" }
 alignable { input: "'y y"           output: "e" }
 alignable { input: "'y Y"           output: "e" }
 alignable { input: "Y"              output: "e" }
-alignable { input: "Y"              output: "a y" }  # once; exceptional?
+alignable { input: "Y"              output: "a y" }   # once; exceptional?
 
 alignable { input: "r"              output: "r" }
 alignable { input: "r :"            output: "r r" }
@@ -225,7 +226,7 @@ alignable { input: "s"              output: "s s" }
 alignable { input: "h"              output: "h" }
 alignable { input: "h"              output: "" }
 alignable { input: "h"              output: "aa" }
-alignable { input: "h m"            output: "m h" }  # once; exceptional?
+alignable { input: "h m"            output: "m h" }   # once; exceptional?
 
 # Additional Perso-Arabic letters
 

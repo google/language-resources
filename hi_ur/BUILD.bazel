@@ -137,6 +137,26 @@ genrule(
 )
 
 sh_test(
+    name = "hi_pron_alignment_test",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        cut -f 1,2,5 $(location preprocessed_hi_ur_pron.tsv) |
+        $(location //festus:lexicon-diagnostics) \
+          --alignables=$(location hi_pron_alignables.txt) \
+          --input_index=1 \
+          --output_index=2
+        """,
+    ],
+    data = [
+        "hi_pron_alignables.txt",
+        "preprocessed_hi_ur_pron.tsv",
+        "//festus:lexicon-diagnostics",
+    ],
+)
+
+sh_test(
     name = "ur_pron_alignment_test",
     timeout = "short",
     srcs = ["//utils:eval.sh"],

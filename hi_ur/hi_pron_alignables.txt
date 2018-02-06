@@ -142,12 +142,12 @@ output_symbol { key: "." value: 50 }
 
 alignable { input: "~m"             output: "n" }
 alignable { input: "~m"             output: "~" }
-alignable { input: "~m v a"         output: "o ~" }  # गाँव
+alignable { input: "~m v a"         output: "o ~" }   # गाँव
 alignable { input: ";m"             output: "ng" }
 alignable { input: ";m"             output: "n" }
 alignable { input: ";m"             output: "m" }
 alignable { input: ";m"             output: "~" }
-alignable { input: ";m v a"         output: "o ~" }  # गांव
+alignable { input: ";m v a"         output: "o ~" }   # गांव
 
 alignable { input: ".h kh"          output: "k kh" }
 

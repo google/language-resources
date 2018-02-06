@@ -175,3 +175,23 @@ sh_test(
         "//festus:lexicon-diagnostics",
     ],
 )
+
+sh_test(
+    name = "hi_ur_alignment_test",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        cut -f 1-4 $(location preprocessed_hi_ur_pron.tsv) |
+        $(location //festus:lexicon-diagnostics) \
+          --alignables=$(location hi_ur_alignables.txt) \
+          --input_index=1 \
+          --output_index=3
+        """,
+    ],
+    data = [
+        "hi_ur_alignables.txt",
+        "preprocessed_hi_ur_pron.tsv",
+        "//festus:lexicon-diagnostics",
+    ],
+)

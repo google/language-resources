@@ -139,3 +139,28 @@
 आॾवाणीअ	aa "d a v aa .n ii a
 ॿोली	"b oo l ii
 दॿो	d a "b oo
+
+# Terrible, horrible, no good, very bad encoding mistakes or typos
+अा	aa
+अॅ	ae
+र्इ	ii
+उु	uu
+उू	uu
+ऋृ	,rr
+ऋॄ	,rr
+एॅ	^e
+एॆ	e
+एे	ai
+एै	ai
+ऐे	ai
+ऐै	ai
+आॅ	^o
+आॆ	o
+अाे	oo
+अी	a ERROR ii
+अेा	oo ERROR aa
+अो	oo
+आे	oo
+अाै	au
+अै	au
+आै	au

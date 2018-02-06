@@ -256,6 +256,16 @@ check_consonants = CDRewrite[
   star
 ];
 
+# Check that every consonant modifier (including dependent vowels) is preceded
+# by a consonant. Where that is not the case, insert ERROR as a marker for
+# debugging.
+check_dependent_vowels = CDRewrite[
+  "" : "ERROR".g,
+  (codepoint | grapheme) - consonant,
+  consonant_modifier,
+  star
+];
+
 # Check that no independent vowel letter is followed by a dependent vowel
 # sign (including the inherent vowel "@"), or virama. Where that is not the
 # case, insert ERROR as a marker for debugging.
@@ -276,10 +286,16 @@ to_graphemes_aux =
   codepoint_to_grapheme
 | ("@".g : "a".g)
 | ("virama".c : "")
-| ("nukta".c : "")
+| ("nukta".c : "ERROR".g)
 ;
 
 to_graphemes = CDRewrite[to_graphemes_aux, "", "", star];
+
+export FIX_TYPOS = Optimize[
+  codepoint*
+@ fix_typos
+@ codepoint*
+];
 
 export CODEPOINTS_TO_GRAPHEMES = Optimize[
   codepoint*
@@ -288,6 +304,7 @@ export CODEPOINTS_TO_GRAPHEMES = Optimize[
 @ ins_inherent_vowel
 @ del_inherent_vowel
 @ check_consonants
+@ check_dependent_vowels
 @ check_independent_vowels
 @ ins_eyelash_ra
 @ keep_virama

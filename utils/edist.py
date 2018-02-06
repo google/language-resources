@@ -1,6 +1,6 @@
 #! /usr/bin/env python
-#
-# Copyright 2008 Google Inc. All Rights Reserved.
+
+# Copyright 2008, 2018 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,22 +24,29 @@ __author__ = 'mjansche@google.com (Martin Jansche)'
 _INF = 1e300 * 1e300
 
 
-class EditDistance:
+class EditDistance(object):
   """Computes the weighted memoryless edit distance between two sequences."""
 
-  START = "S"
-  DELETION = "D"
-  INSERTION = "I"
-  MATCH = "M"
+  START = 'S'
+  DELETION = 'D'
+  INSERTION = 'I'
+  MATCH = 'M'
 
   def __init__(self, x, y, cost):
-    """Compute the weighted edist distance between 'x' and 'y'
+    """Compute a weighted edit distance.
+
+    Compute the weighted edist distance between 'x' and 'y'
     w.r.t. the cost function 'cost'.  The cost function must return
     values that can be added and compared against each other and
     against integers.  It will be invoked as 'cost(None, y_j)' to
     return the insertion cost of 'y_j'; as 'cost(x_i, None)' to return
     the deletion cost of 'x_i'; and as 'cost(x_i, y_j)' to return the
     cost of matching 'x_i' with 'y_j'.
+
+    Args:
+        x: first sequence
+        y: second sequence
+        cost: function returning edit costs
     """
     x = tuple(x)
     y = tuple(y)
@@ -52,12 +59,12 @@ class EditDistance:
     n = len(y) + 1
     M = {(0, 0): (self.START, 0)}
 
-    for j in xrange(1, n):
+    for j in range(1, n):
       M[0, j] = (self.INSERTION, M[0, j-1][1] + cost(None, y[j-1]))
 
-    for i in xrange(1, m):
+    for i in range(1, m):
       M[i, 0] = (self.DELETION, M[i-1, 0][1] + cost(x[i-1], None))
-      for j in xrange(1, n):
+      for j in range(1, n):
         # Start with insertion:
         a = self.INSERTION
         v = M[i, j-1][1] + cost(None, y[j-1])
@@ -88,8 +95,8 @@ class EditDistance:
 
   def PrettyPrint(self, writer):
     """Prints the dynamic programming matrix (for debugging)."""
-    for i in xrange(self.m):
-      for j in xrange(self.n):
+    for i in range(self.m):
+      for j in range(self.n):
         if (i, j) in self.M:
           writer.write('  %s: %s' % self.M[i, j])
       writer.write('\n')
@@ -105,7 +112,7 @@ class EditDistance:
     i = self.m - 1
     j = self.n - 1
     while True:
-      a,v = self.M[i, j]
+      a, _ = self.M[i, j]
       if a == self.START:
         assert (0, 0) == (i, j)
         break
@@ -125,11 +132,22 @@ class EditDistance:
 
 
 def LevenshteinCost(a, b):
-  """Cost function for what is now thought of as the classical
+  """Cost function for Levenshtein distance with substitutions.
+
+  Cost function for what is now thought of as the classical
   Levenshtein distance, which is the minimum number of insertions,
   deletions, and substitutions required to edit one sequence into
   another.  Returns zero for matches, unity for indels and
   substitutions.
+
+  Args:
+      a: input symbol, or None for insertions
+      b: output symbol, or None for deletions
+
+  Returns:
+      0 for exact match
+      1 for mismatch / substitution
+      1 for insertion or deletion
   """
   if a == b:
     return 0
@@ -138,10 +156,21 @@ def LevenshteinCost(a, b):
 
 
 def LevenshteinCostNoSubs(a, b):
-  """Cost function for Levenshtein's other edit distance (the orginal,
+  """Cost function for Levenshtein distance without substitutions.
+
+  Cost function for Levenshtein's other edit distance (the orginal,
   no substitutions), which is the minimum number of indels required to
   edit one sequence into another.  Returns zero for matches, unity for
   indels, and infinity for substitutions.
+
+  Args:
+      a: input symbol, or None for insertions
+      b: output symbol, or None for deletions
+
+  Returns:
+      0   for match
+      inf for mismatch / substitution
+      1   for insertion or deletion
   """
   if a == b:
     return 0
@@ -152,12 +181,22 @@ def LevenshteinCostNoSubs(a, b):
 
 
 def HammingCost(a, b):
-  """Cost function for Hamming distance.  Returns zero for matches,
-  one for mismatches, and infinity for substitutions.  The overall
-  edit distance is finite iff the two sequences have the same length.
-  This function is really only useful for debugging, since the naive
-  algorithm for computing the Hamming distance is more efficient than
-  the dynamic programming algorithm.
+  """Cost function for Hamming distance.
+
+  Returns zero for matches, one for mismatches, and infinity for
+  indels.  The overall edit distance is finite iff the two sequences
+  have the same length.  This function is really only useful for
+  debugging, since the naive algorithm for computing the Hamming
+  distance is more efficient than the dynamic programming algorithm.
+
+  Args:
+      a: input symbol, or None for insertions
+      b: output symbol, or None for deletions
+
+  Returns:
+      0   for match
+      1   for mismatch / substitution
+      inf for insertion or deletion
   """
   if a == b:
     return 0
@@ -170,8 +209,8 @@ def HammingCost(a, b):
 if __name__ == '__main__':
   import sys
   x, y = sys.argv[1:3]
-  print x, y
+  print(x, y)
   ed = EditDistance(x, y, LevenshteinCost)
   ed.PrettyPrint(sys.stdout)
-  print ed.Argmin()
-  print ed.Valmin()
+  print(ed.Argmin())
+  print(ed.Valmin())

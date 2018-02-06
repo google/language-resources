@@ -27,8 +27,8 @@ py_binary(
 py_test(
     name = "python_version_test",
     timeout = "short",
-    main = "python_version.py",
     srcs = ["python_version.py"],
+    main = "python_version.py",
     srcs_version = "PY2AND3",
 )
 
@@ -71,7 +71,6 @@ py_binary(
         "eval_lex.py",
     ],
     srcs_version = "PY2AND3",
-    deps = ["//utils:utf8"],
 )
 
 py_binary(

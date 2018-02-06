@@ -1,4 +1,6 @@
-# Copyright 2008, 2009, 2016, 2017 Google Inc. All Rights Reserved.
+#! /usr/bin/env python
+
+# Copyright 2008, 2009, 2016, 2017, 2018 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,19 +21,20 @@ Mean Reciprocal Rank.
 
 """
 
+from __future__ import unicode_literals
+
 __author__ = 'mjansche@google.com (Martin Jansche)'
 
+import io
 import math
 import optparse
 import sys
 
 import edist
 
-from utils import utf8
-
-_stdout = utf8.stdout
-_stderr = utf8.stderr
-
+_stdin = io.open(0, mode='rt', encoding='utf-8', closefd=False)
+_stdout = io.open(1, mode='wt', encoding='utf-8', closefd=False)
+_stderr = io.open(2, mode='wt', encoding='utf-8', closefd=False)
 
 _INF = 1e300 * 1e300
 _NAN = _INF - _INF
@@ -44,7 +47,7 @@ class FLAGS(object):
   predicted_oracle_type = 'best'
 
 
-def fdiv(x, y):
+def fdiv(x, y):  # pylint: disable=invalid-name
   """Floating point division without exceptions.
 
   By default, Python turns SIGFPE into an exception on floating point
@@ -136,12 +139,13 @@ def ReadLexicon(reader):
     else:
       d[word] = [(pron, cost, other)]
   # Sort prons by increasing cost.
-  for prons in d.itervalues():
-    prons.sort(lambda x, y: cmp(x[1], y[1]))
+  for prons in d.values():
+    prons.sort(key=lambda x: x[1])
   return d
 
 
 class Stats(object):
+
   def __init__(self):
     self.not_found = 0
     self.words_total = 0
@@ -159,7 +163,9 @@ class Stats(object):
 
 def CompareLexica(golden_lex, predicted_lex, writer,
                   golden_cutoff=None, predicted_cutoff=None):
-  """Compares the predicted pronunciations against the golden
+  """Compares predicted and golden lexica.
+
+  Compares the predicted pronunciations against the golden
   reference dictionary.  Outputs statistics to 'writer' in
   tab-separated value format with headers, to facility further
   analysis with R.
@@ -172,7 +178,7 @@ def CompareLexica(golden_lex, predicted_lex, writer,
       predicted_cutoff: only consider top n predicted pronunciations
   """
   stats = Stats()
-  for word, prons in predicted_lex.iteritems():
+  for word, prons in predicted_lex.items():
     if word not in golden_lex:
       _stderr.write("Warning: Word '%s' not found in golden lexicon\n" % word)
       stats.not_found += 1
@@ -211,7 +217,7 @@ def CompareLexica(golden_lex, predicted_lex, writer,
                       '\t'.join(predicted[2])))
       argvals.append((inner_argmin, inner_valmin))
     assert argvals
-    argvals.sort(lambda x, y: cmp(x[1], y[1]))  # Sort by increasing values.
+    argvals.sort(key=lambda x: x[1])  # Sort by increasing values.
     # Outer oracle: Find the best/etc. among the predicted pronunciations.
     if FLAGS.predicted_oracle_type == 'best':
       index = 0
@@ -268,7 +274,7 @@ def CompareLexica(golden_lex, predicted_lex, writer,
       writer.write('#WORD_RR\t%s\t%f\n' % (word, rr))
 
   if FLAGS.output_edit_stats:
-    for (i, o), c in stats.edit_stats.iteritems():
+    for (i, o), c in stats.edit_stats.items():
       writer.write('#EDIT\t%s\t%s\t%d\n' % (i, o, c))
 
   if FLAGS.output_summary_stats:
@@ -301,14 +307,14 @@ def main(argv):
     _stderr.write('Not enough arguments. Use --help for usage information.\n')
     sys.exit(1)
 
-  with utf8.open(argv[1]) as reader:
+  with io.open(argv[1], mode='rt', encoding='utf-8') as reader:
     golden = ReadLexicon(reader)
 
   if len(argv) == 3:
-    with utf8.open(argv[2]) as reader:
+    with io.open(argv[2], mode='rt', encoding='utf-8') as reader:
       predicted = ReadLexicon(reader)
   else:
-    predicted = ReadLexicon(utf8.stdin)
+    predicted = ReadLexicon(_stdin)
 
   CompareLexica(golden, predicted, _stdout)  # Uses oracle.
   # Alternatively, CompareLexica(golden, predicted, _stdout, 1, 1)

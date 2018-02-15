@@ -119,7 +119,7 @@ codepoint = Optimize[
 | "joiner".c
 ];
 
-virama = "^".g;
+virama_g = "^".g;
 eyelash_ra = "^r".g;
 zhe = "^z".g;
 
@@ -127,9 +127,11 @@ grapheme = Optimize[
   Project[codepoint_to_grapheme, 'output']
 | "@".g
 | "ERROR".g
+| "-".g
+| ".".g
 | "non-joiner".g
 | "joiner".g
-| virama
+| virama_g
 | eyelash_ra
 | zhe
 ];
@@ -219,6 +221,12 @@ fix_typos =
 @ CDRewrite[typos, "", "", star]
 ;
 
+export FIX_TYPOS = Optimize[
+  codepoint*
+@ fix_typos
+@ codepoint*
+];
+
 compose_dotted_aux =
   ("ka nukta".c : "qa".c)
 | ("kha nukta".c : "khha".c)
@@ -278,26 +286,7 @@ check_independent_vowels = CDRewrite[
 
 ins_eyelash_ra = CDRewrite["rra".c : eyelash_ra, "", "virama".c, star];
 
-keep_virama = CDRewrite["virama".c : virama, "", independent_vowel, star];
-
-# Replace codepoints with graphemes, replace inherent vowel "@" with "a",
-# and delete virama etc.
-to_graphemes_aux =
-  codepoint_to_grapheme
-| ("@".g : "a".g)
-| ("virama".c : "")
-| ("nukta".c : "ERROR".g)
-;
-
-to_graphemes = CDRewrite[to_graphemes_aux, "", "", star];
-
-export FIX_TYPOS = Optimize[
-  codepoint*
-@ fix_typos
-@ codepoint*
-];
-
-export CODEPOINTS_TO_GRAPHEMES = Optimize[
+codepoints_to_graphemes_internal = Optimize[
   codepoint*
 @ fix_typos
 @ compose_dotted
@@ -307,7 +296,55 @@ export CODEPOINTS_TO_GRAPHEMES = Optimize[
 @ check_dependent_vowels
 @ check_independent_vowels
 @ ins_eyelash_ra
-@ keep_virama
+];
+
+# Add "." before independent vowels after a virama.
+minimally_mark_independent_vowel = CDRewrite[
+  "" : ".".g,
+  "virama".c,
+  independent_vowel,
+  star
+];
+
+always_mark_independent_vowel = CDRewrite[
+  "" : ".".g,
+  "",
+  independent_vowel,
+  star
+];
+
+# Delete virama after consonants.
+del_virama = CDRewrite["virama".c : "", consonant, "", star];
+
+# Replace codepoints with graphemes.
+to_graphemes_aux =
+  codepoint_to_grapheme
+| ("virama".c : virama_g)
+| ("nukta".c : "ERROR".g)
+;
+
+to_graphemes = CDRewrite[to_graphemes_aux, "", "", star];
+
+export CODEPOINTS_TO_GRAPHEMES = Optimize[
+  codepoints_to_graphemes_internal
+@ minimally_mark_independent_vowel
+@ del_virama
 @ to_graphemes
+@ CDRewrite["@".g : "a".g, "", "", star]
+@ grapheme*
+];
+
+g2p_preprocess_aux =
+  ("non-joiner".g : "-".g)
+| ("joiner".g : "-".g)
+;
+
+export G2P_PREPROCESS = Optimize[
+  codepoints_to_graphemes_internal
+@ always_mark_independent_vowel
+@ del_virama
+@ to_graphemes
+@ CDRewrite[g2p_preprocess_aux, "", "", star]
+#@ ("": "BOS".g) grapheme* ("" : "EOS".g)
 @ grapheme*
 ];

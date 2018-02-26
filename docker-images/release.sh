@@ -1,7 +1,7 @@
 set -x 
 
 USERNAME="langtech"
-BUILD_TIME=$(date +%s)
+BUILD_TIME=v1
 
 for IMAGE_NAME in language-resources festival merlin; do
   cd ${IMAGE_NAME}

@@ -20,6 +20,7 @@ ENV BAZEL_VERSION="0.8.0"
 ENV ANDROID_TOOLS_VERSION="3859397"
 
 RUN apt-get update && apt-get install -y \
+      sox \
       curl \
       libicu-dev \
       g++ \

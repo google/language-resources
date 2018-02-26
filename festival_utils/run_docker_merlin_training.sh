@@ -25,7 +25,9 @@ CONF_PATH="egs/locale/s1/conf/"
 
 # Whether to run merlin TTS training.
 TRAIN=true
-SAMPLE_RATE=16000
+
+# Default sample rate is the sample rate of the first wav.
+SAMPLE_RATE=$(find /usr/local/src/voice/data/festvox/wavs/*.wav | head -n 1  | xargs soxi -r)
 MERLIN_GLOBAL_CONFIG=/usr/local/src/voice/data/festvox/voiceSpec.json
 
 while getopts ":t" opt; do

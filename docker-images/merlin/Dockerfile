@@ -12,7 +12,7 @@
 #
 # Copyright 2018 Google, Inc.
 
-FROM langtech/base-festival
+FROM langtech/base-festival:v1
 
 # Required by run_merlin.py
 ENV USER root

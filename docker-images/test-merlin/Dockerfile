@@ -12,7 +12,7 @@
 #
 # Copyright 2018 Google, Inc.
 
-FROM langtech/base-merlin
+FROM langtech/base-merlin:v1
 
 WORKDIR /usr/local/src/voice/
 ADD synth.sh .
@@ -25,6 +25,9 @@ RUN cp /usr/local/src/language-resources/si/festvox/txt.done.data .
 # Test only one speaker
 RUN sed -i '/sin_9228*/!d' txt.done.data
 RUN cp /usr/local/src/language-resources/si/festvox/ipa_phonology.json .
+
+RUN mkdir -p /usr/local/src/voice/data/festvox/
+RUN echo "{}" > /usr/local/src/voice/data/festvox/voiceSpec.json
 
 # Download sinhala wavs
 RUN mkdir wavs && cd wavs && wget http://www.openslr.org/resources/30/si_lk.tar.gz && \

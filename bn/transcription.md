@@ -220,6 +220,8 @@ placed before the aspirated stop:
 | j.jh | সহ্য | sh o j . jh o | tolerance |
 | Th   | পাঠা | p a . Th a | send! |
 | T.Th | পাঠ্য | p a T . Th o | text |
+| Dh   | অঢেল | O . Dh e l | plentiful |
+| D.Dh | আঢ্য | a D . Dh o | a Bengali surname |
 | th   | মাথা | m a . th a | head |
 | t.th | মিথ্যা | m i t . th a | falsehood |
 | dh   | বাধো | b a . dh o | you resist |

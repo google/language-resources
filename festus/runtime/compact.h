@@ -55,10 +55,11 @@ class UnweightedBitfieldCompactor {
       element.ilabel = kMaxILabel;
     } else {
       CHECK_GE(arc.ilabel, 0);
-      if (arc.ilabel < kMaxILabel) {
-        element.ilabel = arc.ilabel;
+      const unsigned int label = arc.ilabel;
+      if (label < kMaxILabel) {
+        element.ilabel = label;
       } else {
-        LOG(ERROR) << "Input label too large: " << arc.ilabel;
+        LOG(ERROR) << "Input label too large: " << label;
         element.ilabel = kMaxILabel;
       }
     }
@@ -66,10 +67,11 @@ class UnweightedBitfieldCompactor {
       element.olabel = kMaxOLabel;
     } else {
       CHECK_GE(arc.olabel, 0);
-      if (arc.olabel < kMaxOLabel) {
-        element.olabel = arc.olabel;
+      const unsigned int label = arc.olabel;
+      if (label < kMaxOLabel) {
+        element.olabel = label;
       } else {
-        LOG(ERROR) << "Output label too large: " << arc.olabel;
+        LOG(ERROR) << "Output label too large: " << label;
         element.olabel = kMaxOLabel;
       }
     }
@@ -82,10 +84,11 @@ class UnweightedBitfieldCompactor {
       element.nextstate = kMaxState;
     } else {
       CHECK_GE(arc.nextstate, 0);
-      if (arc.nextstate < kMaxState) {
-        element.nextstate = arc.nextstate;
+      const unsigned int next = arc.nextstate;
+      if (next < kMaxState) {
+        element.nextstate = next;
       } else {
-        LOG(ERROR) << "Target state ID too large: " << arc.nextstate;
+        LOG(ERROR) << "Target state ID too large: " << next;
         element.nextstate = kMaxState;
       }
     }

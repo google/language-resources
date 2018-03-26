@@ -39,19 +39,23 @@ void PrintInfo(const fst::Fst<Arc> &fst, bool test_properties=false) {
   fst::PrintFstInfoImpl(info, true /* pipe, i.e. print to stderr */);
 }
 
+inline bool OutOfRange(int value, unsigned int max_value) {
+  return value < 0 || static_cast<unsigned int>(value) >= max_value;
+}
+
 template <class Arc>
 void Compactify(const fst::VectorFst<Arc> &fst,
                 const string &path) {
   typedef festus::Compactor_8_10_0_14<fst::LogArc> MyCompactor;
   for (auto s : festus::States(fst)) {
     for (const auto &arc : festus::Arcs(fst, s)) {
-      if (arc.ilabel < 0 || arc.ilabel >= MyCompactor::kMaxILabel) {
+      if (OutOfRange(arc.ilabel, MyCompactor::kMaxILabel)) {
         LOG(ERROR) << "ilabel out of range: " << arc.ilabel;
       }
-      if (arc.olabel < 0 || arc.olabel >= MyCompactor::kMaxOLabel) {
+      if (OutOfRange(arc.olabel, MyCompactor::kMaxOLabel)) {
         LOG(ERROR) << "olabel out of range: " << arc.olabel;
       }
-      if (arc.nextstate < 0 || arc.nextstate >= MyCompactor::kMaxState) {
+      if (OutOfRange(arc.nextstate, MyCompactor::kMaxState)) {
         LOG(ERROR) << "nextstate out of range: " << arc.nextstate;
       }
     }

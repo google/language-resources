@@ -57,6 +57,11 @@ class QuaternionSemiring {
   static constexpr bool Commutative() { return false; }
   static constexpr bool Idempotent() { return false; }
 
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-braces"
+#endif
+
   static const ValueType &NoWeight() {
     static const ValueType kNoWeight = {
       s().NoWeight(), s().NoWeight(), s().NoWeight(), s().NoWeight()
@@ -67,29 +72,38 @@ class QuaternionSemiring {
   // Initializes a quaternion q = a + bi + cj + dk from its scalar part a.
   template <class A>
   static ValueType From(A &&a) {
-    ScalarType scalar(std::forward<A>(a));
-    return {scalar, s().Zero(), s().Zero(), s().Zero()};
+    ValueType q = {
+      ScalarType(std::forward<A>(a)),
+      s().Zero(),
+      s().Zero(),
+      s().Zero(),
+    };
+    return q;
   }
 
   // Initializes a quaternion q = a + bi + cj + dk.
   template <class A, class B, class C, class D>
   static ValueType From(A &&a, B &&b, C &&c, D &&d) {
-    ScalarType q0(std::forward<A>(a));
-    ScalarType q1(std::forward<B>(b));
-    ScalarType q2(std::forward<C>(c));
-    ScalarType q3(std::forward<D>(d));
-    return {q0, q1, q2, q3};
+    ValueType q = {
+      ScalarType(std::forward<A>(a)),
+      ScalarType(std::forward<B>(b)),
+      ScalarType(std::forward<C>(c)),
+      ScalarType(std::forward<D>(d)),
+    };
+    return q;
   }
 
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+
   static const ValueType &Zero() {
-    static const ValueType kZero = {s().Zero(),
-                                    s().Zero(), s().Zero(), s().Zero()};
+    static const ValueType kZero = From(s().Zero());
     return kZero;
   }
 
   static const ValueType &One() {
-    static const ValueType kOne = {s().One(),
-                                   s().Zero(), s().Zero(), s().Zero()};
+    static const ValueType kOne = From(s().One());
     return kOne;
   }
 
@@ -143,16 +157,15 @@ class QuaternionSemiring {
     auto c2 = r[2];
     auto d2 = r[3];
 
-    return {
-      s().OpMinus(s().OpMinus(s().OpTimes(a1, a2), s().OpTimes(b1, b2)),
-                  s().OpPlus(s().OpTimes(c1, c2), s().OpTimes(d1, d2))),
-      s().OpPlus(s().OpPlus(s().OpTimes(a1, b2), s().OpTimes(b1, a2)),
-                 s().OpMinus(s().OpTimes(c1, d2), s().OpTimes(d1, c2))),
-      s().OpPlus(s().OpMinus(s().OpTimes(a1, c2), s().OpTimes(b1, d2)),
-                 s().OpPlus(s().OpTimes(c1, a2), s().OpTimes(d1, b2))),
-      s().OpPlus(s().OpPlus(s().OpTimes(a1, d2), s().OpTimes(b1, c2)),
-                 s().OpMinus(s().OpTimes(d1, a2), s().OpTimes(c1, b2))),
-    };
+    return From(
+        s().OpMinus(s().OpMinus(s().OpTimes(a1, a2), s().OpTimes(b1, b2)),
+                    s().OpPlus(s().OpTimes(c1, c2), s().OpTimes(d1, d2))),
+        s().OpPlus(s().OpPlus(s().OpTimes(a1, b2), s().OpTimes(b1, a2)),
+                   s().OpMinus(s().OpTimes(c1, d2), s().OpTimes(d1, c2))),
+        s().OpPlus(s().OpMinus(s().OpTimes(a1, c2), s().OpTimes(b1, d2)),
+                   s().OpPlus(s().OpTimes(c1, a2), s().OpTimes(d1, b2))),
+        s().OpPlus(s().OpPlus(s().OpTimes(a1, d2), s().OpTimes(b1, c2)),
+                   s().OpMinus(s().OpTimes(d1, a2), s().OpTimes(c1, b2))));
   }
 
   // Scalar multiplication on the left.

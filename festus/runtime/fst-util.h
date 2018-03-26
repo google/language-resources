@@ -116,7 +116,7 @@ void ConnectAndComputeProperties(fst::MutableFst<Arc> *fst) {
   VLOG(3) << "DFS properties: " << PropertiesToString(props);
   if (props & fst::kNotCoAccessible) {
     std::vector<StateId> dstates;
-    for (StateId s = 0; s < coaccess.size(); ++s) {
+    for (std::size_t s = 0; s < coaccess.size(); ++s) {
       CHECK_LT(s, access.size());
       CHECK(access[s]);
       if (!coaccess[s]) {

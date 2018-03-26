@@ -35,6 +35,7 @@
 #ifndef FESTUS_TOPSORT_H__
 #define FESTUS_TOPSORT_H__
 
+#include <cstddef>
 #include <vector>
 
 #include <fst/compat.h>
@@ -92,7 +93,7 @@ class LoopyTopOrderVisitor {
   // format required by fst::StateSort.
   std::vector<StateId> Order() const {
     std::vector<StateId> order(finish_.size(), fst::kNoStateId);
-    for (StateId s = 0; s < finish_.size(); ++s) {
+    for (std::size_t s = 0; s < finish_.size(); ++s) {
       order[finish_[finish_.size() - s - 1]] = s;
     }
     return order;

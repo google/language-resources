@@ -22,7 +22,7 @@ STARTUP=''
 if [ -n "$TRAVIS" ]; then
   STARTUP+=' --batch'
   STRATEGY+=' --jobs=2'
-  STRATEGY+=' --noshow_progress'
+  # STRATEGY+=' --noshow_progress'
   STRATEGY+=' --test_timeout_filters=-long'
 fi
 

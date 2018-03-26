@@ -377,7 +377,7 @@ bool AlignablesUtil::Init(const AlignablesSpec &spec) {
     fst::RmEpsilon(&forbidden_factors_fsa_);
     // This results in a huge blow-up of the FSA:
     DeterminizeUnweighted(&forbidden_factors_fsa_);
-    fst::AcceptorMinimize(&forbidden_factors_fsa_);
+    fst::Minimize(&forbidden_factors_fsa_);
     fst::ArcSort(&forbidden_factors_fsa_, fst::ILabelCompare<Arc>());
     uint64 props = forbidden_factors_fsa_.Properties(fst::kFstProperties, true);
     uint64 unoeps = fst::kUnweighted | fst::kNoEpsilons | fst::kIDeterministic |

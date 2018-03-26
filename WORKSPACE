@@ -122,20 +122,20 @@ new_git_repository(
     name = "openfst",
     build_file = "bazel/openfst.BUILD",
     remote = "https://github.com/mjansche/openfst.git",
-    tag = "1.5.3",
+    tag = "1.6.3",
 )
 
 new_git_repository(
     name = "opengrm_ngram",
     build_file = "bazel/opengrm-ngram.BUILD",
     remote = "https://github.com/mjansche/opengrm-ngram.git",
-    tag = "1.3.0",
+    tag = "1.3.2",
 )
 
 new_git_repository(
     name = "thrax",
     build_file = "bazel/thrax.BUILD",
-    commit = "fa51f84e8bbff730c88df293aacc1041a0e4cf1a",
+    commit = "e5630ac984c186d57668d57074c7c23efdbce8a5",  # 1.2.3
     remote = "https://github.com/mjansche/thrax.git",
 )
 

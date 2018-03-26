@@ -77,7 +77,7 @@ fst::VectorFst<A> ProjectIntoPairLattice(
     fst::VectorFst<A> opt;
     fst::Determinize(lattice, &opt);
     opt.Properties(fst::kAcyclic | fst::kUnweighted, true);
-    fst::AcceptorMinimize(&opt);
+    fst::Minimize(&opt);
     fst::TopSort(&opt);
     lattice = opt;
   }

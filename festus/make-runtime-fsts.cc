@@ -35,8 +35,8 @@ namespace {
 
 template <class Arc>
 void PrintInfo(const fst::Fst<Arc> &fst, bool test_properties=false) {
-  fst::FstInfo<Arc> info(fst, test_properties);
-  fst::PrintFstInfo(info, true);
+  fst::FstInfo info(fst, test_properties);
+  fst::PrintFstInfoImpl(info, true /* pipe, i.e. print to stderr */);
 }
 
 template <class Arc>

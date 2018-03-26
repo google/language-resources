@@ -1,5 +1,9 @@
 package(default_visibility = ["//visibility:public"])
 
+licenses(["notice"])  # Apache 2.0
+
+exports_files(["COPYING"])
+
 openfst = "@openfst//"
 
 prefix_dir = "src/"
@@ -10,10 +14,13 @@ cc_library(
         prefix_dir + "lib/hist-arc.cc",
         prefix_dir + "lib/ngram-absolute.cc",
         prefix_dir + "lib/ngram-context.cc",
+        prefix_dir + "lib/ngram-count.cc",
         prefix_dir + "lib/ngram-count-prune.cc",
         prefix_dir + "lib/ngram-kneser-ney.cc",
+        prefix_dir + "lib/ngram-make.cc",
         prefix_dir + "lib/ngram-marginalize.cc",
         prefix_dir + "lib/ngram-output.cc",
+        prefix_dir + "lib/ngram-shrink.cc",
         prefix_dir + "lib/util.cc",
     ],
     hdrs = [
@@ -59,6 +66,7 @@ cc_library(
     ],
     includes = [prefix_dir + "include"],
     deps = [
+        openfst + ":far_base",
         openfst + ":fst",
         openfst + ":fstscript_base",
     ],
@@ -67,21 +75,19 @@ cc_library(
 cc_binary(
     name = "ngramapply",
     srcs = [prefix_dir + "bin/ngramapply_main.cc"],
-    copts = ["-Wno-maybe-uninitialized"],
-    deps = [
-        ":opengrm-ngram",
-        openfst + ":far_base",
-    ],
+    deps = [":opengrm-ngram"],
+)
+
+cc_binary(
+    name = "ngramcontext",
+    srcs = [prefix_dir + "bin/ngramcontext_main.cc"],
+    deps = [":opengrm-ngram"],
 )
 
 cc_binary(
     name = "ngramcount",
     srcs = [prefix_dir + "bin/ngramcount_main.cc"],
-    copts = ["-Wno-sign-compare"],
-    deps = [
-        ":opengrm-ngram",
-        openfst + ":far_base",
-    ],
+    deps = [":opengrm-ngram"],
 )
 
 cc_binary(
@@ -113,10 +119,7 @@ cc_binary(
 cc_binary(
     name = "ngramperplexity",
     srcs = [prefix_dir + "bin/ngramperplexity_main.cc"],
-    deps = [
-        ":opengrm-ngram",
-        openfst + ":far_base",
-    ],
+    deps = [":opengrm-ngram"],
 )
 
 cc_binary(
@@ -129,10 +132,7 @@ cc_binary(
     name = "ngramrandgen",
     srcs = [prefix_dir + "bin/ngramrandgen_main.cc"],
     copts = ["-Wno-sign-compare"],
-    deps = [
-        ":opengrm-ngram",
-        openfst + ":far_base",
-    ],
+    deps = [":opengrm-ngram"],
 )
 
 cc_binary(

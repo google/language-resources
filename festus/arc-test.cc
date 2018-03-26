@@ -60,11 +60,19 @@ int main() {
   } while (false)                                         \
 
 #ifdef __GLIBCXX__
-  // TODO: Figure out which versions of __GLIBCXX__ support which traits.
   std::cout << "GCC libstdc++ " << __GLIBCXX__ << std::endl;
+#ifdef _GLIBCXX_RELEASE
+  // Defined since GCC 7.
+  std::cout << "GCC libstdc++ release " << _GLIBCXX_RELEASE << std::endl;
+  EXPECT_TRUE(std::is_trivially_default_constructible<RealArc>::value);
+  EXPECT_TRUE(std::is_trivially_copy_constructible<RealArc>::value);
+  EXPECT_TRUE(std::is_trivially_copy_assignable<RealArc>::value);
+#else
+  // Non-standard type traits have been deprecated since GCC 7.
   EXPECT_TRUE(std::has_trivial_default_constructor<RealArc>::value);
   EXPECT_TRUE(std::has_trivial_copy_constructor<RealArc>::value);
   EXPECT_TRUE(std::has_trivial_copy_assign<RealArc>::value);
+#endif
 #endif
 
 #ifdef _LIBCPP_VERSION

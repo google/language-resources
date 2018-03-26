@@ -1,5 +1,9 @@
 package(default_visibility = ["//visibility:public"])
 
+licenses(["notice"])  # Apache 2.0
+
+exports_files(["COPYING"])
+
 prefix_dir = "src/"
 
 static_binary = 1
@@ -135,6 +139,7 @@ cc_library(
 
 cc_library(
     name = "weight",
+    srcs = [prefix_dir + "lib/weight.cc"],
     hdrs = [
         prefix_dir + "include/fst/expectation-weight.h",
         prefix_dir + "include/fst/float-weight.h",
@@ -142,7 +147,6 @@ cc_library(
         prefix_dir + "include/fst/pair-weight.h",
         prefix_dir + "include/fst/power-weight.h",
         prefix_dir + "include/fst/product-weight.h",
-        prefix_dir + "include/fst/random-weight.h",
         prefix_dir + "include/fst/signed-log-weight.h",
         prefix_dir + "include/fst/sparse-power-weight.h",
         prefix_dir + "include/fst/sparse-tuple-weight.h",
@@ -238,6 +242,7 @@ cc_test(
         prefix_dir + "test/fst_test.cc",
         prefix_dir + "test/fst_test.h",
     ],
+    copts = ["-Wno-sign-compare"],
     deps = [":fst"],
 )
 
@@ -279,7 +284,7 @@ cc_library(
         prefix_dir + "script/arciterator-class.cc",
         prefix_dir + "script/encodemapper-class.cc",
         prefix_dir + "script/fst-class.cc",
-        prefix_dir + "script/script-impl.cc",
+        prefix_dir + "script/getters.cc",
         prefix_dir + "script/stateiterator-class.cc",
         prefix_dir + "script/text-io.cc",
         prefix_dir + "script/weight-class.cc",
@@ -292,6 +297,7 @@ cc_library(
         prefix_dir + "include/fst/script/fst-class.h",
         prefix_dir + "include/fst/script/fstscript-decl.h",
         prefix_dir + "include/fst/script/fstscript.h",
+        prefix_dir + "include/fst/script/getters.h",
         prefix_dir + "include/fst/script/register.h",
         prefix_dir + "include/fst/script/script-impl.h",
         prefix_dir + "include/fst/script/stateiterator-class.h",
@@ -337,7 +343,6 @@ cc_library(
         prefix_dir + "include/fst/script/rmepsilon.h",
         prefix_dir + "include/fst/script/shortest-distance.h",
         prefix_dir + "include/fst/script/shortest-path.h",
-        prefix_dir + "include/fst/script/symbols.h",
         prefix_dir + "include/fst/script/synchronize.h",
         prefix_dir + "include/fst/script/topsort.h",
         prefix_dir + "include/fst/script/union.h",
@@ -490,7 +495,10 @@ cc_library(
 
 cc_library(
     name = "fstscript_info",
-    srcs = [prefix_dir + "script/info.cc"],
+    srcs = [
+        prefix_dir + "script/info.cc",
+        prefix_dir + "script/info-impl.cc",
+    ],
     hdrs = [
         prefix_dir + "include/fst/script/info.h",
         prefix_dir + "include/fst/script/info-impl.h",
@@ -1037,10 +1045,7 @@ cc_library(
 
 cc_library(
     name = "far",
-    srcs = [
-        prefix_dir + "extensions/far/main.cc",
-        prefix_dir + "extensions/far/strings.cc",
-    ],
+    srcs = [prefix_dir + "extensions/far/strings.cc"],
     hdrs = [
         prefix_dir + "include/fst/extensions/far/compile-strings.h",
         prefix_dir + "include/fst/extensions/far/create.h",
@@ -1049,7 +1054,6 @@ cc_library(
         prefix_dir + "include/fst/extensions/far/farlib.h",
         prefix_dir + "include/fst/extensions/far/info.h",
         prefix_dir + "include/fst/extensions/far/isomorphic.h",
-        prefix_dir + "include/fst/extensions/far/main.h",
         prefix_dir + "include/fst/extensions/far/print-strings.h",
     ],
     includes = [prefix_dir + "include"],
@@ -1064,12 +1068,16 @@ cc_library(
     srcs = [
         prefix_dir + "extensions/far/far-class.cc",
         prefix_dir + "extensions/far/farscript.cc",
+        prefix_dir + "extensions/far/getters.cc",
+        prefix_dir + "extensions/far/script-impl.cc",
         prefix_dir + "extensions/far/strings.cc",
     ],
     hdrs = [
         prefix_dir + "include/fst/extensions/far/compile-strings.h",
         prefix_dir + "include/fst/extensions/far/far-class.h",
         prefix_dir + "include/fst/extensions/far/farscript.h",
+        prefix_dir + "include/fst/extensions/far/getters.h",
+        prefix_dir + "include/fst/extensions/far/script-impl.h",
     ],
     includes = [prefix_dir + "include"],
     deps = [
@@ -1138,6 +1146,7 @@ cc_library(
         prefix_dir + "include/fst/extensions/pdt/collection.h",
         prefix_dir + "include/fst/extensions/pdt/compose.h",
         prefix_dir + "include/fst/extensions/pdt/expand.h",
+        prefix_dir + "include/fst/extensions/pdt/getters.h",
         prefix_dir + "include/fst/extensions/pdt/info.h",
         prefix_dir + "include/fst/extensions/pdt/paren.h",
         prefix_dir + "include/fst/extensions/pdt/pdt.h",
@@ -1154,8 +1163,14 @@ cc_library(
 
 cc_library(
     name = "pdtscript",
-    srcs = [prefix_dir + "extensions/pdt/pdtscript.cc"],
-    hdrs = [prefix_dir + "include/fst/extensions/pdt/pdtscript.h"],
+    srcs = [
+        prefix_dir + "extensions/pdt/getters.cc",
+        prefix_dir + "extensions/pdt/pdtscript.cc",
+    ],
+    hdrs = [
+        prefix_dir + "include/fst/extensions/pdt/getters.h",
+        prefix_dir + "include/fst/extensions/pdt/pdtscript.h",
+    ],
     copts = ["-Wno-sign-compare"],
     includes = [prefix_dir + "include"],
     deps = [

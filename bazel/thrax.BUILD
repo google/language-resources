@@ -55,6 +55,8 @@ cc_library(
     srcs = [prefix_dir + "bin/utildefs.cc"],
     hdrs = [
         prefix_dir + "bin/utildefs.h",
+        prefix_dir + "include/thrax/algo/paths.h",
+        prefix_dir + "include/thrax/algo/stringprint.h",
         prefix_dir + "include/thrax/symbols.h",  # for k.*SymbolTableName
     ],
     visibility = ["//visibility:private"],
@@ -171,6 +173,7 @@ cc_library(
         prefix_dir + "include/thrax/reverse.h",
         prefix_dir + "include/thrax/rewrite.h",
         prefix_dir + "include/thrax/rmepsilon.h",
+        prefix_dir + "include/thrax/rmweight.h",
         prefix_dir + "include/thrax/stringfile.h",
         prefix_dir + "include/thrax/stringfst.h",
         prefix_dir + "include/thrax/symboltable.h",

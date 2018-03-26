@@ -121,7 +121,7 @@ bool LexiconProcessor::AlignmentDiagnostics(Entry *entry,
   fst::Intersect(entry->input_lattice, entry->output_lattice, &intersection);
   util_->RemoveForbiddenFactors(&intersection);
   fst::Determinize(intersection, &entry->alignment_lattice);
-  fst::AcceptorMinimize(&entry->alignment_lattice);
+  fst::Minimize(&entry->alignment_lattice);
   if (fst::kNoStateId == entry->alignment_lattice.Start()) {
     LOG(ERROR) << logging_prefix << ":" << entry->line_number
                << ": Alignment lattice is empty for line: " << entry->line;

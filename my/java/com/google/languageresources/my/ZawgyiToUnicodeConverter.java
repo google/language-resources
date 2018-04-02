@@ -133,7 +133,7 @@ public final class ZawgyiToUnicodeConverter {
         case 0x106C: gc.setStacked('\u100B'); break;
         case 0x106D: gc.setStacked('\u100C'); break;
         case 0x106E: gc.add('\u100D', unicode).setStacked('\u100D'); break;
-        case 0x106F: gc.add('\u100E', unicode).setStacked('\u100D'); break;
+        case 0x106F: gc.add('\u100D', unicode).setStacked('\u100E'); break;
         case 0x1070: gc.setStacked('\u100F'); break;
         case 0x1071:
         case 0x1072: gc.setStacked('\u1010'); break;

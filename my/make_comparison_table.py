@@ -19,7 +19,7 @@
 Reads two-column tab-separated values from stdin and writes a LaTeX document to
 stdout. Column 1 of the input is expected to be in Zawgyi encoding; column 2 is
 expected to be in Unicode 5.1 encoding. The resulting document can be compiled
-with LuaLaTeX from a recent version of TeX Live (tested with tl-20160609).
+with XeLaTeX or LuaLaTeX from a recent version of TeX Live (tested with TL17).
 
 The output document requires the following TrueType fonts:
 
@@ -28,7 +28,7 @@ The output document requires the following TrueType fonts:
 
 * Padauk, which can be downloaded from
   http://scripts.sil.org/cms/scripts/page.php?item_id=Padauk
-  (tested with version 2.8)
+  (tested with version 3.003)
 
 * Zawgyi-One, which was originally distributed by
   http://web.archive.org/web/20120628203851/http://www.zawgyi.net/
@@ -38,39 +38,38 @@ The output document requires the following TrueType fonts:
 
 """
 
-import codecs
+import io
 import sys
 
-STDIN = codecs.getreader('utf-8')(sys.stdin)
-STDOUT = codecs.getwriter('utf-8')(sys.stdout)
-STDERR = codecs.getwriter('utf-8')(sys.stderr)
+STDIN = io.open(0, mode='rt', encoding='utf-8', closefd=False)
+STDOUT = io.open(1, mode='wt', encoding='utf-8', closefd=False)
+STDERR = io.open(2, mode='wt', encoding='utf-8', closefd=False)
 
 DOCUMENT_HEADER = r'''\documentclass{article}
 \usepackage{geometry}
-\geometry{paperwidth=595bp,paperheight=792bp,hmargin=72bp,vmargin=90bp}
+\geometry{paperwidth=595bp,paperheight=792bp,margin=36bp,noheadfoot}
 \usepackage{fontspec}
-\setmainfont{Noto Sans}
-\newfontface\unicode{Padauk-book}[Path=fonts/,Scale=1.16,Script=Myanmar]
+\setmainfont{NotoSans}
+\newfontface\codepoints{NotoSans-Condensed}
+\newfontface\unicode{PadaukBook-Regular}[Path=fonts/,Scale=1.1]
 %%\newfontface\unicode{mm3}[Path=fonts/,Scale=1.05,Script=Myanmar]
 \newfontface\zawgyi{ZawgyiOne}[Path=fonts/]
 \usepackage{longtable}
 \usepackage[table]{xcolor}
 \definecolor{light-gray}{gray}{0.95}
 \renewcommand{\arraystretch}{1.5}
-\setlength{\tabcolsep}{24bp}
 \begin{document}
 \begin{center}
-\large
 \rowcolors{1}{light-gray}{white}
 \begin{longtable}{r l l}
-\textbf{Line} & \textbf{Zawgyi}  & \textbf{Codepoints} \\*
+\textbf{Line} & \textbf{Zawgyi}  & \textbf{Codepoints (offset 0x1000)} \\*
               & \textbf{Unicode} & \\[16bp]
 \endhead
 '''
 
 TABLE_ITEM = r'''
-%s & {\zawgyi %s}  & {\small %s} \\*
-%s & {\unicode %s} & {\small %s} \\[12bp]
+%s & {\zawgyi %s}  & {\codepoints\footnotesize %s} \\*
+%s & {\unicode %s} & {\codepoints\footnotesize %s} \\[10bp]
 '''
 
 DOCUMENT_FOOTER = r'''
@@ -78,6 +77,13 @@ DOCUMENT_FOOTER = r'''
 \end{center}
 \end{document}
 '''
+
+
+def Codepoint(char):
+  cp = ord(char)
+  if 0x1000 <= cp <= 0x109F:
+    return '%02X' % (cp - 0x1000)
+  return '%04X' % cp
 
 
 def main(unused_argv):
@@ -90,8 +96,8 @@ def main(unused_argv):
     z, u = fields
     n += 1
     STDOUT.write(TABLE_ITEM %
-                 ('%4d' % n, z, ' '.join('%04X' % ord(c) for c in z),
-                  ' ' * 4,   u, ' '.join('%04X' % ord(c) for c in u)))
+                 ('%4d' % n, z, ' '.join(Codepoint(c) for c in z),
+                  ' ' * 4,   u, ' '.join(Codepoint(c) for c in u)))
   STDOUT.write(DOCUMENT_FOOTER)
   return
 

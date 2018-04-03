@@ -38,6 +38,7 @@ datasets. These tools are written in C++ and Python and are built with
 | TTS recordings for four South African languages (af, st, tn, xh) | [http://www.openslr.org/32/](http://www.openslr.org/32/)  |
 | Large Javanese ASR training data set (~185K)	| [http://www.openslr.org/35/](http://www.openslr.org/35/) |
 | Large Sundanese ASR training data set	(~220K)| [http://www.openslr.org/36/](http://www.openslr.org/36/) |
+| High quality TTS data for Bengali languages | [http://www.openslr.org/37/](http://www.openslr.org/37/) |
 
 ## Other reading resources
 

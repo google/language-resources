@@ -65,6 +65,8 @@ int main(int argc, char *argv[]) {
     const auto segments = thrax::Split(line, "\t");
 
     if (segments.size() != 3) {
+      LOG(ERROR) << "Line no: " << line << " malformed";
+      error = 1;
       continue;
     }
 

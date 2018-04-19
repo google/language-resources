@@ -70,27 +70,31 @@ int main(int argc, char *argv[]) {
       continue;
     }
 
-    if (!compiler_(segments[1], &input_fst)) {
-      LOG(ERROR) << "Unable to parse input: " << segments[1];
+    string rule = segments[0];
+    string input = segments[1];
+    string expected = segments[2];
+
+    if (!compiler_(input, &input_fst)) {
+      LOG(ERROR) << "Unable to parse input: " << input;
       error = 1;
       continue;
     }
 
-    if (!grm_manager.RewriteBytes(segments[0], input_fst, &output, "", "")) {
+    if (!grm_manager.RewriteBytes(rule, input_fst, &output, "", "")) {
       LOG(ERROR) << "REWRITE_FAILED in line - " << line_no
                  << "\n line text: " + line
-                 << "\n segment 0: " + segments[0]
-                 << "\n segment 1: " + segments[1]
-                 << "\n segment 2: " + segments[2];
+                 << "\n Rule : " + rule
+                 << "\n Input : " + input
+                 << "\n Expected : " + expected;
 
       error = 1;
       continue;
     }
 
-    if (output != segments[2]) {
+    if (output != expected) {
       error = 1;
       LOG(WARNING) << "Error in line " << line_no << " expected - "
-                   << segments[2] << " but actually - " << output;
+                   << expected << " but actually - " << output;
     }
   }
   return error;

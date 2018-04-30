@@ -16,7 +16,8 @@
 set -x
 set -eo pipefail
 
-IMAGE_ID="$(docker images -q test-merlin)"
+TEST_IMAGE_NAME="test-merlin"
+IMAGE_ID="$(docker images -q ${TEST_IMAGE_NAME})"
 CONTAINER_NAME=merlin-test-box
 
 # Start new docker test box.
@@ -24,6 +25,14 @@ if [[ $(docker ps -q --filter "name=${CONTAINER_NAME}" | wc -l) == 1 ]]; then
   docker stop "${CONTAINER_NAME}"
   docker rm "${CONTAINER_NAME}"
 fi
+
+# Build the test image if not available.
+if [[ $IMAGE_ID == "" ]]; then
+  docker build -t "${TEST_IMAGE_NAME}" .
+  IMAGE_ID="$(docker images -q ${TEST_IMAGE_NAME})"
+fi
+
+# Create a container.
 docker run --name "${CONTAINER_NAME}" -dt "${IMAGE_ID}"  /bin/bash
 
 CONTAINER_ID=$(docker ps -aqf "name=${CONTAINER_NAME}")

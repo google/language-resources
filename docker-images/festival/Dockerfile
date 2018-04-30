@@ -12,7 +12,7 @@
 #
 # Copyright 2018 Google, Inc.
 
-FROM langtech/base-language-resources:v1
+FROM langtech/base-language-resources:v1_1
 
 RUN apt-get update && apt-get install -y \
       automake \

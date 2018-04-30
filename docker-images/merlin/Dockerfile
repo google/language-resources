@@ -12,7 +12,7 @@
 #
 # Copyright 2018 Google, Inc.
 
-FROM langtech/base-festival:v1
+FROM langtech/base-festival:v1_1
 
 # Required by run_merlin.py
 ENV USER root
@@ -43,10 +43,10 @@ RUN git clone https://github.com/CSTR-Edinburgh/merlin
 
 # Set to known commit
 WORKDIR /usr/local/src/merlin
-RUN git reset cc8a65ce2a70db21dab148011c72e3dfeff03eff --hard
+RUN git reset 626bdb98911b181eab10f3a644346f64965bf755 --hard
 
 # Remove size check.
-RUN sed -i '511d'  /usr/local/src/merlin/src/run_merlin.py
+RUN sed -i '551d'  /usr/local/src/merlin/src/run_merlin.py
 
 # Setup merlin dependencies
 WORKDIR /usr/local/src/merlin

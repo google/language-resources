@@ -12,7 +12,7 @@
 #
 # Copyright 2018 Google, Inc.
 
-FROM langtech/base-merlin:v1
+FROM langtech/base-merlin:v1_1
 
 WORKDIR /usr/local/src/voice/
 ADD synth.sh .

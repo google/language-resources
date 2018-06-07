@@ -2,6 +2,8 @@
 
 JSON phonology has four fields which are **name**, **feature_types**, **features** and **phones**
 
+Example JSON phonlogy can be found [here](https://github.com/googlei18n/language-resources/blob/master/si/festvox/ipa_phonology.json)
+
 **Name** - This contains the name of the phoneme inventory .
 
 **Feature Types** - This is an array of arrays. It contains different classes of phonemes. Every sub-array corresponds to a different phoneme class. The first element of each sub-array is the class name and the remaining elements are property types associated with that class.

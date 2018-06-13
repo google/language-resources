@@ -37,6 +37,8 @@ def ReadTsvLexicon(reader):
   lex = {}
   for line in reader:
     line = line.rstrip('\n')
+    if not line or line.strip()[0] == "#":
+      continue
     fields = line.split('\t')
     assert len(fields) >= 2
     orth, pron = fields[:2]

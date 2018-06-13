@@ -16,13 +16,18 @@
 
 package(default_visibility = ["//visibility:public"])
 
-load("//festival_utils:festvox.bzl", "json_phonology_test")
+load("//festival_utils:festvox.bzl", "festvox")
 
 """
 Usage
-    bazel test bn/festvox:phonology_test
+    Test phonology
+        bazel test //bn/festvox:phonology_test
+
+    Generate festvox lexicon (lexicon.scm)
+        bazel build //bn/festvox:make_lexicon_scm
+
+    Generate festvox prompts file (aka txt.done.data)
+        bazel build //bn/festvox:make_festvox_prompts
 """
 
-json_phonology_test(
-    phonology = "phonology.json",
-)
+festvox(language = "bn")

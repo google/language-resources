@@ -17,39 +17,21 @@
 
 package(default_visibility = ["//visibility:public"])
 
-load("//festival_utils:festvox.bzl", "make_festvox_prompts")
-load("//festival_utils:festvox.bzl", "json_phonology_test")
+load("//festival_utils:festvox.bzl", "festvox")
 
 """
 Usage
-    bazel test //si/festvox:phonology_test
+    Test phonology
+        bazel test //si/festvox:phonology_test
+
+    Generate festvox lexicon (lexicon.scm)
+        bazel build //si/festvox:make_lexicon_scm
+
+    Generate festvox prompts file (aka txt.done.data)
+        bazel build //si/festvox:make_festvox_prompts
 """
 
-json_phonology_test(
-    phonology = "ipa_phonology.json",
-)
-
-"""
-Usage
-    bazel build //si/festvox:make_lexicon_scm
-"""
-
-genrule(
-    name = "make_lexicon_scm",
-    srcs = ["//si/data:lexicon.tsv"],
-    outs = ["lexicon.scm"],
-    cmd = """
-          $(location //festival_utils:festival_lexicon_from_tsv) < $(location //si/data:lexicon.tsv) > $@
-          """,
-    tools = ["//festival_utils:festival_lexicon_from_tsv"],
-)
-
-"""
-Usage
-    bazel build //si/festvox:make_txt_done_data
-"""
-
-make_festvox_prompts(
-    lexicon = "//si/data:lexicon.tsv",
-    prompts = "//si/data:prompts.tsv",
+festvox(
+    language = "si",
+    phonology = "ipa_phonology.json"
 )

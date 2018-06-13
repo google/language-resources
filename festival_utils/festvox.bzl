@@ -12,15 +12,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This macro is used to build festvox prompt file.
-def make_festvox_prompts(prompts, lexicon, name="make_txt_done_data"):
+# This macro is used to convert lexicon.tsv file to
+# festvox compalible lexicon.scm file.
+def make_festvox_lexicon(lexicon, name="make_lexicon_scm"):
     native.genrule(
-      name = name,
+        name = name,
+        srcs = [lexicon],
+        outs = ["lexicon.scm"],
+        cmd = """
+              $(location //festival_utils:festival_lexicon_from_tsv) < $(location """ + lexicon +""") > $@
+              """,
+        tools = ["//festival_utils:festival_lexicon_from_tsv"],
+    )
+
+# This macro is used to build festvox prompt file.
+def make_festvox_prompts(prompts, lexicon, name="festvox"):
+    native.genrule(
+      name = "make_" + name,
       srcs = [
           prompts,
           lexicon,
       ],
-      outs = ["txt.done.data"],
+      outs = [name + "_txt.done.data"],
       cmd = """
             $(location //festival_utils:prepare_prompts.py) \
               $(location """ + lexicon + """) \
@@ -47,3 +60,26 @@ def json_phonology_test(phonology, name="phonology_test"):
           "//festival_utils:phonology_json_validator",
       ],
   )
+
+# A simple macro that runs all the other festvox macros.
+def festvox(language, phonology="phonology.json", prompts=[], lexicon=""):
+  json_phonology_test(
+    phonology = phonology,
+  )
+
+  if not lexicon:
+    lexicon = "//%s/data:lexicon.tsv" %(language)
+
+  if not prompts:
+    prompts = ["//%s/data:prompts.tsv" %(language)]
+
+  make_festvox_lexicon(
+    lexicon = lexicon
+  )
+
+  for prompt in prompts:
+    make_festvox_prompts(
+        name = "festvox_" + prompt.split(":")[-1].split(".")[0],
+        lexicon = lexicon,
+        prompts = prompt,
+    )

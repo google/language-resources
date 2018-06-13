@@ -85,7 +85,8 @@ genrule(
     name = "make_jv_lexicon",
     srcs = [
         "//third_party/wikimedia:jv_wiki_cleaned.txt",
-        "data/prompts.txt",
+        "//jv/data:jvf_prompts.tsv",
+        "//jv/data:jvm_prompts.tsv",
         "javanese.far",
         "phoneme.syms",
     ],
@@ -96,7 +97,8 @@ genrule(
     ],
     cmd = """
           cat $(location //third_party/wikimedia:jv_wiki_cleaned.txt) \
-              $(location data/prompts.txt) |
+              $(location //jv/data:jvf_prompts.tsv) \
+              $(location //jv/data:jvm_prompts.tsv) |
           $(location :tokenize) \
             2> $(location jv_bad_tokens.txt) |
           $(location //utils:freq) |
@@ -118,7 +120,7 @@ genrule(
     name = "make_en_lexicon",
     srcs = [
         "//third_party/wikimedia:simple_wiktionary.txt",
-        "data/lexicon.tsv",
+        "//jv/data:lexicon.tsv",
         "javanese.far",
         "phoneme.syms",
     ],
@@ -139,7 +141,7 @@ genrule(
             2> $(location en_unpronouncable.txt) |
           $(location //utils:merge_lexicons) \
             - \
-            $(location data/lexicon.tsv) \
+            $(location //jv/data:lexicon.tsv) \
             > $(location en_lexicon.txt)
           """,
     tools = [

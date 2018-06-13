@@ -49,7 +49,7 @@ sh_test(
 
 genrule(
     name = "preprocess_lexicon",
-    srcs = ["data/lexicon.tsv"],
+    srcs = ["//bn/data:lexicon.tsv"],
     outs = ["preprocessed_lexicon.tsv"],
     cmd = """
         paste <(

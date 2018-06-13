@@ -33,5 +33,5 @@ Usage
 
 festvox(
     language = "si",
-    phonology = "ipa_phonology.json"
+    phonology = "ipa_phonology.json",
 )

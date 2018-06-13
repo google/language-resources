@@ -373,7 +373,7 @@ cc_library(
 cc_library(
     name = "hash",
     hdrs = ["hash.h"],
-    deps = ["@farmhash//:farmhash"],
+    deps = ["@farmhash"],
 )
 
 cc_library(

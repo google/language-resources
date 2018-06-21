@@ -1,0 +1,81 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Khmer money classifier.
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+space = " ";
+
+quantities =
+  ("លាន" : "1000000") |
+  ("កោដិ" : "10000000") |
+  ("ប៊ីលាន" : "1000000000") |
+  ("ទ្រីលាន" : "1000000000000");
+
+quantity_markup = Optimize[
+  universal_func.InvertMarkup[universal_rules.money_quantity]
+  space
+  quantities
+  space
+];
+
+currency_names =
+  (("ដុល្លារ អាមេរិក" | "ដុល្លារ" | "dollar") : "usd") |
+  (("ផោន" | "pound") : "gbp") |
+  (("យ៉េន ជប៉ុន" | "yen") : "jpy") |
+  (("រៀល" | "riel") : "khr") |
+  (("បាត" | "baht") : "thb")
+;
+
+currency_symbol_markup = Optimize[
+  universal_func.InvertMarkup[universal_rules.money_currency]
+  universal_rules.one_space
+  universal_rules.ins_quote
+  (universal_rules.NORM_CURRENCY_SYMBOLS | (universal_rules.lower_case_anything @ currency_names))
+  universal_rules.ins_quote
+  universal_rules.one_space
+];
+
+normalize_zeroes = CDRewrite["" : "0",
+                             "fractional_part: \""
+                             universal_rules.kDigit,
+                             "\"",
+                             universal_rules.sigma_star];
+
+amount_markup = Optimize[
+  universal_func.InvertMarkup[universal_rules.money_amount]
+  universal_rules.ins_space
+  universal_func.InvertMarkup[universal_rules.opening_brace]
+  universal_rules.ins_space
+  (universal_rules.INTEGER_DECIMAL_DOT_MAX | universal_rules.DECIMAL_DOT_MAX)
+  universal_func.InvertMarkup[universal_rules.closing_brace]
+  universal_rules.ins_space
+];
+
+# Normalize zeroes after decimal point (".3" -> ".30"), but only do it
+# when we are not dealing with quantity markup ("9.8 trillion" is not
+# nine point eight zero trillion).
+style1 = (
+   (currency_symbol_markup amount_markup quantity_markup) |
+   (amount_markup quantity_markup currency_symbol_markup) |
+   (currency_symbol_markup (amount_markup @ normalize_zeroes)) |
+   ((amount_markup @ normalize_zeroes) currency_symbol_markup)
+  )
+  universal_func.InvertMarkup[universal_rules.style1]
+;
+
+export MONEY = Optimize[style1 universal_rules.ins_space];
+
+export MONEY_MARKUP = universal_func.APPLY_MONEY_MARKUP[MONEY];

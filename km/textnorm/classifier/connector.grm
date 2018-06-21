@@ -1,0 +1,127 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Parser for tokens connecting other tokens.
+# For example ranges: 5-6 រៀល -> "ប្រាំ ដល់ ប្រាំមួយ រៀល"
+#             ratios: 1:1 -> "មួយ ទល់ មួយ"
+#             by: 4x2 -> "បួន គុណ នឹង ពីរ"
+
+import 'date.grm' as date ;
+import 'measure.grm' as measure ;
+import 'money.grm' as money ;
+import 'time.grm' as time ;
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+# utility functions
+################################################################################
+func connectorMarkup[connector]{
+  return(
+   universal_rules.token_delimiter
+   universal_func.InvertMarkup[universal_rules.connector]
+   universal_rules.ins_space
+   universal_func.InvertMarkup[universal_rules.opening_brace]
+   universal_rules.ins_space
+   universal_func.InvertMarkup[universal_rules.connector_type]
+   universal_rules.ins_space
+   universal_rules.ins_quote
+   universal_rules.del_space_star
+   connector
+   universal_rules.del_space_star
+   universal_rules.ins_quote
+   universal_rules.ins_space
+   universal_func.InvertMarkup[universal_rules.closing_brace]
+   universal_rules.ins_space
+   universal_rules.token_delimiter);
+}
+
+func basic_connector[connector, context]{
+return (
+        context universal_rules.del_space_star
+        connector
+        universal_rules.del_space_star context
+       );
+}
+
+func connector_multicontext[connector, l_context, r_context]{
+return (
+        l_context universal_rules.del_space_star
+        connector
+        universal_rules.del_space_star r_context
+       );
+}
+
+func combined_connector[connector, context, tail_context]{
+return(
+       (context universal_rules.del_space_star
+        connector)+
+        tail_context
+       );
+}
+
+range_connector = connectorMarkup[(("-" | "—" | "–") : "range")];
+ratio_connector = connectorMarkup[":" : "ratio"];
+
+year_range =  connector_multicontext[
+  range_connector,
+  date.YEAR_ONLY_MARKUP,
+  ((date.YEAR_ONLY_MARKUP<-2>) | (universal_rules.CARDINAL_DOT_LOOSE_MARKUP<-1>)
+   | universal_rules.DIGIT_MARKUP)
+];
+
+time_range = connector_multicontext[
+  range_connector,
+  (time.TIME_MARKUP | universal_rules.CARDINAL_DOT_LOOSE_MARKUP),
+  time.TIME_MARKUP];
+
+measure_range = connector_multicontext[
+  range_connector,
+  (measure.MEASURE_MARKUP | universal_rules.CARDINAL_DOT_LOOSE_MARKUP
+   | universal_rules.DECIMAL_DOT_MAX_MARKUP),
+  measure.MEASURE_MARKUP];
+
+money_range = connector_multicontext[
+  range_connector,
+  (money.MONEY_MARKUP | universal_rules.CARDINAL_DOT_LOOSE_MARKUP
+   | universal_rules.DECIMAL_DOT_MAX_MARKUP),
+  money.MONEY_MARKUP];
+
+# For things like 1:2:3.
+multiple_ratios = connector_multicontext[
+  ratio_connector,
+  universal_rules.RATIO_MARKUP,
+  universal_rules.CARDINAL_DOT_LOOSE_MARKUP
+];
+
+export KHMER_MARKUP =
+  year_range
+| time_range
+| measure_range
+| money_range
+| multiple_ratios;
+
+# universal_rules.CONNECTOR_MARKUP excluding cardinal and decimal range.
+connector_exclude_cardinal_and_decimal_range =
+  universal_rules.YEAR_RANGE
+| universal_rules.MEASURE_RANGE
+| universal_rules.FRACTION_RANGE
+| universal_rules.TIME_RANGE
+| universal_rules.RATIO_MARKUP
+| universal_rules.BY_MARKUP
+| universal_rules.MULTI_D_MEASURE;
+
+export CONNECTOR_MARKUP = Optimize[(
+    (connector_exclude_cardinal_and_decimal_range<1>)
+  | KHMER_MARKUP
+) @ universal_rules.CLEAN_SPACES];

@@ -1,0 +1,235 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Classifier for dates.
+# Khmer date usually be written in the format <day> <month> <year> <era>.
+# Identifier words; i.e., 'ថ្ងៃ ទី' ('day of') and/or 'ខែ' ('month'); may be
+# insert before <day> and <month>. In case that a Khmer speaker want to specify
+# day of week, <day_of_week> will be put between 'ថ្ងៃ' and 'ទី', or just before
+# <day> in case that identifier words for <day> aren't presented. <month> might
+# be pronounced in a native word or just an identifier word 'ខែ' + number.
+# The positions of <year> and <era> might be switched. The part separators can
+# be ' ' (white space), '-' (dash), or '' (slash).
+# Example:
+# ថ្ងៃ សៅរ៍ ទី 13 ខែ១២ ព.ស. 2558
+# date{ weekday: "សៅរ៍" day: 13 month: "ខែ12" era: "ពុទ្ធសករាជ" year: 2558
+# style: 1}
+# ថ្ងៃ សៅរ៍ ទី 13 ខែ១២ 2558 នៃ គ្រិស្តសករាជ
+# date{ weekday: "សៅរ៍" day: 13 month: "ខែ12" year: 2558 era: "នៃ គ្រិស្តសករាជ"
+# style: 1}
+# ស.18 មេសា 1999
+# date{ weekday: "សៅរ៍" day: 18 month: "មេសា" year: 1999 style: 1}
+# 23/6/2408
+# date{ day: 23 month: "មិថុនា" year: 2408 style: 1}
+
+import 'khmer.grm' as km;
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+markup_day = universal_rules.ins_space universal_func.InvertMarkup[universal_rules.date_day] universal_rules.ins_space;
+markup_weekday = universal_rules.ins_space universal_func.InvertMarkup[universal_rules.date_weekday] universal_rules.ins_space;
+markup_month = universal_rules.ins_space universal_func.InvertMarkup[universal_rules.date_month] universal_rules.ins_space;
+markup_year = universal_rules.ins_space universal_func.InvertMarkup[universal_rules.date_year] universal_rules.ins_space;
+markup_quote = universal_func.InvertMarkup[universal_rules.quote];
+
+convert_khmer_digits_to_arabic =
+  CDRewrite[km.KHMER_DIGIT, "", "", universal_rules.sigma_star];
+
+# Days
+day = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" |
+    "10" | "11" | "12" | "13" | "14" | "15" | "16" | "17" | "18" | "19" |
+    "20" | "21" | "22" | "23" | "24" | "25" | "26" | "27" | "28" | "29" |
+    "30" | "31";
+
+days = universal_rules.kDigit{1,2} @ universal_rules.delete_initial_zero @ day;
+
+# Months
+month = "1" | "2" | "3" | "4" | "5" | "6" |
+    "7" | "8" | "9" | "10" | "11" | "12";
+
+months = universal_rules.kDigit{1,2} @ universal_rules.delete_initial_zero @ month;
+
+month_number_to_full_name =
+    ("1" : "មករា")
+  | ("2" : "កុម្ភៈ")
+  | ("3" : "មិនា")
+  | ("4" : "មេសា")
+  | ("5" : "ឧសភា")
+  | ("6" : "មិថុនា")
+  | ("7" : "កក្កដា")
+  | ("8" : "សីហា")
+  | ("9" : "កញ្ញា")
+  | ("10" : "តុលា")
+  | ("11" : "វិច្ឆិកា")
+  | ("12" : "ធ្នូ")
+;
+
+months_from_number = months @ month_number_to_full_name;
+
+# There is no abbreviation for month names.
+month_full_name =
+    "មករា"
+  | "កុម្ភៈ"
+  | "មិនា"
+  | "មេសា"
+  | "ឧសភា"
+  | "មិថុនា"
+  | "កក្កដា"
+  | "សីហា"
+  | "កញ្ញា"
+  | "តុលា"
+  | "វិច្ឆិកា"
+  | "ធ្នូ"
+;
+
+# However, people also use the word "month" + cardinals (1-12)
+# to mean these months.
+month_ordinal_name =
+  "ខែ" universal_rules.del_space_star (convert_khmer_digits_to_arabic @ month);
+month_name_map =
+    months_from_number
+  | month_full_name
+  | month_ordinal_name
+;
+
+remove_slash = "/" : "";
+
+month_names = remove_slash? month_name_map remove_slash?;
+
+month_names_with_quotes = markup_quote month_names markup_quote;
+
+# Eras
+# In the abbreviation form ("ព.ស." and "គ.ស.") the way people put dot '.' is
+# uncertain. Furthermore, the segmenter sometimes puts a space between
+# characters and dots, so we implement this rule with flexibility in mind.
+era_names =
+    (
+      (
+          (
+             "ព" universal_rules.clear_space? "."? universal_rules.clear_space?
+             "ស" universal_rules.clear_space? "."?
+          )
+        | "ពុទ្ធសករាជ" | "ពុទ្ធ សករាជ"
+      ) : "ពុទ្ធសករាជ"
+    )
+  | (
+      (
+          (
+            "គ" universal_rules.clear_space? "."? universal_rules.clear_space?
+            "ស" universal_rules.clear_space? "."?
+          )
+        | "គ្រិស្តសករាជ" | "គ្រិស្ត សករាជ"
+      ) : "គ្រិស្តសករាជ"
+    )
+;
+
+export ERA = universal_rules.clear_space_star
+      universal_rules.ins_space
+      universal_func.InvertMarkup[universal_rules.date_era]
+      universal_rules.ins_space
+      universal_rules.ins_quote
+      era_names
+      universal_rules.ins_quote;
+
+# Khmer sometimes write year before era.
+# They also put "មុន"(before) or "នៃ"(of) betweeen year and era.
+# Ex. 2558 នៃ ព.ស. (2558 of B.E.)
+
+export OF_ERA = universal_rules.clear_space_star
+      universal_rules.ins_space
+      universal_func.InvertMarkup[universal_rules.date_era]
+      universal_rules.ins_space
+      universal_rules.ins_quote
+      ("នៃ" | "មុន")? universal_rules.one_space era_names
+      universal_rules.ins_quote;
+
+date_markup = universal_func.InvertMarkup[universal_rules.date] universal_rules.ins_space
+              universal_func.InvertMarkup[universal_rules.opening_brace]
+              universal_rules.sigma_star universal_rules.ins_space
+              universal_func.InvertMarkup[universal_rules.closing_brace];
+
+# Year could be 2-digit or 4-digit long.
+year = universal_rules.kDigit{2,4} | km.KHMER_DIGIT{2,4};
+
+export YEAR_ONLY_MARKUP = Optimize[
+  (markup_year (("1" | "2") universal_rules.kDigit{3})) @
+  date_markup
+];
+separator = ("/" | "-" | ".") : "";
+
+# 4/5/2000, 4-5-2000, 4.5.2000
+dmy1 = markup_day days
+       separator markup_month month_names_with_quotes
+       separator markup_year year;
+
+# 4 មករា 2000, ២ មករា ព.ស. ២៥៥០
+dmy2 = markup_day days
+       universal_rules.clear_space_plus
+       markup_month month_names_with_quotes
+       universal_rules.clear_space_plus
+       (ERA universal_rules.clear_space_star)?
+       markup_year year;
+
+# 13 ខែ១២ 2558 នៃ ព.ស., 13 ខែ១២ 2558 នៃគ្រិស្តសករាជ, ខែ១២ 2558 មុន គ.ស.
+dmy3 = markup_day days
+       universal_rules.clear_space_plus
+       markup_month month_names_with_quotes
+       universal_rules.clear_space_plus
+       markup_year year
+       OF_ERA;
+
+# 1 មករា
+dm = markup_day days universal_rules.clear_space_plus
+     markup_month month_names_with_quotes;
+
+# មករា 2000
+my = markup_month month_names_with_quotes universal_rules.clear_space_plus
+     markup_year year;
+
+weekdays =
+    ((("ច" universal_rules.clear_space? ".") | "ចន្ទ") : "ចន្ទ")
+  | ((("អ" universal_rules.clear_space? ".") | "អង្គារ") : "អង្គារ")
+  | ((("ពុ" universal_rules.clear_space? ".") | "ពុធ") : "ពុធ")
+  | ((("ព្រ" universal_rules.clear_space? ".") | "ព្រហស្បតិ៍") : "ព្រហស្បតិ៍")
+  | ((("សុ" universal_rules.clear_space? ".") | "សុក្រ") : "សុក្រ")
+  | ((("ស" universal_rules.clear_space? ".") | "សៅរ៍") : "សៅរ៍")
+  | ((("អា" universal_rules.clear_space? ".") | "អាទិត្យ") : "អាទិត្យ")
+;
+
+# weekday abbreviation + day. E.g., "ថ្ងៃ អា. 18".
+weekday =
+  markup_weekday ("ថ្ងៃ" : "")? universal_rules.clear_space_star
+  markup_quote weekdays markup_quote
+  universal_rules.clear_space_star ("ទី" : "")? universal_rules.clear_space_star;
+
+# date-only <day_prefix> + number.
+# input: ថ្ងៃទី 09
+# output: day: 9
+# input: ថ្ងៃ សៅរ៍ ទី09
+# output: weekday: "សៅរ៍" day: 9
+day_only =
+  ((("ថ្ងៃទី" | "ថ្ងៃ ទី") : "") | weekday)
+  universal_rules.clear_space_star
+  markup_day
+  days;
+
+export style1 = ((weekday? (dm | dmy1 | dmy2 | dmy3)) | my | day_only)
+         universal_rules.ins_space universal_func.InvertMarkup[universal_rules.style1];
+
+export DATE = Optimize[
+  universal_func.InvertMarkup[universal_rules.date]
+  universal_func.InvertMarkup[universal_rules.opening_brace]
+  style1
+  universal_func.InvertMarkup[universal_rules.closing_brace]
+];

@@ -1,0 +1,51 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Parser for Khmer time.
+# Basically, the rule is similar to the style1 in the universal grammar, with
+# an exception that Khmer speakers do not use dot ('.') as a separator.
+# Khmer time has a suffix similar to a.m. and p.m. in English. Since all of
+# them are usually written as a full word, we decide not to let suffixes pass
+# this classifier. Instead, we handle them in the same way that we handle
+# Khmer words.
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+# We always speak the word "ម៉ោង" (hour) in the verbalizer, so we will consume
+# this word, if it exists.
+hour_mark = "ម៉ោង";
+
+separator = universal_rules.del_space_star (":" : "") universal_rules.del_space_star;
+
+minute_and_optional_second =
+  universal_rules.MARKUP_MINUTES universal_rules.TIME00_59 (separator universal_rules.MARKUP_SECONDS universal_rules.TIME00_59)?;
+
+style1 =
+  ((hour_mark : "") universal_rules.del_space_star<-1>)?
+  universal_rules.MARKUP_HOURS
+  universal_rules.HOURS
+  separator
+  minute_and_optional_second
+  universal_rules.MARKUP_STYLE1
+;
+
+export TIME_MARKUP = Optimize[
+  universal_func.InvertMarkup[universal_rules.time]
+  universal_rules.ins_space
+  universal_func.InvertMarkup[universal_rules.opening_brace]
+  style1
+  (universal_rules.TIME_ZONE universal_rules.ins_space)?
+  universal_func.InvertMarkup[universal_rules.closing_brace]
+];

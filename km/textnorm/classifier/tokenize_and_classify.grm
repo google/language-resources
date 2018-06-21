@@ -1,0 +1,54 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Combined classifier / tokenizer. Goes from arbitrary input string to output
+# tokens in one fell swoop.
+
+import 'classify.grm' as classify;
+import 'khmer.grm' as km;
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+# This is the definition of a legally spelt word.
+letter_def = universal_rules.kAlpha | km.KHMER_LETTER;
+legal_word = universal_rules.kAlpha+ | km.KHMER_LETTER_EXCEPT_REPEATER+;
+
+convert_khmer_digits_to_arabic =
+  CDRewrite[km.KHMER_DIGIT, "", "", universal_rules.sigma_star];
+
+# Zero-width space, U+200B in UTF-8:
+zwsp = "[226][128][139]";
+
+replace_zwsp = CDRewrite[zwsp : " ", "", "", universal_rules.sigma_star];
+
+khmer_punct_token = Optimize[
+  universal_rules.PUNCT_TOKEN |
+  universal_func.PunctToken["។", universal_rules.token_pause_length_long
+               universal_rules.del_space_plus universal_rules.token_phrase_break_true]
+];
+
+export TOKENIZE_AND_CLASSIFY = Optimize[
+  replace_zwsp @
+  convert_khmer_digits_to_arabic @
+  universal_func.TokenizeAndClassify[classify.CLASSIFY,
+                        universal_func.WordToken[legal_word, letter_def],
+                        khmer_punct_token,
+                        universal_rules.FALLBACK_TOKEN,
+                        universal_rules.SPACE,
+                        universal_rules.kAlpha,
+                        km.KHMER_LETTER,
+                        universal_rules.kDigit,
+                        Project[km.KHMER_DIGIT, 'input']] @
+  universal_rules.CLEAN_SPACES
+];

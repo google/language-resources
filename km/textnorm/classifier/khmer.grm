@@ -1,0 +1,85 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Ranges of Khmer characters, as encoded in utf-8.
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+func DomainMinus[transducer, domain_restriction] {
+  return (Project[transducer, 'input'] - Project[domain_restriction, 'input'])
+    @ transducer;
+}
+
+export KHMER_ALPHABET = "ក" | "ខ" | "គ" | "ឃ" | "ង" | "ច" | "ឆ" | "ជ" |
+              "ឈ" | "ញ" | "ដ" | "ឋ" | "ឌ" | "ឍ" | "ណ" | "ត" | "ថ" |
+              "ទ" | "ធ" | "ន" | "ប" | "ផ" | "ព" | "ភ" | "ម" | "យ" | "រ" |
+              "ល" | "វ" | "ស" | "ហ" | "ឡ" | "អ"
+;
+
+export KHMER_DEPENDENT_VOWEL = "ា" | "ិ" | "ី" | "ឹ" | "ឺ" | "ុ" | "ូ" | "ួ" |
+              "ើ" | "ឿ" | "ៀ" | "េ" | "ែ" | "ៃ" | "ោ" | "ៅ"
+;
+
+export KHMER_INDEPENDENT_VOWEL = "ឥ" | "ឦ" | "ឧ" | "ឨ" | "ឩ" | "ឪ" | "ឫ" |
+              "ឬ" | "ឭ" | "ឮ" | "ឯ" | "ឰ" | "ឱ" | "ឲ" | "ឳ"
+;
+
+export KHMER_DIACRITICS = "ំ" | "ះ" | "ៈ" | "៉" | "៊" | "់" | "៌" |
+              "៍" | "៎" | "៏" | "័" | "៑" | "៝"
+;
+
+# Coeng or subscript shifter is the Khmer version of virama
+# (same as in Devanagari).
+#
+# It is used as a joiner for subscripted consonants which then merge
+# with their preceding consonants and become consonant clusters.
+#
+# Ex. ហ (consonant-1) + ្ (coeng) + គ (consonant-2) = ហ្គ (consonant cluster)
+export KHMER_COENG = "្";
+
+export KHMER_CURRENCY = "៛";
+
+export KHMER_SYMBOL = "៘" | "ៗ" | "៕" | "៚" | "៙" | "៖";
+
+export KHMER_LETTER =
+  KHMER_ALPHABET |
+  KHMER_DEPENDENT_VOWEL |
+  KHMER_INDEPENDENT_VOWEL |
+  KHMER_DIACRITICS |
+  KHMER_COENG |
+  KHMER_CURRENCY |
+  KHMER_SYMBOL
+;
+
+export REPEATER = "ៗ";
+
+export KHMER_LETTER_EXCEPT_REPEATER = DomainMinus[KHMER_LETTER, REPEATER];
+
+export KHMER_D1TO9 =
+ (  ("១" : "1")
+  | ("២" : "2")
+  | ("៣" : "3")
+  | ("៤" : "4")
+  | ("៥" : "5")
+  | ("៦" : "6")
+  | ("៧" : "7")
+  | ("៨" : "8")
+  | ("៩" : "9"))
+;
+
+export KHMER_DIGIT = KHMER_D1TO9 | ("០" : "0");
+
+export DIGIT = universal_rules.kDigit
+             | Project[KHMER_DIGIT, 'input'];

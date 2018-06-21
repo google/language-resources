@@ -1,0 +1,40 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+## Khmer classifier for roman numerals.
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+# In Khmer, roman numerals are usually used  as title heading numbers.
+# For example,
+# I. Introduction
+# II. Overview
+# III. Description
+# IV. ...
+#
+# Therefore, to restrict this, it is required to have dot and space
+# after the roman numerals.
+# This grammar rule supports roman numerals up to 29 (the same as
+# universal's LIMITED_ROMAN_CARDINAL).
+export LIMITED_ROMAN_WITH_DOT_SPACE = Optimize[
+  universal_func.InvertMarkup[universal_rules.cardinal] universal_rules.ins_space
+  universal_func.InvertMarkup[universal_rules.opening_brace] universal_rules.ins_space
+  universal_func.InvertMarkup[universal_rules.cardinal_integer] universal_rules.ins_space
+  universal_rules.ins_quote
+  (universal_rules.ROMAN_NUMERAL @ (("1" | "2")? universal_rules.kDigit))
+  (" " : "")? ("." : "") (" " : "")
+  universal_rules.ins_quote
+  universal_func.InvertMarkup[universal_rules.closing_brace] universal_rules.ins_space
+];

@@ -23,6 +23,26 @@ exports_files([
     "devanagari.grm",
 ])
 
+[
+    grm_regression_test(
+        name = test_rules + "_tests",
+        far_file = test_rules + ".far",
+        far_file_path = base_path,
+        test_file = "testdata/" + test_rules + ".tsv",
+        test_file_path = base_path,
+    )
+    for test_rules in [
+        "connector",
+        "date",
+        "devanagari",
+        "measure",
+        "money",
+        "ordinal",
+        "time",
+        "tokenize_and_classify",
+    ]
+]
+
 thrax_compile_grm(
     name = "universal_rules",
     deps = ["universal_depot.far"],

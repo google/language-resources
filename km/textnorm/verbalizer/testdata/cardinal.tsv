@@ -1,0 +1,274 @@
+CARDINAL_MARKUP	cardinal|integer:-100|	ដក មួយ រយ
+CARDINAL_MARKUP	cardinal|integer:-99|	ដក កៅសិប ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:-98|	ដក កៅសិប ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:-97|	ដក កៅសិប ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:-96|	ដក កៅសិប ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:-95|	ដក កៅសិប ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:-94|	ដក កៅសិប បួន
+CARDINAL_MARKUP	cardinal|integer:-93|	ដក កៅសិប បី
+CARDINAL_MARKUP	cardinal|integer:-92|	ដក កៅសិប ពីរ
+CARDINAL_MARKUP	cardinal|integer:-91|	ដក កៅសិប មួយ
+CARDINAL_MARKUP	cardinal|integer:-90|	ដក កៅសិប
+CARDINAL_MARKUP	cardinal|integer:-89|	ដក ប៉ែតសិប ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:-88|	ដក ប៉ែតសិប ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:-87|	ដក ប៉ែតសិប ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:-86|	ដក ប៉ែតសិប ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:-85|	ដក ប៉ែតសិប ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:-84|	ដក ប៉ែតសិប បួន
+CARDINAL_MARKUP	cardinal|integer:-83|	ដក ប៉ែតសិប បី
+CARDINAL_MARKUP	cardinal|integer:-82|	ដក ប៉ែតសិប ពីរ
+CARDINAL_MARKUP	cardinal|integer:-81|	ដក ប៉ែតសិប មួយ
+CARDINAL_MARKUP	cardinal|integer:-80|	ដក ប៉ែតសិប
+CARDINAL_MARKUP	cardinal|integer:-79|	ដក ចិតសិប ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:-78|	ដក ចិតសិប ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:-77|	ដក ចិតសិប ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:-76|	ដក ចិតសិប ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:-75|	ដក ចិតសិប ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:-74|	ដក ចិតសិប បួន
+CARDINAL_MARKUP	cardinal|integer:-73|	ដក ចិតសិប បី
+CARDINAL_MARKUP	cardinal|integer:-72|	ដក ចិតសិប ពីរ
+CARDINAL_MARKUP	cardinal|integer:-71|	ដក ចិតសិប មួយ
+CARDINAL_MARKUP	cardinal|integer:-70|	ដក ចិតសិប
+CARDINAL_MARKUP	cardinal|integer:-69|	ដក ហុកសិប ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:-68|	ដក ហុកសិប ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:-67|	ដក ហុកសិប ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:-66|	ដក ហុកសិប ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:-65|	ដក ហុកសិប ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:-64|	ដក ហុកសិប បួន
+CARDINAL_MARKUP	cardinal|integer:-63|	ដក ហុកសិប បី
+CARDINAL_MARKUP	cardinal|integer:-62|	ដក ហុកសិប ពីរ
+CARDINAL_MARKUP	cardinal|integer:-61|	ដក ហុកសិប មួយ
+CARDINAL_MARKUP	cardinal|integer:-60|	ដក ហុកសិប
+CARDINAL_MARKUP	cardinal|integer:-59|	ដក ហាសិប ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:-58|	ដក ហាសិប ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:-57|	ដក ហាសិប ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:-56|	ដក ហាសិប ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:-55|	ដក ហាសិប ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:-54|	ដក ហាសិប បួន
+CARDINAL_MARKUP	cardinal|integer:-53|	ដក ហាសិប បី
+CARDINAL_MARKUP	cardinal|integer:-52|	ដក ហាសិប ពីរ
+CARDINAL_MARKUP	cardinal|integer:-51|	ដក ហាសិប មួយ
+CARDINAL_MARKUP	cardinal|integer:-50|	ដក ហាសិប
+CARDINAL_MARKUP	cardinal|integer:-49|	ដក សែសិប ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:-48|	ដក សែសិប ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:-47|	ដក សែសិប ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:-46|	ដក សែសិប ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:-45|	ដក សែសិប ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:-44|	ដក សែសិប បួន
+CARDINAL_MARKUP	cardinal|integer:-43|	ដក សែសិប បី
+CARDINAL_MARKUP	cardinal|integer:-42|	ដក សែសិប ពីរ
+CARDINAL_MARKUP	cardinal|integer:-41|	ដក សែសិប មួយ
+CARDINAL_MARKUP	cardinal|integer:-40|	ដក សែសិប
+CARDINAL_MARKUP	cardinal|integer:-39|	ដក សាមសិប ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:-38|	ដក សាមសិប ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:-37|	ដក សាមសិប ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:-36|	ដក សាមសិប ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:-35|	ដក សាមសិប ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:-34|	ដក សាមសិប បួន
+CARDINAL_MARKUP	cardinal|integer:-33|	ដក សាមសិប បី
+CARDINAL_MARKUP	cardinal|integer:-32|	ដក សាមសិប ពីរ
+CARDINAL_MARKUP	cardinal|integer:-31|	ដក សាមសិប មួយ
+CARDINAL_MARKUP	cardinal|integer:-30|	ដក សាមសិប
+CARDINAL_MARKUP	cardinal|integer:-29|	ដក ម្ភៃ ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:-28|	ដក ម្ភៃ ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:-27|	ដក ម្ភៃ ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:-26|	ដក ម្ភៃ ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:-25|	ដក ម្ភៃ ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:-24|	ដក ម្ភៃ បួន
+CARDINAL_MARKUP	cardinal|integer:-23|	ដក ម្ភៃ បី
+CARDINAL_MARKUP	cardinal|integer:-22|	ដក ម្ភៃ ពីរ
+CARDINAL_MARKUP	cardinal|integer:-21|	ដក ម្ភៃ មួយ
+CARDINAL_MARKUP	cardinal|integer:-20|	ដក ម្ភៃ
+CARDINAL_MARKUP	cardinal|integer:-19|	ដក ដប់ ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:-18|	ដក ដប់ ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:-17|	ដក ដប់ ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:-16|	ដក ដប់ ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:-15|	ដក ដប់ ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:-14|	ដក ដប់ បួន
+CARDINAL_MARKUP	cardinal|integer:-13|	ដក ដប់ បី
+CARDINAL_MARKUP	cardinal|integer:-12|	ដក ដប់ ពីរ
+CARDINAL_MARKUP	cardinal|integer:-11|	ដក ដប់ មួយ
+CARDINAL_MARKUP	cardinal|integer:-10|	ដក ដប់
+CARDINAL_MARKUP	cardinal|integer:-9|	ដក ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:-8|	ដក ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:-7|	ដក ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:-6|	ដក ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:-5|	ដក ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:-4|	ដក បួន
+CARDINAL_MARKUP	cardinal|integer:-3|	ដក បី
+CARDINAL_MARKUP	cardinal|integer:-2|	ដក ពីរ
+CARDINAL_MARKUP	cardinal|integer:-1|	ដក មួយ
+CARDINAL_MARKUP	cardinal|integer:1|	មួយ
+CARDINAL_MARKUP	cardinal|integer:2|	ពីរ
+CARDINAL_MARKUP	cardinal|integer:3|	បី
+CARDINAL_MARKUP	cardinal|integer:4|	បួន
+CARDINAL_MARKUP	cardinal|integer:5|	ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:6|	ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:7|	ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:8|	ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:9|	ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:10|	ដប់
+CARDINAL_MARKUP	cardinal|integer:11|	ដប់ មួយ
+CARDINAL_MARKUP	cardinal|integer:12|	ដប់ ពីរ
+CARDINAL_MARKUP	cardinal|integer:13|	ដប់ បី
+CARDINAL_MARKUP	cardinal|integer:14|	ដប់ បួន
+CARDINAL_MARKUP	cardinal|integer:15|	ដប់ ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:16|	ដប់ ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:17|	ដប់ ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:18|	ដប់ ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:19|	ដប់ ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:20|	ម្ភៃ
+CARDINAL_MARKUP	cardinal|integer:21|	ម្ភៃ មួយ
+CARDINAL_MARKUP	cardinal|integer:22|	ម្ភៃ ពីរ
+CARDINAL_MARKUP	cardinal|integer:23|	ម្ភៃ បី
+CARDINAL_MARKUP	cardinal|integer:24|	ម្ភៃ បួន
+CARDINAL_MARKUP	cardinal|integer:25|	ម្ភៃ ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:26|	ម្ភៃ ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:27|	ម្ភៃ ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:28|	ម្ភៃ ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:29|	ម្ភៃ ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:30|	សាមសិប
+CARDINAL_MARKUP	cardinal|integer:31|	សាមសិប មួយ
+CARDINAL_MARKUP	cardinal|integer:32|	សាមសិប ពីរ
+CARDINAL_MARKUP	cardinal|integer:33|	សាមសិប បី
+CARDINAL_MARKUP	cardinal|integer:34|	សាមសិប បួន
+CARDINAL_MARKUP	cardinal|integer:35|	សាមសិប ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:36|	សាមសិប ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:37|	សាមសិប ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:38|	សាមសិប ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:39|	សាមសិប ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:40|	សែសិប
+CARDINAL_MARKUP	cardinal|integer:41|	សែសិប មួយ
+CARDINAL_MARKUP	cardinal|integer:42|	សែសិប ពីរ
+CARDINAL_MARKUP	cardinal|integer:43|	សែសិប បី
+CARDINAL_MARKUP	cardinal|integer:44|	សែសិប បួន
+CARDINAL_MARKUP	cardinal|integer:45|	សែសិប ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:46|	សែសិប ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:47|	សែសិប ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:48|	សែសិប ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:49|	សែសិប ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:50|	ហាសិប
+CARDINAL_MARKUP	cardinal|integer:51|	ហាសិប មួយ
+CARDINAL_MARKUP	cardinal|integer:52|	ហាសិប ពីរ
+CARDINAL_MARKUP	cardinal|integer:53|	ហាសិប បី
+CARDINAL_MARKUP	cardinal|integer:54|	ហាសិប បួន
+CARDINAL_MARKUP	cardinal|integer:55|	ហាសិប ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:56|	ហាសិប ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:57|	ហាសិប ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:58|	ហាសិប ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:59|	ហាសិប ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:60|	ហុកសិប
+CARDINAL_MARKUP	cardinal|integer:61|	ហុកសិប មួយ
+CARDINAL_MARKUP	cardinal|integer:62|	ហុកសិប ពីរ
+CARDINAL_MARKUP	cardinal|integer:63|	ហុកសិប បី
+CARDINAL_MARKUP	cardinal|integer:64|	ហុកសិប បួន
+CARDINAL_MARKUP	cardinal|integer:65|	ហុកសិប ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:66|	ហុកសិប ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:67|	ហុកសិប ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:68|	ហុកសិប ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:69|	ហុកសិប ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:70|	ចិតសិប
+CARDINAL_MARKUP	cardinal|integer:71|	ចិតសិប មួយ
+CARDINAL_MARKUP	cardinal|integer:72|	ចិតសិប ពីរ
+CARDINAL_MARKUP	cardinal|integer:73|	ចិតសិប បី
+CARDINAL_MARKUP	cardinal|integer:74|	ចិតសិប បួន
+CARDINAL_MARKUP	cardinal|integer:75|	ចិតសិប ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:76|	ចិតសិប ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:77|	ចិតសិប ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:78|	ចិតសិប ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:79|	ចិតសិប ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:80|	ប៉ែតសិប
+CARDINAL_MARKUP	cardinal|integer:81|	ប៉ែតសិប មួយ
+CARDINAL_MARKUP	cardinal|integer:82|	ប៉ែតសិប ពីរ
+CARDINAL_MARKUP	cardinal|integer:83|	ប៉ែតសិប បី
+CARDINAL_MARKUP	cardinal|integer:84|	ប៉ែតសិប បួន
+CARDINAL_MARKUP	cardinal|integer:85|	ប៉ែតសិប ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:86|	ប៉ែតសិប ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:87|	ប៉ែតសិប ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:88|	ប៉ែតសិប ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:89|	ប៉ែតសិប ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:90|	កៅសិប
+CARDINAL_MARKUP	cardinal|integer:91|	កៅសិប មួយ
+CARDINAL_MARKUP	cardinal|integer:92|	កៅសិប ពីរ
+CARDINAL_MARKUP	cardinal|integer:93|	កៅសិប បី
+CARDINAL_MARKUP	cardinal|integer:94|	កៅសិប បួន
+CARDINAL_MARKUP	cardinal|integer:95|	កៅសិប ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:96|	កៅសិប ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:97|	កៅសិប ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:98|	កៅសិប ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:99|	កៅសិប ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:100|	មួយ រយ
+CARDINAL_MARKUP	cardinal|integer:102|	មួយ រយ ពីរ
+CARDINAL_MARKUP	cardinal|integer:202|	ពីរ រយ ពីរ
+CARDINAL_MARKUP	cardinal|integer:302|	បី រយ ពីរ
+CARDINAL_MARKUP	cardinal|integer:402|	បួន រយ ពីរ
+CARDINAL_MARKUP	cardinal|integer:502|	ប្រាំ រយ ពីរ
+CARDINAL_MARKUP	cardinal|integer:602|	ប្រាំមួយ រយ ពីរ
+CARDINAL_MARKUP	cardinal|integer:702|	ប្រាំពិល រយ ពីរ
+CARDINAL_MARKUP	cardinal|integer:802|	ប្រាំបី រយ ពីរ
+CARDINAL_MARKUP	cardinal|integer:902|	ប្រាំបួន រយ ពីរ
+CARDINAL_MARKUP	cardinal|integer:1000|	មួយ ពាន់
+CARDINAL_MARKUP	cardinal|integer:2003|	ពីរ ពាន់ បី
+CARDINAL_MARKUP	cardinal|integer:3003|	បី ពាន់ បី
+CARDINAL_MARKUP	cardinal|integer:4003|	បួន ពាន់ បី
+CARDINAL_MARKUP	cardinal|integer:5003|	ប្រាំ ពាន់ បី
+CARDINAL_MARKUP	cardinal|integer:6003|	ប្រាំមួយ ពាន់ បី
+CARDINAL_MARKUP	cardinal|integer:7003|	ប្រាំពិល ពាន់ បី
+CARDINAL_MARKUP	cardinal|integer:8003|	ប្រាំបី ពាន់ បី
+CARDINAL_MARKUP	cardinal|integer:9003|	ប្រាំបួន ពាន់ បី
+CARDINAL_MARKUP	cardinal|integer:10004|	មួយ ម៉ឺន បួន
+CARDINAL_MARKUP	cardinal|integer:20004|	ពីរ ម៉ឺន បួន
+CARDINAL_MARKUP	cardinal|integer:30004|	បី ម៉ឺន បួន
+CARDINAL_MARKUP	cardinal|integer:40004|	បួន ម៉ឺន បួន
+CARDINAL_MARKUP	cardinal|integer:50004|	ប្រាំ ម៉ឺន បួន
+CARDINAL_MARKUP	cardinal|integer:60004|	ប្រាំមួយ ម៉ឺន បួន
+CARDINAL_MARKUP	cardinal|integer:70004|	ប្រាំពិល ម៉ឺន បួន
+CARDINAL_MARKUP	cardinal|integer:80004|	ប្រាំបី ម៉ឺន បួន
+CARDINAL_MARKUP	cardinal|integer:90004|	ប្រាំបួន ម៉ឺន បួន
+CARDINAL_MARKUP	cardinal|integer:100005|	មួយ សែន ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:200005|	ពីរ សែន ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:300005|	បី សែន ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:400005|	បួន សែន ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:500005|	ប្រាំ សែន ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:600005|	ប្រាំមួយ សែន ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:700005|	ប្រាំពិល សែន ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:800005|	ប្រាំបី សែន ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:900005|	ប្រាំបួន សែន ប្រាំ
+CARDINAL_MARKUP	cardinal|integer:1000006|	មួយ លាន ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:2000006|	ពីរ លាន ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:3000006|	បី លាន ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:4000006|	បួន លាន ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:5000006|	ប្រាំ លាន ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:6000006|	ប្រាំមួយ លាន ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:7000006|	ប្រាំពិល លាន ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:8000006|	ប្រាំបី លាន ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:9000006|	ប្រាំបួន លាន ប្រាំមួយ
+CARDINAL_MARKUP	cardinal|integer:10000007|	ដប់ លាន ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:20000007|	ម្ភៃ លាន ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:30000007|	សាមសិប លាន ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:40000007|	សែសិប លាន ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:50000007|	ហាសិប លាន ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:60000007|	ហុកសិប លាន ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:70000007|	ចិតសិប លាន ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:80000007|	ប៉ែតសិប លាន ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:90000007|	កៅសិប លាន ប្រាំពិល
+CARDINAL_MARKUP	cardinal|integer:100000008|	មួយ រយ លាន ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:200000008|	ពីរ រយ លាន ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:300000008|	បី រយ លាន ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:400000008|	បួន រយ លាន ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:500000008|	ប្រាំ រយ លាន ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:600000008|	ប្រាំមួយ រយ លាន ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:700000008|	ប្រាំពិល រយ លាន ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:800000008|	ប្រាំបី រយ លាន ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:900000008|	ប្រាំបួន រយ លាន ប្រាំបី
+CARDINAL_MARKUP	cardinal|integer:1000000009|	មួយ ប៊ីលាន ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:2000000009|	ពីរ ប៊ីលាន ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:3000000009|	បី ប៊ីលាន ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:4000000009|	បួន ប៊ីលាន ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:5000000009|	ប្រាំ ប៊ីលាន ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:6000000009|	ប្រាំមួយ ប៊ីលាន ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:7000000009|	ប្រាំពិល ប៊ីលាន ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:8000000009|	ប្រាំបី ប៊ីលាន ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:9000000009|	ប្រាំបួន ប៊ីលាន ប្រាំបួន
+CARDINAL_MARKUP	cardinal|integer:979156713712|	ប្រាំបួន រយ ចិតសិប ប្រាំបួន ប៊ីលាន មួយ រយ ហាសិប ប្រាំមួយ លាន ប្រាំពិល សែន មួយ ម៉ឺន បី ពាន់ ប្រាំពិល រយ ដប់ ពីរ
+CARDINAL_MARKUP	cardinal|integer:7818724567|	ប្រាំពិល ប៊ីលាន ប្រាំបី រយ ដប់ ប្រាំបី លាន ប្រាំពិល សែន ពីរ ម៉ឺន បួន ពាន់ ប្រាំ រយ ហុកសិប ប្រាំពិល

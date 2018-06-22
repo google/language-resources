@@ -1,0 +1,54 @@
+DATE_MARKUP	date|day:11|month:9|year:2526|style:1|	ដប់ មួយ ខែ កញ្ញា ឆ្នាំ ពីរ ពាន់ ប្រាំ រយ ម្ភៃ ប្រាំមួយ
+DATE_MARKUP	date|day:3|month:8|year:2555|style:1|	បី ខែ សីហា ឆ្នាំ ពីរ ពាន់ ប្រាំ រយ ហាសិប ប្រាំ
+DATE_MARKUP	date|day:8|month:3|year:2600|style:1|	ប្រាំបី ខែ មិនា ឆ្នាំ ពីរ ពាន់ ប្រាំមួយ រយ
+DATE_MARKUP	date|day:11|month:កញ្ញា|year:2526|style:1|	ដប់ មួយ ខែ កញ្ញា ឆ្នាំ ពីរ ពាន់ ប្រាំ រយ ម្ភៃ ប្រាំមួយ
+DATE_MARKUP	date|day:3|month:សីហា|year:2555|style:1|	បី ខែ សីហា ឆ្នាំ ពីរ ពាន់ ប្រាំ រយ ហាសិប ប្រាំ
+DATE_MARKUP	date|day:8|month:មិនា|year:2600|style:1|	ប្រាំបី ខែ មិនា ឆ្នាំ ពីរ ពាន់ ប្រាំមួយ រយ
+DATE_MARKUP	date|day:31|month:2|era:នៃ គ្រិស្តសករាជ|year:2556|style:1|	សាមសិប មួយ ខែ កុម្ភៈ ឆ្នាំ ពីរ ពាន់ ប្រាំ រយ ហាសិប ប្រាំមួយ នៃ គ្រិស្តសករាជ
+DATE_MARKUP	date|day:28|month:1|era:នៃ គ្រិស្តសករាជ|year:1999|style:1|	ម្ភៃ ប្រាំបី ខែ មករា ឆ្នាំ មួយ ពាន់ ប្រាំបួន រយ កៅសិប ប្រាំបួន នៃ គ្រិស្តសករាជ
+DATE_MARKUP	date|day:12|month:7|era:នៃ គ្រិស្តសករាជ|year:2013|style:1|	ដប់ ពីរ ខែ កក្កដា ឆ្នាំ ពីរ ពាន់ ដប់ បី នៃ គ្រិស្តសករាជ
+DATE_MARKUP	date|day:1|month:12|era:នៃ គ្រិស្តសករាជ|year:2556|style:1|	មួយ ខែ ធ្នូ ឆ្នាំ ពីរ ពាន់ ប្រាំ រយ ហាសិប ប្រាំមួយ នៃ គ្រិស្តសករាជ
+
+# Month-year
+DATE_MARKUP	date|month:7|year:2511|style:1|	ខែ កក្កដា ឆ្នាំ ពីរ ពាន់ ប្រាំ រយ ដប់ មួយ
+DATE_MARKUP	date|month:1|era:នៃ គ្រិស្តសករាជ|year:2408|style:1|	ខែ មករា ឆ្នាំ ពីរ ពាន់ បួន រយ ប្រាំបី នៃ គ្រិស្តសករាជ
+DATE_MARKUP	date|month:3|era:នៃ គ្រិស្តសករាជ|year:2317|style:1|	ខែ មិនា ឆ្នាំ ពីរ ពាន់ បី រយ ដប់ ប្រាំពិល នៃ គ្រិស្តសករាជ
+
+# No year
+DATE_MARKUP	date|day:3|month:8|style:1|	បី ខែ សីហា
+DATE_MARKUP	date|day:31|month:10|style:1|	សាមសិប មួយ ខែ តុលា
+
+# Month only
+DATE_MARKUP	date|month:10|style:1|	ខែ តុលា
+DATE_MARKUP	date|month:3|style:1|	ខែ មិនា
+DATE_MARKUP	date|month:7|	ខែ កក្កដា
+
+# Year only
+DATE_MARKUP	date|era:នៃ គ្រិស្តសករាជ|year:2556|style:1|	ឆ្នាំ ពីរ ពាន់ ប្រាំ រយ ហាសិប ប្រាំមួយ នៃ គ្រិស្តសករាជ
+DATE_MARKUP	date|year:2556|style:1|	ឆ្នាំ ពីរ ពាន់ ប្រាំ រយ ហាសិប ប្រាំមួយ
+
+# No |style
+DATE_MARKUP	date|day:31|month:10|	សាមសិប មួយ ខែ តុលា
+DATE_MARKUP	date|year:2556|	ឆ្នាំ ពីរ ពាន់ ប្រាំ រយ ហាសិប ប្រាំមួយ
+DATE_MARKUP	date|day:1|month:12|era:នៃ គ្រិស្តសករាជ|year:2556|	មួយ ខែ ធ្នូ ឆ្នាំ ពីរ ពាន់ ប្រាំ រយ ហាសិប ប្រាំមួយ នៃ គ្រិស្តសករាជ
+
+# With weekday
+DATE_MARKUP	date|weekday:3|day:31|month:4|	ថ្ងៃ ពុធ ទី សាមសិប មួយ ខែ មេសា
+DATE_MARKUP	date|weekday:2|day:3|month:10|	ថ្ងៃ អង្គារ ទី បី ខែ តុលា
+DATE_MARKUP	date|weekday:1|day:22|month:12|year:2558|	ថ្ងៃ ចន្ទ ទី ម្ភៃ ពីរ ខែ ធ្នូ ឆ្នាំ ពីរ ពាន់ ប្រាំ រយ ហាសិប ប្រាំបី
+DATE_MARKUP	date|weekday:3|day:31|month:មេសា|	ថ្ងៃ ពុធ ទី សាមសិប មួយ ខែ មេសា
+DATE_MARKUP	date|weekday:អង្គារ|day:3|month:តុលា|	ថ្ងៃ អង្គារ ទី បី ខែ តុលា
+DATE_MARKUP	date|weekday:ចន្ទ|day:22|month:ធ្នូ|year:2558|	ថ្ងៃ ចន្ទ ទី ម្ភៃ ពីរ ខែ ធ្នូ ឆ្នាំ ពីរ ពាន់ ប្រាំ រយ ហាសិប ប្រាំបី
+
+# Two digit year
+DATE_MARKUP	date|day:1|month:12|era:មុន គ្រិស្តសករាជ|year:56|	មួយ ខែ ធ្នូ ឆ្នាំ ហាសិប ប្រាំមួយ មុន គ្រិស្តសករាជ
+DATE_MARKUP	date|day:1|month:12|year:56|	មួយ ខែ ធ្នូ ឆ្នាំ ហាសិប ប្រាំមួយ
+
+# Month ordinal names
+DATE_MARKUP	date|weekday:អង្គារ|day:3|month:ខែ១|	ថ្ងៃ អង្គារ ទី បី ខែ មួយ
+DATE_MARKUP	date|weekday:ចន្ទ|day:22|month:ខែ ៩|year:2558|	ថ្ងៃ ចន្ទ ទី ម្ភៃ ពីរ ខែ ប្រាំបួន ឆ្នាំ ពីរ ពាន់ ប្រាំ រយ ហាសិប ប្រាំបី
+
+# Day only
+DATE_MARKUP	date|day:8|style:1|	ថ្ងៃ ទី ប្រាំបី
+DATE_MARKUP	date|weekday:សៅរ៍|day:12|style:1|	ថ្ងៃ សៅរ៍ ទី ដប់ ពីរ
+

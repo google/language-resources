@@ -1,0 +1,30 @@
+# Single digit
+DIGIT_MARKUP	digit|digit:1|	មួយ
+DIGIT_MARKUP	digit|digit:2|  ពីរ
+DIGIT_MARKUP	digit|digit:3|	បី
+DIGIT_MARKUP	digit|digit:4|	បួន
+DIGIT_MARKUP	digit|digit:5|	ប្រាំ
+DIGIT_MARKUP	digit|digit:6|	ប្រាំមួយ
+DIGIT_MARKUP	digit|digit:7|	ប្រាំពិល
+DIGIT_MARKUP	digit|digit:8|	ប្រាំបី
+DIGIT_MARKUP	digit|digit:9|	ប្រាំបួន
+DIGIT_MARKUP	digit|digit:0|	សូន្យ
+DIGIT_MARKUP	digit|digit:១|	មួយ
+DIGIT_MARKUP	digit|digit:២|  ពីរ
+DIGIT_MARKUP	digit|digit:៣|	បី
+DIGIT_MARKUP	digit|digit:៤|	បួន
+DIGIT_MARKUP	digit|digit:៥|	ប្រាំ
+DIGIT_MARKUP	digit|digit:៦|	ប្រាំមួយ
+DIGIT_MARKUP	digit|digit:៧|	ប្រាំពិល
+DIGIT_MARKUP	digit|digit:៨|	ប្រាំបី
+DIGIT_MARKUP	digit|digit:៩|	ប្រាំបួន
+DIGIT_MARKUP	digit|digit:០|	សូន្យ
+
+# Consecutive digits
+DIGIT_MARKUP	digit|digit:01|	សូន្យ មួយ
+DIGIT_MARKUP	digit|digit:11|	មួយ មួយ
+DIGIT_MARKUP	digit|digit:123|	មួយ ពីរ បី
+DIGIT_MARKUP	digit|digit:2345|	ពីរ បី បួន ប្រាំ
+DIGIT_MARKUP	digit|digit:34567|	បី បួន ប្រាំ ប្រាំមួយ ប្រាំពិល
+DIGIT_MARKUP	digit|digit:456789|	បួន ប្រាំ ប្រាំមួយ ប្រាំពិល ប្រាំបី ប្រាំបួន
+DIGIT_MARKUP	digit|digit:5678901|	ប្រាំ ប្រាំមួយ ប្រាំពិល ប្រាំបី ប្រាំបួន សូន្យ មួយ

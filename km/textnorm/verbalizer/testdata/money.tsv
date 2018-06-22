@@ -1,0 +1,80 @@
+# Style 1
+MONEY_MARKUP	money|integer_part:25|fractional_part:05|currency:khr|style:1|	ម្ភៃ ប្រាំ ក្បៀស សូន្យ ប្រាំ រៀល
+MONEY_MARKUP	money|integer_part:25|fractional_part:05|currency:aud|style:1|	ម្ភៃ ប្រាំ ក្បៀស សូន្យ ប្រាំ ដុល្លារ អូស្រ្តាលី
+MONEY_MARKUP	money|integer_part:1025|fractional_part:35|currency:thb|style:1|	មួយ ពាន់ ម្ភៃ ប្រាំ ក្បៀស សាមសិប ប្រាំ បាត
+MONEY_MARKUP	money|integer_part:25|fractional_part:05|currency:gbp|style:1|	ម្ភៃ ប្រាំ ក្បៀស សូន្យ ប្រាំ ផោន
+MONEY_MARKUP	money|integer_part:25|fractional_part:01|currency:jpy|style:1|	ម្ភៃ ប្រាំ ក្បៀស សូន្យ មួយ យ៉េន
+MONEY_MARKUP	money|integer_part:25|fractional_part:01|currency:thb|style:1|	ម្ភៃ ប្រាំ ក្បៀស សូន្យ មួយ បាត
+MONEY_MARKUP	money|integer_part:25|fractional_part:01|currency:chf|style:1|	ម្ភៃ ប្រាំ ក្បៀស សូន្យ មួយ ហ្វ្រង់ ស្វីស
+MONEY_MARKUP	money|integer_part:100|fractional_part:50|currency:khr|style:1|	មួយ រយ ក្បៀស ហាសិប រៀល
+MONEY_MARKUP	money|integer_part:100000|fractional_part:65|currency:khr|style:1|	មួយ សែន ក្បៀស ហុកសិប ប្រាំ រៀល
+MONEY_MARKUP	money|integer_part:12345|fractional_part:97|currency:khr|style:1|	មួយ ម៉ឺន ពីរ ពាន់ បី រយ សែសិប ប្រាំ ក្បៀស កៅសិប ប្រាំពិល រៀល
+MONEY_MARKUP	money|integer_part:8857|fractional_part:71|currency:khr|style:1|	ប្រាំបី ពាន់ ប្រាំបី រយ ហាសិប ប្រាំពិល ក្បៀស ចិតសិប មួយ រៀល
+MONEY_MARKUP	money|integer_part:6649|fractional_part:72|currency:khr|style:1|	ប្រាំមួយ ពាន់ ប្រាំមួយ រយ សែសិប ប្រាំបួន ក្បៀស ចិតសិប ពីរ រៀល
+MONEY_MARKUP	money|integer_part:100|fractional_part:50|currency:usd|style:1|	មួយ រយ ក្បៀស ហាសិប ដុល្លារ អាមេរិក
+MONEY_MARKUP	money|integer_part:100000|fractional_part:65|currency:usd|style:1|	មួយ សែន ក្បៀស ហុកសិប ប្រាំ ដុល្លារ អាមេរិក
+MONEY_MARKUP	money|integer_part:12345|fractional_part:97|currency:usd|style:1|	មួយ ម៉ឺន ពីរ ពាន់ បី រយ សែសិប ប្រាំ ក្បៀស កៅសិប ប្រាំពិល ដុល្លារ អាមេរិក
+MONEY_MARKUP	money|integer_part:8857|fractional_part:71|currency:usd|style:1|	ប្រាំបី ពាន់ ប្រាំបី រយ ហាសិប ប្រាំពិល ក្បៀស ចិតសិប មួយ ដុល្លារ អាមេរិក
+MONEY_MARKUP	money|integer_part:6649|fractional_part:72|currency:usd|style:1|	ប្រាំមួយ ពាន់ ប្រាំមួយ រយ សែសិប ប្រាំបួន ក្បៀស ចិតសិប ពីរ ដុល្លារ អាមេរិក
+
+# With quantity
+MONEY_MARKUP	money|integer_part:25|fractional_part:01|quantity:1000000|currency:jpy|style:1|	ម្ភៃ ប្រាំ ក្បៀស សូន្យ មួយ លាន យ៉េន
+MONEY_MARKUP	money|integer_part:25|fractional_part:01|quantity:1000000000|currency:thb|style:1|	ម្ភៃ ប្រាំ ក្បៀស សូន្យ មួយ ប៊ីលាន បាត
+MONEY_MARKUP	money|integer_part:25|fractional_part:01|quantity:10000000|currency:vnd|style:1|	ម្ភៃ ប្រាំ ក្បៀស សូន្យ មួយ កោដិ ដុង
+MONEY_MARKUP	money|integer_part:25|fractional_part:01|quantity:1000000000000|currency:khr|style:1|	ម្ភៃ ប្រាំ ក្បៀស សូន្យ មួយ ទ្រីលាន រៀល
+MONEY_MARKUP	money|integer_part:100|fractional_part:50|quantity:1000000|currency:khr|style:1|	មួយ រយ ក្បៀស ហាសិប លាន រៀល
+MONEY_MARKUP	money|integer_part:100000|fractional_part:65|quantity:10000000|currency:khr|style:1|	មួយ សែន ក្បៀស ហុកសិប ប្រាំ កោដិ រៀល
+MONEY_MARKUP	money|integer_part:12345|fractional_part:97|quantity:1000000000|currency:khr|style:1|	មួយ ម៉ឺន ពីរ ពាន់ បី រយ សែសិប ប្រាំ ក្បៀស កៅសិប ប្រាំពិល ប៊ីលាន រៀល
+MONEY_MARKUP	money|integer_part:8857|fractional_part:71|quantity:1000000000000|currency:khr|style:1|	ប្រាំបី ពាន់ ប្រាំបី រយ ហាសិប ប្រាំពិល ក្បៀស ចិតសិប មួយ ទ្រីលាន រៀល
+MONEY_MARKUP	money|integer_part:6649|fractional_part:72|quantity:10000000|currency:khr|style:1|	ប្រាំមួយ ពាន់ ប្រាំមួយ រយ សែសិប ប្រាំបួន ក្បៀស ចិតសិប ពីរ កោដិ រៀល
+MONEY_MARKUP	money|integer_part:100|fractional_part:50|quantity:1000000|currency:usd|style:1|	មួយ រយ ក្បៀស ហាសិប លាន ដុល្លារ អាមេរិក
+MONEY_MARKUP	money|integer_part:100000|fractional_part:65|quantity:10000000|currency:usd|style:1|	មួយ សែន ក្បៀស ហុកសិប ប្រាំ កោដិ ដុល្លារ អាមេរិក
+MONEY_MARKUP	money|integer_part:12345|fractional_part:97|quantity:1000000000|currency:usd|style:1|	មួយ ម៉ឺន ពីរ ពាន់ បី រយ សែសិប ប្រាំ ក្បៀស កៅសិប ប្រាំពិល ប៊ីលាន ដុល្លារ អាមេរិក
+MONEY_MARKUP	money|integer_part:8857|fractional_part:71|quantity:1000000000000|currency:usd|style:1|	ប្រាំបី ពាន់ ប្រាំបី រយ ហាសិប ប្រាំពិល ក្បៀស ចិតសិប មួយ ទ្រីលាន ដុល្លារ អាមេរិក
+MONEY_MARKUP	money|integer_part:6649|fractional_part:72|quantity:10000000|currency:usd|style:1|	ប្រាំមួយ ពាន់ ប្រាំមួយ រយ សែសិប ប្រាំបួន ក្បៀស ចិតសិប ពីរ កោដិ ដុល្លារ អាមេរិក
+
+# Major only
+MONEY_MARKUP	money|integer_part:25|fractional_part:00|currency:lak|style:1|	ម្ភៃ ប្រាំ គីប
+MONEY_MARKUP	money|integer_part:25|fractional_part:00|currency:eur|style:1|	ម្ភៃ ប្រាំ អឺរ៉ូ
+MONEY_MARKUP	money|integer_part:25|fractional_part:00|currency:cny|style:1|	ម្ភៃ ប្រាំ យ៉ន់
+MONEY_MARKUP	money|integer_part:10|fractional_part:0|currency:khr|style:1|	ដប់ រៀល
+MONEY_MARKUP	money|integer_part:17|fractional_part:00|currency:khr|style:1|	ដប់ ប្រាំពិល រៀល
+MONEY_MARKUP	money|integer_part:127|fractional_part:0|currency:khr|style:1|	មួយ រយ ម្ភៃ ប្រាំពិល រៀល
+MONEY_MARKUP	money|integer_part:2016|fractional_part:0|currency:khr|style:1|	ពីរ ពាន់ ដប់ ប្រាំមួយ រៀល
+MONEY_MARKUP	money|integer_part:11121|fractional_part:0|currency:khr|style:1|	មួយ ម៉ឺន មួយ ពាន់ មួយ រយ ម្ភៃ មួយ រៀល
+MONEY_MARKUP	money|integer_part:10|fractional_part:0|currency:usd|style:1|	ដប់ ដុល្លារ អាមេរិក
+MONEY_MARKUP	money|integer_part:17|fractional_part:00|currency:usd|style:1|	ដប់ ប្រាំពិល ដុល្លារ អាមេរិក
+MONEY_MARKUP	money|integer_part:127|fractional_part:0|currency:usd|style:1|	មួយ រយ ម្ភៃ ប្រាំពិល ដុល្លារ អាមេរិក
+MONEY_MARKUP	money|integer_part:2016|fractional_part:0|currency:usd|style:1|	ពីរ ពាន់ ដប់ ប្រាំមួយ ដុល្លារ អាមេរិក
+MONEY_MARKUP	money|integer_part:11121|fractional_part:0|currency:usd|style:1|	មួយ ម៉ឺន មួយ ពាន់ មួយ រយ ម្ភៃ មួយ ដុល្លារ អាមេរិក
+
+# Minor only
+MONEY_MARKUP	money|integer_part:0|fractional_part:16|currency:usd|style:1|	ដប់ ប្រាំមួយ សេន
+MONEY_MARKUP	money|integer_part:0|fractional_part:22|currency:thb|style:1|	ម្ភៃ ពីរ សាតាំង
+MONEY_MARKUP	money|integer_part:0|fractional_part:98|currency:gbp|style:1|	កៅសិប ប្រាំបី ផិននី
+MONEY_MARKUP	money|integer_part:0|fractional_part:00|currency:khr|style:1|	សូន្យ សេន
+MONEY_MARKUP	money|integer_part:0|fractional_part:05|currency:khr|style:1|	ប្រាំ សេន
+MONEY_MARKUP	money|integer_part:0|fractional_part:14|currency:khr|style:1|	ដប់ បួន សេន
+MONEY_MARKUP	money|integer_part:0|fractional_part:91|currency:khr|style:1|	កៅសិប មួយ សេន
+MONEY_MARKUP	money|integer_part:0|fractional_part:55|currency:khr|style:1|	ហាសិប ប្រាំ សេន
+MONEY_MARKUP	money|integer_part:0|fractional_part:00|currency:usd|style:1|	សូន្យ សេន
+MONEY_MARKUP	money|integer_part:0|fractional_part:05|currency:usd|style:1|	ប្រាំ សេន
+MONEY_MARKUP	money|integer_part:0|fractional_part:14|currency:usd|style:1|	ដប់ បួន សេន
+MONEY_MARKUP	money|integer_part:0|fractional_part:91|currency:usd|style:1|	កៅសិប មួយ សេន
+MONEY_MARKUP	money|integer_part:0|fractional_part:55|currency:usd|style:1|	ហាសិប ប្រាំ សេន
+
+# Major and minor
+MONEY_MARKUP	money|integer_part:11|currency:thb|fractional_part:03|currency:thb|style:1|	ដប់ មួយ បាត បី សាតាំង
+MONEY_MARKUP	money|integer_part:237|currency:usd|fractional_part:35|currency:usd|style:1|	ពីរ រយ សាមសិប ប្រាំពិល ដុល្លារ អាមេរិក សាមសិប ប្រាំ សេន
+MONEY_MARKUP	money|integer_part:2008|currency:gbp|fractional_part:99|currency:gbp|style:1|	ពីរ ពាន់ ប្រាំបី ផោន កៅសិប ប្រាំបួន ផិននី
+MONEY_MARKUP	money|integer_part:19|currency:idr|fractional_part:03|currency:idr|style:1|	ដប់ ប្រាំបួន រូពី ឥណ្ឌូនេស៊ី បី សេន
+MONEY_MARKUP	money|integer_part:100|currency:khr|fractional_part:50|currency:khr|style:1|	មួយ រយ រៀល ហាសិប សេន
+MONEY_MARKUP	money|integer_part:100000|currency:khr|fractional_part:65|currency:khr|style:1|	មួយ សែន រៀល ហុកសិប ប្រាំ សេន
+MONEY_MARKUP	money|integer_part:12345|currency:khr|fractional_part:97|currency:khr|style:1|	មួយ ម៉ឺន ពីរ ពាន់ បី រយ សែសិប ប្រាំ រៀល កៅសិប ប្រាំពិល សេន
+MONEY_MARKUP	money|integer_part:8857|currency:khr|fractional_part:71|currency:khr|style:1|	ប្រាំបី ពាន់ ប្រាំបី រយ ហាសិប ប្រាំពិល រៀល ចិតសិប មួយ សេន
+MONEY_MARKUP	money|integer_part:6649|currency:khr|fractional_part:72|currency:khr|style:1|	ប្រាំមួយ ពាន់ ប្រាំមួយ រយ សែសិប ប្រាំបួន រៀល ចិតសិប ពីរ សេន
+MONEY_MARKUP	money|integer_part:100|currency:usd|fractional_part:50|currency:usd|style:1|	មួយ រយ ដុល្លារ អាមេរិក ហាសិប សេន
+MONEY_MARKUP	money|integer_part:100000|currency:usd|fractional_part:65|currency:usd|style:1|	មួយ សែន ដុល្លារ អាមេរិក ហុកសិប ប្រាំ សេន
+MONEY_MARKUP	money|integer_part:12345|currency:usd|fractional_part:97|currency:usd|style:1|	មួយ ម៉ឺន ពីរ ពាន់ បី រយ សែសិប ប្រាំ ដុល្លារ អាមេរិក កៅសិប ប្រាំពិល សេន
+MONEY_MARKUP	money|integer_part:8857|currency:usd|fractional_part:71|currency:usd|style:1|	ប្រាំបី ពាន់ ប្រាំបី រយ ហាសិប ប្រាំពិល ដុល្លារ អាមេរិក ចិតសិប មួយ សេន
+MONEY_MARKUP	money|integer_part:6649|currency:usd|fractional_part:72|currency:usd|style:1|	ប្រាំមួយ ពាន់ ប្រាំមួយ រយ សែសិប ប្រាំបួន ដុល្លារ អាមេរិក ចិតសិប ពីរ សេន

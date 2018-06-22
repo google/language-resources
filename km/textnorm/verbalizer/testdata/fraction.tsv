@@ -1,0 +1,15 @@
+FRACTION_MARKUP	fraction|integer_part:-1|numerator:12|denominator:0|	ដក មួយ sil ដប់ ពីរ លើ សូន្យ
+FRACTION_MARKUP	fraction|integer_part:12|numerator:11000|denominator:324|	ដប់ ពីរ sil មួយ ម៉ឺន មួយ ពាន់ លើ បី រយ ម្ភៃ បួន
+FRACTION_MARKUP	fraction|integer_part:16|numerator:3|denominator:5|	ដប់ ប្រាំមួយ sil បី លើ ប្រាំ
+FRACTION_MARKUP	fraction|integer_part:17|numerator:4|denominator:5|	ដប់ ប្រាំពិល sil បួន លើ ប្រាំ
+FRACTION_MARKUP	fraction|numerator:-1|denominator:2|	ដក មួយ លើ ពីរ
+FRACTION_MARKUP	fraction|numerator:-129|denominator:12|	ដក មួយ រយ ម្ភៃ ប្រាំបួន លើ ដប់ ពីរ
+FRACTION_MARKUP	fraction|numerator:1112|denominator:1|	មួយ ពាន់ មួយ រយ ដប់ ពីរ លើ មួយ
+FRACTION_MARKUP	fraction|numerator:11345|denominator:567234|	មួយ ម៉ឺន មួយ ពាន់ បី រយ សែសិប ប្រាំ លើ ប្រាំ សែន ប្រាំមួយ ម៉ឺន ប្រាំពិល ពាន់ ពីរ រយ សាមសិប បួន
+FRACTION_MARKUP	fraction|numerator:12|denominator:1|	ដប់ ពីរ លើ មួយ
+FRACTION_MARKUP	fraction|numerator:121|denominator:1|	មួយ រយ ម្ភៃ មួយ លើ មួយ
+FRACTION_MARKUP	fraction|numerator:121|denominator:543|	មួយ រយ ម្ភៃ មួយ លើ ប្រាំ រយ សែសិប បី
+FRACTION_MARKUP	fraction|numerator:12111000|denominator:130100|	ដប់ ពីរ លាន មួយ សែន មួយ ម៉ឺន មួយ ពាន់ លើ មួយ សែន បី ម៉ឺន មួយ រយ
+FRACTION_MARKUP	fraction|numerator:3200|denominator:2000|	បី ពាន់ ពីរ រយ លើ ពីរ ពាន់
+FRACTION_MARKUP	fraction|numerator:4|denominator:5|	បួន លើ ប្រាំ
+FRACTION_MARKUP	fraction|numerator:4567|denominator:1234|	បួន ពាន់ ប្រាំ រយ ហុកសិប ប្រាំពិល លើ មួយ ពាន់ ពីរ រយ សាមសិប បួន

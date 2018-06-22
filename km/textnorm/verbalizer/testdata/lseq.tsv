@@ -1,0 +1,25 @@
+LSEQ_MARKUP	letters|letters:សហន|	ស_letter ហ_letter ន_letter
+LSEQ_MARKUP	letters|letters:សអសក|	ស_letter អ_letter ស_letter ក_letter
+LSEQ_MARKUP	letters|letters:ហឋ|	ហ_letter ឋ_letter
+LSEQ_MARKUP	letters|letters:ហវ|	ហ_letter វ_letter
+LSEQ_MARKUP	letters|letters:ហស|	ហ_letter ស_letter
+LSEQ_MARKUP	letters|letters:ហសន|	ហ_letter ស_letter ន_letter
+LSEQ_MARKUP	letters|letters:អកត|	អ_letter ក_letter ត_letter
+LSEQ_MARKUP	letters|letters:អខយគម|	អ_letter ខ_letter យ_letter គ_letter ម_letter
+LSEQ_MARKUP	letters|letters:អគ|	អ_letter គ_letter
+LSEQ_MARKUP	letters|letters:អគអ|	អ_letter គ_letter អ_letter
+LSEQ_MARKUP	letters|letters:អឃ|	អ_letter ឃ_letter
+LSEQ_MARKUP	letters|letters:អនក្រ|	អ_letter ន_letter ក្រ
+LSEQ_MARKUP	letters|letters:អនក្របក|	អ_letter ន_letter ក្រ ប_letter ក_letter
+LSEQ_MARKUP	letters|letters:អពក|	អ_letter ព_letter ក_letter
+LSEQ_MARKUP	letters|letters:អវ|	អ_letter វ_letter
+LSEQ_MARKUP	letters|letters:អសប|	អ_letter ស_letter ប_letter
+LSEQ_MARKUP	letters|letters:អសហ|	អ_letter ស_letter ហ_letter
+LSEQ_MARKUP	letters|letters:A.B.C.|	a_letter-en b_letter-en c_letter-en
+LSEQ_MARKUP	letters|letters:U.S.A.|	u_letter-en s_letter-en a_letter-en
+LSEQ_MARKUP	letters|letters:I.B.M.|	i_letter-en b_letter-en m_letter-en
+LSEQ_MARKUP	letters|letters:U.V.|	u_letter-en v_letter-en
+LSEQ_MARKUP	letters|letters:ក្ល.ម.|	ក្ល ម_letter
+LSEQ_MARKUP	letters|letters:ច្រ.ប្រ.|	ច្រ ប្រ
+LSEQ_MARKUP	letters|letters:ត.ទ.ស្រ.|	ត_letter ទ_letter ស្រ
+LSEQ_MARKUP	letters|letters:ង្វ្រ.ស្ក្រ.|	ង្វ្រ ស្ក្រ

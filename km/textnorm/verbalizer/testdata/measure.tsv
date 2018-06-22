@@ -1,0 +1,183 @@
+# Failing on purpose. These units are prefixes, which are not valid units.
+MEASURE_MARKUP	measure|integer_part:1|units:មីលី|
+MEASURE_MARKUP	measure|integer_part:11|units:មីលី|
+MEASURE_MARKUP	measure|integer_part:34|units:ណាណូ|
+MEASURE_MARKUP	measure|integer_part:17|units:ម៉ៃក្រូ|
+MEASURE_MARKUP	measure|integer_part:7|units:មីល្លី|
+
+# English measure tests
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:meter|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ម៉ែត្រ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:second|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ វិនាទី
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ampere|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អំពែរ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:kelvin|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ កែលវិន
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:candela|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ កង់ដេឡា
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:mole|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ម៉ូល
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:hertz|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អ៊ែក្ស
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:radian|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ រ៉ាដ្យង់
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:steradian|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ស្តេរ៉ាដ្យង់
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:newton|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ញ៉ូតុន
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:pascal|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ប៉ាស្កាល់
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:joule|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ស៊ូល
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:watt|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ វ៉ាត់
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:coulomb|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ គូឡុំ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:volt|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ វ៉ុល
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:farad|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ហ្វារ៉ាដ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ohm|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អូម
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:tesla|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ តែស្លា
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:henry|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ហង់រី
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:degree celsius|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អង្សាសេ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:minute|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ នាទី
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:hour|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ម៉ោង
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:day|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ថ្ងៃ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:week|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ សប្ដាហ៍
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:month|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ខែ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:year|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ឆ្នាំ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:century|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ សតវត្សរ៍
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:millennium|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ សហសវត្សរ៍
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:inch|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អ៊ីញ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:foot|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ហ្វ៊ូត
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:yard|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ យ៉ាត
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:mile|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ម៉ាយល៍
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:gallon|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ហ្គាឡុង
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ounce|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អោនស៍
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:pound|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ផោន
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:stone|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ស្តូន
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ton|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ តោន
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:degree|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ដឺក្រេ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:hectare|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ហិកតារ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:liter|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ លីត្រ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:gram|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ក្រាម
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:calories|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ កាឡូរី
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:kilocalorie|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ គីឡូ កាឡូរី
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:decibel|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ដេស៊ី ប៊ែល
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:electron volt|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អេឡិចត្រុង វ៉ុល
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:knot|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ណត់
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:horsepower|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ សេស
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:degree fahrenheit|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អង្សា ហ្វារ៉ិនហៃ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:tablespoon|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ស្លាបព្រា
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:teaspoon|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ស្លាបព្រាកាហ្វេ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:bit|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ប៊ីត
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:byte|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ បៃ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:astronomical unit|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ខ្នាត តារាសាស្ត្រ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:light year|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ឆ្នាំពន្លឺ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:barrel|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ បារ៉ែល
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:pixel|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ភិកស៊ែល
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:percent|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ភាគរយ
+
+# English prefix tests
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:petameter|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ពែតា ម៉ែត្រ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:terameter|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ តេរ៉ា ម៉ែត្រ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:gigameter|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ជីហ្គា ម៉ែត្រ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:megameter|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ មេហ្គា ម៉ែត្រ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:kilometer|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ គីឡូ ម៉ែត្រ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:hectometer|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ហិកតូ ម៉ែត្រ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:decameter|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ដេកា ម៉ែត្រ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:decisecond|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ដេស៊ី វិនាទី
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:centisecond|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ សង់ទី វិនាទី
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:millisecond|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ មីល្លី វិនាទី
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:microsecond|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ម៉ៃក្រូ វិនាទី
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:nanosecond|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ណាណូ វិនាទី
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:picosecond|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ពីកូ វិនាទី
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:attosecond|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អាតូ វិនាទី
+
+# English ratio tests
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:light year per microsecond|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ឆ្នាំពន្លឺ ក្នុង មួយ ម៉ៃក្រូ វិនាទី
+
+# English power tests
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:light year per cubic petameter|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ឆ្នាំពន្លឺ ក្នុង មួយ ពែតា ម៉ែត្រ គូប
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:light year per square petameter|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ឆ្នាំពន្លឺ ក្នុង មួយ ពែតា ម៉ែត្រ ការេ
+
+# Khmer measure tests
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ម៉ែត្រ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ម៉ែត្រ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:វិនាទី|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ វិនាទី
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:អំពែរ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អំពែរ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:កែលវិន|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ កែលវិន
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:កង់ដេឡា|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ កង់ដេឡា
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ម៉ូល|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ម៉ូល
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:អ៊ែក្ស|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អ៊ែក្ស
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:រ៉ាដ្យង់|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ រ៉ាដ្យង់
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ស្តេរ៉ាដ្យង់|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ស្តេរ៉ាដ្យង់
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ញ៉ូតុន|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ញ៉ូតុន
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ប៉ាស្កាល់|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ប៉ាស្កាល់
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ស៊ូល|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ស៊ូល
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:វ៉ាត់|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ វ៉ាត់
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:គូឡុំ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ គូឡុំ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:វ៉ុល|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ វ៉ុល
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ហ្វារ៉ាដ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ហ្វារ៉ាដ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:អូម|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អូម
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:តែស្លា|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ តែស្លា
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ហង់រី|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ហង់រី
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:អង្សាសេ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អង្សាសេ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:នាទី|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ នាទី
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ម៉ោង|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ម៉ោង
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ថ្ងៃ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ថ្ងៃ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:សប្ដាហ៍|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ សប្ដាហ៍
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ខែ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ខែ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ឆ្នាំ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ឆ្នាំ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:សតវត្សរ៍|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ សតវត្សរ៍
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:សហសវត្សរ៍|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ សហសវត្សរ៍
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:អ៊ីញ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អ៊ីញ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ហ្វ៊ូត|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ហ្វ៊ូត
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:យ៉ាត|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ យ៉ាត
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ម៉ាយល៍|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ម៉ាយល៍
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ហ្គាឡុង|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ហ្គាឡុង
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:អោនស៍|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អោនស៍
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ផោន|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ផោន
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ស្តូន|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ស្តូន
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:តោន|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ តោន
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ដឺក្រេ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ដឺក្រេ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ហិកតារ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ហិកតារ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:លីត្រ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ លីត្រ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ក្រាម|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ក្រាម
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:កាឡូរី|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ កាឡូរី
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ដេស៊ី ប៊ែល|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ដេស៊ី ប៊ែល
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:អេឡិចត្រុង វ៉ុល|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អេឡិចត្រុង វ៉ុល
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ណត់|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ណត់
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:សេស|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ សេស
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:អង្សា ហ្វារ៉ិនហៃ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អង្សា ហ្វារ៉ិនហៃ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ស្លាបព្រា|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ស្លាបព្រា
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ស្លាបព្រាកាហ្វេ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ស្លាបព្រាកាហ្វេ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ប៊ីត|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ប៊ីត
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:បៃ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ បៃ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ខ្នាត តារាសាស្ត្រ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ខ្នាត តារាសាស្ត្រ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ឆ្នាំពន្លឺ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ឆ្នាំពន្លឺ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:បារ៉ែល|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ បារ៉ែល
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ភិកស៊ែល|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ភិកស៊ែល
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ភាគរយ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ភាគរយ
+
+# Khmer prefix tests
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ពែតា ឆ្នាំ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ពែតា ឆ្នាំ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:តេរ៉ា ឆ្នាំ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ តេរ៉ា ឆ្នាំ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ជីហ្គា ឆ្នាំ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ជីហ្គា ឆ្នាំ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:មេហ្គា ឆ្នាំ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ មេហ្គា ឆ្នាំ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:គីឡូ ឆ្នាំ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ គីឡូ ឆ្នាំ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ហិកតូ ឆ្នាំ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ហិកតូ ឆ្នាំ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ដេកា ឆ្នាំ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ដេកា ឆ្នាំ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ដេស៊ី សតវត្សរ៍|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ដេស៊ី សតវត្សរ៍
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:សង់ទី សតវត្សរ៍|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ សង់ទី សតវត្សរ៍
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:មីល្លី សតវត្សរ៍|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ មីល្លី សតវត្សរ៍
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ម៉ៃក្រូ សតវត្សរ៍|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ម៉ៃក្រូ សតវត្សរ៍
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ណាណូ សតវត្សរ៍|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ណាណូ សតវត្សរ៍
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ពីកូ សតវត្សរ៍|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ពីកូ សតវត្សរ៍
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:អាតូ សតវត្សរ៍|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អាតូ សតវត្សរ៍
+
+# Khmer ratio unit tests
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ពែតា ឆ្នាំ ក្នុង មួយ ម៉ែត្រ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ពែតា ឆ្នាំ ក្នុង មួយ ម៉ែត្រ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:តេរ៉ា ឆ្នាំ ក្នុង មួយ ជីហ្គា ម៉ែត្រ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ តេរ៉ា ឆ្នាំ ក្នុង មួយ ជីហ្គា ម៉ែត្រ
+
+# Khmer power unit tests
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ពីកូ សតវត្សរ៍ ក្នុង មួយ ម៉ែត្រ ការេ|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ ពីកូ សតវត្សរ៍ ក្នុង មួយ ម៉ែត្រ ការេ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:អាតូ សតវត្សរ៍ ក្នុង មួយ ម៉ែត្រ គូប|	ម្ភៃ ក្បៀស ដប់ ប្រាំមួយ អាតូ សតវត្សរ៍ ក្នុង មួយ ម៉ែត្រ គូប
+
+STYLE_UNIT_ONLY	units:គីឡូក្រាម|	គីឡូ ក្រាម
+MEASURE_UNIT_ONLY	measure|units:គីឡូក្រាម|	គីឡូ ក្រាម
+MEASURE_MARKUP	measure|integer_part:90|units:គីឡូក្រាម|	កៅសិប គីឡូ ក្រាម
+MEASURE_MARKUP	measure|integer_part:32|units:គីឡូ កាឡូរី|	សាមសិប ពីរ គីឡូ កាឡូរី
+MEASURE_MARKUP	measure|integer_part:98|fractional_part:33|units:អង្សា ហ្វារ៉ិនហៃ|	កៅសិប ប្រាំបី ក្បៀស សាមសិប បី អង្សា ហ្វារ៉ិនហៃ
+MEASURE_MARKUP	measure|integer_part:87|fractional_part:12|units:លីត្រ|	ប៉ែតសិប ប្រាំពិល ក្បៀស ដប់ ពីរ លីត្រ
+MEASURE_MARKUP	measure|integer_part:9|fractional_part:8|units:គីឡូក្រាម|	ប្រាំបួន ក្បៀស ប្រាំបី គីឡូ ក្រាម
+MEASURE_MARKUP	measure|integer_part:3|units:គីឡូម៉ែត្រ ក្នុង មួយ ម៉ោង|	បី គីឡូ ម៉ែត្រ ក្នុង មួយ ម៉ោង
+MEASURE_MARKUP	measure|integer_part:17|units:គីឡូម៉ែត្រ ក្នុង មួយ ម៉ោង|	ដប់ ប្រាំពិល គីឡូ ម៉ែត្រ ក្នុង មួយ ម៉ោង
+MEASURE_MARKUP	measure|integer_part:50|units:គីឡូម៉ែត្រ ក្នុង មួយ ម៉ោង|	ហាសិប គីឡូ ម៉ែត្រ ក្នុង មួយ ម៉ោង
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:49|units:គីឡូម៉ែត្រ ក្នុង មួយ ម៉ោង|	ម្ភៃ ក្បៀស សែសិប ប្រាំបួន គីឡូ ម៉ែត្រ ក្នុង មួយ ម៉ោង
+MEASURE_MARKUP	measure|integer_part:20|units:ក្នុង មួយ ឆ្នាំ|	ម្ភៃ ក្នុង មួយ ឆ្នាំ

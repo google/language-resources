@@ -1,0 +1,28 @@
+VERBATIM_MARKUP	verbatim|verbatim:Θ|	តែតតា
+VERBATIM_MARKUP	verbatim|verbatim:"|	អញ្ញប្រកាស
+VERBATIM_MARKUP	verbatim|verbatim:#|	ទ្រុងជ្រូក
+VERBATIM_MARKUP	verbatim|verbatim:$|	ដុល្លារ
+VERBATIM_MARKUP	verbatim|verbatim:€|	អឺរ៉ូ
+VERBATIM_MARKUP	verbatim|verbatim:£|	ផោន
+VERBATIM_MARKUP	verbatim|verbatim:%|	ភាគរយ
+VERBATIM_MARKUP	verbatim|verbatim:&|	និង
+VERBATIM_MARKUP	verbatim|verbatim:'|	អព្ភន្តរសញ្ញា
+VERBATIM_MARKUP	verbatim|verbatim:(|	បើកវង់ក្រចក
+VERBATIM_MARKUP	verbatim|verbatim:)|	បិទវង់ក្រចក
+VERBATIM_MARKUP	verbatim|verbatim:*|	ផ្កាយ
+VERBATIM_MARKUP	verbatim|verbatim:+|	បូក
+VERBATIM_MARKUP	verbatim|verbatim:,|	ក្បៀស
+VERBATIM_MARKUP	verbatim|verbatim:-|	ត្រេ
+VERBATIM_MARKUP	verbatim|verbatim:.|	ចុច
+VERBATIM_MARKUP	verbatim|verbatim:/|	ស្លាស
+VERBATIM_MARKUP	verbatim|verbatim::|	ចុចពីរ
+VERBATIM_MARKUP	verbatim|verbatim:×|	គុណ នឹង
+VERBATIM_MARKUP	verbatim|verbatim:.23.01|	ចុច ពីរ បី ចុច សូន្យ មួយ
+VERBATIM_MARKUP	verbatim|verbatim:.00000.0001|	ចុច សូន្យ សូន្យ សូន្យ សូន្យ សូន្យ ចុច សូន្យ សូន្យ សូន្យ មួយ
+VERBATIM_MARKUP	verbatim|verbatim:.10.14|	ចុច មួយ សូន្យ ចុច មួយ បួន
+VERBATIM_MARKUP	verbatim|verbatim:ΚΙΝγ|	កាបប៉ា អាយអូតា នុយ ហ្គាម៉ា
+VERBATIM_MARKUP	verbatim|verbatim:RX-78#2=99.95%|	r_letter-en x_letter-en ត្រេ ប្រាំពិល ប្រាំបី ទ្រុងជ្រូក ពីរ ស្មើ ប្រាំបួន ប្រាំបួន ចុច ប្រាំបួន ប្រាំ ភាគរយ
+VERBATIM_MARKUP	verbatim|verbatim:ΣF=ΜΑ|	ស៊ិចម៉ា f_letter-en ស្មើ មុយ អាល់ហ្វា
+VERBATIM_MARKUP	verbatim|verbatim:!!!♯!|	សញ្ញាឧទាន សញ្ញាឧទាន សញ្ញាឧទាន សាប សញ្ញាឧទាន
+VERBATIM_MARKUP	verbatim|verbatim:π=3.14=ρΙ|	ផាយ ស្មើ បី ចុច មួយ បួន ស្មើ រ៉ូ អាយអូតា
+VERBATIM_MARKUP	verbatim|verbatim:ΔX/ΔY±5!=0|	ដែលតា x_letter-en ស្លាស ដែលតា y_letter-en បូក ឬ ដក ប្រាំ សញ្ញាឧទាន ស្មើ សូន្យ

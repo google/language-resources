@@ -1,0 +1,15 @@
+ELECTRONIC_MARKUP	electronic|username:abc123_9x8@|domain:gmail.com|	a_letter-en b_letter-en c_letter-en មួយ ពីរ បី អាន់ឌើស្ករ ប្រាំបួន x_letter-en ប្រាំបី អ៊ែត gmail ដត់ com
+ELECTRONIC_MARKUP	electronic|username:abcde@|domain:hotmail.com|	a_letter-en b_letter-en c_letter-en d_letter-en e_letter-en អ៊ែត hotmail ដត់ com
+ELECTRONIC_MARKUP	electronic|username:smart_person@|domain:yahoo.com|	s_letter-en m_letter-en a_letter-en r_letter-en t_letter-en អាន់ឌើស្ករ p_letter-en e_letter-en r_letter-en s_letter-en o_letter-en n_letter-en អ៊ែត yahoo ដត់ com
+ELECTRONIC_MARKUP	electronic|username:test@|domain:google.com|	t_letter-en e_letter-en s_letter-en t_letter-en អ៊ែត google ដត់ com
+ELECTRONIC_MARKUP	electronic|domain:www.test123.com|	ដាប់ប៊លយូ ដាប់ប៊លយូ ដាប់ប៊លយូ ដត់ t_letter-en e_letter-en s_letter-en t_letter-en មួយ ពីរ បី ដត់ com
+ELECTRONIC_MARKUP	electronic|domain:www.google.com|	ដាប់ប៊លយូ ដាប់ប៊លយូ ដាប់ប៊លយូ ដត់ google ដត់ com
+ELECTRONIC_MARKUP	electronic|protocol:https|domain:www.facebook.com|	h_letter-en t_letter-en t_letter-en p_letter-en s_letter-en ចុច ពីរ បន្ទាត់ ទ្រេត ពីរ ដាប់ប៊លយូ ដាប់ប៊លយូ ដាប់ប៊លយូ ដត់ facebook ដត់ com
+ELECTRONIC_MARKUP	electronic|protocol:http|domain:www.facebook.com|	h_letter-en t_letter-en t_letter-en p_letter-en ចុច ពីរ បន្ទាត់ ទ្រេត ពីរ ដាប់ប៊លយូ ដាប់ប៊លយូ ដាប់ប៊លយូ ដត់ facebook ដត់ com
+ELECTRONIC_MARKUP	electronic|domain:www.sanook.com|	ដាប់ប៊លយូ ដាប់ប៊លយូ ដាប់ប៊លយូ ដត់ s_letter-en a_letter-en n_letter-en o_letter-en o_letter-en k_letter-en ដត់ com
+ELECTRONIC_MARKUP	electronic|domain:lazada.co.th|	l_letter-en a_letter-en z_letter-en a_letter-en d_letter-en a_letter-en ដត់ c_letter-en o_letter-en ចុច t_letter-en h_letter-en
+ELECTRONIC_MARKUP	electronic|domain:hotmail.com|	hotmail ដត់ com
+ELECTRONIC_MARKUP	electronic|domain:yahoo.co.th|	yahoo ដត់ c_letter-en o_letter-en ចុច t_letter-en h_letter-en
+ELECTRONIC_MARKUP	electronic|domain:www.test.com|port:80|	ដាប់ប៊លយូ ដាប់ប៊លយូ ដាប់ប៊លយូ ដត់ t_letter-en e_letter-en s_letter-en t_letter-en ដត់ com ចុចពីរ ប្រាំបី សូន្យ
+ELECTRONIC_MARKUP	electronic|domain:www.google.com|port:4567|	ដាប់ប៊លយូ ដាប់ប៊លយូ ដាប់ប៊លយូ ដត់ google ដត់ com ចុចពីរ បួន ប្រាំ ប្រាំមួយ ប្រាំពិល
+ELECTRONIC_MARKUP	electronic|domain:www.postkhmer.co.kh|port:22|	ដាប់ប៊លយូ ដាប់ប៊លយូ ដាប់ប៊លយូ ដត់ postkhmer ដត់ c_letter-en o_letter-en ដត់ k_letter-en h_letter-en ចុចពីរ ពីរ ពីរ

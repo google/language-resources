@@ -1,0 +1,40 @@
+DECIMAL_MARKUP	decimal|negative:1|integer_part:4|fractional_part:5|	ដក បួន ក្បៀស ប្រាំ
+DECIMAL_MARKUP	decimal|negative:0|integer_part:4|fractional_part:5|	បួន ក្បៀស ប្រាំ
+DECIMAL_MARKUP	decimal|integer_part:4|fractional_part:5|	បួន ក្បៀស ប្រាំ
+DECIMAL_MARKUP	decimal|integer_part:0|fractional_part:5|	សូន្យ ក្បៀស ប្រាំ
+DECIMAL_MARKUP	decimal|integer_part:0|fractional_part:005|	សូន្យ ក្បៀស សូន្យ សូន្យ ប្រាំ
+DECIMAL_MARKUP	decimal|integer_part:0|fractional_part:00025|	សូន្យ ក្បៀស សូន្យ សូន្យ សូន្យ ម្ភៃ ប្រាំ
+DECIMAL_MARKUP	decimal|integer_part:0|fractional_part:00125|	សូន្យ ក្បៀស សូន្យ សូន្យ មួយ រយ ម្ភៃ ប្រាំ
+DECIMAL_MARKUP	decimal|integer_part:5|	ប្រាំ
+DECIMAL_MARKUP	decimal|negative:1|integer_part:127|	ដក មួយ រយ ម្ភៃ ប្រាំពិល
+DECIMAL_MARKUP	decimal|integer_part:2015|	ពីរ ពាន់ ដប់ ប្រាំ
+DECIMAL_MARKUP	decimal|integer_part:12719|fractional_part:1270|	មួយ ម៉ឺន ពីរ ពាន់ ប្រាំពិល រយ ដប់ ប្រាំបួន ក្បៀស មួយ ពាន់ ពីរ រយ ចិតសិប
+DECIMAL_MARKUP	decimal|integer_part:36|fractional_part:01|	សាមសិប ប្រាំមួយ ក្បៀស សូន្យ មួយ
+DECIMAL_MARKUP	decimal|integer_part:117|fractional_part:012|	មួយ រយ ដប់ ប្រាំពិល ក្បៀស សូន្យ ដប់ ពីរ
+DECIMAL_MARKUP	decimal|integer_part:1181|fractional_part:0112|	មួយ ពាន់ មួយ រយ ប៉ែតសិប មួយ ក្បៀស សូន្យ មួយ រយ ដប់ ពីរ
+DECIMAL_MARKUP	decimal|integer_part:2|fractional_part:99|exponent:8|	ពីរ ក្បៀស កៅសិប ប្រាំបួន គុណ នឹង ដប់ ស្វ័យគុណ ប្រាំបី
+DECIMAL_MARKUP	decimal|integer_part:314159|fractional_part:26|exponent:-5|	បី សែន មួយ ម៉ឺន បួន ពាន់ មួយ រយ ហាសិប ប្រាំបួន ក្បៀស ម្ភៃ ប្រាំមួយ គុណ នឹង ដប់ ស្វ័យគុណ ដក ប្រាំ
+
+
+
+
+DECIMAL	negative:1|integer_part:4|fractional_part:5|	ដក បួន ក្បៀស ប្រាំ
+DECIMAL	negative:0|integer_part:4|fractional_part:5|	បួន ក្បៀស ប្រាំ
+DECIMAL	integer_part:4|fractional_part:5|	បួន ក្បៀស ប្រាំ
+DECIMAL	integer_part:0|fractional_part:5|	សូន្យ ក្បៀស ប្រាំ
+DECIMAL	integer_part:0|fractional_part:005|	សូន្យ ក្បៀស សូន្យ សូន្យ ប្រាំ
+DECIMAL	integer_part:0|fractional_part:00025|	សូន្យ ក្បៀស សូន្យ សូន្យ សូន្យ ម្ភៃ ប្រាំ
+DECIMAL	integer_part:0|fractional_part:00125|	សូន្យ ក្បៀស សូន្យ សូន្យ មួយ រយ ម្ភៃ ប្រាំ
+DECIMAL	integer_part:5|	ប្រាំ
+DECIMAL	negative:1|integer_part:127|	ដក មួយ រយ ម្ភៃ ប្រាំពិល
+DECIMAL	integer_part:2015|	ពីរ ពាន់ ដប់ ប្រាំ
+DECIMAL	integer_part:12719|fractional_part:1270|	មួយ ម៉ឺន ពីរ ពាន់ ប្រាំពិល រយ ដប់ ប្រាំបួន ក្បៀស មួយ ពាន់ ពីរ រយ ចិតសិប
+DECIMAL	integer_part:36|fractional_part:01|	សាមសិប ប្រាំមួយ ក្បៀស សូន្យ មួយ
+DECIMAL	integer_part:117|fractional_part:012|	មួយ រយ ដប់ ប្រាំពិល ក្បៀស សូន្យ ដប់ ពីរ
+DECIMAL	integer_part:1181|fractional_part:0112|	មួយ ពាន់ មួយ រយ ប៉ែតសិប មួយ ក្បៀស សូន្យ មួយ រយ ដប់ ពីរ
+DECIMAL	integer_part:2|fractional_part:99|exponent:8|	ពីរ ក្បៀស កៅសិប ប្រាំបួន គុណ នឹង ដប់ ស្វ័យគុណ ប្រាំបី
+DECIMAL	integer_part:314159|fractional_part:26|exponent:-5|	បី សែន មួយ ម៉ឺន បួន ពាន់ មួយ រយ ហាសិប ប្រាំបួន ក្បៀស ម្ភៃ ប្រាំមួយ គុណ នឹង ដប់ ស្វ័យគុណ ដក ប្រាំ
+
+
+DECIMAL	negative:1|integer_part:127|	ដក មួយ រយ ម្ភៃ ប្រាំពិល
+DECIMAL	integer_part:4|fractional_part:5|	បួន ក្បៀស ប្រាំ

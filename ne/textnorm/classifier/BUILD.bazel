@@ -19,6 +19,10 @@ load("//:thrax.bzl", "grm_regression_test")
 
 base_path = "ne/textnorm/classifier/"
 
+exports_files([
+    "devanagari.grm",
+])
+
 thrax_compile_grm(
     name = "universal_rules",
     deps = ["universal_depot.far"],

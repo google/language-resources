@@ -1,10 +1,10 @@
-# Copyright 2016 Google, Inc.
+# Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#    https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,6 +29,7 @@ base_path = "si/textnorm/classifier/"
     )
     for test_rules in [
         "address",
+        "cardinal",
         "connector",
         "date",
         "measure",
@@ -66,22 +67,16 @@ universal_deps = [
         deps = universal_deps,
     )
     for rule_name in [
-        "address",
+        "cardinal",
         "date",
+        "measure",
         "money",
         "ordinal",
-        "time",
         "sinhala",
+        "time",
+        "address",
     ]
 ]
-
-thrax_compile_grm(
-    name = "measure",
-    deps = [
-        "money.far",
-        "money.grm",
-    ] + universal_deps,
-)
 
 thrax_compile_grm(
     name = "roman_numeral",
@@ -94,61 +89,67 @@ thrax_compile_grm(
 thrax_compile_grm(
     name = "connector",
     deps = [
-        "date.far",
         "date.grm",
-        "measure.far",
+        "date.far",
         "measure.grm",
-        "money.far",
+        "measure.far",
         "money.grm",
-        "time.far",
+        "money.far",
         "time.grm",
+        "time.far",
     ] + universal_deps,
 )
 
 thrax_compile_grm(
     name = "classify",
     deps = [
-        "address.far",
         "address.grm",
-        "connector.far",
+        "address.far",
+        "cardinal.grm",
+        "cardinal.far",
         "connector.grm",
-        "date.far",
+        "connector.far",
         "date.grm",
-        "measure.far",
+        "date.far",
         "measure.grm",
-        "money.far",
+        "measure.far",
         "money.grm",
-        "ordinal.far",
+        "money.far",
         "ordinal.grm",
-        "roman_numeral.far",
+        "ordinal.far",
         "roman_numeral.grm",
-        "time.far",
+        "roman_numeral.far",
+        "sinhala.grm",
+        "sinhala.far",
         "time.grm",
+        "time.far",
     ] + universal_deps,
 )
 
 thrax_compile_grm(
     name = "tokenize_and_classify",
     deps = [
-        "address.far",
         "address.grm",
-        "classify.far",
+        "address.far",
+        "cardinal.grm",
+        "cardinal.far",
         "classify.grm",
-        "connector.far",
+        "classify.far",
         "connector.grm",
-        "date.far",
+        "connector.far",
         "date.grm",
-        "measure.far",
+        "date.far",
         "measure.grm",
-        "money.far",
+        "measure.far",
         "money.grm",
-        "ordinal.far",
+        "money.far",
         "ordinal.grm",
-        "roman_numeral.far",
+        "ordinal.far",
         "roman_numeral.grm",
-        "sinhala.far",
+        "roman_numeral.far",
         "sinhala.grm",
-        "time.far",
+        "sinhala.far",
         "time.grm",
+        "time.far",
     ] + universal_deps,
 )

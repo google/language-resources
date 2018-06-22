@@ -1,19 +1,18 @@
+# Copyright 2018 Google LLC
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#    https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# Copyright 2016 and onwards, Google, Inc.
 
-# Repository of universal rules needed (mostly) by the classifiers for various
-# NEMO languages.
+# Repository of universal rules needed by various grammars.
 
 
 far =
@@ -169,6 +168,8 @@ export letters = LoadFstFromFar[far, 'letters'];
 export abbreviation = LoadFstFromFar[far, 'abbreviation'];
 export abbreviation_text = LoadFstFromFar[far, 'abbreviation_text'];
 export money = LoadFstFromFar[far, 'money'];
+export ISO4217_CODES_ALL = LoadFstFromFar[far, 'ISO4217_CODES_ALL'];
+export ISO4217_CODE_DM = LoadFstFromFar[far, 'ISO4217_CODE_DM'];
 export money_currency = LoadFstFromFar[far, 'money_currency'];
 export money_amount = LoadFstFromFar[far, 'money_amount'];
 export money_quantity = LoadFstFromFar[far, 'money_quantity'];
@@ -353,6 +354,7 @@ export PERS = LoadFstFromFar[far, 'PERS'];
 export TWENTYFOUR_H = LoadFstFromFar[far, 'TWENTYFOUR_H'];
 export ALL_UNITS = LoadFstFromFar[far, 'ALL_UNITS'];
 export MEASURE = LoadFstFromFar[far, 'MEASURE'];
+export MEASURE_DOT_MARKUP = LoadFstFromFar[far, 'MEASURE_DOT_MARKUP'];
 export MEASURE_DOT_MAX = LoadFstFromFar[far, 'MEASURE_DOT_MAX'];
 export MEASURE_MARKUP = LoadFstFromFar[far, 'MEASURE_MARKUP'];
 export MEASURE_DOT_MAX_MARKUP = LoadFstFromFar[far, 'MEASURE_DOT_MAX_MARKUP'];
@@ -430,5 +432,6 @@ export VALID_BYTES_RFC3629 = LoadFstFromFar[far, 'VALID_BYTES_RFC3629'];
 export LETTER_MAPPINGS = LoadFstFromFar[far, 'LETTER_MAPPINGS'];
 export VERSION_NUMBERS = LoadFstFromFar[far, 'VERSION_NUMBERS'];
 export VERBATIM_FORMULA = LoadFstFromFar[far, 'VERBATIM_FORMULA'];
+export WEAK_VERBATIM_MARKUP = LoadFstFromFar[far, 'WEAK_VERBATIM_MARKUP'];
 export SPOKEN_PUNCT_MARKUP = LoadFstFromFar[far, 'SPOKEN_PUNCT_MARKUP'];
 export EMOTICONS_MARKUP = LoadFstFromFar[far, 'EMOTICONS_MARKUP'];

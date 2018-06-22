@@ -1,19 +1,18 @@
+# Copyright 2018 Google LLC
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#    https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# Copyright 2016 and onwards, Google, Inc.
 
-# Repository of universal functions needed (mostly) by the classifiers for
-# various NEMO languages.
+# Repository of universal functions needed by various grammars.
 
 import 'universal_rules.grm' as u;
 
@@ -21,6 +20,15 @@ import 'universal_rules.grm' as u;
 # with varying number of spaces.
 func InvertMarkup[markup] {
   return Optimize[Invert[markup] @ u.CLEAN_SPACES];
+}
+
+# Useful insertion and deletion functions
+func I[expr] {
+  return "" : expr;
+}
+
+func D[expr] {
+  return expr : "";
 }
 
 # Utility function to mark up units.
@@ -36,6 +44,18 @@ func UnitMarkup[units] {
          ];
 }
 
+# A WordToken transducer that accepts either a general legal word definition
+# (from legal_word) or specific lexical entries. Occasionally lexicons contain
+# words that would normally be split because they contain some characters that
+# do not fit legal_word definition, for example, ("P!nk", "ke$ha", etc). These
+# can be passed in lex_entries to be accepted as exceptions.
+func WordTokenWithLexEntries[legal_word, verbatim_letters, lex_entries] {
+  caseless_lex_entries = u.lower_case_anything @ lex_entries;
+  lex_words = QuotedMarkup[InvertMarkup[u.token_name], caseless_lex_entries];
+  lex_tokens = TokenMarkup[lex_words, ""]<1000>;
+  return Optimize[WordToken[legal_word, verbatim_letters] | lex_tokens];
+}
+
 # Utility function to add markup around an already marked up
 # number and not marked up unit.
 func MeasureMarkup[number, units] {
@@ -49,6 +69,18 @@ func MeasureMarkup[number, units] {
            UnitMarkup[units]
            InvertMarkup[u.closing_brace]
          ];
+}
+
+func PhoneNumberMarkup[number] {
+  return Optimize[
+    InvertMarkup[u.telephone]
+    u.ins_space
+    InvertMarkup[u.opening_brace]
+    u.ins_space
+    number
+    u.ins_space
+    InvertMarkup[u.closing_brace]
+  ];
 }
 
 func connectorMarkup[connector]{
@@ -69,6 +101,19 @@ func connectorMarkup[connector]{
    InvertMarkup[u.closing_brace]
    u.ins_space
    u.token_delimiter);
+}
+
+# special case for inches where we don't want to turn "1 in 10" into
+# "one inches ten", so we only recognize it if there's no space.
+func UnitsInches[number]{
+  return Optimize[
+           InvertMarkup[u.measure]
+           u.ins_space
+           InvertMarkup[u.opening_brace]
+           number
+           UnitMarkup["in" : "inch"]
+           InvertMarkup[u.closing_brace]
+         ];
 }
 
 func basic_connector[connector, context]{
@@ -255,4 +300,19 @@ func APPLY_MONEY_MARKUP[money]{
     money
     InvertMarkup[u.closing_brace]
   ];
+}
+
+# "|" and "\" are escaped in the new serialization scheme using a backslash, so
+# we need to adjust these in the verbatim mappings.
+
+func EscapedMappings[raw_mappings] {
+  escapes = ("\\\\" : "\\") | ("\\|" : "|");
+  return Optimize[
+    ((Project[raw_mappings, 'input'] - Project[escapes, 'output']) | escapes)
+    @ raw_mappings
+  ];
+}
+
+func clean_untreated_fields[digit] {
+  return Optimize[(digit u.ins_space)+ @ u.CLEAN_SPACES];
 }

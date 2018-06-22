@@ -1,0 +1,58 @@
+# English abbreviation units
+MEASURE_MARKUP	100 km/h	measure { decimal { integer_part: "100" } units: "kilometer per hour" }
+MEASURE_MARKUP	23 Pa	measure { decimal { integer_part: "23" } units: "pascal" }
+MEASURE_MARKUP	100 Kbps	measure { decimal { integer_part: "100" } units: "kilobit per second" }
+MEASURE_MARKUP	48 kHz	measure { decimal { integer_part: "48" } units: "kilohertz" }
+MEASURE_MARKUP	200 MW	measure { decimal { integer_part: "200" } units: "megawatt" }
+MEASURE_MARKUP	1013 hPa	measure { decimal { integer_part: "1013" } units: "hectopascal" }
+MEASURE_MARKUP	71 %	measure { decimal { integer_part: "71" } units: "percent" }
+MEASURE_MARKUP	3 m2	measure { decimal { integer_part: "3" } units: "square meter" }
+MEASURE_MARKUP	3 cm2	measure { decimal { integer_part: "3" } units: "square centimeter" }
+MEASURE_MARKUP	12 km³	measure { decimal { integer_part: "12" } units: "cubic kilometer" }
+MEASURE_MARKUP	9 m^2	measure { decimal { integer_part: "9" } units: "square meter" }
+MEASURE_MARKUP	3.1415 MB	measure { decimal { integer_part: "3" fractional_part: "1415" } units: "megabyte" }
+# English units
+MEASURE_MARKUP	100 meter	measure { decimal { integer_part: "100" } units: "meter" }
+MEASURE_MARKUP	100 meter/millisecond	measure { decimal { integer_part: "100" } units: "meter ក្នុង មួយ millisecond" }
+MEASURE_MARKUP	3.1415 gigabyte per hour	measure { decimal { integer_part: "3" fractional_part: "1415" } units: "gigabyte ក្នុង មួយ hour" }
+MEASURE_MARKUP	1000000 decaliter / cubic kilometer	measure { decimal { integer_part: "1000000" } units: "decaliter ក្នុង មួយ cubic kilometer" }
+# meter group
+MEASURE_MARKUP	1 ម	measure { decimal { integer_part: "1" } units: "ម៉ែត្រ" }
+MEASURE_MARKUP	11 ម.	measure { decimal { integer_part: "11" } units: "ម៉ែត្រ" }
+MEASURE_MARKUP	1000 មម	measure { decimal { integer_part: "1000" } units: "មីលីម៉ែត្រ" }
+MEASURE_MARKUP	1000 ម.ម	measure { decimal { integer_part: "1000" } units: "មីលីម៉ែត្រ" }
+MEASURE_MARKUP	1000 ម.ម.	measure { decimal { integer_part: "1000" } units: "មីលីម៉ែត្រ" }
+# gram group
+MEASURE_MARKUP	9 ក	measure { decimal { integer_part: "9" } units: "ក្រាម" }
+MEASURE_MARKUP	90 ដក	measure { decimal { integer_part: "90" } units: "ដេស៊ីក្រាម" }
+MEASURE_MARKUP	900 សក	measure { decimal { integer_part: "900" } units: "សង់ទីក្រាម" }
+MEASURE_MARKUP	0.9 គក	measure { decimal { integer_part: "0" fractional_part: "9" } units: "គីឡូក្រាម" }
+MEASURE_MARKUP	0.9 គ.ក	measure { decimal { integer_part: "0" fractional_part: "9" } units: "គីឡូក្រាម" }
+MEASURE_MARKUP	0.9 គ.ក.	measure { decimal { integer_part: "0" fractional_part: "9" } units: "គីឡូក្រាម" }
+# kilogram - a sequence of 3 letters (1 char + optional dot + 3 chars + optional dot)
+MEASURE_MARKUP	0.9 គក្រ	measure { decimal { integer_part: "0" fractional_part: "9" } units: "គីឡូក្រាម" }
+MEASURE_MARKUP	0.9 គ.ក្រ	measure { decimal { integer_part: "0" fractional_part: "9" } units: "គីឡូក្រាម" }
+MEASURE_MARKUP	0.9 គ.ក្រ.	measure { decimal { integer_part: "0" fractional_part: "9" } units: "គីឡូក្រាម" }
+# litre
+MEASURE_MARKUP	87.12 ល	measure { decimal { integer_part: "87" fractional_part: "12" } units: "លីត្រ" }
+MEASURE_MARKUP	87.12 ល.	measure { decimal { integer_part: "87" fractional_part: "12" } units: "លីត្រ" }
+# kilometers in one hour
+MEASURE_MARKUP	3 គីឡូម៉ែត្រក្នុងមួយម៉ោង	measure { decimal { integer_part: "3" } units: "គីឡូម៉ែត្រ ក្នុង មួយ ម៉ោង" }
+# kilometers / hour
+MEASURE_MARKUP	17 គីឡូម៉ែត្រ/ម៉ោង	measure { decimal { integer_part: "17" } units: "គីឡូម៉ែត្រ ក្នុង មួយ ម៉ោង" }
+# km/h
+MEASURE_MARKUP	17 គ.ម./ម៉.	measure { decimal { integer_part: "17" } units: "គីឡូម៉ែត្រ ក្នុង មួយ ម៉ោង" }
+# kilometers per hours
+MEASURE_MARKUP	50 គីឡូម៉ែត្រperម៉ោង	measure { decimal { integer_part: "50" } units: "គីឡូម៉ែត្រ ក្នុង មួយ ម៉ោង" }
+# km per h
+MEASURE_MARKUP	20.49 គ.ម.perម៉.	measure { decimal { integer_part: "20" fractional_part: "49" } units: "គីឡូម៉ែត្រ ក្នុង មួយ ម៉ោង" }
+# per year
+MEASURE_MARKUP	20 ក្នុងមួយឆ្នាំ	measure { decimal { integer_part: "20" } units: "ក្នុង មួយ ឆ្នាំ" }
+# others
+MEASURE_MARKUP	34 ណាណូ	measure { decimal { integer_part: "34" } units: "ណាណូ" }
+MEASURE_MARKUP	17 ម៉ៃក្រូ	measure { decimal { integer_part: "17" } units: "ម៉ៃក្រូ" }
+MEASURE_MARKUP	7 មីល្លី	measure { decimal { integer_part: "7" } units: "មីល្លី" }
+MEASURE_MARKUP	32 គីឡូ កាឡូរី	measure { decimal { integer_part: "32" } units: "គីឡូ កាឡូរី" }
+MEASURE_MARKUP	98.33 អង្សា ហ្វារ៉ិនហៃ	measure { decimal { integer_part: "98" fractional_part: "33" } units: "អង្សា ហ្វារ៉ិនហៃ" }
+# comma separator
+MEASURE_MARKUP	98,33 អង្សា ហ្វារ៉ិនហៃ	measure { decimal { integer_part: "98" fractional_part: "33" } units: "អង្សា ហ្វារ៉ិនហៃ" }

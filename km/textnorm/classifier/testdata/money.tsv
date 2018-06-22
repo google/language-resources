@@ -1,0 +1,53 @@
+# Dot separator
+# Symbol
+MONEY_MARKUP	$1.2	money { currency: "usd" amount { integer_part: "1" fractional_part: "20"} style: 1 }
+MONEY_MARKUP	$ 1.2	money { currency: "usd" amount { integer_part: "1" fractional_part: "20"} style: 1 }
+MONEY_MARKUP	1.2៛	money { amount { integer_part: "1" fractional_part: "20"} currency: "khr" style: 1 }
+MONEY_MARKUP	1.2 ៛	money { amount { integer_part: "1" fractional_part: "20"} currency: "khr" style: 1 }
+# Khmer currency names
+MONEY_MARKUP	320.7 រៀល	money { amount { integer_part: "320" fractional_part: "70"} currency: "khr" style: 1 }
+MONEY_MARKUP	320.7 ផោន	money { amount { integer_part: "320" fractional_part: "70"} currency: "gbp" style: 1 }
+MONEY_MARKUP	1.3 យ៉េន ជប៉ុន	money { amount { integer_part: "1" fractional_part: "30"} currency: "jpy" style: 1 }
+MONEY_MARKUP	30.7 បាត	money { amount { integer_part: "30" fractional_part: "70"} currency: "thb" style: 1 }
+# Khmer currency names with quantities
+MONEY_MARKUP	1 លាន ដុល្លារ	money { amount { integer_part: "1" } quantity: 1000000 currency: "usd" style: 1 }
+MONEY_MARKUP	1.7 កោដិ រៀល	money { amount { integer_part: "1" fractional_part: "7"} quantity: 10000000 currency: "khr" style: 1 }
+MONEY_MARKUP	3.7 ប៊ីលាន បាត	money { amount { integer_part: "3" fractional_part: "7"} quantity: 1000000000 currency: "thb" style: 1 }
+MONEY_MARKUP	9.8 ទ្រីលាន រៀល	money { amount { integer_part: "9" fractional_part: "8"} quantity: 1000000000000 currency: "khr" style: 1 }
+# English currency names
+MONEY_MARKUP	2.5 riel	money { amount { integer_part: "2" fractional_part: "50"} currency: "khr" style: 1 }
+MONEY_MARKUP	20.7 baht	money { amount { integer_part: "20" fractional_part: "70"} currency: "thb" style: 1 }
+MONEY_MARKUP	120.7 dollar	money { amount { integer_part: "120" fractional_part: "70"} currency: "usd" style: 1 }
+
+# Comma separator
+# Symbol
+MONEY_MARKUP	$1,2	money { currency: "usd" amount { integer_part: "1" fractional_part: "20"} style: 1 }
+MONEY_MARKUP	1,2៛	money { amount { integer_part: "1" fractional_part: "20"} currency: "khr" style: 1 }
+MONEY_MARKUP	1,02៛	money { amount { integer_part: "1" fractional_part: "02"} currency: "khr" style: 1 }
+MONEY_MARKUP	1,2 ៛	money { amount { integer_part: "1" fractional_part: "20"} currency: "khr" style: 1 }
+# Khmer currency names
+MONEY_MARKUP	320,7 រៀល	money { amount { integer_part: "320" fractional_part: "70"} currency: "khr" style: 1 }
+MONEY_MARKUP	320,7 ផោន	money { amount { integer_part: "320" fractional_part: "70"} currency: "gbp" style: 1 }
+# Khmer currency names with quantities
+MONEY_MARKUP	1,7 កោដិ រៀល	money { amount { integer_part: "1" fractional_part: "7"} quantity: 10000000 currency: "khr" style: 1 }
+MONEY_MARKUP	3,7 ប៊ីលាន បាត	money { amount { integer_part: "3" fractional_part: "7"} quantity: 1000000000 currency: "thb" style: 1 }
+MONEY_MARKUP	9,8 ទ្រីលាន រៀល	money { amount { integer_part: "9" fractional_part: "8"} quantity: 1000000000000 currency: "khr" style: 1 }
+MONEY_MARKUP	2,5 riel	money { amount { integer_part: "2" fractional_part: "50"} currency: "khr" style: 1 }
+MONEY_MARKUP	1,3 យ៉េន ជប៉ុន	money { amount { integer_part: "1" fractional_part: "30"} currency: "jpy" style: 1 }
+MONEY_MARKUP	30,7 បាត	money { amount { integer_part: "30" fractional_part: "70"} currency: "thb" style: 1 }
+# English currency names
+MONEY_MARKUP	20,7 baht	money { amount { integer_part: "20" fractional_part: "70"} currency: "thb" style: 1 }
+MONEY_MARKUP	120,7 dollar	money { amount { integer_part: "120" fractional_part: "70"} currency: "usd" style: 1 }
+MONEY_MARKUP	100 pound	money { amount { integer_part: "100" } currency: "gbp" style: 1 }
+MONEY_MARKUP	100 yen	money { amount { integer_part: "100" } currency: "jpy" style: 1 }
+
+# Only interger part
+MONEY_MARKUP	100 ដុល្លារ អាមេរិក	money { amount { integer_part: "100" } currency: "usd" style: 1 }
+MONEY_MARKUP	200 រៀល	money { amount { integer_part: "200" } currency: "khr" style: 1 }
+MONEY_MARKUP	300 រៀល	money { amount { integer_part: "300" } currency: "khr" style: 1 }
+MONEY_MARKUP	400 រៀល	money { amount { integer_part: "400" } currency: "khr" style: 1 }
+MONEY_MARKUP	500 រៀល	money { amount { integer_part: "500" } currency: "khr" style: 1 }
+MONEY_MARKUP	600 រៀល	money { amount { integer_part: "600" } currency: "khr" style: 1 }
+MONEY_MARKUP	700 រៀល	money { amount { integer_part: "700" } currency: "khr" style: 1 }
+MONEY_MARKUP	800 រៀល	money { amount { integer_part: "800" } currency: "khr" style: 1 }
+MONEY_MARKUP	900 រៀល	money { amount { integer_part: "900" } currency: "khr" style: 1 }

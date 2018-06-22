@@ -1,0 +1,11 @@
+CONNECTOR_MARKUP	2015-2016	date { year: 2015 } } tokens { connector { type: "range" } } tokens { date { year: 2016 }
+CONNECTOR_MARKUP	2015-17	date { year: 2015 } } tokens { connector { type: "range" } } tokens { cardinal { integer: "17" }
+CONNECTOR_MARKUP	1990-2500	date { year: 1990 } } tokens { connector { type: "range" } } tokens { date { year: 2500 }
+CONNECTOR_MARKUP	14:00-15:00	time { hours: 14 minutes: 0 style: 1 } } tokens { connector { type: "range" } } tokens { time { hours: 15 minutes: 0 style: 1 }
+CONNECTOR_MARKUP	14:30-16:30 UTC	time { hours: 14 minutes: 30 style: 1 } } tokens { connector { type: "range" } } tokens { time { hours: 16 minutes: 30 style: 1 zone: "UTC" }
+CONNECTOR_MARKUP	1,2-3,4 kilometer	decimal { integer_part: "1" fractional_part: "2" } } tokens { connector { type: "range" } } tokens { measure { decimal { integer_part: "3" fractional_part: "4" } units: "kilometer" }
+CONNECTOR_MARKUP	1.2-3.4 គក	decimal { integer_part: "1" fractional_part: "2" } } tokens { connector { type: "range" } } tokens { measure { decimal { integer_part: "3" fractional_part: "4" } units: "គីឡូក្រាម" }
+CONNECTOR_MARKUP	20-30$	cardinal { integer: "20" } } tokens { connector { type: "range" } } tokens { money { amount { integer_part: "30" } currency: "usd" style: 1 }
+CONNECTOR_MARKUP	12070.000-99999 រៀល	decimal { integer_part: "12070" fractional_part: "000" } } tokens { connector { type: "range" } } tokens { money { amount { integer_part: "99999" } currency: "khr" style: 1 }
+CONNECTOR_MARKUP	12345 រៀល-56789 riel		money { amount { integer_part: "12345" } currency: "khr" style: 1 } } tokens { connector { type: "range" } } tokens { money { amount { integer_part: "56789" } currency: "khr" style: 1 }
+CONNECTOR_MARKUP	12345 riel-56789 riel		money { amount { integer_part: "12345" } currency: "khr" style: 1 } } tokens { connector { type: "range" } } tokens { money { amount { integer_part: "56789" } currency: "khr" style: 1 }

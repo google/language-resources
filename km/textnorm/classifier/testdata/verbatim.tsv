@@ -1,0 +1,6 @@
+RANGE_VERBATIM_MARKUP	2-5	cardinal { integer: "2" } } tokens { verbatim: "-" } tokens { cardinal { integer: "5" }
+RANGE_VERBATIM_MARKUP	5-2	cardinal { integer: "5" } } tokens { verbatim: "-" } tokens { cardinal { integer: "2" }
+RANGE_VERBATIM_MARKUP	10-20	cardinal { integer: "10" } } tokens { verbatim: "-" } tokens { cardinal { integer: "20" }
+RANGE_VERBATIM_MARKUP	10.0-20	decimal { integer_part: "10" fractional_part: "0" } } tokens { verbatim: "-" } tokens { decimal { integer_part: "20"  }
+RANGE_VERBATIM_MARKUP	10-50,001.05	decimal { integer_part: "10"  } } tokens { verbatim: "-" } tokens { decimal { integer_part: "50001" fractional_part: "05" }
+

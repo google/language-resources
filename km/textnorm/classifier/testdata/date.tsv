@@ -1,0 +1,35 @@
+DATE	មករា 2555	date{ month: "មករា" year: 2555 style: 1}
+DATE	កុម្ភៈ 2557	date{ month: "កុម្ភៈ" year: 2557 style: 1}
+DATE	3 សីហា 2556	date{ day: 3 month: "សីហា" year: 2556 style: 1}
+DATE	31 កក្កដា ព.ស. 2535	date{ day: 31 month: "កក្កដា" era: "ពុទ្ធសករាជ" year: 2535 style: 1}
+DATE	29 ឧសភា ពុទ្ធសករាជ 2423	date{ day: 29 month: "ឧសភា" era: "ពុទ្ធសករាជ" year: 2423 style: 1}
+DATE	1 ធ្នូ គ.ស. 1999	date{ day: 1 month: "ធ្នូ" era: "គ្រិស្តសករាជ" year: 1999 style: 1}
+DATE	10 តុលា គ្រិស្តសករាជ 1982	date{ day: 10 month: "តុលា" era: "គ្រិស្តសករាជ" year: 1982 style: 1}
+DATE	3/1/2455	date{ day: 3 month: "មករា" year: 2455 style: 1}
+DATE	12/10/1932	date{ day: 12 month: "តុលា" year: 1932 style: 1}
+DATE	23/6/2408	date{ day: 23 month: "មិថុនា" year: 2408 style: 1}
+DATE	12-1-1998	date{ day: 12 month: "មករា" year: 1998 style: 1}
+DATE	12-11-2556	date{ day: 12 month: "វិច្ឆិកា" year: 2556 style: 1}
+DATE	2 កញ្ញា	date{ day: 2 month: "កញ្ញា" style: 1}
+DATE	18 មិនា	date{ day: 18 month: "មិនា" style: 1}
+DATE	2 ខែ៩	date{ day: 2 month: "ខែ9" style: 1}
+DATE	2 ខែ ៩	date{ day: 2 month: "ខែ9" style: 1}
+DATE	18 ខែ៣	date{ day: 18 month: "ខែ3" style: 1}
+DATE	18 ខែ ៣	date{ day: 18 month: "ខែ3" style: 1}
+DATE	10 ខែ១០ គ្រិស្តសករាជ 1982	date{ day: 10 month: "ខែ10" era: "គ្រិស្តសករាជ" year: 1982 style: 1}
+DATE	29 ខែ៥ ពុទ្ធសករាជ 2423	date{ day: 29 month: "ខែ5" era: "ពុទ្ធសករាជ" year: 2423 style: 1}
+DATE	ខែ២ 2557	date{ month: "ខែ2" year: 2557 style: 1}
+DATE	ព្រ. 19 ខែ៣	date{ weekday: "ព្រហស្បតិ៍" day: 19 month: "ខែ3" style: 1}
+DATE	ថ្ងៃ អ. ទី 2 ខែ៩ 2443	date{ weekday: "អង្គារ" day: 2 month: "ខែ9" year: 2443 style: 1}
+DATE	ថ្ងៃ ពុ. 3 ខែ៥	date{ weekday: "ពុធ" day: 3 month: "ខែ5" style: 1}
+DATE	សុ. ទី 13 ខែ១២ ព.ស. 2558	date{ weekday: "សុក្រ" day: 13 month: "ខែ12" era: "ពុទ្ធសករាជ" year: 2558 style: 1}
+DATE	ស.18 មេសា 1999	date{ weekday: "សៅរ៍" day: 18 month: "មេសា" year: 1999 style: 1}
+DATE	ថ្ងៃ សៅរ៍ ទី 13 ខែ១២ ព.ស. 2558	date{ weekday: "សៅរ៍" day: 13 month: "ខែ12" era: "ពុទ្ធសករាជ" year: 2558 style: 1}
+DATE	ថ្ងៃ សៅរ៍ ទី 13 ខែ១២ 2558 នៃ ព.ស.	date{ weekday: "សៅរ៍" day: 13 month: "ខែ12" year: 2558 era: "នៃ ពុទ្ធសករាជ" style: 1}
+DATE	ថ្ងៃ សៅរ៍ ទី 13 ខែ១២ 2558 នៃ គ្រិស្តសករាជ	date{ weekday: "សៅរ៍" day: 13 month: "ខែ12" year: 2558 era: "នៃ គ្រិស្តសករាជ" style: 1}
+DATE	ថ្ងៃ សៅរ៍ ទី 13 ខែ១២ 2558 មុន គ.ស.	date{ weekday: "សៅរ៍" day: 13 month: "ខែ12" year: 2558 era: "មុន គ្រិស្តសករាជ" style: 1}
+DATE	ថ្ងៃ សៅរ៍ ទី 13 ខែ១២ 2558 មុន គ្រិស្តសករាជ	date{ weekday: "សៅរ៍" day: 13 month: "ខែ12" year: 2558 era: "មុន គ្រិស្តសករាជ" style: 1}
+DATE	ថ្ងៃទី09	date{ day: 9 style: 1}
+DATE	ថ្ងៃទី 09	date{ day: 9 style: 1}
+DATE	ថ្ងៃ ទី 17	date{ day: 17 style: 1}
+DATE	ថ្ងៃ សៅរ៍ ទី09	date{ weekday: "សៅរ៍" day: 9 style: 1}

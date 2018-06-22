@@ -1,0 +1,270 @@
+# Arabic cardinal number
+TOKENIZE_AND_CLASSIFY	1	tokens { cardinal { integer: "1" } }
+TOKENIZE_AND_CLASSIFY	2	tokens { cardinal { integer: "2" } }
+TOKENIZE_AND_CLASSIFY	3	tokens { cardinal { integer: "3" } }
+TOKENIZE_AND_CLASSIFY	4	tokens { cardinal { integer: "4" } }
+TOKENIZE_AND_CLASSIFY	5	tokens { cardinal { integer: "5" } }
+TOKENIZE_AND_CLASSIFY	6	tokens { cardinal { integer: "6" } }
+TOKENIZE_AND_CLASSIFY	7	tokens { cardinal { integer: "7" } }
+TOKENIZE_AND_CLASSIFY	8	tokens { cardinal { integer: "8" } }
+TOKENIZE_AND_CLASSIFY	9	tokens { cardinal { integer: "9" } }
+TOKENIZE_AND_CLASSIFY	10	tokens { cardinal { integer: "10" } }
+TOKENIZE_AND_CLASSIFY	98	tokens { cardinal { integer: "98" } }
+TOKENIZE_AND_CLASSIFY	747	tokens { cardinal { integer: "747" } }
+TOKENIZE_AND_CLASSIFY	1.001.001	tokens { cardinal { integer: "1001001" } }
+TOKENIZE_AND_CLASSIFY	123.456.789	tokens { cardinal { integer: "123456789" } }
+# Arabic decimal number
+TOKENIZE_AND_CLASSIFY	1001.1	tokens { decimal { integer_part: "1001" fractional_part: "1" } }
+TOKENIZE_AND_CLASSIFY	1001,1	tokens { decimal { integer_part: "1001" fractional_part: "1" } }
+TOKENIZE_AND_CLASSIFY	1001.001	tokens { decimal { integer_part: "1001" fractional_part: "001" } }
+TOKENIZE_AND_CLASSIFY	1001,001	tokens { decimal { integer_part: "1001" fractional_part: "001" } }
+TOKENIZE_AND_CLASSIFY	4.5	tokens { decimal { integer_part: "4" fractional_part: "5" } }
+TOKENIZE_AND_CLASSIFY	-4.5	tokens { decimal { negative: true integer_part: "4" fractional_part: "5" } }
+TOKENIZE_AND_CLASSIFY	4,5	tokens { decimal { integer_part: "4" fractional_part: "5" } }
+TOKENIZE_AND_CLASSIFY	-4,5	tokens { decimal { negative: true integer_part: "4" fractional_part: "5" } }
+TOKENIZE_AND_CLASSIFY	1,234.5	tokens { decimal { integer_part: "1234" fractional_part: "5" } }
+TOKENIZE_AND_CLASSIFY	-1,234.5	tokens { decimal { negative: true integer_part: "1234" fractional_part: "5" } }
+TOKENIZE_AND_CLASSIFY	1.234,5	tokens { decimal { integer_part: "1234" fractional_part: "5" } }
+TOKENIZE_AND_CLASSIFY	-1.234,5	tokens { decimal { negative: true integer_part: "1234" fractional_part: "5" } }
+# Ambiguous cases for cardinal and decimal number.
+# Comma can also be a thousand separator in Khmer.
+# But if the number with comma as a thousand separater is writen alone without
+# the context, it is more preferable to consider it as decimal number.
+TOKENIZE_AND_CLASSIFY	1.234	tokens { cardinal { integer: "1234" } }
+TOKENIZE_AND_CLASSIFY	11.001	tokens { cardinal { integer: "11001" } }
+TOKENIZE_AND_CLASSIFY	567.890	tokens { cardinal { integer: "567890" } }
+TOKENIZE_AND_CLASSIFY	1,234	tokens { decimal { integer_part: "1" fractional_part: "234" } }
+TOKENIZE_AND_CLASSIFY	11,001	tokens { decimal { integer_part: "11" fractional_part: "001" } }
+TOKENIZE_AND_CLASSIFY	567,890	tokens { decimal { integer_part: "567" fractional_part: "890" } }
+
+# Khmer cardinal number
+TOKENIZE_AND_CLASSIFY	១	tokens { cardinal { integer: "1" } }
+TOKENIZE_AND_CLASSIFY	២	tokens { cardinal { integer: "2" } }
+TOKENIZE_AND_CLASSIFY	៣	tokens { cardinal { integer: "3" } }
+TOKENIZE_AND_CLASSIFY	៤	tokens { cardinal { integer: "4" } }
+TOKENIZE_AND_CLASSIFY	៥	tokens { cardinal { integer: "5" } }
+TOKENIZE_AND_CLASSIFY	៦	tokens { cardinal { integer: "6" } }
+TOKENIZE_AND_CLASSIFY	៧	tokens { cardinal { integer: "7" } }
+TOKENIZE_AND_CLASSIFY	៨	tokens { cardinal { integer: "8" } }
+TOKENIZE_AND_CLASSIFY	៩	tokens { cardinal { integer: "9" } }
+TOKENIZE_AND_CLASSIFY	១០	tokens { cardinal { integer: "10" } }
+TOKENIZE_AND_CLASSIFY	៩៨	tokens { cardinal { integer: "98" } }
+TOKENIZE_AND_CLASSIFY	៧៤៧	tokens { cardinal { integer: "747" } }
+TOKENIZE_AND_CLASSIFY	១.០០១.០០១	tokens { cardinal { integer: "1001001" } }
+TOKENIZE_AND_CLASSIFY	១២៣.៤៥៦.៧៨៩	tokens { cardinal { integer: "123456789" } }
+# Khmer decimal number
+TOKENIZE_AND_CLASSIFY	១០០១.១	tokens { decimal { integer_part: "1001" fractional_part: "1" } }
+TOKENIZE_AND_CLASSIFY	១០០១,១	tokens { decimal { integer_part: "1001" fractional_part: "1" } }
+TOKENIZE_AND_CLASSIFY	១០០១.០០១	tokens { decimal { integer_part: "1001" fractional_part: "001" } }
+TOKENIZE_AND_CLASSIFY	១០០១,០០១	tokens { decimal { integer_part: "1001" fractional_part: "001" } }
+TOKENIZE_AND_CLASSIFY	៤.៥	tokens { decimal { integer_part: "4" fractional_part: "5" } }
+TOKENIZE_AND_CLASSIFY	-៤.៥	tokens { decimal { negative: true integer_part: "4" fractional_part: "5" } }
+TOKENIZE_AND_CLASSIFY	៤,៥	tokens { decimal { integer_part: "4" fractional_part: "5" } }
+TOKENIZE_AND_CLASSIFY	-៤,៥	tokens { decimal { negative: true integer_part: "4" fractional_part: "5" } }
+TOKENIZE_AND_CLASSIFY	១,២៣៤.៥	tokens { decimal { integer_part: "1234" fractional_part: "5" } }
+TOKENIZE_AND_CLASSIFY	-១,២៣៤.៥	tokens { decimal { negative: true integer_part: "1234" fractional_part: "5" } }
+TOKENIZE_AND_CLASSIFY	១.២៣៤,៥	tokens { decimal { integer_part: "1234" fractional_part: "5" } }
+TOKENIZE_AND_CLASSIFY	-១.២៣៤,៥	tokens { decimal { negative: true integer_part: "1234" fractional_part: "5" } }
+# Ambiguous cases for cardinal and decimal number.
+# Comma can also be a thousand separator in Khmer.
+# But if the number with comma as a thousand separater is writen alone without
+# the context, it is more preferable to consider it as decimal number.
+TOKENIZE_AND_CLASSIFY	១.២៣៤	tokens { cardinal { integer: "1234" } }
+TOKENIZE_AND_CLASSIFY	១១.០០១	tokens { cardinal { integer: "11001" } }
+TOKENIZE_AND_CLASSIFY	៥៦៧.៨៩០	tokens { cardinal { integer: "567890" } }
+TOKENIZE_AND_CLASSIFY	១,២៣៤	tokens { decimal { integer_part: "1" fractional_part: "234" } }
+TOKENIZE_AND_CLASSIFY	១១,០០១	tokens { decimal { integer_part: "11" fractional_part: "001" } }
+TOKENIZE_AND_CLASSIFY	៥៦៧,៨៩០	tokens { decimal { integer_part: "567" fractional_part: "890" } }
+
+# Arabic digit with context
+TOKENIZE_AND_CLASSIFY	boeing 747	tokens { name: "boeing" } tokens { digit: "747" }
+TOKENIZE_AND_CLASSIFY	xbox 360	tokens { name: "xbox" } tokens { cardinal { integer: "3" } } tokens { cardinal { integer: "60" } }
+TOKENIZE_AND_CLASSIFY	x-box 360	tokens { name: "x-box" } tokens { cardinal { integer: "3" } } tokens { cardinal { integer: "60" } }
+TOKENIZE_AND_CLASSIFY	Xbox 360	tokens { name: "xbox" } tokens { cardinal { integer: "3" } } tokens { cardinal { integer: "60" } }
+TOKENIZE_AND_CLASSIFY	xbox360	tokens { name: "xbox" } tokens { cardinal { integer: "3" } } tokens { cardinal { integer: "60" } }
+TOKENIZE_AND_CLASSIFY	Levi's 501	tokens { name: "levi's" } tokens { digit: "501" }
+TOKENIZE_AND_CLASSIFY	Beverly Hills 90210	tokens { name: "beverly" } tokens { name: "hills" } tokens { digit: "90210" }
+TOKENIZE_AND_CLASSIFY	720p	tokens { cardinal { integer: "7" } } tokens { cardinal { integer: "20" } } tokens { name: "p" }
+TOKENIZE_AND_CLASSIFY	720i	tokens { cardinal { integer: "7" } } tokens { cardinal { integer: "20" } } tokens { name: "i" }
+TOKENIZE_AND_CLASSIFY	1080p	tokens { cardinal { integer: "10" } } tokens { cardinal { integer: "80" } } tokens { name: "p" }
+TOKENIZE_AND_CLASSIFY	1080i	tokens { cardinal { integer: "10" } } tokens { cardinal { integer: "80" } } tokens { name: "i" }
+# Khmer digit with context
+TOKENIZE_AND_CLASSIFY	boeing ៧៤៧	tokens { name: "boeing" } tokens { digit: "747" }
+TOKENIZE_AND_CLASSIFY	xbox ៣៦០	tokens { name: "xbox" } tokens { cardinal { integer: "3" } } tokens { cardinal { integer: "60" } }
+TOKENIZE_AND_CLASSIFY	x-box ៣៦០	tokens { name: "x-box" } tokens { cardinal { integer: "3" } } tokens { cardinal { integer: "60" } }
+TOKENIZE_AND_CLASSIFY	Xbox ៣៦០	tokens { name: "xbox" } tokens { cardinal { integer: "3" } } tokens { cardinal { integer: "60" } }
+TOKENIZE_AND_CLASSIFY	xbox៣៦០	tokens { name: "xbox" } tokens { cardinal { integer: "3" } } tokens { cardinal { integer: "60" } }
+TOKENIZE_AND_CLASSIFY	Levi's ៥០១	tokens { name: "levi's" } tokens { digit: "501" }
+TOKENIZE_AND_CLASSIFY	Beverly Hills ៩០២១០	tokens { name: "beverly" } tokens { name: "hills" } tokens { digit: "90210" }
+TOKENIZE_AND_CLASSIFY	៧២០p	tokens { cardinal { integer: "7" } } tokens { cardinal { integer: "20" } } tokens { name: "p" }
+TOKENIZE_AND_CLASSIFY	៧២០i	tokens { cardinal { integer: "7" } } tokens { cardinal { integer: "20" } } tokens { name: "i" }
+TOKENIZE_AND_CLASSIFY	១០៨០p	tokens { cardinal { integer: "10" } } tokens { cardinal { integer: "80" } } tokens { name: "p" }
+TOKENIZE_AND_CLASSIFY	១០៨០i	tokens { cardinal { integer: "10" } } tokens { cardinal { integer: "80" } } tokens { name: "i" }
+
+# Arabic ordinal number
+TOKENIZE_AND_CLASSIFY	ទី1	tokens { name: "ទី" } tokens { cardinal { integer: "1" } }
+TOKENIZE_AND_CLASSIFY	ទី11	tokens { name: "ទី" } tokens { cardinal { integer: "11" } }
+TOKENIZE_AND_CLASSIFY	ទី23	tokens { name: "ទី" } tokens { cardinal { integer: "23" } }
+TOKENIZE_AND_CLASSIFY	ទី102	tokens { name: "ទី" } tokens { cardinal { integer: "102" } }
+TOKENIZE_AND_CLASSIFY	ទី3533	tokens { name: "ទី" } tokens { cardinal { integer: "3533" } }
+TOKENIZE_AND_CLASSIFY	ទី21772	tokens { name: "ទី" } tokens { cardinal { integer: "21772" } }
+# Arabic orinal number with space between ទី and ordinal number
+TOKENIZE_AND_CLASSIFY	ទី 1	tokens { name: "ទី" } tokens { cardinal { integer: "1" } }
+TOKENIZE_AND_CLASSIFY	ទី 11	tokens { name: "ទី" } tokens { cardinal { integer: "11" } }
+TOKENIZE_AND_CLASSIFY	ទី 23	tokens { name: "ទី" } tokens { cardinal { integer: "23" } }
+TOKENIZE_AND_CLASSIFY	ទី 102	tokens { name: "ទី" } tokens { cardinal { integer: "102" } }
+TOKENIZE_AND_CLASSIFY	ទី 3533	tokens { name: "ទី" } tokens { cardinal { integer: "3533" } }
+TOKENIZE_AND_CLASSIFY	ទី 21772	tokens { name: "ទី" } tokens { cardinal { integer: "21772" } }
+# Khmer ordinal number
+TOKENIZE_AND_CLASSIFY	ទី១	tokens { name: "ទី" } tokens { cardinal { integer: "1" } }
+TOKENIZE_AND_CLASSIFY	ទី១១	tokens { name: "ទី" } tokens { cardinal { integer: "11" } }
+TOKENIZE_AND_CLASSIFY	ទី២៣	tokens { name: "ទី" } tokens { cardinal { integer: "23" } }
+TOKENIZE_AND_CLASSIFY	ទី១០២	tokens { name: "ទី" } tokens { cardinal { integer: "102" } }
+TOKENIZE_AND_CLASSIFY	ទី៣៥៣៣	tokens { name: "ទី" } tokens { cardinal { integer: "3533" } }
+TOKENIZE_AND_CLASSIFY	ទី២១៧៧២	tokens { name: "ទី" } tokens { cardinal { integer: "21772" } }
+# Khmer orinal number with space between ទី and ordinal number
+TOKENIZE_AND_CLASSIFY	ទី ១	tokens { name: "ទី" } tokens { cardinal { integer: "1" } }
+TOKENIZE_AND_CLASSIFY	ទី ១១	tokens { name: "ទី" } tokens { cardinal { integer: "11" } }
+TOKENIZE_AND_CLASSIFY	ទី ២៣	tokens { name: "ទី" } tokens { cardinal { integer: "23" } }
+TOKENIZE_AND_CLASSIFY	ទី ១០២	tokens { name: "ទី" } tokens { cardinal { integer: "102" } }
+TOKENIZE_AND_CLASSIFY	ទី ៣៥៣៣	tokens { name: "ទី" } tokens { cardinal { integer: "3533" } }
+TOKENIZE_AND_CLASSIFY	ទី ២១៧៧២	tokens { name: "ទី" } tokens { cardinal { integer: "21772" } }
+# Fractions
+TOKENIZE_AND_CLASSIFY		16⅗	tokens { fraction { integer_part: 16 numerator: 3 denominator: 5 } }
+TOKENIZE_AND_CLASSIFY		16 ⅗	tokens { fraction { integer_part: 16 numerator: 3 denominator: 5 } }
+TOKENIZE_AND_CLASSIFY		4/5	tokens { fraction { numerator: 4 denominator: 5 } }
+TOKENIZE_AND_CLASSIFY		17 4 / 5	tokens { fraction { integer_part: 17 numerator: 4 denominator: 5 } }
+TOKENIZE_AND_CLASSIFY		⅘	tokens { fraction { numerator: 4 denominator: 5 } }
+TOKENIZE_AND_CLASSIFY		17 ⅘	tokens { fraction { integer_part: 17 numerator: 4 denominator: 5 } }
+TOKENIZE_AND_CLASSIFY		-1 12/0	tokens { fraction { integer_part: -1 numerator: 12 denominator: 0 } }
+TOKENIZE_AND_CLASSIFY		-1/2	tokens { fraction { numerator: -1 denominator: 2 } }
+TOKENIZE_AND_CLASSIFY		121/1	tokens { fraction { numerator: 121 denominator: 1 } }
+TOKENIZE_AND_CLASSIFY		-129/12	tokens { fraction { numerator: -129 denominator: 12 } }
+TOKENIZE_AND_CLASSIFY		121 / 543	tokens { fraction { numerator: 121 denominator: 543 } }
+TOKENIZE_AND_CLASSIFY		12/1	tokens { fraction { numerator: 12 denominator: 1 } }
+TOKENIZE_AND_CLASSIFY		1.112/1	tokens { fraction { numerator: 1112 denominator: 1 } }
+TOKENIZE_AND_CLASSIFY		1,112/1	tokens { fraction { numerator: 1112 denominator: 1 } }
+TOKENIZE_AND_CLASSIFY		12.111.000/130.100	tokens { fraction { numerator: 12111000 denominator: 130100 } }
+TOKENIZE_AND_CLASSIFY		3200/2000	tokens { fraction { numerator: 3200 denominator: 2000 } }
+TOKENIZE_AND_CLASSIFY		4,567 / 1,234	tokens { fraction { numerator: 4567 denominator: 1234 } }
+TOKENIZE_AND_CLASSIFY		11345/567234	tokens { fraction { numerator: 11345 denominator: 567234 } }
+TOKENIZE_AND_CLASSIFY		12 11.000/324	tokens { fraction { integer_part: 12 numerator: 11000 denominator: 324 } }
+
+# Emoticons
+TOKENIZE_AND_CLASSIFY	:)	tokens { concept: ":)" }
+TOKENIZE_AND_CLASSIFY	:-D	tokens { concept: ":-D" }
+TOKENIZE_AND_CLASSIFY	:-O	tokens { concept: ":-O" }
+TOKENIZE_AND_CLASSIFY	:-|	tokens { concept: ":-|" }
+TOKENIZE_AND_CLASSIFY	:@	tokens { concept: ":@" }
+TOKENIZE_AND_CLASSIFY	:'(	tokens { concept: ":'(" }
+
+# LSEQ
+TOKENIZE_AND_CLASSIFY	សហន អសប ត.ទ.ស្រ.	tokens { letters: "សហន" } tokens { letters: "អសប" } tokens { letters: "ត.ទ.ស្រ." }
+TOKENIZE_AND_CLASSIFY	I.B.M.	tokens { letters: "I.B.M." }
+
+# Roman numerals
+TOKENIZE_AND_CLASSIFY	I. 	tokens { cardinal { integer: "1"} }
+TOKENIZE_AND_CLASSIFY	II. 	tokens { cardinal { integer: "2"} }
+TOKENIZE_AND_CLASSIFY	III. 	tokens { cardinal { integer: "3"} }
+TOKENIZE_AND_CLASSIFY	IV. 	tokens { cardinal { integer: "4"} }
+TOKENIZE_AND_CLASSIFY	V. 	tokens { cardinal { integer: "5"} }
+TOKENIZE_AND_CLASSIFY	VI. 	tokens { cardinal { integer: "6"} }
+TOKENIZE_AND_CLASSIFY	VII. 	tokens { cardinal { integer: "7"} }
+TOKENIZE_AND_CLASSIFY	VIII. 	tokens { cardinal { integer: "8"} }
+TOKENIZE_AND_CLASSIFY	IX. 	tokens { cardinal { integer: "9"} }
+TOKENIZE_AND_CLASSIFY	X. 	tokens { cardinal { integer: "10"} }
+TOKENIZE_AND_CLASSIFY	IIII. 	tokens { cardinal { integer: "4"} }
+TOKENIZE_AND_CLASSIFY	XIV. 	tokens { cardinal { integer: "14"} }
+TOKENIZE_AND_CLASSIFY	XVI. 	tokens { cardinal { integer: "16"} }
+
+# Verbatim and spoken puncts.
+TOKENIZE_AND_CLASSIFY	10.23.01	tokens { cardinal { integer: "10" } } tokens { verbatim: ".23.01" }
+TOKENIZE_AND_CLASSIFY	7.00000.0001	tokens { cardinal { integer: "7" } } tokens { verbatim: ".00000.0001" }
+TOKENIZE_AND_CLASSIFY	ver. 2.15.14	tokens { name: "ver" } tokens { name: "." pause_length: PAUSE_LONG phrase_break: true type: PUNCT } tokens { cardinal { integer: "2" } } tokens { verbatim: ".15.14" }
+TOKENIZE_AND_CLASSIFY	០.០.១	tokens { cardinal { integer: "0" } } tokens { verbatim: ".0.1" }
+TOKENIZE_AND_CLASSIFY	អត្ថបទ​នេះ​ត្រូវ​បាន​ផ្ដល់​ក្រោម​អាជ្ញាបណ្ណ Creative Commons Attribution-ShareAlike License​ ។ លក្ខខណ្ឌបន្ថែម​ផ្សេងៗទៀតក៏នឹងអាចត្រូវបានអនុវត្ត។​ សូមមើល លក្ខខណ្ឌ​ក្នុងការ​ប្រើប្រាស់ សម្រាប់​ព័ត៌មានលម្អិត​។	tokens { name: "អត្ថបទ" } tokens { name: "នេះ" } tokens { name: "ត្រូវ" } tokens { name: "បាន" } tokens { name: "ផ្ដល់" } tokens { name: "ក្រោម" } tokens { name: "អាជ្ញាបណ្ណ" } tokens { name: "Creative" } tokens { name: "Commons" } tokens { name: "Attribution" } tokens { name: "-" pause_length: PAUSE_MEDIUM type: PUNCT } tokens { name: "ShareAlike" } tokens { name: "License" } tokens { name: "។" pause_length: PAUSE_LONG phrase_break: true type: PUNCT } tokens { name: "លក្ខខណ្ឌបន្ថែម" } tokens { verbatim: "ផ្សេងៗទៀតក៏នឹងអាចត្រូវបានអនុវត្ត" type: SEMIOTIC_CLASS } tokens { name: "។" pause_length: PAUSE_LONG phrase_break: true type: PUNCT } tokens { name: "សូមមើល" } tokens { name: "លក្ខខណ្ឌ" } tokens { name: "ក្នុងការ" } tokens { name: "ប្រើប្រាស់" } tokens { name: "សម្រាប់" } tokens { name: "ព័ត៌មានលម្អិត" } tokens { name: "។" pause_length: PAUSE_LONG phrase_break: true type: PUNCT }
+TOKENIZE_AND_CLASSIFY	(ចំណាត់ថ្នាក់លេខរៀងទី១៥៥ ក្នុងចំណោម ២៨៥ភាសា)។	tokens { name: "(" pause_length: PAUSE_SHORT type: PUNCT } tokens { name: "ចំណាត់ថ្នាក់លេខរៀងទី" } tokens { cardinal { integer: "155" } } tokens { name: "ក្នុងចំណោម" } tokens { cardinal { integer: "285" } } tokens { name: "ភាសា" } tokens { name: ")" pause_length: PAUSE_SHORT type: PUNCT } tokens { name: "។" pause_length: PAUSE_LONG phrase_break: true type: PUNCT }
+TOKENIZE_AND_CLASSIFY	ម្នាងទង។ ព្រះរាជវង្សតពីទ្រង់គឺ ពញាជ័យ និងពញាសួស...	tokens { name: "ម្នាងទង" } tokens { name: "។" pause_length: PAUSE_LONG phrase_break: true type: PUNCT } tokens { name: "ព្រះរាជវង្សតពីទ្រង់គឺ" } tokens { name: "ពញាជ័យ" } tokens { name: "និងពញាសួស" } tokens { name: "." pause_length: PAUSE_LONG phrase_break: true type: PUNCT } tokens { name: "." pause_length: PAUSE_LONG phrase_break: true type: PUNCT } tokens { name: "." pause_length: PAUSE_LONG phrase_break: true type: PUNCT }
+
+# Electronic.
+TOKENIZE_AND_CLASSIFY	www.google.com.kh	tokens { electronic { domain: "www.google.com.kh" } }
+TOKENIZE_AND_CLASSIFY	http://www.everyday.com.kh	tokens { electronic { protocol: "http" domain: "www.everyday.com.kh" } }
+TOKENIZE_AND_CLASSIFY	someone@somemail.com	tokens { electronic { username: "someone@" domain: "somemail.com" } }
+TOKENIZE_AND_CLASSIFY	someone@outlook.com	tokens { electronic { username: "someone@" domain: "outlook.com" } }
+TOKENIZE_AND_CLASSIFY	https://www.google.com/intl/kh/inputtools/try/	tokens { electronic { protocol: "https" domain: "www.google.com" path: "/intl/kh/inputtools/try/" } }
+TOKENIZE_AND_CLASSIFY	https://www.camnews.org/2015/11/24/%E1%9E%A2%E1%9F%92%E1%9E%93%E1%9E%80%E1%9E%9A%E1%9E%B6%E1%9E%99%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%8E%E1%9F%8D%E1%9E%96%E1%9E%B7%E1%9E%9F%E1%9F%81%E1%9E%9F-%E1%9E%A2%E1%9E%9F%E1%9E%94-%E1%9E%90-2	tokens { electronic { protocol: "https" domain: "www.camnews.org" path: "/2015/11/24/%E1%9E%A2%E1%9F%92%E1%9E%93%E1%9E%80%E1%9E%9A%E1%9E%B6%E1%9E%99%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%8E%E1%9F%8D%E1%9E%96%E1%9E%B7%E1%9E%9F%E1%9F%81%E1%9E%9F-%E1%9E%A2%E1%9E%9F%E1%9E%94-%E1%9E%90-2" } }
+TOKENIZE_AND_CLASSIFY	http://cyncambodia.org/index.php	tokens { electronic { protocol: "http" domain: "cyncambodia.org" path: "/index.php" } }
+TOKENIZE_AND_CLASSIFY	firstname.lastname@example.com	tokens { electronic { username: "firstname.lastname@" domain: "example.com" } }
+TOKENIZE_AND_CLASSIFY	someone@subdomain.example.com	tokens { electronic { username: "someone@" domain: "subdomain.example.com" } }
+TOKENIZE_AND_CLASSIFY	someone@123.123.123.123	tokens { electronic { username: "someone@" domain: "123.123.123.123" } }
+
+# Telephone numbers in English Numeral.
+TOKENIZE_AND_CLASSIFY	0988824745	tokens { telephone { number_part: "0988824745" } }
+TOKENIZE_AND_CLASSIFY	981-882-4745	tokens { telephone { number_part: "981" number_part: "882" number_part: "4745" } }
+TOKENIZE_AND_CLASSIFY	981 882 4745	tokens { telephone { number_part: "981" number_part: "882" number_part: "4745" } }
+TOKENIZE_AND_CLASSIFY	099 992 423	tokens { telephone { number_part: "099" number_part: "992" number_part: "423" } }
+TOKENIZE_AND_CLASSIFY	099 99 24 23	tokens { telephone { number_part: "099" number_part: "99" number_part: "24" number_part: "23" } }
+TOKENIZE_AND_CLASSIFY	097 12 34 56 7	tokens { telephone { number_part: "097" number_part: "12" number_part: "34" number_part: "56" number_part: "7" } }
+TOKENIZE_AND_CLASSIFY	097 12 34 567	tokens { telephone { number_part: "097" number_part: "12" number_part: "34" number_part: "567" } }
+TOKENIZE_AND_CLASSIFY	097 123 456 7	tokens { telephone { number_part: "097" number_part: "123" number_part: "456" number_part: "7" } }
+TOKENIZE_AND_CLASSIFY	0718 390 541	tokens { telephone { number_part: "0718" number_part: "390" number_part: "541" } }
+TOKENIZE_AND_CLASSIFY	+977 718390541	tokens { telephone { country_code: "977" number_part: "718390541" } }
+TOKENIZE_AND_CLASSIFY	+977 1 412 5566	tokens { telephone { country_code: "977" number_part: "1" number_part: "412" number_part: "5566" } }
+TOKENIZE_AND_CLASSIFY	+977-1-412-5566	tokens { telephone { country_code: "977" number_part: "1" number_part: "412" number_part: "5566" } }
+TOKENIZE_AND_CLASSIFY	+97714125566	tokens { verbatim: "+" } tokens { digit: "97714125566" }
+TOKENIZE_AND_CLASSIFY	01-412-5566	tokens { telephone { number_part: "01" number_part: "412" number_part: "5566" } }
+
+# Telephone numbers in Khmer Numeral.
+TOKENIZE_AND_CLASSIFY	០៩៨៨៨២៤៧៤៥	tokens { telephone { number_part: "0988824745" } }
+TOKENIZE_AND_CLASSIFY	០៩៨-៨៨២-៤៧៤៥	tokens { telephone { number_part: "098" number_part: "882" number_part: "4745" } }
+TOKENIZE_AND_CLASSIFY	០៩៨ ៨៨២ ៤៧៤៥	tokens { telephone { number_part: "098" number_part: "882" number_part: "4745" } }
+TOKENIZE_AND_CLASSIFY	០៩៩ ៩៩២ ៤២៣	tokens { telephone { number_part: "099" number_part: "992" number_part: "423" } }
+TOKENIZE_AND_CLASSIFY	០៩៩ ៩៩ ២៤ ២៣	tokens { telephone { number_part: "099" number_part: "99" number_part: "24" number_part: "23" } }
+TOKENIZE_AND_CLASSIFY	០៩៧ ១២ ៣៤ ៥៦ ៧	tokens { telephone { number_part: "097" number_part: "12" number_part: "34" number_part: "56" number_part: "7" } }
+TOKENIZE_AND_CLASSIFY	០៩៧ ១២ ៣៤ ៥៦៧	tokens { telephone { number_part: "097" number_part: "12" number_part: "34" number_part: "567" } }
+TOKENIZE_AND_CLASSIFY	០៩៧ ១២៣ ៤៥៦ ៧	tokens { telephone { number_part: "097" number_part: "123" number_part: "456" number_part: "7" } }
+TOKENIZE_AND_CLASSIFY	០៧១៨ ៣៩០ ៥៤១	tokens { telephone { number_part: "0718" number_part: "390" number_part: "541" } }
+TOKENIZE_AND_CLASSIFY	+៩៧៧ ៧១៨៣៩០៥៤១	tokens { telephone { country_code: "977" number_part: "718390541" } }
+TOKENIZE_AND_CLASSIFY	+៩៧៧ ១ ៤១២ ៥៥៦៦	tokens { telephone { country_code: "977" number_part: "1" number_part: "412" number_part: "5566" } }
+TOKENIZE_AND_CLASSIFY	+៩៧៧-១-៤១២-៥៥៦៦	tokens { telephone { country_code: "977" number_part: "1" number_part: "412" number_part: "5566" } }
+TOKENIZE_AND_CLASSIFY	+៩៧៧១៤១២៥៥៦៦	tokens { verbatim: "+" } tokens { digit: "97714125566" }
+TOKENIZE_AND_CLASSIFY	០១-៤១២-៥៥៦៦	tokens { telephone { number_part: "01" number_part: "412" number_part: "5566" } }
+
+# Test that 999 and 911 are not telephone numbers.
+TOKENIZE_AND_CLASSIFY	999	tokens { cardinal { integer: "999" } }
+TOKENIZE_AND_CLASSIFY	911	tokens { cardinal { integer: "911" } }
+
+# Time tests
+TOKENIZE_AND_CLASSIFY	01 :02	tokens { time { hours: 1 minutes: 2 style: 1 } }
+TOKENIZE_AND_CLASSIFY	01 : 02	tokens { time { hours: 1 minutes: 2 style: 1 } }
+TOKENIZE_AND_CLASSIFY	17:32	tokens { time { hours: 17 minutes: 32 style: 1 } }
+TOKENIZE_AND_CLASSIFY	15:40	tokens { time { hours: 15 minutes: 40 style: 1 } }
+TOKENIZE_AND_CLASSIFY	15:40:29	tokens { time { hours: 15 minutes: 40 seconds: 29 style: 1 } }
+TOKENIZE_AND_CLASSIFY	21:00	tokens { time { hours: 21 minutes: 0 style: 1 } }
+TOKENIZE_AND_CLASSIFY	24:00	tokens { time { hours: 24 minutes: 0 style: 1 } }
+TOKENIZE_AND_CLASSIFY	១០:១០	tokens { time { hours: 10 minutes: 10 style: 1 } }
+# Test cases with timezones and suffixes. Timezones aren't commonly used in
+# Cambodia, however put these tests to ensure that the classifier can handle
+# them.
+TOKENIZE_AND_CLASSIFY	00:00 GMT+7	tokens { time { hours: 0 minutes: 0 style: 1 zone: "GMT+07" } }
+TOKENIZE_AND_CLASSIFY	7:15 UTC-5:30	tokens { time { hours: 7 minutes: 15 style: 1 zone: "UTC-05:30" } }
+TOKENIZE_AND_CLASSIFY	7:15 HST	tokens { time { hours: 7 minutes: 15 style: 1 zone: "HST" } }
+TOKENIZE_AND_CLASSIFY	5:00 យប់	tokens { time { hours: 5 minutes: 0 style: 1 } } tokens { name: "យប់" }
+TOKENIZE_AND_CLASSIFY	7:15 HST មុនថ្ងៃត្រង់	tokens { time { hours: 7 minutes: 15 style: 1 zone: "HST" } } tokens { name: "មុនថ្ងៃត្រង់" }
+TOKENIZE_AND_CLASSIFY	7:15 HST ក្រោយថ្ងៃត្រង់	tokens { time { hours: 7 minutes: 15 style: 1 zone: "HST" } } tokens { name: "ក្រោយថ្ងៃត្រង់" }
+TOKENIZE_AND_CLASSIFY	7:15 HST ព្រឹក	tokens { time { hours: 7 minutes: 15 style: 1 zone: "HST" } } tokens { name: "ព្រឹក" }
+TOKENIZE_AND_CLASSIFY	7:15 HST រសៀល	tokens { time { hours: 7 minutes: 15 style: 1 zone: "HST" } } tokens { name: "រសៀល" }
+TOKENIZE_AND_CLASSIFY	7:15 HST ល្ងាច	tokens { time { hours: 7 minutes: 15 style: 1 zone: "HST" } } tokens { name: "ល្ងាច" }
+TOKENIZE_AND_CLASSIFY	7:15 HST យប់	tokens { time { hours: 7 minutes: 15 style: 1 zone: "HST" } } tokens { name: "យប់" }
+TOKENIZE_AND_CLASSIFY	7:15 យប់ HST	tokens { time { hours: 7 minutes: 15 style: 1 } } tokens { name: "យប់" } tokens { letters: "HST" }
+TOKENIZE_AND_CLASSIFY	7:15 យប់ GMT+11	tokens { time { hours: 7 minutes: 15 style: 1 } } tokens { name: "យប់" } tokens { letters: "GMT" } tokens { verbatim: "+" } tokens { digit: "11" }
+# Khmer speakers usually pronounce a location name in place of timezone. "4:00 at Paris".
+TOKENIZE_AND_CLASSIFY	4:00 នៅ បា៉រីស	tokens { time { hours: 4 minutes: 0 style: 1 } } tokens { name: "នៅ" } tokens { name: "បា៉រីស" }
+
+# Verbatim tests
+TOKENIZE_AND_CLASSIFY	2-5	tokens { cardinal { integer: "2" } } tokens { verbatim: "-" } tokens { cardinal { integer: "5" } }
+TOKENIZE_AND_CLASSIFY	5-2	tokens { cardinal { integer: "5" } } tokens { verbatim: "-" } tokens { cardinal { integer: "2" } }
+TOKENIZE_AND_CLASSIFY	10-20	tokens { cardinal { integer: "10" } } tokens { verbatim: "-" } tokens { cardinal { integer: "20" } }
+TOKENIZE_AND_CLASSIFY	10.0-20	tokens { decimal { integer_part: "10" fractional_part: "0" } } tokens { verbatim: "-" } tokens { decimal { integer_part: "20" } }
+TOKENIZE_AND_CLASSIFY	10-50,001.05	tokens { decimal { integer_part: "10" } } tokens { verbatim: "-" } tokens { decimal { integer_part: "50001" fractional_part: "05" } }
+

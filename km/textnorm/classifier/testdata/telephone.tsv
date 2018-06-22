@@ -1,0 +1,16 @@
+PHONE_NUMBER_MARKUP	0988824745	telephone { number_part: "0988824745"  }
+PHONE_NUMBER_MARKUP	981-882-4745	telephone { number_part: "981" number_part: "882" number_part: "4745"  }
+PHONE_NUMBER_MARKUP	981 882 4745	telephone { number_part: "981" number_part: "882" number_part: "4745"  }
+PHONE_NUMBER_MARKUP	099 992 423	telephone { number_part: "099" number_part: "992" number_part: "423"  }
+PHONE_NUMBER_MARKUP	099 99 24 23	telephone { number_part: "099" number_part: "99" number_part: "24" number_part: "23"  }
+PHONE_NUMBER_MARKUP	097 12 34 56 7	telephone { number_part: "097" number_part: "12" number_part: "34" number_part: "56" number_part: "7"  }
+PHONE_NUMBER_MARKUP	097 12 34 567	telephone { number_part: "097" number_part: "12" number_part: "34" number_part: "567"  }
+PHONE_NUMBER_MARKUP	097 123 456 7	telephone { number_part: "097" number_part: "123" number_part: "456" number_part: "7"  }
+PHONE_NUMBER_MARKUP	0718 390 541	telephone { number_part: "0718" number_part: "390" number_part: "541"  }
+PHONE_NUMBER_MARKUP	+977 718390541	telephone { country_code: "977" number_part: "718390541"  }
+PHONE_NUMBER_MARKUP	+977 1 412 5566	telephone { country_code: "977" number_part: "1" number_part: "412" number_part: "5566"  }
+PHONE_NUMBER_MARKUP	+977-1-412-5566	telephone { country_code: "977" number_part: "1" number_part: "412" number_part: "5566"  }
+PHONE_NUMBER_MARKUP	+97714125566	verbatim: "+" } tokens { digit: "97714125566"
+PHONE_NUMBER_MARKUP	01-412-5566	telephone { number_part: "01" number_part: "412" number_part: "5566"  }
+PHONE_NUMBER_MARKUP	999
+PHONE_NUMBER_MARKUP	911

@@ -1,0 +1,9 @@
+TIME_MARKUP	01 :02 time { hours: 1 minutes: 2 style: 1 }
+TIME_MARKUP	01 : 02 time { hours: 1 minutes: 2 style: 1 }
+TIME_MARKUP	17:32 time { hours: 17 minutes: 32 style: 1 }
+TIME_MARKUP	15:40 time { hours: 15 minutes: 40 style: 1 }
+TIME_MARKUP	21:00 time { hours: 21 minutes: 0 style: 1 }
+TIME_MARKUP	24:00 time { hours: 24 minutes: 0 style: 1 }
+TIME_MARKUP	ម៉ោង 01 : 02 time { hours: 1 minutes: 2 style: 1 }
+TIME_MARKUP	ម៉ោង   01 : 02 time { hours: 1 minutes: 2 style: 1 }
+TIME_MARKUP	ម៉ោង21:00 time { hours: 21 minutes: 0 style: 1 }

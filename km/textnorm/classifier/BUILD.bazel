@@ -19,6 +19,29 @@ load("//:thrax.bzl", "grm_regression_test")
 
 base_path = "km/textnorm/classifier/"
 
+[
+    grm_regression_test(
+        name = test_rules + "_tests",
+        far_file = test_rules + ".far",
+        far_file_path = base_path,
+        test_file = "testdata/" + test_rules + ".tsv",
+        test_file_path = base_path,
+    )
+    for test_rules in [
+        "address",
+        "connector",
+        "date",
+        "lseq",
+        "measure",
+        "money",
+        "repeater",
+        "telephone",
+        "time",
+        "tokenize_and_classify",
+        "verbatim",
+    ]
+]
+
 thrax_compile_grm(
     name = "universal_rules",
     deps = ["universal_depot.far"],

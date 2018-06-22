@@ -1,0 +1,57 @@
+meter	ម៉ែត្រ
+second	វិនាទី
+ampere	អំពែរ
+kelvin	កែលវិន
+candela	កង់ដេឡា
+mole	ម៉ូល
+hertz	អ៊ែក្ស
+radian	រ៉ាដ្យង់
+steradian	ស្តេរ៉ាដ្យង់
+newton	ញ៉ូតុន
+pascal	ប៉ាស្កាល់
+joule	ស៊ូល
+watt	វ៉ាត់
+coulomb	គូឡុំ
+volt	វ៉ុល
+farad	ហ្វារ៉ាដ
+ohm	អូម
+tesla	តែស្លា
+henry	ហង់រី
+degree celsius	អង្សាសេ
+minute	នាទី
+hour	ម៉ោង
+day	ថ្ងៃ
+week	សប្ដាហ៍
+month	ខែ
+year	ឆ្នាំ
+century	សតវត្សរ៍
+millennium	សហសវត្សរ៍
+inch	អ៊ីញ
+foot	ហ្វ៊ូត
+yard	យ៉ាត
+mile	ម៉ាយល៍
+gallon	ហ្គាឡុង
+ounce	អោនស៍
+pound	ផោន
+stone	ស្តូន
+ton	តោន
+degree	ដឺក្រេ
+hectare	ហិកតារ
+liter	លីត្រ
+gram	ក្រាម
+calories	កាឡូរី
+kilocalorie	គីឡូ កាឡូរី
+decibel	ដេស៊ី ប៊ែល
+electron volt	អេឡិចត្រុង វ៉ុល
+knot	ណត់
+horsepower	សេស
+degree fahrenheit	អង្សា ហ្វារ៉ិនហៃ
+tablespoon	ស្លាបព្រា
+teaspoon	ស្លាបព្រាកាហ្វេ
+bit	ប៊ីត
+byte	បៃ
+astronomical unit	ខ្នាត តារាសាស្ត្រ
+light year	ឆ្នាំពន្លឺ
+barrel	បារ៉ែល
+pixel	ភិកស៊ែល
+percent	ភាគរយ

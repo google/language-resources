@@ -1,0 +1,103 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Khmer Verbalizer for letter sequences.
+# This grammar will handle both letters and clusters, a pair of consonants
+# joined with '្' (coeng character).
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+khmer_mappings = Optimize[
+      ("ក" : "ក_letter")
+    | ("ខ" : "ខ_letter")
+    | ("គ" : "គ_letter")
+    | ("ឃ" : "ឃ_letter")
+    | ("ង" : "ង_letter")
+    | ("ច" : "ច_letter")
+    | ("ឆ" : "ឆ_letter")
+    | ("ជ" : "ជ_letter")
+    | ("ឈ" : "ឈ_letter")
+    | ("ញ" : "ញ_letter")
+    | ("ដ" : "ដ_letter")
+    | ("ឋ" : "ឋ_letter")
+    | ("ឌ" : "ឌ_letter")
+    | ("ឍ" : "ឍ_letter")
+    | ("ណ" : "ណ_letter")
+    | ("ត" : "ត_letter")
+    | ("ថ" : "ថ_letter")
+    | ("ទ" : "ទ_letter")
+    | ("ធ" : "ធ_letter")
+    | ("ន" : "ន_letter")
+    | ("ប" : "ប_letter")
+    | ("ផ" : "ផ_letter")
+    | ("ព" : "ព_letter")
+    | ("ភ" : "ភ_letter")
+    | ("ម" : "ម_letter")
+    | ("យ" : "យ_letter")
+    | ("រ" : "រ_letter")
+    | ("ល" : "ល_letter")
+    | ("វ" : "វ_letter")
+    | ("ស" : "ស_letter")
+    | ("ហ" : "ហ_letter")
+    | ("ឡ" : "ឡ_letter")
+    | ("អ" : "អ_letter")
+];
+
+latin_mappings = Optimize[
+      (("a" | "A") : "a_letter-en")
+    | (("b" | "B") : "b_letter-en")
+    | (("c" | "C") : "c_letter-en")
+    | (("d" | "D") : "d_letter-en")
+    | (("e" | "E") : "e_letter-en")
+    | (("f" | "F") : "f_letter-en")
+    | (("g" | "G") : "g_letter-en")
+    | (("h" | "H") : "h_letter-en")
+    | (("i" | "I") : "i_letter-en")
+    | (("j" | "J") : "j_letter-en")
+    | (("k" | "K") : "k_letter-en")
+    | (("l" | "L") : "l_letter-en")
+    | (("m" | "M") : "m_letter-en")
+    | (("n" | "N") : "n_letter-en")
+    | (("o" | "O") : "o_letter-en")
+    | (("p" | "P") : "p_letter-en")
+    | (("q" | "Q") : "q_letter-en")
+    | (("r" | "R") : "r_letter-en")
+    | (("s" | "S") : "s_letter-en")
+    | (("t" | "T") : "t_letter-en")
+    | (("u" | "U") : "u_letter-en")
+    | (("v" | "V") : "v_letter-en")
+    | (("w" | "W") : "w_letter-en")
+    | (("x" | "X") : "x_letter-en")
+    | (("y" | "Y") : "y_letter-en")
+    | (("z" | "Z") : "z_letter-en")
+];
+
+khmer_letters = Project[khmer_mappings, 'input'];
+khmer_coeng = "្";
+khmer_clusters_cc =  khmer_letters khmer_coeng khmer_letters;
+khmer_clusters_ccc = khmer_clusters_cc khmer_coeng khmer_letters;
+
+export MAPPINGS = Optimize[khmer_mappings | latin_mappings];
+
+mapping_dot =
+  (MAPPINGS | khmer_clusters_cc | khmer_clusters_ccc) ("." : "")?;
+
+export LSEQ_MARKUP = Optimize[
+  universal_rules.semclass_letters
+  universal_rules.letters
+  (mapping_dot universal_rules.ins_space)* mapping_dot
+  universal_rules.rec_sep
+  @ universal_rules.CLEAN_SPACES
+];

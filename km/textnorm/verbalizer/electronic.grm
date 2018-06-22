@@ -1,0 +1,133 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Verbalizer for electronic items such as URLs and email addresses.
+# These will only contain ascii characters and digits...so the rules
+# are pretty much like in English.
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+import 'verbatim.grm' as verbatim;
+
+dot = "." : "ដត់";
+electronic_verbatim =
+    (("@" | "_" | "-" | ":" | "/") @ verbatim.MAPPINGS) | dot
+;
+
+kh = "kh" : "k_letter-en h_letter-en";
+edu = "edu" : "e_letter-en d_letter-en u_letter-en";
+ac = "ac" : "a_letter-en c_letter-en";
+go = "go" : "g_letter-en o_letter-en";
+or = "or" : "o_letter-en r_letter-en";
+co = "co" : "c_letter-en o_letter-en";
+
+read_verbatim = universal_rules.ins_space
+                (universal_rules.kNotRecSep+ @ verbatim.MAPPINGS)
+                universal_rules.ins_space;
+
+verbatim_component = universal_rules.URL_LSEQS @ read_verbatim+;
+number_component = universal_rules.kDigit+ @ read_verbatim+;
+
+deal_with_dots = CDRewrite[dot, "", "", universal_rules.sigma_star];
+www_dot =
+  "www." : "ដាប់ប៊លយូ ដាប់ប៊លយូ ដាប់ប៊លយូ" universal_rules.ins_space dot universal_rules.ins_space;
+popular_sites =
+  StringFile['urls.txt'];
+
+read_electronic = (
+                    (
+                      (
+                        (www_dot<-1>)?
+                        universal_rules.ins_space
+                        (
+                          (popular_sites <-1>) |
+                          (verbatim_component) |
+                          (number_component<1>) |
+                          (electronic_verbatim) |
+                          (verbatim.MAPPINGS <2>)
+                        )
+                        universal_rules.ins_space
+                      )+
+                    )<1>
+                  )*;
+
+# special case to read Twitter hashtags more naturally
+read_hashtag = ("#" : " ទ្រុង ជ្រូក ")
+               (
+                 universal_rules.ins_space
+                 (universal_rules.kAlpha+ @ universal_rules.lower_case)
+                 ("_" : " ")?
+                 universal_rules.ins_space
+               )+;
+
+url_suffix = (".com" : dot universal_rules.ins_space "com")
+  | (".edu" : dot universal_rules.ins_space edu)
+  | (".org" : dot universal_rules.ins_space "org")
+  | (".net" : dot universal_rules.ins_space "net")
+  | (".ac.kh" : dot universal_rules.ins_space ac universal_rules.ins_space dot universal_rules.ins_space kh)
+  | (".co.kh" : dot universal_rules.ins_space co universal_rules.ins_space dot universal_rules.ins_space kh)
+  | (".go.kh" : dot universal_rules.ins_space go universal_rules.ins_space dot universal_rules.ins_space kh)
+  | (".net.kh" : dot universal_rules.ins_space "net" universal_rules.ins_space dot universal_rules.ins_space kh)
+  | (".or.kh" : dot universal_rules.ins_space or universal_rules.ins_space dot universal_rules.ins_space kh)
+  | (".in.kh" : dot universal_rules.ins_space "in" universal_rules.ins_space dot universal_rules.ins_space kh)
+;
+
+read_domain = read_electronic
+              ((url_suffix <-1>) |
+               ((("." universal_rules.kAlpha{2}) @ read_verbatim+)<-1>)?);
+
+# Reading of IPv6/MAC addresses; basically just skip the separating characters.
+read_address = ((universal_rules.kHex @ read_verbatim) | ((":" | "-") : " sil "))+;
+
+protocol = (universal_rules.protocol
+            read_verbatim*
+            universal_rules.rec_sep) @ deal_with_dots;
+username = (universal_rules.username
+            (read_electronic | read_hashtag)
+            universal_rules.rec_sep) @ deal_with_dots;
+password = universal_rules.password
+           read_verbatim*
+           universal_rules.rec_sep;
+domain = (universal_rules.domain
+          (read_domain | (read_address<-1>))
+          universal_rules.rec_sep) @ deal_with_dots;
+
+# Read the port digit-by-digit
+port = universal_rules.port (universal_rules.kDigit+ @ read_verbatim+) universal_rules.rec_sep;
+path = universal_rules.path
+       read_electronic
+       universal_rules.rec_sep;
+query_string = universal_rules.query_string
+               read_electronic
+               universal_rules.rec_sep;
+fragment_id = universal_rules.fragment_id
+              read_electronic
+              universal_rules.rec_sep;
+
+electronic = Optimize[
+  (protocol ("" : " ចុច ពីរ បន្ទាត់ ទ្រេត ពីរ "))?
+  (username (("" : " អក្សរសម្ងាត់ ") password ("" : " អ៊ែត "))?)?
+  (domain)?
+  (("" : " ចុចពីរ ") port)?
+  (path)?
+  (("" : " សញ្ញាសួរ ") query_string)?
+  (("" : " ទ្រុងជ្រូក ") fragment_id)?
+];
+
+export ELECTRONIC_MARKUP = Optimize[
+  (universal_rules.semclass_electronic
+   electronic
+  )
+  @ universal_rules.CLEAN_SPACES
+];

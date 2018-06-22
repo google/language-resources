@@ -1,0 +1,56 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Verbalization rules for Khmer.
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+import 'address.grm' as address;
+import 'cardinal.grm' as cardinal;
+import 'connector.grm' as connector;
+import 'date.grm' as date;
+import 'decimal.grm' as decimal;
+import 'digit.grm' as digit;
+import 'electronic.grm' as electronic;
+import 'emoticons.grm' as emoticons;
+import 'fraction.grm' as fraction;
+import 'lseq.grm' as lseq;
+import 'measure.grm' as measure;
+import 'money.grm' as money;
+import 'repeater.grm' as repeater;
+import 'telephone.grm' as telephone;
+import 'time.grm' as time;
+import 'verbatim.grm' as verbatim;
+
+all_grammars =
+    address.ADDRESS_MARKUP
+  | cardinal.CARDINAL_MARKUP
+  | connector.CONNECTOR_MARKUP
+  | date.DATE_MARKUP
+  | decimal.DECIMAL_MARKUP
+  | digit.DIGIT_MARKUP
+  | electronic.ELECTRONIC_MARKUP
+  | emoticons.EMOTICONS_MARKUP
+  | fraction.FRACTION_MARKUP
+  | lseq.LSEQ_MARKUP
+  | measure.MEASURE_MARKUP
+  | money.MONEY_MARKUP
+  | repeater.REPEATER_MARKUP
+  | telephone.PHONE_NUMBER_MARKUP
+  | time.TIME_MARKUP
+  | verbatim.VERBATIM_MARKUP
+# universal_rules.clear_space_star
+;
+
+export ALL = Optimize[universal_rules.clear_space_star all_grammars universal_rules.clear_space_star];

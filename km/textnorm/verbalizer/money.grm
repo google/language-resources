@@ -1,0 +1,107 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Currencies for Khmer.
+# money {amount {integer_part: "25" fractional_part: "05"}
+#   currency: "aud" style: 1}
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+import 'cardinal.grm' as c ;
+import 'decimal.grm' as d ;
+
+quantities =
+    ("1000000" : "លាន")
+  | ("10000000" : "កោដិ")
+  | ("1000000000" : "ប៊ីលាន")
+  | ("1000000000000" : "ទ្រីលាន");
+
+minor_unit = StringFile[
+    'money_minor.txt'];
+major_unit = StringFile[
+    'money_major.txt'];
+
+minor_markup = universal_rules.currency minor_unit universal_rules.rec_sep;
+major_markup = universal_rules.currency major_unit universal_rules.rec_sep;
+
+# Reads just the major part of the money amount, discards the fraction.
+major_part = universal_rules.integer_part c.CARDINAL universal_rules.rec_sep;
+# Reads just the minor part of the money amount, discards the integer.
+minor_part = universal_rules.fractional_part c.CARDINAL universal_rules.rec_sep;
+
+# Generates verbalization of either major or minor part with
+# specialization for a singular form for 1.
+func MoneyPart[part, single_markup] {
+  return (part universal_rules.ins_space single_markup<-20>);
+}
+
+# No minor unit: jpy 4,50 -> បួន ក្បៀស ប្រាំ យ៉េន
+# Note that Khmer speakers will pronounce this in exactly the same way that they
+# pronounce a decimal. For example, usd 25,01 will be pronounced as
+# ម្ភៃ ប្រាំ ក្បៀស សូន្យ មួយ ដុល្លារ អាមេរិក, which means
+# "twenty five comma zero one dollars".
+normal =
+  d.DECIMAL
+  universal_rules.ins_space
+  major_markup
+  (universal_rules.style1 | universal_rules.style2 | universal_rules.style3 | universal_rules.del_space_star)
+;
+
+# Read both major and minor units explicitly.
+# e.g., thb 10,12 -> ដប់ បាត ដប់ ពីរ សាតាំង
+# (English version: usd 10,12 -> ten dollars and twelve cents)
+major_and_minor =
+  MoneyPart[major_part, major_markup]
+  universal_rules.ins_space
+  MoneyPart[minor_part, minor_markup]
+  (universal_rules.style1 | universal_rules.style2 | universal_rules.style3);
+
+# Anything with a quantity.
+with_quantity = d.DECIMAL
+  universal_rules.ins_space universal_rules.quantity quantities universal_rules.ins_space universal_rules.rec_sep
+  major_markup (universal_rules.style1 | universal_rules.style2 | universal_rules.style3 | universal_rules.del_space_star);
+
+# Major part only.
+# Includes minor parts of value zero - you don't say
+# "twelve dollars and zero cents" even if the .00 is written.
+amount_major_only =
+  universal_rules.integer_part c.CARDINAL universal_rules.rec_sep
+  (universal_rules.fractional_part ("0" : "")+ universal_rules.rec_sep)?
+;
+
+major_only =
+  (amount_major_only universal_rules.ins_space major_markup)
+  (universal_rules.style1 | universal_rules.del_space_star)
+;
+
+amount_minor_only =
+  (universal_rules.integer_part ("0" : "")+ universal_rules.rec_sep)?
+  universal_rules.fractional_part
+  c.CARDINAL
+  universal_rules.rec_sep
+;
+
+minor_only =
+  (amount_minor_only universal_rules.ins_space minor_markup)
+  (universal_rules.style1 | universal_rules.del_space_star)
+;
+
+export MONEY_MARKUP = Optimize[
+  universal_rules.semclass_money
+  ( (minor_only <-51>)
+  | (major_only <-50>)
+  | (major_and_minor <3>)
+  | (normal <4>)
+  | (with_quantity <5>))
+];

@@ -1,0 +1,42 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Khmer Verbalizer for verbatim; does a character by character
+# mapping from input character to output words.
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+import 'digit.grm' as digit;
+import 'lseq.grm' as lseq;
+
+raw_mappings = StringFile[
+  'verbatim.tsv'];
+
+mappings = universal_func.EscapedMappings[raw_mappings];
+
+export MAPPINGS = Optimize[
+  digit.DIGIT |
+  lseq.MAPPINGS |
+  mappings
+];
+export REPEATED_MAPPINGS = Optimize[
+  (MAPPINGS universal_rules.ins_space)* MAPPINGS universal_rules.del_space_star
+];
+
+export VERBATIM_MARKUP = Optimize[
+  universal_rules.semclass_verbatim
+  universal_rules.verbatim
+  REPEATED_MAPPINGS
+  universal_rules.rec_sep
+];

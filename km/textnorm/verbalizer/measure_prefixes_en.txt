@@ -1,0 +1,14 @@
+peta	ពែតា
+tera	តេរ៉ា
+giga	ជីហ្គា
+mega	មេហ្គា
+kilo	គីឡូ
+hecto	ហិកតូ
+deca	ដេកា
+deci	ដេស៊ី
+centi	សង់ទី
+milli	មីល្លី
+micro	ម៉ៃក្រូ
+nano	ណាណូ
+pico	ពីកូ
+atto	អាតូ

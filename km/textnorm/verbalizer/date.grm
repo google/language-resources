@@ -1,0 +1,196 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Khmer Verbalizer for dates. Takes ascii protocol buffers for a
+# date and convert it to regular Khmer words.
+# example input:
+# date { day: 31 month: 2 era: "នៃ គ្រិស្តសករាជ" year: 2556 style: 1}
+# example output:
+# ថ្ងៃ ទី សាមសិប មួយ ខែកុម្ភៈ ឆ្នាំពីរ ពាន់ ប្រាំ
+# រយ ហាសិប ប្រាំមួយនៃ គ្រិស្តសករាជ
+#
+# Era, if it exists, must follow the year.
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+import 'cardinal.grm' as c;
+
+khmer_month_number =
+  "១" | "២" | "៣" | "៤" | "៥" | "៦" | "៧" | "៨" | "៩" | "១០" | "១១" | "១២";
+
+month_number_to_full_name =
+    ("1" : "មករា")
+  | ("2" : "កុម្ភៈ")
+  | ("3" : "មិនា")
+  | ("4" : "មេសា")
+  | ("5" : "ឧសភា")
+  | ("6" : "មិថុនា")
+  | ("7" : "កក្កដា")
+  | ("8" : "សីហា")
+  | ("9" : "កញ្ញា")
+  | ("10" : "តុលា")
+  | ("11" : "វិច្ឆិកា")
+  | ("12" : "ធ្នូ")
+;
+
+month_full_name =
+    "មករា"
+  | "កុម្ភៈ"
+  | "មិនា"
+  | "មេសា"
+  | "ឧសភា"
+  | "មិថុនា"
+  | "កក្កដា"
+  | "សីហា"
+  | "កញ្ញា"
+  | "តុលា"
+  | "វិច្ឆិកា"
+  | "ធ្នូ"
+;
+
+# In case of ខែ (month) + number, remove a word "ខែ" (month) and leave only
+# verbalized number. The word "ខែ" (month) will be put back later in the end.
+# The reason here is because the verbalizer will also put "ខែ" to a month
+# in another formats (month_full_name) as well. Add it below is a little
+# bit cleaner than add it above, in the month_number_to_full_name and in the
+# month_full_name rules.
+month_ordinal_name =
+  ("ខែ" : "")
+  universal_rules.clear_space?
+  ((universal_rules.any_month | khmer_month_number) @ c.CARDINAL)
+;
+
+months = month_number_to_full_name | month_full_name | month_ordinal_name;
+
+weekdays_number_to_full_name =
+    ("1" : "ចន្ទ")
+  | ("2" : "អង្គារ")
+  | ("3" : "ពុធ")
+  | ("4" : "ព្រហស្បតិ៍")
+  | ("5" : "សុក្រ")
+  | ("6" : "សៅរ៍")
+  | ("7" : "អាទិត្យ")
+;
+
+weekdays_full_name =
+    "ចន្ទ"
+  | "អង្គារ"
+  | "ពុធ"
+  | "ព្រហស្បតិ៍"
+  | "សុក្រ"
+  | "សៅរ៍"
+  | "អាទិត្យ"
+;
+
+weekdays = weekdays_number_to_full_name | weekdays_full_name;
+
+era_before_ce =
+  universal_rules.era
+  ("មុន គ្រិស្តសករាជ" : "")
+  universal_rules.rec_sep
+;
+
+era_of_ce =
+  universal_rules.era
+  ("នៃ គ្រិស្តសករាជ" : "")
+  universal_rules.rec_sep
+;
+
+era_ce =
+  universal_rules.era
+  ("គ្រិស្តសករាជ" : "")
+  universal_rules.rec_sep
+;
+
+era_before_be =
+  universal_rules.era
+  ("មុន ពុទ្ធសករាជ" : "")
+  universal_rules.rec_sep
+;
+
+era_of_be =
+  universal_rules.era
+  ("នៃ ពុទ្ធសករាជ" : "")
+  universal_rules.rec_sep
+;
+
+era_be =
+  universal_rules.era
+  ("ពុទ្ធសករាជ" : "")
+  universal_rules.rec_sep
+;
+
+read_year = universal_rules.year ("" : "ឆ្នាំ ") c.CARDINAL universal_rules.rec_sep;
+
+weekday_part =
+  universal_rules.weekday
+  ("" : "ថ្ងៃ ")
+  weekdays
+  ("" : " ទី ")
+  universal_rules.rec_sep
+;
+
+# input: day:10 month:12 year:1967
+# output "the tenth of December nineteen sixty seven"
+style1 = Optimize[
+  (
+    (weekday_part? universal_rules.day c.CARDINAL universal_rules.ins_space universal_rules.rec_sep)?
+    universal_rules.month
+    ("" : "ខែ ")
+    (universal_rules.delete_initial_zero @ months)
+    universal_rules.ins_space
+    universal_rules.rec_sep
+  )?
+  (
+      (universal_rules.year ("" : "ឆ្នាំ ") c.CARDINAL universal_rules.rec_sep)
+    | (era_before_ce read_year ("" : " មុន គ្រិស្តសករាជ"))
+    | (era_of_ce read_year ("" : " នៃ គ្រិស្តសករាជ"))
+    | (era_ce read_year ("" : " គ្រិស្តសករាជ"))
+    | (era_before_be read_year ("" : " មុន ពុទ្ធសករាជ"))
+    | (era_of_be read_year ("" : " នៃ ពុទ្ធសករាជ"))
+    | (era_be read_year ("" : " ពុទ្ធសករាជ"))
+
+  )
+  (universal_rules.style1 | universal_rules.del_space_star)
+];
+
+# input: day: 8
+# output: ថ្ងៃ ទី ប្រាំបី (<day_prefix> + 8)
+# input: weekday: "សៅរ៍" day: 12 style: 1
+# output: ថ្ងៃ សៅរ៍ ទី ដប់ ពីរ (<saturday> + 12)
+day_only = Optimize[
+  (("" : "ថ្ងៃ ទី ") | weekday_part)
+  universal_rules.day c.CARDINAL universal_rules.rec_sep
+  (universal_rules.style1 | universal_rules.del_space_star)
+];
+
+month_only = Optimize[
+  universal_rules.month
+  ("" : "ខែ ")
+  (universal_rules.delete_initial_zero @ months)
+  universal_rules.rec_sep
+  (universal_rules.style1 | universal_rules.del_space_star)
+];
+
+no_year = Optimize[
+  weekday_part?
+  universal_rules.day c.CARDINAL universal_rules.ins_space
+  universal_rules.rec_sep
+  month_only
+];
+
+export DATE_MARKUP = Optimize[
+  universal_rules.semclass_date
+  (style1 | day_only | month_only | no_year)
+];

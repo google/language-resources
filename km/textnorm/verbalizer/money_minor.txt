@@ -1,0 +1,16 @@
+aud	សេន
+cad	សេន
+chf	រ៉ាផិន
+cny	សេន
+eur	សេន
+gbp	ផិននី
+idr	សេន
+inr	ប៉ៃសា
+jpy	សេន
+khr	សេន
+lak	អាត
+myr	សេន
+php	សេនតាវ៉ូ
+thb	សាតាំង
+usd	សេន
+vnd	ហៅ

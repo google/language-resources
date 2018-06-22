@@ -1,0 +1,122 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Khmer Verbalizer for times. Takes ascii protocol buffers for a
+# time and converts it to regular Khmer words.
+#
+# example input: "time { hours: 22 minutes: 51 seconds: 33 style: 1}"
+# example output: "ម៉ោង ដប់ ហាសិប មួយ នាទី សាមសិប បី វិនាទី យប់"
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+import 'cardinal.grm' as c;
+import 'lseq.grm' as l;
+
+hour_mark = "" : " ម៉ោង ";
+minute_mark = "" : " នាទី ";
+second_mark = "" : " វិនាទី ";
+
+# Typical cardinal number but say nothing if the input is "0" or "00".
+func omitZeroCardinalWithTimeUnit[time_unit] {
+  return ((universal_rules.ins_space (universal_rules.non_zero_number @ c.CARDINAL) time_unit) |
+          (("0" | "00") : ""));
+}
+
+minute_part = universal_rules.minutes omitZeroCardinalWithTimeUnit[minute_mark] universal_rules.rec_sep;
+
+second_part = universal_rules.seconds omitZeroCardinalWithTimeUnit[second_mark] universal_rules.rec_sep;
+
+# When Khmer speakers pronounce time zone, they will put hour_mark after the
+# hour number.
+# example input: zone: "GMT"
+# example output: g_letter-en m_letter-en t_letter-en
+# example input: zone: "UTC-07:30"
+# example output: u_letter-en t_letter-en c_letter-en ដក ប្រាំ ម៉ោង សាមសិប នាទី
+# which can be interpreted as "u t c minus seven hours thirty minutes"
+zone =
+  universal_rules.zone
+  (universal_rules.ins_space l.MAPPINGS)+
+  (
+    universal_rules.ins_space
+    (("+" : "បូក") | ("-" : "ដក"))
+    universal_rules.ins_space
+    c.CARDINAL hour_mark
+    ((":" : "") c.CARDINAL minute_mark)?
+  )?
+  universal_rules.rec_sep;
+
+consume_speak_period = universal_rules.speak_period_true | universal_rules.speak_period_false;
+
+minutes_and_seconds =
+  (minute_part)?
+  (second_part)?
+  (universal_rules.del_space_star consume_speak_period)?
+  (universal_rules.del_space_star ("style: 1" : ""))?
+  zone?
+;
+
+# Below, we specify the suffixes used for certain periods of the day, kind of
+# like "a.universal_rules." and "p.universal_rules." in English but with six different such periods in Khmer
+# rather than just two. Since a suffix might already appears in the input text
+# and our classifer won't consume it, we will express suffixes only when hour
+# is greater than 12 or hour is 0.
+hour_13_to_15 =
+  hour_mark
+  universal_rules.hours
+  (("13" | "14" | "15") @ universal_rules.hours_24_to_12 @ c.CARDINAL)
+  universal_rules.rec_sep
+;
+hour_16_to_18 =
+  hour_mark
+  universal_rules.hours
+  (("16" | "17" | "18") @ universal_rules.hours_24_to_12 @ c.CARDINAL)
+  universal_rules.rec_sep
+;
+hour_19_to_23 =
+  hour_mark
+  universal_rules.hours
+  (("19" | "20" | "21" | "22" | "23") @ universal_rules.hours_24_to_12 @ c.CARDINAL)
+  universal_rules.rec_sep
+;
+hour_midnight =
+  hour_mark
+  universal_rules.hours
+  (("0" | "00" | "24") @ universal_rules.hours_24_to_12 @ c.CARDINAL)
+  universal_rules.rec_sep
+;
+
+time_with_out_suffix = hour_mark
+  universal_rules.hours c.CARDINAL universal_rules.rec_sep minutes_and_seconds;
+time_13_to_15 = hour_13_to_15 minutes_and_seconds ("" : " រសៀល");
+time_16_to_18 = hour_16_to_18 minutes_and_seconds ("" : " ល្ងាច");
+time_19_to_23 = hour_19_to_23 minutes_and_seconds ("" : " យប់");
+time_midnight = hour_midnight minutes_and_seconds ("" : " អធ្រាត្រ");
+
+# Style 1: typical, formal time reading.
+# E.g., ម៉ោង ដប់ ហាសិប មួយ នាទី សាមសិប បី វិនាទី យប់
+# Literally, "hour ten fifty one minutes thirty three second in the evening"
+style1 =
+    (time_with_out_suffix<1>)
+  | time_13_to_15
+  | time_16_to_18
+  | time_19_to_23
+  | time_midnight
+;
+
+export TIME_MARKUP = Optimize[
+(
+  universal_rules.semclass_time
+  style1
+) @ universal_rules.CLEAN_SPACES
+];

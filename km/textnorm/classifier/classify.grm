@@ -20,7 +20,7 @@ import 'date.grm' as date;
 import 'lseq.grm' as lseq;
 import 'measure.grm' as measure;
 import 'money.grm' as money;
-import 'repeater.grm' as repeater;
+import 'classifier_repeater.grm' as repeater;
 import 'roman_numeral.grm' as roman_numeral;
 import 'telephone.grm' as telephone;
 import 'time.grm' as time;

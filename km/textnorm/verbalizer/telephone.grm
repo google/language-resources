@@ -1,0 +1,71 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Khmer verbalizer for phone numbers.
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+import 'cardinal.grm' as cardinal;
+import 'digit.grm' as digit;
+
+cardinal_with_leading_zeroes =
+  (("0" @ digit.DIGIT) universal_rules.ins_space<-1>)*
+  cardinal.CARDINAL
+;
+
+# A group of two to four digits will be pronounced as a cardinal.
+# Otherwise, pronounce them digit by digit.
+# Leading zeroes will be pronounced digit by digit.
+read_token =
+    (universal_rules.kDigit{2,4} @ cardinal_with_leading_zeroes<-1>)
+  | digit.DIGIT
+;
+
+# When Khmer speakers pronounce an area code of the telephone number, they tend
+# to start with a single zero and the following two digits will be pronounced
+# in the way that they pronounce a cardinal.
+read_first_token =
+    (
+      (universal_rules.kDigit{3} @ cardinal_with_leading_zeroes)
+      (universal_rules.ins_sil read_token)?
+    )
+  | (read_token<5>)
+;
+
+area_or_country_code =
+  (
+      universal_rules.number_part
+    | (universal_rules.country_code ("" : "បូក "))
+  )
+  read_first_token
+  universal_rules.rec_sep
+;
+
+number_part =
+  universal_rules.number_part
+  read_token
+  universal_rules.rec_sep
+;
+
+phone_number = Optimize[
+  area_or_country_code
+  (universal_rules.ins_sil number_part)*
+];
+
+export PHONE_NUMBER_MARKUP = Optimize[
+  (
+    universal_rules.semclass_telephone
+    phone_number
+  ) @ universal_rules.CLEAN_SPACES
+];

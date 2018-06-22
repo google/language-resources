@@ -1,0 +1,66 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Khmer Verbalizer for decimals. Can verbalize a decimal thats contain both
+# an integer part and a fractional part. An exponent is also support here.
+
+import 'number_names_rules.grm' as n;
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+import 'cardinal.grm' as c;
+import 'digit.grm' as d;
+
+minus_word = Project[n.MINUS, 'output'];
+
+# Handle the 'negative: {true,false}' part.
+negative =
+  (universal_rules.negative_true : minus_word " ") | (universal_rules.negative_false : "")
+;
+
+# When Khmer speakers pronounce a decimal, if it is a negative number, they will
+# pronounce 'ដក' (minus) first, then they will pronounce the integer part, and
+# if the fractional part exists, they will pronounce 'ក្បៀស' (comma) before
+# pronouncing the fractional part. The integer part is pronounced in the same
+# way that they pronounce cardinals. For the fractional part, leading zero(es)
+# are pronounced digit by digit, and the rest is pronounced as a cardinal.
+# 'ក្បៀស' (','), 'កណ្ដកសញ្ញា' (','), and 'ចុច' ('.') are interchangable.
+# Since 'ក្បៀស' is the most common way to pronounce the joining word, we prefer
+# 'ក្បៀស' here.
+integer_fraction =
+  negative?
+  universal_rules.integer_part
+  c.CARDINAL
+  universal_rules.rec_sep
+  (("" : " ក្បៀស ")
+   universal_rules.fractional_part
+   (("0" @ d.DIGIT<-1>) universal_rules.ins_space)*
+   c.CARDINAL
+   universal_rules.rec_sep)?
+;
+
+# Handle the 'exponent: "<cardinal>"' part.
+# The phrase 'គុណ នឹង ដប់ ស្វ័យគុណ' means 'times ten to'.
+exponent =
+  universal_rules.exponent
+  ("" : " គុណ នឹង ដប់ ស្វ័យគុណ ")
+  c.CARDINAL
+  universal_rules.rec_sep
+;
+
+export DECIMAL = Optimize[integer_fraction exponent?];
+
+export DECIMAL_MARKUP = Optimize[
+  universal_rules.semclass_decimal
+  DECIMAL
+];

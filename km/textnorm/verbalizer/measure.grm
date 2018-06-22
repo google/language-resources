@@ -1,0 +1,104 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Khmer Verbalizer for measures.
+# measure { decimal {integer_part: 33 fractional_part: "047"} units:
+# "kilogram"}
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+import 'cardinal.grm' as c;
+import 'decimal.grm' as d;
+import 'fraction.grm' as f;
+
+english_units = StringFile[
+    'measure_units_en.txt'];
+
+english_prefixes = StringFile[
+    'measure_prefixes_en.txt'];
+
+khmer_units = StringFile[
+    'measure_units_km.txt'];
+
+khmer_prefixes = StringFile[
+    'measure_prefixes_km.txt'];
+
+prefixes = english_prefixes | khmer_prefixes;
+units = english_units | khmer_units;
+
+# We also support units like គីឡូ ម៉ែត្រ (kilo meter).
+combined_units = (prefixes universal_rules.one_space)? units;
+
+khmer_square = "ការេ";
+khmer_cubic = "គូប";
+
+# Support for square & cubic meters, kilometers, etc.
+# For Khmer speakers, when they pronounce a unit with 'square' or 'cubic',
+# they will pronounce it as a suffix of the phrase. So we need to handle it
+# by adding a corresponding suffix, if a prefix 'square' or a prefix 'cubic'
+# is found.
+square_units =
+  ("square" : "")
+  universal_rules.clear_space_star
+  combined_units
+  universal_rules.one_space
+  ("" : khmer_square)
+;
+cubic_units =
+  ("cubic" : "")
+  universal_rules.clear_space_star
+  combined_units
+  universal_rules.one_space
+  ("" : khmer_cubic)
+;
+basic_and_power_units =
+    square_units
+  | cubic_units
+  | (combined_units (universal_rules.one_space (khmer_square | khmer_cubic))?)
+;
+
+# Support for ratio units. The expected format is
+# <unit> "per" <unit>. Sometime, the first <unit> is not necessary,
+# for example, បី ក្នុង មួយ ឆ្នាំ means "three in a year".
+ratio_units =
+  (basic_and_power_units universal_rules.one_space)?
+  (("ក្នុង មួយ" | "per") : "ក្នុង មួយ")
+  universal_rules.one_space
+  basic_and_power_units
+;
+
+quantity = universal_rules.CARDINAL_TO_DECIMAL @ (c.CARDINAL | d.DECIMAL | f.FRACTION);
+
+# Just units, no quantity
+export STYLE_UNIT_ONLY = Optimize[
+  universal_rules.units
+  (ratio_units | basic_and_power_units)
+  universal_rules.rec_sep
+];
+
+export MEASURE_MARKUP = Optimize[
+  (universal_rules.semclass_measure
+  quantity
+  universal_rules.ins_space
+  STYLE_UNIT_ONLY
+ )
+  @ universal_rules.CLEAN_SPACES
+];
+
+export MEASURE_UNIT_ONLY = Optimize[
+  (universal_rules.semclass_measure
+  STYLE_UNIT_ONLY
+ )
+  @ universal_rules.CLEAN_SPACES
+];

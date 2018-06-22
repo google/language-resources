@@ -19,6 +19,11 @@ load("//:thrax.bzl", "grm_regression_test")
 
 base_path = "km/textnorm/classifier/"
 
+exports_files([
+    "classifier_repeater.grm",
+    "khmer.grm",
+])
+
 [
     grm_regression_test(
         name = test_rules + "_tests",
@@ -34,7 +39,7 @@ base_path = "km/textnorm/classifier/"
         "lseq",
         "measure",
         "money",
-        "repeater",
+        "classifier_repeater",
         "telephone",
         "time",
         "tokenize_and_classify",
@@ -61,7 +66,6 @@ universal_deps = [
     "universal_rules.far",
     "universal_rules.grm",
 ]
-
 
 [
     thrax_compile_grm(
@@ -95,7 +99,7 @@ thrax_compile_grm(
 )
 
 thrax_compile_grm(
-    name = "repeater",
+    name = "classifier_repeater",
     deps = [
         "khmer.far",
         "khmer.grm",
@@ -122,8 +126,6 @@ thrax_compile_grm(
     ] + universal_deps,
 )
 
-
-
 thrax_compile_grm(
     name = "classify",
     deps = [
@@ -141,8 +143,8 @@ thrax_compile_grm(
         "measure.far",
         "money.grm",
         "money.far",
-        "repeater.grm",
-        "repeater.far",
+        "classifier_repeater.grm",
+        "classifier_repeater.far",
         "roman_numeral.grm",
         "roman_numeral.far",
         "telephone.grm",
@@ -189,8 +191,8 @@ thrax_compile_grm(
         "measure.far",
         "money.grm",
         "money.far",
-        "repeater.grm",
-        "repeater.far",
+        "classifier_repeater.grm",
+        "classifier_repeater.far",
         "roman_numeral.grm",
         "roman_numeral.far",
         "telephone.grm",

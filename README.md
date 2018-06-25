@@ -16,9 +16,12 @@ This is not an official Google product.
 | hi_ur     | Hindi & Urdu       |
 | is        | Icelandic          |
 | jv        | Javanese           |
+| km        | Khmer              |
 | lo        | Lao                |
 | my        | Burmese / Myanmar  |
+| ne        | Nepali             |
 | si        | Sinhala            |
+| su        | Sundanese          |
 | xh        | Xhosa              |
 | zu        | Zulu               |
 

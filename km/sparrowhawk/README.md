@@ -1,4 +1,4 @@
-# Sinhala Sparrowhawk Utils Usage 
+# Khmer Sparrowhawk Utils Usage 
 
 
 1. Build Khmer sparrowhawk

@@ -2,6 +2,8 @@ ADDRESS_MARKUP	ផ្លូវ 80	address { thoroughfare { premises: "ផ្ល�
 ADDRESS_MARKUP	វិថី 75	address { thoroughfare { premises: "វិថី" dependent_name: "75" } }
 ADDRESS_MARKUP	ផ្លូវ លេខ 80	address { thoroughfare { premises: "ផ្លូវ លេខ" dependent_name: "80" } }
 ADDRESS_MARKUP	វិថី លេខ 75	address { thoroughfare { premises: "វិថី លេខ" dependent_name: "75" } }
+ADDRESS_MARKUP	ផ្លូវ លេខ 12	address { thoroughfare { premises: "ផ្លូវ លេខ" dependent_name: "12" } }
+ADDRESS_MARKUP	វិថី លេខ 5	address { thoroughfare { premises: "វិថី លេខ" dependent_name: "5" } }
 ADDRESS_MARKUP	ផ្លូវ ៩៧៩	address { thoroughfare { premises: "ផ្លូវ" dependent_name: "979" } }
 ADDRESS_MARKUP	វិថី ៣៨	address { thoroughfare { premises: "វិថី" dependent_name: "38" } }
 ADDRESS_MARKUP	ផ្លូវ លេខ ៩៧៩	address { thoroughfare { premises: "ផ្លូវ លេខ" dependent_name: "979" } }

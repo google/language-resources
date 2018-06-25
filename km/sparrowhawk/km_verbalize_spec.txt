@@ -1,14 +1,14 @@
-class_spec {
-  semiotic_class: "address"
-  style_spec {
-    record_spec {
-      field_path: "address.thoroughfare.premises"
-    }
-    record_spec {
-      field_path: "address.thoroughfare.dependent_name"
-    }
-  }
-}
+# class_spec {
+#   semiotic_class: "address"
+#   style_spec {
+#     record_spec {
+#       field_path: "address.thoroughfare.premises"
+#     }
+#     record_spec {
+#       field_path: "address.thoroughfare.dependent_name"
+#     }
+#   }
+# }
 class_spec {
   semiotic_class: "cardinal"
   style_spec {
@@ -25,14 +25,14 @@ class_spec {
     }
   }
 }
-class_spec {
-  semiotic_class: "concept"
-  style_spec {
-    record_spec {
-      field_path: "concept"
-    }
-  }
-}
+# class_spec {
+#   semiotic_class: "concept"
+#   style_spec {
+#     record_spec {
+#       field_path: "concept"
+#     }
+#   }
+# }
 class_spec {
   semiotic_class: "date"
   style_spec {

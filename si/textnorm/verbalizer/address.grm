@@ -1,26 +1,22 @@
+# Copyright 2018 Google LLC
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#    https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# Copyright 2016 and onwards, Google, Inc.
 
 # Sinhala address verbalizer.
 import 'universal_rules.grm' as universal_rules;
 import 'universal_func.grm' as universal_func;
 import 'cardinal.grm' as cardinal;
 import 'lseq.grm' as lseq;
-
-remove_quote = "\"" : "";
-opening_brace = "{" : "";
-closing_brace = "}" : "";
 
 number_prefix = ("අංක" | ("නො." : "නොම්මර"));
 
@@ -35,23 +31,14 @@ number_part = Optimize[
 ];
 
 export STREET_NUMBER_MARKUP = Optimize[
-  universal_rules.address
-  opening_brace
-  universal_rules.address_thoroughfare
-  opening_brace
-  universal_rules.address_premises
-  remove_quote
+  universal_rules.semclass_address
+  universal_rules.premises
   number_prefix
-  remove_quote
+  universal_rules.rec_sep
   universal_rules.ins_space
-  universal_rules.address_number
-  remove_quote
+  universal_rules.number
   number_part
-  remove_quote
-  universal_rules.del_space_star
-  closing_brace
-  universal_rules.del_space_star
-  closing_brace
+  universal_rules.rec_sep
 ];
 
 export ADDRESS_MARKUP = Optimize[

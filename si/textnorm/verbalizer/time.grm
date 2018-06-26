@@ -1,16 +1,16 @@
+# Copyright 2018 Google LLC
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#    https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# Copyright 2016 and onwards, Google, Inc.
 
 # Sinhala Verbalizer for times. Takes ascii protocol buffers for a
 # time and convert it to regular Sinhala words.
@@ -45,40 +45,36 @@ hours_24_to_12 =
 ;
 
 verbalize_am_hours =
-  universal_rules.time_hours
+  universal_rules.hours
   ("" : "පෙරවරු ")
   (morning_hours @ cardinal)
-  universal_rules.del_space_star;
+  universal_rules.rec_sep;
 
 verbalize_pm_hours =
-  universal_rules.time_hours
+  universal_rules.hours
   ("" : "පස්වරු ")
   (hours_24_to_12 @ cardinal)
-  universal_rules.del_space_star;
+  universal_rules.rec_sep;
 
 # Sinhala equivalent of "and" is used between hour and minutes.
 verbalize_minutes =
-  universal_rules.del_space_star
-  universal_rules.time_minutes
+  universal_rules.minutes
   (("" : "යි ") (universal_rules.non_zero_number @ cardinal) | ("0" : ""))
-  universal_rules.del_space_star
+  universal_rules.rec_sep
 ;
 
 # Sinhala equivalent of "and" with Sinhala word for seconds is used between
 # minutes and seconds.
 verbalize_seconds =
-  universal_rules.del_space_star
-  universal_rules.time_seconds
+  universal_rules.seconds
   (("" : "යි තත්පර ") (universal_rules.non_zero_number @ cardinal) | ("0" : ""))
-  universal_rules.del_space_star
+  universal_rules.rec_sep
 ;
 
 sinhala_time = Optimize[
   (verbalize_am_hours | verbalize_pm_hours)
   verbalize_minutes?
   verbalize_seconds?
-  (universal_rules.time_speak_period_true | universal_rules.time_speak_period_false)?
-  (universal_rules.style1 | universal_rules.style2)
 ];
 
 zone_offset =
@@ -89,16 +85,13 @@ zone_offset =
 ;
 
 zone =
-    universal_rules.time_zone
-    universal_rules.quote
+    universal_rules.zone
     (universal_rules.ins_space l.MAPPINGS)*
     zone_offset?
-    universal_rules.quote;
+    universal_rules.rec_sep;
 
 export TIME_MARKUP = Optimize[
-  universal_rules.time
-  universal_rules.opening_brace
+  universal_rules.semclass_time
   sinhala_time
   zone?
-  universal_rules.closing_brace
 ];

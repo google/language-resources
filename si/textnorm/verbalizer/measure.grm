@@ -1,16 +1,16 @@
+# Copyright 2018 Google LLC
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#    https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# Copyright 2016 and onwards, Google, Inc.
 
 # Sinhala Verbalizer for measures.
 # In Sinhala units of the measures will always be verbalized before the number
@@ -19,6 +19,8 @@
 # i.e. මී. 100 or 100m -> meter hundred. Therefore we have two types of inputs.
 # measure { decimal {integer_part: 33 fractional_part: "047"} units: "kilogram"}
 # measure { units: "kilogram" decimal {integer_part: 33 fractional_part: "047"}}
+# Both are serialized the same way by the spec-based serializer
+# measure|units:kilogram|integer_part:33|fractional_part:047|
 
 import 'universal_rules.grm' as universal_rules;
 import 'universal_func.grm' as universal_func;
@@ -55,80 +57,31 @@ basic_and_power_units =
   (((square | cubic) universal_rules.one_space)? combined_units)
 ;
 
-# TODO: Rule for ratios when the units are written with standard
 # units. e.g 100 km/h -> measure { decimal { integer_part: "100" }
 # units: "kilometer per hour" } should be verbalized as "hour per kilometer
 # hundred" format.
 
-quantity = universal_rules.CARDINAL_TO_DECIMAL @
-           (c.CARDINAL_MARKUP | d.DECIMAL_MARKUP | f.FRACTION_MARKUP);
+quantity = universal_rules.CARDINAL_TO_DECIMAL @ (c.CARDINAL | d.DECIMAL | f.FRACTION);
 
 # Just units, no quantity
 export STYLE_UNIT_ONLY = Optimize[
-  universal_rules.measure_units
-  universal_rules.quote
+  universal_rules.units
   basic_and_power_units
   universal_rules.ins_space
-  universal_rules.quote
-  universal_rules.del_space_star
+  universal_rules.rec_sep
 ];
 
-style1 = Optimize[
-  (universal_rules.measure
-  universal_rules.opening_brace
+export MEASURE_MARKUP = Optimize[
+  (universal_rules.semclass_measure
   STYLE_UNIT_ONLY
   quantity
-  universal_rules.closing_brace)
+ )
   @ universal_rules.CLEAN_SPACES
 ];
-
-del_anything = universal_rules.kBytes* : "";
-
-style2 = Optimize[
-  (universal_rules.measure
-  universal_rules.opening_brace
-  del_anything
-  STYLE_UNIT_ONLY
-  universal_rules.closing_brace
-  universal_rules.del_space_star
-  universal_rules.measure
-  universal_rules.opening_brace
-  quantity
-  del_anything
-  universal_rules.closing_brace)
-  @ universal_rules.CLEAN_SPACES
-];
-
-export MEASURE_MARKUP = Optimize[style1 | style2];
 
 export MEASURE_UNIT_ONLY = Optimize[
-  (universal_rules.measure
-  universal_rules.opening_brace
+  (universal_rules.semclass_measure
   STYLE_UNIT_ONLY
-  universal_rules.closing_brace)
+ )
   @ universal_rules.CLEAN_SPACES
 ];
-
-# Reduplication rule for measure; reduplicate for any case which quantity
-# precedes the units in the input.
-redup =
-  universal_rules.measure
-  universal_rules.opening_brace
-  universal_rules.decimal
-  universal_rules.opening_brace
-  universal_rules.decimal_integer
-  universal_rules.quote
-  universal_rules.non_zero_number
-  universal_rules.quote
-  (universal_rules.decimal_fraction
-  universal_rules.quote
-  universal_rules.non_zero_number
-  universal_rules.quote)?
-  universal_rules.closing_brace
-  universal_rules.measure_units
-  universal_rules.quote
-  universal_rules.kLower+
-  universal_rules.quote
-  universal_rules.closing_brace
-;
-export REDUP = Optimize[Project[redup, 'input']];

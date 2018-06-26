@@ -1,16 +1,16 @@
+# Copyright 2018 Google LLC
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#    https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# Copyright 2016 and onwards, Google, Inc.
 
 # Sinhala Verbalizer for verbatim; does a character by character
 # mapping from input character to output words.
@@ -20,8 +20,9 @@ import 'universal_func.grm' as universal_func;
 import 'digit.grm' as digit;
 import 'lseq.grm' as lseq;
 
-mappings = StringFile[
+raw_mappings = StringFile[
   'verbatim.tsv'];
+mappings = universal_func.EscapedMappings[raw_mappings];
 
 export MAPPINGS = Optimize[
   digit.DIGIT |
@@ -29,13 +30,12 @@ export MAPPINGS = Optimize[
   mappings
 ];
 export REPEATED_MAPPINGS = Optimize[
-  (MAPPINGS universal_rules.ins_space)* MAPPINGS universal_rules.del_space_star
+  (MAPPINGS universal_rules.ins_space)* MAPPINGS
 ];
 
 export VERBATIM_MARKUP = Optimize[
+  universal_rules.semclass_verbatim
   universal_rules.verbatim
-  universal_rules.quote
   REPEATED_MAPPINGS
-  universal_rules.quote
-  universal_rules.verbatim_concise_emoji_true?
+  universal_rules.rec_sep
 ];

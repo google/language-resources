@@ -751,84 +751,120 @@ cc_library(
 
 cc_binary(
     name = "fstarcsort",
-    srcs = [prefix_dir + "bin/fstarcsort.cc"],
+    srcs = [
+        prefix_dir + "bin/fstarcsort.cc",
+        prefix_dir + "bin/fstarcsort-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_arcsort"],
 )
 
 cc_binary(
     name = "fstclosure",
-    srcs = [prefix_dir + "bin/fstclosure.cc"],
+    srcs = [
+        prefix_dir + "bin/fstclosure.cc",
+        prefix_dir + "bin/fstclosure-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_closure"],
 )
 
 cc_binary(
     name = "fstcompile",
-    srcs = [prefix_dir + "bin/fstcompile.cc"],
+    srcs = [
+        prefix_dir + "bin/fstcompile.cc",
+        prefix_dir + "bin/fstcompile-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_compile"],
 )
 
 cc_binary(
     name = "fstcompose",
-    srcs = [prefix_dir + "bin/fstcompose.cc"],
+    srcs = [
+        prefix_dir + "bin/fstcompose.cc",
+        prefix_dir + "bin/fstcompose-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_compose"],
 )
 
 cc_binary(
     name = "fstconcat",
-    srcs = [prefix_dir + "bin/fstconcat.cc"],
+    srcs = [
+        prefix_dir + "bin/fstconcat.cc",
+        prefix_dir + "bin/fstconcat-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_concat"],
 )
 
 cc_binary(
     name = "fstconnect",
-    srcs = [prefix_dir + "bin/fstconnect.cc"],
+    srcs = [
+        prefix_dir + "bin/fstconnect.cc",
+        prefix_dir + "bin/fstconnect-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_connect"],
 )
 
 cc_binary(
     name = "fstconvert",
-    srcs = [prefix_dir + "bin/fstconvert.cc"],
+    srcs = [
+        prefix_dir + "bin/fstconvert.cc",
+        prefix_dir + "bin/fstconvert-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_convert"],
 )
 
 cc_binary(
     name = "fstdeterminize",
-    srcs = [prefix_dir + "bin/fstdeterminize.cc"],
+    srcs = [
+        prefix_dir + "bin/fstdeterminize.cc",
+        prefix_dir + "bin/fstdeterminize-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_determinize"],
 )
 
 cc_binary(
     name = "fstdifference",
-    srcs = [prefix_dir + "bin/fstdifference.cc"],
+    srcs = [
+        prefix_dir + "bin/fstdifference.cc",
+        prefix_dir + "bin/fstdifference-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_difference"],
 )
 
 cc_binary(
     name = "fstdisambiguate",
-    srcs = [prefix_dir + "bin/fstdisambiguate.cc"],
+    srcs = [
+        prefix_dir + "bin/fstdisambiguate.cc",
+        prefix_dir + "bin/fstdisambiguate-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_disambiguate"],
 )
 
 cc_binary(
     name = "fstdraw",
-    srcs = [prefix_dir + "bin/fstdraw.cc"],
+    srcs = [
+        prefix_dir + "bin/fstdraw.cc",
+        prefix_dir + "bin/fstdraw-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_draw"],
 )
 
 cc_binary(
     name = "fstencode",
-    srcs = [prefix_dir + "bin/fstencode.cc"],
+    srcs = [
+        prefix_dir + "bin/fstencode.cc",
+        prefix_dir + "bin/fstencode-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [
         ":fstscript_decode",
@@ -838,21 +874,30 @@ cc_binary(
 
 cc_binary(
     name = "fstepsnormalize",
-    srcs = [prefix_dir + "bin/fstepsnormalize.cc"],
+    srcs = [
+        prefix_dir + "bin/fstepsnormalize.cc",
+        prefix_dir + "bin/fstepsnormalize-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_epsnormalize"],
 )
 
 cc_binary(
     name = "fstequal",
-    srcs = [prefix_dir + "bin/fstequal.cc"],
+    srcs = [
+        prefix_dir + "bin/fstequal.cc",
+        prefix_dir + "bin/fstequal-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_equal"],
 )
 
 cc_binary(
     name = "fstequivalent",
-    srcs = [prefix_dir + "bin/fstequivalent.cc"],
+    srcs = [
+        prefix_dir + "bin/fstequivalent.cc",
+        prefix_dir + "bin/fstequivalent-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [
         ":fstscript_equivalent",
@@ -862,91 +907,130 @@ cc_binary(
 
 cc_binary(
     name = "fstinfo",
-    srcs = [prefix_dir + "bin/fstinfo.cc"],
+    srcs = [
+        prefix_dir + "bin/fstinfo.cc",
+        prefix_dir + "bin/fstinfo-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_info"],
 )
 
 cc_binary(
     name = "fstintersect",
-    srcs = [prefix_dir + "bin/fstintersect.cc"],
+    srcs = [
+        prefix_dir + "bin/fstintersect.cc",
+        prefix_dir + "bin/fstintersect-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_intersect"],
 )
 
 cc_binary(
     name = "fstinvert",
-    srcs = [prefix_dir + "bin/fstinvert.cc"],
+    srcs = [
+        prefix_dir + "bin/fstinvert.cc",
+        prefix_dir + "bin/fstinvert-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_invert"],
 )
 
 cc_binary(
     name = "fstisomorphic",
-    srcs = [prefix_dir + "bin/fstisomorphic.cc"],
+    srcs = [
+        prefix_dir + "bin/fstisomorphic.cc",
+        prefix_dir + "bin/fstisomorphic-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_isomorphic"],
 )
 
 cc_binary(
     name = "fstmap",
-    srcs = [prefix_dir + "bin/fstmap.cc"],
+    srcs = [
+        prefix_dir + "bin/fstmap.cc",
+        prefix_dir + "bin/fstmap-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_map"],
 )
 
 cc_binary(
     name = "fstminimize",
-    srcs = [prefix_dir + "bin/fstminimize.cc"],
+    srcs = [
+        prefix_dir + "bin/fstminimize.cc",
+        prefix_dir + "bin/fstminimize-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_minimize"],
 )
 
 cc_binary(
     name = "fstprint",
-    srcs = [prefix_dir + "bin/fstprint.cc"],
+    srcs = [
+        prefix_dir + "bin/fstprint.cc",
+        prefix_dir + "bin/fstprint-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_print"],
 )
 
 cc_binary(
     name = "fstproject",
-    srcs = [prefix_dir + "bin/fstproject.cc"],
+    srcs = [
+        prefix_dir + "bin/fstproject.cc",
+        prefix_dir + "bin/fstproject-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_project"],
 )
 
 cc_binary(
     name = "fstprune",
-    srcs = [prefix_dir + "bin/fstprune.cc"],
+    srcs = [
+        prefix_dir + "bin/fstprune.cc",
+        prefix_dir + "bin/fstprune-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_prune"],
 )
 
 cc_binary(
     name = "fstpush",
-    srcs = [prefix_dir + "bin/fstpush.cc"],
+    srcs = [
+        prefix_dir + "bin/fstpush.cc",
+        prefix_dir + "bin/fstpush-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_push"],
 )
 
 cc_binary(
     name = "fstrandgen",
-    srcs = [prefix_dir + "bin/fstrandgen.cc"],
+    srcs = [
+        prefix_dir + "bin/fstrandgen.cc",
+        prefix_dir + "bin/fstrandgen-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_randgen"],
 )
 
 cc_binary(
     name = "fstrelabel",
-    srcs = [prefix_dir + "bin/fstrelabel.cc"],
+    srcs = [
+        prefix_dir + "bin/fstrelabel.cc",
+        prefix_dir + "bin/fstrelabel-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_relabel"],
 )
 
 cc_binary(
     name = "fstreplace",
-    srcs = [prefix_dir + "bin/fstreplace.cc"],
+    srcs = [
+        prefix_dir + "bin/fstreplace.cc",
+        prefix_dir + "bin/fstreplace-main.cc",
+    ],
     copts = ["-Wno-sign-compare"],
     linkstatic = static_binary,
     deps = [":fstscript_replace"],
@@ -954,63 +1038,90 @@ cc_binary(
 
 cc_binary(
     name = "fstreverse",
-    srcs = [prefix_dir + "bin/fstreverse.cc"],
+    srcs = [
+        prefix_dir + "bin/fstreverse.cc",
+        prefix_dir + "bin/fstreverse-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_reverse"],
 )
 
 cc_binary(
     name = "fstreweight",
-    srcs = [prefix_dir + "bin/fstreweight.cc"],
+    srcs = [
+        prefix_dir + "bin/fstreweight.cc",
+        prefix_dir + "bin/fstreweight-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_reweight"],
 )
 
 cc_binary(
     name = "fstrmepsilon",
-    srcs = [prefix_dir + "bin/fstrmepsilon.cc"],
+    srcs = [
+        prefix_dir + "bin/fstrmepsilon.cc",
+        prefix_dir + "bin/fstrmepsilon-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_rmepsilon"],
 )
 
 cc_binary(
     name = "fstshortestdistance",
-    srcs = [prefix_dir + "bin/fstshortestdistance.cc"],
+    srcs = [
+        prefix_dir + "bin/fstshortestdistance.cc",
+        prefix_dir + "bin/fstshortestdistance-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_shortest_distance"],
 )
 
 cc_binary(
     name = "fstshortestpath",
-    srcs = [prefix_dir + "bin/fstshortestpath.cc"],
+    srcs = [
+        prefix_dir + "bin/fstshortestpath.cc",
+        prefix_dir + "bin/fstshortestpath-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_shortest_path"],
 )
 
 cc_binary(
     name = "fstsymbols",
-    srcs = [prefix_dir + "bin/fstsymbols.cc"],
+    srcs = [
+        prefix_dir + "bin/fstsymbols.cc",
+        prefix_dir + "bin/fstsymbols-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_verify"],
 )
 
 cc_binary(
     name = "fstsynchronize",
-    srcs = [prefix_dir + "bin/fstsynchronize.cc"],
+    srcs = [
+        prefix_dir + "bin/fstsynchronize.cc",
+        prefix_dir + "bin/fstsynchronize-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_synchronize"],
 )
 
 cc_binary(
     name = "fsttopsort",
-    srcs = [prefix_dir + "bin/fsttopsort.cc"],
+    srcs = [
+        prefix_dir + "bin/fsttopsort.cc",
+        prefix_dir + "bin/fsttopsort-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_topsort"],
 )
 
 cc_binary(
     name = "fstunion",
-    srcs = [prefix_dir + "bin/fstunion.cc"],
+    srcs = [
+        prefix_dir + "bin/fstunion.cc",
+        prefix_dir + "bin/fstunion-main.cc",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_union"],
 )

@@ -88,6 +88,7 @@ cc_library(
     ],
     hdrs = [
         prefix_dir + "include/thrax/compat/compat.h",
+        prefix_dir + "include/thrax/compat/gtl.h",
         prefix_dir + "include/thrax/compat/registry.h",
         prefix_dir + "include/thrax/compat/stlfunctions.h",
         prefix_dir + "include/thrax/compat/utils.h",
@@ -104,6 +105,7 @@ cc_library(
         prefix_dir + "include/thrax/algo/cdrewrite.h",
         prefix_dir + "include/thrax/algo/optimize.h",
         prefix_dir + "include/thrax/algo/prefix_tree.h",
+        prefix_dir + "include/thrax/algo/stripcomment.h",
     ],
     includes = [prefix_dir + "include"],
     deps = [

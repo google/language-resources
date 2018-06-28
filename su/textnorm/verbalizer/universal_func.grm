@@ -1,0 +1,318 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Repository of universal functions needed by various grammars.
+
+import 'universal_rules.grm' as u;
+
+# Inverts the markup safely in that it does not introduce spurious ambiguities
+# with varying number of spaces.
+func InvertMarkup[markup] {
+  return Optimize[Invert[markup] @ u.CLEAN_SPACES];
+}
+
+# Useful insertion and deletion functions
+func I[expr] {
+  return "" : expr;
+}
+
+func D[expr] {
+  return expr : "";
+}
+
+# Utility function to mark up units.
+func UnitMarkup[units] {
+  return Optimize[
+           u.ins_space
+           InvertMarkup[u.measure_units]
+           u.ins_space
+           u.ins_quote
+           units
+           u.ins_quote
+           u.ins_space
+         ];
+}
+
+# A WordToken transducer that accepts either a general legal word definition
+# (from legal_word) or specific lexical entries. Occasionally lexicons contain
+# words that would normally be split because they contain some characters that
+# do not fit legal_word definition, for example, ("P!nk", "ke$ha", etc). These
+# can be passed in lex_entries to be accepted as exceptions.
+func WordTokenWithLexEntries[legal_word, verbatim_letters, lex_entries] {
+  caseless_lex_entries = u.lower_case_anything @ lex_entries;
+  lex_words = QuotedMarkup[InvertMarkup[u.token_name], caseless_lex_entries];
+  lex_tokens = TokenMarkup[lex_words, ""]<1000>;
+  return Optimize[WordToken[legal_word, verbatim_letters] | lex_tokens];
+}
+
+# Utility function to add markup around an already marked up
+# number and not marked up unit.
+func MeasureMarkup[number, units] {
+  return Optimize[
+           InvertMarkup[u.measure]
+           u.ins_space
+           InvertMarkup[u.opening_brace]
+           u.ins_space
+           number
+           u.clear_space_star
+           UnitMarkup[units]
+           InvertMarkup[u.closing_brace]
+         ];
+}
+
+func PhoneNumberMarkup[number] {
+  return Optimize[
+    InvertMarkup[u.telephone]
+    u.ins_space
+    InvertMarkup[u.opening_brace]
+    u.ins_space
+    number
+    u.ins_space
+    InvertMarkup[u.closing_brace]
+  ];
+}
+
+func connectorMarkup[connector]{
+  return(
+   u.token_delimiter
+   InvertMarkup[u.connector]
+   u.ins_space
+   InvertMarkup[u.opening_brace]
+   u.ins_space
+   InvertMarkup[u.connector_type]
+   u.ins_space
+   u.ins_quote
+   u.del_space_star
+   connector
+   u.del_space_star
+   u.ins_quote
+   u.ins_space
+   InvertMarkup[u.closing_brace]
+   u.ins_space
+   u.token_delimiter);
+}
+
+# special case for inches where we don't want to turn "1 in 10" into
+# "one inches ten", so we only recognize it if there's no space.
+func UnitsInches[number]{
+  return Optimize[
+           InvertMarkup[u.measure]
+           u.ins_space
+           InvertMarkup[u.opening_brace]
+           number
+           UnitMarkup["in" : "inch"]
+           InvertMarkup[u.closing_brace]
+         ];
+}
+
+func basic_connector[connector, context]{
+return (
+        context u.del_space_star
+        connector
+        u.del_space_star context
+       );
+}
+
+func connector_multicontext[connector, l_context, r_context]{
+return (
+        l_context u.del_space_star
+        connector
+        u.del_space_star r_context
+       );
+}
+
+# Adds name and quotes around token_def.
+func QuotedMarkup[token_name, token_def] {
+  return token_name
+         u.ins_space
+         u.ins_quote
+         token_def
+         u.ins_quote;
+}
+
+# Adds token { } markup around a fst
+func TokenMarkup[token_def, token_type] {
+  return u.ins_space
+         InvertMarkup[u.token]
+         u.ins_space
+         InvertMarkup[u.opening_brace]
+         u.ins_space
+         token_def
+         u.ins_space
+         token_type
+         u.ins_space
+         InvertMarkup[u.closing_brace]
+         u.ins_space;
+}
+
+# Punctuation tokens. Separated into various buckets depending on how long
+# a pause they're likely to indicate.
+func PunctToken[punct_char, pause_length] {
+  punct_token = QuotedMarkup[InvertMarkup[u.token_name], punct_char]
+                u.ins_space InvertMarkup[pause_length];
+  return TokenMarkup[punct_token, InvertMarkup[u.token_type_punct]]<1000>;
+}
+
+# Legal word tokens.
+# legal_word defines something that we consider worth trying to read as a word
+# eg. for English it might be "any letters with at least one vowel".
+# other_letters is a definition of other letters that aren't a legal word;
+# eg. for English it's any number of consonants.
+func WordToken[legal_word, other_letters] {
+  word_token = QuotedMarkup[InvertMarkup[u.token_name], legal_word];
+  letters_token = QuotedMarkup[InvertMarkup[u.verbatim], other_letters+];
+  return (TokenMarkup[word_token, ""]<1000>) |
+         (TokenMarkup[letters_token,
+                      InvertMarkup[u.token_type_semclass]]<10000>);
+}
+
+# Uses Latin consonants for alternate words.  Probably okay for many western
+# European languages but not for others.
+func WordTokenSimple[legal_word] {
+  return WordToken[legal_word, u.CONSONANTS_INSENSITIVE];
+}
+
+###########################################################################
+# Combining tokens into the final classifier
+#
+# During the tokenization, we introduce 'marks'; the intention of these is to
+# discourage the tokenizer from splitting up words / numbers. For example,
+# we might mark up "hello 2013" as "h|e|l|l|o 2|0|1|3".
+# The marks are consumed again within classification, but any between
+# tokens will be left and penalised heavily later. So, for example,
+# if it tried to split the above into "20" and "13", it would have one mark
+# left between them which would be penalised later.
+#
+# We also support preformatted markup for cases where one needs to mix markup
+# with real text. This is important for addresses where the address is parsed
+# into an address proto, then reformatted for the general tokenizer. In *most*
+# cases that is reasonable, but in a few cases we want to inject specialized
+# knowledge --- e.g. that English "290" for a street address should be read as a
+# sequence of number names, or that a post code is read verbatim (as a sequence
+# of characters). One can get some of the way by splitting things into separate
+# tokens ("2 90", "9 2 1 2 4"), but this cannot be expected to be robust for all
+# languages, and even in English it will cause problems. For example, a UK
+# postcode "WA11 0PQ", if it is split up into "W A 1 1 0 P Q", we'll probably
+# end up pronouncing the "A" like the indefinite article. Thus we would prefer
+# to allow the light use of markup like tokens { verbatim: "WA11 0PQ" },
+# interspersed with text that needs to be analyzed by the general tokenizer.
+func TokenizeAndClassify[semclass, word, punct, fallback, space,
+                         context1, context2, context3, context4] {
+  # Adds / removes markers to FST (see above for explanation).
+  marker = "[MARKER]";
+  sigma = u.kBytes | marker;
+  add_marks = CDRewrite["" : marker, context1, context1, sigma*] @
+              CDRewrite["" : marker, context2, context2, sigma*] @
+              CDRewrite["" : marker, context3, context3, sigma*] @
+              CDRewrite["" : marker, context4, context4, sigma*];
+  del_marks = "" | (u.kBytes (((marker : "") | u.kBytes)* u.kBytes)?);
+
+  ss = u.kBytes*;
+  no_embedded_pre = Optimize[ss - (ss "<pre>" ss) - (ss "</pre>" ss)];
+  preformatted = ("<pre>" : "") no_embedded_pre ("</pre>" : "");
+  not_award = punct | fallback | space | (del_marks @ preformatted);
+  word_def = del_marks @ word;
+  non_semclass_seq = Optimize[(word_def | not_award)*];
+
+  # Removes duplicated spaces; v. important for lookahead FSTs not to have
+  # input epsilon labels, which we typically get from u.InvertMarkup[u.****].
+  clean_spaces = CDRewrite[" " : "", " ", "", u.sigma_star];
+  semiotic_class = del_marks @ TokenMarkup[semclass, ""]<940>;
+  tokenizer_and_classifier = Optimize[
+      (u.clear_space_star
+       non_semclass_seq
+       (semiotic_class non_semclass_seq)*)
+      @ clean_spaces
+  ];
+  return Optimize[
+    u.VALID_BYTES_RFC3629* @
+    add_marks @
+    tokenizer_and_classifier
+  ];
+}
+
+# Slightly simplified version of the above with defaults for some arguments.
+func TokenizeAndClassifySimpler[semclass, word, punct, fallback, space,
+                                letter, digit] {
+  # Ban rewrites for the additional parameters.
+  no = "[NOT_PERMITTED]";
+  remove_final_space = CDRewrite[" " : "", "", "[EOS]", u.sigma_star];
+  return TokenizeAndClassify[semclass, word, punct, fallback, space,
+                             letter, digit, no, no]
+                             @ remove_final_space;
+}
+
+# Much simplified version of the above with many defaults.
+func TokenizeAndClassifyEvenSimpler[semclass, word] {
+
+  return TokenizeAndClassifySimpler[semclass, word,
+                                    u.PUNCT_TOKEN, u.FALLBACK_TOKEN, u.SPACE,
+                                    u.kAlpha, u.kDigit];
+}
+
+# it is to classify things like:
+# 10 m/s -> units: "meter per second"
+# 10 per m -> units: "per meter"
+# per m (the same but do not require the presence of a number)
+func UnitsPerUnitsMarkup[number, unit_before, per, unit_after]{
+  return Optimize[
+           InvertMarkup[u.measure]
+           u.ins_space
+           InvertMarkup[u.opening_brace]
+           u.one_space
+           (number
+           u.clear_space_star)?
+           UnitMarkup[(unit_before u.ins_space)? per u.ins_space
+                      unit_after]
+           InvertMarkup[u.closing_brace]
+         ];
+}
+
+# Some utilities to reduce the fragmentation due to markup
+
+func APPLY_QUANTITY_MARKUP[quantity]{
+ one_space = u.clear_space_star u.ins_space;
+ return Optimize[
+    InvertMarkup[u.money_quantity]
+    one_space
+    quantity
+    one_space
+  ];
+}
+
+func APPLY_MONEY_MARKUP[money]{
+  return Optimize[
+    InvertMarkup[u.money]
+    u.ins_space
+    InvertMarkup[u.opening_brace]
+    u.ins_space
+    money
+    InvertMarkup[u.closing_brace]
+  ];
+}
+
+# "|" and "\" are escaped in the new serialization scheme using a backslash, so
+# we need to adjust these in the verbatim mappings.
+
+func EscapedMappings[raw_mappings] {
+  escapes = ("\\\\" : "\\") | ("\\|" : "|");
+  return Optimize[
+    ((Project[raw_mappings, 'input'] - Project[escapes, 'output']) | escapes)
+    @ raw_mappings
+  ];
+}
+
+func clean_untreated_fields[digit] {
+  return Optimize[(digit u.ins_space)+ @ u.CLEAN_SPACES];
+}

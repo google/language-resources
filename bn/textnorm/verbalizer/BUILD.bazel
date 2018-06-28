@@ -17,6 +17,34 @@ package(default_visibility = ["//visibility:public"])
 load("//:thrax.bzl", "thrax_compile_grm")
 load("//:thrax.bzl", "grm_regression_test")
 
+base_path = "bn/textnorm/verbalizer/"
+
+[
+    grm_regression_test(
+        name = test_rules + "_tests",
+        far_file = test_rules + ".far",
+        far_file_path = base_path,
+        test_file = "testdata/" + test_rules + ".tsv",
+        test_file_path = base_path,
+    )
+    for test_rules in [
+        "abbreviation",
+        "cardinal",
+        "connector",
+        "date",
+        "decimal",
+        "digit",
+        "electronic",
+        "fraction",
+        "lseq",
+        "measure",
+        "money",
+        "telephone",
+        "time",
+        "verbatim",
+    ]
+]
+
 thrax_compile_grm(
     name = "universal_rules",
     deps = ["universal_depot.far"],

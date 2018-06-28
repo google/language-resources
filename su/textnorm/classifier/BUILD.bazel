@@ -92,23 +92,23 @@ thrax_compile_grm(
     ] + universal_deps,
 )
 
-# thrax_compile_grm(
-#     name = "tokenize_and_classify",
-#     deps = [
-#         "spelling_exceptions.fst",
-#         "classify.far",
-#         "classify.grm",
-#         "date_classifier.far",
-#         "date_classifier.grm",
-#         "lseq.far",
-#         "lseq.grm",
-#         "money_classifier.far",
-#         "money_classifier.grm",
-#         "ordinal.far",
-#         "ordinal.grm",
-#         "time.far",
-#         "time.grm",
-#         "word_definition.far",
-#         "word_definition.grm",
-#     ] + universal_deps,
-# )
+thrax_compile_grm(
+    name = "tokenize_and_classify",
+    deps = [
+        "spelling_exceptions.fst",
+        "classify.far",
+        "classify.grm",
+        "date_classifier.far",
+        "date_classifier.grm",
+        "lseq.far",
+        "lseq.grm",
+        "money_classifier.far",
+        "money_classifier.grm",
+        "ordinal.far",
+        "ordinal.grm",
+        "time.far",
+        "time.grm",
+        "word_definition.far",
+        "word_definition.grm",
+    ] + universal_deps,
+)

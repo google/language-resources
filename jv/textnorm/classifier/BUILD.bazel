@@ -17,10 +17,29 @@ package(default_visibility = ["//visibility:public"])
 load("//:thrax.bzl", "thrax_compile_grm")
 load("//:thrax.bzl", "grm_regression_test")
 
+base_path = "jv/textnorm/classifier/"
+
 exports_files([
     "date_classifier.grm",
     "money_classifier.grm",
 ])
+
+[
+    grm_regression_test(
+        name = test_rules + "_tests",
+        far_file = test_rules + ".far",
+        far_file_path = base_path,
+        test_file = "testdata/" + test_rules + ".tsv",
+        test_file_path = base_path,
+    )
+    for test_rules in [
+        "date_classifier",
+        "lseq",
+        "money_classifier",
+        "ordinal",
+        "time",
+    ]
+]
 
 thrax_compile_grm(
     name = "universal_rules",

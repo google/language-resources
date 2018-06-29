@@ -25,9 +25,15 @@ set -o nounset
 
 # Whether to run festvox TTS training.
 TRAIN=true
+# Path to custom txt.done.data
+CUSTOM_TXT_DONE_DATA_PATH=""
 
-while getopts ":t" opt; do
+while getopts "tc:" opt; do
   case ${opt} in
+    c) # Path to custom txt.done.data
+      CUSTOM_TXT_DONE_DATA_PATH="${OPTARG}"
+      echo "Using custom txt.done.data  - ${CUSTOM_TXT_DONE_DATA_PATH}"
+      ;;
     t ) # Option to disable training.
       TRAIN=false
       echo "Disable festvox training"
@@ -41,11 +47,18 @@ if [[ $# -ne 3 ]]; then
     exit 1
 fi
 
-
 BASEDIR=$(dirname "$0")
 PATH_TO_WAVS=$1
 LANG=$2
 VOICE_DIR=$3
+
+TXT_DONE_DATA_PATH=""
+
+if [[ "${CUSTOM_TXT_DONE_DATA_PATH}" == "" ]]; then
+  TXT_DONE_DATA_PATH="${LANG}/festvox/txt.done.data"
+else
+  TXT_DONE_DATA_PATH="${CUSTOM_TXT_DONE_DATA_PATH}"
+fi
 
 # Check required env variables.
 echo "${FESTVOXDIR?Set env variable FESTVOXDIR}"
@@ -63,7 +76,7 @@ rm -rf "${VOICE_DIR}/wav"
 ln -sf "${PATH_TO_WAVS}" "${VOICE_DIR}/wav"
 
 # Copy prompts
-cp "${LANG}/festvox/txt.done.data" "${VOICE_DIR}/etc/"
+cp "${TXT_DONE_DATA_PATH}" "${VOICE_DIR}/etc/txt.done.data"
 
 # Copy festvox lexicon file.
 cp "${LANG}/festvox/lexicon.scm" "${VOICE_DIR}/festvox/lexicon.scm"

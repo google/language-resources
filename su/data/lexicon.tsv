@@ -1,22 +1,9 @@
-# Copyright 2018 Google Inc. All Rights Reserved.
-#
-# This work is licensed under a Creative Commons Attribution 4.0
-# International License. [https://creativecommons.org/licenses/by/4.0/]
-# =============================================================================
-#
-# This is a pronunciation dictionary.
-#
-# The three tab-separated columns are as follows:
-#
-#   1. Spelling
-#   2. Phonemic transcription
-#   3. Optional disambiguating label
-#
-
 a	a
 a	e y
+a_letter	a
+a_letter-en	e y
 aachen	a . c e n
-aacs	
+aacs	a . a . c e . e s
 aah	a . a h
 aam	a . a m
 aan	a . a n
@@ -39,7 +26,7 @@ abbasid	a . b a . s i d
 abbasiyah	a . b a . s i . y a h
 abbe	a . b e
 abbot	e . b o t
-abc	
+abc	a . b e . c e
 abda	a b . d a
 abdas	a b . d a s
 abdel	a b . d e l
@@ -61,7 +48,7 @@ abdurachman	a b . d u . r a h . m a n
 abdurahman	a b . d u . r a h . m a n
 abdurrachman	a b . d u . r a h . m a n
 abdurrahman	a b . d u . r a h . m a n
-abdurrasyid	a b . d u . r a . sh i d
+abdurrasyid	a b . d u . r a . sy i d
 abdus	a b . d u s
 abe	a . b e
 abeh	a . b e h
@@ -150,7 +137,7 @@ acre	ex . k e r
 acrididae	a . k r i . d i . d a . e
 acropora	a . k r o . p o . r a
 actinomorfik	a k . t i . n o . m o r . f i k
-action	e k . sh ex n
+action	e k . sy ex n
 acuan	a . c u . a n
 acuk	a . c u k
 acung	a . c u ng
@@ -308,10 +295,10 @@ aeronautika	a . e . r o . n a . u . t i . k a
 aeta	a . e . t a
 aethiopicum	a . e . t i . o . p i . k u m
 afar	ex . f a r
-afc	
+afc	a . e f . c e
 afdeeling	a f . d ex . l i ng
 afdol	a f . d o l
-aff	
+aff	a . e f . e f
 affan	a . f a n
 affandi	a . f a n . d i
 affandie	a . f a n . d i
@@ -387,6 +374,7 @@ agungna	a . g u ng . n a
 agus	a . g u s
 agustina	a . g u s . t i . n a
 agustinus	a . g u s . t i . n u s
+agustus	a . g u s . t u s
 agustusan	a . g u s . t u . s a n
 aha	a . h a
 ahad	a . h a d
@@ -452,10 +440,10 @@ airways	e r . w a y s
 aisa	a . i . s a
 aisah	a . i . s a h
 aisan	a . i . s a n
-aisha	a . i . sh a
+aisha	a . i . sy a
 aisin	a . i . s i n
-aisya	a . i . sh a
-aisyah	a . i . sh a h
+aisya	a . i . sy a
+aisyah	a . i . sy a h
 aitinyo	a . i . t i . ny o
 aja	a . j a
 ajaccio	a . j a . k i . o
@@ -636,13 +624,14 @@ alamiah	a . l a . m i . a h
 alamna	a . l a m . n a
 alamnya	a . l a m . ny a
 alamos	a . l a . m o s
-alamsyah	a . l a m . sh a h
+alamsyah	a . l a m . sy a h
 alan	a . l a n
 aland	a . l a n
 alang	a . l a ng
 alangkah	a . l a ng . k a h
 alanin	a . l a . n i n
 alanyar	a . l a . ny a r
+alarm	a . l a . r ex m
 alas	a . l a s
 alasan	a . l a . s a n
 alaska	a . l a s . k a
@@ -764,7 +753,7 @@ aliquip	a . l i . k u . i p
 alirana	a . l i . r a . n a
 alirkan	a . l i r . k a n
 alisahbana	a . l i . s a h . b a . n a
-alisjahbana	a . l i . sh a h . b a . n a
+alisjahbana	a . l i . sy a h . b a . n a
 alisyahbana	a . l i . sy a h . b a . n a
 alit	a . l i t
 alitalia	a . l i . t a . l i . a
@@ -895,7 +884,7 @@ amarawati	a . m a . r a . w a . t i
 amaria	a . m a . r i . a
 amarta	a . m a r . t a
 amas	a . m a s
-amasya	a . m a . sh a
+amasya	a . m a . sy a
 amat	a . m a t
 amatan	a . m a . t a n
 amaterasu	a . m a . t e . r a . s u
@@ -1312,6 +1301,7 @@ anjingna	a n . j i ng . n a
 anjleng	a n . j l ex ng
 anjlok	a n . j l o k
 anjuang	a n . j u . a ng
+anjuen	a n . j u . e n
 anjuk	a n . j u k
 anjung	a n . j u ng
 anjungan	a n . j u . ng a n
@@ -1319,6 +1309,7 @@ anjuran	a n . j u . r a n
 anka	a ng . k a
 ankara	a n . k a . r a
 anke	a n . k e
+anmasik	a n . m a . s i k
 ann	a n
 annapurna	a . n a . p u r . n a
 anneke	a . n ex . k ex
@@ -1509,14 +1500,16 @@ apart	ex . p a r t
 apartemen	a . p a r . t ex . m e n
 apartments	a . p a r t . m e n t s
 apatis	a . p a . t i s
-apbd	
-apbn	
+apbd	a . p e . b e . d e
+apbn	a . p e . b e . e n
 apdet	a p . d e t
 apdol	a p . d o l
 apdolna	a p . d o l . n a
 apek	a . p ex k
 apel	a . p e l
 apel	a . p ex l
+apel_nou	a . p ex l
+apel_vrb	a . p e l
 apem	a . p ex m
 apep	a . p ex p
 apes	a . p ex s
@@ -1647,6 +1640,7 @@ areal	a . r e . a l
 areanya	a . r e . a . ny a
 areas	a . r e . a s
 arek	a . r e k
+arema	a . r e . m a
 aren	a . r e n
 areng	a . r ex ng
 arenga	a . r e ng . g a
@@ -1775,7 +1769,7 @@ arsitektural	a r . s i . t e k . t u . r a l
 arsitekturna	a r . s i . t e k . t u r . n a
 arslan	a r . s l a n
 arso	a r . s o
-arsya	a r . sh a
+arsya	a r . sy a
 arta	a r . t a
 arte	a r . t e
 artefak	a r . t e . f a k
@@ -1868,8 +1862,8 @@ ashadu	a s . h a . d u
 ashanti	a . s a n . t i
 ashanty	a . s a n . t i
 ashi	a . s i
-ashikaga	a . sh i . k a . g a
-ashley	a sh . l i
+ashikaga	a . sy i . k a . g a
+ashley	a sy . l i
 ashram	a s . r a m
 ashri	a . s r i
 ashtarak	a s . t a . r a k
@@ -1938,7 +1932,7 @@ assi	a . s i
 assistance	a . s i s . t ex n
 associate	ex . s o . s i . e t
 associates	ex . s o . s i . e t s
-assr	
+assr	a . e s . e s . e r
 assunnah	a . s u . n a h
 assyria	a . sy i . r i . a
 astadasaparwa	a . s t a . d a . s a . p a r . w a
@@ -2061,7 +2055,7 @@ atlet	a t . l e t
 atletik	a t . l ex . t i k
 atlhete	a . t ex . l i t
 atlit	a t . l i t
-atm	
+atm	a . t e . e m
 atma	a t . m a
 atmadja	a t . m a . j a
 atmahariwangsa	a t . m a . h a . r i . w a ng . s a
@@ -2075,6 +2069,7 @@ atomna	a . t o m . n a
 aton	a . t o n
 atonal	a . t o . n a l
 atonia	a . t o . n i . a
+atos	a . t o s
 atpase	a t . p a . s ex
 atraktif	a t . r a k . t i f
 atribut	a t . r i . b u t
@@ -2085,7 +2080,7 @@ atropates	a t . r o . p a . t e s
 atropin	a t . r o . p i n
 atsir	a t . s i r
 atsiri	a t . s i . r i
-atsushi	a t . s u . sh i
+atsushi	a t . s u . sy i
 attaches	ex . t e . c ex s
 attaqwa	a . t a k . w a
 attila	a . t i . l a
@@ -2117,7 +2112,7 @@ aulia	a . u . l i . a
 auliana	a w . l i . y a . n a
 auliya	a w . l i . y a
 auman	a . u . m a n
-aun	
+aun	a . u . e n
 aung	a . u ng
 aunur	a w . n u r
 aurah	a . u . r a h
@@ -2132,7 +2127,7 @@ australia	a . u s . t r a . l i . a
 austria	a . u . s t r i . a
 austrian	a . u s . t r i . a n
 austronesia	a . u . s t r o . n e . s i . a
-aut	
+aut	a . u . t e
 autarki	a . u . t a r . k i
 autentikasi	a . u . t e n . t i . k a . s i
 autisme	a w . t i s . m ex
@@ -2154,7 +2149,7 @@ aux	u
 ava	a . f a
 avalokitesvara	a . f a . l o . k i . t e s . f a . r a
 avatar	a . f a . t a r
-avc	
+avc	a . f e . c e
 ave	a . f e
 avenue	e . f ex . n u
 avery	e . f ex . r i
@@ -2204,7 +2199,7 @@ awunsugan	a . w u n . s u . g a n
 awuran	a . w u . r a n
 awwal	a . w a l
 awwaluddini	a . w a . l u . d i . n i
-axiomatization	a k . s i . o . m a . t i . z e . sh ex n
+axiomatization	a k . s i . o . m a . t i . z e . sy ex n
 axis	e k . s i s
 ay	a y
 aya	a . y a
@@ -2232,7 +2227,8 @@ ayem	a . y ex m
 ayena	a . y ex . n a
 ayenabeda	a . y ex . n a . b e . d a
 ayer	a . y ex r
-ayesha	a . y e . sh a
+ayesha	a . y e . sy a
+ayeuna	a . y eu . n a
 ayeunamah	a . y eu . n a . m a h
 ayeunna	a . y eu . n a
 ayi	a . y i
@@ -2252,7 +2248,7 @@ ayunan	a . y u . n a n
 ayunda	a . y u . n d a
 ayurveda	a . y u r . f i . d a
 ayurvedic	a . y u r . f e . d i k
-ayushita	a . y u . sh i . t a
+ayushita	a . y u . sy i . t a
 ayyi	a . y i
 ayyub	a . y u b
 aza	a . z a
@@ -2282,6 +2278,8 @@ azusa	a . z u . s a
 azyumardi	a z . y u . m a r . d i
 b	b e
 b	b i
+b_letter	b e
+b_letter-en	b i
 bab	b a b
 baba	b a . b a
 babacaan	b a . b a . c a . a n
@@ -3311,6 +3309,7 @@ bellamy	b ex . l a . m i
 belli	b e . l i
 bellina	b e . l i . n a
 belo	b ex . l o
+belok	b e . l o k
 belowclass	b i . l o w . k l a s
 belowstyle	b i . l o w . s t ai l
 belpas	b e l . p a s
@@ -3368,6 +3367,7 @@ bengkak	b ex ng . k a k
 bengkal	b ex ng . k a l
 bengkalis	b ex ng . k a . l i s
 bengkayang	b ex ng . k a . y a ng
+bengkeut	b ex ng . k eu t
 bengkok	b e ng . k o k
 bengkokan	b e ng . k o . k a n
 bengkokna	b e ng . k o k . n a
@@ -4073,7 +4073,7 @@ bihar	b i . h a r
 bihari	b i . h a . r i
 bihi	b i . h i
 bihun	b i . h u n
-bij	
+bij	b e . i . j e
 bijak	b i . j a k
 bijaksana	b i . j a k . s a . n a
 bijanggut	b i . j a ng . g u t
@@ -4213,7 +4213,7 @@ biotop	b i . o . t o p
 bip	b i p
 bipartit	b i . p a r . t i t
 biphenyls	b a . i . p e . n i l s
-bipm	
+bipm	b e . i . p e . e m
 bipolar	b i . p o . l a r
 birahi	b i . r a . h i
 birama	b i . r a . m a
@@ -4264,7 +4264,7 @@ bituminus	b i . t u . m i . n u s
 bituna	b i . t u . n a
 biung	b i . u ng
 bivak	b i . f a k
-bivb	
+bivb	b e . i . f e . b e
 biwako	b i . w a . k o
 biwirna	b i . w i r . n a
 biwirnalaku	b i . w i r . n a . l a . k u
@@ -4385,7 +4385,7 @@ bohlam	b o h . l a m
 bohong	b o . h o ng
 bohongan	b o . h o . ng a n
 boin	b o . i n
-boj	
+boj	b e . o . j e
 boja	b o . j a
 bojo	b o . j o
 bojona	b o . j o . n a
@@ -4557,7 +4557,7 @@ botoh	b o . t o h
 botolambat	b o . t o . l a m . b a t
 botor	b o . t o r
 botumoito	b o . t u . m o . i . t o
-bou	
+bou	b e . o . u
 boulevard	b u . l ex . f a r d
 bouman	b o . u . m a n
 bouraq	b u . r o k
@@ -4702,8 +4702,8 @@ brussels	b r a . s e l s
 brutal	b r u . t a l
 bruto	b r u . t o
 bryan	b r a . y ex n
-btn	
-btw	
+btn	b e . t e . e n
+btw	b e . t e . w e
 bu	b u
 bua	b u . a
 buah	b u . a h
@@ -4875,7 +4875,7 @@ bumiayu	b u . m i . a . y u
 bumihayu	b u . m i . h a . y u
 buminami	b u . m i . n a . m i
 bumiputra	b u . m i . p u t . r a
-bumn	
+bumn	b e . u . e m . e n
 bumthang	b u m . t a ng
 bunaken	b u . n a . k e n
 buncir	b u n . c i r
@@ -5027,7 +5027,8 @@ byte	b a . i t
 byzantium	b i . z a n . t i . u m
 c	c e
 c	s i
-ca	
+c_letter	c e
+ca	c e . a
 caang	c a . a ng
 caangna	c a . a ng . n a
 cabai	c a . b a y
@@ -5157,6 +5158,7 @@ campus	k e m . p u s
 can	c a n
 canadian	k a . n a . d i . a n
 cancer	k e n . c ex r
+candak	c a n . d a k
 candana	k a n . d a . n a
 candela	k a n . d e . l a
 candi	c a n . d i
@@ -5213,7 +5215,7 @@ cantikan	c a n . t i . k a n
 cantilan	c a n . t i . l a n
 canting	c a n . t i ng
 canton	k e n . t ex n
-cao	
+cao	c e . a . o
 cap	c a p
 capa	c a . p a
 capai	c a . p ai
@@ -5314,7 +5316,7 @@ caturangga	c a . t u . r a ng . g a
 caturjalma	c a . t u r . j a l . m a
 caturtunggal	c a . t u r . t u ng . g a l
 caturwarna	c a . t u r . w a r . n a
-catv	
+catv	c e . a . t e . f e
 catwalk	k e t . w o l k
 cauchy	k a . u . s i
 caudal	k a . u . d a l
@@ -5326,7 +5328,7 @@ caye	c a . y e
 cayenne	k a . y e n
 cayman	k e y . m a n
 cayur	c a . y u r
-ce	
+ce	c e . e
 ceblok	c ex . b l o k
 cece	c e . c e
 cecekelan	c ex . c ex . k ex . l a n
@@ -5334,6 +5336,8 @@ cecempeh	c ex . c ex m . p ex h
 cecendet	c e . c e . n d e t
 cecep	c e . c e p
 cecep	c ex . c ex p
+cecep_adj	c ex . c ex p
+cecep_nou	c e . c e p
 cecepengan	c ex . c ex . p ex . ng a n
 cecepet	c ex . c ex . p e t
 cedera	c ex . d ex . r a
@@ -5418,6 +5422,7 @@ centerdiagram	s e n . t ex r . d i . a . g r a m
 centerpeta	s e n . t ex r . p ex . t a
 centhini	c ex n . t i . n i
 centil	c ex n . t i l
+centimeter	s e n . t i . m e . t ex r
 centimetre	s e n . t i . m e t . r ex
 centimetres	s e n . t i . m i . t ex r s
 centong	c e n . t o ng
@@ -5454,6 +5459,7 @@ cepokokuning	c ex . p o . k o . k u . n i ng
 cepot	c e . p o t
 cepu	c ex . p u
 cepy	c e . p i
+cerah	c ex . r a h
 cerai	c ex . r a y
 ceraikan	c ex . r a . i . k a n
 ceramah	c ex . r a . m a h
@@ -5630,7 +5636,7 @@ christine	k r i s . t i n
 christofori	k r i s . t o . p o . r i
 christoper	k r i s . t o . p ex r
 christopher	k r i s . t o . p ex r
-chrisye	c r i . sh e
+chrisye	c r i . sy e
 chrome	k r o m
 chronicon	k r o . n i . k o n
 chronicum	k r o . n i . k u m
@@ -5643,7 +5649,7 @@ chungcheong	c u ng . c e . o ng
 chunin	c u . n i n
 churcill	c u r . c i l
 ci	c i
-cia	
+cia	c e . i . a
 ciadeg	c i . a . d ex g
 ciakar	c i . a . k a r
 ciambar	c i . a m . b a r
@@ -5854,8 +5860,8 @@ cihirup	c i . h i . r u p
 cihujan	c i . h u . j a n
 cihuni	c i . h u . n i
 cihurip	c i . h u . r i p
-cii	
-cij	
+cii	c e . i . i
+cij	c e . i . j e
 cijagamulya	c i . j a . g a . m u . l i . a
 cijagra	c i . j a . g r a
 cijaku	c i . j a . k u
@@ -6185,7 +6191,7 @@ cipinang	c i . p i . n a ng
 cipining	c i . p i . n i ng
 cipir	c i . p i r
 ciples	c i . p l ex s
-cipm	
+cipm	c e . i . p e . e m
 cipocok	c i . p o . c o k
 cipondoh	c i . p o n . d o h
 cipondok	c i . p o n . d o k
@@ -6212,7 +6218,7 @@ cipurut	c i . p u . r u t
 cipurwasari	c i . p u r . w a . s a . r i
 ciputat	c i . p u . t a t
 ciputri	c i . p u t . r i
-cir	
+cir	c e . i . e r
 ciracap	c i . r a . c a p
 cirahab	c i . r a . h a b
 cirahayu	c i . r a . h a . y u
@@ -6285,12 +6291,13 @@ cisokan	c i . s o . k a n
 cisoklat	c i . s o k . l a t
 cisolok	c i . s o . l o k
 cisomang	c i . s o . m a ng
-cispr	
+cispr	c e . i . e s . p e . e r
 cisternae	s i s . t ex r . n e y
 cisukadana	c i . s u . k a . d a . n a
 cisurat	c i . s u . r a t
 cisurupan	c i . s u . r u . p a n
 cisusu	c i . s u . s u
+cita	c i . t a
 citah	c i . t a h
 citak	c i . t a k
 citakan	c i . t a . k a n
@@ -6426,14 +6433,14 @@ cocolok	c o . c o . l o k
 coconut	k o . k o . n a t
 cocooan	c o . c o . o . a n
 cocopet	c o . c o . p e t
-cod	
+cod	c e . o . d e
 coding	k o . d i ng
 coedes	k o . e . d e s
 coelenterata	k o . e . l e n . t e . r a . t a
 coelho	k e . l o
 coen	k u n
 coeur	k eu r
-cofdm	
+cofdm	c e . o . e f . d e . e m
 coffee	k o . f i
 coffin	k o . f i n
 cogreg	c o g . r e g
@@ -6614,7 +6621,7 @@ correa	k o . r e . a
 correlate	k o . r ex . l e t
 corridor	k o . r i . d o r
 corsica	k o r . s i . k a
-cos	
+cos	c e . o . e s
 cosinus	k o . s i . n u s
 cosmetic	k o s . m e . t i k
 cosmic	k o s . m i k
@@ -6657,8 +6664,8 @@ cruyff	k ex . r a f
 cruz	k r u z
 crystal	k r i s . t ex l
 crystalline	k r i s . t ex . l a n
-cu	
-cua	
+cu	c e . u
+cua	c e . u . a
 cuaca	c u . a . c a
 cuacana	c u . a . c a . n a
 cuart	k u . a r t s
@@ -6704,7 +6711,7 @@ cungcurung	c u ng . c u . r u ng
 cungkring	c u ng . k r i ng
 cungkup	c u ng . k u p
 cunha	k u . ny a
-cuo	
+cuo	c e . u . o
 cuomo	k u . o . m o
 cupat	c u . p a t
 cupatna	c u . p a t . n a
@@ -6715,7 +6722,7 @@ cuplis	c u p . l i s
 cuprum	c u p . r u m
 cupumanik	c u . p u . m a . n i k
 cupunagara	c u . p u . n a . g a . r a
-cur	
+cur	c e . u . e r
 curacao	c u . r a . c a . o
 curah	c u . r a h
 curam	c u . r a m
@@ -6749,6 +6756,8 @@ czar	z a r
 czech	c e k
 d	d e
 d	d i
+d_letter	d e
+d_letter-en	d i
 daan	d a . a n
 daar	d a r
 daari	d a . r i
@@ -6866,7 +6875,7 @@ dalu	d a . l u
 daluang	d a . l u . w a ng
 daluwang	d a . l u . w a ng
 daluwarsa	d a . l u . w a r . s a
-daly	
+daly	d e . a . e l . y e
 dam	d a m
 damai	d a . m ai
 damak	d a . m a k
@@ -6952,7 +6961,7 @@ danui	d a . n u . i
 dany	d a . n i
 danzig	d e n . z i g
 danzo	d a n . z o
-dao	
+dao	d e . a . o
 daoed	d a . u d
 daood	d a . u d
 dapati	d a . p a t . i
@@ -6964,7 +6973,7 @@ daptarna	d a p . t a r . n a
 dapunta	d a . p u n . t a
 dapur	d a . p u r
 dapuran	d a . p u . r a n
-dar	
+dar	d e . a . e r
 dara	d a . r a
 daragang	d a . r a . g a ng
 darah	d a . r a h
@@ -7007,10 +7016,10 @@ darmasiksa	d a r . m a . s i k . s a
 darmawangsa	d a r . m a . w a ng . s a
 darmayasa	d a r . m a . y a . s a
 darna	d a r . n a
-darpa	
+darpa	d e . a . e r . p e . a
 darpan	d a r . p a n
 darsa	d a r . s a
-dart	
+dart	d e . a . e r . t e
 daru	d a . r u
 darul	d a . r u l
 darurat	d a . r u . r a t
@@ -7021,7 +7030,7 @@ darwinisme	d a r . w i . n i s . m ex
 darwis	d a r . w i s
 darya	d a . r i . a
 daryono	d a r . y o . n o
-das	
+das	d e . a . e s
 dasabala	d a . s a . b a . l a
 dasamuka	d a . s a . m u . k a
 dasar	d a . s a r
@@ -7036,9 +7045,9 @@ dasima	d a . s i . m a
 dasimah	d a . s i . m a h
 dassler	d a s . l ex r
 dasun	d a . s u n
-dat	
+dat	d e . a . t e
 data	d a . t a
-datab	
+datab	d e . a . t e . a . b e
 datacell	d a . t a . s e l
 datacella	d a . t a . s e . l a
 datan	d a . t a n
@@ -7097,8 +7106,8 @@ dayeuhmanggung	d a . y eu h . m a ng . g u ng
 days	d e y s
 daytona	d e y . t o . n a
 dayung	d a . y u ng
-dc	
-ddos	
+dc	d e . c e
+ddos	d e . d e . o . e s
 de	d e
 dea	d e . a
 dead	d e d
@@ -7115,7 +7124,7 @@ debu	d ex . b u
 debus	d ex . b u s
 debut	d ex . b u t
 debutna	d ex . b u t . n a
-dec	
+dec	d e . e . c e
 deca	d ex . k a
 decedes	d e . s ex . d e
 decepticons	d ex . s e p . t i . k o n s
@@ -7360,7 +7369,7 @@ desaku	d e . s a . k u
 desan	d e . s a n
 desana	d e . s a . n a
 desanya	d e . s a . ny a
-desc	
+desc	d e . e . e s . c e
 desde	d ex s . d e
 desekan	d ex . s ex . k a n
 desember	d e . s e m . b ex r
@@ -7385,7 +7394,7 @@ destop	d e s . t o p
 destruktif	d e s . t r u k . t i f
 desty	d e s . t i
 desy	d e . s i
-det	
+det	d e . e . t e
 detail	d ex . t ai l
 detak	d ex . t a k
 detasemen	d e . t a . s ex . m e n
@@ -7451,7 +7460,7 @@ dewiq	d e . w i k
 dewisari	d e . w i . s a . r i
 dewo	d e . w o
 dewy	d e . w i
-dha	
+dha	d e . h a . a
 dhabi	d a . b i
 dhaka	d a . k a
 dhamir	d o . m i r
@@ -7484,6 +7493,7 @@ diacritik	d i . a . k r i . t i k
 diadakan	d i . a . d a . k a n
 diadaptasi	d i . a . d a p . t a . s i
 diadaptasikan	d i . a . d a p . t a . s i . k a n
+diadegkeun	d i . a . d ex g . k eu n
 diadegkeuna	d i . a . d ex g . k eu . n a
 diadegkeunana	d i . a . d ex g . k eu . n a . n a
 diadegkeunna	d i . a . d ex g . k eu . n a
@@ -7602,7 +7612,7 @@ dianugerahi	d i . a . n u . g ex . r a . h i
 dianugerahkan	d i . a . n u . g ex . r a h . k a n
 dianyam	d i . a . ny a m
 dianyarkeun	d i . a . ny a r . k eu n
-diap	
+diap	d e . i . a . p e
 diapakan	d i . a . p a . k a n
 diapalkeun	d i . a . p a l . k eu n
 diapit	d i . a . p i t
@@ -7622,7 +7632,7 @@ diario	d i . a . r i . o
 diaromongkeun	d i . a . r o . m o ng . k eu n
 diartikan	d i . a r . t i . k a n
 diartikeun	d i . a r . t i . k eu n
-dias	
+dias	d e . i . a . e s
 diasaan	d i . a . s a . a n
 diasakan	d i . a . s a . k a n
 diasakanana	d i . a . s a . k a . n a . n a
@@ -9590,7 +9600,7 @@ disoren	d i . s o . r e n
 disorot	d i . s o . r o t
 disortir	d i . s o r . t i r
 disosiasi	d i . s o . s i . a . s i
-disp	
+disp	d e . i . e s . p e
 dispesifikasikeun	d i . s p e . s i . f i . k a . s i . k eu n
 distal	d i s . t a l
 distandardisasi	d i . s t a n . d a r . d i . s a . s i
@@ -9647,7 +9657,7 @@ disusukan	d i . s u . s u . k a n
 disusul	d i . s u . s u l
 disutradaraan	d i . s u t . r a . d a . r a . a n
 disutradarai	d i . s u . t r a . d a . r a . i
-dit	
+dit	d e . i . t e
 dita	d i . t a
 ditaati	d i . t a . a . t i
 ditabeuh	d i . t a . b eu h
@@ -10080,7 +10090,7 @@ djuminah	j u . m i . n a h
 djunaedi	j u . n a . e . d i
 djuru	j u . r u
 djurung	j u . r u ng
-dk	
+dk	d e . k a
 dmitri	d i . m i t . r i
 dmitry	d ex . m i . t r i
 dnipro	d ex . n i p . r o
@@ -10193,7 +10203,7 @@ doohan	d u . h a n
 doom	d u m
 door	d o r
 doosan	d o . s a n
-dop	
+dop	d e . o . p e
 dopa	d u . p a
 dopamin	d o . p a . m i n
 doping	d o . p i ng
@@ -10307,7 +10317,7 @@ duhur	d u . h u r
 duisburg	d u . i s . b ex g
 duit	d u . i t
 duitna	d u . i t . n a
-duk	
+duk	d e . u . k a
 duka	d u . k a
 dukhan	d u . hx o n
 dukuh	d u . k u h
@@ -10402,7 +10412,7 @@ dust	d a s
 dustira	d u s . t i . r a
 dusun	d u . s u n
 duswanta	d u s . w a n . t a
-dut	
+dut	d e . u . t e
 duta	d u . t a
 duurstede	d u r . s t e d
 duve	d u f
@@ -10434,6 +10444,7 @@ dzulhijjah	z u l . h i . j a h
 e	e
 e	i
 e_letter	e . l e . t ex r
+e_letter-en	i
 east	i s
 easter	i s . t ex r
 eastern	i s . t ex r n
@@ -10444,7 +10455,7 @@ ebith	e . b i t
 eboni	e . b o . n i
 ebrehan	e b . r e . h a n
 eca	e . c a
-ece	
+ece	e . c e . e
 eceng	e . c e ng
 ecep	e . c e p
 eceran	e . c e . r a n
@@ -10474,7 +10485,7 @@ edukatif	e . d u . k a . t i f
 eduskunta	e . d u s . k u n . t a
 edwards	e d . w a r d s
 edwin	e d . w i n
-eeg	
+eeg	e . e . g e
 efansyah	e . f a n . sy a h
 efekna	e . f e k . n a
 efektif	e . f e k . t i f
@@ -10494,7 +10505,7 @@ eggi	e . g i
 ego	e . g o
 egrang	e . g r a ng
 ehime	e . h i . m e
-ehm	
+ehm	e . h a . e m
 eiffel	e . i . f ex l
 eigen	a . i . g ex n
 eiichiro	e . i . c i . r o
@@ -10649,6 +10660,8 @@ elvis	e l . f i s
 elvy	e l . f i
 ema	e . m a
 ema	ex . m a
+ema_nou-mother	ex . m a
+ema_pers	e . m a
 email	i . m e l
 eman	e . m a n
 emangna	e . m a ng . n a
@@ -10798,8 +10811,8 @@ episodena	e . p i . s o . d ex . n a
 episodeu	e . p i . s o . d eu
 epitel	e . p i . t e l
 epitelium	e . p i . t e . l i . u m
-epos	
-epp	
+epos	e . p e . o . e s
+epp	e . p e . p e
 epsilon	e p . s i . l o n
 equinox	e . k u . i . n o k s
 era	e . r a
@@ -10836,10 +10849,10 @@ esensil	e . s e n . s i l
 esey	e . s e y
 eseyna	e . s e y . n a
 eskalator	e s . k a . l a . t o r
-esn	
+esn	e . e s . e n
 esna	e . s n a
 espoo	e s . p o
-essa	
+essa	e . e s . e s . a
 essen	e . s ex n
 estapet	e s . t a . p e t
 estate	e s . t e . i t
@@ -10867,7 +10880,7 @@ etanoat	e . t a . n o . a t
 etanol	e . t a . n o l
 etateh	e . t a . t e h
 etawa	e . t a . w a
-ete	
+ete	e . t e . e
 etem	e . t ex m
 etena	e . t ex . n a
 eter	e . t e r
@@ -10921,7 +10934,7 @@ eunteup	eu n . t eu p
 euntreup	eu n . t r eu p
 eupanbalik	eu . p a n . b a . l i k
 euphorbiaceae	e . u . p o r . b i . a . k e . a . e
-eur	
+eur	e . u . e r
 eureka	y u . r i . k a
 euren	eu . r ex n
 eureunna	eu . r eu . n a
@@ -10951,7 +10964,7 @@ everst	e . f ex . r e s
 evert	e . f ex r t
 evie	e . f i
 evita	e . f i . t a
-evoh	
+evoh	e . f e . o . h a
 evolusi	e . f o . l u . s i
 evolusioner	e . f o . l u . s i . o . n e r
 evolusionis	e . f o . l u . s i . o . n i s
@@ -10967,7 +10980,7 @@ exclusive	e k s . k l u . s i f
 exec	i k . z e k
 exercitation	e k . s e r . c i . t e . sy ex n
 exeter	e k . s ex . t ex r
-exhibition	e k . s i . b i . sh ex n
+exhibition	e k . s i . b i . sy ex n
 exopterygota	e k . s o p . t e . r i . g o . t a
 exotic	e k . s o . t i k
 expansion	e k s . p a n . sy ex n
@@ -10983,13 +10996,14 @@ exports	e k s . p o r t s
 express	e k s . p r e s
 extended	e k s . t e n . d i d
 extensi	e k s . t e n . s i
-eya	
+eya	e . y e . a
 eyang	e . y a ng
 eyes	a . i s
 ezagren	e . z a . g r e n
 ezra	e z . r a
 f	e f
-faa	
+f_letter	e f
+faa	e f . a . a
 faathir	f a . t i r
 fabaceae	f a . b a . s e . a . e
 fabel	f a . b e l
@@ -11087,7 +11101,7 @@ fantastik	f a n . t a s . t i k
 fantastis	p a n . t a s . t i s
 fantasy	f e n . t ex . s i
 fany	f a . n i
-fao	
+fao	e f . a . o
 faperta	f a . p ex r . t a
 faqih	f a . k i h
 faqir	f a . k i r
@@ -11187,15 +11201,15 @@ federico	f e . d ex . r i . k o
 fedex	f e d . e k s
 fedi	f e . d i
 fedor	f e . d o r
-fef	
+fef	e f . e . e f
 fei	f e . i
 feiberg	f e . i . b ex g
 feiburg	f e . i . b ex r g
 feisal	f e . i . s a l
 feldspar	f e l d . s p a r
 felipe	f e . l i . p e
-fellowship	f e . l o w . sh i p
-fem	
+fellowship	f e . l o w . sy i p
+fem	e f . e . e m
 femeli	f e . m ex . l i
 feminim	f e . m i . n i m
 feminimnya	f e . m i . n i m . ny a
@@ -11239,9 +11253,9 @@ fessenden	f e . s ex n . d ex n
 festifal	f e s . t i . f a l
 festipal	f e s . t i . p a l
 festival	f e s . t i . f a l
-fet	
+fet	e f . e . t e
 feta	f ex . t a
-fets	
+fets	e f . e . t e . e s
 fetus	f e . t u s
 fetusna	f e . t u s . n a
 fia	p i . a
@@ -11275,6 +11289,7 @@ fiktif	p i k . t i p
 fil	f i l
 fila	f i . l a
 filamen	f i . l a . m e n
+filandia	p i . l a n . d i . a
 filaria	f i . l a . r i . a
 filariasis	f i . l a . r i . a . s i s
 filateli	f i . l a . t e . l i
@@ -11298,7 +11313,7 @@ filosofis	f i . l o . s o . f i s
 filsafat	f i l . s a . f a t
 filsuf	f i l . s u f
 filusuf	f i . l u . s u f
-fim	
+fim	e f . i . e m
 fin	f i n
 fina	f i . n a
 final	f i . n a l
@@ -11352,7 +11367,7 @@ fitosterol	f i . t o s . t e . r o l
 fitrah	f i t . r a h
 fitri	f i . t r i
 fitur	f i . t u r
-fiv	
+fiv	e f . i . f e
 flagel	f l a . j e l
 flagela	f l a . g e . l a
 flagella	f l a . j e . l a
@@ -11400,7 +11415,7 @@ folat	f o . l a t
 folder	f o l . d ex r
 folklor	f o k . l o r
 foma	f o . m a
-fon	
+fon	e f . o . e n
 fonda	f o n . d a
 fondasi	p o n . d a . s i
 fonem	f o . n ex m
@@ -11596,6 +11611,8 @@ futurama	f u . t u . r a . m a
 fuzhou	f u . c o . u
 g	g e
 g	j i
+g_letter	g e
+g_letter-en	j i
 gaal	g a l
 gaang	g a . a ng
 gaarder	g a r . d ex r
@@ -11794,7 +11811,7 @@ gandus	g a n . d u s
 gane	g e . n ex
 ganeas	g a . n e . a s
 ganesa	g a . n e . s a
-ganesha	g a . n e . sh a
+ganesha	g a . n e . sy a
 gang	g a ng
 ganga	g a ng . g a
 gangas	g a . ng a s
@@ -11830,7 +11847,7 @@ ganting	g a n . t i ng
 gantiwarno	g a n . t i . w a r . n o
 gantt	g a n t
 gantungan	g a n . t u . ng a n
-gao	
+gao	g e . a . o
 gaok	g a . o k
 gapai	g a . p ai
 gapeka	g a . p ex . k a
@@ -12170,7 +12187,7 @@ geoteknik	g e . o . t e k . n i k
 geotermal	g e . o . t e r . m a l
 geothermal	j i . o . t ex r . m o l
 gepokan	g ex . p o . k a n
-geq	
+geq	g e . e . k i
 ger	g ex r
 gera	g ex . r a
 gerabah	g ex . r a . b a h
@@ -12185,7 +12202,7 @@ gerakannya	g ex . r a . k a n . ny a
 gerakkan	g ex . r a . k a n
 gerakna	g ex . r a k . n a
 geraldine	g e . r a l . d i n
-geran	
+geran	g e . e . e r . a . e n
 gerard	g e . r a t
 gerardus	hx i . r a r . d u s
 gerbang	g ex r . b a ng
@@ -12287,8 +12304,8 @@ ghoffar	g o . f a r
 ghofur	g o . f u r
 ghoib	g o . i b
 ghosh	g o sy
-ghosyiyah	g o . sh i . y a h
-ghs	
+ghosyiyah	g o . sy i . y a h
+ghs	g e . h a . e s
 ghulam	g u . l a m
 ghunung	g u . n u ng
 giacomo	g i . y a . k o . m o
@@ -12529,6 +12546,7 @@ gonore	g o . n o . r e
 gonta	g o n . t a
 goodbless	g u d . b l e s
 goodyear	g u d . y i . ex r
+google	g u . g ex l
 googletrans	g u . g ex l . t r a n s
 goongna	g o ng . n a
 goose	g u s
@@ -12863,6 +12881,8 @@ gyoza	g i . o . z a
 gypsum	j i p . s u m
 h	e j
 h	h a
+h_letter	h a
+h_letter-en	e j
 ha	h a
 haa	h a . a
 haag	h a g
@@ -12872,7 +12892,7 @@ haar	h a r
 haaretz	h a . a . r e z
 haat	h a . a t
 habanero	a . b a . n e . r o
-habasyah	h a . b a . sh a h
+habasyah	h a . b a . sy a h
 haben	h a . b ex n
 haber	h o . b ex r
 habib	h a . b i b
@@ -13041,7 +13061,7 @@ hampas	h a m . p a s
 hampelas	h a m . p ex . l a s
 hamperu	h a m . p ex . r u
 hampiran	h a m . p i . r a n
-hampshire	h e m . sh eu r
+hampshire	h e m . sy eu r
 hamptons	h e m . t ex n s
 hampurahampura	h a m . p u . r a . h a m . p u . r a
 hana	h a . n a
@@ -13264,6 +13284,7 @@ hasiah	h a . s i . a h
 hasiat	h a . s i . y a t
 hasiatna	h a . s i . a t . n a
 hasibuan	h a . s i . b u . a n
+hasil	h a . s i l
 hasilkan	h a . s i l . k a n
 hasilnanaon	h a . s i l . n a . n a . o n
 hasilnya	h a . s i l . ny a
@@ -13654,7 +13675,7 @@ himeji	h i . m e . j i
 himiko	h i . m i . k o
 himne	h i m . n ex
 himpunan	h i m . p u . n a n
-hin	
+hin	h a . i . e n
 hina	h i . n a
 hinata	h i . n a . t a
 hinayana	h i . n a . y a . n a
@@ -13707,7 +13728,7 @@ hiroglif	h i . r o . g l i f
 hirohito	h i . r o . h i . t o
 hiroko	h i . r o . k o
 hirosaki	h i . r o . s a . k i
-hiroshima	h i . r o . sh i . m a
+hiroshima	h i . r o . sy i . m a
 hirosima	h i . r o . s i . m a
 hiru	h i . r u
 hirudin	h i . r u . d i n
@@ -13724,7 +13745,7 @@ historia	h i s . t o . r i . a
 historiografi	h i s . t o . r i . o . g r a . f i
 historis	h i s . t o . r i s
 historisna	h i s . t o . r i s . n a
-hisyam	h i . sh a m
+hisyam	h i . sy a m
 hitam	h i . t a m
 hitar	h i . t a r
 hite	h i . t e
@@ -13865,7 +13886,7 @@ hoxha	h o k . s a
 hoyong	h o . y o ng
 href	r ex f
 hrvatska	h ex r . f a t s . k a
-htr	
+htr	h a . t e . e r
 hu	h u
 hua	h u . a
 huang	h o . a ng
@@ -13978,11 +13999,13 @@ hyuga	h i . u . g a
 hyundai	h u n . d a y
 i	ai
 i	i
+i_letter	i
+i_letter-en	ai
 iaculis	i . a . k u . l i s
 iaitu	i . a . i . t u
-iana	
+iana	i . a . e n . a
 iasana	i . a . s a . n a
-iata	
+iata	i . a . t e . a
 iba	i . b a
 ibadah	i . b a . d a h
 ibadahna	i . b a . d a h . n a
@@ -13997,12 +14020,12 @@ ibingan	i . b i . ng a n
 ibingna	i . b i ng . n a
 ibis	i . b i s
 iblis	i b . l i s
-ibm	
+ibm	i . b e . e m
 ibnu	i b . n u
 ibrahim	i b . r a . h i m
 ibrahimovic	i . b r a . h i . m o . f i k
 ibrani	i b . r a . n i
-ibro	
+ibro	i . b e . e r . o
 ibrohim	i . b r o . h i m
 ibtidaiyah	i b . t i . d a . i . y a h
 ibu	i . b u
@@ -14012,12 +14035,12 @@ ibun	i . b u n
 ibunda	i . b u n . d a
 ibunya	i . b u . ny a
 ibur	i . b u r
-ic	
+ic	i . c e
 ica	i . c a
 icalan	i . c a . l a n
-icao	
-icc	
-icdo	
+icao	i . c e . a . o
+icc	i . c e . c e
+icdo	i . c e . d e . o
 iceu	i . c eu
 ich	i hx
 icha	i . c a
@@ -14052,22 +14075,22 @@ ideologi	i . d e . o . l o . g i
 ideologinya	i . d e . o . l o . g i . ny a
 ideologis	i . d e . o . l o . g i s
 ideuna	i . d eu . n a
-idf	
+idf	i . d e . e f
 idham	i . d a m
 idiofon	i . d i . o . f o n
 idiologi	i . d i . o . l o . g i
 idiot	i . d i . o t
-idk	
-ido	
+idk	i . d e . k a
+ido	i . d e . o
 idola	i . d o . l a
 idris	i . d r i s
 idrisi	i d . r i . s i
 idu	i . d u
 idung	i . d u ng
-iec	
+iec	i . e . c e
 ied	i d
 iedul	i . d u l
-ieee	
+ieee	i . e . e . e
 ieu	i . eu
 ieuh	i . eu h
 ieumah	i . eu . m a h
@@ -14078,11 +14101,11 @@ iga	i . g a
 igana	i . g a . n a
 igarashi	i . g a . r a . s i
 igbo	i g . b o
-ige	
+ige	i . g e . e
 igel	i . g ex l
 igelkeun	i . g ex l . k eu n
-igfets	
-igi	
+igfets	i . g e . e f . e . t e . e s
+igi	i . g e . i
 iglesia	i g . l e . s i . a
 ignatius	i g . n a . s i . u s
 igneel	i g . n e l
@@ -14097,25 +14120,24 @@ ihtisar	i h . t i . s a r
 ihwal	i h . w a l
 ihwan	i h . w a n
 ihya	i h . y a
-iida	
-iie	
-iii	
+iida	i . i . d e . a
+iie	i . i . e
+iii	i . i . i
 iinditan	i . i n d i . t a n
 iing	i . i ng
 iisip	i . i . s i p
-iix	
+iix	i . i . e k s
 ijab	i . j a b
 ijajah	i . j a . j a h
 ijasah	i . j a . s a h
 ijazah	i . j a . s a h
 ijen	i . j e n
-iji	
+iji	i . j e . i
 ijin	i . j i n
 ijmali	i j . m a . l i
 ijo	i . j o
 ijtihad	i j . t i . h a d
-ijur	
-ijur	i . j u r
+ijur	i . j e . u . e r
 ika	i . k a
 ikada	i . k a . d a
 ikal	i . k a l
@@ -14137,7 +14159,7 @@ iki	i . k i
 ikin	i . k i n
 ikip	i . k i p
 ikis	i . k i s
-ikj	
+ikj	i . k a . j e
 ikke	i . k ex
 ikkeu	i . k eu
 iklam	i . k l a m
@@ -14154,7 +14176,7 @@ iksan	i k . s a n
 ikswaku	i k . s w a . k u
 iku	i . k u
 ikut	i . k u t
-ila	
+ila	i . e l . a
 ilaga	i . l a . g a
 ilah	i . l a h
 ilaha	i . l a . h a
@@ -14186,9 +14208,9 @@ ilmu	i l . m u
 ilmuan	i l . m u . a n
 ilmun	i l . m u n
 ilmuwan	i l . m u . a n
-ilo	
-ilo	i . l o
-ilu	
+ilo	i . e l . o
+ilo_vrb	i . l o
+ilu	i . e l . u
 ilubiungna	i . l u . b i . u ng . n a
 ilusionis	i . l u . s i . o . n i s
 ilustrasi	i . l u s . t r a . s i
@@ -14215,9 +14237,9 @@ imbuhan	i m . b u . h a n
 ime	i . m e
 imej	i . m e j
 imel	i . m e l
-imf	
-img	
-imi	
+imf	i . e m . e f
+img	i . e m . g e
+imi	i . e m . i
 imigrasi	i . m i . g r a . s i
 imina	i . m i . n a
 imlek	i m . l e k
@@ -14282,7 +14304,7 @@ incah	i n . c a h
 incaran	i n . c a . r a n
 inceptos	i n . c e p . t o s
 incheon	i n . c o n
-inchi	
+inchi	i . e n . c e . h a . i
 inci	i n . c i
 incididunt	i n . c i . d i . d u n t
 incik	i n . c i k
@@ -14485,7 +14507,7 @@ insektivora	i n . s e k . t i . f o . r a
 inseln	i n . s e l n
 inserter	i n . s ex r . t ex r
 inserts	i n . s ex r t s
-insha	i n . sh a
+insha	i n . sy a
 inside	i n . s a . i d
 insiden	i n . s i . d e n
 insinyur	i n . s i . ny u r
@@ -14513,7 +14535,7 @@ insularum	i n . s u . l a . r u m
 insulasi	i n . s u . l a . s i
 insulator	i n . s u . l a . t o r
 insuler	i n . s u . l e r
-insyikok	i n . sh i . k o k
+insyikok	i n . sy i . k o k
 insyiqoq	i n . sy i . k o k
 intake	i n . t e k
 intan	i n . t a n
@@ -14612,7 +14634,7 @@ inulin	i . n u . l i n
 inuman	i . n u . m a n
 inumeun	i . n u . m eu n
 inuyama	i . n u . y a . m a
-inuyasha	i . n u . y a . sh a
+inuyasha	i . n u . y a . sy a
 invansi	i n . f a n . s i
 invarian	i n . f a . r i . a n
 invasi	i n . f a . s i
@@ -14638,27 +14660,27 @@ ionik	i . o . n i k
 ionisasi	i . o . n i . s a . s i
 ionna	i . o . n a
 iowa	a . i . o . w a
-ip	
+ip	i . p e
 ipad	ai . p e d
 ipang	i . p a ng
 ipank	i . p a ng
-iparm	
+iparm	i . p e . a . e r . e m
 iparna	i . p a r . n a
-ipb	
+ipb	i . p e . b e
 ipeda	i . p ex . d a
 iphone	a y . f o n
 ipis	i . p i s
-ipm	
-ipp	
+ipm	i . p e . e m
+ipp	i . p e . p e
 iprik	i p . r i k
-ipsi	
-iptv	
+ipsi	i . p e . e s . i
+iptv	i . p e . t e . f e
 ipun	i . p u n
 ipung	i . p u ng
 ipunk	i . p u n g
 iqbal	i k . b a l
 iqro	i . k r o
-ir	
+ir	i . e r
 ira	i . r a
 iradiasi	i . r a . d i . a . s i
 irak	i . r a k
@@ -14671,14 +14693,15 @@ iras	i . r a s
 irasional	i . r a . s i . o . n a l
 irawan	i . r a . w a n
 irawati	i . r a . w a . t i
-irb	
-irc	
+irb	i . e r . b e
+irc	i . e r . c e
 iren	i . r e n
 irene	i . r ex . n ex
 ireng	i . r ex ng
 irgi	i r . g i
 irham	i r . h a m
 iri	i . r i
+iriana	i . r i . a . n a
 irianto	i . r i . a n . t o
 iridium	i . r i . d i . u m
 iridofor	i . r i . d o . f o r
@@ -14698,7 +14721,7 @@ irlam	ex r . l a m
 irlandia	i r . l a n . d i . a
 irma	i r . m a
 irman	i r . m a n
-irn	
+irn	i . e r . e n
 iro	i . r o
 irobbikuma	i . r o . b i . k u . m a
 iroh	i . r o h
@@ -14706,10 +14729,10 @@ iroha	i . r o . h a
 iron	a . i . r ex n
 ironis	i . r o . n i s
 irpan	i r . p a n
-irq	
+irq	i . e r . k i
 irrasional	i . r a . s i . o . n a l
 irreversible	i . r ex . f ex r . s i . b ex l
-iru	
+iru	i . e r . u
 iruka	i . r u . k a
 irung	i . r u ng
 irure	i . r u . r ex
@@ -14728,9 +14751,9 @@ isap	i . s a p
 isaq	i . s a k
 isarat	i . s a . r a t
 isbat	i s . b a t
-isdb	
-isdn	
-ise	
+isdb	i . e s . d e . b e
+isdn	i . e s . d e . e n
+ise	i . e s . e
 iseng	i . s ex ng
 isere	i . s e r
 iseries	a . i . s e . r i s
@@ -14751,7 +14774,7 @@ iskandar	i s . k a n . d a r
 iskandardinata	i s . k a n . d a r . d i . n a . t a
 iskandariah	i s . k a n . d a . r i . a h
 iskandariyah	i s . k a n . d a . r i . y a h
-isl	
+isl	i . e s . e l
 isla	i s . l a
 islam	i s . l a m
 islami	i s . l a . m i
@@ -14776,7 +14799,7 @@ isnadnya	i s . n a d . ny a
 isnaini	i s . n a . i . n i
 isnan	i s . n a n
 isnendes	i s . n e n . d ex s
-isni	
+isni	i . e s . e n . i
 isogami	i . s o . g a . m i
 isola	i . s o . l a
 isolasi	i . s o . l a . s i
@@ -14788,16 +14811,16 @@ isotaktik	i . s o . t a k . t i k
 isotonik	i . s o . t o . n i k
 isotop	i . s o . t o p
 isotropik	i . s o . t r o . p i k
-isp	
-isps	
+isp	i . e s . p e
+isps	i . e s . p e . e s
 isra	i s . r a
 israel	i s . r a . e l
 israfil	i s . r o . f i l
 isrofil	i . s r o . f i l
-iss	
+iss	i . e s . e s
 issa	i . s a
 issac	i . z e k
-issn	
+issn	i . e s . e s . e n
 istambul	i s . t a m . b u l
 istan	i s . t ex n
 istana	i . s t a . n a
@@ -14812,6 +14835,7 @@ istiqlal	i s . t i . k l a l
 istirahat	i s . t i . r a . h a t
 istisqa	i s . t i s . k o
 isto	i s . t o
+istrina	i s . t r i . n a
 istrinya	i s . t r i . ny a
 istuning	i s . t u . n i ng
 isu	i . s u
@@ -14836,7 +14860,7 @@ itami	i . t a . m i
 itang	i . t a ng
 itanium	i . t a . n i . u m
 itawa	i . t a . w a
-itb	
+itb	i . t e . b e
 itenas	i . t e . n a s
 iteuk	i . t eu k
 iteukna	i . t eu k . n a
@@ -14850,13 +14874,13 @@ itsukushima	i t . s u . k u . s i . m a
 itti	i . t i
 itung	i . t u ng
 itupun	i . t u . p u n
-itv	
-iucn	
+itv	i . t e . f e
+iucn	i . u . c e . e n
 iuh	i . u h
 iuhan	i . u . h a n
-iupac	
+iupac	i . u . p e . a . c e
 iuran	i . u . r a n
-iv	
+iv	i . f e
 ivakdalam	i . f a k . d a . l a m
 ivan	i . f a n
 ivanov	i . f a . n o f
@@ -14872,7 +14896,7 @@ iwama	i . w a . m a
 iwan	i . w a n
 iwata	i . w a . t a
 iwate	i . w a . t e
-iwo	
+iwo	i . w e . o
 iwul	i . w u l
 iwungna	i . w u ng . n a
 iyan	i . y a n
@@ -14880,8 +14904,7 @@ iyang	i . y a ng
 iye	i . y e
 iyeth	i . y e t
 iyo	i . y o
-iyos	
-iyos	i . y o s
+iyos	i . y e . o . e s
 iyuh	i . y u h
 iyyaka	i . y a . k a
 izin	i . z i n
@@ -14892,7 +14915,9 @@ izuna	i . z u . n a
 izzah	i . z a h
 j	j e
 j	j e y
-jaa	
+j_letter	j e
+j_letter-en	j e y
+jaa	j e . a . a
 jaap	j a p
 jaarbeurs	y a r . b i . u r s
 jaarlijkse	y a r . l ex k . s ex
@@ -15141,7 +15166,7 @@ jangkung	j a ng . k u ng
 jangkungan	j a ng . k u . ng a n
 jangkungna	j a ng . k u ng . n a
 jangsen	j a ng . s ex n
-jangsyen	j a ng . sh ex n
+jangsyen	j a ng . sy ex n
 janick	j e . n i k
 janin	j a . n i n
 janji	j a n . j i
@@ -15212,7 +15237,7 @@ jasmani	j a s . m a . n i
 jasmaniah	j a s . m a . n i . a h
 jason	j e . s ex n
 jassin	y a . s i n
-jat	
+jat	j e . a . t e
 jatah	j a . t a h
 jatayu	j a . t a . y u
 jaten	j a . t e n
@@ -15281,7 +15306,7 @@ jauhi	j a . u . h i
 jauhna	j a . u h . n a
 jaume	j a . u . m e
 jaung	j a . u ng
-jav	
+jav	j e . a . f e
 java	j a . f a
 javaanse	j a . f a n . s ex
 javad	j a . f a d
@@ -15359,7 +15384,7 @@ jefferson	j e . f ex r . s ex n
 jeffrey	j e f . r i
 jegud	j ex . g u d
 jeing	j ex . i ng
-jeis	
+jeis	j e . e . i . e s
 jejakmu	j ex . j a k . m u
 jejaknya	j ex . j a k . ny a
 jejaring	j ex . j a . r i ng
@@ -15531,7 +15556,7 @@ jiayu	j i . a . y u
 jiayuguan	j i . a . y u . g u . a n
 jib	j i b
 jibril	j i b . r i l
-jic	
+jic	j e . i . c e
 jida	j i . d a
 jidai	j i . d ai
 jiddah	j i . d a h
@@ -15575,7 +15600,7 @@ jirah	j i . r a h
 jirangan	j i . r a . ng a n
 jiri	j i . r i
 jirimna	j i . r i m . n a
-jis	
+jis	j e . i . e s
 jita	j i . t a
 jitu	j i . t u
 jiung	j i . u ng
@@ -15626,6 +15651,7 @@ jojon	j o . j o n
 jok	j o k
 joker	j o . k ex r
 joki	j o . k i
+joko	j o . k o
 jokowi	j o . k o . w i
 joli	j o . l i
 jolla	j o . l a
@@ -15658,7 +15684,7 @@ jordan	j o r . d a n
 jordania	j o r . d a . n i . a
 jorge	hx o r . h e
 jorong	j o . r o ng
-jorr	
+jorr	j e . o . e r . e r
 jos	j o s
 jose	h o . s e
 josef	y o . s e f
@@ -15675,7 +15701,7 @@ joururi	j o . u . r u . r i
 joy	j o y
 jreng	j r e ng
 jrut	j r u t
-jst	
+jst	j e . e s . t e
 ju	j u
 jua	j u . a
 jual	j u . a l
@@ -15815,6 +15841,8 @@ juwono	j u . w o . n o
 juz	j u j
 k	k a
 k	k e y
+k_letter	k a
+k_letter-en	k e y
 ka	k a
 kaabotan	k a . a . b o . t a n
 kaadaban	k a . a . d a . b a n
@@ -15848,7 +15876,7 @@ kaasup	k a . a . s u p
 kaasupan	k a . a . s u . p a n
 kaasupkeun	k a . a . s u p . k eu n
 kaatur	k a . a . t u r
-kaausp	
+kaausp	k a . a . a . u . e s . p e
 kaawas	k a . a . w a s
 kaayaah	k a . a . y a . a n
 kaayaan	k a . a . y a . a n
@@ -16219,6 +16247,7 @@ kahirupanana	k a . h i . r u . p a . n a . n a
 kahirupanna	k a . h i . r u . p a . n a
 kahirupannana	k a . h i . r u . p a . n a . n a
 kahitna	k a . h i t . n a
+kahiyang	k a . h i . y a ng
 kahiyangan	k a . h i . y a . ng a n
 kahn	k a n
 kahontal	k a . h o n . t a l
@@ -16951,6 +16980,7 @@ kapireungeuh	k a . p i . r eu . ng eu h
 kapisah	k a . p i . s a h
 kapita	k a . p i . t a
 kapitalis	k a . p i . t a . l i s
+kapitalisasi	k a . p i . t a . l i . s a . s i
 kapitalisme	k a . p i . t a . l i s . m ex
 kapitan	k a . p i . t a n
 kapitana	k a . p i . t a . n a
@@ -16969,7 +16999,7 @@ kapopuleran	k a . p o . p u . l e . r a n
 kaporit	k a . p o . r i t
 kapotong	k a . p o . t o ng
 kappa	k a . p a
-kappi	
+kappi	k a . a . p e . p e . i
 kaprabon	k a . p r a . b o n
 kaprajuritan	k a . p r a . j u . r i . t a n
 kapramukaan	k a . p r a . m u . k a . a n
@@ -17406,7 +17436,7 @@ kasetna	k a . s e t . n a
 kaseundeuhan	k a . s eu n . d eu . h a n
 kaseuseup	k a . s eu . s eu p
 kashgar	k a s . g a r
-kashima	k a . sh i . m a
+kashima	k a . sy i . m a
 kashiwazaki	k a . s i . w a . z a . k i
 kashmir	k a sy . m i r
 kashogunan	k a . s o . g u . n a n
@@ -17479,8 +17509,8 @@ kasusna	k a . s u s . n a
 kasusnya	k a . s u s . ny a
 kasusun	k a . s u . s u n
 kasut	k a . s u t
-kasyafani	k a . sh a . f a . n i
-kasyapani	k a . sh a . p a . n i
+kasyafani	k a . sy a . f a . n i
+kasyapani	k a . sy a . p a . n i
 kataatan	k a . t a . a . t a n
 katabolik	k a . t a . b o . l i k
 katabolisme	k a . t a . b o . l i s . m ex
@@ -17622,6 +17652,7 @@ katua	k a . t u . a
 katuangan	k a . t u . a . ng a n
 katuduh	k a . t u . d u h
 katuhanan	k a . t u . h a . n a n
+katuhu	k a . t u . h u
 katuhueun	k a . t u . h u . eu n
 katuk	k a . t u k
 katukang	k a . t u . k a ng
@@ -17854,7 +17885,7 @@ kebutuhan	k ex . b u . t u . h a n
 kebutuhduwur	k ex . b u . t u h . d u . w u r
 kebutuhjurang	k ex . b u . t u h . j u . r a ng
 kebyar	k ex b . y a r
-kec	
+kec	k a . e . c e
 keca	k e . c a
 kecamatan	k ex . c a . m a . t a n
 kecanduan	k ex . c a n . d u . a n
@@ -17862,6 +17893,8 @@ kecantikan	k ex . c a n . t i . k a n
 kecantikannya	k ex . c a n . t i . k a n . ny a
 kecap	k e . c a p
 kecap	k ex . c a p
+kecap_nou-soysauce	k e . c a p
+kecap_nou-word	k ex . c a p
 kecapi	k ex . c a . p i
 kecelakaan	k ex . c ex . l a . k a . a n
 kecenderungan	k ex . c ex n . d ex . r u . ng a n
@@ -17931,6 +17964,7 @@ kedungdalem	k ex . d u ng . d a . l ex m
 kedungdawa	k ex . d u ng . d a . w a
 kedunggede	k ex . d u ng . g ex . d e
 kedunghalang	k ex . d u ng . h a . l a ng
+kedungjati	k ex . d u ng . j a . t i
 kedungjaya	k ex . d u ng . j a . y a
 kedungjenar	k ex . d u ng . j ex . n a r
 kedungjeruk	k ex . d u ng . j ex . r u k
@@ -18232,6 +18266,7 @@ kenanga	k ex . n a . ng a
 kenangan	k ex . n a . ng a n
 kenanglah	k ex . n a ng . l a h
 kenari	k ex . n a . r i
+kenca	k e n . c a
 kencaeun	k e n . c a . eu n
 kencan	k ex n . c a n
 kencana	k ex n . c a . n a
@@ -18518,7 +18553,7 @@ keset	k ex . s ex t
 kesetanan	k ex . s e . t a . n a n
 kesetiaan	k ex . s ex . t i . a . a n
 kesetiaannya	k ex . s ex . t i . a . a n . ny a
-kesha	k e . sh a
+kesha	k e . sy a
 keshi	k e . s i
 kesialan	k ex . s i . a . l a n
 kesimpulan	k ex . s i m . p u . l a n
@@ -18538,7 +18573,7 @@ kesuma	k ex . s u . m a
 kesundaan	k ex . s u n . d a . a n
 kesusasteraan	k ex . s u . s a s . t ex . r a . a n
 kesusastraan	k ex . s u . s a s . t r a . a n
-kesya	k e . sh a
+kesya	k e . sy a
 ketahanan	k ex . t a . h a . n a n
 ketahui	k ex . t a . h u . i
 ketak	k ex . t a k
@@ -18891,13 +18926,13 @@ kirimkeun	k i . r i m . k eu n
 kirining	k i . r i . n i ng
 kiripik	k i . r i . p i k
 kirow	k i . r o w
-kis	
+kis	k a . i . e s
 kisah	k i . s a h
 kisahna	k i . s a h . n a
 kisam	k i . s a m
 kisame	k i . s a . m e
 kisaran	k i . s a . r a n
-kishimoto	k i . sh i . m o . t o
+kishimoto	k i . sy i . m o . t o
 kisi	k i . s i
 kismis	k i s . m i s
 kiso	k i . s o
@@ -18926,7 +18961,7 @@ kiyoko	k i . y o . k o
 kiyoshi	k i . y o . sy i
 kiyoura	k i . y o . u . r a
 kkal	k a l
-kku	
+kku	k a . k a . u
 klab	k l a b
 klahang	k l a . h a ng
 klaimnya	k l a . i m . ny a
@@ -18976,6 +19011,8 @@ klinting	k l i n . t i ng
 klirong	k l i . r o ng
 klise	k l i . s e
 klise	k l i . s ex
+klise_nou-cliche	k l i . s e
+klise_nou-rollfilm	k l i . s ex
 kliwed	k l i . w ex d
 klok	k l o k
 klompen	k l o m . p ex n
@@ -18998,7 +19035,7 @@ kluwih	k l u . w i h
 knalpot	k n a l . p o t
 knightley	n a . i g . l i
 knightli	k ex . n ai k . l i
-knip	
+knip	k a . e n . i . p e
 knowles	n o w . l ex s
 knox	n o k s
 knuth	k n u t
@@ -19019,6 +19056,7 @@ koboy	k o . b o y
 kobra	k o b . r a
 kocak	k o . c a k
 kocapa	k o . c a . p a
+koceak	k o . c e . a k
 kocek	k o . c e k
 koch	k o hx
 koci	k o . c i
@@ -19649,6 +19687,7 @@ kring	k r i ng
 kringen	k r i . ng ex n
 kriolit	k r i . o . l i t
 kripa	k r i . p a
+kripik	k r i . p i k
 kriptografi	k r i p . t o . g r a . f i
 kripton	k r i p . t o n
 krir	k r i r
@@ -19712,7 +19751,7 @@ krupuk	k r u . p u k
 krustasea	k r u s . t a . s e . a
 ksatria	k s a . t r i . a
 ku	k u
-kua	
+kua	k a . u . a
 kuabdi	k u . a b . d i
 kuadran	k u . a . d r a n
 kuadriliun	k u . a d . r i . l i . u n
@@ -19815,6 +19854,7 @@ kuji	k u . j i
 kuk	k u k
 kuka	k u . k a
 kukang	k u . k a ng
+kukar	k u . k a r
 kukitu	k u . k i . t u
 kukkiwon	k u . k i . w o n
 kukuh	k u . k u h
@@ -20144,11 +20184,13 @@ kyung	k y u ng
 kyurin	k i . u . r i n
 kyushu	k i . u . sy u
 l	e l
+l_letter	e l
 la	l a
 laah	l a . a h
 laan	l a . a n
 laas	l a s
 lab	l e b
+laba	l a . b a
 laban	l a . b a n
 labanjaya	l a . b a n . j a . y a
 labbaek	l a . b a . e k
@@ -20213,6 +20255,7 @@ lahanna	l a . h a . n a
 lahar	l a . h a r
 lahat	l a . h a t
 lahia	l a . h i . a
+lahir	l a . h i r
 lahiran	l a . h i . r a n
 lahirna	l a . h i r . n a
 lahirnya	l a . h i r . ny a
@@ -20265,7 +20308,7 @@ lakuan	l a . k u . a n
 lakukan	l a . k u . k a n
 lakukeun	l a . k u . k eu n
 lakuna	l a . k u . n a
-lal	
+lal	e l . a . e l
 lala	l a . l a
 laladon	l a . l a . d o n
 lalagasan	l a . l a . g a . s a n
@@ -20561,8 +20604,7 @@ lavin	l e . f i n
 lavoisier	l a . f o . s i r
 lavrentiy	l a . f r i n . t i
 law	l a w
-lawa	
-lawa	l a . w a
+lawa	e l . a . w e . a
 lawadan	l a . w a . d a n
 lawak	l a . w a k
 lawakan	l a . w a . k a n
@@ -20600,9 +20642,9 @@ lazardis	l a . z a r . d i s
 lazaro	l a . z a . r o
 lazim	l a . z i m
 lazuli	l a . z u . l i
-lca	
-ldap	
-le	
+lca	e l . c e . a
+ldap	e l . d e . a . p e
+le	e l . e
 leaf	l i f
 leah	l e . a h
 leang	l e . a ng
@@ -20626,6 +20668,7 @@ lebel	l e . b ex l
 lebeng	l ex . b ex ng
 leber	l e . b e r
 lebesgue	l ex . b e g
+lebet	l ex . b ex t
 lebetan	l ex . b ex . t a n
 lebetkeun	l ex . b ex t . k eu n
 lebetna	l ex . b ex t . n a
@@ -20831,7 +20874,7 @@ lepidoptera	l e . p i . d o p . t e . r a
 lepra	l e . p r a
 leprae	l e p . r e
 leptop	l e p . t o p
-leq	
+leq	e l . e . k i
 ler	l i . ex r
 lereng	l e . r e ng
 leresan	l ex . r ex . s a n
@@ -20933,7 +20976,7 @@ lewih	l ex . w i h
 lewis	l u . i s
 leyuranana	l ex . y u . r a . n a . n a
 lezat	l ex . z a t
-lha	
+lha	e l . h a . a
 lhasa	l a . s a
 lhokseumawe	l o k . s eu . m a . w e
 li	l i
@@ -20975,6 +21018,7 @@ lifescape	l a . i f . s k e . i p
 lifestyle	l ai f . s t ai l
 lift	l i f
 lig	l i g
+liga	l i . g a
 ligamen	l i . g a . m e n
 ligamentum	l i . g a . m e n . t u m
 ligar	l i . g a r
@@ -21189,7 +21233,7 @@ ljungberg	y u ng . b a y
 llama	l a . m a
 llotja	l o . c a
 lmam	l m a m
-loa	
+loa	e l . o . a
 loakan	l o . a . k a n
 loano	l o . a . n o
 loba	l o . b a
@@ -21270,7 +21314,7 @@ lonceng	l o n . c e ng
 londo	l o n . d o
 london	l o n . d o n
 longgar	l o ng . g a r
-longhaul	
+longhaul	e l . o . e n . g e . h a . a . u . e l
 longicuspis	l o n . j i . k u s . p a y
 longitud	l o . ng i . t u d
 longkewang	l o ng . k e . w a ng
@@ -21320,7 +21364,7 @@ loyang	l o . y a ng
 loyo	l o . y o
 loyogna	l o . y o g . n a
 loyor	l o . y o r
-ltd	
+ltd	e l . t e . d e
 luang	l u . a ng
 luarbiasa	l u . a r . b i . a . s a
 luarna	l u . a r . n a
@@ -21485,7 +21529,7 @@ maan	m a . a n
 maarten	m a r . t ex n
 maasai	m e . s ai
 maatschappij	m a t s . hx a . p ai
-maav	
+maav	e m . a . a . f e
 maba	m a . b a
 mabal	m a . b a l
 mabok	m a . b o k
@@ -21563,7 +21607,7 @@ maenpo	m a . e n . p o
 maesarah	m a . e . s a . r o h
 maeso	m a . e . s o
 maestro	m a . e s . t r o
-maf	
+maf	e m . a . e f
 mafia	m a . f i . a
 magadhi	m a . g a . d i
 magallanes	m a . g a l . y a . n e s
@@ -21670,7 +21714,7 @@ mahmut	m a h . m u t
 mahoni	m a . h o . n i
 mahpud	m a h . p u d
 mahsyar	m a h . sy a r
-mahsyur	m a h . sh u r
+mahsyur	m a h . sy u r
 mahya	m a . h i . a
 mahyar	m a h . y a r
 mai	m ai
@@ -21722,6 +21766,7 @@ majhul	m a j . h u l
 majid	m a . j i d
 majik	m a . j i k
 majlis	m a j . l i s
+majmu	m a j . m u
 major	m e . j ex r
 majorca	m a . y o r . k a
 maju	m a . j u
@@ -21779,6 +21824,7 @@ makroskopis	m a k . r o s . k o . p i s
 makrozoobentos	m a k . r o . z u . b e n . t o s
 makruf	m a k . r u f
 makruh	m a k . r u h
+maksad	m a k . s a d
 maksadna	m a k . s a d . n a
 maksimalna	m a k . s i . m a l . n a
 maksimum	m a k . s i . m u m
@@ -22117,7 +22163,7 @@ manonjaya	m a . n o n . j a . y a
 manpaatna	m a n . p a . a t . n a
 mans	m a n s
 mansur	m a n . s u r
-mansyur	m a n . sh u r
+mansyur	m a n . sy u r
 mantak	m a n . t a k
 mantan	m a n . t a n
 mantangul	m a n . t a . ng u l
@@ -22244,7 +22290,7 @@ marentahan	m a . r e n . t a . h a n
 marentahkeun	m a . r e n . t a h . k eu n
 maret	m a . r ex t
 mareuman	m a . r eu . m a n
-marf	
+marf	e m . a . e r . e f
 marga	m a r . g a
 margaasih	m a r . g a . a . s i h
 margabakti	m a r . g a . b a k . t i
@@ -22340,9 +22386,9 @@ marsel	m a r . s e l
 marsh	m a r sy
 marsha	m a r . s a
 marshall	m a r . sy ex l
-marshanda	m a r . sh a n . d a
+marshanda	m a r . sy a n . d a
 marsil	m a r . s i l
-marsyell	m a r . sh e l
+marsyell	m a r . sy e l
 marta	m a r . t a
 martabak	m a r . t a . b a k
 martabat	m a r . t a . b a t
@@ -22462,10 +22508,10 @@ masukkan	m a . s u . k a n
 masuklah	m a . s u k . l a h
 masuknya	m a . s u k . ny a
 masyaallah	m a . sy a . a w . l o h
-masyarakat	m a . sh a . r a . k a t
+masyarakat	m a . sy a . r a . k a t
 masyarakatna	m a . sy a . r a . k a t . n a
 masyarakatnya	m a . sy a . r a . k a t . ny a
-masyhur	m a sh . h u r
+masyhur	m a sy . h u r
 mat	m e t
 mata	m a . t a
 matador	m a . t a . d o r
@@ -22612,7 +22658,7 @@ mcdonnell	m e k . d ex . n e l
 mcdonnell	m e k . d o . n ex l
 mcgowan	m e k . g o . w ex n
 mcguire	m ex k . g u . a . e r
-mea	
+mea	e m . e . a
 meadow	m i . d o w
 meadows	m e . d o w s
 meakeun	m e . a . k eu n
@@ -22698,7 +22744,7 @@ meiji	m e i . j i
 meilani	m e . i . l a . n i
 meilia	m e . i . l i . a
 meiosis	m e . i . o . s i s
-meisya	m e . i . sh a
+meisya	m e . i . sy a
 meitetsu	m e . i . t e t . s u
 mejana	m e . j a . n a
 mejia	m e . j i . a
@@ -22868,8 +22914,7 @@ meluncurkan	m ex . l u n . c u r . k a n
 melung	m ex . l u ng
 melupakan	m ex . l u . p a . k a n
 melvin	m e l . f i n
-mem	
-mem	m e m
+mem	e m . e . e m
 memacu	m ex . m a . c u
 memahami	m ex . m a . h a . m i
 memainkan	m ex . m a . i n . k a n
@@ -23559,7 +23604,7 @@ menstrual	m e n s . t r u . ex l
 menstruasi	m e n s . t r u . a . s i
 mensubsidi	m ex n . s u b . s i . d i
 mensuplai	m ex n . s u . p l ai
-mensyen	m e n . sh ex n
+mensyen	m e n . sy ex n
 mentaan	m e n . t a . a n
 mentah	m ex n . t a h
 mentalis	m e n . t a . l i s
@@ -23573,6 +23618,7 @@ mentawai	m ex n . t a . w ai
 mentega	m ex n . t e . g a
 menteng	m e n . t e ng
 mentereng	m ex n . t e . r e ng
+menteri	m ex n . t ex . r i
 menterjemahkan	m ex n . t ex r . j ex . m a h . k a n
 menterjemahkannya	m ex n . t ex r . j ex . m a h . k a . ny a
 mentha	m e n . t a
@@ -23836,8 +23882,7 @@ meruntuhkan	m ex . r u n . t u h . k a n
 merusak	m ex . r u . s a k
 meruya	m ex . r u . y a
 meruyung	m ex . r u . y u ng
-mes	
-mes	m e s
+mes	e m . e . e s
 mesak	m e . s a k
 mesat	m ex . s a t
 mesek	m ex . s e k
@@ -24006,7 +24051,7 @@ micro	m ai . k r o
 microfibrillar	m a . i k . r o . f i b . r i . l ex r
 microsoft	m i k . r o . s o f t
 microwave	m a y . k r o . w e f
-micu	
+micu	e m . i . c e . u
 midai	m i . d ai
 midamel	m i . d a . m ex l
 midanda	m i . d a n . d a
@@ -24173,12 +24218,13 @@ mimilukeun	m i . m i . l u . k eu n
 mimin	m i . m i n
 mimindengna	m i . m i n . d ex ng . n a
 mimiri	m i . m i . r i
-mimit	
+mimit	e m . i . e m . i . t e
 mimiti	m i . m i . t i
 mimitinamah	m i . m i . t i . n a . m a h
 mimitran	m i . m i t . r a n
 mimitu	m i . m i . t u
 mimosa	m i . m o . s a
+mimpin	m i m . p i n
 min	m i n
 mina	m i . n a
 minah	m i . n a h
@@ -24277,8 +24323,7 @@ miosin	m i . o . s i n
 miosis	m i . o . s i s
 mipa	m i . p a
 mipis	m i . p i s
-mir	
-mir	m i r
+mir	e m . i . e r
 mira	m i . r a
 mirah	m i . r a h
 miraj	m i . r a j
@@ -24326,7 +24371,7 @@ misha	m i . s a
 mishima	m i . s i . m a
 misia	m i . s i . a
 misil	m i . s i l
-misin	
+misin	e m . i . e s . i . e n
 misina	m i . s i . n a
 misionaris	m i . s i . o . n a . r i s
 miskin	m i . s k i n
@@ -24600,7 +24645,7 @@ morpologi	m o r . p o . l o . g i
 morris	m o . r i s
 mortalitas	m o r . t a . l i . t a s
 mortir	m o r . t i r
-mos	
+mos	e m . o . e s
 mosaik	m o . s a . i k
 mosambik	m o . s a m . b i k
 mosasaurus	m o . s a . s a . u . r u s
@@ -24646,7 +24691,7 @@ mountainous	m a . u n . t ex . n u s
 mourinho	m o . r i . n o
 mouth	m o . u t
 moutong	m o . u . t o ng
-mov	
+mov	e m . o . f e
 movie	m u . f i
 mowgli	m o w . g l i
 mox	m o k s
@@ -24658,8 +24703,8 @@ moyudan	m o . y u . d a n
 mozambik	m o . z a . m b i k
 mozart	m o . z a r t
 mozzarella	m o . z a . r e . l a
-mu	
-mua	
+mu	e m . u
+mua	e m . u . a
 muadz	m u . a z
 muadzin	m u . a . z i n
 muakkadah	m u . a . k a . d a h
@@ -24737,7 +24782,7 @@ muhyi	m u h . y i
 muhyiddin	m u h . y i . d i n
 muhyiddina	m u h . y i . d i . n a
 muhyidin	m u h . y i . d i n
-muih	
+muih	e m . u . i . h a
 muin	m u . i n
 muis	m u . i s
 muisme	m u . i s . m e
@@ -24843,6 +24888,7 @@ munadi	m u . n a . d i
 munaf	m u . n a f
 munajat	m u . n a . j a t
 munapek	m u . n a . p e k
+munara	m u . n a . r a
 munarana	m u . n a . r a . n a
 munas	m u . n a s
 munawar	m u . n a . w a r
@@ -24867,6 +24913,8 @@ mundurkeun	m u n . d u r . k eu n
 mundurna	m u n . d u r . n a
 munel	m u . n e l
 munel	m u . n ex l
+munel_adj	m u . n ex l
+munel_pers	m u . n e l
 munfarid	m u n . f a . r i d
 mungaran	m u . ng a . r a n
 munggah	m u ng . g a h
@@ -25007,7 +25055,7 @@ musnah	m u s . n a h
 musnahna	m u s . n a h . n a
 musola	m u . s o . l a
 muson	m u . s o n
-musppanitra	
+musppanitra	e m . u . e s . p e . p e . a . e n . i . t e . e r . a
 musrik	m u s . r i k
 musrikin	m u s . r i . k i n
 musschenbroek	m u . sy e n . b r u k
@@ -25034,13 +25082,14 @@ musyawarah	m u . sy a . w a . r a h
 musyawaroh	m u . sy a . w a . r o h
 musyrik	m u sy . r i k
 musyrikin	m u sy . r i . k i n
-mut	
+mut	e m . u . t e
 mutagen	m u . t a . g e n
 mutahir	m u . t a . h i r
 mutakhir	m u . t a . hx i r
 mutakin	m u . t a . k i n
 mutasi	m u . t a . s i
 mutean	m u . t e . a n
+muter	m u . t ex r
 muterkeun	m u . t ex r . k eu n
 muthalib	m u . t o . l i b
 muthoffifin	m u . t o . f i . f i n
@@ -25071,9 +25120,10 @@ myosin	m a . e . s ex n
 myrtaceae	m i r . t a . c e
 myrtle	m a r . d ex l
 mysore	m i . s o . r e
-mysql	
+mysql	e m . y e . e s . k i . e l
 mystogan	m i s . t o . g a n
 n	e n
+n_letter	e n
 naba	n a . b a
 nabati	n a . b a . t i
 nabawi	n a . b a . w i
@@ -25101,7 +25151,7 @@ nadila	n a . d i . l a
 nadran	n a d . r a n
 nadu	n a . d u
 nadua	n a . d u . a
-nae	
+nae	e n . a . e
 naek	n a . e k
 naekan	n a . e . k a n
 naekeun	n a . e . k eu n
@@ -25329,6 +25379,7 @@ nao	n a . o
 naoan	n a . o . a n
 naoko	n a . o . k o
 naomi	n a . o . m i
+naon	n a . o n
 naoto	n a . o . t o
 napas	n a . p a s
 napasha	n a . p a . s a
@@ -25406,7 +25457,7 @@ nasehat	n a . s e . h a t
 naser	n a . s e r
 nash	n a s
 nasha	n a . sy a
-nashvil	n a sh . f i l
+nashvil	n a sy . f i l
 nasi	n a . s i
 nasib	n a . s i b
 nasibna	n a . s i b . n a
@@ -25430,7 +25481,7 @@ nassar	n a . s a r
 nasser	n a . s ex r
 nasuha	n a . s u . h a
 nasution	n a . s u . t i . o n
-nat	
+nat	e n . a . t e
 nata	n a . t a
 nataan	n a . t a . a n
 natabaya	n a . t a . b a . y a
@@ -25446,7 +25497,7 @@ natanagara	n a . t a . n a . g a . r a
 natangga	n a . t a ng . g a
 nataprawira	n a . t a . p r a . w i . r a
 natar	n a . t a r
-natasha	n a . t a . sh a
+natasha	n a . t a . sy a
 nateh	n a . t e h
 nath	n a t h
 natoque	n a . t o . k ex
@@ -25466,7 +25517,7 @@ natural	n a . t u . r a l
 naturalis	n a . t u . r a . l i s
 naturalisasi	n a . t u . r a . l i . s a . s i
 nature	n e . c ex r
-nau	
+nau	e n . a . u
 naufal	n a . u . f a l
 naungan	n a . u . ng a n
 navajo	n a . f a . j o
@@ -25531,9 +25582,9 @@ negri	n e g . r i
 negrito	n e g . r i . t o
 negro	n e g . r o
 neguh	n ex . g u h
-nehen	
+nehen	e n . e . h a . e . e n
 nehru	n e h . r u
-nei	
+nei	e n . e . i
 neighbourhood	n e . i . b ex r . h u d
 neighbourhoods	n e . b ex r . h u d s
 neighbouring	n e g . b ex . r i ng
@@ -25652,10 +25703,10 @@ neru	n e . r u
 nerus	n ex . r u s
 nes	n e s
 nescafe	n e s . k a . f e
-neshvil	n e sh . f i l
+neshvil	n e sy . f i l
 nesta	n ex s . t a
 netaskeun	n ex . t a s . k eu n
-netbeui	
+netbeui	e n . e . t e . b e . e . u . i
 netbios	n e t . b a . y o s
 netelakeun	n e . t e . l a . k eu n
 netepan	n ex . t ex . p a n
@@ -26014,6 +26065,7 @@ ngageugeuh	ng a . g eu . g eu h
 ngageumpeurkeun	ng a . g eu m . p eu r . k eu n
 ngaggo	ng a ng . g o
 ngaggunakeun	ng a . g u . n a . k eu n
+ngaggurr	ng a . g u r
 ngagiblegkeun	ng a . g i b . l ex g . k eu n
 ngagiling	ng a . g i . l i ng
 ngagimbung	ng a . g i m . b u ng
@@ -26435,6 +26487,7 @@ nganalisa	ng a . n a . l i . s a
 nganalisis	ng a . n a . l i . s i s
 nganasehatan	ng a . n a . s e . h a . t a n
 nganasir	ng a . n a . s i r
+nganavigasi	ng a . n a . f i . g a . s i
 ngancam	ng a n . c a m
 ngancem	ng a n . c ex m
 ngancik	ng a n . c i k
@@ -26466,6 +26519,7 @@ nganjrekna	ng a n . j r ex k . n a
 nganjuk	ng a n . j u k
 nganjurkeun	ng a n . j u r . k eu n
 nganomeran	ng a . n o . m ex . r a n
+nganonaktifkeun	ng a . n o n . a k . t i f . k eu n
 ngantep	ng a n . t ex p
 ngantepkeun	ng a n . t ex p . k eu n
 ngantet	ng a n . t ex t
@@ -26772,6 +26826,7 @@ ngeklik	ng ex . k l i k
 ngekos	ng ex . k o s
 ngekspresikeun	ng e k s . p r e . s i . k eu n
 ngelaba	ng ex . l a . b a
+ngelehkeun	ng e . l e h . k eu n
 ngelel	ng ex . l ex l
 ngelem	ng ex . l e m
 ngeles	ng ex . l e s
@@ -26937,6 +26992,7 @@ ngirangna	ng i . r a ng . n a
 ngiridit	ng i . r i . d i t
 ngirim	ng i . r i m
 ngirimkan	ng i . r i m . k a n
+ngirimkeun	ng i . r i m . k eu n
 ngiring	ng i . r i ng
 ngirit	ng i . r i t
 ngiritik	ng i . r i . t i k
@@ -27101,7 +27157,7 @@ ngutuk	ng u . t u k
 ngutus	ng u . t u s
 ngutuskeun	ng u . t u s . k eu n
 nguyung	ng u . y u ng
-ni	
+ni	e n . i
 nia	n i . a
 niaga	n i . a . g a
 niagara	n i . a . g a . r a
@@ -27128,9 +27184,9 @@ nicobar	n i . k o . b a r
 nicolae	n i . n o . l a . e
 nicolai	n i . k o . l ai
 nicolas	n i . k o . l a s
-nicu	
+nicu	e n . i . c e . u
 nidji	n i . j i
-nie	
+nie	e n . i . e
 niepce	n i . e p s
 nietzsche	n i t . s ex
 nieuwe	n i . u . w ex
@@ -27234,7 +27290,7 @@ nirukeun	n i . r u . k eu n
 nirunmas	n i . r u n . m a s
 nirvana	n i r . f a . n a
 nirwana	n i r . w a . n a
-nis	
+nis	e n . i . e s
 nisa	n i . s a
 nisan	n i . s a n
 nisanna	n i . s a n . n a
@@ -27363,7 +27419,7 @@ northeast	n o r . t i s
 northern	n o r . t ex r n
 northwest	n o r t . w e s t
 norwegia	n o r . w e . g i . a
-nos	
+nos	e n . o . e s
 nostalgia	n o s . t a l . g i . a
 nostrud	n o s . t r u d
 notabene	n o . t a . b e . n e
@@ -27398,7 +27454,7 @@ noya	n o . y a
 noyodna	n o . y o d . n a
 nozomi	n o . z o . m i
 nu	n u
-nua	
+nua	e n . u . a
 nuang	n u . a ng
 nuansa	n u . a n . s a
 nuar	n u . a r
@@ -27408,13 +27464,14 @@ nuduhkeun	n u . d u h . k eu n
 nuevo	n u . e . f o
 nufail	n u . f a . i l
 nugaskeun	n u . g a s . k eu n
+nugie	n u . g i . ex
 nugini	n u . g i . n i
 nugraha	n u g . r a . h a
 nugroho	n u g . r o . h o
 nuh	n u h
 nuhartina	n u . h a r . t i . n a
 nuhun	n u . h u n
-nui	
+nui	e n . u . i
 nujadi	n u . j a . d i
 nuju	n u . j u
 nujuh	n u . j u h
@@ -27475,8 +27532,7 @@ numpi	n u m . p i
 numpuk	n u m . p u k
 numpukna	n u m . p u k . n a
 numpurkeun	n u m . p u r . k eu n
-nums	
-nums	n u m s
+nums	e n . u . e m . e s
 numut	n u . m u t
 numutkuen	n u . m u t . k eu n
 numuwuhkeun	n u . m u . w u h . k eu n
@@ -27539,7 +27595,7 @@ nurunna	n u . r u . n a
 nurutan	n u . r u . t a n
 nurutkeun	n u . r u t . k eu n
 nurzaman	n u r . z a . m a n
-nus	
+nus	e n . u . e s
 nusa	n u . s a
 nusaherang	n u . s a . h e . r a ng
 nusaikeut	n u . s a . i . k eu t
@@ -27564,7 +27620,7 @@ nuturkeunana	n u . t u r . k eu . n a . n a
 nuvola	n u . f o . l a
 nuwas	n u . w a s
 nuwuhkeun	n u . w u h . k eu n
-ny	
+ny	e n . y e
 nya	ny a
 nyaaheun	ny a . a . h eu n
 nyaan	ny a . a n
@@ -27587,7 +27643,7 @@ nyadap	ny a . d a p
 nyadar	ny a . d a r
 nyadarkeun	ny a . d a r . k eu n
 nyaderhanakeun	ny a . d ex r . h a . n a . k eu n
-nyadi	
+nyadi	e n . y e . a . d e . i
 nyadiaan	ny a . d i . a . a n
 nyadran	ny a d . r a n
 nyaeeta	ny a . e . t a
@@ -27721,7 +27777,7 @@ nyaru	ny a . r u
 nyaruaan	ny a . r u . a . a n
 nyaruakeun	ny a . r u . a . k eu n
 nyasar	ny a . s a r
-nyat	
+nyat	e n . y e . a . t e
 nyata	ny a . t a
 nyatakan	ny a . t a . k a n
 nyatapatokan	ny a . t a . p a . t o . k a n
@@ -27823,6 +27879,7 @@ nyesakeun	ny e . s a . k eu n
 nyesekkeun	ny ex . s ex . k eu n
 nyesel	ny ex . s ex l
 nyesep	ny ex . s ex p
+nyeta	ny e . t a
 nyetak	ny ex . t a k
 nyetel	ny ex . t e l
 nyetir	ny ex . t i r
@@ -27951,6 +28008,7 @@ nyuguhan	ny u . g u . h a n
 nyuguhkeun	ny u . g u h . k eu n
 nyuhungkeun	ny u . h u n . k eu n
 nyukcruk	ny u k . c r u k
+nyukeruk	ny u . k ex . r u k
 nyukestel	ny u . k e s . t ex l
 nyukseskeun	ny u k . s e s . k eu n
 nyukupan	ny u . k u . p a n
@@ -28003,6 +28061,7 @@ nyutonian	ny u . t o . n i . a n
 nyutradaraan	ny u t . r a . d a . r a . a n
 nyuuh	ny u . u h
 o	o
+o_letter	o
 oak	o . a k
 oakland	o k . l ex n
 oakley	o . u k . l i
@@ -28065,14 +28124,13 @@ odorata	o . d o . r a . t a
 odori	o . d o . r i
 odour	o . d o r
 odoy	o . d o y
-odu	
-oecd	
+odu	o . d e . u
+oecd	o . e . c e . d e
 oedjang	u . j a ng
 oefeto	o . e . f e . t o
-oem	
+oem	o . e . e m
 oemoem	u . m u m
-oen	
-oen	o . e n
+oen	o . e . e n
 oeno	o . i . n o
 oetama	u . t a . m a
 oetomo	u . t o . m o
@@ -28090,15 +28148,15 @@ ogasawara	o . g a . s a . w a . r a
 oge	o . g e
 ogel	o . g e l
 ogeul	o . g eu l
-ogg	
+ogg	o . g e . g e
 ogi	o . g i
 ogo	o . g o
 ogong	o . g o ng
-ogv	
+ogv	o . g e . f e
 oh	o h
 oha	o . h a
 ohara	o . h a . r a
-ohci	
+ohci	o . h a . c e . i
 ohio	o . h i . o
 ohira	o . h i . r a
 ohrid	o h . r i d
@@ -28154,7 +28212,7 @@ olaus	u . l o . u s
 olbers	o l . b e r s
 old	o l d
 olde	o l d
-oldr	
+oldr	o . e l . d e . e r
 ole	o . l e
 olea	o . l e . a
 oleat	o . l e . a t
@@ -28211,11 +28269,11 @@ ompreng	o m . p r e ng
 omset	o m . s e t
 omsetna	o m . s e t . n a
 omzack	o m . z e k
-ona	
+ona	o . e n . a
 onan	o . n a n
 onar	o . n a r
 onboard	o n . b o r d
-oncat	
+oncat	o . e n . c e . a . t e
 once	o n . c ex
 oncor	o n . c o r
 ondangan	o n . d a . ng a n
@@ -28380,16 +28438,15 @@ ortogonal	o r . t o . g o . n a l
 ortografi	o r . t o g . r a . f i
 orville	o r . f i l
 oryzae	o r i . z a . e
-os	
+os	o . e s
 osaka	o . s a . k a
 osamu	o . s a . m u
 osan	o . s a n
-osce	
+osce	o . e s . c e . e
 oseania	o . s e . a . n i . a
 oseanografi	o . s e . a . n o . g r a . f i
-osh	
-osh	o s
-osi	
+osh	o . e s . h a
+osi	o . e s . i
 osikel	o . s i . k ex l
 osilasi	o . s i . l a . s i
 osiloskop	o . s i . l o s . k o p
@@ -28402,14 +28459,13 @@ osmoregulasi	o s . m o . r e . g u . l a . s i
 osmosis	o s . m o . s i s
 oson	o . s o n
 ossetia	o . s e . t i . a
-ost	
+ost	o . e s . t e
 osteologi	o s . t e . o . l o . g i
 osteomalasia	o s . t e . o . m a . l a . s i . a
 osteoporosis	o s . t e . o . p o . r o . s i s
-osu	
-osu	o . s u
+osu	o . e s . u
 osvia	o s . f i . a
-ota	
+ota	o . t e . a
 otaheite	o . t a . h e . i t
 otak	o . t a k
 otakna	o . t a k . n a
@@ -28491,12 +28547,14 @@ ozonna	o . z o . n a
 ozora	o . z o . r a
 p	p e
 p	p i
+p_letter	p e
+p_letter-en	p i
 paadilan	p a . a . d i . l a n
 paadu	p a . a . d u
 paamprok	p a . a m . p r o k
 paamprokna	p a . a m . p r o k . n a
 paanggang	p a . a ng . g a ng
-paas	
+paas	p e . a . a . e s
 pabajoan	p a . b a . j o . a n
 pabaru	p a . b a . r u
 pabean	p a . b e . a n
@@ -28524,7 +28582,7 @@ pabukitan	p a . b u . k i . t a n
 paburantakna	p a . b u . r a n . t a k . n a
 paburincay	p a . b u . r i n . c a y
 paburisat	p a . b u . r i . s a t
-pabx	
+pabx	p e . a . b e . e k s
 pacabakan	p a . c a . b a . k a n
 pacaian	p a . c a . i . a n
 pacampur	p a . c a m . p u r
@@ -28647,6 +28705,7 @@ pagaulan	p a . g a . u . l a n
 pagawean	p a . g a . w e . a n
 pagaweanana	p a . g a . w e . a . n a . n a
 pagawena	p a . g a . w e . n a
+page	p e j
 pageblug	p a . g ex . b l u g
 pagedangan	p a . g ex . d a . ng a n
 pagedongan	p a . g ex . d o . ng a n
@@ -28795,7 +28854,7 @@ pakusamben	p a . k u . s a m . b ex n
 pakutandang	p a . k u . t a n . d a ng
 pakuwon	p a . k u . w o n
 pakwan	p a k . w a n
-pal	
+pal	p e . a . e l
 pala	p a . l a
 palabuhan	p a . l a . b u . h a n
 palace	p a . l ex s
@@ -28821,6 +28880,7 @@ palanggan	p a . l a ng . g a n
 palanggaran	p a . l a ng . g a . r a n
 palanggeran	p a . l a ng . g ex . r a n
 palangka	p a . l a ng . k a
+palangkaraya	p a . l a ng . k a . r a . y a
 palangkungan	p a . l a ng . k u . ng a n
 palanglang	p a . l a ng . l a ng
 palapa	p a . l a . p a
@@ -28997,6 +29057,7 @@ pamelo	p a . m e . l o
 pamen	p a . m e n
 pamengan	p a . m ex . ng a n
 pamengkang	p a . m ex ng . k a ng
+pamengpeuk	p a . m ex ng . p eu k
 pamentaan	p a . m e n . t a . a n
 pamentana	p a . m e n . t a . n a
 pamentasan	p a . m e n . t a . s a n
@@ -29316,8 +29377,10 @@ pangaosna	p a . ng a . o . s n a
 pangaping	p a . ng a . p i ng
 pangapingna	p a . ng a . p i ng . n a
 pangapon	p a . ng a . p o n
+pangapungan	p a . ng a . p u . ng a n
 pangarah	p a . ng a . r a h
 pangaranan	p a . ng a . r a . n a n
+pangarang	p a . ng a . r a ng
 pangarangna	p a . ng a . r a ng . n a
 pangarengan	p a . ng a . r ex . ng a n
 pangaresepna	p a . ng a . r ex . s ex p . n a
@@ -30137,7 +30200,7 @@ parusakan	p a . r u . s a . k a n
 parut	p a . r u t
 parwa	p a r . w a
 parwati	p a r . w a . t i
-pasa	
+pasa	p e . a . e s . a
 pasadena	p a . s a . d e . n a
 pasai	p a . s ai
 pasaingan	p a . s a . i . ng a n
@@ -30154,6 +30217,7 @@ pasamakmuran	p a . s a . m a k . m u . r a n
 pasaman	p a . s a . m a n
 pasamoan	p a . s a . m o . a n
 pasan	p a . s a n
+pasang	p a . s a ng
 pasangan	p a . s a . ng a n
 pasanganna	p a . s a . ng a . n a
 pasangannya	p a . s a . ng a n . ny a
@@ -30189,7 +30253,7 @@ paser	p a . s ex r
 pasesaan	p a . s e . s a . a n
 paseuk	p a . s eu k
 pasewakan	p a . s e . w a . k a n
-pasha	p a . sh a
+pasha	p a . sy a
 pashto	p a s . t o
 pashtun	p a sy . t u n
 pasi	p a . s i
@@ -30292,7 +30356,7 @@ pasurenan	p a . s u . r e . n a n
 pasuruan	p a . s u . r u . a n
 pasuruhan	p a . s u . r u . h a n
 pasya	p a . sy a
-pasyen	p a . sh e n
+pasyen	p a . sy e n
 pata	p a . t a
 patagium	p a . t a . j i . u m
 patagonia	p a . t a . g o . n i . a
@@ -30316,7 +30380,7 @@ patapa	p a . t a . p a
 pataruman	p a . t a . r u . m a n
 patatin	p a . t a . t i n
 patchy	p e t . c i
-patd	
+patd	p e . a . t e . d e
 pate	p a . t e
 pateh	p a . t ex h
 patel	p a . t e l
@@ -30397,7 +30461,7 @@ patumpuk	p a . t u m . p u k
 patungan	p a . t u . ng a n
 patut	p a . t u t
 patuturut	p a . t u . t u . r u t
-pau	
+pau	p e . a . u
 paucibacillary	p a . u . s i . b a . s i . l ex . r i
 pauk	p a . u k
 paula	p a . u . l a
@@ -30438,12 +30502,13 @@ payer	p e . y ex r
 pays	p e y s
 payu	p a . y u
 payudara	p a . y u . d a . r a
+payun	p a . y u n
 payuna	p a . y u . n a
 payuneun	p a . y u . n eu n
 payungsari	p a . y u ng . s a . r i
 payunna	p a . y u n . n a
 payusna	p a . y u s . n a
-pcb	
+pcb	p e . c e . b e
 pea	p e . a
 peace	p i s
 peadang	p e . a . d a ng
@@ -31236,6 +31301,7 @@ penyampaiannya	p ex . ny a m . p a . y a n . ny a
 penyandian	p ex . ny a n . d i . a n
 penyangga	p ex . ny a ng . g a
 penyantun	p ex . ny a n . t u n
+penyanyi	p ex . ny a . ny i
 penyaringan	p ex . ny a . r i . ng a n
 penyatuan	p ex . ny a . t u . a n
 penyearah	p ex . ny ex . a . r a h
@@ -31300,11 +31366,12 @@ peperenian	p ex . p ex . r ex . n i . a n
 pepero	p e . p e . r o
 pepes	p e . p e s
 pepet	p ex . p ex t
+pepita	p ex . p i . t a
 pepsin	p e p . s i n
 pepsinogen	p e p . s i . n o . g e n
 peptida	p e p . t i . d a
 peptide	p e p . t a . i d
-per	
+per	p e . e . e r
 pera	p ex . r a
 perabadan	p ex . r a . b a . d a n
 peradaban	p ex . r a . d a . b a n
@@ -31697,6 +31764,7 @@ pertambakan	p ex r . t a m . b a . k a n
 pertambangan	p ex r . t a m . b a . ng a n
 pertamina	p ex r . t a . m i . n a
 pertanda	p ex r . t a n . d a
+pertandingan	p ex r . t a n . d i . ng a n
 pertanyaan	p ex r . t a . ny a . a n
 pertanyaannya	p ex r . t a . ny a . a n . ny a
 pertapa	p ex r . t a . p a
@@ -31760,6 +31828,7 @@ pesawahan	p ex . s a . w a . h a n
 pesawaran	p ex . s a . w a . r a n
 pesawat	p ex . s a . w a t
 peselancar	p ex . s ex . l a n . c a r
+pesen	p ex . s ex n
 pesenan	p ex . s ex . n a n
 pesennya	p ex . s ex n . ny a
 pesepak	p ex . s e . p a k
@@ -32083,7 +32152,7 @@ pinyuh	p i . ny u h
 piomongeun	p i . o . m o . ng eu n
 pioner	p i . o . n e r
 pionir	p i . o . n i r
-pip	
+pip	p e . i . p e
 pipa	p i . p a
 pipah	p i . p a h
 pipet	p i . p e t
@@ -32165,7 +32234,7 @@ piwarang	p i . w a . r a ng
 piwejang	p i . w ex . j a ng
 piwuruk	p i . w u . r u k
 piyin	p i . y i n
-pla	
+pla	p e . e l . a
 pladimir	p l a . d i . m i r
 plagiarisme	p l a . g i . a . r i s . m ex
 plagioclase	p l a . j i . o . k l e s
@@ -32227,7 +32296,7 @@ pleura	p l e . u . r a
 pleyte	p l e y . t e
 pliken	p l i . k ex n
 plis	p l i s
-plo	
+plo	p e . e l . o
 ploeg	p l u g
 ploegt	p l u g hx
 plong	p l o ng
@@ -32989,6 +33058,7 @@ punk	p a ng
 punta	p u n . t a
 puntadewa	p u n . t a . d e . w a
 puntang	p u n . t a ng
+punten	p u n . t ex n
 punteun	p u n . t eu n
 puntianak	p u n . t i . a . n a k
 punto	p u n . t o
@@ -33100,7 +33170,7 @@ pustaka	p u s . t a . k a
 pustakamangsa	p u s . t a . k a . m a ng . s a
 pusterad	p u s . t e . r a d
 pusuer	p u . s eu r
-pusyet	p u . sh e t
+pusyet	p u . sy e t
 putar	p u . t a r
 putat	p u . t a t
 putauw	p u . t a w
@@ -33151,17 +33221,19 @@ pyrenees	p i . r ex . n i s
 pythagoras	p i . t a . g o . r a s
 q	k i
 q	k y u
+q_letter	k i
+q_letter-en	k y u
 qadar	k o . d a r
 qadarsih	k a . d a r . s i h
 qadim	k o . d i m
 qadir	k o . d i r
 qadri	k o d . r i
-qaic	
+qaic	k i . a . i . c e
 qainuqa	k a . i . n u . k a
 qais	k a . i s
 qajar	k o . j a r
 qalam	k o . l a m
-qam	
+qam	k i . a . e m
 qamari	k a . m a . r i
 qamus	k a . m u s
 qanita	k o . n i . t a
@@ -33192,7 +33264,7 @@ qodiriyah	k o . d i . r i . y a h
 qois	k o . i s
 qom	k o m
 qoppa	k o . p a
-qos	
+qos	k i . o . e s
 qosidah	k o . s i . d a h
 qu	k u
 quality	k u . a . l i . t i
@@ -33228,6 +33300,8 @@ qutb	k u t b
 qwerty	k w e r . t i
 r	a r
 r	e r
+r_letter	e r
+r_letter-en	a r
 raad	r a . a d
 raat	r a . a t
 rabah	r a . b a h
@@ -33349,6 +33423,7 @@ raimuna	r a . i . m u . n a
 rain	r e n
 rainbow	r e . i n . b o w
 raion	r a . y o n
+raisa	r a . i . s a
 raja	r a . j a
 rajab	r a . j a b
 rajaban	r a . j a . b a n
@@ -33387,7 +33462,7 @@ raji	r a . j i
 rajin	r a . j i n
 rajkot	r a j . k o t
 rajol	r a . j o l
-rajshahi	r a j . sh a . h i
+rajshahi	r a j . sy a . h i
 rajutan	r a . j u . t a n
 rajyarajya	r a j . y a . r a j . y a
 raka	r a . k a
@@ -33615,7 +33690,7 @@ rasaning	r a . s a . n i ng
 rasasarua	r a . s a . s a . r u . a
 rasasir	r a . s a . s i r
 rashid	r o . sy i d
-rashmi	r a sh . m i
+rashmi	r a sy . m i
 rasial	r a . s i . a l
 rasio	r a . s i . o
 rasiona	r a . s i . o . n a
@@ -33641,7 +33716,7 @@ ratib	r a . t i b
 ratih	r a . t i h
 ratim	r a . t i m
 rating	r e . t i ng
-ratm	
+ratm	e r . a . t e . e m
 ratna	r a t . n a
 ratnadilla	r a t . n a . d i . l a
 ratnaningsih	r a t . n a . n i ng . s i h
@@ -33684,6 +33759,8 @@ rawon	r a . w o n
 rawung	r a . w u ng
 ray	r a y
 ray	r e y
+ray_nou	r e y
+ray_prt	r a y
 raya	r a . y a
 rayagung	r a . y a . g u ng
 rayana	r a . y a . n a
@@ -33863,8 +33940,8 @@ reliabilitas	r e . l i . a . b i . l i . t a s
 reliabiliti	r ex . l i . a . b i . l i . t i
 relief	r e . l i f
 relin	r e . l i n
-relo	
-relo	r e . l o
+relo	e r . e . e l . o
+relo_verb	r e . l o
 rely	r i . l ai
 rem	r e m
 remaja	r ex . m a . j a
@@ -33944,7 +34021,7 @@ renungan	r ex . n u . ng a n
 renville	r e n . f i l
 renyah	r ex . ny a h
 renyuan	r e . ny u . a n
-reo	
+reo	e r . e . o
 reog	r e . o g
 reorganisasi	r e . o r . g a . n i . s a . s i
 repair	r i . p e r
@@ -34179,7 +34256,7 @@ riksdag	r i k s . d a g
 rikssvenska	r i k s . f e m . k y a
 rikter	r i k . t ex r
 rikwes	r i . k w ex s
-ril	
+ril	e r . i . e l
 rilau	r i . l au
 rilis	r i . l i s
 rilisan	r i . l i . s a n
@@ -34278,7 +34355,7 @@ riza	r i . z a
 rizal	r i . z a l
 rizki	r i z . k i
 rizoma	r i . z o . m a
-roa	
+roa	e r . o . a
 road	r o u d
 roald	r o . a l d
 roay	r o . ai
@@ -34334,7 +34411,7 @@ rohmana	r o h . m a . n a
 rohmat	r o h . m a t
 rohmatan	r o h . m a . t a n
 rohna	r o h . n a
-roi	
+roi	e r . o . i
 roji	r o . j i
 rojiun	r o . j i . u n
 rojo	r o . hx o
@@ -34348,7 +34425,7 @@ rol	r o l
 roland	r o . l ex n d
 rolling	r o . l i ng
 rollo	r o l . l o
-rom	
+rom	e r . o . e m
 roma	r o . m a
 romadhon	r o . m a . d o n
 romadon	r o . m a . d o n
@@ -34398,7 +34475,7 @@ rorongkongna	r o . r o ng . k o ng . n a
 roronjatan	r o . r o n . j a . t a n
 roronoa	r o . r o . n o . a
 rorotan	r o . r o . t a n
-ros	
+ros	e r . o . e s
 rosa	r o . s a
 rosada	r o . s a . d a
 rosado	r o . s a . d o
@@ -34455,7 +34532,7 @@ royong	r o . y o ng
 roza	r o . z a
 rozak	r o . z a k
 rozi	r o . z i
-rri	
+rri	e r . e r . i
 ruam	r u . a m
 ruangan	r u . a . ng a n
 ruas	r u . a s
@@ -34627,6 +34704,7 @@ ryuk	r i . u k
 ryutaro	r i . u . t a . r o
 ryuzaki	r i . u . z a . k i
 s	e s
+s_letter	e s
 sa	s a
 saab	s a . a b
 saabad	s a . a . b a d
@@ -34644,7 +34722,7 @@ saanggeus	s a . a ng . g eu s
 saangkatan	s a . a ng . k a . t a n
 saantero	s a . a n . t e . r o
 saarah	s a . a . r a h
-saarc	
+saarc	e s . a . a . e r . c e
 saasupna	s a . a . s u p . n a
 saatos	s a . a . t o s
 saatosna	s a . a . t o s . n a
@@ -34677,6 +34755,7 @@ sabangsa	s a . b a ng . s a
 sabangsana	s a . b a ng . s a . n a
 sabapa	s a . b a . p a
 sabarae	s a . b a . r a . e
+sabaraha	s a . b a . r a . h a
 sabararaha	s a . b a . r a . r a . h a
 sabaraya	s a . b a . r a . y a
 sabaris	s a . b a . r i s
@@ -34845,12 +34924,14 @@ sagumpal	s a . g u m . p a l
 sagurat	s a . g u . r a t
 saguruntul	s a . g u . r u n . t u l
 sah	s a h
+saha	s a . h a
 sahabat	s a . h a . b a t
 sahabatna	s a . h a . b a t . n a
 sahabatnya	s a . h a . b a t . ny a
 sahadat	s a . h a . d a t
 sahagemah	s a . h a . g ex . m a h
 sahaja	s a . h a . j a
+saham	s a . h a m
 sahamna	s a . h a m . n a
 sahamnya	s a . h a m . ny a
 sahana	s a . h a . n a
@@ -35251,6 +35332,7 @@ samemehnya	s a . m e . m e h . ny a
 samen	s a . m ex n
 samenanjung	s a . m ex . n a n . j u ng
 samenit	s a . m ex . n i t
+samentara	s a . m ex n . t a . r a
 samentarana	s a . m ex n . t a . r a . n a
 samentawis	s a . m ex n . t a . w i s
 samer	s a . m ex r
@@ -35700,7 +35782,7 @@ sasatoan	s a . s a . t o . a n
 sasendok	s a . s e n . d o k
 sasentimeter	s a . s e n . t i . m e . t ex r
 saset	s a . s e t
-sasha	s a . sh a
+sasha	s a . sy a
 sasih	s a . s i h
 sasikirana	s a . s i . k i . r a . n a
 sasis	s a . s i s
@@ -35901,7 +35983,7 @@ scarab	s k e . r ex b
 scarlett	s k a r . l ex t
 scelerisque	s e . l e . r i s . k u . e
 schacht	sy a hx t
-schengen	sh e . ng ex n
+schengen	sy e . ng ex n
 schiphol	s k i p . h o l
 schleswig	s l e s . w i hx
 schlumberger	sy l a m . b e r . j ex r
@@ -35928,7 +36010,7 @@ season	s i . s ex n
 seasonal	s i . s ex . n ex l
 seasons	s i . z ex n s
 seat	s i t
-seato	
+seato	e s . e . a . t e . o
 seattle	s i . e . t ex l
 seba	s e . b a
 sebab	s ex . b a b
@@ -36054,7 +36136,7 @@ sehebat	s ex . h e . b a t
 seheriae	s e . h ex . r i . a . e
 sehingga	s ex . h i ng . g a
 sehubungan	s ex . h u . b u . ng a n
-sei	
+sei	e s . e . i
 seibu	s ex . i . b u
 seid	s e . i d
 seika	s e . i . k a
@@ -36125,6 +36207,7 @@ sekop	s ex . k o p
 sekresi	s e . k r e . s i
 sekresina	s e k . r e . s i . n a
 sekret	s e k . r e t
+sekretari	s e k . r e . t a . r i
 sekretariat	s e k . r ex . t a . r i . a t
 sekretariatnya	s e k . r ex . t a . r i . a t . ny a
 sekretaris	s e k . r ex . t a . r i s
@@ -36398,8 +36481,8 @@ sentuh	s ex n . t u h
 sentul	s ex n . t u l
 senyawa	s ex . ny a . w a
 senyawaan	s ex . ny a . w a . a n
-seo	
-seo	s o
+seo	e s . e . o
+seo_det	s o
 seocho	s o . c o
 seogwipo	s e . o . g ex . w i p o
 seojangdae	s o . j a ng . d e
@@ -36424,7 +36507,7 @@ sepat	s ex . p a t
 sepatnunggal	s ex . p a t . n u ng . g a l
 sepatu	s ex . p a . t u
 sepayung	s ex . p a . y u ng
-sepc	
+sepc	e s . e . p e . c e
 sepeda	s ex . p e . d a
 sepengetahuan	s ex . p ex . ng ex . t a . h u . a n
 sepenggal	s ex . p ex ng . g a l
@@ -36509,6 +36592,7 @@ sergei	s e r . g e . i
 sergels	s e r . g e l s
 sergey	s ex r . g e y
 sergio	s e r . g i . o
+seri	s e . r i
 serian	s e . r i . a n
 serieus	s ex . r i . eu s
 serif	s ex . r i f
@@ -36547,7 +36631,7 @@ servik	s e r . f i k
 serviks	s e r . f i k s
 servis	s e r . f i s
 serzh	s e r z
-ses	
+ses	e s . e . e s
 sesaat	s ex . s a . a t
 sesah	s ex . s a h
 sesaji	s ex . s a . j i
@@ -36606,11 +36690,12 @@ seting	s e . t i ng
 setip	s ex . t i p
 setir	s ex . t i r
 seto	s e . t o
+setral	s e t . r a l
 setres	s ex t . r e s
 setrika	s ex . t r i . k a
 setrum	s ex . t r u m
 settingnya	s e . t i ng . ny a
-settlement	s e . t ex l . . m ex n t
+settlement	s e . t ex l . m ex n t
 settsu	s e t . s u
 setu	s e . t u
 setuju	s ex . t u . j u
@@ -36669,11 +36754,11 @@ seyegan	s e . y e . g a n
 seyoru	s e . y o . r u
 seypred	s e y . p r ex d
 sha	sy a
-shaar	sh a . a r
+shaar	sy a . a r
 shab	s a b
 shabdrung	sy e b . d r a ng
 shafie	s a . f i
-shah	sh a h
+shah	sy a h
 shahab	s a . h a b
 shahar	s a . h a r
 shahih	s o . h i h
@@ -36697,32 +36782,32 @@ shana	sy a . n a
 shandong	sy a n . d o ng
 shandy	sy e n . d i
 shang	s a ng
-shanghai	sh a ng . h ai
+shanghai	sy a ng . h ai
 shanhai	s a n . h ai
 shannon	sy e . n ex n
-shanti	sh a n . t i
+shanti	sy a n . t i
 shao	s a . o
-shara	sh a . r a
+shara	sy a . r a
 sharingan	s a . r i ng . g a n
 sharinganna	s a . r i ng . g a . n a
 sharjah	sy a r . j ex h
-sharma	sh a r . m a
-sharon	sh e . r o n
+sharma	sy a r . m a
+sharon	sy e . r o n
 shaum	s a . u m
 shaw	sy o w
 shed	s e d
 sheen	sy i n
 sheffield	s e . f i l d
-sheherazade	sh ex . h e . r e . z e . d ex
-sheila	sh e . i . l a
+sheherazade	sy ex . h e . r e . z e . d ex
+sheila	sy e . i . l a
 shek	sy e k
-shelah	sh e . l a h
+shelah	sy e . l a h
 shelter	sy e l . t ex r
-shen	sh ex n
-shenyang	sh e n . y a ng
+shen	sy ex n
+shenyang	sy e n . y a ng
 shenzhen	s e n . z e n
-sherina	sh e . r i . n a
-sheron	sh e . r o n
+sherina	sy e . r i . n a
+sheron	sy e . r o n
 shetland	s i t . l ex n d
 shewhart	sy u . w a r t
 shi	s i
@@ -36740,11 +36825,11 @@ shikai	s i . k ai
 shikamaru	s i . k a . m a . r u
 shiki	s i . k i
 shikibu	sy i . k i . b u
-shikoku	sh i . k o . k u
+shikoku	sy i . k o . k u
 shikon	s i . k o n
 shikona	sy i . k o . n a
 shima	sy i . m a
-shimada	sh i . m a . d a
+shimada	sy i . m a . d a
 shimbun	s i m . b u n
 shimizu	s i . m i . z u
 shimokawa	s i . m o . k a . w a
@@ -36754,18 +36839,18 @@ shindo	s i n . d o
 shinee	s a . i . n i
 shingo	s i ng . g o
 shinichi	s i . n i . c i
-shinigami	sh i . n i . g a . m i
+shinigami	sy i . n i . g a . m i
 shinji	s i n . j i
 shinjitai	s i n . j i . t ai
 shinjuku	sy i n . j u . k u
 shino	s i . n o
 shinobi	s i . n o . b i
 shinoda	s i . n o . d a
-shinto	sh i n . t o
+shinto	sy i n . t o
 shintya	s i n . t i . a
 shinzo	s i n . z o
 shio	s i . o
-ship	sh i p
+ship	sy i p
 shippuden	s i . p u . d e n
 shiraishi	s i . r a . i . s i
 shirak	s i . r a k
@@ -36790,7 +36875,7 @@ sholahuddin	s o . l a . h u . d i n
 sholat	s o . l a t
 sholawat	s o . l a . w a t
 sholeh	s o . l e h
-shollallohu	sh o . l a . l o . h u
+shollallohu	sy o . l a . l o . h u
 shon	sy o n
 shona	h o . n a
 shonbeh	sy o n . b e h
@@ -36799,7 +36884,7 @@ shooffat	s o f . f a t
 shool	s u l
 shoot	sy u t
 shooting	sy u . t i ng
-shopi	sh o . p i
+shopi	sy o . p i
 shopping	s o . p i ng
 shore	sy o r
 shoreline	sy o r . l a . i n
@@ -36812,7 +36897,7 @@ shubuh	s u . b u h
 shueisha	sy u . e . i . sy a
 shuger	s u . g ex r
 shui	s u . i
-shuku	sh u . k u
+shuku	sy u . k u
 shun	sy a n
 shuraim	sy u . r e . i m
 si	s i
@@ -36899,7 +36984,7 @@ sierra	s i . e . r a
 sieuneun	s i . eu . n eu n
 sieup	s i . eu p
 sieur	s i . eu r
-siew	
+siew	e s . i . e . w e
 sifa	s i . f a
 sifat	s i . f a t
 sifata	s i . f a . t a
@@ -36956,6 +37041,7 @@ siksik	s i k . s i k
 siksikan	s i k . s i . k a n
 sikumpul	s i . k u m . p u l
 sikut	s i . k u t
+sil	sil
 silaban	s i . l a . b a n
 silabus	s i . l a . b u s
 siladen	s i . l a . d e n
@@ -37058,7 +37144,7 @@ sinambung	s i . n a m . b u ng
 sinambungan	s i . n a m . b u . ng a n
 sinangkasih	s i . n a ng . k a . s i h
 sinanthropus	s i . n a n . t r o . p u s
-sinaps	
+sinaps	e s . i . e n . a . p e . e s
 sinareng	s i . n a . r ex ng
 sinargalih	s i . n a r . g a . l i h
 sinarjati	s i . n a r . j a . t i
@@ -37361,7 +37447,7 @@ sjahrir	sy a h . r i r
 sjarifudin	s y a . r i . f u . d i n
 sjukur	sy u . k u r
 sjuman	sy u . m a n
-ska	
+ska	e s . k a . a
 skala	s k a . l a
 skalana	s k a . l a . n a
 skalar	s k a . l a r
@@ -37394,7 +37480,7 @@ skuad	s k u . a d
 skuter	s k u . t ex r
 skybridge	s k a . i . b r e j
 skyline	s k ai . l ai n
-sla	
+sla	e s . e l . a
 slam	s l e m
 slamet	s l a . m ex t
 slang	s l a ng
@@ -37424,7 +37510,7 @@ smoker	s m o . k ex r
 smoking	s m o . k i ng
 sneijder	s n e . i . d ex r
 snowmen	s n o w . m e n
-soa	
+soa	e s . o . a
 soad	s o . u d
 soak	s o . a k
 soal	s o . a l
@@ -37433,7 +37519,7 @@ soalnya	s o . a l . ny a
 soanten	s o . a n . t ex n
 soara	s o . a . r a
 soarana	s o . a . r a . n a
-sob	
+sob	e s . o . b e
 soba	s o . b a
 sobana	s o . b a . n a
 sobandi	s o . b a n . d i
@@ -37661,7 +37747,7 @@ sorban	s o r . b a n
 sorbannya	s o r . b a n . ny a
 sorbitol	s o r . b i . t o l
 sorbonne	s o r . b o n
-sorbs	
+sorbs	e s . o . e r . b e . e s
 sore	s o . r e
 soreang	s o . r e . a ng
 sorena	s o . r e . n a
@@ -37679,7 +37765,7 @@ sorot	s o . r o t
 sorotan	s o . r o . t a n
 sortkey	s o r t . k i
 soseki	s o . s e . k i
-sosi	
+sosi	e s . o . e s . i
 sosial	s o . s i . a l
 sosialis	s o . s i . a . l i s
 sosialisasi	s o . s i . a . l i . s a . s i
@@ -37817,7 +37903,7 @@ stabilisasi	s t a . b i . l i . s a . s i
 stabilised	s t e . b i . l a . i . s ex d
 stabilitas	s t a . b i . l i . t a s
 staccato	s t a . k a . t o
-stad	
+stad	e s . t e . a . d e
 stade	s t a . d ex
 stadion	s t a . d i . o n
 stadiun	s t a . d i . u n
@@ -37826,7 +37912,7 @@ stafnya	s t a f . ny a
 stage	s t e j
 stagnasi	s t a g . n a . s i
 stahel	s t e . h ex l
-stai	
+stai	e s . t e . a . i
 stain	s t e . i n
 stalaktit	s t a . l a k . t i t
 stalin	s t a . l i n
@@ -37897,7 +37983,7 @@ stevenage	s t i f . n e j
 stevertigo	s t i . f ex r . t a . i . g o
 stibitz	s t i . b i t s
 stick	s t i k
-stie	
+stie	e s . t e . i . e
 stiglitz	s t i g . l i t z
 stigma	s t i g . m a
 stijl	s t e l
@@ -38367,8 +38453,8 @@ sumurugul	s u . m u . r u . g u l
 sumurwiru	s u . m u r . w i . r u
 sumut	s u . m u t
 sun	s u n
-suna	
-suna	s u . n a
+suna	e s . u . e n . a
+suna_nou	s u . n a
 sunah	s u . n a h
 sunalari	s u . n a . l a . r i
 sunami	s u . n a . m i
@@ -38635,10 +38721,10 @@ sutowo	s u . t o . w o
 sutrana	s u t . r a . n a
 suuk	s u . u k
 suung	s u . u ng
-suv	
+suv	e s . u . f e
 suva	s u . f a
 suvenir	s u . f ex . n i r
-suwa	
+suwa	e s . u . w e . a
 suwandi	s u . w a n . d i
 suwangkung	s u . w a ng . k u ng
 suwardi	s u . w a r . d i
@@ -38651,7 +38737,7 @@ suweileh	s u . w e . i . l e h
 suweng	s u . w ex ng
 suwida	s u . w i . d a
 suwignyo	s u . w i g . ny o
-suwiki	
+suwiki	e s . u . w e . i . k a . i
 suwiran	s u . w i . r a n
 suwito	s u . w i . t o
 suwits	s u . w i t s
@@ -38695,30 +38781,30 @@ swindon	s w i n . d ex n
 swis	s w i s
 swiss	s w i s
 sya	sy a
-syaa	
+syaa	e s . y e . a . a
 syafei	sy a . f e . i
 syafii	sy a . f i . i
 syah	sy a h
 syahadat	sy a . h a . d a t
 syahadatain	sy a . h a . d a . t a . i n
 syahadati	sy a . h a . d a . t i
-syahbandar	sh a h . b a n . d a r
+syahbandar	sy a h . b a n . d a r
 syahda	sy a h . d a
 syahdu	sy a h . d u
 syahid	sy a . h i d
-syahnaz	sh a h . n a j
+syahnaz	sy a h . n a j
 syahputra	sy a h . p u t . r a
 syahrani	sy a h . r a . n i
 syahri	sy a h . r i
-syahrini	sh a h . r i . n i
+syahrini	sy a h . r i . n i
 syahrir	sy a h . r i r
 syahroni	sy a h . r o . n i
 syahwat	sy a h . w a t
 syaibah	sy a . i . b a h
 syailendra	sy a . i . l e n . d r a
 syairna	sy a . i r . n a
-syakib	sh a . k i b
-syakieb	sh a . k i b
+syakib	sy a . k i b
+syakieb	sy a . k i b
 syaltut	sy a l . t u t
 syam	sy a m
 syams	sy a m s
@@ -38738,23 +38824,23 @@ syariah	sy a . r i . a h
 syariat	sy a . r i . a t
 syariatnya	sy a . r i . a t . ny a
 syarief	sy a . r i f
-syarif	sh a . r i f
+syarif	sy a . r i f
 syarifuddin	sy a . r i . f u . d i n
 syarifudin	sy a . r i . f u . d i n
 syarikat	sy a . r i . k a t
-syarip	sh a . r i p
+syarip	sy a . r i p
 syatari	sy a . t a . r i
 syatibi	sy a . t i . b i
 syawal	sy a . w a l
 sydney	s i d . n e y
-sydni	sh i d . n i
-syeh	sh ex h
+sydni	sy i d . n i
+syeh	sy ex h
 syeikh	sy ex . i hx
-syekh	sh ex hx
+syekh	sy ex hx
 syetan	sy e . t a n
 syiah	sy i . a h
 syiar	sy i . a r
-syifa	sh i . f a
+syifa	sy i . f a
 syiila	sy i . l a
 syila	sy i . l a
 syin	sy i n
@@ -38770,7 +38856,7 @@ symphony	s i m . f o . n i
 syngman	s i ng . m a n
 syok	sy o k
 syracuse	s a . i . r ex . k i . u s
-syria	sh i . r i . a
+syria	sy i . r i . a
 sysops	s i . s a p s
 syukran	sy u . k r o n
 syukuran	sy u . k u . r a n
@@ -38782,6 +38868,8 @@ syuting	sy u . t i ng
 syzygii	s i . z i . g i
 t	t e
 t	t i
+t_letter	t e
+t_letter-en	t i
 taala	t a . a . l a
 taar	t a . a r
 taat	t a . a t
@@ -38849,7 +38937,7 @@ tahir	t a . h i r
 tahiti	t a . h i . t i
 tahlil	t a h . l i l
 tahlilan	t a h . l i . l a n
-tahn	
+tahn	t e . a . h a . e n
 tahqiq	t a h . k i k
 tahrif	t a h . r i f
 tahrim	t a h . r i m
@@ -38936,7 +39024,7 @@ takus	t a . k u s
 takuya	t a . k u . y a
 takwa	t a k . w a
 takwir	t a k . w i r
-tal	
+tal	t e . a . e l
 tala	t a . l a
 talaah	t a . l a . a h
 talaga	t a . l a . g a
@@ -38966,6 +39054,7 @@ taliabu	t a . l i . a . b u
 talian	t a . l i . a n
 talib	t a . l i b
 taliban	t a . l i . b a n
+talim	t a . l i m
 taling	t a . l i ng
 talingkup	t a . l i ng . k u p
 talisa	t a . l i . s a
@@ -39148,6 +39237,7 @@ tanjungwangi	t a n . j u ng . w a . ng i
 tank	t e ng
 tanker	t e ng . k ex r
 tankian	t a ng . k i . a n
+tanpa	t a n . p a
 tanpabati	t a n . p a . b a . t i
 tanpamu	t a n . p a . m u
 tansil	t a n . s i l
@@ -39437,8 +39527,7 @@ tehnologina	t e h . n o . l o . g i . n a
 tehnologis	t e h . n o . l o . g i s
 tehran	t e h . r a n
 tehyan	t e h . y a n
-tei	
-tei	t e y
+tei	t e . e . i
 teijsmann	t e . i s . m a n
 teja	t e . j a
 tejamulya	t e . j a . m u . l i . a
@@ -39463,7 +39552,7 @@ tektonik	t e k . t o . n i k
 tekun	t ex . k u n
 tekung	t ex . k u ng
 tekwan	t e k . w a n
-tel	
+tel	t e . e . e l
 tela	t e . l a
 telaga	t ex . l a . g a
 telagasari	t ex . l a . g a . s a . r i
@@ -39598,11 +39687,16 @@ tendonitis	t e n . d o . n i . t i s
 tenerife	t e . n e . r i . f e
 teng	t e ng
 teng	t ex ng
+teng_interj	t ex ng
+teng_prt	t e ng
+tengah	t ex . ng a h
 tengahan	t ex . ng a . h a n
 tengahna	t ex . ng a h . n a
 tengan	t ex . ng a n
 tengek	t e ng . g e k
 tengek	t ex ng . g ex k
+tengek_nou-neck	t ex ng . g ex k
+tengek_nou-snail	t e ng . g e k
 tenger	t ex . ng ex r
 tenget	t ex . ng ex t
 tengetan	t ex . ng ex . t a n
@@ -39780,6 +39874,7 @@ teridentifikasi	t ex r . i . d e n . t i . f i . k a . s i
 terik	t ex . r i k
 terikat	t ex r . i . k a t
 terimakasih	t ex . r i . m a . k a . s i h
+terindah	t ex r . i n . d a h
 terindeks	t ex . r i n . d e k s
 terinspirasi	t ex r . i n s . p i . r a . s i
 terisolasi	t ex . r i . s o . l a . s i
@@ -39797,6 +39892,7 @@ terjemahan	t ex r . j ex . m a . h a n
 terjemahannya	t ex r . j ex . m a . h a n . ny a
 terjerembab	t ex r . j ex . r ex m . b a b
 terjual	t ex r . j u . a l
+terjun	t ex r . j u n
 terkadang	t ex r . k a . d a ng
 terkait	t ex r . k a . i t
 terkaya	t ex r . k a . y a
@@ -39951,6 +40047,7 @@ terukir	t ex . r u . k i r
 terumbu	t ex . r u m . b u
 terungkap	t ex . r u ng . k a p
 terurai	t ex r . u . r ai
+terus	t ex . r u s
 teruskeun	t ex . r u s . k eu n
 terutama	t ex . r u . t a . m a
 terwakili	t ex r . w a . k i . l i
@@ -39977,6 +40074,7 @@ tetembakan	t e . t e m . b a . k a n
 tetempoanana	t ex . t ex m . p o . a . n a . n a
 teten	t e . t e n
 tetengahan	t ex . t ex . ng a . h a n
+tetep	t ex . t ex p
 tetepna	t ex . t ex p . n a
 teterekel	t e . t e . r e . k e l
 teterekelan	t e . t e . r e . k e . l a n
@@ -40127,7 +40225,7 @@ tijaman	t i . j a . m a n
 tijdens	t e . i . d ex n s
 tijero	t i . j ex . r o
 tijuana	t i . j u . a . n a
-tik	
+tik	t e . i . k a
 tika	t i . k a
 tikakeun	t i . k a . k eu n
 tikaman	t i . k a . m a n
@@ -40142,7 +40240,7 @@ tikukur	t i . k u . k u r
 tikungan	t i . k u . ng a n
 tikus	t i . k u s
 tikusruk	t i . k u s . r u k
-til	
+til	t e . i . e l
 tila	t i . l a
 tilak	t i . l a k
 tilakoid	t i . l a . k o . i d
@@ -40400,6 +40498,7 @@ toksisitasna	t o k . s i . s i . t a s . n a
 toksoplasmosis	t o k . s o . p l a s . m o . s i s
 tokubetsutai	t o . k u . b e t . s u . t ai
 tokugawa	t o . k u . g a . w a
+tokushima	t o . k u . sy i . m a
 tokyo	t o k . y o
 tol	t o l
 tolab	t o . l a b
@@ -40541,7 +40640,7 @@ toyoake	t o . y o . a . k e
 toyohashi	t o . y o . h a . s i
 toyokawa	t o . y o . k a . w a
 toyotomi	t o . y o . t o . m i
-tra	
+tra	t e . e r . a
 trabzon	t r a b . z o n
 trace	t r e s
 tractor	t r e k . t ex r
@@ -40617,7 +40716,7 @@ transpor	t r a n s . p o r
 transportasina	t r a n s . p o r . t a . s i . n a
 transporter	t r a n s . p o r . t ex r
 transposisi	t r a n s . p o . s i . s i
-transtv	
+transtv	t e . e r . a . e n . e s . t e . f e
 transylvania	t r e n . s i l . f a . n i . a
 trap	t r e p
 trapattoni	t r a . p a t . t o . n i
@@ -40745,7 +40844,7 @@ tsany	s a . n i
 tsar	s a r
 tsaur	s a . u r
 tsauri	s a . u . r i
-tsb	
+tsb	t e . e s . b e
 tsendenjong	s ex n . d ex n . j o ng
 tsikolkovsky	s i . k o l . k o f . s k i
 tsing	s i ng
@@ -40762,8 +40861,8 @@ tsusin	s u . s i n
 tsusinkyoku	s u . s i n . k i . o . k u
 tsutomu	s u . t o . m u
 tteok	t o k
-tti	
-tu	
+tti	t e . t e . i
+tu	t e . u
 tua	t u . a
 tuah	t u . a h
 tuak	t u . a k
@@ -40829,7 +40928,7 @@ tujuhlain	t u . j u h . l a . i n
 tujul	t u . j u l
 tujuman	t u . j u . m a n
 tujus	t u . j u s
-tuk	
+tuk	t e . u . k a
 tukak	t u . k a k
 tukan	t u . k a n
 tukang	t u . k a ng
@@ -41057,6 +41156,8 @@ tze	s ex
 tzu	z u
 u	u
 u	y u
+u_letter	u
+u_letter-en	y u
 ua	u . a
 uang	u . a ng
 uangna	u . a ng . n a
@@ -41078,14 +41179,14 @@ ububan	u . b u . b a n
 ubud	u . b u d
 ubun	u . b u n
 ubuntu	y u . b u n . t u
-uc	
+uc	u . c e
 ucap	u . c a p
 ucapan	u . c a . p a n
 ucapanana	u . c a . p a . n a . n a
 uchiha	u . c i . h a
 ucil	u . c i l
 ucingna	u . c i ng . n a
-ucla	
+ucla	u . c e . e l . a
 ucrit	u . c r i t
 uda	u . d a
 udag	u . d a g
@@ -41104,18 +41205,18 @@ udjo	u . j o
 udmurtia	u d . m u r . t i . a
 udo	u . d o
 udon	u . d o n
-udp	
+udp	u . d e . p e
 udud	u . d u d
 uduh	u . d u h
 uduk	u . d u k
 udung	u . d u ng
 udur	u . d u r
 udzur	u . z u r
-ue	
+ue	u . e
 uefa	u . e . f a
 uemura	u . e . m u . r a
 ueno	u . e . n o
-ues	
+ues	u . e . e s
 ueshiba	u . e . s i . b a
 uesugi	u . e . s u . g i
 ugahari	u . g a . h a . r i
@@ -41124,13 +41225,13 @@ uganda	u . g a n . d a
 uger	u . g ex r
 ugeran	u . g ex . r a n
 ugil	u . g i l
-ugm	
+ugm	u . g e . e m
 ugun	u . g u n
 ugyen	u g . y e n
-uhf	
+uhf	u . h a . e f
 uhud	u . h u d
 uhuru	u . h u . r u
-uin	
+uin	u . i . e n
 uitgebreid	a t . g ex . b r e . i d
 ujan	u . j a n
 ujang	u . j a ng
@@ -41152,7 +41253,7 @@ ujungnegoro	u . j u ng . n ex . g o . r o
 ujungnya	u . j u ng . ny a
 ujungpandang	u . j u ng . p a n . d a ng
 ujungsemi	u . j u ng . s ex . m i
-uk	
+uk	u . k a
 uka	u . k a
 uke	u . k e
 ukhuwwah	u . hx u . w a h
@@ -41160,9 +41261,9 @@ uki	u . k i
 uking	u . k i ng
 ukir	u . k i r
 ukiran	u . k i . r a n
-ukm	
-uko	
-ukr	
+ukm	u . k a . e m
+uko	u . k a . o
+ukr	u . k a . e r
 ukraina	u k . r a . i . n a
 ukrajini	u k . r a . h i . n i
 ukran	u . k r a n
@@ -41183,8 +41284,8 @@ uleebalang	u . l e . ex . b a . l a ng
 ulekan	u . l ex . k a n
 uleman	u . l ex . m a n
 ulen	u . l e n
-ulfa	
-ulfa	u l . f a
+ulfa	u . e l . e f . a
+ulfa_pers	u l . f a
 ulik	u . l i k
 ulikanana	u . l i . k a . n a . n a
 ulikanna	u . l i . k a . n a
@@ -41219,8 +41320,7 @@ ulung	u . l u ng
 ulva	u l . f a
 uly	u . l i
 ulya	u l . y a
-uma	
-uma	u . m a
+uma	u . e m . a
 umam	u . m a m
 umat	u . m a t
 umatna	u . m a t . n a
@@ -41241,7 +41341,7 @@ umpamana	u m . p a . m a . n a
 umpan	u m . p a n
 umrah	u m . r a h
 umroh	u m . r o h
-umts	
+umts	u . e m . t e . e s
 umu	u . m u
 umum	u . m u m
 umumna	u . m u m . n a
@@ -41270,7 +41370,7 @@ undi	u n . d i
 undian	u n . d i . a n
 undip	u n . d i p
 undur	u n . d u r
-une	
+une	u . e n . e
 uneh	u . n e h
 unen	u . n e n
 unesco	y u . n e s . k o
@@ -41285,7 +41385,8 @@ ungkal	u ng . k a l
 ungkapan	u ng . k a . p a n
 ungkara	u ng . k a . r a
 ungko	u ng . k o
-unhrc	
+ungu	u . ng u
+unhrc	u . e n . h a . e r . c e
 uni	u . n i
 unifikasi	u . n i . f i . k a . s i
 unikameral	u . n i . k a . m e . r a l
@@ -41339,9 +41440,9 @@ untuyan	u n . t u . y a n
 unud	u . n u d
 ununennium	u . n u . n e . n i . u m
 unur	u . n u r
-unus	
+unus	u . e n . u . e s
 unyil	u . ny i l
-upa	
+upa	u . p e . a
 upacarana	u . p a . c a . r a . n a
 upah	u . p a h
 upami	u . p a . m i
@@ -41360,7 +41461,7 @@ uplek	u p . l ex k
 upper	a . p ex r
 uppsala	u p . s a . l a
 upsilon	u p . s i . l o n
-ura	
+ura	u . e r . a
 urab	u . r a b
 uraian	u . r ai . a n
 urais	u . r a . i s
@@ -41387,13 +41488,13 @@ urea	u . r e . a
 uretra	u . r e t . r a
 urey	y u . r i
 urgan	u r . g a n
-uri	
+uri	u . e r . i
 urin	u . r i n
 urinasi	u . r i . n a . s i
 urip	u . r i p
-url	
+url	u . e r . e l
 urnag	u r . n a g
-urss	
+urss	u . e r . e s . e s
 urubamba	u . r u . b a m . b a
 urug	u . r u g
 urugan	u . r u . g a n
@@ -41405,19 +41506,19 @@ urutanna	u . r u . t a . n a
 urutna	u . r u t . n a
 ury	y u . r i
 us	a s
-usa	
+usa	u . e s . a
 usada	u . s a . d a
 usah	u . s a h
 usaha	u . s a . h a
 usahawan	u . s a . h a . w a n
 usai	u . s a . i
-usaid	
+usaid	u . e s . a . i . d e
 usainya	u . s a . i . ny a
 usap	u . s a p
 usapan	u . s a . p a n
 usar	u . s a r
-usb	
-usc	
+usb	u . e s . b e
+usc	u . e s . c e
 useup	u . s eu p
 useupna	u . s eu p . n a
 ushul	u . s u l
@@ -41426,7 +41527,7 @@ usiana	u . s i . a . n a
 usik	u . s i k
 usikna	u . s i k . n a
 usil	u . s i l
-usim	
+usim	u . e s . i . e m
 usir	u . s i r
 uskup	u s . k u p
 usman	u s . m a n
@@ -41436,9 +41537,9 @@ usopp	u . s o p
 usro	u s . r o
 usrol	u s . r o l
 ussi	u . s i
-ussr	
+ussr	u . e s . e s . e r
 ussy	u . s i
-ust	
+ust	u . e s . t e
 ustad	u . s t a d
 ustadz	u s . t a d
 usu	u . s u
@@ -41451,7 +41552,7 @@ usulkeun	u . s u l . k eu n
 usum	u . s u m
 usuman	u . s u . m a n
 usup	u . s u p
-uta	
+uta	u . t e . a
 utable	y u . t e . b ex l
 utah	u . t a h
 utama	u . t a . m a
@@ -41466,7 +41567,7 @@ utara	u . t a . r a
 utari	u . t a . r i
 utas	u . t a s
 utawa	u . t a . w a
-utc	
+utc	u . t e . c e
 uter	u . t ex r
 utero	u . t e . r o
 uterus	u . t e . r u s
@@ -41474,7 +41575,7 @@ uteukna	u . t eu k . n a
 uthe	u . t e
 utilisateur	u . t i . l i . s a . t eu r
 utilitas	u . t i . l i . t a s
-utk	
+utk	u . t e . k a
 utomo	u . t o . m o
 utopia	u . t o . p i . a
 utra	u t . r a
@@ -41485,11 +41586,11 @@ uttar	u . t a r
 utuh	u . t u h
 utusan	u . t u . s a n
 utusanna	u . t u . s a . n a
-uud	
+uud	u . u . d e
 uulinan	u . u . l i . n a n
 uum	u . u m
 uus	u . u s
-uv	
+uv	u . f e
 uvea	y u . f i . a
 uwa	u . w a
 uwak	u . w a gl
@@ -41507,6 +41608,8 @@ uzi	u . z i
 uzur	u . z u r
 v	f e
 v	f i
+v_letter	f e
+v_letter-en	f i
 vadose	f ex . d o s
 vagetoz	f a . g ex . t o s
 vagina	f a . g i . n a
@@ -41549,7 +41652,7 @@ vanua	f a . n u . a
 vanuatu	f a . n u . a . t u
 vanya	f a . ny a
 vapour	f e . p ex r
-var	
+var	f e . a . e r
 varanus	f a . r a . n u s
 vareasi	f a . r e . a . s i
 vareatif	f a . r e . a . t i f
@@ -41638,7 +41741,7 @@ vesuvius	f ex . s u . f i . u s
 veteran	f e . t ex . r a n
 veto	f e . t o
 vetonya	f e . t o . ny a
-vi	
+vi	f e . i
 viabilitas	f i . a . b i . l i . t a s
 viagra	f i . a g . r a
 viani	f i . a . n i
@@ -41654,6 +41757,7 @@ vieira	f i . e . i . r a
 viera	f i . e . r a
 vierra	f i . e . r a
 vietjet	f i . e t . j e t
+vietman	f i . e t . m a n
 vietmen	f i . ex t . m ex n
 vietnam	f i . e t . n a m
 vigor	f i . g o r
@@ -41707,11 +41811,11 @@ vivi	f i . f i
 viviani	f i . f i . a . n i
 vivipar	f i . f i . p a r
 vivo	f i . f o
-vj	
+vj	f e . j e
 vlad	f l a d
 vladimir	f l a . d i . m i r
 voboam	f o . b o . a m
-voc	
+voc	f e . o . c e
 vocal	f o . k a l
 vodiylar	f o . d i . l a r
 vodka	f o d . k a
@@ -41754,10 +41858,12 @@ vulkanis	f u l . k a . n i s
 vulkanisasi	f u l . k a . n i . s a . s i
 vulkanolog	f u l . k a . n o . l o g
 vulvitis	f u l . f i . t i s
-vw	
+vw	f e . w e
 vyacheslav	f y a . c e s . l a f
 w	d a . b ex l . y u
 w	w e
+w_letter	w e
+w_letter-en	d a . b ex l . y u
 wa	w a
 waals	w a l s
 waar	w a r
@@ -41822,6 +41928,7 @@ wakaf	w a . k a f
 wakatobi	w a . k a . t o . b i
 wakayama	w a . k a . y a . m a
 wakca	w a k . c a
+wakil	w a . k i l
 wakilna	w a . k i l . n a
 waktos	w a k . t o s
 waktu	w a k . t u
@@ -42151,7 +42258,7 @@ wer	w e r
 werasari	w e . r a . s a . r i
 werden	w e r . d ex n
 wereng	w ex . r ex ng
-weri	
+weri	w e . e . e r . i
 werk	w e r k
 werkudara	w ex r . k u . d a . r a
 wertheim	w i . a t . h a . e m
@@ -42422,13 +42529,13 @@ wushu	w u . sy u
 wustha	w u s . t o
 wuwuhan	w u . w u . h a n
 wuwung	w u . w u ng
-wwe	
+wwe	w e . w e . e
 wyatt	w a . y ex t
 x	e k s
+x_letter	e k s
 xang	s a ng
 xeon	s e . o n
-xi	
-xi	s i
+xi	e k s . i
 xia	s i . a
 xiah	s i . a h
 xiang	s i . a ng
@@ -42444,6 +42551,8 @@ xun	hx u n
 xylinum	s i . l i . n u m
 y	w a y
 y	y e
+y_letter	y e
+y_letter-en	w a y
 yaa	y a
 yadawa	y a . d a . w a
 yadi	y a . d i
@@ -42463,7 +42572,7 @@ yaktos	y a k . t o s
 yakub	y a . k u b
 yakup	y a . k u p
 yale	y e l
-yali	
+yali	y e . a . e l . i
 yama	y a . m a
 yamaguchi	y a . m a . g u . c i
 yamaha	y a . m a . h a
@@ -42471,7 +42580,7 @@ yamamah	y a . m a . m a h
 yaman	y a . m a n
 yamanaka	y a . m a . n a . k a
 yamanote	y a . m a . n o . t e
-yamashita	y a . m a . sh i . t a
+yamashita	y a . m a . sy i . t a
 yamato	y a . m a . t o
 yamatoji	y a . m a . t o . j i
 yamin	y a . m i n
@@ -42480,6 +42589,7 @@ yandu	y a n . d u
 yang	y a ng
 yangcheon	y a ng . c o n
 yangdi	y a ng . d i
+yangkungna	y a ng . k u ng . n a
 yangmemiliki	y a ng . m ex . m i . l i . k i
 yangsan	y a ng . s a n
 yani	y a . n i
@@ -42503,7 +42613,7 @@ yasa	y a . s a
 yasaka	y a . s a . k a
 yasana	y a . s a . n a
 yasar	y a . s a r
-yasha	y a . sh a
+yasha	y a . sy a
 yasid	y a . s i d
 yasin	y a . s i n
 yasir	y a . s i r
@@ -42544,6 +42654,7 @@ yeppeo	y ex . p o
 yerevan	y e . r ex . f a n
 yerikho	y e . r i . k o
 yersinia	y ex r . s i . n i . a
+yerusalam	y e . r u . s a . l a m
 yerusalem	y e . r u . s a . l e m
 yes	y e s
 yeso	y e . s o
@@ -42597,7 +42708,7 @@ yoruba	y o . r u . b a
 yoseph	y o . s e p
 yoshinkan	y o . s i n . k a n
 yoshinobu	y o . sy i . n o . b u
-yoshioka	y o . sh i . o . k a
+yoshioka	y o . sy i . o . k a
 yoshiro	y o . s i . r o
 yosie	y o . s i
 yosowilangun	y o . s o . w i . l a . ng u n
@@ -42630,8 +42741,7 @@ yuliati	y u . l i . a . t i
 yulio	y u . l i . o
 yulius	y u . l i . u s
 yume	y u . m e
-yumi	
-yumi	y u . m i
+yumi	y e . u . e m . i
 yun	y u n
 yuna	y u . n a
 yunan	y u . n a n
@@ -42661,6 +42771,7 @@ yusoff	y u . s o f
 yusran	y u s . r o n
 yustisio	y u s . t i . s i . o
 yusup	y u . s u p
+yuswa	y u s . w a
 yuswana	y u s . w a . n a
 yuu	y u
 yuwono	y u . w o . n o
@@ -42669,6 +42780,8 @@ yuyun	y u . y u n
 yuyutsu	y u . y u t . s u
 z	z e t
 z	z i
+z_letter	z e t
+z_letter-en	z i
 zabaniyah	z a . b a . n i . y a h
 zabur	z a . b u r
 zabuza	z a . b u . z a
@@ -42679,7 +42792,7 @@ zaelani	z a . e . l a . n i
 zaenab	z a . e . n a b
 zaenal	z a . e . n a l
 zaeni	z a . e . n i
-zaf	
+zaf	z e t . a . e f
 zaha	z a . h a
 zahar	z a . h a r
 zaharah	j a . h a . r a h

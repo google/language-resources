@@ -108,6 +108,8 @@ cc_library(
         prefix_dir + "include/thrax/algo/optimize.h",
         prefix_dir + "include/thrax/algo/prefix_tree.h",
         prefix_dir + "include/thrax/algo/stripcomment.h",
+        prefix_dir + "include/thrax/algo/lenientlycompose.h",
+        prefix_dir + "include/thrax/algo/sigma_star.h",
     ],
     includes = [prefix_dir + "include"],
     deps = [
@@ -182,6 +184,7 @@ cc_library(
         prefix_dir + "include/thrax/stringfst.h",
         prefix_dir + "include/thrax/symboltable.h",
         prefix_dir + "include/thrax/union.h",
+        prefix_dir + "include/thrax/lenientlycompose.h",
     ],
     includes = [prefix_dir + "include"],
     visibility = ["//visibility:private"],

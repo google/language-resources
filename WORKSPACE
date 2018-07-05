@@ -121,8 +121,8 @@ bind(
 new_http_archive(
     name = "openfst",
     build_file = "bazel/openfst.BUILD",
-    strip_prefix = "openfst-1.6.6",
-    urls = ["http://www.openfst.org/twiki/pub/FST/FstDownload/openfst-1.6.6.tar.gz"],
+    strip_prefix = "openfst-1.6.7",
+    urls = ["http://www.openfst.org/twiki/pub/FST/FstDownload/openfst-1.6.7.tar.gz"],
 )
 
 new_git_repository(
@@ -135,7 +135,7 @@ new_git_repository(
 new_git_repository(
     name = "thrax",
     build_file = "bazel/thrax.BUILD",
-    tag = "1_2_5_mod_2",
+    tag = "1.2.6",
     remote = "https://github.com/pasindud/thrax.git",
 )
 

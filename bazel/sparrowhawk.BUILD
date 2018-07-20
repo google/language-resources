@@ -104,6 +104,9 @@ cc_library(
     copts = ["-Wno-sign-compare"],
     includes = ["src/include"],
     visibility = ["//visibility:private"],
+    deps = [
+        "@openfst//:base",
+    ],
 )
 
 cc_library(

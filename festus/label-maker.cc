@@ -84,7 +84,7 @@ bool SymbolLabelMaker::StringToLabels(const StringPiece str,
   labels->reserve(symbols.size());
   for (const auto &symbol : symbols) {
     auto label = symbols_->Find(symbol.ToString());
-    if (label == fst::SymbolTable::kNoSymbol) {
+    if (label == fst::kNoSymbol) {
       LOG(ERROR) << "Unknown symbol in SymbolLabelMaker: " << symbol;
       return false;
     }

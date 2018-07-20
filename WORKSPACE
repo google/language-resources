@@ -128,8 +128,8 @@ new_http_archive(
 new_git_repository(
     name = "opengrm_ngram",
     build_file = "bazel/opengrm-ngram.BUILD",
-    remote = "https://github.com/mjansche/opengrm-ngram.git",
-    tag = "1.3.2",
+    remote = "https://github.com/pasindud/opengrm-ngram.git",
+    tag = "1.3.4",
 )
 
 new_git_repository(
@@ -144,6 +144,6 @@ new_git_repository(
 new_git_repository(
     name = "sparrowhawk",
     build_file = "bazel/sparrowhawk.BUILD",
-    commit = "eb97411535e9ab280982bae18c99d6a2c933e162",
+    commit = "a0503e26a433fbd3a9ff81ba7a08819e4a3bb668",
     remote = "https://github.com/google/sparrowhawk.git",
 )

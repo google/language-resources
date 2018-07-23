@@ -135,8 +135,8 @@ new_git_repository(
 new_git_repository(
     name = "thrax",
     build_file = "bazel/thrax.BUILD",
-    tag = "1.2.6",
-    remote = "https://github.com/pasindud/thrax.git",
+    commit = "3b23d606f421357292787c4f45827e1f8635439a",
+    remote = "https://github.com/pasindud/thrax_1_2_6",
 )
 
 # Sparrowhawk

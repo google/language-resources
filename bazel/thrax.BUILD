@@ -89,7 +89,6 @@ cc_library(
     hdrs = [
         prefix_dir + "include/thrax/compat/closure.h",
         prefix_dir + "include/thrax/compat/compat.h",
-        prefix_dir + "include/thrax/compat/gtl.h",
         prefix_dir + "include/thrax/compat/oneof.h",
         prefix_dir + "include/thrax/compat/registry.h",
         prefix_dir + "include/thrax/compat/stlfunctions.h",

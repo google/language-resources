@@ -1,0 +1,184 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2005-2011 Google, Inc.
+# Author: rws@google.com (Richard Sproat)
+
+import 'share_grms/byte.grm' as bytelib;
+
+insspace = "" : " ";
+
+zero  = "0" : "zero";
+
+delzero = "0" : "";
+delzerounion = delzero | "" : "";
+
+delzeroth = "0th" : "";
+
+## Note that the grouping parentheses are required here:
+
+units =   ("1" : "one")
+	| ("2" : "two")
+	| ("3" : "three")
+	| ("4" : "four")
+	| ("5" : "five")
+	| ("6" : "six")
+	| ("7" : "seven")
+	| ("8" : "eight")
+	| ("9" : "nine")
+;
+
+ordinal_units = ("1st" : "first")
+		| ("2nd" : "second")
+		| ("3rd" : "third")
+		| ("4th" : "fourth")
+		| ("5th" : "fifth")
+		| ("6th" : "sixth")
+		| ("7th" : "seventh")
+		| ("8th" : "eighth")
+		| ("9th" : "ninth")
+;
+
+teens =   ("10" : "ten")
+	| ("11" : "eleven")
+	| ("12" : "twelve")
+	| ("13" : "thirteen")
+	| ("14" : "fourteen")
+	| ("15" : "fifteen")
+	| ("16" : "sixteen")
+	| ("17" : "seventeen")
+	| ("18" : "eighteen")
+	| ("19" : "nineteen")
+;
+
+ordinal_teens = ("10th" : "tenth")
+        | ("11th" : "eleventh")
+        | ("12th" : "twelfth")
+        | ("13th" : "thirteenth")
+        | ("14th" : "fourteenth")
+        | ("15th" : "fifteenth")
+        | ("16th" : "sixteenth")
+        | ("17th" : "seventeenth")
+        | ("18th" : "eighteenth")
+        | ("19th" : "nineteenth")
+;
+
+decades =   ("2" : "twenty")
+	  | ("3" : "thirty")
+	  | ("4" : "forty")
+	  | ("5" : "fifty")
+	  | ("6" : "sixty")
+	  | ("7" : "seventy")
+	  | ("8" : "eighty")
+	  | ("9" : "ninety")
+;
+
+ordinal_decades = ("20th" : "twentieth")
+          | ("30th" : "thirtieth")
+          | ("40th" : "fortieth")
+          | ("50th" : "fiftieth")
+          | ("60th" : "sixtieth")
+          | ("70th" : "seventieth")
+          | ("80th" : "eightieth")
+          | ("90th" : "ninetieth")
+;
+
+numbers_20_to_99 = decades delzero | decades insspace units ;
+
+numbers_to_99 = Optimize[ units | teens | numbers_20_to_99] ;
+
+hundreds = units insspace ("" : "hundred") ;
+
+numbers_100_to_999 = 
+Optimize[
+  hundreds delzero delzero |
+  hundreds delzero insspace ("":"and ") units |
+  hundreds insspace teens |
+  hundreds insspace numbers_20_to_99 |
+  hundreds ("":" and ") teens |
+  hundreds ("":" and ") numbers_20_to_99]
+;
+
+numbers_to_999 = Optimize[numbers_to_99 | numbers_100_to_999];
+
+thousands = numbers_to_999 insspace ("" : "thousand") ;
+numbers_1000_to_999999 = Optimize[  thousands delzero delzero delzero |
+				    thousands delzero delzero insspace ("":"and ") units |
+				    thousands delzero insspace ("":"and ") teens |
+				    thousands delzero insspace ("":"and ") numbers_20_to_99 |
+				    thousands insspace numbers_100_to_999 ];
+numbers_to_999999 = Optimize[ numbers_to_999 | numbers_1000_to_999999 ];
+
+millions = numbers_to_999 insspace ("" : "million") ;
+numbers_1m_to_999999999 = Optimize[ millions delzero delzero delzero delzero delzero delzero | 
+				    millions delzero delzero delzero delzero delzero insspace units |
+				    millions delzero delzero delzero delzero insspace teens |
+				    millions delzero delzero delzero delzero insspace numbers_20_to_99 |
+				    millions delzero delzero delzero insspace numbers_100_to_999 |
+				    millions delzerounion delzerounion insspace numbers_1000_to_999999 ];
+numbers_to_999999999 = Optimize[ numbers_to_999999 | numbers_1m_to_999999999 ];
+
+ord_numbers_20_to_99 = ordinal_decades | decades insspace ordinal_units ;
+
+ord_numbers_to_99 = Optimize[ ordinal_units | ordinal_teens | ord_numbers_20_to_99] ;
+
+ord_hundreds = units insspace ("" : "hundredth") ;
+ord_numbers_100_to_999 =
+Optimize[
+  ord_hundreds delzero delzeroth |
+  hundreds delzero insspace ordinal_units |
+  hundreds insspace ordinal_teens |
+  hundreds insspace ord_numbers_20_to_99]
+;
+
+ord_numbers_to_999 = Optimize[ord_numbers_to_99 | ord_numbers_100_to_999];
+
+ord_thousands = numbers_to_999 insspace ("" : "thousandth") ;
+ord_numbers_1000_to_999999 = Optimize[ ord_thousands delzero delzero delzeroth |
+                                    thousands delzero delzero insspace ordinal_units |
+                                    thousands delzero insspace ordinal_teens |
+				    thousands delzero insspace ord_numbers_20_to_99 |
+                                    thousands insspace ord_numbers_100_to_999 ];
+
+ord_numbers_to_999999 = Optimize[ ord_numbers_to_999 | ord_numbers_1000_to_999999 ];
+
+ord_millions = numbers_to_999 insspace ("" : "millionth") ;
+ord_numbers_1m_to_999999999 = Optimize[ ord_millions delzero delzero delzero delzero delzero delzero |
+                                    millions delzero delzero delzero delzero delzero insspace ordinal_units |
+                                    millions delzero delzero delzero delzero insspace ordinal_teens |
+				    millions delzero delzero delzero delzero insspace ord_numbers_20_to_99 |
+                                    millions delzero delzero delzero insspace ord_numbers_100_to_999 |
+                                    millions delzerounion delzerounion insspace ord_numbers_1000_to_999999 ];
+
+ord_numbers_to_999999999 = Optimize[ ord_numbers_to_999999 | ord_numbers_1m_to_999999999 ];
+
+digit = bytelib.kDigit;
+
+two_digit_numbers = teens | decades delzero | decades insspace units;
+
+# An approximation to years --- doesn't get "2001" right, for example.
+
+year = ((("1" | "2") digit) @ two_digit_numbers)
+       insspace
+       ((digit digit) @ two_digit_numbers
+        | ("0" : "oh") insspace (digit @ units));
+
+read_digit_by_digit = (units | zero) (insspace (units | zero))* ;
+
+# This must be exported to be available to other grammars. Note the use of
+# a weight in the rule to indicate deprecation of the read_digit_by_digit rule
+# if there are other matches:
+
+export ORDINAL_NUMBERS = Optimize[ord_numbers_to_999999999];
+export NUMBERS = Optimize[numbers_to_999999999 | zero
+                          | year
+                          | (read_digit_by_digit <1.0>)] ;

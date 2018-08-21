@@ -1,0 +1,104 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2016 and onwards, Google, Inc.
+
+# Afrikaans verbalizer for measures.
+# measure {Decimal {integer_part: 33 fractional_part: "047"} units:
+# "kilogram"}
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+import 'cardinal.grm' as c;
+import 'decimal.grm' as d;
+import 'fraction.grm' as f;
+unit_plural = StringFile[
+  'measure_plural.txt'];
+
+unit_singular = StringFile[
+  'measure_singular.txt'];
+
+unit_prefixes = StringFile[
+  'measure_prefixes.txt'];
+
+# Support for square & cubic meters, kilometers, etc (m2, m3)
+square_prefix = ("square" : "squares ");
+cubic_prefix = ("cubic" : "cubic ");
+square_or_cubic = (square_prefix | cubic_prefix) universal_rules.clear_space_star;
+
+# singular units, eg. "1km" -> "one kilometre"
+style_decimal_singular = ((d.DECIMAL_MARKUP_SINGULAR |
+                           f.FRACTION_MARKUP_SIMPLE |
+                           f.FRACTION_MARKUP)
+                          universal_rules.ins_space)?
+                         universal_rules.measure_units
+                         universal_rules.quote
+                         square_or_cubic?
+                         unit_prefixes?
+                         (unit_singular | Project[unit_singular, 'output'])?
+                         (("/" | "per" : " per ")
+                          universal_rules.one_space
+                          square_or_cubic? unit_prefixes?
+                          (unit_singular | Project[unit_singular, 'output']))?
+                         universal_rules.quote
+                         universal_rules.del_space_star;
+
+# integer > 1 and decimal.
+# use plural form of unit.
+# 2,25 degrees => "twee komma twee vyf grade"
+style_decimal_plural = ((f.FRACTION_MARKUP | d.DECIMAL_MARKUP)
+                        universal_rules.ins_space)?
+                       universal_rules.measure_units
+                       universal_rules.quote
+                       square_or_cubic?
+                       unit_prefixes?
+                       (unit_plural |
+                        Project[unit_plural, 'output'] |
+                        (Project[unit_singular, 'output'] <1>))?
+                       (("/" | "per" : " per ")
+                          universal_rules.one_space
+                          square_or_cubic? unit_prefixes?
+                          (unit_singular | Project[unit_singular, 'output']))?
+                       universal_rules.quote
+                       universal_rules.del_space_star;
+
+# for cases up to 9, meters should be verbalized as "one meter eighty five"
+# "1,01" is verbalized as "one meter one". In Afr: een punt een meter
+style_meter_col = universal_rules.decimal
+                  universal_rules.opening_brace
+                  universal_rules.decimal_integer
+                  universal_rules.quote (universal_rules.kDigit @ c.CARDINAL) universal_rules.quote
+                  ("" : " meter ")
+                  universal_rules.decimal_fraction
+                  universal_rules.quote
+                  (
+                   ((("0" : "") universal_rules.d1to9) |
+                    (universal_rules.kDigit universal_rules.kDigit? "\[E1\]"))
+                   @ c.CARDINAL
+                  )
+                  universal_rules.quote
+                  universal_rules.closing_brace
+                  universal_rules.measure_units
+                  universal_rules.quote ("meter" : "") universal_rules.quote;
+
+export MEASURE = Optimize[(universal_rules.CARDINAL_TO_DECIMAL @ ((style_meter_col<-20>) | (style_decimal_singular <-10>) | (style_decimal_plural)))];
+
+export MEASURE_MARKUP = Optimize[
+   (universal_rules.measure
+    universal_rules.opening_brace
+    (universal_rules.CARDINAL_TO_DECIMAL @ (
+       (style_meter_col<-20>) |
+       (style_decimal_singular <-10>) |
+       (style_decimal_plural)
+    ))
+    universal_rules.closing_brace) @ universal_rules.CLEAN_SPACES
+];

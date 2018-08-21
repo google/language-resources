@@ -1,0 +1,833 @@
+0	3	<epsilon>	<epsilon>
+0	4	<epsilon>	<epsilon>
+0	5	<epsilon>	<epsilon>
+0	6	<epsilon>	<epsilon>
+0	7	<epsilon>	<epsilon>
+0	8	<epsilon>	<epsilon>
+0	9	<epsilon>	<epsilon>
+0	10	<epsilon>	<epsilon>
+0	1	<epsilon>	h
+0	2	<epsilon>	<epsilon>
+0	11	0	n
+0	12	1	<epsilon>
+0	13	1	h
+0	14	2	<epsilon>
+0	15	3	<epsilon>
+0	16	4	<epsilon>
+0	17	5	<epsilon>
+0	18	6	<epsilon>
+0	19	7	<epsilon>
+0	20	8	<epsilon>
+0	21	9	<epsilon>
+1	Infinity
+2	22	<epsilon>	t
+3	23	<epsilon>	d
+4	24	<epsilon>	v
+5	25	<epsilon>	v
+6	26	<epsilon>	s
+7	27	<epsilon>	s
+8	28	<epsilon>	a
+9	29	<epsilon>	n
+10	30	<epsilon>	e
+11	31	<epsilon>	u
+12	32	<epsilon>	e
+12	33	<epsilon>	a
+12	34	<epsilon>	d
+12	35	<epsilon>	e
+12	36	<epsilon>	n
+12	37	<epsilon>	s
+12	38	<epsilon>	t
+12	39	<epsilon>	v
+12	40	<epsilon>	h
+13	41	<epsilon>	o
+14	42	<epsilon>	t
+14	43	<epsilon>	t
+15	44	<epsilon>	d
+15	45	<epsilon>	d
+16	46	<epsilon>	v
+16	47	<epsilon>	v
+17	48	<epsilon>	v
+17	49	<epsilon>	v
+18	50	<epsilon>	s
+18	51	<epsilon>	s
+19	52	<epsilon>	s
+19	53	<epsilon>	s
+20	54	<epsilon>	a
+20	55	<epsilon>	t
+21	56	<epsilon>	n
+21	57	<epsilon>	n
+22	58	<epsilon>	w
+23	59	<epsilon>	r
+24	60	<epsilon>	i
+25	61	<epsilon>	y
+26	62	<epsilon>	e
+27	63	<epsilon>	e
+28	64	<epsilon>	g
+29	65	<epsilon>	e
+30	66	<epsilon>	e
+31	67	<epsilon>	l
+32	68	<epsilon>	e
+33	Infinity
+34	Infinity
+35	Infinity
+36	Infinity
+37	Infinity
+38	69	<epsilon>	i
+39	Infinity
+40	70	<epsilon>	o
+41	71	<epsilon>	n
+42	72	<epsilon>	w
+43	Infinity
+44	73	<epsilon>	r
+45	Infinity
+46	74	<epsilon>	i
+47	Infinity
+48	75	<epsilon>	y
+49	Infinity
+50	76	<epsilon>	e
+51	Infinity
+52	77	<epsilon>	e
+53	Infinity
+54	78	<epsilon>	g
+55	Infinity
+56	79	<epsilon>	e
+57	Infinity
+58	80	<epsilon>	e
+59	81	<epsilon>	i
+60	82	<epsilon>	e
+61	83	<epsilon>	f
+62	84	<epsilon>	s
+63	85	<epsilon>	w
+64	86	<epsilon>	t
+65	87	<epsilon>	g
+66	88	<epsilon>	n
+67	89	<epsilon>	<space>
+67
+68	90	<epsilon>	n
+69	91	<epsilon>	e
+70	71	<epsilon>	n
+71	92	<epsilon>	d
+72	93	<epsilon>	e
+73	93	<epsilon>	i
+74	94	<epsilon>	e
+75	95	<epsilon>	f
+76	95	<epsilon>	s
+77	93	<epsilon>	w
+78	95	<epsilon>	t
+79	93	<epsilon>	g
+80	96	<epsilon>	e
+81	97	<epsilon>	e
+82	98	<epsilon>	r
+83	99	<epsilon>	<space>
+84	100	<epsilon>	<space>
+85	101	<epsilon>	e
+86	102	<epsilon>	<space>
+87	103	<epsilon>	e
+88	104	<epsilon>	<space>
+89	Infinity
+90	105	<epsilon>	<space>
+90
+91	106	<epsilon>	n
+92	107	<epsilon>	e
+93	95	<epsilon>	e
+94	95	<epsilon>	r
+95	108	<epsilon>	<space>
+95
+96	109	<epsilon>	<space>
+97	110	<epsilon>	<space>
+98	111	<epsilon>	<space>
+99	112	<epsilon>	e
+100	113	<epsilon>	e
+101	114	<epsilon>	<space>
+102	115	<epsilon>	e
+103	116	<epsilon>	<space>
+104	117	<epsilon>	e
+105	118	<epsilon>	<epsilon>
+105	119	<epsilon>	<epsilon>
+105	120	<epsilon>	<epsilon>
+106	121	<epsilon>	<space>
+107	122	<epsilon>	r
+108	40	<epsilon>	h
+108	118	<epsilon>	<epsilon>
+108	119	<epsilon>	<epsilon>
+108	120	<epsilon>	<epsilon>
+109	123	<epsilon>	e
+110	124	<epsilon>	e
+111	125	<epsilon>	e
+112	126	<epsilon>	n
+113	127	<epsilon>	n
+114	128	<epsilon>	e
+115	129	<epsilon>	n
+116	130	<epsilon>	e
+117	131	<epsilon>	n
+118	132	<epsilon>	d
+119	133	<epsilon>	m
+120	134	<epsilon>	m
+121	Infinity
+122	135	<epsilon>	d
+123	136	<epsilon>	n
+124	137	<epsilon>	n
+125	138	<epsilon>	n
+126	139	<epsilon>	<space>
+127	140	<epsilon>	<space>
+128	141	<epsilon>	n
+129	142	<epsilon>	<space>
+130	143	<epsilon>	n
+131	144	<epsilon>	<space>
+132	145	<epsilon>	u
+133	146	<epsilon>	i
+134	147	<epsilon>	i
+135	148	<epsilon>	<space>
+136	149	<epsilon>	<space>
+137	150	<epsilon>	<space>
+138	151	<epsilon>	<space>
+139	152	2	<epsilon>
+139	153	3	<epsilon>
+139	154	4	<epsilon>
+139	155	5	<epsilon>
+139	156	6	<epsilon>
+139	157	7	<epsilon>
+139	158	8	<epsilon>
+139	159	9	<epsilon>
+140	160	2	<epsilon>
+140	161	3	<epsilon>
+140	162	4	<epsilon>
+140	163	5	<epsilon>
+140	164	6	<epsilon>
+140	165	7	<epsilon>
+140	166	8	<epsilon>
+140	167	9	<epsilon>
+141	168	<epsilon>	<space>
+142	169	2	<epsilon>
+142	170	3	<epsilon>
+142	171	4	<epsilon>
+142	172	5	<epsilon>
+142	173	6	<epsilon>
+142	174	7	<epsilon>
+142	175	8	<epsilon>
+142	176	9	<epsilon>
+143	177	<epsilon>	<space>
+144	178	2	<epsilon>
+144	179	3	<epsilon>
+144	180	4	<epsilon>
+144	181	5	<epsilon>
+144	182	6	<epsilon>
+144	183	7	<epsilon>
+144	184	8	<epsilon>
+144	185	9	<epsilon>
+145	186	<epsilon>	i
+146	187	<epsilon>	l
+147	188	<epsilon>	l
+148	189	<epsilon>	<epsilon>
+148	190	<epsilon>	<epsilon>
+148	191	<epsilon>	<epsilon>
+148	192	<epsilon>	<epsilon>
+148	193	<epsilon>	<epsilon>
+148	194	<epsilon>	<epsilon>
+148	195	<epsilon>	<epsilon>
+148	196	<epsilon>	<epsilon>
+148	197	<epsilon>	<epsilon>
+148	198	<epsilon>	h
+148	199	<epsilon>	e
+149	200	2	<epsilon>
+149	201	3	<epsilon>
+149	202	4	<epsilon>
+149	203	5	<epsilon>
+149	204	6	<epsilon>
+149	205	7	<epsilon>
+149	206	8	<epsilon>
+149	207	9	<epsilon>
+150	208	2	<epsilon>
+150	209	3	<epsilon>
+150	210	4	<epsilon>
+150	211	5	<epsilon>
+150	212	6	<epsilon>
+150	213	7	<epsilon>
+150	214	8	<epsilon>
+150	215	9	<epsilon>
+151	216	2	<epsilon>
+151	217	3	<epsilon>
+151	218	4	<epsilon>
+151	219	5	<epsilon>
+151	220	6	<epsilon>
+151	221	7	<epsilon>
+151	222	8	<epsilon>
+151	223	9	<epsilon>
+152	224	<epsilon>	t
+152	225	<epsilon>	t
+153	226	<epsilon>	d
+153	227	<epsilon>	d
+154	228	<epsilon>	v
+154	229	<epsilon>	v
+155	230	<epsilon>	v
+155	231	<epsilon>	v
+156	232	<epsilon>	s
+156	233	<epsilon>	s
+157	234	<epsilon>	s
+157	235	<epsilon>	s
+158	236	<epsilon>	a
+158	237	<epsilon>	t
+159	238	<epsilon>	n
+159	239	<epsilon>	n
+160	240	<epsilon>	t
+160	241	<epsilon>	t
+161	242	<epsilon>	d
+161	243	<epsilon>	d
+162	244	<epsilon>	v
+162	245	<epsilon>	v
+163	246	<epsilon>	v
+163	247	<epsilon>	v
+164	248	<epsilon>	s
+164	249	<epsilon>	s
+165	250	<epsilon>	s
+165	251	<epsilon>	s
+166	252	<epsilon>	a
+166	253	<epsilon>	t
+167	254	<epsilon>	n
+167	255	<epsilon>	n
+168	256	2	<epsilon>
+168	257	3	<epsilon>
+168	258	4	<epsilon>
+168	259	5	<epsilon>
+168	260	6	<epsilon>
+168	261	7	<epsilon>
+168	262	8	<epsilon>
+168	263	9	<epsilon>
+169	264	<epsilon>	t
+169	265	<epsilon>	t
+170	266	<epsilon>	d
+170	267	<epsilon>	d
+171	268	<epsilon>	v
+171	269	<epsilon>	v
+172	270	<epsilon>	v
+172	271	<epsilon>	v
+173	272	<epsilon>	s
+173	273	<epsilon>	s
+174	274	<epsilon>	s
+174	275	<epsilon>	s
+175	276	<epsilon>	a
+175	277	<epsilon>	t
+176	278	<epsilon>	n
+176	279	<epsilon>	n
+177	280	2	<epsilon>
+177	281	3	<epsilon>
+177	282	4	<epsilon>
+177	283	5	<epsilon>
+177	284	6	<epsilon>
+177	285	7	<epsilon>
+177	286	8	<epsilon>
+177	287	9	<epsilon>
+178	288	<epsilon>	t
+178	289	<epsilon>	t
+179	290	<epsilon>	d
+179	291	<epsilon>	d
+180	292	<epsilon>	v
+180	293	<epsilon>	v
+181	294	<epsilon>	v
+181	295	<epsilon>	v
+182	296	<epsilon>	s
+182	297	<epsilon>	s
+183	298	<epsilon>	s
+183	299	<epsilon>	s
+184	300	<epsilon>	a
+184	301	<epsilon>	t
+185	302	<epsilon>	n
+185	303	<epsilon>	n
+186	304	<epsilon>	s
+187	305	<epsilon>	j
+188	306	<epsilon>	j
+189	307	<epsilon>	e
+190	308	<epsilon>	n
+191	309	<epsilon>	a
+192	310	<epsilon>	s
+193	311	<epsilon>	s
+194	312	<epsilon>	v
+195	313	<epsilon>	v
+196	314	<epsilon>	d
+197	315	<epsilon>	t
+198	Infinity
+199	316	<epsilon>	n
+200	317	<epsilon>	t
+200	318	<epsilon>	t
+201	319	<epsilon>	d
+201	320	<epsilon>	d
+202	321	<epsilon>	v
+202	322	<epsilon>	v
+203	323	<epsilon>	v
+203	324	<epsilon>	v
+204	325	<epsilon>	s
+204	326	<epsilon>	s
+205	327	<epsilon>	s
+205	328	<epsilon>	s
+206	329	<epsilon>	a
+206	330	<epsilon>	t
+207	331	<epsilon>	n
+207	332	<epsilon>	n
+208	333	<epsilon>	t
+208	334	<epsilon>	t
+209	335	<epsilon>	d
+209	336	<epsilon>	d
+210	337	<epsilon>	v
+210	338	<epsilon>	v
+211	339	<epsilon>	v
+211	340	<epsilon>	v
+212	341	<epsilon>	s
+212	342	<epsilon>	s
+213	343	<epsilon>	s
+213	344	<epsilon>	s
+214	345	<epsilon>	a
+214	346	<epsilon>	t
+215	347	<epsilon>	n
+215	348	<epsilon>	n
+216	349	<epsilon>	t
+216	350	<epsilon>	t
+217	351	<epsilon>	d
+217	352	<epsilon>	d
+218	353	<epsilon>	v
+218	354	<epsilon>	v
+219	355	<epsilon>	v
+219	356	<epsilon>	v
+220	357	<epsilon>	s
+220	358	<epsilon>	s
+221	359	<epsilon>	s
+221	360	<epsilon>	s
+222	361	<epsilon>	a
+222	362	<epsilon>	t
+223	363	<epsilon>	n
+223	364	<epsilon>	n
+224	365	<epsilon>	w
+225	Infinity
+226	366	<epsilon>	r
+227	Infinity
+228	367	<epsilon>	i
+229	Infinity
+230	368	<epsilon>	y
+231	Infinity
+232	369	<epsilon>	e
+233	Infinity
+234	370	<epsilon>	e
+235	Infinity
+236	371	<epsilon>	g
+237	Infinity
+238	372	<epsilon>	e
+239	Infinity
+240	373	<epsilon>	w
+241	Infinity
+242	374	<epsilon>	r
+243	Infinity
+244	375	<epsilon>	i
+245	Infinity
+246	376	<epsilon>	y
+247	Infinity
+248	377	<epsilon>	e
+249	Infinity
+250	378	<epsilon>	e
+251	Infinity
+252	379	<epsilon>	g
+253	Infinity
+254	380	<epsilon>	e
+255	Infinity
+256	381	<epsilon>	t
+256	382	<epsilon>	t
+257	383	<epsilon>	d
+257	384	<epsilon>	d
+258	385	<epsilon>	v
+258	386	<epsilon>	v
+259	387	<epsilon>	v
+259	388	<epsilon>	v
+260	389	<epsilon>	s
+260	390	<epsilon>	s
+261	391	<epsilon>	s
+261	392	<epsilon>	s
+262	393	<epsilon>	a
+262	394	<epsilon>	t
+263	395	<epsilon>	n
+263	396	<epsilon>	n
+264	397	<epsilon>	w
+265	Infinity
+266	398	<epsilon>	r
+267	Infinity
+268	399	<epsilon>	i
+269	Infinity
+270	400	<epsilon>	y
+271	Infinity
+272	401	<epsilon>	e
+273	Infinity
+274	402	<epsilon>	e
+275	Infinity
+276	403	<epsilon>	g
+277	Infinity
+278	404	<epsilon>	e
+279	Infinity
+280	405	<epsilon>	t
+280	406	<epsilon>	t
+281	407	<epsilon>	d
+281	408	<epsilon>	d
+282	409	<epsilon>	v
+282	410	<epsilon>	v
+283	411	<epsilon>	v
+283	412	<epsilon>	v
+284	413	<epsilon>	s
+284	414	<epsilon>	s
+285	415	<epsilon>	s
+285	416	<epsilon>	s
+286	417	<epsilon>	a
+286	418	<epsilon>	t
+287	419	<epsilon>	n
+287	420	<epsilon>	n
+288	421	<epsilon>	w
+289	Infinity
+290	422	<epsilon>	r
+291	Infinity
+292	423	<epsilon>	i
+293	Infinity
+294	424	<epsilon>	y
+295	Infinity
+296	425	<epsilon>	e
+297	Infinity
+298	426	<epsilon>	e
+299	Infinity
+300	427	<epsilon>	g
+301	Infinity
+302	428	<epsilon>	e
+303	Infinity
+304	429	<epsilon>	e
+305	430	<epsilon>	o
+306	431	<epsilon>	a
+307	432	<epsilon>	e
+308	433	<epsilon>	e
+309	434	<epsilon>	g
+310	435	<epsilon>	e
+311	436	<epsilon>	e
+312	437	<epsilon>	y
+313	438	<epsilon>	i
+314	439	<epsilon>	r
+315	440	<epsilon>	w
+316	441	<epsilon>	<space>
+317	442	<epsilon>	w
+318	Infinity
+319	443	<epsilon>	r
+320	Infinity
+321	444	<epsilon>	i
+322	Infinity
+323	445	<epsilon>	y
+324	Infinity
+325	446	<epsilon>	e
+326	Infinity
+327	447	<epsilon>	e
+328	Infinity
+329	448	<epsilon>	g
+330	Infinity
+331	449	<epsilon>	e
+332	Infinity
+333	450	<epsilon>	w
+334	Infinity
+335	451	<epsilon>	r
+336	Infinity
+337	452	<epsilon>	i
+338	Infinity
+339	453	<epsilon>	y
+340	Infinity
+341	454	<epsilon>	e
+342	Infinity
+343	455	<epsilon>	e
+344	Infinity
+345	456	<epsilon>	g
+346	Infinity
+347	457	<epsilon>	e
+348	Infinity
+349	458	<epsilon>	w
+350	Infinity
+351	459	<epsilon>	r
+352	Infinity
+353	460	<epsilon>	i
+354	Infinity
+355	461	<epsilon>	y
+356	Infinity
+357	462	<epsilon>	e
+358	Infinity
+359	463	<epsilon>	e
+360	Infinity
+361	464	<epsilon>	g
+362	Infinity
+363	465	<epsilon>	e
+364	Infinity
+365	466	<epsilon>	e
+366	466	<epsilon>	i
+367	467	<epsilon>	e
+368	468	<epsilon>	f
+369	468	<epsilon>	s
+370	466	<epsilon>	w
+371	468	<epsilon>	t
+372	466	<epsilon>	g
+373	469	<epsilon>	e
+374	469	<epsilon>	i
+375	470	<epsilon>	e
+376	471	<epsilon>	f
+377	471	<epsilon>	s
+378	469	<epsilon>	w
+379	471	<epsilon>	t
+380	469	<epsilon>	g
+381	472	<epsilon>	w
+382	Infinity
+383	473	<epsilon>	r
+384	Infinity
+385	474	<epsilon>	i
+386	Infinity
+387	475	<epsilon>	y
+388	Infinity
+389	476	<epsilon>	e
+390	Infinity
+391	477	<epsilon>	e
+392	Infinity
+393	478	<epsilon>	g
+394	Infinity
+395	479	<epsilon>	e
+396	Infinity
+397	480	<epsilon>	e
+398	480	<epsilon>	i
+399	481	<epsilon>	e
+400	482	<epsilon>	f
+401	482	<epsilon>	s
+402	480	<epsilon>	w
+403	482	<epsilon>	t
+404	480	<epsilon>	g
+405	483	<epsilon>	w
+406	Infinity
+407	484	<epsilon>	r
+408	Infinity
+409	485	<epsilon>	i
+410	Infinity
+411	486	<epsilon>	y
+412	Infinity
+413	487	<epsilon>	e
+414	Infinity
+415	488	<epsilon>	e
+416	Infinity
+417	489	<epsilon>	g
+418	Infinity
+419	490	<epsilon>	e
+420	Infinity
+421	491	<epsilon>	e
+422	491	<epsilon>	i
+423	492	<epsilon>	e
+424	493	<epsilon>	f
+425	493	<epsilon>	s
+426	491	<epsilon>	w
+427	493	<epsilon>	t
+428	491	<epsilon>	g
+429	494	<epsilon>	n
+430	495	<epsilon>	e
+431	496	<epsilon>	r
+432	497	<epsilon>	n
+433	498	<epsilon>	g
+434	499	<epsilon>	t
+435	500	<epsilon>	w
+436	501	<epsilon>	s
+437	502	<epsilon>	f
+438	503	<epsilon>	e
+439	504	<epsilon>	i
+440	505	<epsilon>	e
+441	506	<epsilon>	<epsilon>
+441	507	<epsilon>	<epsilon>
+441	508	<epsilon>	<epsilon>
+441	509	<epsilon>	<epsilon>
+441	510	<epsilon>	<epsilon>
+441	511	<epsilon>	<epsilon>
+441	512	<epsilon>	<epsilon>
+441	513	<epsilon>	<epsilon>
+441	514	<epsilon>	<epsilon>
+442	515	<epsilon>	e
+443	515	<epsilon>	i
+444	516	<epsilon>	e
+445	517	<epsilon>	f
+446	517	<epsilon>	s
+447	515	<epsilon>	w
+448	517	<epsilon>	t
+449	515	<epsilon>	g
+450	518	<epsilon>	e
+451	518	<epsilon>	i
+452	519	<epsilon>	e
+453	520	<epsilon>	f
+454	520	<epsilon>	s
+455	518	<epsilon>	w
+456	520	<epsilon>	t
+457	518	<epsilon>	g
+458	521	<epsilon>	e
+459	521	<epsilon>	i
+460	522	<epsilon>	e
+461	523	<epsilon>	f
+462	523	<epsilon>	s
+463	521	<epsilon>	w
+464	523	<epsilon>	t
+465	521	<epsilon>	g
+466	468	<epsilon>	e
+467	468	<epsilon>	r
+468	524	<epsilon>	<space>
+469	471	<epsilon>	e
+470	471	<epsilon>	r
+471	525	<epsilon>	<space>
+472	526	<epsilon>	e
+473	526	<epsilon>	i
+474	527	<epsilon>	e
+475	528	<epsilon>	f
+476	528	<epsilon>	s
+477	526	<epsilon>	w
+478	528	<epsilon>	t
+479	526	<epsilon>	g
+480	482	<epsilon>	e
+481	482	<epsilon>	r
+482	529	<epsilon>	<space>
+483	530	<epsilon>	e
+484	530	<epsilon>	i
+485	531	<epsilon>	e
+486	532	<epsilon>	f
+487	532	<epsilon>	s
+488	530	<epsilon>	w
+489	532	<epsilon>	t
+490	530	<epsilon>	g
+491	493	<epsilon>	e
+492	493	<epsilon>	r
+493	533	<epsilon>	<space>
+494	534	<epsilon>	d
+495	535	<epsilon>	n
+496	536	<epsilon>	d
+497	537	<epsilon>	<space>
+498	538	<epsilon>	e
+499	539	<epsilon>	<space>
+500	540	<epsilon>	e
+501	541	<epsilon>	<space>
+502	542	<epsilon>	<space>
+503	543	<epsilon>	r
+504	544	<epsilon>	e
+505	545	<epsilon>	e
+506	546	<epsilon>	t
+507	547	<epsilon>	d
+508	548	<epsilon>	v
+509	549	<epsilon>	v
+510	550	<epsilon>	s
+511	551	<epsilon>	s
+512	552	<epsilon>	a
+513	553	<epsilon>	n
+514	554	<epsilon>	e
+515	517	<epsilon>	e
+516	517	<epsilon>	r
+517	555	<epsilon>	<space>
+518	520	<epsilon>	e
+519	520	<epsilon>	r
+520	556	<epsilon>	<space>
+521	523	<epsilon>	e
+522	523	<epsilon>	r
+523	557	<epsilon>	<space>
+524	Infinity
+525	Infinity
+526	528	<epsilon>	e
+527	528	<epsilon>	r
+528	558	<epsilon>	<space>
+529	Infinity
+530	532	<epsilon>	e
+531	532	<epsilon>	r
+532	559	<epsilon>	<space>
+533	Infinity
+534	560	<epsilon>	<space>
+535	561	<epsilon>	<space>
+536	562	<epsilon>	<space>
+537	563	<epsilon>	e
+538	564	<epsilon>	<space>
+539	565	<epsilon>	e
+540	566	<epsilon>	<space>
+541	567	<epsilon>	e
+542	568	<epsilon>	e
+543	569	<epsilon>	<space>
+544	570	<epsilon>	<space>
+545	571	<epsilon>	<space>
+546	572	<epsilon>	w
+547	573	<epsilon>	r
+548	574	<epsilon>	i
+549	575	<epsilon>	y
+550	576	<epsilon>	e
+551	577	<epsilon>	e
+552	578	<epsilon>	g
+553	579	<epsilon>	e
+554	580	<epsilon>	e
+555	Infinity
+556	Infinity
+557	Infinity
+558	Infinity
+559	Infinity
+560	581	<epsilon>	e
+561	582	<epsilon>	e
+562	583	<epsilon>	e
+563	584	<epsilon>	n
+564	585	<epsilon>	e
+565	586	<epsilon>	n
+566	587	<epsilon>	e
+567	588	<epsilon>	n
+568	589	<epsilon>	n
+569	590	<epsilon>	e
+570	591	<epsilon>	e
+571	592	<epsilon>	e
+572	593	<epsilon>	e
+573	594	<epsilon>	i
+574	595	<epsilon>	e
+575	596	<epsilon>	f
+576	597	<epsilon>	s
+577	598	<epsilon>	w
+578	599	<epsilon>	t
+579	600	<epsilon>	g
+580	601	<epsilon>	n
+581	602	<epsilon>	n
+582	603	<epsilon>	n
+583	604	<epsilon>	n
+584	605	<epsilon>	<space>
+585	606	<epsilon>	n
+586	607	<epsilon>	<space>
+587	608	<epsilon>	n
+588	609	<epsilon>	<space>
+589	610	<epsilon>	<space>
+590	611	<epsilon>	n
+591	612	<epsilon>	n
+592	613	<epsilon>	n
+593	614	<epsilon>	e
+594	615	<epsilon>	e
+595	616	<epsilon>	r
+596	617	<epsilon>	<space>
+597	618	<epsilon>	<space>
+598	619	<epsilon>	e
+599	620	<epsilon>	<space>
+600	621	<epsilon>	e
+601	622	<epsilon>	<space>
+602	623	<epsilon>	<space>
+603	624	<epsilon>	<space>
+604	625	<epsilon>	<space>
+605	Infinity
+606	626	<epsilon>	<space>
+607	Infinity
+608	627	<epsilon>	<space>
+609	Infinity
+610	Infinity
+611	628	<epsilon>	<space>
+612	629	<epsilon>	<space>
+613	630	<epsilon>	<space>
+614	631	<epsilon>	<space>
+615	632	<epsilon>	<space>
+616	633	<epsilon>	<space>
+617	Infinity
+618	Infinity
+619	634	<epsilon>	<space>
+620	Infinity
+621	635	<epsilon>	<space>
+622	Infinity
+623	Infinity
+624	Infinity
+625	Infinity
+626	Infinity
+627	Infinity
+628	Infinity
+629	Infinity
+630	Infinity
+631	Infinity
+632	Infinity
+633	Infinity
+634	Infinity
+635	Infinity

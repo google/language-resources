@@ -1,0 +1,94 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2016 and onwards, Google, Inc.
+
+# Afrikaans cardinal verbalization. Depends upon factorization of
+# digit strings defined in western_factorization.grm
+
+import 'number_names_rules.grm' as n;
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+import 'digit.grm' as digit;
+
+# Since we will not be using the prefactorized numbers for Afrikaans (open
+# sourcing), we will get rid of this entirely. For now for expedience to get
+# things to compile we leave it as is.
+export PREFIX = "";
+
+d = universal_rules.kDigit;
+d1 = d - "0";
+
+two_digit_del_initial_zero =
+    (("0" : "o ") d)
+  | ((d - "0") d)
+;
+
+one_two_digit_del_initial_zero =
+    (("0" : "o ") d)
+  | ((d - "0") d)
+  | d1
+;
+
+
+hundreds_four_digit_forms =
+  ((d1 d1) @ n.CARDINAL_NUMBER_NAME)
+  universal_rules.ins_space
+  ("" : "hundred")
+  universal_rules.ins_space
+  (  ((d1 d) @ n.CARDINAL_NUMBER_NAME)
+   | ("00" : "")
+   | (("0" @ n.CARDINAL_NUMBER_NAME)
+      universal_rules.ins_space
+      (d1 @  n.CARDINAL_NUMBER_NAME)))
+;
+
+export CARDINAL_YEAR = Optimize[hundreds_four_digit_forms];
+
+cardinals =
+     n.CARDINAL_NUMBER_NAME
+  |  ((digit.DIGIT universal_rules.ins_space)+ <10>)
+;
+
+export CARDINAL = Optimize[(n.MINUS universal_rules.ins_space)? cardinals];
+
+export TWO_DIGIT_CARDINAL = Optimize[d{2} @ CARDINAL];
+
+export CARDINAL_MARKUP = Optimize[
+  universal_rules.cardinal universal_rules.opening_brace universal_rules.cardinal_integer
+  universal_rules.quote CARDINAL universal_rules.quote
+  universal_rules.closing_brace
+];
+
+export UNFACTORIZED_TWO_DIGIT_CARDINAL =
+   Optimize[two_digit_del_initial_zero @ CARDINAL]
+;
+
+export UNFACTORIZED_ONE_TWO_DIGIT_CARDINAL =
+   Optimize[one_two_digit_del_initial_zero @ CARDINAL]
+;
+
+
+# The original Dutch grammar said:
+#
+# "ordinal needs a special cardinal that has a space at the end,
+# without the prefix, and that can also match the empty string".
+#
+# For now let's ignore this and reintroduce if we need it.
+export CARDINAL_FOR_ORDINAL = CARDINAL;
+
+# See above on this.
+export MATCH_PREFIX = Project[PREFIX, 'input'];
+
+export MINUS_NAME = n.MINUS;
+
+export MINUS = Optimize[n.MINUS ("" : " ")];

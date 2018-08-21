@@ -1,0 +1,98 @@
+#	hash
+$	dollar
+€	euro
+%	percent
+&	ampersand
+'	apostrophe
+(	linker hakie
+)	regter hakie
+*	asterisk
++	plus
+−	min
+,	comma
+-	koppelteken
+.	dot
+/	forward slash
+:	colon
+;	semicolon
+<	lesser than
+=	is 
+>	greater than
+?	question mark
+!	exclamatory mark
+@	at 
+[	linker vierkantige hakie
+]	regter vierkantige hakie
+©	kopiereg
+^	kappie
+_	underscore
+{	linker krul hakie
+|	pypsimbool
+}	regter krul hakie
+\	backward slash
+`	gravis
+~	tilde
+±	plus minus
+♯	kruis
+♭	mol
+²	kwadraat
+³	tot die derde
+µ	mikrp
+∞	oneindig
+®	r_letter
+Α	apha
+Β	beta
+Γ	gamma
+Δ	delta
+Ε	epsilon
+Ζ	zeta
+Η	eta
+Θ	theta
+Ι	iota
+Κ	kappa
+Λ	lambda
+Μ	mu
+Ν	nu
+Ξ	ksi
+Ο	omikron
+Π	pi
+Ρ	rho
+Σ	sigma
+Τ	tau
+Υ	ypsilon
+Φ	phi
+Χ	chi
+Ψ	psi
+Ω	omega
+α	alfa
+β	beta
+γ	gamma
+δ	delta
+ε	epsilon
+ζ	zeta
+η	eta
+θ	theta
+ι	iota
+κ	kappa
+λ	lambda
+μ	mu
+ν	nu
+ξ	ksi
+ο	omikron
+π	pi
+ρ	rho
+σ	sigma
+ς	sigma
+τ	tau
+υ	ypsilon
+φ	phi
+χ	chi
+ψ	psi
+ω	omega
+—	min
+×	maal
+÷	deel
+™	t_letter m_letter
+°	grade
+£	pond
+"	double quotes

@@ -1,0 +1,119 @@
+21	0	<epsilon>	<epsilon>
+21	19	<epsilon>	<epsilon>
+21	22	<epsilon>	<epsilon>
+0	2	<epsilon>	<epsilon>
+0	1	1	1
+1
+2	4	<epsilon>	<epsilon>
+2	3	2	2
+3
+4	6	<epsilon>	<epsilon>
+4	5	3	3
+5
+6	8	<epsilon>	<epsilon>
+6	7	4	4
+7
+8	10	<epsilon>	<epsilon>
+8	9	5	5
+9
+10	12	<epsilon>	<epsilon>
+10	11	6	6
+11
+12	14	<epsilon>	<epsilon>
+12	13	7	7
+13
+14	16	<epsilon>	<epsilon>
+14	15	8	8
+15
+16	17	9	9
+17
+18	0	<epsilon>	<epsilon>
+19	20	0	<epsilon>
+20	18	<epsilon>	<epsilon>
+22	25	<epsilon>	<epsilon>
+22	23	1	1
+23	24	0	0
+24
+25	28	<epsilon>	<epsilon>
+25	26	1	1
+26	27	1	1
+27
+28	31	<epsilon>	<epsilon>
+28	29	1	1
+29	30	2	2
+30
+31	34	<epsilon>	<epsilon>
+31	32	1	1
+32	33	3	3
+33
+34	37	<epsilon>	<epsilon>
+34	35	1	1
+35	36	4	4
+36
+37	40	<epsilon>	<epsilon>
+37	38	1	1
+38	39	5	5
+39
+40	43	<epsilon>	<epsilon>
+40	41	1	1
+41	42	6	6
+42
+43	46	<epsilon>	<epsilon>
+43	44	1	1
+44	45	7	7
+45
+46	49	<epsilon>	<epsilon>
+46	47	1	1
+47	48	8	8
+48
+49	52	<epsilon>	<epsilon>
+49	50	1	1
+50	51	9	9
+51
+52	55	<epsilon>	<epsilon>
+52	53	2	2
+53	54	0	0
+54
+55	58	<epsilon>	<epsilon>
+55	56	2	2
+56	57	1	1
+57
+58	61	<epsilon>	<epsilon>
+58	59	2	2
+59	60	2	2
+60
+61	64	<epsilon>	<epsilon>
+61	62	2	2
+62	63	3	3
+63
+64	67	<epsilon>	<epsilon>
+64	65	2	2
+65	66	4	4
+66
+67	70	<epsilon>	<epsilon>
+67	68	2	2
+68	69	5	5
+69
+70	73	<epsilon>	<epsilon>
+70	71	2	2
+71	72	6	6
+72
+73	76	<epsilon>	<epsilon>
+73	74	2	2
+74	75	7	7
+75
+76	79	<epsilon>	<epsilon>
+76	77	2	2
+77	78	8	8
+78
+79	82	<epsilon>	<epsilon>
+79	80	2	2
+80	81	9	9
+81
+82	85	<epsilon>	<epsilon>
+82	83	3	3
+83	84	0	0
+84
+85	86	3	3
+86	87	1	1
+87

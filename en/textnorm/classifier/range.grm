@@ -1,0 +1,166 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2016 and onwards, Google, Inc.
+
+# Parser for ranges of things
+import 'date.grm' as date;
+import 'lseq.grm' as lseq;
+import 'mapper.grm' as mapper;
+import 'measure.grm' as measure;
+import 'time.grm' as time;
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+sports_teams = StringFile[
+    'sports_teams.txt'];
+
+# Common definitions
+weekdays_short = ("mon" : "monday") |
+                 ("tue" : "tuesday") |
+                 ("wed" : "wednesday") |
+                 ("thur" : "thursday") |
+                 ("fri" : "friday") |
+                 ("sat" : "saturday") |
+                 ("sun" : "sunday");
+weekdays = weekdays_short | Project[weekdays_short, 'output'];
+
+range_tot_char = universal_rules.clear_space_star ("-" : "tot") universal_rules.clear_space_star;
+range_tot_markup = universal_rules.token_delimiter
+                   (range_tot_char @ universal_rules.word_token)
+                   universal_rules.token_delimiter;
+
+range_year_separator_char = universal_rules.clear_space_star (("-" : "tot") |
+                            ("/" : "tot")) universal_rules.clear_space_star;
+range_year_separator_markup = universal_rules.token_delimiter
+                              (range_year_separator_char @ universal_rules.word_token)
+                              universal_rules.token_delimiter;
+
+range_tot_en_met_char = universal_rules.clear_space_star
+                        ("-" : "tot en met")
+                        universal_rules.clear_space_star;
+range_tot_en_met_markup = universal_rules.token_delimiter
+                          (range_tot_en_met_char @ universal_rules.word_tokens)
+                          universal_rules.token_delimiter;
+
+range_van_markup = ("van" @ universal_rules.word_token)
+                   universal_rules.token_delimiter;
+
+range_en_char = universal_rules.clear_space_star ("-" : "en") universal_rules.clear_space_star;
+range_en_markup = universal_rules.token_delimiter
+                  (range_en_char @ universal_rules.word_token)
+                  universal_rules.token_delimiter;
+
+range_tussen_markup = ("tussen" @ universal_rules.word_token)
+                      universal_rules.token_delimiter;
+
+# Weekday ranges
+weekday_range = (universal_rules.lower_case @ weekdays @ universal_rules.word_token)
+                (range_tot_en_met_markup)
+                (universal_rules.lower_case @ weekdays @ universal_rules.word_token);
+
+# Cardinal ranges
+# limit number ranges to 3 digits each for now, otherwise they tend
+# to overmatch on things like telephone numbers.
+cardinal_range = (universal_rules.kDigit{1,3} @ universal_rules.CARDINAL_DOT_MARKUP)
+                 range_tot_markup
+                 (universal_rules.kDigit{1,3} @ universal_rules.CARDINAL_DOT_MARKUP);
+
+cardinal_numbers = (universal_rules.kDigit{1,3} @ universal_rules.CARDINAL_DOT_MARKUP)
+                   " "?
+                   ("-" : " ")
+                   " "?
+                   universal_rules.token_delimiter
+                   (universal_rules.kDigit{1,3} @ universal_rules.CARDINAL_DOT_MARKUP);
+
+# Year ranges
+# 1996-1997, 1996-97 and 2003-04; 1996/1997, 1996/97, 2003/04
+year_range = date.YEAR_ONLY
+             range_year_separator_markup
+             (
+               (date.YEAR_ONLY<-2>) |
+               (universal_rules.CARDINAL_DOT_MARKUP<-1>) |
+               universal_rules.DIGIT_MARKUP
+             );
+
+# Date ranges
+# 1 januari 2012 - 1 december 2013
+# TODO(dvanesch): Weights need some fixing to make this more accurate
+# date_range = date.FULL_DATE range_tot_markup date.FULL_DATE;
+
+# Measure ranges
+# 5m-10m or 5-10m
+measure_range = (measure.AFRIKAANS_MEASURE_MARKUP |
+                 universal_rules.CARDINAL_DOT_MARKUP |
+                 universal_rules.DECIMAL_DOT_MARKUP)
+                range_tot_markup
+                measure.AFRIKAANS_MEASURE_MARKUP;
+
+# Fraction ranges
+# 1/3-1/4
+fraction_range = mapper.AFRIKAANS_FRACTION_MARKUP
+                 range_tot_markup
+                 mapper.AFRIKAANS_FRACTION_MARKUP;
+
+# Time ranges
+# 16:30-18:00 "half vyf tot ses uur"
+# tussen 16:30-18:00 "tussen half vyf en ses uur"
+# van 16:30-18:00 "van half vyf tot ses uur"
+# van 16-18h "van 4 tot 6 uur"
+hours_24_to_12 = (universal_rules.kDigit | ("10" : "10") | ("11" : "11") |
+                  ("12" : "12") | ("13" : "1") | ("14" : "2") | ("15" : "3") |
+                  ("16" : "4") | ("17" : "5") | ("18" : "6") | ("19" : "7") |
+                  ("20" : "8") | ("21" : "9") | ("22" : "10") | ("23" : "11") |
+                  ("24" : "12"));
+time_no_prefix = ((time.TIME_MARKUP | hours_24_to_12 @ universal_rules.CARDINAL_MARKUP)
+                 range_tot_markup
+                 time.TIME_MARKUP)<-100>;
+
+time_tussen_prefix = range_tussen_markup
+                     universal_rules.clear_space_star
+                     time.TIME_MARKUP
+                     range_en_markup
+                     time.TIME_MARKUP;
+
+time_van_prefix = range_van_markup
+                  universal_rules.clear_space_star
+                  time.TIME_MARKUP
+                  range_tot_markup
+                  time.TIME_MARKUP;
+
+time_range = time_no_prefix | time_tussen_prefix | time_van_prefix;
+
+# Matches any sports team and a cardinal numbers range like Feyenoord 2-1,
+# so they can be pronounced not as a range but just 'twee een'.
+sports_context_words = sports_teams | "wen" | "klop" | "verloor" |
+                       "nederlaag" | "eindtelling";
+sports_context = ((universal_rules.lower_case_letter |
+                  "'" | " " | "." | universal_rules.kDigit)* @
+                  ((sports_context_words @ lseq.LSEQ <-1>) |
+                   (sports_context_words @ universal_rules.word_tokens <0>)));
+
+sports_score = (sports_context
+                universal_rules.del_space_star universal_rules.token_delimiter
+                cardinal_numbers) |
+               (cardinal_numbers
+                universal_rules.del_space_star universal_rules.token_delimiter
+                sports_context);
+# Exports
+# NB. cardinal_range is slightly weighted so year_range is preferred
+#     whenever that matches.
+export RANGE_MARKUP = Optimize[weekday_range |
+                               cardinal_range |
+                               year_range |
+                               measure_range |
+                               fraction_range |
+                               time_range |
+                               sports_score];

@@ -1,7 +1,0 @@
-/usr/local/src/merlin/egs/locale/s1/conf/
-/usr/local/src/merlin/egs/locale/s1/conf/_acoustic_dnn.conf
-/usr/local/src/merlin/egs/locale/s1/conf/_duration_dnn.conf
-/usr/local/src/merlin/egs/locale/s1/conf/acoustic_dnn.conf
-/usr/local/src/merlin/egs/locale/s1/conf/test_synth.conf
-/usr/local/src/merlin/egs/locale/s1/conf/test_dur_synth.conf
-/usr/local/src/merlin/egs/locale/s1/conf/duration_dnn.conf

@@ -1,0 +1,59 @@
+0	2	<epsilon>	<epsilon>
+0	24	<epsilon>	<epsilon>
+0	1	.	.
+1
+2	4	<epsilon>	<epsilon>
+2	3	?	?
+3
+4	6	<epsilon>	<epsilon>
+4	5	;	;
+5
+6	8	<epsilon>	<epsilon>
+6	7	!	!
+7
+8	14	<epsilon>	<epsilon>
+8	9	<226>	<226>
+9	10	<128>	<128>
+10	11	<166>	<166>
+11
+12	13	=	=
+13	12	<epsilon>	<epsilon>
+13
+14	21	<epsilon>	<epsilon>
+14	15	=	=
+15	16	=	=
+16	17	=	=
+17	12	<epsilon>	<epsilon>
+18	19	-	-
+19	18	<epsilon>	<epsilon>
+19
+20	18	<epsilon>	<epsilon>
+20
+21	22	-	-
+22	23	-	-
+23	20	<epsilon>	<epsilon>
+24	26	<epsilon>	<epsilon>
+24	25	,	,
+25
+26	28	<epsilon>	<epsilon>
+26	27	:	:
+27
+28	32	<epsilon>	<epsilon>
+28	29	<226>	<226>
+29	30	<128>	<128>
+30	31	<148>	<148>
+31
+32	34	<epsilon>	<epsilon>
+32	33	/	/
+33
+34	36	<epsilon>	<epsilon>
+34	35	|	|
+35
+36	40	<epsilon>	<epsilon>
+36	37	<227>	<227>
+37	38	<128>	<128>
+38	39	<129>	<129>
+39
+40	41	<216>	<216>
+41	42	<140>	<140>
+42

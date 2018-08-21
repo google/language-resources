@@ -1,0 +1,25 @@
+14	3	<epsilon>	<epsilon>
+14	12	<epsilon>	<epsilon>
+0	1	<9>	<9>
+0	1	<10>	<10>
+0	1	<13>	<13>
+0	1	<space>	<space>
+1	0	<epsilon>	<epsilon>
+1
+2	0	<epsilon>	<epsilon>
+2
+3	4	m	m
+4	5	i	i
+5	6	n	n
+6	7	u	u
+7	8	t	t
+8	9	e	e
+9	10	s	s
+10	11	:	:
+11	2	<epsilon>	<epsilon>
+12	13	<9>	<9>
+12	13	<10>	<10>
+12	13	<13>	<13>
+12	13	<space>	<space>
+13	3	<epsilon>	<epsilon>
+13	12	<epsilon>	<epsilon>

@@ -1,0 +1,45 @@
+0	2	<epsilon>	<epsilon>
+0	1	0	0
+1
+2	4	<epsilon>	<epsilon>
+2	3	5	5
+3
+4	7	<epsilon>	<epsilon>
+4	5	1	1
+5	6	0	0
+6
+7	10	<epsilon>	<epsilon>
+7	8	1	1
+8	9	5	5
+9
+10	13	<epsilon>	<epsilon>
+10	11	2	2
+11	12	0	0
+12
+13	16	<epsilon>	<epsilon>
+13	14	2	2
+14	15	5	5
+15
+16	19	<epsilon>	<epsilon>
+16	17	3	3
+17	18	0	0
+18
+19	22	<epsilon>	<epsilon>
+19	20	3	3
+20	21	5	5
+21
+22	25	<epsilon>	<epsilon>
+22	23	4	4
+23	24	0	0
+24
+25	28	<epsilon>	<epsilon>
+25	26	4	4
+26	27	5	5
+27
+28	31	<epsilon>	<epsilon>
+28	29	5	5
+29	30	0	0
+30
+31	32	5	5
+32	33	5	5
+33

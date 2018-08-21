@@ -1,3 +1,0 @@
-grammar_file: "../textnorm/verbalizer/verbalize.far"
-grammar_name: "Verbalizer"
-rules { main: "ALL" redup: "REDUP" }

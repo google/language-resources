@@ -1,0 +1,165 @@
+aed	verenigde arabian emirate-dirhams
+afn	afghan afghani's
+all	albanese leks
+amd	armeense drams
+ang	nederlandse antille-guldens
+aoa	angolese kwanzas
+ars	argentynse peso's
+aud	australian dollars
+awg	aruba-florins
+azn	azerbeidjanse manats
+bam	bosnies-herzegowiniese omskakelbarebare mark
+bbd	barbados-dollars
+bdt	bangladesh-takas
+bgn	bulgaarse levs
+bhd	bahreinse dinars
+bif	burundi-frank
+bmd	bermuda-dollars
+bnd	broenei-dollars
+bob	boliviaanse boliviano's
+brl	brasiliaanse real
+bsd	bahamas-dollars
+btn	bhoetan-ngultrums
+bwp	botswana pulas
+byr	wit-russiese roebels
+bzd	belize-dollars
+cad	kanadese dollars
+cdf	congolese frank
+chf	switserse frank
+ckd	cookeilandse dollars
+clp	chileense peso's
+cny	yuan
+cop	colombiaanse peso's
+crc	costa ricaanse colóns
+cuc	kubaanse omskakelbare peso's
+cup	kubaanse peso's
+cve	kaap verdiese escudo's
+czk	tsjeggiese krone
+djf	djiboeti frank
+dkk	deense krone
+dop	dominikaanse peso's
+dzd	algeriese dinars
+egp	egiptiese ponde
+ehp	sahariese pesetas
+ern	eritrea-nakfas
+etb	ethiopiese birrs
+eur	euro's
+fjd	fidjiaanse dollars
+fkp	falkland-eilande ponde
+gbp	pond sterling
+gel	georgiese lari's
+ggp	guernsey-ponde
+ghs	ghana cedi's
+gip	gibraltar-ponde
+gmd	gambiese dalasi's
+gnf	guinese frank
+gtq	guatemalaanse quetzals
+gyd	guyana-dollars
+hkd	hongkong dollars
+hnl	hondurese lempiras
+hrk	kroatiese kunas
+htg	haïtiaanse gourdes
+huf	hongaarse forints
+idr	indonesiese rupiahs
+ils	die israeliese nuwe sikkels
+imp	manx-ponde
+inr	indian rupees
+iqd	irakse dinars
+irr	rial
+isk	yslandse krónas
+jpy	japanese yen
+jep	jersey-ponde
+jmd	jamaikaanse dollars
+jod	jordaanse dinars
+kes	keniaanse shillings
+kgs	kirgisiese soms
+khr	kambodjaanse riel
+kmf	comoriese frank
+kpw	noord-koreaanse won
+krw	suid-koreaanse won
+kwd	koeweitse dinars
+kyd	kaaimanseilande-dollars
+kzt	kasakse tenges
+lak	laosiaanse kips
+lpb	libanese ponde
+lkr	sri lanka rupees
+lrd	liberiaanse dollars
+lsl	lesotho loti's
+lyd	libiese dinars
+mad	marokaanse dirhams
+mdl	moldawiese leu's
+mga	malagasiese ariary's
+mkd	macedoniese denars
+mmk	burmeese kyats
+mnt	mongoolse tögrögs
+mop	macau patacas
+mro	mauritaanse ouguiyas
+mur	mauritiaanse roepee's
+mvr	maledive-rufiyaa's
+mwk	malawiese kwachas
+mxn	meksikaanse peso's
+myr	maleise ringgits
+mzn	mosambiekse meticals
+nad	namibiese dollars
+ngn	nigeriese nairas
+nio	nicaraguaanse córdobas
+nok	noorse krone
+npr	nepalese rupee's
+nzd	nieu-seelandse dollars
+omr	omanse rial
+pab	panamese balboas
+pen	peruaanse nuevo sols
+pgk	papoea-nieu-guinee-kinas
+php	filippynse peso's
+pkr	pakistaanse rupee's
+pln	złoty's
+pyg	paraguayaanse guarani's
+qar	kataarse riyal
+ron	roemeense leu's
+rsd	serwiese dinars
+rub	roebels
+rwf	rwanda-frank
+sar	saoedi-arabiese riyal
+sbd	solomoneilande-dollars
+scr	seychelle-roepee's
+sdg	soedanse ponde
+sek	sweedse krone
+sgd	singapoer-dollars
+shp	sint-helena-ponde
+sll	sierra leone-leone's
+sos	somaliese shillings
+srd	surinaamse dollars
+ssp	suid-soedanse ponde
+std	são tomé en príncipe dobras
+syp	siriese ponde
+szl	lilangeni's
+thb	thai baht
+tjs	somoni's
+tmt	turkmeense nuwe manats
+tnd	tunisiese dinars
+top	tongaanse paʻangas
+try	turkse lire
+ttd	trinidad-en-tobago-dollars
+tvd	tuvalunesiese dollars
+twd	nuwe taiwan-dollars
+tzs	tanzanië-shillings
+uah	oekraïense hryvnias
+ugx	ugandiese shillings
+usd	american dollars
+uyu	uruguaanse peso's
+uzs	oesbekiese soms
+vef	bolívar fuerte's
+vnd	viëtnamese đồngs
+vuv	vanuatu vatu's
+wst	samoaanse talas
+xaf	sentraal-afrikaanse cfa-frank
+xag	fynons silver
+xau	fynons goud
+xcd	oos-karibiese dollars
+xof	wes-afrikaanse cfa-frank
+xpd	fynons palladium
+xpf	cfp frank
+xpt	fynons platinum
+yer	jemense rial
+zar	south-african rands
+zmw	zambian kwachas

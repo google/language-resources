@@ -1,9 +1,0 @@
-LSEQ_MARKUP	letters|letters:B.C.C.I.|	b_letter-en c_letter-en c_letter-en i_letter-en
-LSEQ_MARKUP	letters|letters:IBM|	i_letter-en b_letter-en m_letter-en
-LSEQ_MARKUP	letters|letters:বিবিআইএন|	b_letter-en b_letter-en i_letter-en n_letter-en
-LSEQ_MARKUP	letters|letters:বিআইবিএম|	b_letter-en i_letter-en b_letter-en m_letter-en
-LSEQ_MARKUP	letters|letters:এস.এস.সি.|	s_letter-en s_letter-en c_letter-en
-LSEQ_MARKUP	letters|letters:এইচ.এস.সি.|	h_letter-en s_letter-en c_letter-en
-LSEQ_MARKUP	letters|letters:এমবিএম|	m_letter-en b_letter-en m_letter-en
-LSEQ_MARKUP	letters|letters:এমবিএ|	m_letter-en b_letter-en a_letter-en
-LSEQ_MARKUP	letters|letters:বিবিএ|	b_letter-en b_letter-en a_letter-en

@@ -1,0 +1,40 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2016 and onwards, Google, Inc.
+
+# Rewrites various universal number grammars for Afrikaans, which uses a comma
+# as its decimals separator and a point as its thousands separator.
+
+import 'money.grm' as money;
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+# Rewrite money grammar
+# €1,- means "exactly one euro"; the dash indicates this amount does not have a
+# decimal part.
+money_mapper = CDRewrite[("," : ".") | ("." : ","), "", "", universal_rules.sigma_star];
+export AFRIKAANS_MONEY_MARKUP = Optimize[(money_mapper @ money.MONEY_MARKUP) |
+                                     (money.MONEY_MARKUP<5>)];
+
+# Rewrite fraction grammar to remove ordinal markers at end of fractions.
+# Ordinal markers must be attached directly to the fraction, e.g. 1/3de
+# "de" is also Afrikaans "the", so clearing white space is very dangerous
+remove_ordinal_marker = CDRewrite[
+  ("nd" : "") | ("rd" : "") | ("st" : ""),
+  "",
+  "[EOS]",
+  universal_rules.sigma_star];
+
+export AFRIKAANS_FRACTION_MARKUP = Optimize[
+  remove_ordinal_marker @ universal_rules.FRACTION_MARKUP
+];

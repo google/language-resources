@@ -1,0 +1,125 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2016 and onwards, Google, Inc.
+
+# Afrikaans verbalizer for letter sequences; read character by character
+# with optional plural/possessive cases.
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+rem_fullstops = CDRewrite["." : "", "", "", universal_rules.sigma_star];
+english_lseqs = rem_fullstops @ (universal_rules.lower_case | "/")* @
+                ("bbc" | "big" | "bsc" | "ceo" | "cia" | "cnn" | "csi" |
+                 "dj" | "fbi" | "ibm" | "i/o" | "ios" | "kfc" | "ma" | "mba" |
+                 "mc" | "mit" | "msc" | "mtv" | "ncis" | "ngo" | "phd" | "suv" |
+                 "tmf" | "tnt" | "upc" | "ups" | "usa" | "tgif" | "tgiaf" |
+                 "us" | "cnbc" | "nba" | "jfk" | "tt" | "acdc" | "imdb" |
+                 "bnn" | "uk" | "ui");
+
+accent = "á" | "é" | "í" | "ó" | "ú" | "Á" | "É" | "Í" | "Ó" | "Ú";
+accent_grave =  "à" | "è" | "ì" | "ò" | "ù" | "À" | "È" | "Ì" | "Ò" | "Ù";
+trema = "â" | "ê" | "î" | "ô" | "û" | "Â" | "6" | "E" | "Î" | "Ô" | "Û";
+umlaut = "ä" | "ë" | "ï" | "ö" | "ü" | "Ä" | "Ë" | "Ï" | "Ö" | "Ü";
+corona = "å" | "Å";
+
+simplify_letters = (("á" | "à" | "â" | "ä" | "å" |
+                     "Á" | "À" | "Â" | "Ä" | "Å") : "a") |
+                   (("é" | "è" | "ê" | "ë" |
+                     "É" | "È" | "Ê" | "Ë") : "e") |
+                   (("í" | "ì" | "î" | "ï" |
+                     "Í" | "Ì" | "Î" | "Ï") : "i") |
+                   (("ó" | "ò" | "ô" | "ö" |
+                     "Ó" | "Ò" | "Ô" | "Ö") : "o") |
+                   (("ú" | "ù" | "û" | "ü" |
+                     "Ú" | "Ù" | "Û" | "Ü") : "u");
+
+all_letters = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" |
+              "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" |
+              "w" | "x" | "y" | "z";
+
+# map all letters from "a" to "a_letter"
+export MAPPINGS = Optimize[
+  (("&" : "en_conj") |
+   (accent @ simplify_letters ("" : "accent")) |
+   (accent_grave @ simplify_letters ("" : "accent grave")) |
+   (trema @ simplify_letters ("" : "trema")) |
+   (umlaut @ simplify_letters ("" : "umlaut")) |
+   (corona @ simplify_letters ("" : "corona")) |
+   (universal_rules.lower_case_letter @ all_letters @
+    universal_rules.lower_case_letter ("" : "")<0>))];
+
+# remove any dots or slashes from the sequence (like in I./.O)
+mapping_dot = MAPPINGS (("." | "/") : "")*;
+
+# deal with suffixes that are productively attached to LSEQs in Afrikaans
+# 's
+# 'tjie
+# "'" ("je" | "tje" | "etje" | "er") "s"?
+# or for possessive/plural: "'"? ("s"):"
+plural_or_possessive_suffix =
+  (mapping_dot @ (universal_rules.kLower ))
+  ("'s" : "")<-1>;
+
+# Plural: l'e, m'e, n'e, r'e, s'e, x'e, y'e
+plural_suffix =
+  (mapping_dot @ (universal_rules.kLower ))
+  (("e" | "'e") : "")<-1>;
+
+diminutive_suffixes =
+  (mapping_dot @ (universal_rules.kLower ))
+  (("one" | "'one" | "they" | "'they" | "these" | "'these" | "pie" | "'pie" | "co" |
+    "'co" ) : "")<-1>;
+
+#nominalizing_suffix =
+#  (mapping_dot @ (universal_rules.kLower ("_letter" : "'er_letter")))
+#  (("er" | "'er") : "")<-1>;
+
+#nominalizing_and_pluralsuffix =
+#  (mapping_dot @ (universal_rules.kLower ("_letter" : "'ers_letter")))
+#  (("ers" | "'ers") : "")<-1>;
+
+# in Afrikaans we can add 'en to lseq's to make them a verb
+# like SMS and SMSing in English
+#en_suffix =
+#  (mapping_dot @ (universal_rules.kLower ("_letter" : "'en_letter")))
+#  (("en" | "'en") : "")<-1>;
+
+trailing_modifier_af = plural_or_possessive_suffix |
+                       plural_suffix |
+                       diminutive_suffixes;
+                       #(nominalizing_suffix <0>) |
+                       #(nominalizing_and_pluralsuffix <-1>) |
+                       #en_suffix;
+trailing_modifier_en = plural_or_possessive_suffix ("" : "'s");
+
+# mapping foreign lseq's, we append '-en', '-de' and '-fr' to the letters
+english = (english_lseqs "'s"?) @ ((mapping_dot universal_rules.ins_space)*
+                                   (trailing_modifier_en)?);
+
+# mapping afrikaans lseq's
+afrikaans = (mapping_dot universal_rules.ins_space)* trailing_modifier_af?;
+
+# Remove any additional apostrophes, but prefer to keep them if we can.
+remove_apos = CDRewrite["'" : ""<10>, "", "", universal_rules.sigma_star, 'ltr', 'opt'];
+
+export LSEQ =  Optimize[remove_apos @ ((english <-1>) | (afrikaans   < 0>))];
+
+export LSEQ_MARKUP = Optimize[
+ (universal_rules.letters
+  universal_rules.quote
+    remove_apos @
+    ((english <-1>) |
+     (afrikaans   < 0>))
+  universal_rules.quote) @ universal_rules.CLEAN_SPACES
+];

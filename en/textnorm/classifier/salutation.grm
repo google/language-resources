@@ -1,0 +1,7 @@
+# saltation rule - mr, Mr, miss, Prof.
+
+import 'universal_rules.grm' as universal_rules;
+
+export SALUTE_MARKUP = Optimize[ ("": "name: \"") ( "mr" | "mrs" | "ms" | "dr" | "st" ) ((".":"")*) ("":"\"") ];
+
+

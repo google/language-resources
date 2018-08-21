@@ -1,0 +1,23 @@
+4	2	<epsilon>	<epsilon>
+4	10	<epsilon>	<epsilon>
+4	5	<space>	<epsilon>
+0	1	<space>	<epsilon>
+0
+1	1	<space>	<epsilon>
+1
+2	3	-	<space>
+3	0	<epsilon>	<epsilon>
+3	3	-	<epsilon>
+5	2	<epsilon>	<epsilon>
+5	5	<space>	<epsilon>
+6	7	<space>	<epsilon>
+6
+7	7	<space>	<epsilon>
+7
+8	9	<space>	<space>
+9	6	<epsilon>	<epsilon>
+9	9	<space>	<epsilon>
+10	8	<epsilon>	<epsilon>
+10	11	<space>	<epsilon>
+11	8	<epsilon>	<epsilon>
+11	11	<space>	<epsilon>

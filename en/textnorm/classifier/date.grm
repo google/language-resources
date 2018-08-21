@@ -1,0 +1,164 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2016 and onwards, Google, Inc.
+
+# Parser for dates of various forms. Output is a semiotic parse in
+# phonetic arts protcol buffer Data, in standard ascii serialization.
+
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+markup_day = universal_rules.ins_space Invert[universal_rules.date_day] universal_rules.ins_space;
+markup_month = universal_rules.ins_space Invert[universal_rules.date_month] universal_rules.ins_space;
+markup_year = universal_rules.ins_space Invert[universal_rules.date_year] universal_rules.ins_space;
+
+# Days
+day = (("0" : "")? ("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")) |
+      "10" | "11" | "12" | "13" | "14" | "15" | "16" | "17" | "18" | "19" |
+      "20" | "21" | "22" | "23" | "24" | "25" | "26" | "27" | "28" | "29" |
+      "30" | "31";
+
+days = universal_rules.delete_initial_zero @ day;
+
+# Months
+month = (("0" : "")? ("1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9")) |
+        "10" | "11" | "12";
+
+month_names_short = (
+                      ("jan" : "1") | ("feb" : "2") | ("mar" : "3") |
+                      ("apr" : "4") | ("may" : "5") | ("jun" : "6") |
+                      ("jul" : "7") | ("aug" : "8") | ("sep" : "9") |
+                      ("sept" : "9") | ("oct" : "10") | ("nov" : "11") |
+                      ("dec" : "12")
+                    ) ("." : "")?;
+
+month_names_long = ("january" : "1") | ("february" : "2") | ("march" : "3") |
+                   ("april" : "4") | ("may" : "5") | ("june" : "6") |
+                   ("july" : "7") | ("august" : "8") | ("september" : "9") |
+                   ("october" : "10") | ("november" : "11") |
+                   ("december" : "12");
+
+month_names = (universal_rules.lower_case "."?) @ (month_names_short | month_names_long);
+
+# Weekdays
+weekday_names_short =
+  (("mon" | "mon") : "1") | (("tue" | "tues") : "2") | (("wed" | "weds") : "3") |
+  (("thur" | "thurs") : "4") | (("fri" | "fri") : "5") | (("sat" | "sat") : "6") |
+  (("sun" | "sun") : "7");
+
+weekday_names_long =
+  ("monday" : "1") | ("tuesday" : "2") | ("wednesday" : "3") |
+  ("thursday" : "4") | ("friday" : "5") | ("saturday" : "6") |
+  ("sunday" : "7");
+
+weekday_names =
+  ((universal_rules.lower_case @ weekday_names_short) ("." : "")?) |
+  (universal_rules.lower_case @ weekday_names_long);
+weekday = Invert[universal_rules.date_weekday]
+          universal_rules.ins_space
+          weekday_names
+          universal_rules.ins_space
+          universal_rules.clear_space_star;
+
+# Eras
+era_names = (("v.Chr." | "vChr." | "v.Chr" | "vChr" | "vC" | "v.C.") : "vC") |
+            (("n.Chr." | "nChr." | "n.Chr" | "nChr" | "nC" | "n.C.") : "nC") |
+            (("A.D." | "AD") : "AD") |
+            (("A.H." | "AH") : "AH");
+era = universal_rules.clear_space_star
+      universal_rules.ins_space
+      Invert[universal_rules.date_era]
+      universal_rules.ins_space
+      universal_rules.ins_quote
+      era_names
+      universal_rules.ins_quote;
+
+# English uses 1980s, Afrikaans uses "die jare '80"
+# "1-2-'99" is also a valid way to write "1-2-99" (Feb 1, 1999). (Not in Afr)
+# Delete apostrophes preceding two-digit years
+two_digit_year = universal_rules.kDigit{2};
+three_or_four_digit_year = universal_rules.kDigit{3,4};
+year = (two_digit_year | three_or_four_digit_year) @ universal_rules.delete_initial_zero;
+
+separator = ("/" | "-") : "";
+
+# 4/5/2000, 4-5-2000, 4/5 and 4-5
+dmy1 = markup_day day
+       separator markup_month (month | month_names)
+       separator markup_year year;
+
+# 4 mei 2000
+dmy2 = markup_day days
+       universal_rules.clear_space_plus
+       markup_month month_names
+       universal_rules.clear_space_plus
+       markup_year year;
+
+#sept 5, 2018
+mdy = markup_month month_names
+       universal_rules.clear_space_plus
+        markup_day days
+       universal_rules.clear_space_plus
+       markup_year year;
+
+# 1 jan
+dm = markup_day days universal_rules.clear_space_plus
+     markup_month month_names;
+
+# jan 1
+md = markup_month month_names universal_rules.clear_space_plus
+     markup_day days;
+
+# jan 2000
+my = markup_month month_names universal_rules.clear_space_plus
+     markup_year universal_rules.kDigit{4};
+
+style1 = weekday?
+         (dm | dmy1 | dmy2 |mdy | my)
+         era?
+         universal_rules.ins_space Invert[universal_rules.style1];
+style2 = weekday?
+         md
+         era?
+         universal_rules.ins_space Invert[universal_rules.style2];
+
+year_only_with_era =
+  Invert[universal_rules.date]
+  Invert[universal_rules.opening_brace]
+  markup_year universal_rules.kDigit{1,4}
+  era
+  Invert[universal_rules.closing_brace];
+
+# 60'er jaren (60ties)
+year_s =
+  Invert[universal_rules.date]
+  Invert[universal_rules.opening_brace]
+  markup_year "19"? universal_rules.kDigit "0"
+  (("'s" | "s" | "-s") : "s")
+  Invert[universal_rules.closing_brace];
+
+export YEAR_ONLY = Optimize[
+  Invert[universal_rules.date]
+  Invert[universal_rules.opening_brace]
+  markup_year ("1" | "2") universal_rules.kDigit{3}
+  era?
+  Invert[universal_rules.closing_brace]];
+
+export FULL_DATE = Optimize[Invert[universal_rules.date]
+                            Invert[universal_rules.opening_brace]
+                            (style1 | style2)
+                            Invert[universal_rules.closing_brace]];
+
+# public export
+export DATE = Optimize[FULL_DATE | YEAR_ONLY | year_s | year_only_with_era];

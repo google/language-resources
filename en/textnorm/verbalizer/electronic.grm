@@ -1,0 +1,116 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2016 and onwards, Google, Inc.
+
+# Verbalizer for electronic items such as URLs and
+# email addresses.
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+import 'cardinal.grm' as c;
+import 'date.grm' as d;
+import 'verbatim.grm' as verbatim;
+
+read_verbatim = universal_rules.ins_space
+              (universal_rules.kNotQuote+ @ verbatim.MAPPINGS)
+              universal_rules.ins_space;
+
+verbatim_component = universal_rules.URL_LSEQS @ read_verbatim+;
+date_component = (("19" | "20") universal_rules.kDigit{2}) @ d.YEARS;
+word_component = universal_rules.lower_case @
+               (universal_rules.kLower universal_rules.kLower+) @
+               (universal_rules.kLower* (universal_rules.VOWELS_Y)+ universal_rules.kLower*);
+number_component = (universal_rules.kDigit{2} @ c.CARDINAL) |
+                 (universal_rules.kDigit+ @ read_verbatim+);
+
+read_electronic = (
+                  (
+                    (
+                     universal_rules.ins_space
+                     (
+                       (verbatim_component) |
+                       (date_component) |
+                       (word_component<1>) |
+                       (number_component<1>) |
+                       (verbatim.MAPPINGS<2>)
+                     )
+                     universal_rules.ins_space
+                    )+
+                  )<1>
+                )*;
+
+# special case to read Twitter hashtags more naturally
+read_hashtag = ("#" : " hash ")
+              (universal_rules.ins_space universal_rules.lower_case ("_" : "")? universal_rules.ins_space)+;
+
+# Slight fiddle to read two-letter ccTLDs as verbatim - eg.
+# .us -> "punt u_letter s_letter" not "punt us".
+read_domain = read_electronic
+             ((("." universal_rules.kAlpha{2}) @ read_verbatim+)<-1>)?;
+
+# Reading of IPv6/MAC addresses; basically just skip the separating characters.
+read_address = ((universal_rules.kHex @ read_verbatim) | ((":" | "-") : " sil "))+;
+
+# we read protocol and password letter by letter
+# port as a number
+# everything else we try to read by words if possible
+# eg. www.google.com -> "w_letter w_letter w_letter punt google punt com"
+protocol = universal_rules.electronic_protocol
+          universal_rules.quote
+          read_verbatim*
+          universal_rules.quote;
+username = universal_rules.electronic_username
+          universal_rules.quote
+          (read_electronic | read_hashtag)
+          universal_rules.quote;
+password = universal_rules.electronic_password
+          universal_rules.quote
+          read_verbatim*
+          universal_rules.quote;
+domain = universal_rules.electronic_domain
+        universal_rules.quote
+        (read_domain | (read_address<-1>))
+        universal_rules.quote;
+
+# Before we read :80 as 'tachtig' and :8080 as 'tachtig tachtig'. We cannot
+# do this easily anymore as we cannot factorize numbers
+port = universal_rules.electronic_port
+       (verbatim.MAPPINGS universal_rules.ins_space)+;
+
+path = universal_rules.electronic_path
+       universal_rules.quote
+       read_electronic
+       universal_rules.quote;
+query_string = universal_rules.electronic_query_string
+              universal_rules.quote
+              read_electronic
+              universal_rules.quote;
+fragment_id = universal_rules.electronic_fragment_id
+             universal_rules.quote
+             read_electronic
+             universal_rules.quote;
+
+export electronic = (protocol ("" : " colon slash slash "))?
+            (username (("" : " password ") password ("" : " by "))?)?
+            (domain)?
+            (("" : " port ") port)?
+            (path)?
+            (("" : " question mark ") query_string)?
+            (("" : " hash ") fragment_id)?;
+
+export ELECTRONIC_MARKUP = Optimize[
+ (universal_rules.electronic
+  universal_rules.opening_brace
+  electronic
+  universal_rules.closing_brace) @ universal_rules.CLEAN_SPACES
+];

@@ -1,0 +1,23 @@
+0	1	E	e
+0	2	N	n
+0	3	O	e
+0	4	O	w
+0	5	S	s
+0	6	W	w
+1	7	<epsilon>	a
+2	8	<epsilon>	o
+2	8	B	o
+3	7	L	a
+4	7	<epsilon>	e
+5	9	<epsilon>	o
+6	7	<epsilon>	e
+6	7	L	e
+7	10	<epsilon>	s
+8	11	<epsilon>	r
+9	11	<epsilon>	u
+10	14	<epsilon>	t
+11	12	<epsilon>	t
+12	14	<epsilon>	h
+13
+14	13	.	<epsilon>
+14

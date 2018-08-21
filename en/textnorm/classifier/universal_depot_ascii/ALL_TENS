@@ -1,0 +1,37 @@
+0	3	<epsilon>	<epsilon>
+0	15	<epsilon>	<epsilon>
+0	1	L	6
+1	2	X	<epsilon>
+2
+3	7	<epsilon>	<epsilon>
+3	4	L	7
+4	5	X	<epsilon>
+5	6	X	<epsilon>
+6
+7	12	<epsilon>	<epsilon>
+7	8	L	8
+8	9	X	<epsilon>
+9	10	X	<epsilon>
+10	11	X	<epsilon>
+11
+12	13	X	9
+13	14	C	<epsilon>
+14
+15	17	<epsilon>	<epsilon>
+15	16	X	1
+16
+17	20	<epsilon>	<epsilon>
+17	18	X	2
+18	19	X	<epsilon>
+19
+20	24	<epsilon>	<epsilon>
+20	21	X	3
+21	22	X	<epsilon>
+22	23	X	<epsilon>
+23
+24	27	<epsilon>	<epsilon>
+24	25	X	4
+25	26	L	<epsilon>
+26
+27	28	L	5
+28

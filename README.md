@@ -16,12 +16,9 @@ This is not an official Google product.
 | hi_ur     | Hindi & Urdu       |
 | is        | Icelandic          |
 | jv        | Javanese           |
-| km        | Khmer              |
 | lo        | Lao                |
 | my        | Burmese / Myanmar  |
-| ne        | Nepali             |
 | si        | Sinhala            |
-| su        | Sundanese          |
 | xh        | Xhosa              |
 | zu        | Zulu               |
 
@@ -32,26 +29,7 @@ We are including a few tools for working with the natural language
 datasets. These tools are written in C++ and Python and are built with
 [Bazel](http://bazel.io). To compile and use these tools,
 [install a recent version of Bazel](http://bazel.io/docs/install.html)
-(minimally Bazel release 0.4.5 is required).
-
-## Opensourced Audio Data
-| Resource | Link |
-|-----------|--------------------|
-| Sinhala TTS recordings (~3K) | [http://www.openslr.org/30/](http://www.openslr.org/30/)      |
-| TTS recordings for four South African languages (af, st, tn, xh) | [http://www.openslr.org/32/](http://www.openslr.org/32/)  |
-| Large Javanese ASR training data set (~185K)	| [http://www.openslr.org/35/](http://www.openslr.org/35/) |
-| Large Sundanese ASR training data set	(~220K)| [http://www.openslr.org/36/](http://www.openslr.org/36/) |
-| High quality TTS data for Bengali languages | [http://www.openslr.org/37/](http://www.openslr.org/37/) |
-| High quality TTS data for Javanese | [http://www.openslr.org/41/](http://www.openslr.org/41/) |
-| High quality TTS data for Khmer | [http://www.openslr.org/42/](http://www.openslr.org/42/) |
-| High quality TTS data for Nepali | [http://www.openslr.org/43/](http://www.openslr.org/43/) |
-| High quality TTS data for Sundanese | [http://www.openslr.org/44/](http://www.openslr.org/44/) |
-
-
-## Other reading resources
-
-SLTU 2016 Tutorial - [https://sites.google.com/site/sltututorial/overview](https://sites.google.com/site/sltututorial/overview)
-
+(minimally Bazel release 0.2.0 is required).
 
 
 ## License

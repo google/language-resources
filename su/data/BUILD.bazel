@@ -1,5 +1,0 @@
-exports_files([
-    "lexicon.tsv",
-    "suf_prompts.tsv",
-    "sum_prompts.tsv",
-])

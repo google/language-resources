@@ -1,0 +1,121 @@
+meter	meter
+metre	meter
+second	seconds
+ampere	ampere
+kelvin	kelvin
+candela	candela
+mole	mole
+hertz	hertz
+radian	radian
+steradian	steradian
+newton	newton
+pascal	pascal
+joule	joule
+watt	watt
+coulomb	coulomb
+volt	volt
+farad	farad
+ohm	ohm
+siemens	siemens
+weber	weber
+tesla	tesla
+henry	henry
+degree celsius	degree celsius
+degree	degree
+lumen	lumen
+lux	lux
+becquerel	becquerel
+gray	gray
+sievert	sievert
+katal	katal
+kilometer per hour	kilometer per hour
+newton meter	newton meter
+meter per second	meter per second
+minute	minute
+hour	hour
+day	day
+week	week
+month	month
+year	year
+century	century
+millenium	millenium
+inch	inch
+foot	foot
+yard	yard
+chain	chain
+furlong	furlong
+mile	mile
+league	league
+fathom	fathom
+cable	cable
+nautical mile	nautical mile
+link	link
+rod	rod
+rood	rood
+acre	acre
+square mile	square mile
+fluid ounce	fluid ounce
+gill	gill
+pint	pint
+quart	quart
+gallon	gallon
+ounce	ounce
+pound	pound
+stone	stone
+hundredweight	hundredweight
+ton	ton
+pixel	pixel
+pixel per inch	pixel per inch
+cubic centimeter	cubic centimeter
+cc	cc
+degree	degree
+hectare	hectare
+liter	liter
+tonne	tonne
+neper	neper
+bel	bel
+gram	gram
+smoot	smoot
+degree	degree
+minute	minute
+second	second
+decibel	decibel
+electron volt	electron volt
+dalton	dalton
+knot	knot
+are	are
+barn	barn
+bar	bar
+atmosphere	atmosphere
+horsepower	horsepower
+degree fahrenheit	degree fahrenheit
+tablespoon	tablespoon
+teaspoon	teaspoon
+revolution	revolution
+revolution per minute	revolution per minute
+mile per hour	mile per hour
+barrel	barrel
+barrel per day	barrel per day
+barrel of oil	barrel of oil
+barrel of oil per day	barrel of oil per day
+barrel of oil equivalent	barrel of oil equivalent
+barrel of oil equivalent per day	barrel of oil equivalent per day
+bit per second	bit per second
+bit	bit
+byte per second  byte per second
+byte	byte
+light year	light year
+kilogram-force	kilogram-force
+kilogram force	kilogram force
+calorie	calorie
+kilocalorie      kilocalorie
+piece	piece
+astronomical unit	astronomical unit
+square	square
+cubic	cubic
+percent	percent
+north	north
+south	south
+east	east
+west	west
+pages	pages

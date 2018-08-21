@@ -1,0 +1,143 @@
+0	3	<epsilon>	<epsilon>
+0	1	A	A
+1	2	C	C
+2
+3	6	<epsilon>	<epsilon>
+3	4	A	A
+4	5	D	D
+5
+6	9	<epsilon>	<epsilon>
+6	7	A	A
+7	8	I	I
+8
+9	12	<epsilon>	<epsilon>
+9	10	A	A
+10	11	K	K
+11
+12	15	<epsilon>	<epsilon>
+12	13	C	C
+13	14	O	O
+14
+15	18	<epsilon>	<epsilon>
+15	16	C	C
+16	17	T	T
+17
+18	22	<epsilon>	<epsilon>
+18	19	E	E
+19	20	S	S
+20	21	P	P
+21
+22	25	<epsilon>	<epsilon>
+22	23	E	E
+23	24	T	T
+24
+25	28	<epsilon>	<epsilon>
+25	26	E	E
+26	27	U	U
+27
+28	33	<epsilon>	<epsilon>
+28	29	G	G
+29	30	m	m
+30	31	b	b
+31	32	H	H
+32
+33	37	<epsilon>	<epsilon>
+33	34	H	H
+34	35	M	M
+35	36	M	M
+36
+37	40	<epsilon>	<epsilon>
+37	38	H	H
+38	39	R	R
+39
+40	43	<epsilon>	<epsilon>
+40	41	I	I
+41	42	D	D
+42
+43	46	<epsilon>	<epsilon>
+43	44	I	I
+44	45	M	M
+45
+46	50	<epsilon>	<epsilon>
+46	47	I	I
+47	48	O	O
+48	49	S	S
+49
+50	54	<epsilon>	<epsilon>
+50	51	i	i
+51	52	O	O
+52	53	S	S
+53
+54	58	<epsilon>	<epsilon>
+54	55	I	I
+55	56	P	P
+56	57	V	V
+57
+58	62	<epsilon>	<epsilon>
+58	59	I	I
+59	60	P	P
+60	61	v	v
+61
+62	65	<epsilon>	<epsilon>
+62	63	L	L
+63	64	A	A
+64
+65	68	<epsilon>	<epsilon>
+65	66	L	L
+66	67	I	I
+67
+68	71	<epsilon>	<epsilon>
+68	69	M	M
+69	70	A	A
+70
+71	74	<epsilon>	<epsilon>
+71	72	M	M
+72	73	S	S
+73
+74	78	<epsilon>	<epsilon>
+74	75	N	N
+75	76	G	G
+76	77	O	O
+77
+78	81	<epsilon>	<epsilon>
+78	79	O	O
+79	80	S	S
+80
+81	84	<epsilon>	<epsilon>
+81	82	P	P
+82	83	T	T
+83
+84	88	<epsilon>	<epsilon>
+84	85	R	R
+85	86	E	E
+86	87	I	I
+87
+88	91	<epsilon>	<epsilon>
+88	89	S	S
+89	90	I	I
+90
+91	95	<epsilon>	<epsilon>
+91	92	T	T
+92	93	H	H
+93	94	X	X
+94
+95	98	<epsilon>	<epsilon>
+95	96	U	U
+96	97	I	I
+97
+98	101	<epsilon>	<epsilon>
+98	99	U	U
+99	100	N	N
+100
+101	105	<epsilon>	<epsilon>
+101	102	U	U
+102	103	P	P
+103	104	S	S
+104
+105	108	<epsilon>	<epsilon>
+105	106	U	U
+106	107	S	S
+107
+108	109	V	V
+109	110	S	S
+110

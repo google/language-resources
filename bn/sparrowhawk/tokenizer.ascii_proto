@@ -1,3 +1,0 @@
-grammar_file: "../textnorm/classifier/tokenize_and_classify.far"
-grammar_name: "TokenizerClassifier"
-rules { main: "TOKENIZE_AND_CLASSIFY" }

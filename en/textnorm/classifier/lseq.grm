@@ -1,0 +1,87 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2016 and onwards, Google, Inc.
+
+# Parser for letter sequences, eg. "VVD", "CDA", etc.
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+lseq_markup =
+  Invert[universal_rules.letters]
+  universal_rules.ins_space
+  universal_rules.ins_quote
+  universal_rules.kBytes+
+  universal_rules.ins_quote;
+ins_fullstops = ((universal_rules.kAlpha | "/") ("" : "."))+;
+
+trailing_modifiers = ("e" | "ke" | "kie" | "ie" | "tjie" | "jie" | "s");
+
+# Various things that we force into being letter sequences so they don't
+# get converted back into words when they exist in the lex.
+force_lseq =
+  ("ACSV" | "ACVV" | "AD" | "AK" | "ARP" | "AU" | "AWB" | "AWS" | "AZ" | "BA" |
+   "BSc" | "BTW" | "CHO" | "CIA" | "CO" | "CSV" | "CV" | "DBV" | "DRK" | "EU" |
+   "EU" "I/O" | "FAK" | "FBI" | "FEDUSA" | "FM" | "HAT" | "HO" | "HOD" | "HTS" |
+   "ID" | "IKR" | "IMF" | "IOA" | "IOK" | "iOS" | "IP" | "IT" | "JE" | "JEB" |
+   "KANSA" | "KJA" | "KKNK" | "KODESA" | "KSA" | "KZN" | "LOD" | "LPR" | "LUR" |
+   "MIT" | "MMC" | "MR" | "NAVO" | "NCIS" | "NEC" | "NG" | "NMMU" | "NSL" |
+   "NSRI" | "NUM" | "NUMSA" | "NVG" | "NWU" | "OS" | "OVK" | "PhD" | "PIN" |
+   "PSL" | "PT" | "PTSV" | "RAU" | "RSG" | "SAL" | "SAMWU" | "SAP" | "SAPD" |
+   "SARU" | "SASKOK" | "SAUK" | "SWD" | "TT" | "TUT" | "UFH" | "UI" | "UJ" |
+   "UPS" | "US" | "UWK" | "VN" | "VVV" | "WAT" | "WGO" | "WHO" | "WNNR" | "WP" |
+   "WVK")
+   @ (universal_rules.lower_case | "/")+;
+
+delete_dots = CDRewrite["." : "", "", "", universal_rules.sigma_star];
+force_lseq_caseless = delete_dots @ universal_rules.lower_case @
+  ("abc" | "adsl" | "apk" | "cd" | "ceo" | "ct" | "dj" | "dna" | "gsm" | "hbo" |
+   "ict" | "id" | "lmao" | "ms" | "msc" | "ngo" | "omg" | "rofl" | "roflmao" |
+   "sms" | "suv" | "tgiaf" | "tgif" | "thx" | "tnt" | "tv" | "url" | "usa" |
+   "usb" | "vdsl" | "xl" | "xxl" | "ymca" | "ywca" | "cnbc" | "csi" | "phd" |
+   "bbc" | "nba" | "jfk" | "acdc" | "cpu" | "imdb" | "lte" | "ing" | "klm" |
+   "pc" | "sabc" | "etv" | "bbc" | "big" | "bsc" | "ceo" | "cia" | "cnn" | "csi" |
+                 "dj" | "fbi" | "ibm" | "io" | "ios" | "kfc" | "ma" | "mba" |
+                 "mc" | "mit" | "msc" | "mtv" | "ncis" | "ngo" | "phd" | "suv" |
+                 "tmf" | "tnt" | "upc" | "ups" | "usa" | "tgif" | "tgiaf" |
+                  "cnbc" | "nba" | "jfk" | "tt" | "acdc" | "imdb" |
+                 "bnn" | "uk" | "ui");
+
+os = "os" @ ins_fullstops @ lseq_markup;
+os_affixes = ("android" | "chrome" | "windows" | "x" | "linux" | "ubuntu")
+             @ universal_rules.word_token;
+os_lseq = universal_rules.lower_case_anything @
+          ((os_affixes universal_rules.clear_space_plus universal_rules.token_delimiter os) |
+           (os universal_rules.clear_space_plus universal_rules.token_delimiter os_affixes));
+
+export LSEQ = Optimize[
+  ((
+    (
+     ((force_lseq | force_lseq_caseless) @ ins_fullstops <-1>) |
+     (universal_rules.kUpper universal_rules.kUpper+)
+    )
+    ("'"? trailing_modifiers)?
+   ) @ lseq_markup
+  ) | os_lseq
+];
+
+# Initials with fullstops in between; U.S.A. should become
+# lseq "USA" for example, not three separate tokens.
+letter_fullstop = universal_rules.kUpper ".";
+export LSEQ_FULLSTOPS = Optimize[
+  (
+    (letter_fullstop letter_fullstop+ trailing_modifiers?) |
+    (letter_fullstop trailing_modifiers) |
+    (universal_rules.clear_space_plus letter_fullstop trailing_modifiers?)
+  ) @ lseq_markup
+];

@@ -1,0 +1,1048 @@
+0	1	A	A
+0	2	B	B
+0	3	C	C
+0	4	D	D
+0	5	E	E
+0	6	F	F
+0	7	G	G
+0	8	H	H
+0	9	I	I
+0	10	J	J
+0	11	K	K
+0	12	L	L
+0	13	M	M
+0	14	N	N
+0	15	O	O
+0	16	P	P
+0	17	R	R
+0	18	S	S
+0	19	T	T
+0	20	U	U
+0	21	V	V
+0	22	W	W
+0	23	Y	Y
+1	24	<epsilon>	<epsilon>
+2	25	<epsilon>	<epsilon>
+3	26	<epsilon>	<epsilon>
+4	27	<epsilon>	<epsilon>
+5	28	<epsilon>	<epsilon>
+6	29	<epsilon>	<epsilon>
+7	30	<epsilon>	<epsilon>
+8	31	<epsilon>	<epsilon>
+9	32	<epsilon>	<epsilon>
+10	33	<epsilon>	<epsilon>
+11	34	<epsilon>	<epsilon>
+12	35	<epsilon>	<epsilon>
+13	36	<epsilon>	<epsilon>
+14	37	<epsilon>	<epsilon>
+15	38	<epsilon>	<epsilon>
+16	39	<epsilon>	<epsilon>
+17	40	<epsilon>	<epsilon>
+18	41	<epsilon>	<epsilon>
+19	42	<epsilon>	<epsilon>
+20	43	<epsilon>	<epsilon>
+21	44	<epsilon>	<epsilon>
+22	45	<epsilon>	<epsilon>
+23	46	<epsilon>	<epsilon>
+24	47	C	C
+24	48	D	D
+24	49	E	E
+24	50	K	K
+24	51	M	M
+24	52	S	S
+24	53	W	W
+24	54	Z	Z
+25	55	D	D
+25	56	I	I
+25	57	R	R
+25	58	S	S
+25	59	T	T
+26	60	C	C
+26	61	D	D
+26	62	E	E
+26	63	H	H
+26	64	I	I
+26	65	K	K
+26	66	L	L
+26	67	S	S
+26	68	T	T
+26	69	V	V
+26	70	W	W
+26	71	X	X
+26	72	h	h
+27	73	A	A
+27	74	D	D
+27	75	F	F
+28	76	A	A
+28	77	C	C
+28	78	D	D
+28	79	E	E
+28	80	G	G
+28	81	I	I
+28	82	S	S
+28	83	T	T
+29	84	E	E
+29	85	J	J
+29	86	K	K
+29	87	N	N
+30	88	A	A
+30	89	F	F
+30	90	M	M
+30	91	S	S
+30	92	Y	Y
+31	93	A	A
+31	94	K	K
+31	95	M	M
+31	96	O	O
+31	97	S	S
+32	98	C	C
+32	99	D	D
+32	100	O	O
+32	101	R	R
+32	102	S	S
+33	103	S	S
+34	104	G	G
+34	105	O	O
+34	106	R	R
+34	107	S	S
+35	108	H	H
+35	109	I	I
+36	110	A	A
+36	111	D	D
+36	112	E	E
+36	113	H	H
+36	114	M	M
+36	115	S	S
+36	116	U	U
+36	117	V	V
+36	118	Y	Y
+37	119	C	C
+37	120	D	D
+37	121	F	F
+37	122	P	P
+37	123	S	S
+37	124	T	T
+37	125	U	U
+37	126	Z	Z
+38	127	M	M
+38	128	R	R
+39	129	D	D
+39	130	E	E
+39	131	G	G
+39	132	H	H
+39	133	K	K
+39	134	M	M
+39	135	O	O
+39	136	S	S
+40	137	E	E
+40	138	O	O
+41	139	A	A
+41	140	B	B
+41	141	C	C
+41	142	G	G
+41	143	L	L
+41	144	R	R
+41	145	S	S
+41	146	Y	Y
+42	147	A	A
+42	148	F	F
+42	149	H	H
+42	150	J	J
+42	151	K	K
+42	152	L	L
+42	153	M	M
+42	154	V	V
+43	155	C	C
+43	156	L	L
+43	157	T	T
+43	158	Y	Y
+43	159	Z	Z
+44	160	L	L
+44	161	O	O
+44	162	U	U
+45	163	A	A
+45	164	E	E
+45	165	S	S
+46	166	A	A
+46	167	E	E
+47	168	<epsilon>	<epsilon>
+48	169	<epsilon>	<epsilon>
+49	170	<epsilon>	<epsilon>
+50	171	<epsilon>	<epsilon>
+51	172	<epsilon>	<epsilon>
+52	173	<epsilon>	<epsilon>
+53	174	<epsilon>	<epsilon>
+54	175	<epsilon>	<epsilon>
+55	176	<epsilon>	<epsilon>
+56	177	<epsilon>	<epsilon>
+57	178	<epsilon>	<epsilon>
+58	179	<epsilon>	<epsilon>
+59	180	<epsilon>	<epsilon>
+60	181	<epsilon>	<epsilon>
+61	182	<epsilon>	<epsilon>
+62	183	<epsilon>	<epsilon>
+63	184	<epsilon>	<epsilon>
+64	185	<epsilon>	<epsilon>
+65	186	<epsilon>	<epsilon>
+66	187	<epsilon>	<epsilon>
+67	188	<epsilon>	<epsilon>
+68	189	<epsilon>	<epsilon>
+68
+69	190	<epsilon>	<epsilon>
+70	191	<epsilon>	<epsilon>
+71	192	<epsilon>	<epsilon>
+72	193	<epsilon>	<epsilon>
+73	194	<epsilon>	<epsilon>
+74	195	<epsilon>	<epsilon>
+75	196	<epsilon>	<epsilon>
+76	197	<epsilon>	<epsilon>
+77	198	<epsilon>	<epsilon>
+78	199	<epsilon>	<epsilon>
+79	200	<epsilon>	<epsilon>
+80	201	<epsilon>	<epsilon>
+81	202	<epsilon>	<epsilon>
+82	203	<epsilon>	<epsilon>
+83	204	<epsilon>	<epsilon>
+83
+84	205	<epsilon>	<epsilon>
+85	206	<epsilon>	<epsilon>
+86	207	<epsilon>	<epsilon>
+87	208	<epsilon>	<epsilon>
+88	209	<epsilon>	<epsilon>
+89	210	<epsilon>	<epsilon>
+90	211	<epsilon>	<epsilon>
+91	212	<epsilon>	<epsilon>
+92	213	<epsilon>	<epsilon>
+93	214	<epsilon>	<epsilon>
+94	215	<epsilon>	<epsilon>
+95	216	<epsilon>	<epsilon>
+96	217	<epsilon>	<epsilon>
+97	218	<epsilon>	<epsilon>
+98	219	<epsilon>	<epsilon>
+99	220	<epsilon>	<epsilon>
+100	221	<epsilon>	<epsilon>
+101	222	<epsilon>	<epsilon>
+102	223	<epsilon>	<epsilon>
+103	224	<epsilon>	<epsilon>
+104	225	<epsilon>	<epsilon>
+105	226	<epsilon>	<epsilon>
+106	227	<epsilon>	<epsilon>
+107	228	<epsilon>	<epsilon>
+108	229	<epsilon>	<epsilon>
+109	230	<epsilon>	<epsilon>
+110	231	<epsilon>	<epsilon>
+111	232	<epsilon>	<epsilon>
+112	233	<epsilon>	<epsilon>
+113	234	<epsilon>	<epsilon>
+114	235	<epsilon>	<epsilon>
+115	236	<epsilon>	<epsilon>
+116	237	<epsilon>	<epsilon>
+117	238	<epsilon>	<epsilon>
+118	239	<epsilon>	<epsilon>
+119	240	<epsilon>	<epsilon>
+120	241	<epsilon>	<epsilon>
+121	242	<epsilon>	<epsilon>
+122	243	<epsilon>	<epsilon>
+123	244	<epsilon>	<epsilon>
+124	245	<epsilon>	<epsilon>
+124
+125	246	<epsilon>	<epsilon>
+126	247	<epsilon>	<epsilon>
+127	248	<epsilon>	<epsilon>
+128	249	<epsilon>	<epsilon>
+129	250	<epsilon>	<epsilon>
+130	251	<epsilon>	<epsilon>
+131	252	<epsilon>	<epsilon>
+132	253	<epsilon>	<epsilon>
+133	254	<epsilon>	<epsilon>
+134	255	<epsilon>	<epsilon>
+135	256	<epsilon>	<epsilon>
+136	257	<epsilon>	<epsilon>
+137	258	<epsilon>	<epsilon>
+138	259	<epsilon>	<epsilon>
+139	260	<epsilon>	<epsilon>
+140	261	<epsilon>	<epsilon>
+141	262	<epsilon>	<epsilon>
+142	263	<epsilon>	<epsilon>
+143	264	<epsilon>	<epsilon>
+144	265	<epsilon>	<epsilon>
+145	266	<epsilon>	<epsilon>
+146	267	<epsilon>	<epsilon>
+147	268	<epsilon>	<epsilon>
+148	269	<epsilon>	<epsilon>
+149	270	<epsilon>	<epsilon>
+150	271	<epsilon>	<epsilon>
+151	272	<epsilon>	<epsilon>
+152	273	<epsilon>	<epsilon>
+153	274	<epsilon>	<epsilon>
+154	275	<epsilon>	<epsilon>
+155	276	<epsilon>	<epsilon>
+156	277	<epsilon>	<epsilon>
+157	278	<epsilon>	<epsilon>
+158	279	<epsilon>	<epsilon>
+159	280	<epsilon>	<epsilon>
+160	281	<epsilon>	<epsilon>
+161	282	<epsilon>	<epsilon>
+162	283	<epsilon>	<epsilon>
+163	284	<epsilon>	<epsilon>
+164	285	<epsilon>	<epsilon>
+165	286	<epsilon>	<epsilon>
+166	287	<epsilon>	<epsilon>
+167	288	<epsilon>	<epsilon>
+168	289	D	D
+168	290	S	S
+169	291	T	T
+170	292	D	D
+170	293	S	S
+171	294	D	D
+171	295	S	S
+172	296	S	S
+173	297	T	T
+174	298	D	D
+174	299	S	S
+175	300	O	O
+175	301	T	T
+176	302	T	T
+177	303	O	O
+178	304	T	T
+179	305	T	T
+180	306	T	T
+181	307	T	T
+182	308	T	T
+183	309	D	D
+183	310	S	S
+183	311	T	T
+184	312	A	A
+184	313	O	O
+184	314	U	U
+185	315	S	S
+185	316	T	T
+186	317	T	T
+187	318	S	S
+187	319	T	T
+188	320	T	T
+189	Infinity
+190	321	T	T
+191	322	S	S
+192	323	T	T
+193	324	S	S
+194	325	V	V
+195	326	U	U
+196	327	T	T
+197	328	S	S
+198	329	T	T
+199	330	T	T
+200	331	D	D
+200	332	S	S
+200	333	T	T
+201	334	S	S
+201	335	T	T
+202	336	T	T
+203	337	T	T
+204	Infinity
+205	338	T	T
+206	339	T	T
+207	340	S	S
+207	341	T	T
+208	342	T	T
+209	343	L	L
+209	344	M	M
+210	345	T	T
+211	346	T	T
+212	347	T	T
+213	348	T	T
+214	349	D	D
+214	350	E	E
+214	351	S	S
+215	352	T	T
+216	353	T	T
+217	354	V	V
+218	355	T	T
+219	356	T	T
+220	357	T	T
+221	358	T	T
+222	359	D	D
+222	360	K	K
+222	361	S	S
+223	362	T	T
+224	363	T	T
+225	364	T	T
+226	365	S	S
+227	366	A	A
+228	367	T	T
+229	368	S	S
+230	369	N	N
+231	370	G	G
+231	371	W	W
+232	372	T	T
+233	373	S	S
+233	374	T	T
+234	375	T	T
+235	376	T	T
+236	377	K	K
+236	378	T	T
+237	379	T	T
+238	380	T	T
+239	381	T	T
+240	382	T	T
+241	383	T	T
+242	384	T	T
+243	385	T	T
+244	386	T	T
+245	Infinity
+246	387	T	T
+247	388	D	D
+247	389	S	S
+248	390	S	S
+249	391	A	A
+250	392	T	T
+251	393	T	T
+252	394	T	T
+253	395	O	O
+253	396	T	T
+254	397	T	T
+255	398	D	D
+255	399	S	S
+256	400	N	N
+257	401	T	T
+258	402	T	T
+259	403	T	T
+260	404	K	K
+260	405	M	M
+260	406	S	S
+261	407	T	T
+262	408	T	T
+263	409	T	T
+264	410	T	T
+265	411	T	T
+266	412	T	T
+267	413	O	O
+268	414	H	H
+269	415	T	T
+270	416	A	A
+271	417	T	T
+272	418	T	T
+273	419	T	T
+274	420	T	T
+275	421	T	T
+276	422	T	T
+277	423	A	A
+278	424	C	C
+279	425	S	S
+279	426	T	T
+280	427	T	T
+281	428	A	A
+282	429	L	L
+282	430	S	S
+283	431	T	T
+284	432	K	K
+284	433	S	S
+284	434	T	T
+285	435	D	D
+285	436	S	S
+286	437	T	T
+287	438	K	K
+288	439	K	K
+289	440	<epsilon>	<epsilon>
+290	441	<epsilon>	<epsilon>
+291	442	<epsilon>	<epsilon>
+291
+292	443	<epsilon>	<epsilon>
+293	444	<epsilon>	<epsilon>
+294	445	<epsilon>	<epsilon>
+295	446	<epsilon>	<epsilon>
+296	447	<epsilon>	<epsilon>
+297	448	<epsilon>	<epsilon>
+297
+298	449	<epsilon>	<epsilon>
+299	450	<epsilon>	<epsilon>
+300	451	<epsilon>	<epsilon>
+301	452	<epsilon>	<epsilon>
+301
+302	453	<epsilon>	<epsilon>
+302
+303	454	<epsilon>	<epsilon>
+304	455	<epsilon>	<epsilon>
+304
+305	456	<epsilon>	<epsilon>
+305
+306	457	<epsilon>	<epsilon>
+306
+307	458	<epsilon>	<epsilon>
+307
+308	459	<epsilon>	<epsilon>
+308
+309	460	<epsilon>	<epsilon>
+310	461	<epsilon>	<epsilon>
+311	462	<epsilon>	<epsilon>
+311
+312	463	<epsilon>	<epsilon>
+313	464	<epsilon>	<epsilon>
+314	465	<epsilon>	<epsilon>
+315	466	<epsilon>	<epsilon>
+316	467	<epsilon>	<epsilon>
+316
+317	468	<epsilon>	<epsilon>
+317
+318	469	<epsilon>	<epsilon>
+319	470	<epsilon>	<epsilon>
+319
+320	471	<epsilon>	<epsilon>
+320
+321	472	<epsilon>	<epsilon>
+321
+322	473	<epsilon>	<epsilon>
+323	474	<epsilon>	<epsilon>
+323
+324	475	<epsilon>	<epsilon>
+325	476	<epsilon>	<epsilon>
+326	477	<epsilon>	<epsilon>
+327	478	<epsilon>	<epsilon>
+327
+328	479	<epsilon>	<epsilon>
+329	480	<epsilon>	<epsilon>
+329
+330	481	<epsilon>	<epsilon>
+330
+331	482	<epsilon>	<epsilon>
+332	483	<epsilon>	<epsilon>
+333	484	<epsilon>	<epsilon>
+333
+334	485	<epsilon>	<epsilon>
+335	486	<epsilon>	<epsilon>
+335
+336	487	<epsilon>	<epsilon>
+336
+337	488	<epsilon>	<epsilon>
+337
+338	489	<epsilon>	<epsilon>
+338
+339	490	<epsilon>	<epsilon>
+339
+340	491	<epsilon>	<epsilon>
+341	492	<epsilon>	<epsilon>
+341
+342	493	<epsilon>	<epsilon>
+342
+343	494	<epsilon>	<epsilon>
+344	495	<epsilon>	<epsilon>
+345	496	<epsilon>	<epsilon>
+345
+346	497	<epsilon>	<epsilon>
+346
+347	498	<epsilon>	<epsilon>
+347
+348	499	<epsilon>	<epsilon>
+348
+349	500	<epsilon>	<epsilon>
+350	501	<epsilon>	<epsilon>
+351	502	<epsilon>	<epsilon>
+352	503	<epsilon>	<epsilon>
+352
+353	504	<epsilon>	<epsilon>
+353
+354	505	<epsilon>	<epsilon>
+355	506	<epsilon>	<epsilon>
+355
+356	507	<epsilon>	<epsilon>
+356
+357	508	<epsilon>	<epsilon>
+357
+358	509	<epsilon>	<epsilon>
+358
+359	510	<epsilon>	<epsilon>
+360	511	<epsilon>	<epsilon>
+361	512	<epsilon>	<epsilon>
+362	513	<epsilon>	<epsilon>
+362
+363	514	<epsilon>	<epsilon>
+363
+364	515	<epsilon>	<epsilon>
+364
+365	516	<epsilon>	<epsilon>
+366	517	<epsilon>	<epsilon>
+367	518	<epsilon>	<epsilon>
+367
+368	519	<epsilon>	<epsilon>
+369	520	<epsilon>	<epsilon>
+370	521	<epsilon>	<epsilon>
+371	522	<epsilon>	<epsilon>
+372	523	<epsilon>	<epsilon>
+372
+373	524	<epsilon>	<epsilon>
+374	525	<epsilon>	<epsilon>
+374
+375	526	<epsilon>	<epsilon>
+375
+376	527	<epsilon>	<epsilon>
+376
+377	528	<epsilon>	<epsilon>
+377
+378	529	<epsilon>	<epsilon>
+378
+379	530	<epsilon>	<epsilon>
+379
+380	531	<epsilon>	<epsilon>
+380
+381	532	<epsilon>	<epsilon>
+381
+382	533	<epsilon>	<epsilon>
+382
+383	534	<epsilon>	<epsilon>
+383
+384	535	<epsilon>	<epsilon>
+384
+385	536	<epsilon>	<epsilon>
+385
+386	537	<epsilon>	<epsilon>
+386
+387	538	<epsilon>	<epsilon>
+387
+388	539	<epsilon>	<epsilon>
+389	540	<epsilon>	<epsilon>
+390	541	<epsilon>	<epsilon>
+391	542	<epsilon>	<epsilon>
+392	543	<epsilon>	<epsilon>
+392
+393	544	<epsilon>	<epsilon>
+394	545	<epsilon>	<epsilon>
+394
+395	546	<epsilon>	<epsilon>
+396	547	<epsilon>	<epsilon>
+396
+397	548	<epsilon>	<epsilon>
+397
+398	549	<epsilon>	<epsilon>
+399	550	<epsilon>	<epsilon>
+400	551	<epsilon>	<epsilon>
+401	552	<epsilon>	<epsilon>
+401
+402	553	<epsilon>	<epsilon>
+402
+403	554	<epsilon>	<epsilon>
+404	555	<epsilon>	<epsilon>
+405	556	<epsilon>	<epsilon>
+406	557	<epsilon>	<epsilon>
+407	558	<epsilon>	<epsilon>
+407
+408	559	<epsilon>	<epsilon>
+408
+409	560	<epsilon>	<epsilon>
+409
+410	561	<epsilon>	<epsilon>
+410
+411	562	<epsilon>	<epsilon>
+411
+412	563	<epsilon>	<epsilon>
+412
+413	564	<epsilon>	<epsilon>
+414	565	<epsilon>	<epsilon>
+415	566	<epsilon>	<epsilon>
+415
+416	567	<epsilon>	<epsilon>
+416
+417	568	<epsilon>	<epsilon>
+417
+418	569	<epsilon>	<epsilon>
+418
+419	570	<epsilon>	<epsilon>
+419
+420	571	<epsilon>	<epsilon>
+420
+421	572	<epsilon>	<epsilon>
+421
+422	573	<epsilon>	<epsilon>
+422
+423	574	<epsilon>	<epsilon>
+424	575	<epsilon>	<epsilon>
+424
+425	576	<epsilon>	<epsilon>
+426	577	<epsilon>	<epsilon>
+426
+427	578	<epsilon>	<epsilon>
+427
+428	579	<epsilon>	<epsilon>
+429	580	<epsilon>	<epsilon>
+430	581	<epsilon>	<epsilon>
+431	582	<epsilon>	<epsilon>
+431
+432	583	<epsilon>	<epsilon>
+433	584	<epsilon>	<epsilon>
+434	585	<epsilon>	<epsilon>
+434
+435	586	<epsilon>	<epsilon>
+436	587	<epsilon>	<epsilon>
+437	588	<epsilon>	<epsilon>
+437
+438	589	<epsilon>	<epsilon>
+439	590	<epsilon>	<epsilon>
+440	591	T	T
+441	592	T	T
+442	Infinity
+443	593	T	T
+444	594	T	T
+445	595	T	T
+446	596	T	T
+447	597	T	T
+448	Infinity
+449	598	T	T
+450	599	T	T
+451	600	S	S
+452	Infinity
+453	Infinity
+454	601	T	T
+455	Infinity
+456	Infinity
+457	Infinity
+458	Infinity
+459	Infinity
+460	602	T	T
+461	603	T	T
+462	Infinity
+463	604	D	D
+463	605	S	S
+464	606	T	T
+465	607	T	T
+466	608	T	T
+467	Infinity
+468	Infinity
+469	609	T	T
+470	Infinity
+471	Infinity
+472	Infinity
+473	610	T	T
+474	Infinity
+475	611	T	T
+476	612	T	T
+477	613	T	T
+478	Infinity
+479	614	S	S
+480	Infinity
+481	Infinity
+482	615	T	T
+483	616	T	T
+484	Infinity
+485	617	T	T
+486	Infinity
+487	Infinity
+488	Infinity
+489	Infinity
+490	Infinity
+491	618	T	T
+492	Infinity
+493	Infinity
+494	619	T	T
+495	620	T	T
+496	Infinity
+497	Infinity
+498	Infinity
+499	Infinity
+500	621	T	T
+501	622	C	C
+502	623	T	T
+503	Infinity
+504	Infinity
+505	624	T	T
+506	Infinity
+507	Infinity
+508	Infinity
+509	Infinity
+510	625	T	T
+511	626	T	T
+512	627	T	T
+513	Infinity
+514	Infinity
+515	Infinity
+516	628	T	T
+517	629	T	T
+518	Infinity
+519	630	T	T
+520	631	T	T
+521	632	T	T
+522	633	T	T
+523	Infinity
+524	634	T	T
+525	Infinity
+526	Infinity
+527	Infinity
+528	Infinity
+529	Infinity
+530	Infinity
+531	Infinity
+532	Infinity
+533	Infinity
+534	Infinity
+535	Infinity
+536	Infinity
+537	Infinity
+538	Infinity
+539	635	T	T
+540	636	T	T
+541	637	T	T
+542	638	T	T
+543	Infinity
+544	639	T	T
+545	Infinity
+546	640	T	T
+547	Infinity
+548	Infinity
+549	641	T	T
+550	642	T	T
+551	643	T	T
+552	Infinity
+553	Infinity
+554	644	T	T
+555	645	T	T
+556	646	T	T
+557	647	T	T
+558	Infinity
+559	Infinity
+560	Infinity
+561	Infinity
+562	Infinity
+563	Infinity
+564	648	T	T
+565	649	T	T
+566	Infinity
+567	Infinity
+568	Infinity
+569	Infinity
+570	Infinity
+571	Infinity
+572	Infinity
+573	Infinity
+574	650	T	T
+575	Infinity
+576	651	T	T
+577	Infinity
+578	Infinity
+579	652	T	T
+580	653	T	T
+581	654	T	T
+582	Infinity
+583	655	T	T
+584	656	T	T
+585	Infinity
+586	657	T	T
+587	658	T	T
+588	Infinity
+589	659	T	T
+590	660	T	T
+591	661	<epsilon>	<epsilon>
+591
+592	662	<epsilon>	<epsilon>
+592
+593	663	<epsilon>	<epsilon>
+593
+594	664	<epsilon>	<epsilon>
+594
+595	665	<epsilon>	<epsilon>
+595
+596	666	<epsilon>	<epsilon>
+596
+597	667	<epsilon>	<epsilon>
+597
+598	668	<epsilon>	<epsilon>
+598
+599	669	<epsilon>	<epsilon>
+599
+600	670	<epsilon>	<epsilon>
+601	671	<epsilon>	<epsilon>
+601
+602	672	<epsilon>	<epsilon>
+602
+603	673	<epsilon>	<epsilon>
+603
+604	674	<epsilon>	<epsilon>
+605	675	<epsilon>	<epsilon>
+606	676	<epsilon>	<epsilon>
+606
+607	677	<epsilon>	<epsilon>
+607
+608	678	<epsilon>	<epsilon>
+608
+609	679	<epsilon>	<epsilon>
+609
+610	680	<epsilon>	<epsilon>
+610
+611	681	<epsilon>	<epsilon>
+611
+612	682	<epsilon>	<epsilon>
+612
+613	683	<epsilon>	<epsilon>
+613
+614	684	<epsilon>	<epsilon>
+615	685	<epsilon>	<epsilon>
+615
+616	686	<epsilon>	<epsilon>
+616
+617	687	<epsilon>	<epsilon>
+617
+618	688	<epsilon>	<epsilon>
+618
+619	689	<epsilon>	<epsilon>
+619
+620	690	<epsilon>	<epsilon>
+620
+621	691	<epsilon>	<epsilon>
+621
+622	692	<epsilon>	<epsilon>
+622
+623	693	<epsilon>	<epsilon>
+623
+624	694	<epsilon>	<epsilon>
+624
+625	695	<epsilon>	<epsilon>
+625
+626	696	<epsilon>	<epsilon>
+626
+627	697	<epsilon>	<epsilon>
+627
+628	698	<epsilon>	<epsilon>
+628
+629	699	<epsilon>	<epsilon>
+629
+630	700	<epsilon>	<epsilon>
+630
+631	701	<epsilon>	<epsilon>
+631
+632	702	<epsilon>	<epsilon>
+632
+633	703	<epsilon>	<epsilon>
+633
+634	704	<epsilon>	<epsilon>
+634
+635	705	<epsilon>	<epsilon>
+635
+636	706	<epsilon>	<epsilon>
+636
+637	707	<epsilon>	<epsilon>
+637
+638	708	<epsilon>	<epsilon>
+638
+639	709	<epsilon>	<epsilon>
+639
+640	710	<epsilon>	<epsilon>
+640
+641	711	<epsilon>	<epsilon>
+641
+642	712	<epsilon>	<epsilon>
+642
+643	713	<epsilon>	<epsilon>
+643
+644	714	<epsilon>	<epsilon>
+644
+645	715	<epsilon>	<epsilon>
+645
+646	716	<epsilon>	<epsilon>
+646
+647	717	<epsilon>	<epsilon>
+647
+648	718	<epsilon>	<epsilon>
+648
+649	719	<epsilon>	<epsilon>
+649
+650	720	<epsilon>	<epsilon>
+650
+651	721	<epsilon>	<epsilon>
+651
+652	722	<epsilon>	<epsilon>
+652
+653	723	<epsilon>	<epsilon>
+653
+654	724	<epsilon>	<epsilon>
+654
+655	725	<epsilon>	<epsilon>
+655
+656	726	<epsilon>	<epsilon>
+656
+657	727	<epsilon>	<epsilon>
+657
+658	728	<epsilon>	<epsilon>
+658
+659	729	<epsilon>	<epsilon>
+659
+660	730	<epsilon>	<epsilon>
+660
+661	Infinity
+662	Infinity
+663	Infinity
+664	Infinity
+665	Infinity
+666	Infinity
+667	Infinity
+668	Infinity
+669	Infinity
+670	731	T	T
+671	Infinity
+672	Infinity
+673	Infinity
+674	732	T	T
+675	733	T	T
+676	Infinity
+677	Infinity
+678	Infinity
+679	Infinity
+680	Infinity
+681	Infinity
+682	Infinity
+683	Infinity
+684	734	T	T
+685	Infinity
+686	Infinity
+687	Infinity
+688	Infinity
+689	Infinity
+690	Infinity
+691	Infinity
+692	Infinity
+693	Infinity
+694	Infinity
+695	Infinity
+696	Infinity
+697	Infinity
+698	Infinity
+699	Infinity
+700	Infinity
+701	Infinity
+702	Infinity
+703	Infinity
+704	Infinity
+705	Infinity
+706	Infinity
+707	Infinity
+708	Infinity
+709	Infinity
+710	Infinity
+711	Infinity
+712	Infinity
+713	Infinity
+714	Infinity
+715	Infinity
+716	Infinity
+717	Infinity
+718	Infinity
+719	Infinity
+720	Infinity
+721	Infinity
+722	Infinity
+723	Infinity
+724	Infinity
+725	Infinity
+726	Infinity
+727	Infinity
+728	Infinity
+729	Infinity
+730	Infinity
+731	735	<epsilon>	<epsilon>
+731
+732	736	<epsilon>	<epsilon>
+732
+733	737	<epsilon>	<epsilon>
+733
+734	738	<epsilon>	<epsilon>
+734
+735	Infinity
+736	Infinity
+737	Infinity
+738	Infinity

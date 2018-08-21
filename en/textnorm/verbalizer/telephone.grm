@@ -1,0 +1,83 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2016 and onwards, Google, Inc.
+
+# Afrikaans telephone numbers
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+import 'cardinal.grm' as c ;
+import 'verbatim.grm' as verbatim ;
+
+char_by_char = (verbatim.MAPPINGS universal_rules.ins_space)+;
+
+country_code =
+  universal_rules.telephone_code
+    universal_rules.quote ("+"? : "plus ") c.CARDINAL universal_rules.quote
+;
+
+# Area codes consisting of three numbers should be read as "nul" +
+# cardinal for final two digits.
+# Example: 020-1234567 nul twintig sil etc.
+
+special_area_prefixes =
+  c.TWO_DIGIT_CARDINAL |
+  ("800" : "eight hundred") |
+  ("900" : "nine hundred")
+;
+
+special_area_prefix_readings =
+  ("0" : "zero") universal_rules.ins_space special_area_prefixes <-20>
+;
+
+number_part =
+  universal_rules.telephone_part universal_rules.quote char_by_char universal_rules.quote
+;
+
+number_part_special =
+  universal_rules.telephone_part
+    universal_rules.quote (char_by_char | special_area_prefix_readings) universal_rules.quote
+;
+
+number_parts = (number_part_special (universal_rules.ins_sil number_part)*);
+
+#extension =
+#  universal_rules.telephone_ext ("" : " doorkiesnummer ")
+#    universal_rules.quote char_by_char universal_rules.quote
+#;
+
+phone_number = Optimize[
+  (country_code universal_rules.ins_sil)?
+  number_parts
+#  extension?
+  universal_rules.clear_space_star
+];
+
+digits_before = ("one" | "two" | "three" | "four" | "five" | "six" | "seven" |
+                 "eight" | "nine") " ";
+gap_after = (universal_rules.pass_space_star) | "[EOS]";
+ooo_to_thousand = ("zero zero zero" : "thousand" <-1.0>);
+thousands_sub =
+  CDRewrite[ooo_to_thousand, digits_before, gap_after, universal_rules.sigma_star];
+
+style1 = phone_number;
+style2 = phone_number @ thousands_sub;
+
+export PHONE_NUMBER = Optimize[(style1 | style2)];
+
+export PHONE_NUMBER_MARKUP = Optimize[
+ (universal_rules.telephone
+  universal_rules.opening_brace
+    (style1 | style2)
+  universal_rules.closing_brace) @ universal_rules.CLEAN_SPACES
+];

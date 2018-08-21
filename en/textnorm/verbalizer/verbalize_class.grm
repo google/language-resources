@@ -1,0 +1,51 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2016 and onwards, Google, Inc.
+
+# Afrikaans verbalization rules.
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+import 'cardinal.grm' as cardinal;
+import 'date.grm' as date;
+import 'decimal.grm' as decimal;
+import 'digit.grm' as digit;
+import 'electronic.grm' as electronic;
+import 'fraction.grm' as fraction;
+import 'lseq.grm' as lseq;
+import 'measure.grm' as measure;
+import 'money.grm' as money;
+import 'ordinal.grm' as ordinal;
+import 'telephone.grm' as telephone;
+import 'time.grm' as time;
+import 'verbatim.grm' as verbatim;
+
+export all_grammars = (
+    (time.TIME_MARKUP "":"<class_time>")
+  | (date.DATE_MARKUP "":"<class_date>")
+  | (cardinal.CARDINAL_MARKUP "":"<class_cardinal>")
+  | (ordinal.ORDINAL_MARKUP "":"<class_ordinal>")
+  | (digit.DIGIT_MARKUP "":"<class_digit>")
+  | (fraction.FRACTION_MARKUP "":"<class_fraction>")
+  | (decimal.DECIMAL_MARKUP "":"<class_decimal>")
+  | (decimal.DECIMAL_MARKUP_SINGULAR "":"<class_decimal>")
+  | (measure.MEASURE_MARKUP "":"<class_measure>")
+  | (verbatim.VERBATIM_MARKUP "":"<class_verbatim>")
+  | (telephone.PHONE_NUMBER_MARKUP "":"<class_phone>")
+  | (money.MONEY_MARKUP "":"<class_money>")
+  | (electronic.ELECTRONIC_MARKUP "":"<class_electronic>")
+  | (lseq.LSEQ_MARKUP "":"<class_lseq>")
+);
+
+export ALL = Optimize[universal_rules.clear_space_star all_grammars universal_rules.clear_space_star];
+export REDUP = Optimize[money.REDUP | ordinal.REDUP];

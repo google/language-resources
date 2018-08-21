@@ -1,0 +1,13 @@
+0	1	<space>	p
+0	2	/	p
+0	3	p	p
+1	4	/	e
+1	5	p	e
+2	6	<epsilon>	e
+3	6	/	e
+4	9	<space>	r
+5	7	e	r
+6	9	<epsilon>	r
+7	8	r	<epsilon>
+8	9	<space>	<epsilon>
+9

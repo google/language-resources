@@ -1,6 +1,0 @@
-MONEY_MARKUP	$8	money { currency: "$" amount { integer_part: "8" } }
-MONEY_MARKUP	Rp. 8.000.000	money { currency: "rp." amount { integer_part: "8000000" } }
-MONEY_MARKUP	Rp.9.000.000	money { currency: "rp." amount { integer_part: "9000000" } }
-MONEY_MARKUP	€10	money { currency: "€" amount { integer_part: "10" } }
-MONEY_MARKUP	USD 100	money { currency: "usd" amount { integer_part: "100" } }
-MONEY_MARKUP	EUR 8	money { currency: "eur" amount { integer_part: "8" } }

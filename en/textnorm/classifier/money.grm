@@ -1,0 +1,83 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2016 and onwards, Google, Inc.
+
+# Afrikaans-specific money parser
+# Adds support for million, billion etc.
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+# we don't keep a zero fractional part when it's connected with a quantity.
+remove_zeroes = CDRewrite[
+    (universal_rules.decimal_fraction universal_rules.quote ("0"+) universal_rules.quote) : "",
+    "",
+    "",
+    universal_rules.sigma_star];
+
+# Actually it is ',-' but before this is called the dots are switched with
+# comma's and vica versa in the Afrikaans mapper grammar
+# We match the ",-" if the amount is a whole number
+comma_dash = ".-" : "";
+comma_dash_rewrite = CDRewrite[comma_dash, "", "[EOS]", universal_rules.sigma_star];
+
+quantities = (("k") : "1000") |
+             (("million" | "m") : "1000000") |
+             (("billion" | "mjd") : "1000000000") |
+             (("trillion" | "bn") : "1000000000000") ;
+
+quantity = universal_func.APPLY_QUANTITY_MARKUP[universal_rules.lower_case @ quantities];
+
+# We match the ",-" if the amount is a whole number
+amount = ((universal_rules.kDigit* @ universal_rules.AMOUNT_MARKUP @ remove_zeroes)
+          comma_dash? <-1>) |
+         (universal_rules.AMOUNT_MARKUP @ remove_zeroes);
+
+style_simple = ((universal_rules.MONEY @ remove_zeroes) quantity?);
+
+style1 = amount
+         quantity?
+         universal_rules.CURRENCY_SYMBOL_MARKUP
+         universal_rules.ins_space;
+
+style3 = amount
+         quantity?
+         universal_rules.ISO4217_CODE_MARKUP
+         universal_rules.ins_space;
+
+# Force markup for Rand:
+
+randmap = ("r" | "R") : "currency: \"zar\"";
+
+rand = Optimize[
+  universal_func.InvertMarkup[universal_rules.money]
+  universal_rules.ins_space
+  universal_func.InvertMarkup[universal_rules.opening_brace]
+  universal_rules.ins_space
+  randmap
+  universal_rules.ins_space
+  universal_rules.AMOUNT_MARKUP
+  universal_rules.ins_space
+  quantity?
+  universal_rules.ins_space
+  universal_func.InvertMarkup[universal_rules.closing_brace]]
+;
+
+export MONEY_MARKUP = Optimize[
+ (universal_func.APPLY_MONEY_MARKUP[
+  (style_simple | style1 |
+   style3 | (comma_dash_rewrite @ universal_rules.MONEY @ remove_zeroes))]
+  (universal_rules.token_delimiter (((" "? "cpm") : "per minute") @
+   universal_rules.word_tokens))?)
+ | rand
+];

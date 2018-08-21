@@ -1,0 +1,67 @@
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Copyright 2016 and onwards, Google, Inc.
+
+# Parser for times of the form "10:05", which outputs the phonetic
+# arts protcol buffer Time in standard ascii serialization.
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+markup_hours = universal_rules.ins_space Invert[universal_rules.time_hours] universal_rules.ins_space;
+markup_minutes = universal_rules.ins_space Invert[universal_rules.time_minutes] universal_rules.ins_space;
+markup_style1 = universal_rules.ins_space Invert[universal_rules.style1] universal_rules.ins_space;
+# speak_period =
+#   universal_rules.ins_space Invert[universal_rules.time_speak_period_true] universal_rules.ins_space
+# ;
+
+# Import some definitions from universal time grammar.
+minutes = universal_rules.TIME00_59;
+hours = universal_rules.HOURS;
+zone = universal_rules.TIME_ZONE;
+
+# Separators to accept in Afrikaans times: 14:15, 14.15, 14u15, 14h15
+# There is no possibility for confusion between decimals and times because
+# Afrikaans uses a comma as its decimal separator.
+separators =
+  universal_rules.del_space_star ((":" | "." | "u" | "h") : "") universal_rules.del_space_star
+;
+
+# "uur" is often added after times, e.g. "14:15 uur", and should be parsed
+# as part of the time
+uur = universal_rules.del_space_star ("hour" : "") universal_rules.del_space_star;
+
+# similarly for "u" and "h": 16:00u, 16:00h
+# we should not accept any whitespace in between the time & "u"
+# because "u" is also the formal version of "you" in Afrikaans
+u_suffix = ("u" : "") universal_rules.del_space_star;
+h_suffix = universal_rules.del_space_star ("h" : "") universal_rules.del_space_star;
+
+# Normal way to read times, style 1 in verbalizer
+style1 = markup_hours hours
+         separators
+         universal_rules.ins_space markup_minutes minutes
+         (uur | u_suffix | h_suffix)?;
+#         markup_style1;
+# Like in 12h, when there are no minutes the suffix should be there
+style1_no_minute = markup_hours hours
+                   (u_suffix | h_suffix)?;
+#                   markup_style1;
+
+# public export
+export TIME_MARKUP = Optimize[(Invert[universal_rules.time]
+                               Invert[universal_rules.opening_brace]
+                               (style1 | style1_no_minute)
+                               zone?
+                               Invert[universal_rules.closing_brace])];
+#                              | (universal_rules.TIME_MARKUP_STRICT <2>)];

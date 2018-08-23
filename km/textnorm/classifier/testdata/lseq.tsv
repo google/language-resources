@@ -25,5 +25,5 @@ LSEQ_FULLSTOPS	ច្រ.ប្រ.	letters: "ច្រ.ប្រ."
 LSEQ_FULLSTOPS	ត.ទ.ស្រ.	letters: "ត.ទ.ស្រ."
 
 # failing on purpose
-LSEQ_FULLSTOPS	ន.	
-LSEQ_FULLSTOPS	ក្ល.	
+LSEQ_FULLSTOPS	ន.
+LSEQ_FULLSTOPS	ក្ល.

@@ -17,12 +17,15 @@
 
 #include <fstream>
 #include <string>
+#include <vector>
 
 #include <fst/compat.h>
 #include <fst/string.h>
 #include <fst/vector-fst.h>
 #include <thrax/compat/utils.h>
 #include <thrax/grm-manager.h>
+
+using std::string;
 
 DEFINE_string(far, "", "Path to the far file.");
 DEFINE_string(test_file, "", "Path to a tsv file which "
@@ -62,39 +65,61 @@ int main(int argc, char *argv[]) {
       continue;
     }
 
-    const auto segments = thrax::Split(line, "\t");
+    vector<string> segments = thrax::Split(line, "\t");
 
-    if (segments.size() != 3) {
-      LOG(ERROR) << "Line no: " << line << " malformed";
+    if (segments.size() != 3 && segments.size() != 2) {
       error = 1;
+      LOG(ERROR) << "Line no: " << line << " malformed";
       continue;
     }
 
     string rule = segments[0];
     string input = segments[1];
-    string expected = segments[2];
 
-    if (!compiler_(input, &input_fst)) {
-      LOG(ERROR) << "Unable to parse input: " << input;
-      error = 1;
-      continue;
-    }
+    if (segments.size() == 2) {
+      if (!compiler_(input, &input_fst)) {
+        error = 1;
+        LOG(ERROR) << "Unable to parse input: " << input;
+        continue;
+      }
 
-    if (!grm_manager.RewriteBytes(rule, input_fst, &output, "", "")) {
-      LOG(ERROR) << "REWRITE_FAILED in line - " << line_no
-                 << "\n line text: " + line
-                 << "\n Rule : " + rule
-                 << "\n Input : " + input
-                 << "\n Expected : " + expected;
+      if (grm_manager.RewriteBytes(rule, input_fst, &output, "", "")) {
+        error = 1;
+        LOG(WARNING) << "Expected rewrite to fail but succeeded in line - " << line_no
+                   << "\n line text: " + line
+                   << "\n Rule : " + rule
+                   << "\n Input : " + input;
+        continue;
+      }
+    } else {
+      string expected = segments[2];
 
-      error = 1;
-      continue;
-    }
+      if (!compiler_(input, &input_fst)) {
+        error = 1;
+        LOG(ERROR) << "Unable to parse input: " << input;
+        continue;
+      }
 
-    if (output != expected) {
-      error = 1;
-      LOG(WARNING) << "Error in line " << line_no << " expected - "
-                   << expected << " but actually - " << output;
+      if (!grm_manager.RewriteBytes(rule, input_fst, &output, "", "")) {
+        error = 1;
+        LOG(WARNING) << "REWRITE_FAILED in line - " << line_no
+                   << "\n line text: " + line
+                   << "\n Rule : " + rule
+                   << "\n Input : " + input
+                   << "\n Expected : " + expected;
+        continue;
+      }
+
+      if (output != expected) {
+        error = 1;
+        LOG(WARNING) << "Error in line " << line_no
+                     << "\n line text: " + line
+                     << "\n Rule : " + rule
+                     << "\n Input : " + input
+                     << "\n expected : " + expected
+                     << "\n actually : " << output;
+
+      }
     }
   }
   return error;

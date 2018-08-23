@@ -1,5 +1,5 @@
 VERBATIM_MARKUP	verbatim|verbatim:"|	උඩු කොමාව
-VERBATIM_MARKUP	verbatim|verbatim:#|	හෑෂ්
+VERBATIM_MARKUP	verbatim|verbatim:\#|	හෑෂ්
 VERBATIM_MARKUP	verbatim|verbatim:$|	ඩොලර්
 VERBATIM_MARKUP	verbatim|verbatim:€|	යුරෝ
 VERBATIM_MARKUP	verbatim|verbatim:£|	පවුම
@@ -20,7 +20,7 @@ VERBATIM_MARKUP	verbatim|verbatim:.23.01|	තිත දෙක තුන ති�
 VERBATIM_MARKUP	verbatim|verbatim:.00000.0001|	තිත බින්දුව බින්දුව බින්දුව බින්දුව බින්දුව තිත බින්දුව බින්දුව බින්දුව එක
 VERBATIM_MARKUP	verbatim|verbatim:.10.14|	තිත එක බින්දුව තිත එක හතර
 VERBATIM_MARKUP	verbatim|verbatim:ΚΙΝγ|	කප්පා අයෝටා නියු ගැමා
-VERBATIM_MARKUP	verbatim|verbatim:RX-78#2=99.95|	r_letter-en x_letter-en කෙටි ඉර හත අට හෑෂ් දෙක සමානයි නවය නවය තිත නවය පහ
+VERBATIM_MARKUP	verbatim|verbatim:RX-78\#2=99.95|	r_letter-en x_letter-en කෙටි ඉර හත අට හෑෂ් දෙක සමානයි නවය නවය තිත නවය පහ
 VERBATIM_MARKUP	verbatim|verbatim:ΣF=ΜΑ|	සිග්මා f_letter-en සමානයි මියු ඇල්ෆා
 VERBATIM_MARKUP	verbatim|verbatim:!!!!|	හර්ෂයාදී ලකුණ හර්ෂයාදී ලකුණ හර්ෂයාදී ලකුණ හර්ෂයාදී ලකුණ
 VERBATIM_MARKUP	verbatim|verbatim:π=3.14=ρΙ|	පයි සමානයි තුන තිත එක හතර සමානයි රෝ අයෝටා

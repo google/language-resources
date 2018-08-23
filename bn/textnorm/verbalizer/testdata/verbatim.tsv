@@ -1,5 +1,5 @@
 VERBATIM_MARKUP	verbatim|verbatim:"|	উদ্ধৃতি চিহ্ন
-VERBATIM_MARKUP	verbatim|verbatim:#|	হ্যাশ
+VERBATIM_MARKUP	verbatim|verbatim:\#|	হ্যাশ
 VERBATIM_MARKUP	verbatim|verbatim:$|	ডলার
 VERBATIM_MARKUP	verbatim|verbatim:€|	ইউরো
 VERBATIM_MARKUP	verbatim|verbatim:£|	পাউন্ড

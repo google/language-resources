@@ -15,6 +15,7 @@ cc_binary(
         prefix_dir + "lib/main/compiler-log64.cc",
         prefix_dir + "lib/main/compiler-stdarc.cc",
     ],
+    copts = ["-funsigned-char",],
     deps = [
         ":grm-compiler",
         ":thrax_main_lib",
@@ -36,7 +37,7 @@ py_binary(
 cc_binary(
     name = "thraxrandom-generator",
     srcs = [prefix_dir + "bin/random-generator.cc"],
-    copts = ["-Wno-sign-compare"],
+    copts = ["-funsigned-char", "-Wno-sign-compare"],
     deps = [":thrax_main_lib"],
 )
 
@@ -47,6 +48,7 @@ cc_binary(
         prefix_dir + "bin/rewrite-tester-utils.cc",
         prefix_dir + "bin/rewrite-tester-utils.h",
     ],
+    copts = ["-funsigned-char",],
     deps = [":thrax_main_lib"],
 )
 
@@ -59,6 +61,7 @@ cc_library(
         prefix_dir + "include/thrax/algo/stringprint.h",
         prefix_dir + "include/thrax/symbols.h",  # for k.*SymbolTableName
     ],
+    copts = ["-funsigned-char",],
     visibility = ["//visibility:private"],
     deps = [
         ":compat",
@@ -72,6 +75,7 @@ cc_library(
     name = "thrax",
     hdrs = [prefix_dir + "include/thrax/thrax.h"],
     includes = [prefix_dir + "include"],
+    copts = ["-funsigned-char",],
     deps = [
         ":compat",
         ":function",
@@ -93,6 +97,7 @@ cc_library(
         prefix_dir + "include/thrax/compat/utils.h",
         prefix_dir + "include/thrax/make-parens-pair-vector.h",
     ],
+    copts = ["-funsigned-char",],
     includes = [prefix_dir + "include"],
     visibility = ["//visibility:private"],
     deps = [openfst + ":base"],
@@ -100,6 +105,7 @@ cc_library(
 
 cc_library(
     name = "algo",
+    copts = ["-funsigned-char",],
     hdrs = [
         prefix_dir + "include/thrax/algo/cdrewrite.h",
         prefix_dir + "include/thrax/algo/optimize.h",
@@ -114,6 +120,7 @@ cc_library(
 
 cc_library(
     name = "grm-manager",
+    copts = ["-funsigned-char",],
     srcs = [
         prefix_dir + "lib/main/grm-manager.cc",
     ],
@@ -181,6 +188,7 @@ cc_library(
     ],
     includes = [prefix_dir + "include"],
     visibility = ["//visibility:private"],
+    copts = ["-funsigned-char",],
     deps = [
         ":algo",
         ":compat",
@@ -249,6 +257,7 @@ cc_library(
     copts = [
         "-Wno-return-type",
         "-Wno-sign-compare",
+        "-funsigned-char",
     ],
     includes = [prefix_dir + "include"],
     deps = [

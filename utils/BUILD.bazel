@@ -128,6 +128,7 @@ cc_binary(
 cc_binary(
     name = "grm_tester",
     srcs = ["grm_tester.cc"],
+    copts = ["-funsigned-char",],
     deps = [
         "//festus:fst-util",
         "//festus:string-util",
@@ -139,6 +140,7 @@ cc_binary(
 cc_library(
     name = "grm_tester_lib",
     testonly = 1,
+    copts = ["-funsigned-char",],
     srcs = ["grm_tester.cc"],
     deps = [
         "//festus:fst-util",

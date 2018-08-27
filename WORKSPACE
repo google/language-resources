@@ -144,6 +144,6 @@ new_git_repository(
 new_git_repository(
     name = "sparrowhawk",
     build_file = "bazel/sparrowhawk.BUILD",
-    commit = "eb97411535e9ab280982bae18c99d6a2c933e162",
+    commit = "0d2fe1305439c213653ed15da639de9b72f454a4",
     remote = "https://github.com/google/sparrowhawk.git",
 )

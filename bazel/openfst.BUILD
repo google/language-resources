@@ -13,6 +13,10 @@ static_binary = 1
 cc_library(
     name = "fst-decl",
     hdrs = [prefix_dir + "include/fst/fst-decl.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":base"],
 )
@@ -103,7 +107,11 @@ cc_library(
         prefix_dir + "include/fst/verify.h",
         prefix_dir + "include/fst/visit.h",
     ],
-    copts = ["-Wno-sign-compare"],
+    copts = [
+        "-Wno-sign-compare",
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     linkopts = ["-lm"],
     deps = [
@@ -121,6 +129,10 @@ cc_library(
 
 cc_library(
     name = "lib_export_dynamic",
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkopts = ["-Wl,--export-dynamic"],
     deps = [":fst"],
 )
@@ -129,7 +141,11 @@ cc_library(
     name = "symbol-table",
     srcs = [prefix_dir + "lib/symbol-table.cc"],
     hdrs = [prefix_dir + "include/fst/symbol-table.h"],
-    copts = ["-Wno-sign-compare"],
+    copts = [
+        "-Wno-sign-compare",
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [
         ":base",
@@ -155,6 +171,10 @@ cc_library(
         prefix_dir + "include/fst/union-weight.h",
         prefix_dir + "include/fst/weight.h",
     ],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     linkopts = ["-lm"],
     deps = [
@@ -166,6 +186,10 @@ cc_library(
 cc_library(
     name = "interval-set",
     hdrs = [prefix_dir + "include/fst/interval-set.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [
         ":base",
@@ -178,6 +202,10 @@ cc_library(
     hdrs = [
         prefix_dir + "include/fst/generic-register.h",
         prefix_dir + "include/fst/register.h",
+    ],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
     ],
     includes = [prefix_dir + "include"],
     linkopts = ["-ldl"],
@@ -192,11 +220,19 @@ cc_library(
     hdrs = [
         prefix_dir + "include/fst/icu.h",
     ],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
 )
 
 cc_library(
     name = "union-find",
     hdrs = [prefix_dir + "include/fst/union-find.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":base"],
 )
@@ -210,6 +246,10 @@ cc_library(
     hdrs = [
         prefix_dir + "include/fst/mapped-file.h",
         prefix_dir + "include/fst/util.h",
+    ],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
     ],
     includes = [prefix_dir + "include"],
     deps = [":base"],
@@ -230,6 +270,10 @@ cc_library(
         prefix_dir + "include/fst/log.h",
         prefix_dir + "include/fst/types.h",
     ],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
 )
 
@@ -242,7 +286,11 @@ cc_test(
         prefix_dir + "test/fst_test.cc",
         prefix_dir + "test/fst_test.h",
     ],
-    copts = ["-Wno-sign-compare"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+        "-Wno-sign-compare",
+    ],
     deps = [":fst"],
 )
 
@@ -250,6 +298,10 @@ cc_library(
     name = "weight-tester",
     testonly = 1,
     hdrs = [prefix_dir + "test/weight-tester.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir],
     deps = [":weight"],
 )
@@ -258,7 +310,11 @@ cc_test(
     name = "weight_test",
     timeout = "short",
     srcs = [prefix_dir + "test/weight_test.cc"],
-    copts = ["-Wno-unused-local-typedefs"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+        "-Wno-unused-local-typedefs",
+    ],
     deps = [
         ":fst",
         ":weight-tester",
@@ -272,7 +328,11 @@ cc_test(
         prefix_dir + "test/algo_test.h",
         prefix_dir + "test/rand-fst.h",
     ],
-    copts = ["-Wno-unused-local-typedefs"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+        "-Wno-unused-local-typedefs",
+    ],
     deps = [":fst"],
 )
 
@@ -303,7 +363,6 @@ cc_library(
         prefix_dir + "include/fst/script/stateiterator-class.h",
         prefix_dir + "include/fst/script/text-io.h",
         prefix_dir + "include/fst/script/weight-class.h",
-
         prefix_dir + "include/fst/script/arcsort.h",
         prefix_dir + "include/fst/script/closure.h",
         prefix_dir + "include/fst/script/compile.h",
@@ -348,7 +407,11 @@ cc_library(
         prefix_dir + "include/fst/script/union.h",
         prefix_dir + "include/fst/script/verify.h",
     ],
-    copts = ["-Wno-sign-compare"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+        "-Wno-sign-compare",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fst"],
 )
@@ -357,6 +420,10 @@ cc_library(
     name = "fstscript_arcsort",
     srcs = [prefix_dir + "script/arcsort.cc"],
     hdrs = [prefix_dir + "include/fst/script/arcsort.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -365,6 +432,10 @@ cc_library(
     name = "fstscript_closure",
     srcs = [prefix_dir + "script/closure.cc"],
     hdrs = [prefix_dir + "include/fst/script/closure.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -376,6 +447,10 @@ cc_library(
         prefix_dir + "include/fst/script/compile.h",
         prefix_dir + "include/fst/script/compile-impl.h",
     ],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -384,6 +459,10 @@ cc_library(
     name = "fstscript_compose",
     srcs = [prefix_dir + "script/compose.cc"],
     hdrs = [prefix_dir + "include/fst/script/compose.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [
         ":fstscript_base",
@@ -395,6 +474,10 @@ cc_library(
     name = "fstscript_concat",
     srcs = [prefix_dir + "script/concat.cc"],
     hdrs = [prefix_dir + "include/fst/script/concat.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -403,6 +486,10 @@ cc_library(
     name = "fstscript_connect",
     srcs = [prefix_dir + "script/connect.cc"],
     hdrs = [prefix_dir + "include/fst/script/connect.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -411,6 +498,10 @@ cc_library(
     name = "fstscript_convert",
     srcs = [prefix_dir + "script/convert.cc"],
     hdrs = [prefix_dir + "include/fst/script/convert.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -419,6 +510,10 @@ cc_library(
     name = "fstscript_decode",
     srcs = [prefix_dir + "script/decode.cc"],
     hdrs = [prefix_dir + "include/fst/script/decode.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -427,6 +522,10 @@ cc_library(
     name = "fstscript_determinize",
     srcs = [prefix_dir + "script/determinize.cc"],
     hdrs = [prefix_dir + "include/fst/script/determinize.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -435,6 +534,10 @@ cc_library(
     name = "fstscript_difference",
     srcs = [prefix_dir + "script/difference.cc"],
     hdrs = [prefix_dir + "include/fst/script/difference.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [
         ":fstscript_base",
@@ -446,6 +549,10 @@ cc_library(
     name = "fstscript_disambiguate",
     srcs = [prefix_dir + "script/disambiguate.cc"],
     hdrs = [prefix_dir + "include/fst/script/disambiguate.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -457,6 +564,10 @@ cc_library(
         prefix_dir + "include/fst/script/draw.h",
         prefix_dir + "include/fst/script/draw-impl.h",
     ],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -465,6 +576,10 @@ cc_library(
     name = "fstscript_encode",
     srcs = [prefix_dir + "script/encode.cc"],
     hdrs = [prefix_dir + "include/fst/script/encode.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -473,6 +588,10 @@ cc_library(
     name = "fstscript_epsnormalize",
     srcs = [prefix_dir + "script/epsnormalize.cc"],
     hdrs = [prefix_dir + "include/fst/script/epsnormalize.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -481,6 +600,10 @@ cc_library(
     name = "fstscript_equal",
     srcs = [prefix_dir + "script/equal.cc"],
     hdrs = [prefix_dir + "include/fst/script/equal.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -489,6 +612,10 @@ cc_library(
     name = "fstscript_equivalent",
     srcs = [prefix_dir + "script/equivalent.cc"],
     hdrs = [prefix_dir + "include/fst/script/equivalent.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -503,6 +630,10 @@ cc_library(
         prefix_dir + "include/fst/script/info.h",
         prefix_dir + "include/fst/script/info-impl.h",
     ],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -511,6 +642,10 @@ cc_library(
     name = "fstscript_intersect",
     srcs = [prefix_dir + "script/intersect.cc"],
     hdrs = [prefix_dir + "include/fst/script/intersect.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [
         ":fstscript_base",
@@ -522,6 +657,10 @@ cc_library(
     name = "fstscript_invert",
     srcs = [prefix_dir + "script/invert.cc"],
     hdrs = [prefix_dir + "include/fst/script/invert.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -530,6 +669,10 @@ cc_library(
     name = "fstscript_isomorphic",
     srcs = [prefix_dir + "script/isomorphic.cc"],
     hdrs = [prefix_dir + "include/fst/script/isomorphic.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -538,6 +681,10 @@ cc_library(
     name = "fstscript_map",
     srcs = [prefix_dir + "script/map.cc"],
     hdrs = [prefix_dir + "include/fst/script/map.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -546,6 +693,10 @@ cc_library(
     name = "fstscript_minimize",
     srcs = [prefix_dir + "script/minimize.cc"],
     hdrs = [prefix_dir + "include/fst/script/minimize.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -557,6 +708,10 @@ cc_library(
         prefix_dir + "include/fst/script/print.h",
         prefix_dir + "include/fst/script/print-impl.h",
     ],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -565,6 +720,10 @@ cc_library(
     name = "fstscript_project",
     srcs = [prefix_dir + "script/project.cc"],
     hdrs = [prefix_dir + "include/fst/script/project.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -573,6 +732,10 @@ cc_library(
     name = "fstscript_prune",
     srcs = [prefix_dir + "script/prune.cc"],
     hdrs = [prefix_dir + "include/fst/script/prune.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -581,6 +744,10 @@ cc_library(
     name = "fstscript_push",
     srcs = [prefix_dir + "script/push.cc"],
     hdrs = [prefix_dir + "include/fst/script/push.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -589,6 +756,10 @@ cc_library(
     name = "fstscript_randequivalent",
     srcs = [prefix_dir + "script/randequivalent.cc"],
     hdrs = [prefix_dir + "include/fst/script/randequivalent.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [
         ":fstscript_base",
@@ -600,6 +771,10 @@ cc_library(
     name = "fstscript_randgen",
     srcs = [prefix_dir + "script/randgen.cc"],
     hdrs = [prefix_dir + "include/fst/script/randgen.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -608,6 +783,10 @@ cc_library(
     name = "fstscript_relabel",
     srcs = [prefix_dir + "script/relabel.cc"],
     hdrs = [prefix_dir + "include/fst/script/relabel.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -616,7 +795,11 @@ cc_library(
     name = "fstscript_replace",
     srcs = [prefix_dir + "script/replace.cc"],
     hdrs = [prefix_dir + "include/fst/script/replace.h"],
-    copts = ["-Wno-sign-compare"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+        "-Wno-sign-compare",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -625,6 +808,10 @@ cc_library(
     name = "fstscript_reverse",
     srcs = [prefix_dir + "script/reverse.cc"],
     hdrs = [prefix_dir + "include/fst/script/reverse.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -633,6 +820,10 @@ cc_library(
     name = "fstscript_reweight",
     srcs = [prefix_dir + "script/reweight.cc"],
     hdrs = [prefix_dir + "include/fst/script/reweight.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -641,6 +832,10 @@ cc_library(
     name = "fstscript_rmepsilon",
     srcs = [prefix_dir + "script/rmepsilon.cc"],
     hdrs = [prefix_dir + "include/fst/script/rmepsilon.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [
         ":fstscript_base",
@@ -652,6 +847,10 @@ cc_library(
     name = "fstscript_shortest_distance",
     srcs = [prefix_dir + "script/shortest-distance.cc"],
     hdrs = [prefix_dir + "include/fst/script/shortest-distance.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [
         ":fstscript_base",
@@ -663,6 +862,10 @@ cc_library(
     name = "fstscript_shortest_path",
     srcs = [prefix_dir + "script/shortest-path.cc"],
     hdrs = [prefix_dir + "include/fst/script/shortest-path.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [
         ":fstscript_base",
@@ -674,6 +877,10 @@ cc_library(
     name = "fstscript_synchronize",
     srcs = [prefix_dir + "script/synchronize.cc"],
     hdrs = [prefix_dir + "include/fst/script/synchronize.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -682,6 +889,10 @@ cc_library(
     name = "fstscript_topsort",
     srcs = [prefix_dir + "script/topsort.cc"],
     hdrs = [prefix_dir + "include/fst/script/topsort.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -690,6 +901,10 @@ cc_library(
     name = "fstscript_union",
     srcs = [prefix_dir + "script/union.cc"],
     hdrs = [prefix_dir + "include/fst/script/union.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
@@ -698,12 +913,20 @@ cc_library(
     name = "fstscript_verify",
     srcs = [prefix_dir + "script/verify.cc"],
     hdrs = [prefix_dir + "include/fst/script/verify.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":fstscript_base"],
 )
 
 cc_library(
     name = "fstscript",
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     deps = [
         ":fstscript_arcsort",
         ":fstscript_closure",
@@ -752,6 +975,10 @@ cc_library(
 cc_binary(
     name = "fstarcsort",
     srcs = [prefix_dir + "bin/fstarcsort.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_arcsort"],
 )
@@ -759,6 +986,10 @@ cc_binary(
 cc_binary(
     name = "fstclosure",
     srcs = [prefix_dir + "bin/fstclosure.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_closure"],
 )
@@ -766,6 +997,10 @@ cc_binary(
 cc_binary(
     name = "fstcompile",
     srcs = [prefix_dir + "bin/fstcompile.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_compile"],
 )
@@ -773,6 +1008,10 @@ cc_binary(
 cc_binary(
     name = "fstcompose",
     srcs = [prefix_dir + "bin/fstcompose.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_compose"],
 )
@@ -780,6 +1019,10 @@ cc_binary(
 cc_binary(
     name = "fstconcat",
     srcs = [prefix_dir + "bin/fstconcat.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_concat"],
 )
@@ -787,6 +1030,10 @@ cc_binary(
 cc_binary(
     name = "fstconnect",
     srcs = [prefix_dir + "bin/fstconnect.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_connect"],
 )
@@ -794,6 +1041,10 @@ cc_binary(
 cc_binary(
     name = "fstconvert",
     srcs = [prefix_dir + "bin/fstconvert.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_convert"],
 )
@@ -801,6 +1052,10 @@ cc_binary(
 cc_binary(
     name = "fstdeterminize",
     srcs = [prefix_dir + "bin/fstdeterminize.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_determinize"],
 )
@@ -808,6 +1063,10 @@ cc_binary(
 cc_binary(
     name = "fstdifference",
     srcs = [prefix_dir + "bin/fstdifference.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_difference"],
 )
@@ -815,6 +1074,10 @@ cc_binary(
 cc_binary(
     name = "fstdisambiguate",
     srcs = [prefix_dir + "bin/fstdisambiguate.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_disambiguate"],
 )
@@ -822,6 +1085,10 @@ cc_binary(
 cc_binary(
     name = "fstdraw",
     srcs = [prefix_dir + "bin/fstdraw.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_draw"],
 )
@@ -829,6 +1096,10 @@ cc_binary(
 cc_binary(
     name = "fstencode",
     srcs = [prefix_dir + "bin/fstencode.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [
         ":fstscript_decode",
@@ -839,6 +1110,10 @@ cc_binary(
 cc_binary(
     name = "fstepsnormalize",
     srcs = [prefix_dir + "bin/fstepsnormalize.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_epsnormalize"],
 )
@@ -846,6 +1121,10 @@ cc_binary(
 cc_binary(
     name = "fstequal",
     srcs = [prefix_dir + "bin/fstequal.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_equal"],
 )
@@ -853,6 +1132,10 @@ cc_binary(
 cc_binary(
     name = "fstequivalent",
     srcs = [prefix_dir + "bin/fstequivalent.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [
         ":fstscript_equivalent",
@@ -863,6 +1146,10 @@ cc_binary(
 cc_binary(
     name = "fstinfo",
     srcs = [prefix_dir + "bin/fstinfo.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_info"],
 )
@@ -877,6 +1164,10 @@ cc_binary(
 cc_binary(
     name = "fstinvert",
     srcs = [prefix_dir + "bin/fstinvert.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_invert"],
 )
@@ -884,6 +1175,10 @@ cc_binary(
 cc_binary(
     name = "fstisomorphic",
     srcs = [prefix_dir + "bin/fstisomorphic.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_isomorphic"],
 )
@@ -891,6 +1186,10 @@ cc_binary(
 cc_binary(
     name = "fstmap",
     srcs = [prefix_dir + "bin/fstmap.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_map"],
 )
@@ -905,6 +1204,10 @@ cc_binary(
 cc_binary(
     name = "fstprint",
     srcs = [prefix_dir + "bin/fstprint.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_print"],
 )
@@ -912,6 +1215,10 @@ cc_binary(
 cc_binary(
     name = "fstproject",
     srcs = [prefix_dir + "bin/fstproject.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_project"],
 )
@@ -919,6 +1226,10 @@ cc_binary(
 cc_binary(
     name = "fstprune",
     srcs = [prefix_dir + "bin/fstprune.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_prune"],
 )
@@ -1011,6 +1322,10 @@ cc_binary(
 cc_binary(
     name = "fstunion",
     srcs = [prefix_dir + "bin/fstunion.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":fstscript_union"],
 )
@@ -1027,6 +1342,10 @@ cc_library(
         prefix_dir + "include/fst/extensions/far/stlist.h",
         prefix_dir + "include/fst/extensions/far/sttable.h",
     ],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [":util"],
 )
@@ -1035,6 +1354,10 @@ cc_library(
     name = "far_base",
     hdrs = [
         prefix_dir + "include/fst/extensions/far/far.h",
+    ],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
     ],
     includes = [prefix_dir + "include"],
     deps = [
@@ -1055,6 +1378,10 @@ cc_library(
         prefix_dir + "include/fst/extensions/far/info.h",
         prefix_dir + "include/fst/extensions/far/isomorphic.h",
         prefix_dir + "include/fst/extensions/far/print-strings.h",
+    ],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
     ],
     includes = [prefix_dir + "include"],
     deps = [
@@ -1079,6 +1406,10 @@ cc_library(
         prefix_dir + "include/fst/extensions/far/getters.h",
         prefix_dir + "include/fst/extensions/far/script-impl.h",
     ],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [
         ":base",
@@ -1090,7 +1421,11 @@ cc_library(
 cc_binary(
     name = "farcompilestrings",
     srcs = [prefix_dir + "extensions/far/farcompilestrings.cc"],
-    copts = ["-Wno-sign-compare"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+        "-Wno-sign-compare",
+    ],
     linkstatic = static_binary,
     deps = [":farscript"],
 )
@@ -1098,7 +1433,11 @@ cc_binary(
 cc_binary(
     name = "farcreate",
     srcs = [prefix_dir + "extensions/far/farcreate.cc"],
-    copts = ["-Wno-sign-compare"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+        "-Wno-sign-compare",
+    ],
     linkstatic = static_binary,
     deps = [":farscript"],
 )
@@ -1106,6 +1445,10 @@ cc_binary(
 cc_binary(
     name = "farequal",
     srcs = [prefix_dir + "extensions/far/farequal.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":farscript"],
 )
@@ -1113,6 +1456,10 @@ cc_binary(
 cc_binary(
     name = "farextract",
     srcs = [prefix_dir + "extensions/far/farextract.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":farscript"],
 )
@@ -1120,6 +1467,10 @@ cc_binary(
 cc_binary(
     name = "farinfo",
     srcs = [prefix_dir + "extensions/far/farinfo.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":farscript"],
 )
@@ -1127,6 +1478,10 @@ cc_binary(
 cc_binary(
     name = "farisomorphic",
     srcs = [prefix_dir + "extensions/far/farisomorphic.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":farscript"],
 )
@@ -1134,6 +1489,10 @@ cc_binary(
 cc_binary(
     name = "farprintstrings",
     srcs = [prefix_dir + "extensions/far/farprintstrings.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":farscript"],
 )
@@ -1155,6 +1514,10 @@ cc_library(
         prefix_dir + "include/fst/extensions/pdt/reverse.h",
         prefix_dir + "include/fst/extensions/pdt/shortest-path.h",
     ],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [
         ":fst",
@@ -1171,7 +1534,11 @@ cc_library(
         prefix_dir + "include/fst/extensions/pdt/getters.h",
         prefix_dir + "include/fst/extensions/pdt/pdtscript.h",
     ],
-    copts = ["-Wno-sign-compare"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+        "-Wno-sign-compare",
+    ],
     includes = [prefix_dir + "include"],
     deps = [
         ":fst",
@@ -1183,6 +1550,10 @@ cc_library(
 cc_binary(
     name = "pdtcompose",
     srcs = [prefix_dir + "extensions/pdt/pdtcompose.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [
         ":fstscript_connect",
@@ -1193,6 +1564,10 @@ cc_binary(
 cc_binary(
     name = "pdtexpand",
     srcs = [prefix_dir + "extensions/pdt/pdtexpand.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":pdtscript"],
 )
@@ -1200,6 +1575,10 @@ cc_binary(
 cc_binary(
     name = "pdtinfo",
     srcs = [prefix_dir + "extensions/pdt/pdtinfo.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":pdtscript"],
 )
@@ -1215,6 +1594,10 @@ cc_binary(
 cc_binary(
     name = "pdtreverse",
     srcs = [prefix_dir + "extensions/pdt/pdtreverse.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":pdtscript"],
 )
@@ -1222,6 +1605,10 @@ cc_binary(
 cc_binary(
     name = "pdtshortestpath",
     srcs = [prefix_dir + "extensions/pdt/pdtshortestpath.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":pdtscript"],
 )
@@ -1239,6 +1626,10 @@ cc_library(
         prefix_dir + "include/fst/extensions/mpdt/read_write_utils.h",
         prefix_dir + "include/fst/extensions/mpdt/reverse.h",
     ],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [
         ":fst",
@@ -1250,6 +1641,10 @@ cc_library(
     name = "mpdtscript",
     srcs = [prefix_dir + "extensions/mpdt/mpdtscript.cc"],
     hdrs = [prefix_dir + "include/fst/extensions/mpdt/mpdtscript.h"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     includes = [prefix_dir + "include"],
     deps = [
         ":fst",
@@ -1262,6 +1657,10 @@ cc_library(
 cc_binary(
     name = "mpdtcompose",
     srcs = [prefix_dir + "extensions/mpdt/mpdtcompose.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [
         ":fstscript_connect",
@@ -1272,6 +1671,10 @@ cc_binary(
 cc_binary(
     name = "mpdtexpand",
     srcs = [prefix_dir + "extensions/mpdt/mpdtexpand.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":mpdtscript"],
 )
@@ -1279,6 +1682,10 @@ cc_binary(
 cc_binary(
     name = "mpdtinfo",
     srcs = [prefix_dir + "extensions/mpdt/mpdtinfo.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":mpdtscript"],
 )
@@ -1286,6 +1693,10 @@ cc_binary(
 cc_binary(
     name = "mpdtreverse",
     srcs = [prefix_dir + "extensions/mpdt/mpdtreverse.cc"],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
+    ],
     linkstatic = static_binary,
     deps = [":mpdtscript"],
 )
@@ -1303,6 +1714,10 @@ cc_library(
         prefix_dir + "include/fst/extensions/ngram/bitmap-index.h",
         prefix_dir + "include/fst/extensions/ngram/ngram-fst.h",
         prefix_dir + "include/fst/extensions/ngram/nthbit.h",
+    ],
+    copts = [
+        "-funsigned-char",
+        "-fno-exceptions",
     ],
     includes = [prefix_dir + "include"],
     deps = [

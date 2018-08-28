@@ -20,7 +20,7 @@ STRATEGY='--nodistinct_host_configuration'
 STARTUP=''
 
 if [ -n "$TRAVIS" ]; then
-  STARTUP+=' --batch'
+  # STARTUP+=' --batch' Deprecated
   STRATEGY+=' --jobs=2'
   # STRATEGY+=' --noshow_progress'
   STRATEGY+=' --test_timeout_filters=-long'

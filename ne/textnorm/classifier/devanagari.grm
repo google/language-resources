@@ -223,11 +223,11 @@ kill_additional_dependent_vowels =
 
 ## This is temporary: it is quite common to get junk, basically stray bytes**,
 ## in Indic script input. This sort of thing ought to be handled by the
-## normalizer (see above), but for now we map junk to "[junk]"
+## normalizer (see above), but for now we map junk to "j"
 ##
 ## **stray bytes are small samosas that appear randomly on platters.
 
-junk = (universal_rules.kBytes <100000>)+ : "[junk]";
+junk = (universal_rules.kBytes <100000>)+ : "j";
 
 aksara = Optimize[
    kill_spurious_nukta

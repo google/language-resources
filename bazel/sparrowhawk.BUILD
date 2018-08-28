@@ -103,6 +103,9 @@ cc_library(
         "src/include/sparrowhawk/logger.h",
         "src/include/sparrowhawk/string_utils.h",
     ],
+    deps = [
+        "@openfst//:base",
+    ],
     copts = ["-funsigned-char", "-Wno-sign-compare"],
     includes = ["src/include"],
     visibility = ["//visibility:private"],

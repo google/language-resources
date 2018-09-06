@@ -1,2 +1,3 @@
-brew "bazel"
+tap "bazelbuild/tap", pin: true
+brew "bazelbuild/tap/bazel"
 brew "icu4c", link: true

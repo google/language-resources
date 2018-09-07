@@ -1,13 +1,11 @@
 if [ "$TRAVIS_OS_NAME" = osx -o "$(uname)" = Darwin ]; then
   MY_OS=darwin
+  echo '$ python --version'
+  python --version
+  echo '$ pip --version'
+  pip --version
   # brew update
   brew bundle --file=travis/Brewfile
-  if [ -z "$VIRTUAL_ENV" ]; then
-    virtualenv -p "$(which "$PY")" venv
-    . venv/bin/activate
-    python --version
-    pip --version
-  fi
 else
   MY_OS=linux
   ## Optionally configure Trusty backports for a less ancient ICU.

@@ -11,10 +11,14 @@ if [ -z "$BAZEL_EXECUTABLE" ]; then
   exit 1
 fi
 
-STRATEGY='--compilation_mode=opt --verbose_failures'
+STRATEGY='--compilation_mode=opt'
+STRATEGY+=' --nodistinct_host_configuration'
+STRATEGY+=' --host_java_toolchain=@bazel_tools//tools/jdk:toolchain_hostjdk8'
+STRATEGY+=' --java_toolchain=@bazel_tools//tools/jdk:toolchain_hostjdk8'
+STRATEGY+=' --verbose_failures'
 if [ -n "$TRAVIS" ]; then
   STRATEGY+=' --curses=no'
-  STRATEGY+=' --jobs=3'
+  STRATEGY+=' --jobs=2'
   STRATEGY+=' --local_resources=2048,.5,1.0'
   STRATEGY+=' --test_timeout_filters=-long'
 fi

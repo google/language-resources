@@ -88,6 +88,13 @@ http_archive(
     urls = ["https://github.com/abseil/abseil-cpp/archive/master.zip"],
 )
 
+# Google benchmark, required by abseil-cpp.
+http_archive(
+    name = "com_github_google_benchmark",
+    strip_prefix = "benchmark-master",
+    urls = ["https://github.com/google/benchmark/archive/master.zip"],
+)
+
 # Time-zone framework, required by abseil-cpp
 http_archive(
     name = "com_googlesource_code_cctz",

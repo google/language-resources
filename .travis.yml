@@ -10,7 +10,6 @@ branches:
 env:
   global:
     - ANDROID_SDK=4333796
-    - JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
 
 matrix:
   fast_finish: true
@@ -23,11 +22,11 @@ matrix:
       python: 3.6
     - os: osx
       language: cpp
-      env: PY=/usr/bin/python2.7
+      env: PY=/usr/bin/python2.7 JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
   allow_failures:
     - os: osx
       language: cpp
-      env: PY=/usr/bin/python2.7
+      env: PY=/usr/bin/python2.7 JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
 
 before_install:
   - . travis/before_install.sh

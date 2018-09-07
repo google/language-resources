@@ -1,6 +1,6 @@
 if [ "$TRAVIS_OS_NAME" = osx -o "$(uname)" = Darwin ]; then
   MY_OS=darwin
-  brew update
+  # brew update
   brew bundle --file=travis/Brewfile
   if [ -z "$VIRTUAL_ENV" ]; then
     virtualenv -p "$(which "$PY")" venv

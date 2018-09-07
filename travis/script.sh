@@ -11,7 +11,12 @@ if [ -z "$BAZEL_EXECUTABLE" ]; then
   exit 1
 fi
 
-STRATEGY=''
+# Not having a host configuration which is distinct from the target
+# configuration means that portions of tools (e.g. protobuf) that are shared
+# between build time (protoc, compiled for host) and runtime (protobuf runtime
+# library, compiled for target) only need to be built once. For a one-shot
+# continuous integration build, this saves a little bit of total build time.
+STRATEGY='--compilation_mode=opt --nodistinct_host_configuration'
 if [ -n "$TRAVIS" ]; then
   STRATEGY+=' --curses=no'
   STRATEGY+=' --jobs=3'

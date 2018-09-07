@@ -1,7 +1,0 @@
-# Just making sure that we don't OOM with parallel builds
-build --local_resources 2048,.5,1.0
-
-# This is so we understand failures better
-build --verbose_failures
-
-build --java_toolchain=@bazel_tools//tools/jdk:toolchain_hostjdk8

@@ -16,13 +16,10 @@ matrix:
   fast_finish: true
   include:
     - os: linux
-      jdk: oracalejdk9
       python: 2.7
     - os: linux
-      jdk: oracalejdk9
       python: 3.3
     - os: linux
-      jdk: oracalejdk9
       python: 3.7-dev
     - os: osx
       language: cpp

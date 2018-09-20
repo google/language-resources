@@ -18,7 +18,7 @@ else
   BAZEL=0.17.1
   curl -L "https://github.com/bazelbuild/bazel/releases/download/${BAZEL}/bazel-${BAZEL}-installer-${MY_OS}-x86_64.sh" > bazel-installer.sh
   bash bazel-installer.sh --user
-  jdk_switcher use openjdk10
+  export JAVA_HOME="$(bazel info java-home)"
 fi
 
 if [ -z "$ANDROID_HOME" ]; then
@@ -29,4 +29,5 @@ if [ -z "$ANDROID_HOME" ]; then
 fi
 
 echo JAVA_HOME="$JAVA_HOME"
+"$JAVA_HOME/bin/java" -version
 echo ANDROID_HOME="$ANDROID_HOME"

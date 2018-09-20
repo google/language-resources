@@ -13,11 +13,12 @@ else
   ## Optionally configure Trusty backports for a less ancient ICU.
   ## Fix this when Xenial becomes available.
   # sudo add-apt-repository ppa:suawekk/trusty-backports -y
-  # sudo apt-get update -q
-  echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
-  curl https://bazel.build/bazel-release.pub.gpg | sudo apt-key add -
-  sudo apt-get update -qq
-  sudo apt-get install -qq bazel libicu-dev -y
+  sudo apt-get update -q
+  sudo apt-get install -y libicu-dev
+  BAZEL=0.17.1
+  curl -L "https://github.com/bazelbuild/bazel/releases/download/${BAZEL}/bazel-${BAZEL}-installer-${MY_OS}-x86_64.sh" > bazel-installer.sh
+  bash bazel-installer.sh --user
+  jdk_switcher use openjdk10
 fi
 
 if [ -z "$ANDROID_HOME" ]; then

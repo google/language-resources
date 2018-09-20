@@ -36,7 +36,7 @@ before_install:
   - . travis/before_install.sh
 
 install:
-  - yes | "$ANDROID_HOME/tools/bin/sdkmanager" 'build-tools;28.0.2' 'platforms;android-28'
+  - yes | "$ANDROID_HOME/tools/bin/sdkmanager" 'build-tools;28.0.2' 'platforms;android-28' | tail
   - pip install -r travis/requirements.txt
 
 script:

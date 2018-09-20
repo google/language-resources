@@ -27,4 +27,5 @@ if [ -z "$ANDROID_HOME" ]; then
   unzip -q sdk-tools.zip -d "$ANDROID_HOME"
 fi
 
+echo JAVA_HOME="$JAVA_HOME"
 echo ANDROID_HOME="$ANDROID_HOME"

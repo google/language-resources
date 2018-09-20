@@ -12,16 +12,17 @@ env:
     - ANDROID_SDK=4333796
     - JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
 
-jdk: oracalejdk9
-
 matrix:
   fast_finish: true
   include:
     - os: linux
+      jdk: oracalejdk9
       python: 2.7
     - os: linux
+      jdk: oracalejdk9
       python: 3.3
     - os: linux
+      jdk: oracalejdk9
       python: 3.7-dev
     - os: osx
       language: cpp

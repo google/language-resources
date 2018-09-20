@@ -136,7 +136,7 @@ new_git_repository(
     name = "thrax",
     build_file = "bazel/thrax.BUILD",
     commit = "c65fb3d51f9bd0299503f3289a124f52c3431eeb",
-    remote = "https://github.com/mjansche/opengrm-ngram.git",
+    remote = "https://github.com/mjansche/thrax.git",
 )
 
 # Sparrowhawk

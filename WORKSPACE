@@ -118,25 +118,25 @@ bind(
 
 # OpenFst, OpenGrm NGram & Thrax
 
-new_http_archive(
+new_git_repository(
     name = "openfst",
     build_file = "bazel/openfst.BUILD",
-    strip_prefix = "openfst-1.6.7",
-    urls = ["http://www.openfst.org/twiki/pub/FST/FstDownload/openfst-1.6.7.tar.gz"],
+    commit = "612b2042a54a415926aaeee12106b93ae2d38bb2",
+    remote = "https://github.com/mjansche/openfst.git",
 )
 
 new_git_repository(
     name = "opengrm_ngram",
     build_file = "bazel/opengrm-ngram.BUILD",
-    remote = "https://github.com/pasindud/opengrm-ngram.git",
+    remote = "https://github.com/mjansche/opengrm-ngram.git",
     tag = "1.3.4",
 )
 
 new_git_repository(
     name = "thrax",
     build_file = "bazel/thrax.BUILD",
-    commit = "3b23d606f421357292787c4f45827e1f8635439a",
-    remote = "https://github.com/pasindud/thrax_1_2_6",
+    commit = "c65fb3d51f9bd0299503f3289a124f52c3431eeb",
+    remote = "https://github.com/mjansche/opengrm-ngram.git",
 )
 
 # Sparrowhawk

@@ -17,16 +17,14 @@ cc_library(
     deps = [":base"],
 )
 
-
-
 PUBLIC_HEADERS = [
     prefix_dir + "include/fst/fstlib.h",
-    # fstlib.h is a convenience header which includes all of the
+    #
     prefix_dir + "include/fst/accumulator.h",
     prefix_dir + "include/fst/add-on.h",
-    prefix_dir + "include/fst/arc.h",
     prefix_dir + "include/fst/arc-arena.h",
     prefix_dir + "include/fst/arc-map.h",
+    prefix_dir + "include/fst/arc.h",
     prefix_dir + "include/fst/arcfilter.h",
     prefix_dir + "include/fst/arcsort.h",
     prefix_dir + "include/fst/bi-table.h",
@@ -49,17 +47,14 @@ PUBLIC_HEADERS = [
     prefix_dir + "include/fst/equal.h",
     prefix_dir + "include/fst/equivalent.h",
     prefix_dir + "include/fst/expanded-fst.h",
-    prefix_dir + "include/fst/expectation-weight.h",
     prefix_dir + "include/fst/factor-weight.h",
     prefix_dir + "include/fst/filter-state.h",
     prefix_dir + "include/fst/fst.h",
     prefix_dir + "include/fst/heap.h",
-    prefix_dir + "include/fst/icu.h",
     prefix_dir + "include/fst/intersect.h",
     prefix_dir + "include/fst/invert.h",
     prefix_dir + "include/fst/isomorphic.h",
     prefix_dir + "include/fst/label-reachable.h",
-    prefix_dir + "include/fst/lexicographic-weight.h",
     prefix_dir + "include/fst/lookahead-filter.h",
     prefix_dir + "include/fst/lookahead-matcher.h",
     prefix_dir + "include/fst/map.h",
@@ -68,10 +63,7 @@ PUBLIC_HEADERS = [
     prefix_dir + "include/fst/memory.h",
     prefix_dir + "include/fst/minimize.h",
     prefix_dir + "include/fst/mutable-fst.h",
-    prefix_dir + "include/fst/pair-weight.h",
     prefix_dir + "include/fst/partition.h",
-    prefix_dir + "include/fst/power-weight.h",
-    prefix_dir + "include/fst/product-weight.h",
     prefix_dir + "include/fst/project.h",
     prefix_dir + "include/fst/properties.h",
     prefix_dir + "include/fst/prune.h",
@@ -81,34 +73,32 @@ PUBLIC_HEADERS = [
     prefix_dir + "include/fst/randgen.h",
     prefix_dir + "include/fst/rational.h",
     prefix_dir + "include/fst/relabel.h",
-    prefix_dir + "include/fst/replace.h",
     prefix_dir + "include/fst/replace-util.h",
+    prefix_dir + "include/fst/replace.h",
     prefix_dir + "include/fst/reverse.h",
     prefix_dir + "include/fst/reweight.h",
     prefix_dir + "include/fst/rmepsilon.h",
     prefix_dir + "include/fst/rmfinalepsilon.h",
-    prefix_dir + "include/fst/set-weight.h",
     prefix_dir + "include/fst/shortest-distance.h",
     prefix_dir + "include/fst/shortest-path.h",
-    prefix_dir + "include/fst/signed-log-weight.h",
     prefix_dir + "include/fst/state-map.h",
     prefix_dir + "include/fst/state-reachable.h",
     prefix_dir + "include/fst/state-table.h",
     prefix_dir + "include/fst/statesort.h",
     prefix_dir + "include/fst/string.h",
-    prefix_dir + "include/fst/string-weight.h",
     prefix_dir + "include/fst/symbol-table-ops.h",
     prefix_dir + "include/fst/synchronize.h",
     prefix_dir + "include/fst/test-properties.h",
     prefix_dir + "include/fst/topsort.h",
     prefix_dir + "include/fst/union.h",
-    prefix_dir + "include/fst/union-weight.h",
     prefix_dir + "include/fst/vector-fst.h",
     prefix_dir + "include/fst/verify.h",
     prefix_dir + "include/fst/visit.h",
-    prefix_dir + "include/fst/weight.h",
 ]
 
+# This version does not have the export-dynamic flag set and should not be
+# used to load dynamic-shared object FST extensions. Please see the
+# "lib_export_dynamic" target below for binaries that need DSO loading.
 cc_library(
     name = "lib_lite",
     srcs = [
@@ -117,6 +107,9 @@ cc_library(
         prefix_dir + "lib/symbol-table-ops.cc",
     ],
     hdrs = PUBLIC_HEADERS,
+    copts = ["-Wno-sign-compare"],
+    includes = [prefix_dir + "include"],
+    linkopts = ["-lm"],
     deps = [
         ":base",
         ":fst-decl",
@@ -130,30 +123,27 @@ cc_library(
     ],
 )
 
-# This version does not have export-dynamic flag set and should not be used to
-# load dynamic-shared object FST extensions. Please see the "lib_export_dynamic"
-# target below for binaries that need DSO loading.
 cc_library(
     name = "fst",
     hdrs = PUBLIC_HEADERS,
+    includes = [prefix_dir + "include"],
     deps = [
         ":fst-types",
         ":lib_lite",
-        ":base",
     ],
-)
-
-cc_library(
-    name = "fst-types",
-    srcs = [prefix_dir + "lib/fst-types.cc"],
-    deps = [":lib_lite"],
-    alwayslink = 1,
 )
 
 cc_library(
     name = "lib_export_dynamic",
     linkopts = ["-Wl,--export-dynamic"],
     deps = [":fst"],
+)
+
+cc_library(
+    name = "fst-types",
+    srcs = [prefix_dir + "lib/fst-types.cc"],
+    deps = [":lib_lite"],
+    alwayslink = 1,  # because of registration
 )
 
 cc_library(
@@ -178,6 +168,7 @@ cc_library(
         prefix_dir + "include/fst/pair-weight.h",
         prefix_dir + "include/fst/power-weight.h",
         prefix_dir + "include/fst/product-weight.h",
+        prefix_dir + "include/fst/set-weight.h",
         prefix_dir + "include/fst/signed-log-weight.h",
         prefix_dir + "include/fst/sparse-power-weight.h",
         prefix_dir + "include/fst/sparse-tuple-weight.h",
@@ -271,7 +262,7 @@ cc_test(
     timeout = "short",
     srcs = [
         prefix_dir + "test/fst_test.cc",
-        prefix_dir + "test/fst_test.h",
+        prefix_dir + "include/fst/test/fst_test.h",
     ],
     copts = ["-Wno-sign-compare"],
     deps = [":fst"],
@@ -280,7 +271,7 @@ cc_test(
 cc_library(
     name = "weight-tester",
     testonly = 1,
-    hdrs = [prefix_dir + "test/weight-tester.h"],
+    hdrs = [prefix_dir + "include/fst/test/weight-tester.h"],
     includes = [prefix_dir],
     deps = [":weight"],
 )
@@ -300,8 +291,8 @@ cc_test(
     name = "algo_test",
     srcs = [
         prefix_dir + "test/algo_test.cc",
-        prefix_dir + "test/algo_test.h",
-        prefix_dir + "test/rand-fst.h",
+        prefix_dir + "include/fst/test/algo_test.h",
+        prefix_dir + "include/fst/test/rand-fst.h",
     ],
     copts = ["-Wno-unused-local-typedefs"],
     deps = [":fst"],
@@ -334,7 +325,7 @@ cc_library(
         prefix_dir + "include/fst/script/stateiterator-class.h",
         prefix_dir + "include/fst/script/text-io.h",
         prefix_dir + "include/fst/script/weight-class.h",
-
+        #
         prefix_dir + "include/fst/script/arcsort.h",
         prefix_dir + "include/fst/script/closure.h",
         prefix_dir + "include/fst/script/compile.h",

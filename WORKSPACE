@@ -128,21 +128,21 @@ bind(
 new_git_repository(
     name = "openfst",
     build_file = "bazel/openfst.BUILD",
+    commit = "612b2042a54a415926aaeee12106b93ae2d38bb2",
     remote = "https://github.com/mjansche/openfst.git",
-    tag = "1.6.3",
 )
 
 new_git_repository(
     name = "opengrm_ngram",
     build_file = "bazel/opengrm-ngram.BUILD",
     remote = "https://github.com/mjansche/opengrm-ngram.git",
-    tag = "1.3.2",
+    tag = "1.3.4",
 )
 
 new_git_repository(
     name = "thrax",
     build_file = "bazel/thrax.BUILD",
-    commit = "e5630ac984c186d57668d57074c7c23efdbce8a5",  # 1.2.3
+    commit = "c65fb3d51f9bd0299503f3289a124f52c3431eeb",
     remote = "https://github.com/mjansche/thrax.git",
 )
 
@@ -151,6 +151,6 @@ new_git_repository(
 new_git_repository(
     name = "sparrowhawk",
     build_file = "bazel/sparrowhawk.BUILD",
-    commit = "0d2fe1305439c213653ed15da639de9b72f454a4",
+    commit = "a0503e26a433fbd3a9ff81ba7a08819e4a3bb668",
     remote = "https://github.com/google/sparrowhawk.git",
 )

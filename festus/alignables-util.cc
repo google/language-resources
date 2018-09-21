@@ -287,7 +287,7 @@ bool AlignablesUtil::Init(const AlignablesSpec &spec) {
   auto state = AddStartFinal(&pair_fsa_);
   for (const Alignable &ali : spec.alignable()) {
     string pair_symbol = MakePairSymbol(ali);
-    if (pair_symbols.Find(pair_symbol) != SymbolTable::kNoSymbol) {
+    if (pair_symbols.Find(pair_symbol) != fst::kNoSymbol) {
       LOG(ERROR) << "Pair symbol " << pair_symbol << " for alignable { "
                  << ali.Utf8DebugString() << " } has already been defined";
       return false;
@@ -307,7 +307,7 @@ bool AlignablesUtil::Init(const AlignablesSpec &spec) {
   for (const Alignable &ali : spec.alignable()) {
     // TODO: Merge into previous loop.
     Label pair_label = pair_symbols.Find(MakePairSymbol(ali));
-    CHECK_NE(pair_label, SymbolTable::kNoSymbol);
+    CHECK_NE(pair_label, fst::kNoSymbol);
 
     const string &input = ali.input();
     const string &output = ali.output();

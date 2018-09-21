@@ -227,7 +227,7 @@ kill_additional_dependent_vowels =
 ##
 ## **stray bytes are small samosas that appear randomly on platters.
 
-junk = (universal_rules.kBytes <100000>)+ : "j";
+junk = (universal_rules.kBytes <100000>)+ : "[junk]";
 
 aksara = Optimize[
    kill_spurious_nukta
@@ -243,6 +243,7 @@ export DELETE_JUNK =
 export NE_ALPHA = C | V;
 export WORD = Optimize[aksara+ | om];
 
+export WORD_CLEAN = Optimize[WORD @ DELETE_JUNK];
 
 ## You cannot have a dependent vowel after a number:
 kill_dependent_vowel_after_number =

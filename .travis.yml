@@ -10,6 +10,8 @@ branches:
 env:
   global:
     - ANDROID_SDK=4333796
+    - BAZEL=0.17.1
+    - JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
 
 matrix:
   fast_finish: true

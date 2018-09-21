@@ -26,7 +26,7 @@
 
 #include <fst/compat.h>
 #include <fst/float-weight.h>
-#include <test/weight-tester.h>  // fst/test/weight-tester.h
+#include <fst/test/weight-tester.h>
 #include <gtest/gtest.h>
 
 #include "festus/weight-test-lib.h"

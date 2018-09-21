@@ -11,17 +11,16 @@ if [ -z "$BAZEL_EXECUTABLE" ]; then
   exit 1
 fi
 
-STRATEGY='--compilation_mode=opt'
+# Not having a host configuration which is distinct from the target
+# configuration means that portions of tools (e.g. protobuf) that are shared
+# between build time (protoc, compiled for host) and runtime (protobuf runtime
+# library, compiled for target) only need to be built once. For a one-shot
+# continuous integration build, this saves a little bit of total build time.
+STRATEGY='--nodistinct_host_configuration'
+STRATEGY+=' --compilation_mode=opt'
 STRATEGY+=' --verbose_failures'
-if [ "$TRAVIS_OS_NAME" = linux -o "$(uname)" = Linux ]; then
-  STRATEGY+=' --nodistinct_host_configuration'
-  STRATEGY+=' --host_java_toolchain=@bazel_tools//tools/jdk:toolchain_hostjdk8'
-  STRATEGY+=' --java_toolchain=@bazel_tools//tools/jdk:toolchain_hostjdk8'
-fi
 if [ -n "$TRAVIS" ]; then
   STRATEGY+=' --curses=no'
-  #STRATEGY+=' --jobs=2'
-  #STRATEGY+=' --local_resources=2048,.5,1.0'
   STRATEGY+=' --test_timeout_filters=-long'
 fi
 
@@ -35,3 +34,5 @@ set -o xtrace
 
 "$BAZEL_EXECUTABLE" query '//... - rdeps(//..., filter("/textnorm/", //...))' |
   xargs "$BAZEL_EXECUTABLE" test $STRATEGY --
+
+"$BAZEL_EXECUTABLE" test $STRATEGY -- //ne/...

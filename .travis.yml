@@ -24,11 +24,11 @@ matrix:
       python: 3.6
     - os: osx
       language: cpp
-      env: PY=/usr/bin/python2.7 JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
+      env: PY=/usr/bin/python2.7
   allow_failures:
     - os: osx
       language: cpp
-      env: PY=/usr/bin/python2.7 JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
+      env: PY=/usr/bin/python2.7
 
 before_install:
   - . travis/before_install.sh

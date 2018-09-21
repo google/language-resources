@@ -243,6 +243,7 @@ export DELETE_JUNK =
 export NE_ALPHA = C | V;
 export WORD = Optimize[aksara+ | om];
 
+export WORD_CLEAN = Optimize[WORD @ DELETE_JUNK];
 
 ## You cannot have a dependent vowel after a number:
 kill_dependent_vowel_after_number =

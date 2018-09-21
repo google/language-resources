@@ -64,38 +64,52 @@ int main(int argc, char *argv[]) {
 
     const auto segments = thrax::StringSplit(line, "\t");
 
-    if (segments.size() != 3) {
-      LOG(ERROR) << "Line no: " << line << " malformed";
-      error = 1;
+    if (segments.size() != 2 && segments.size() != 3) {
+      LOG(ERROR) << "Line " << line_no << " malformed: " << line;
+      ++error;
       continue;
     }
 
-    string rule = segments[0];
-    string input = segments[1];
-    string expected = segments[2];
-
+    const string &input = segments[1];
     if (!compiler_(input, &input_fst)) {
       LOG(ERROR) << "Unable to parse input: " << input;
-      error = 1;
+      ++error;
       continue;
     }
 
-    if (!grm_manager.RewriteBytes(rule, input_fst, &output, "", "")) {
-      LOG(ERROR) << "REWRITE_FAILED in line - " << line_no
-                 << "\n line text: " + line
-                 << "\n Rule : " + rule
-                 << "\n Input : " + input
-                 << "\n Expected : " + expected;
+    const string &rule = segments[0];
+    bool success = grm_manager.RewriteBytes(rule, input_fst, &output, "", "");
+    if (segments.size() == 2) {
+      if (success) {
+        LOG(ERROR) << "REWRITE_SUCCEEDED unexpectedly in line " << line_no
+                   << "\n Line text: " + line
+                   << "\n Rule: " + rule
+                   << "\n Input: " + input
+                   << "\n Output: " + output;
+        ++error;
+      }
+      continue;
+    }
 
-      error = 1;
+    const string &expected = segments[2];
+    if (!success) {
+      LOG(ERROR) << "REWRITE_FAILED in line " << line_no
+                 << "\n Line text: " + line
+                 << "\n Rule: " + rule
+                 << "\n Input: " + input
+                 << "\n Output:   " + output
+                 << "\n Expected: " + expected;
+
+      ++error;
       continue;
     }
 
     if (output != expected) {
-      error = 1;
+      ++error;
       LOG(WARNING) << "Error in line " << line_no << " expected - "
                    << expected << " but actually - " << output;
     }
   }
+
   return error;
 }

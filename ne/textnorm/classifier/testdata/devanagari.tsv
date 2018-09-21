@@ -1,21 +1,20 @@
-WORD	ख़राब	खराब
-WORD	344	[junk]
-WORD	ख़	ख
-WORD	ख़ास	खास
-WORD	तः	तः
-WORD	अन्तत:	अन्ततः
-WORD	ख़ासः	खासः
+WORD_CLEAN	ख़राब	खराब
+WORD_CLEAN	344	
+WORD_CLEAN	ख़	ख
+WORD_CLEAN	ख़ास	खास
+WORD_CLEAN	तः	तः
+WORD_CLEAN	अन्तत:	अन्ततः
+WORD_CLEAN	ख़ासः	खासः
 # Spurious nukta
-WORD	एष़िमला	एषिमला
+WORD_CLEAN	एष़िमला	एषिमला
 # Anusvara in the wrong order: this should have been cleaned up
-WORD	कााठमाडौँी	काठमाडौँ
+WORD_CLEAN	कााठमाडौँी	काठमाडौँ
 # Some people like to use the sign for "3" followed by long /a/
 # (and here a long /i/ too)
-WORD	कछार३ाील	कछार[junk][junk]ल
+WORD_CLEAN	कछार३ाील	कछारल
 # Too many dependent vowels
-WORD	श्घ्रीा	श्घ्री
-WORD	जॅक़शन	ज[junk][junk]कशन
-WORD	झीङ्े	झीङे
-WORD	क्योंे	क्यों
-WORD	३ारनोंएवं	[junk][junk][junk]रनोंएवं
-
+WORD_CLEAN	श्घ्रीा	श्घ्री
+WORD_CLEAN	जॅक़शन	जकशन
+WORD_CLEAN	झीङ्े	झीङे
+WORD_CLEAN	क्योंे	क्यों
+WORD_CLEAN	३ारनोंएवं	रनोंएवं

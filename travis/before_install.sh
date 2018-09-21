@@ -1,25 +1,25 @@
 if [ "$TRAVIS_OS_NAME" = osx -o "$(uname)" = Darwin ]; then
   MY_OS=darwin
-  brew update
+  echo '$ python --version'
+  python --version
+  echo '$ pip --version'
+  pip --version
+  # brew update
   brew bundle --file=travis/Brewfile
-  if [ -z "$VIRTUAL_ENV" ]; then
-    virtualenv -p "$(which "$PY")" venv
-    . venv/bin/activate
-    python --version
-    pip --version
-  fi
 else
   MY_OS=linux
   ## Optionally configure Trusty backports for a less ancient ICU.
   ## Fix this when Xenial becomes available.
   # sudo add-apt-repository ppa:suawekk/trusty-backports -y
-  sudo apt-get update -q
-  sudo apt-get install -y libicu-dev
-  BAZEL=0.17.1
-  curl -L "https://github.com/bazelbuild/bazel/releases/download/${BAZEL}/bazel-${BAZEL}-installer-${MY_OS}-x86_64.sh" > bazel-installer.sh
-  bash bazel-installer.sh --user
-  export JAVA_HOME="$(bazel info java-home)"
+  # sudo apt-get update -qq
+  sudo apt-get install -q -y libicu-dev
 fi
+
+curl -L "https://github.com/bazelbuild/bazel/releases/download/${BAZEL}/bazel-${BAZEL}-installer-${MY_OS}-x86_64.sh" > bazel-installer.sh
+bash bazel-installer.sh --user
+export JAVA_HOME="$(bazel info java-home)"
+echo '$ $JAVA_HOME/bin/java -version'
+"$JAVA_HOME/bin/java" -version
 
 if [ -z "$ANDROID_HOME" ]; then
   export ANDROID_HOME="$HOME/Android/Sdk"
@@ -28,6 +28,4 @@ if [ -z "$ANDROID_HOME" ]; then
   unzip -q sdk-tools.zip -d "$ANDROID_HOME"
 fi
 
-echo JAVA_HOME="$JAVA_HOME"
-"$JAVA_HOME/bin/java" -version
 echo ANDROID_HOME="$ANDROID_HOME"

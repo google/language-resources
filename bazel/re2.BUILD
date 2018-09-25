@@ -54,6 +54,7 @@ cc_library(
         "util/logging.h",
         "util/mix.h",
         "util/mutex.h",
+        "util/pod_array.h",
         "util/sparse_array.h",
         "util/sparse_set.h",
         "util/strutil.h",

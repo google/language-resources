@@ -9,9 +9,9 @@ android_sdk_repository(
 
 # Protobuf
 
-protobuf_version = "3.5.1.1"
+protobuf_version = "3.6.1"
 
-protobuf_sha256 = "56b5d9e1ab2bf4f5736c4cfba9f4981fbc6976246721e7ded5602fbaee6d6869"
+protobuf_sha256 = "3d4e589d81b2006ca603c1ab712c9715a76227293032d05b26fca603f90b3f5b"
 
 # proto_library and related rules implicitly depend on @com_google_protobuf.
 http_archive(
@@ -74,7 +74,7 @@ new_git_repository(
     name = "com_googlesource_code_re2",
     build_file = "bazel/re2.BUILD",
     remote = "https://github.com/google/re2.git",
-    tag = "2016-11-01",
+    tag = "2018-09-01",
 )
 
 bind(

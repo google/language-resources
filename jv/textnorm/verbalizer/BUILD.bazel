@@ -82,7 +82,6 @@ thrax_compile_grm(
     ]
 ]
 
-
 thrax_compile_grm(
     name = "emoticons",
     deps = [
@@ -179,7 +178,6 @@ thrax_compile_grm(
         "number_names_rules.far",
     ] + universal_deps,
 )
-
 
 thrax_compile_grm(
     name = "measure",

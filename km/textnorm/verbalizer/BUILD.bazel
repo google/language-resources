@@ -19,7 +19,6 @@ load("//:thrax.bzl", "grm_regression_test")
 
 base_path = "km/textnorm/verbalizer/"
 
-
 [
     grm_regression_test(
         name = test_rules + "_tests",

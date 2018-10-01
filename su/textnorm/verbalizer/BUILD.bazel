@@ -179,7 +179,6 @@ thrax_compile_grm(
     ] + universal_deps,
 )
 
-
 thrax_compile_grm(
     name = "measure",
     deps = [

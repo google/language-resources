@@ -177,7 +177,6 @@ thrax_compile_grm(
     ] + universal_deps,
 )
 
-
 thrax_compile_grm(
     name = "time",
     deps = [

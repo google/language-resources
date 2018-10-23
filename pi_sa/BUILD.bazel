@@ -49,3 +49,23 @@ sh_test(
         "//utils:test_icu_transform",
     ],
 )
+
+sh_test(
+    name = "thai_laoo_translit_test",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = [
+        """
+        grep '^[^#]' $(location translit_testdata.tsv) |
+        cut -f 3,4 |
+        awk 'NF==2' |
+        $(location //utils:test_icu_transform) \
+          $(location pi_Thai-pi_Laoo.txt)
+        """,
+    ],
+    data = [
+        "pi_Thai-pi_Laoo.txt",
+        "translit_testdata.tsv",
+        "//utils:test_icu_transform",
+    ],
+)

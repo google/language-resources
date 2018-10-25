@@ -1,0 +1,207 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Classifier for dates.
+
+import 'burmese.grm' as burmese;
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+markup_day = universal_rules.ins_space universal_func.InvertMarkup[universal_rules.date_day] universal_rules.ins_space;
+markup_weekday = universal_rules.ins_space universal_func.InvertMarkup[universal_rules.date_weekday] universal_rules.ins_space;
+markup_month = universal_rules.ins_space universal_func.InvertMarkup[universal_rules.date_month] universal_rules.ins_space;
+markup_year = universal_rules.ins_space universal_func.InvertMarkup[universal_rules.date_year] universal_rules.ins_space;
+markup_quote = universal_func.InvertMarkup[universal_rules.quote];
+
+# Days
+day = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" |
+    "10" | "11" | "12" | "13" | "14" | "15" | "16" | "17" | "18" | "19" |
+    "20" | "21" | "22" | "23" | "24" | "25" | "26" | "27" | "28" | "29" |
+    "30" | "31";
+
+days = universal_rules.delete_initial_zero @ day;
+
+# Months
+month = "1" | "2" | "3" | "4" | "5" | "6" |
+    "7" | "8" | "9" | "10" | "11" | "12";
+
+months = universal_rules.delete_initial_zero @ month;
+
+space = (" " : "");
+day_classifier = space? ((("ရက်" | "နေ့") : "")
+                       | (("ရက် နေ့" | "ရက်နေ့") : "ရက်နေ့"));
+month_classifier = space? ("လ" : "");
+year_classifier = space? ("ခုနှစ်" : "");
+
+month_number_to_full_name =
+    ("1" : "ဇန်နဝါရီ")
+  | ("2" : "ဖေဖော်ဝါရီ")
+  | ("3" : "မတ်")
+  | ("4" : "ဧပြီ")
+  | ("5" : "မေ")
+  | ("6" : "ဇွန်")
+  | ("7" : "ဇူလိုင်")
+  | ("8" : "ဩဂုတ်")
+  | ("9" : "စက်တင်ဘာ")
+  | ("10" : "အောက်တိုဘာ")
+  | ("11" : "နိုဝင်ဘာ")
+  | ("12" : "ဒီဇင်ဘာ")
+;
+
+months_from_number = months @ month_number_to_full_name;
+
+# There is no abbreviation for month names.
+month_full_name =
+    "ဇန်နဝါရီ"
+  | "ဖေဖော်ဝါရီ"
+  | "မတ်"
+  | "ဧပြီ"
+  | "မေ"
+  | "ဇွန်"
+  | "ဇူလိုင်"
+  | "ဩဂုတ်"
+  | "စက်တင်ဘာ"
+  | "အောက်တိုဘာ"
+  | "နိုဝင်ဘာ"
+  | "ဒီဇင်ဘာ"
+;
+
+# Howerver, people also use the word "month" + cardinals (1-12)
+# to mean these months.
+month_ordinal_name =
+    "တစ်လပိုင်း"
+  | "နှစ်လပိုင်း"
+  | "သုံးလပိုင်း"
+  | "လေးလပိုင်း"
+  | "ငါးလပိုင်း"
+  | "ခြောက်လပိုင်း"
+  | "ခုနှစ်လပိုင်း"
+  | "ရှစ်လပိုင်း"
+  | "ကိုးလပိုင်း"
+  | "ဆယ်လပိုင်း"
+  | "ဆယ့်တစ်လပိုင်း"
+  | "ဆယ့်နှစ်လပိုင်း"
+;
+
+month_name_map =
+    months_from_number
+  | month_full_name
+  | month_ordinal_name
+;
+
+remove_slash = "/" : "";
+month_names = remove_slash? month_name_map remove_slash?;
+month_names_with_quotes = markup_quote month_names markup_quote;
+
+# Eras
+era_names = (("BC" | "ဘီစီ") : "ဘီစီ")
+          | (("AC" | "အေစီ") : "အေစီ")
+          | ("ဘီ စီ" : "ဘီစီ");
+
+export ERA = universal_rules.clear_space_star
+      universal_rules.ins_space
+      universal_func.InvertMarkup[universal_rules.date_era]
+      universal_rules.ins_space
+      universal_rules.ins_quote
+      era_names
+      universal_rules.ins_quote;
+
+date_markup = universal_func.InvertMarkup[universal_rules.date] universal_rules.ins_space
+              universal_func.InvertMarkup[universal_rules.opening_brace]
+              universal_rules.sigma_star universal_rules.ins_space
+              universal_func.InvertMarkup[universal_rules.closing_brace];
+
+# Year could be 2-digit or 4-digit long.
+year = universal_rules.kDigit{2,4} | burmese.BURMESE_DIGIT{2,4};
+year_2digits = universal_rules.kDigit{2} | burmese.BURMESE_DIGIT{2};
+year_4digits = universal_rules.kDigit{4} | burmese.BURMESE_DIGIT{4};
+
+export YEAR_ONLY_MARKUP = Optimize[
+  (markup_year (("1" | "2") universal_rules.kDigit{3})) @
+  date_markup
+];
+separator = ("/" | "-" | ".") : "";
+
+# 4/5/2000, 4-5-2000, 4.5.2000
+dmy1 = markup_day days
+       separator markup_month month_names_with_quotes
+       separator markup_year year;
+
+# ဖေဖော်ဝါရီ 4 ရက်နေ့ အေဒီ 2000 ခုနှစ်
+dmy2 = markup_month month_names_with_quotes month_classifier?
+       universal_rules.clear_space_plus
+       markup_day days day_classifier?
+       universal_rules.clear_space_plus
+       (ERA universal_rules.clear_space_star)?
+       markup_year year year_classifier?;
+
+# 2000 ခုနှစ် ဖေဖော်ဝါရီ 4 ရက်နေ့
+dmy3 = (ERA universal_rules.clear_space_star)?
+       markup_year year year_classifier?
+       universal_rules.clear_space_plus
+       markup_month month_names_with_quotes month_classifier?
+       universal_rules.clear_space_plus
+       markup_day days day_classifier?
+       universal_rules.clear_space_plus;
+
+# ဖေဖော်ဝါရီ 3 ရက်
+md = markup_month month_names_with_quotes month_classifier?
+     universal_rules.clear_space_plus
+     markup_day days day_classifier?;
+
+# When the format is "day month",
+# we disallow slash in month to avoid conflict with fraction.
+month_names_with_quotes_no_slash = markup_quote month_name_map markup_quote;
+dm = markup_day days day_classifier?
+     universal_rules.clear_space_plus
+    markup_month month_names_with_quotes_no_slash month_classifier?;
+
+# ဖေဖော်ဝါရီ 2000 ခုနစ်
+my = markup_month month_names_with_quotes month_classifier?
+     universal_rules.clear_space_plus
+     markup_year
+     ((year_4digits year_classifier?) | (year_2digits year_classifier));
+
+# 2000 ခုနစ် ဖေဖော်ဝါရီ
+ym = markup_year
+    ((year_4digits year_classifier?) | (year_2digits year_classifier))
+     universal_rules.clear_space_plus
+     markup_month month_names_with_quotes month_classifier?;
+
+# No commonly used abbreviations for weekday names.
+weekdays =
+    "တနင်္လာ"
+  | "အင်္ဂါ"
+  | "ဗုဒ္ဓဟူး"
+  | "ကြာသပတေး"
+  | "သောကြာ"
+  | "စနေ"
+  | "တနင်္ဂနွေ"
+;
+
+# weekday + day. E.g., "2000 ခုနစ် ဖေဖော်ဝါရီလ သောကြာနေ့".
+weekday = universal_rules.clear_space_star
+          markup_weekday markup_quote weekdays day_classifier? markup_quote;
+
+export style1 = ((dmy1 | dmy2 | my | ym) | ((dmy3 | md) weekday?))
+         universal_rules.ins_space universal_func.InvertMarkup[universal_rules.style1];
+
+export style2 = dm weekday? universal_rules.ins_space universal_func.InvertMarkup[universal_rules.style2];
+
+export DATE_MARKUP = Optimize[
+  universal_func.InvertMarkup[universal_rules.date]
+  universal_func.InvertMarkup[universal_rules.opening_brace]
+  (style1 | style2)
+  universal_func.InvertMarkup[universal_rules.closing_brace]
+];

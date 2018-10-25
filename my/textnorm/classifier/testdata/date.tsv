@@ -1,0 +1,39 @@
+# DMY1
+DATE_MARKUP	3/1/2455	date{ day: 3 month: "ဇန်နဝါရီ" year: 2455 style: 1}
+DATE_MARKUP	12/10/1932	date{ day: 12 month: "အောက်တိုဘာ" year: 1932 style: 1}
+DATE_MARKUP	23/6/2408	date{ day: 23 month: "ဇွန်" year: 2408 style: 1}
+DATE_MARKUP	12-1-1998	date{ day: 12 month: "ဇန်နဝါရီ" year: 1998 style: 1}
+DATE_MARKUP	12-11-2556	date{ day: 12 month: "နိုဝင်ဘာ" year: 2556 style: 1}
+
+# DMY2
+DATE_MARKUP	ဖေဖော်ဝါရီ 4ရက် 2000 ခုနှစ်	date{ month: "ဖေဖော်ဝါရီ" day: 4 year: 2000 style: 1}
+DATE_MARKUP	ဖေဖော်ဝါရီ 4 ရက်နေ့ ဘီစီ 2000 ခုနှစ်	date{ month: "ဖေဖော်ဝါရီ" day: 4ရက်နေ့ era: "ဘီစီ" year: 2000 style: 1}
+DATE_MARKUP	ဖေဖော်ဝါရီ 4 ရက်နေ့ ဘီ စီ 2000 ခုနှစ်	date{ month: "ဖေဖော်ဝါရီ" day: 4ရက်နေ့ era: "ဘီစီ" year: 2000 style: 1}
+DATE_MARKUP	ဖေဖော်ဝါရီ 4 ရက် နေ့ ဘီစီ 2000 ခုနှစ်	date{ month: "ဖေဖော်ဝါရီ" day: 4ရက်နေ့ era: "ဘီစီ" year: 2000 style: 1}
+DATE_MARKUP	ဇွန်လ 14 ရက်နေ့ 3228ခုနှစ်	date{ month: "ဇွန်" day: 14ရက်နေ့ year: 3228 style: 1}
+
+# DMY3
+DATE_MARKUP	2000 ခုနှစ် ဖေဖော်ဝါရီ 4ရက် တနင်္လာနေ့	date{ year: 2000 month: "ဖေဖော်ဝါရီ" day: 4 weekday: "တနင်္လာ" style: 1}
+DATE_MARKUP	ဘီစီ 2000 ခုနှစ် ဖေဖော်ဝါရီ 4 ရက်နေ့ 	date{ era: "ဘီစီ" year: 2000 month: "ဖေဖော်ဝါရီ" day: 4ရက်နေ့ style: 1}
+DATE_MARKUP	3228ခုနှစ် ဇွန်လ 14 ရက် နေ့ 	date{ year: 3228 month: "ဇွန်" day: 14ရက်နေ့ style: 1}
+DATE_MARKUP	3228ခုနှစ် ဇွန်လ 14 ရက်နေ့ 	date{ year: 3228 month: "ဇွန်" day: 14ရက်နေ့ style: 1}
+
+# MD
+DATE_MARKUP	ဇွန် 4 ရက်နေ့	date{ month: "ဇွန်" day: 4ရက်နေ့ style: 1}
+DATE_MARKUP	နိုဝင်ဘာ  22 ရက်နေ့	date{ month: "နိုဝင်ဘာ" day: 22ရက်နေ့ style: 1}
+DATE_MARKUP	သုံးလပိုင်း  18ရက် သောကြာနေ့	date{ month: "သုံးလပိုင်း" day: 18 weekday: "သောကြာ" style: 1}
+
+# DM
+DATE_MARKUP	4 ရက်နေ့ ဇွန်	date{ day: 4ရက်နေ့ month: "ဇွန်" style: 2}
+DATE_MARKUP	19 နိုဝင်ဘာ	date{ day: 19 month: "နိုဝင်ဘာ" style: 2}
+DATE_MARKUP	18ရက် သုံးလပိုင်း သောကြာနေ့	date{ day: 18 month: "သုံးလပိုင်း" weekday: "သောကြာ" style: 2}
+
+# MY
+DATE_MARKUP	ဇွန်လ 2015ခုနှစ်	date{ month: "ဇွန်" year: 2015 style: 1}
+DATE_MARKUP	ဧပြီလ 1998 ခုနှစ်	date{ month: "ဧပြီ" year: 1998 style: 1}
+DATE_MARKUP	ဩဂုတ် 2018	date{ month: "ဩဂုတ်" year: 2018 style: 1}
+
+# YM
+DATE_MARKUP	2015ခုနှစ် ဇွန်လ	date{ year: 2015 month: "ဇွန်" style: 1}
+DATE_MARKUP	1998 ခုနှစ် ဧပြီ	date{ year: 1998 month: "ဧပြီ" style: 1}
+DATE_MARKUP	2018 ဩဂုတ်	date{ year: 2018 month: "ဩဂုတ်" style: 1}

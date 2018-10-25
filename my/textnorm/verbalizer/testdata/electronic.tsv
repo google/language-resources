@@ -1,0 +1,19 @@
+ELECTRONIC_MARKUP	electronic|username:abc123_9x8@|domain:gmail.com|	a_letter-en b_letter-en c_letter-en တစ်_standalone နှစ်_standalone သုံး အန်ဒါစကော ကိုး x_letter-en ရှစ် အက် gmail ဒေါ့ com
+ELECTRONIC_MARKUP	electronic|username:abcde@|domain:hotmail.com|	a_letter-en b_letter-en c_letter-en d_letter-en e_letter-en အက် hotmail ဒေါ့ com
+ELECTRONIC_MARKUP	electronic|username:smart_person@|domain:yahoo.com|	s_letter-en m_letter-en a_letter-en r_letter-en t_letter-en အန်ဒါစကော p_letter-en e_letter-en r_letter-en s_letter-en o_letter-en n_letter-en အက် yahoo ဒေါ့ com
+ELECTRONIC_MARKUP	electronic|username:test@|domain:google.com|	t_letter-en e_letter-en s_letter-en t_letter-en အက် google ဒေါ့ com
+ELECTRONIC_MARKUP	electronic|domain:www.test123.com|	ဒဗလျူ ဒဗလျူ ဒဗလျူ ဒေါ့ t_letter-en e_letter-en s_letter-en t_letter-en တစ်_standalone နှစ်_standalone သုံး ဒေါ့ com
+ELECTRONIC_MARKUP	electronic|domain:www.google.com.mm|	ဒဗလျူ ဒဗလျူ ဒဗလျူ ဒေါ့ google ဒေါ့ com ဒေါ့ m_letter-en m_letter-en
+ELECTRONIC_MARKUP	electronic|protocol:https|domain:www.facebook.com|	h_letter-en t_letter-en t_letter-en p_letter-en s_letter-en ကော်လံ ဆလက်ရှ် ဆလက်ရှ် ဒဗလျူ ဒဗလျူ ဒဗလျူ ဒေါ့ facebook ဒေါ့ com
+ELECTRONIC_MARKUP	electronic|protocol:http|domain:www.facebook.com|	h_letter-en t_letter-en t_letter-en p_letter-en ကော်လံ ဆလက်ရှ် ဆလက်ရှ် ဒဗလျူ ဒဗလျူ ဒဗလျူ ဒေါ့ facebook ဒေါ့ com
+ELECTRONIC_MARKUP	electronic|domain:hotmail.com|	hotmail ဒေါ့ com
+ELECTRONIC_MARKUP	electronic|domain:yahoo.com|	yahoo ဒေါ့ com
+ELECTRONIC_MARKUP	electronic|domain:www.test.com|port:80|	ဒဗလျူ ဒဗလျူ ဒဗလျူ ဒေါ့ t_letter-en e_letter-en s_letter-en t_letter-en ဒေါ့ com ပေါ့ ရှစ် ဆယ်
+ELECTRONIC_MARKUP	electronic|domain:www.google.com.mm|port:4567|	ဒဗလျူ ဒဗလျူ ဒဗလျူ ဒေါ့ google ဒေါ့ com ဒေါ့ m_letter-en m_letter-en ပေါ့ လေး ထောင့် ငါး ရာ ခြောက် ဆယ့် ခုနစ်_standalone
+ELECTRONIC_MARKUP	electronic|domain:www.9gag.com|	ဒဗလျူ ဒဗလျူ ဒဗလျူ ဒေါ့ nine gag ဒေါ့ com
+ELECTRONIC_MARKUP	electronic|domain:www.irrawaddy.com|	ဒဗလျူ ဒဗလျူ ဒဗလျူ ဒေါ့ i_letter-en r_letter-en r_letter-en a_letter-en w_letter-en a_letter-en d_letter-en d_letter-en y_letter-en ဒေါ့ com
+ELECTRONIC_MARKUP	electronic|domain:twitter.com|	twitter ဒေါ့ com
+ELECTRONIC_MARKUP	electronic|domain:www.7daydaily.com|	ဒဗလျူ ဒဗလျူ ဒဗလျူ ဒေါ့ 7 day daily ဒေါ့ com
+ELECTRONIC_MARKUP	electronic|domain:www.youtube.com|	ဒဗလျူ ဒဗလျူ ဒဗလျူ ဒေါ့ youtube ဒေါ့ com
+ELECTRONIC_MARKUP	electronic|domain:www.mcit.gov.mm|	ဒဗလျူ ဒဗလျူ ဒဗလျူ ဒေါ့ m_letter-en c_letter-en i_letter-en t_letter-en ဒေါ့ g_letter-en o_letter-en v_letter-en ဒေါ့ m_letter-en m_letter-en
+ELECTRONIC_MARKUP	electronic|domain:www.ict.com.mm|	ဒဗလျူ ဒဗလျူ ဒဗလျူ ဒေါ့ i_letter-en c_letter-en t_letter-en ဒေါ့ com ဒေါ့ m_letter-en m_letter-en

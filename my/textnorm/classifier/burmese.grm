@@ -1,0 +1,79 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Ranges of Burmese characters, as encoded in utf-8.
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+# Consonants: U+1000 through U+1021, as well as U+103F
+export BURMESE_ALPHABET = "က" | "ခ" | "ဂ" | "ဃ" | "င" | "စ" | "ဆ" | "ဇ" |
+"ဈ" | "ဉ" | "ည" | "ဋ" | "ဌ" | "ဍ" | "ဎ" | "ဏ" | "တ" | "ထ" | "ဒ" | "ဓ" |
+"န" | "ပ" | "ဖ" | "ဗ" | "ဘ" | "မ" | "ယ" | "ရ" | "လ" | "ဝ" | "သ" | "ဟ" |
+"ဠ" | "အ" | "ဿ";
+
+# U+1023 through U+102A, excluding U+1028
+export BURMESE_INDEPENDENT_VOWEL = "ဣ" | "ဤ" | "ဥ" | "ဦ" | "ဧ" | "ဩ" |
+"ဪ";
+
+# U+102B through U+1032, as well as U+1036
+export BURMESE_VOWEL = "ါ" | "ာ" | "ိ" | "ီ" | "ု" | "ူ" | "ေ" | "ဲ" | "ံ";
+
+# U+1037 and U+1038
+export BURMESE_TONE = "့" | "း";
+
+# U+1039
+export BURMESE_VIRAMA = "္";
+
+# U+103A
+export BURMESE_ASAT = "်";
+
+# U+103B through U+103E
+export BURMESE_MEDIAL = "ျ" | "ြ" | "ွ" | "ှ";
+
+# U+104A and U+104B
+export BURMESE_PUNCTUATION = "၊" | "။";
+
+# U+104C through U+104F
+export BURMESE_SYMBOL = "၌" | "၍" | "၎" | "၏";
+
+export BURMESE_LETTER =
+  BURMESE_ALPHABET
+| BURMESE_INDEPENDENT_VOWEL
+| BURMESE_VOWEL
+| BURMESE_TONE
+| BURMESE_VIRAMA
+| BURMESE_ASAT
+| BURMESE_MEDIAL
+| BURMESE_SYMBOL
+;
+
+# U+1041 through U+1049
+export BURMESE_D1TO9 = ("၁" : "1")
+            | ("၂" : "2")
+            | ("၃" : "3")
+            | ("၄" : "4")
+            | ("၅" : "5")
+            | ("၆" : "6")
+            | ("၇" : "7")
+            | ("၈" : "8")
+            | ("၉" : "9")
+;
+
+# U+1040
+export BURMESE_DIGIT = BURMESE_D1TO9
+            | ("၀" : "0");
+
+export DIGIT = universal_rules.kDigit
+             | Project[BURMESE_DIGIT, 'input'];

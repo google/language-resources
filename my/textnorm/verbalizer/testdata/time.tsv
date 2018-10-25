@@ -1,0 +1,17 @@
+TIME_MARKUP	time|hours:21|minutes:19|	နှစ်_unit ဆယ့် တစ်_unit နာရီ ဆယ့် ကိုး မိနစ်
+TIME_MARKUP	time|hours:12|minutes:23|	ဆယ့် နှစ်_unit နာရီ နှစ်_unit ဆယ့် သုံး မိနစ်
+TIME_MARKUP	time|hours:7|minutes:17|seconds:12|	ခုနစ်_unit နာရီ ဆယ့် ခုနစ်_unit မိနစ် ဆယ့် နှစ်_unit စက္ကန့်
+TIME_MARKUP	time|hours:22|minutes:51|seconds:33|	နှစ်_unit ဆယ့် နှစ်_unit နာရီ ငါး ဆယ့် တစ်_unit မိနစ် သုံး ဆယ့် သုံး စက္ကန့်
+TIME_MARKUP	time|hours:19|minutes:4|seconds:59|	ဆယ့် ကိုး နာရီ လေး မိနစ် ငါး ဆယ့် ကိုး စက္ကန့်
+TIME_MARKUP	time|hours:19|minutes:0|seconds:9|	ဆယ့် ကိုး နာရီ ကိုး စက္ကန့်
+TIME_MARKUP	time|hours:24|minutes:0|	နှစ်_unit ဆယ့် လေး နာရီ
+TIME_MARKUP	time|hours:17|minutes:0|seconds:0|	ဆယ့် ခုနစ်_unit နာရီ
+TIME_MARKUP	time|hours:18|minutes:10|seconds:0|	ဆယ့် ရှစ် နာရီ တစ်_unit ဆယ် မိနစ်
+TIME_MARKUP	time|hours:9|minutes:0|seconds:7|	ကိုး နာရီ ခုနစ်_unit စက္ကန့်
+TIME_MARKUP	time|hours:8|minutes:0|	ရှစ် နာရီ
+TIME_MARKUP	time|hours:16|minutes:0|	ဆယ့် ခြောက် နာရီ
+TIME_MARKUP	time|hours:4|minutes:0|	လေး နာရီ
+TIME_MARKUP	time|hours:17|minutes:32|	ဆယ့် ခုနစ်_unit နာရီ သုံး ဆယ့် နှစ်_unit မိနစ်
+TIME_MARKUP	time|suffix:နေ့ခင်း|hours:4|minutes:0|	နေ့ခင်း လေး နာရီ
+TIME_MARKUP	time|hours:8|minutes:30|	ရှစ် နာရီ သုံး ဆယ် မိနစ်
+TIME_MARKUP	time|suffix:ညနေ|hours:3|minutes:30|	ညနေ သုံး နာရီ သုံး ဆယ် မိနစ်

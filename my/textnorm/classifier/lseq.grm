@@ -1,0 +1,36 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Parser for Burmese letter sequences "စစစ" and "အ.ထ.က" etc.
+
+import 'burmese.grm' as burmese;
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+lseq_exceptions = Optimize[StringFile['lseq_exceptions.tsv']];
+
+# Normally, LSEQ are three or four consecutive letters,
+# except the words in the exceptions list.
+lseq_my = burmese.BURMESE_ALPHABET{3,4} - lseq_exceptions;
+
+# Sometimes, fullstop maybe used in between letters such as  "အ.ထ.က".
+# Strip dot in those cases.
+lseq_my_dot = burmese.BURMESE_ALPHABET
+              ((("." | " . ") : "") burmese.BURMESE_ALPHABET){2,3};
+
+export LSEQ_FULLSTOPS = Optimize[
+  universal_rules.LSEQ |
+  universal_rules.LSEQ_FULLSTOPS |
+  ((lseq_my | lseq_my_dot) @ universal_rules.LSEQ_MARKUP)
+];

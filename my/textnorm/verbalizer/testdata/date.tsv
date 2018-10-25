@@ -1,0 +1,34 @@
+# DMY1
+DATE_MARKUP	date|day:3|month:ဇန်နဝါရီ|year:2455|style:1|	သုံး ရက် ဇန်နဝါရီ လ နှစ်_unit ထောင့် လေး ရာ ငါး ဆယ့် ငါး ခုနှစ်
+DATE_MARKUP	date|day:12|month:ဇန်နဝါရီ|year:1998|style:1|	ဆယ့် နှစ်_unit ရက် ဇန်နဝါရီ လ တစ်_unit ထောင့် ကိုး ရာ ကိုး ဆယ့် ရှစ် ခုနှစ်
+DATE_MARKUP	date|day:12|month:နိုဝင်ဘာ|year:2556|style:1|	ဆယ့် နှစ်_unit ရက် နိုဝင်ဘာ လ နှစ်_unit ထောင့် ငါး ရာ ငါး ဆယ့် ခြောက် ခုနှစ်
+
+# DMY2
+DATE_MARKUP	date|month:ဖေဖော်ဝါရီ|day:4|year:2000|style:1|	ဖေဖော်ဝါရီ လ လေး ရက် နှစ်_unit ထောင် ခုနှစ်
+DATE_MARKUP	date|month:ဖေဖော်ဝါရီ|day:4|era:ဘီစီ|year:2000|style:1|	ဖေဖော်ဝါရီ လ လေး ရက် ဘီစီ နှစ်_unit ထောင် ခုနှစ်
+DATE_MARKUP	date|month:ဖေဖော်ဝါရီ|day:4|era:ဘီစီ|year:2000|style:1|	ဖေဖော်ဝါရီ လ လေး ရက် ဘီစီ နှစ်_unit ထောင် ခုနှစ်
+DATE_MARKUP	date|month:ဇွန်|day:14|year:3228|style:1|	ဇွန် လ ဆယ့် လေး ရက် သုံး ထောင့် နှစ်_unit ရာ နှစ်_unit ဆယ့် ရှစ် ခုနှစ်
+
+# DMY3
+DATE_MARKUP	date|year:2000|month:ဖေဖော်ဝါရီ|day:4|weekday:တနင်္လာ|style:1|	နှစ်_unit ထောင် ခုနှစ် ဖေဖော်ဝါရီ လ လေး ရက် တနင်္လာ နေ့
+DATE_MARKUP	date|era:ဘီစီ|year:2000|month:ဖေဖော်ဝါရီ|day:4|style:1|	ဘီစီ နှစ်_unit ထောင် ခုနှစ် ဖေဖော်ဝါရီ လ လေး ရက်
+DATE_MARKUP	date|year:3228|month:ဇွန်|day:14|style:1|	သုံး ထောင့် နှစ်_unit ရာ နှစ်_unit ဆယ့် ရှစ် ခုနှစ် ဇွန် လ ဆယ့် လေး ရက်
+
+# MD
+DATE_MARKUP	date|month:ဇွန်|day:4|style:1|	ဇွန် လ လေး ရက်
+DATE_MARKUP	date|month:နိုဝင်ဘာ|day:22|style:1|	နိုဝင်ဘာ လ နှစ်_unit ဆယ့် နှစ်_unit ရက်
+DATE_MARKUP	date|month:သုံး လပိုင်း|day:18|weekday:သောကြာ|style:1|	သုံး လပိုင်း လ ဆယ့် ရှစ် ရက် သောကြာ နေ့
+
+# DM
+DATE_MARKUP	date|day:4|month:ဇွန်|style:2|	လေး ဇွန် လ
+DATE_MARKUP	date|day:22|month:နိုဝင်ဘာ|style:2|	နှစ်_unit ဆယ့် နှစ်_unit နိုဝင်ဘာ လ
+
+# MY
+DATE_MARKUP	date|month:ဇွန်|year:2015|style:1|	ဇွန် လ နှစ်_unit ထောင့် တစ်_unit ဆယ့် ငါး ခုနှစ်
+DATE_MARKUP	date|month:ဧပြီ|year:1998|style:1|	ဧပြီ လ တစ်_unit ထောင့် ကိုး ရာ ကိုး ဆယ့် ရှစ် ခုနှစ်
+DATE_MARKUP	date|month:ဩဂုတ်|year:2018|style:1|	ဩဂုတ် လ နှစ်_unit ထောင့် တစ်_unit ဆယ့် ရှစ် ခုနှစ်
+
+# YM
+DATE_MARKUP	date|year:2015|month:ဇွန်|style:1|	နှစ်_unit ထောင့် တစ်_unit ဆယ့် ငါး ခုနှစ် ဇွန် လ
+DATE_MARKUP	date|year:1998|month:ဧပြီ|style:1|	တစ်_unit ထောင့် ကိုး ရာ ကိုး ဆယ့် ရှစ် ခုနှစ် ဧပြီ လ
+DATE_MARKUP	date|year:2018|month:ဩဂုတ်|style:1|	နှစ်_unit ထောင့် တစ်_unit ဆယ့် ရှစ် ခုနှစ် ဩဂုတ် လ

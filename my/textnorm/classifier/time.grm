@@ -1,0 +1,130 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Parser for Burmese time.
+# Basically, combine universal time markup with added support
+# for Burmese a.m and p.m (မနက် and ညနေ)
+
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+separator = universal_rules.del_space_star (":" : "") universal_rules.del_space_star;
+
+burmese_am = ("မနက်" | "နံနက်" | "မနက်ခင်း");
+burmese_pm = ("မွန်းလွဲ" | "နေ့ခင်း" | "ညနေ" | "ည") | ("နေ့ ခင်း" : "နေ့ခင်း");
+
+burmese_time_indicator = Optimize[burmese_am | burmese_pm];
+
+remove_hour = (" နာရီ") : "";
+
+export MARKUP_SUFFIX = universal_func.InvertMarkup[universal_rules.time_suffix] universal_rules.ins_space;
+
+minute_and_optional_second =
+  universal_rules.MARKUP_MINUTES universal_rules.TIME00_59 (separator universal_rules.MARKUP_SECONDS universal_rules.TIME00_59)?;
+
+half_hour = (" နာရီ ခွဲ" : "30") @ minute_and_optional_second;
+
+# Below, we specify the suffixes used for certain periods of the day, kind of
+# like "a.m." and "p.m." in English.
+hour_03_to_11 =
+  MARKUP_SUFFIX
+  universal_rules.del_space_star
+  ("" : "မနက် ")
+  universal_rules.MARKUP_HOURS
+  universal_rules.del_space_star
+  ("3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11")
+  universal_rules.AM
+;
+
+hour_12_to_14 =
+  MARKUP_SUFFIX
+  universal_rules.del_space_star
+  ("" : "နေ့လည် ")
+  universal_rules.MARKUP_HOURS
+  universal_rules.del_space_star
+  ("12" | "1" | "2" | "13" | "14")
+  universal_rules.PM
+;
+
+hour_15_to_18 =
+  MARKUP_SUFFIX
+  universal_rules.del_space_star
+  ("" : "ညနေ ")
+   universal_rules.MARKUP_HOURS
+  universal_rules.del_space_star
+  ("3" | "4" | "5" | "6" | "15" | "16" | "17" | "18")
+  universal_rules.PM
+;
+
+hour_19_to_23 =
+  MARKUP_SUFFIX
+  universal_rules.del_space_star
+  ("" : "ည ")
+  universal_rules.MARKUP_HOURS
+  universal_rules.del_space_star
+  ("7" | "8" | "9" | "10" | "11" | "19" | "20" | "21" | "22" | "23")
+  universal_rules.PM
+;
+
+hour_midnight =
+  MARKUP_SUFFIX
+  universal_rules.del_space_star
+  ("" : "သန်းခေါင်ယံ ")
+  universal_rules.MARKUP_HOURS
+  universal_rules.del_space_star
+  ("12" | "0" | "1" | "2" | "24")
+  universal_rules.AM
+;
+
+# Time with time indicator; may or may not have 'minute' and 'second' parts.
+style_with_indicator = Optimize[
+  MARKUP_SUFFIX
+  universal_rules.del_space_star
+  burmese_time_indicator
+  universal_rules.MARKUP_HOURS
+  universal_rules.del_space_star
+  universal_rules.HOURS
+  remove_hour?
+  ((separator minute_and_optional_second remove_hour?) | half_hour)?
+  universal_rules.ins_space universal_func.InvertMarkup[universal_rules.style2]
+  universal_rules.ins_space
+];
+
+style_with_indicator2 = Optimize[
+  (hour_03_to_11 | hour_12_to_14 | hour_15_to_18 | hour_19_to_23 |
+   hour_midnight)
+  universal_rules.ins_space universal_func.InvertMarkup[universal_rules.style2]
+  universal_rules.ins_space
+];
+
+# Time without time indicator; MUST have at least 'hour' and 'minute' parts.
+style_without_indicator = Optimize[
+  universal_rules.MARKUP_HOURS
+  universal_rules.HOURS
+  ((separator minute_and_optional_second remove_hour?) | half_hour)
+  universal_rules.MARKUP_STYLE1
+];
+
+burmese_time = style_with_indicator | style_without_indicator |
+                style_with_indicator2;
+
+export TIME_MARKUP = Optimize[
+  (universal_func.InvertMarkup[universal_rules.time]
+   universal_rules.ins_space
+   universal_func.InvertMarkup[universal_rules.opening_brace]
+   (universal_rules.style1 | burmese_time)
+   universal_rules.TIME_ZONE?
+   universal_func.InvertMarkup[universal_rules.closing_brace])
+  @ universal_rules.CLEAN_SPACES
+];

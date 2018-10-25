@@ -1,0 +1,78 @@
+# measure tests
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:meter|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် မီတာ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:second|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် စက္ကန့်
+MEASURE_MARKUP	measure|integer:1|units:second|	တစ်_unit စက္ကန့်
+MEASURE_MARKUP	measure|integer:2|units:second|	နှစ်_unit စက္ကန့်
+MEASURE_MARKUP	measure|integer:7|units:second|	ခုနစ်_unit စက္ကန့်
+MEASURE_MARKUP	measure|integer:20|units:second|	နှစ်_unit ဆယ် စက္ကန့်
+MEASURE_MARKUP	measure|integer:27|units:second|	နှစ်_unit ဆယ့် ခုနစ်_unit စက္ကန့်
+MEASURE_MARKUP	measure|integer:75|units:second|	ခုနစ်_unit ဆယ့် ငါး စက္ကန့်
+MEASURE_MARKUP	measure|integer:101|units:second|	တစ်_unit ရာ့ တစ်_unit စက္ကန့်
+MEASURE_MARKUP	measure|integer_part:1|fractional_part:1|units:second|	တစ်_standalone ဒသမ တစ်_standalone စက္ကန့်
+MEASURE_MARKUP	measure|integer_part:2|fractional_part:7|units:second|	နှစ်_standalone ဒသမ ခုနစ်_standalone စက္ကန့်
+MEASURE_MARKUP	measure|integer_part:10|fractional_part:5|units:second|	တစ်_unit ဆယ် ဒသမ ငါး စက္ကန့်
+MEASURE_MARKUP	measure|integer_part:21|fractional_part:27|units:second|	နှစ်_unit ဆယ့် တစ်_standalone ဒသမ နှစ်_standalone ခုနစ်_standalone စက္ကန့်
+MEASURE_MARKUP	measure|integer_part:77|fractional_part:11|units:second|	ခုနစ်_unit ဆယ့် ခုနစ်_standalone ဒသမ တစ်_standalone တစ်_standalone စက္ကန့်
+MEASURE_MARKUP	measure|integer_part:101|fractional_part:21|units:second|	တစ်_unit ရာ့ တစ်_standalone ဒသမ နှစ်_standalone တစ်_standalone စက္ကန့်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ampere|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် အမ်ပီအာ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:kelvin|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ကယ်ဗင်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:mole|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် မိုး
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:hertz|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ဟာဇ့်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:radian|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ရေဒီယံ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:newton|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် နယူတန်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:pascal|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ပါစကယ်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:joule|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ဂျိုး
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:watt|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ဝပ်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:volt|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ဗို့
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ohm|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် အုမ်း
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:tesla|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် တက်စလာ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:henry|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ဟင်နရီ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:degree celsius|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ဒီဂရီ ဆဲလ်စီးရပ်စ်
+MEASURE_MARKUP	measure|integer:20|units:minute|	နှစ်_unit ဆယ် မိနစ်
+MEASURE_MARKUP	measure|integer:20|units:hour|	နှစ်_unit ဆယ် နာရီ
+MEASURE_MARKUP	measure|integer:20|units:day|	နှစ်_unit ဆယ် ရက်
+MEASURE_MARKUP	measure|integer:20|units:week|	နှစ်_unit ဆယ် ပတ်
+MEASURE_MARKUP	measure|integer:20|units:month|	နှစ်_unit ဆယ် လ
+MEASURE_MARKUP	measure|integer:20|units:year|	နှစ်_unit ဆယ် နှစ်_standalone
+MEASURE_MARKUP	measure|integer:20|units:century|	နှစ်_unit ဆယ် ရာစုနှစ်
+MEASURE_MARKUP	measure|integer:20|units:millennium|	နှစ်_unit ဆယ် ထောင်စုနှစ်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:inch|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် လက်မ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:foot|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ပေ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:yard|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ကိုက်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:mile|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် မိုင်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:gallon|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ဂါလံ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ounce|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် အောင်စ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:pound|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ပေါင်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:ton|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် တန်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:degree|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ဒီဂရီ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:hectare|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ဟက်တာ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:liter|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် လီတာ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:gram|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ဂရမ်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:calories|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ကယ်လိုရီ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:kilocalorie|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ကီလို ကယ်လိုရီ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:decibel|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ဒက်ဆီဘယ်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:electron volt|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် အီလက်ထရွန် ဗို့
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:knot|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် နော့
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:horsepower|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် မြင်း ကောင်ရေ အား
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:degree fahrenheit|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ဒီဂရီ ဖာရင်ဟိုက်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:tablespoon|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် စားပွဲတင် ဇွန်း
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:teaspoon|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် လက်ဖက်ရည် ဇွန်း
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:bit|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ဘစ်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:byte|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ဘိုက်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:astronomical unit|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် နက္ခတ္တ ဗေဒ ယူနစ်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:light year|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် အလင်း နှစ်_standalone
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:pixel|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ပစ်ဇယ်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:percent|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ရာခိုင်နှုန်း
+# prefix tests
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:petameter|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ပီတာ မီတာ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:terameter|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် တယ်ရာ မီတာ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:gigameter|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ဂစ်ဂါ မီတာ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:decisecond|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် ဒက်ဆီ စက္ကန့်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:centisecond|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် စင်တီ စက္ကန့်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:millisecond|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် မီလီ စက္ကန့်
+# ratio tests
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:light year per microsecond|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် အလင်း နှစ်_standalone ပါ မိုက်ခရို စက္ကန့်
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:megabit per microsecond|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် မီဂါ ဘစ် ပါ မိုက်ခရို စက္ကန့်
+# power tests
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:light year per cubic petameter|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် အလင်း နှစ်_standalone ပါ ကုဗ ပီတာ မီတာ
+MEASURE_MARKUP	measure|integer_part:20|fractional_part:16|units:light year per square petameter|	နှစ်_unit ဆယ် ဒသမ တစ်_standalone ခြောက် အလင်း နှစ်_standalone ပါ စတုရန်း ပီတာ မီတာ

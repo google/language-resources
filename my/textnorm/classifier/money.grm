@@ -1,0 +1,70 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Burmese money classifier.
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+quantities =
+  ("သိန်း" : "100000") |
+  ("သန်း" : "1000000") |
+  ("ကုဋေ" : "10000000") |
+  ("ဘီလီယံ" : "1000000000")
+;
+
+quantity_markup = universal_func.APPLY_QUANTITY_MARKUP[quantities];
+
+currency_names =
+  (("ဒေါ်လာ" | "dollar") : "usd") |
+  (("ယွမ်" | "yuan") : "cny") |
+  (("ယူရို" | "euro") : "eur") |
+  (("ဘတ်" | "bhat") : "thb") |
+  (("ရူပီး" | "rupee") : "inr") |
+  (("ပေါင်" | "pound") : "gbp") |
+  (("ယန်း" | "yen") : "jpy") |
+  (("ကျပ်" | "kyat") : "mmk")
+;
+
+currency_symbol_markup = Optimize[
+  universal_func.InvertMarkup[universal_rules.money_currency]
+  universal_rules.one_space
+  universal_rules.ins_quote
+  (universal_rules.NORM_CURRENCY_SYMBOLS | (universal_rules.lower_case_anything @ currency_names))
+  universal_rules.ins_quote
+  universal_rules.one_space
+];
+
+amount_markup = Optimize[
+  universal_func.InvertMarkup[universal_rules.money_amount]
+  universal_rules.ins_space
+  universal_func.InvertMarkup[universal_rules.opening_brace]
+  universal_rules.ins_space
+  (universal_rules.INTEGER_DECIMAL_DOT_MAX | universal_rules.DECIMAL_DOT_MAX)
+  universal_func.InvertMarkup[universal_rules.closing_brace]
+  universal_rules.ins_space
+];
+
+amount_quantity_markup =
+(amount_markup @ universal_rules.NORMALIZE_ZEROES) | (amount_markup quantity_markup);
+
+style1 = (
+   (currency_symbol_markup amount_quantity_markup) |
+   (amount_quantity_markup currency_symbol_markup)
+  )
+  universal_func.InvertMarkup[universal_rules.style1]
+;
+
+export MONEY = Optimize[style1 universal_rules.ins_space];
+
+export MONEY_MARKUP = universal_func.APPLY_MONEY_MARKUP[MONEY];

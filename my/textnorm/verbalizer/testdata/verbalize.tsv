@@ -1,0 +1,3 @@
+ALL	letters|letters:IBM|	i_letter-en b_letter-en m_letter-en
+ALL	time|suffix:နေ့ခင်း|hours:4|minutes:0|	နေ့ခင်း လေး နာရီ
+ALL	time|suffix:မနက်|hours:7|minutes:52|	မနက် ခုနစ်_unit နာရီ ငါး ဆယ့် နှစ်_unit မိနစ်

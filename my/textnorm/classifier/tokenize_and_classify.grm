@@ -1,0 +1,54 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Simple classifier for Burmese.
+
+import 'burmese.grm' as burmese;
+import 'classify.grm' as classify;
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+
+# Legal letters in a Burmese word.
+letter_def = universal_rules.kAlpha | burmese.BURMESE_LETTER;
+
+# This is the definition of a legally spelt word.
+legal_word = letter_def+;
+
+convert_burmese_digits_to_arabic =
+  CDRewrite[burmese.BURMESE_DIGIT, "", "", universal_rules.sigma_star];
+
+burmese_punct_token = Optimize[
+  universal_rules.PUNCT_TOKEN |
+  universal_func.PunctToken["၊", universal_rules.token_pause_length_medium
+               universal_rules.del_space_plus universal_rules.token_phrase_break_true] |
+  universal_func.PunctToken["။", universal_rules.token_pause_length_long
+               universal_rules.del_space_plus]
+];
+
+fallback_char = Optimize[universal_rules.LATIN_FALLBACK_CHAR - letter_def];
+fallback_token = Optimize[universal_func.FallbackToken[fallback_char]];
+
+export TOKENIZE_AND_CLASSIFY = Optimize[
+  convert_burmese_digits_to_arabic @
+  universal_func.TokenizeAndClassifySimpler[classify.CLASSIFY,
+                               universal_func.WordTokenSimple[legal_word],
+                               burmese_punct_token,
+                               fallback_token,
+                               universal_rules.SPACE,
+                               letter_def,
+                               burmese.DIGIT] @
+  universal_rules.CLEAN_SPACES
+];
+
+export INCH_AND_FEET_DETECTOR = universal_rules.INCH_AND_FEET_DETECTOR;

@@ -1,0 +1,10 @@
+DECIMAL_MARKUP	decimal|negative:1|integer_part:4|fractional_part:5|	အနုတ် လေး ဒသမ ငါး
+DECIMAL_MARKUP	decimal|negative:0|integer_part:4|fractional_part:5|	လေး ဒသမ ငါး
+DECIMAL_MARKUP	decimal|integer_part:4|fractional_part:5|	လေး ဒသမ ငါး
+DECIMAL_MARKUP	decimal|integer_part:0|fractional_part:5|	သုည ဒသမ ငါး
+DECIMAL_MARKUP	decimal|integer_part:15|fractional_part:22|	ဆယ့် ငါး ဒသမ နှစ်_standalone နှစ်_standalone
+DECIMAL_MARKUP	decimal|integer_part:10|	တစ်_unit ဆယ်
+DECIMAL_MARKUP	decimal|negative:1|integer_part:84|fractional_part:1024|exponent:-10|	အနုတ် ရှစ် ဆယ့် လေး ဒသမ တစ်_standalone သုည နှစ်_standalone လေး ထပ်ကိန်း အနုတ် တစ်_unit ဆယ်
+DECIMAL_MARKUP	decimal|negative:1|integer_part:17|fractional_part:90|exponent:-4|	အနုတ် ဆယ့် ခုနစ်_standalone ဒသမ ကိုး သုည ထပ်ကိန်း အနုတ် လေး
+DECIMAL_MARKUP	decimal|integer_part:17|fractional_part:90|exponent:5|	ဆယ့် ခုနစ်_standalone ဒသမ ကိုး သုည ထပ်ကိန်း ငါး
+DECIMAL_MARKUP	decimal|integer_part:3|fractional_part:9|exponent:0|	သုံး ဒသမ ကိုး ထပ်ကိန်း သုည

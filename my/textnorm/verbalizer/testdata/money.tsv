@@ -1,0 +1,78 @@
+# Style 1
+MONEY_MARKUP	money|integer_part:25|fractional_part:05|currency:cny|style:1|	နှစ်_unit ဆယ့် ငါး ဒသမ သုည ငါး ယွမ်
+MONEY_MARKUP	money|integer_part:25|fractional_part:05|currency:gbp|style:1|	နှစ်_unit ဆယ့် ငါး ဒသမ သုည ငါး ပေါင်
+MONEY_MARKUP	money|integer_part:25|fractional_part:01|currency:jpy|style:1|	နှစ်_unit ဆယ့် ငါး ဒသမ သုည တစ်_standalone ယန်း
+MONEY_MARKUP	money|integer_part:6649|fractional_part:72|currency:mmk|style:1|	ခြောက် ထောင့် ခြောက် ရာ လေး ဆယ့် ကိုး ဒသမ ခုနစ်_standalone နှစ်_standalone ကျပ်
+MONEY_MARKUP	money|integer_part:25|fractional_part:05|currency:mmk|style:1|	နှစ်_unit ဆယ့် ငါး ဒသမ သုည ငါး ကျပ်
+MONEY_MARKUP	money|integer_part:100|fractional_part:50|currency:sgd|style:1|	တစ်_unit ရာ ဒသမ ငါး သုည ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:6649|fractional_part:72|currency:sgd|style:1|	ခြောက် ထောင့် ခြောက် ရာ လေး ဆယ့် ကိုး ဒသမ ခုနစ်_standalone နှစ်_standalone ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:1025|fractional_part:35|currency:thb|style:1|	တစ်_unit ထောင့် နှစ်_unit ဆယ့် ငါး ဒသမ သုံး ငါး ဘတ်
+MONEY_MARKUP	money|integer_part:25|fractional_part:01|currency:thb|style:1|	နှစ်_unit ဆယ့် ငါး ဒသမ သုည တစ်_standalone ဘတ်
+MONEY_MARKUP	money|integer_part:100|fractional_part:50|currency:usd|style:1|	တစ်_unit ရာ ဒသမ ငါး သုည ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:6649|fractional_part:72|currency:usd|style:1|	ခြောက် ထောင့် ခြောက် ရာ လေး ဆယ့် ကိုး ဒသမ ခုနစ်_standalone နှစ်_standalone ဒေါ်လာ
+
+# With quantity
+MONEY_MARKUP	money|integer_part:25|fractional_part:01|quantity:1000000|currency:jpy|style:1|	နှစ်_unit ဆယ့် ငါး ဒသမ သုည တစ်_standalone သန်း ယန်း
+MONEY_MARKUP	money|integer_part:25|fractional_part:01|quantity:1000000000|currency:mmk|style:1|	နှစ်_unit ဆယ့် ငါး ဒသမ သုည တစ်_standalone ဘီလီယံ ကျပ်
+MONEY_MARKUP	money|integer_part:100000|fractional_part:65|quantity:10000000|currency:sgd|style:1|	တစ်_unit သိန်း ဒသမ ခြောက် ငါး ကုဋေ ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:12345|fractional_part:97|quantity:1000000000|currency:sgd|style:1|	တစ်_unit သောင်း နှစ်_unit ထောင့် သုံး ရာ လေး ဆယ့် ငါး ဒသမ ကိုး ခုနစ်_standalone ဘီလီယံ ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:8857|fractional_part:71|quantity:1000000|currency:sgd|style:1|	ရှစ် ထောင့် ရှစ် ရာ ငါး ဆယ့် ခုနစ်_standalone ဒသမ ခုနစ်_standalone တစ်_standalone သန်း ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:6649|fractional_part:72|quantity:10000000|currency:sgd|style:1|	ခြောက် ထောင့် ခြောက် ရာ လေး ဆယ့် ကိုး ဒသမ ခုနစ်_standalone နှစ်_standalone ကုဋေ ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:100000|fractional_part:65|quantity:10000000|currency:usd|style:1|	တစ်_unit သိန်း ဒသမ ခြောက် ငါး ကုဋေ ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:12345|fractional_part:97|quantity:1000000000|currency:usd|style:1|	တစ်_unit သောင်း နှစ်_unit ထောင့် သုံး ရာ လေး ဆယ့် ငါး ဒသမ ကိုး ခုနစ်_standalone ဘီလီယံ ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:8857|fractional_part:71|quantity:1000000|currency:usd|style:1|	ရှစ် ထောင့် ရှစ် ရာ ငါး ဆယ့် ခုနစ်_standalone ဒသမ ခုနစ်_standalone တစ်_standalone သန်း ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:6649|fractional_part:72|quantity:10000000|currency:usd|style:1|	ခြောက် ထောင့် ခြောက် ရာ လေး ဆယ့် ကိုး ဒသမ ခုနစ်_standalone နှစ်_standalone ကုဋေ ဒေါ်လာ
+
+# Major only
+MONEY_MARKUP	money|integer_part:25|fractional_part:00|currency:cny|style:1|	နှစ်_unit ဆယ့် ငါး ယွမ်
+MONEY_MARKUP	money|integer_part:25|fractional_part:00|currency:eur|style:1|	နှစ်_unit ဆယ့် ငါး ယူရို
+MONEY_MARKUP	money|integer_part:25|fractional_part:00|currency:mmk|style:1|	နှစ်_unit ဆယ့် ငါး ကျပ်
+MONEY_MARKUP	money|integer_part:25|fractional_part:00|currency:mmk|style:1|	နှစ်_unit ဆယ့် ငါး ကျပ်
+MONEY_MARKUP	money|integer_part:127|fractional_part:0|currency:sgd|style:1|	တစ်_unit ရာ နှစ်_unit ဆယ့် ခုနစ်_unit ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:2016|fractional_part:0|currency:sgd|style:1|	နှစ်_unit ထောင့် တစ်_unit ဆယ့် ခြောက် ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:11121|fractional_part:0|currency:sgd|style:1|	တစ်_unit သောင်း တစ်_unit ထောင့် တစ်_unit ရာ နှစ်_unit ဆယ့် တစ်_unit ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:127|fractional_part:0|currency:usd|style:1|	တစ်_unit ရာ နှစ်_unit ဆယ့် ခုနစ်_unit ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:2016|fractional_part:0|currency:usd|style:1|	နှစ်_unit ထောင့် တစ်_unit ဆယ့် ခြောက် ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:11121|fractional_part:0|currency:usd|style:1|	တစ်_unit သောင်း တစ်_unit ထောင့် တစ်_unit ရာ နှစ်_unit ဆယ့် တစ်_unit ဒေါ်လာ
+
+# Minor only
+MONEY_MARKUP	money|integer_part:0|fractional_part:98|currency:gbp|style:1|	ကိုး ဆယ့် ရှစ် ပဲနိ
+MONEY_MARKUP	money|integer_part:0|fractional_part:00|currency:mmk|style:1|	သုည ကျပ်
+MONEY_MARKUP	money|integer_part:0|fractional_part:05|currency:mmk|style:1|	သုည ဒသမ သုည ငါး ကျပ်
+MONEY_MARKUP	money|integer_part:0|fractional_part:14|currency:mmk|style:1|	ဆယ့် လေး ပြား
+MONEY_MARKUP	money|integer_part:0|fractional_part:91|currency:mmk|style:1|	ကိုး ဆယ့် တစ်_unit ပြား
+MONEY_MARKUP	money|integer_part:0|fractional_part:55|currency:mmk|style:1|	ငါး ဆယ့် ငါး ပြား
+MONEY_MARKUP	money|integer_part:0|fractional_part:16|currency:sgd|style:1|	ဆယ့် ခြောက် ဆင့်
+MONEY_MARKUP	money|integer_part:0|fractional_part:00|currency:sgd|style:1|	သုည ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:0|fractional_part:05|currency:sgd|style:1|	သုည ဒသမ သုည ငါး ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:0|fractional_part:14|currency:sgd|style:1|	ဆယ့် လေး ဆင့်
+MONEY_MARKUP	money|integer_part:0|fractional_part:91|currency:sgd|style:1|	ကိုး ဆယ့် တစ်_unit ဆင့်
+MONEY_MARKUP	money|integer_part:0|fractional_part:55|currency:sgd|style:1|	ငါး ဆယ့် ငါး ဆင့်
+MONEY_MARKUP	money|integer_part:0|fractional_part:16|currency:usd|style:1|	ဆယ့် ခြောက် ဆင့်
+MONEY_MARKUP	money|integer_part:0|fractional_part:00|currency:usd|style:1|	သုည ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:0|fractional_part:05|currency:usd|style:1|	သုည ဒသမ သုည ငါး ဒေါ်လာ
+MONEY_MARKUP	money|integer_part:0|fractional_part:14|currency:usd|style:1|	ဆယ့် လေး ဆင့်
+MONEY_MARKUP	money|integer_part:0|fractional_part:91|currency:usd|style:1|	ကိုး ဆယ့် တစ်_unit ဆင့်
+MONEY_MARKUP	money|integer_part:0|fractional_part:55|currency:usd|style:1|	ငါး ဆယ့် ငါး ဆင့်
+
+# Major and minor
+MONEY_MARKUP	money|integer_part:2008|currency:gbp|fractional_part:99|currency:gbp|style:1|	နှစ်_unit ထောင့် ရှစ် ပေါင် ကိုး ဆယ့် ကိုး ပဲနိ
+MONEY_MARKUP	money|integer_part:19|currency:inr|fractional_part:03|currency:inr|style:1|	ဆယ့် ကိုး ရူပီး သုံး ပြား
+MONEY_MARKUP	money|integer_part:100|currency:mmk|fractional_part:50|currency:mmk|style:1|	တစ်_unit ရာ ကျပ် ငါး ဆယ် ပြား
+MONEY_MARKUP	money|integer_part:100000|currency:mmk|fractional_part:65|currency:mmk|style:1|	တစ်_unit သိန်း ကျပ် ခြောက် ဆယ့် ငါး ပြား
+MONEY_MARKUP	money|integer_part:12345|currency:mmk|fractional_part:97|currency:mmk|style:1|	တစ်_unit သောင်း နှစ်_unit ထောင့် သုံး ရာ လေး ဆယ့် ငါး ကျပ် ကိုး ဆယ့် ခုနစ်_unit ပြား
+MONEY_MARKUP	money|integer_part:8857|currency:mmk|fractional_part:71|currency:mmk|style:1|	ရှစ် ထောင့် ရှစ် ရာ ငါး ဆယ့် ခုနစ်_unit ကျပ် ခုနစ်_unit ဆယ့် တစ်_unit ပြား
+MONEY_MARKUP	money|integer_part:6649|currency:mmk|fractional_part:72|currency:mmk|style:1|	ခြောက် ထောင့် ခြောက် ရာ လေး ဆယ့် ကိုး ကျပ် ခုနစ်_unit ဆယ့် နှစ်_unit ပြား
+MONEY_MARKUP	money|integer_part:237|currency:sgd|fractional_part:35|currency:sgd|style:1|	နှစ်_unit ရာ သုံး ဆယ့် ခုနစ်_unit ဒေါ်လာ သုံး ဆယ့် ငါး ဆင့်
+MONEY_MARKUP	money|integer_part:100|currency:sgd|fractional_part:50|currency:sgd|style:1|	တစ်_unit ရာ ဒေါ်လာ ငါး ဆယ် ဆင့်
+MONEY_MARKUP	money|integer_part:100000|currency:sgd|fractional_part:65|currency:sgd|style:1|	တစ်_unit သိန်း ဒေါ်လာ ခြောက် ဆယ့် ငါး ဆင့်
+MONEY_MARKUP	money|integer_part:12345|currency:sgd|fractional_part:97|currency:sgd|style:1|	တစ်_unit သောင်း နှစ်_unit ထောင့် သုံး ရာ လေး ဆယ့် ငါး ဒေါ်လာ ကိုး ဆယ့် ခုနစ်_unit ဆင့်
+MONEY_MARKUP	money|integer_part:8857|currency:sgd|fractional_part:71|currency:sgd|style:1|	ရှစ် ထောင့် ရှစ် ရာ ငါး ဆယ့် ခုနစ်_unit ဒေါ်လာ ခုနစ်_unit ဆယ့် တစ်_unit ဆင့်
+MONEY_MARKUP	money|integer_part:6649|currency:sgd|fractional_part:72|currency:sgd|style:1|	ခြောက် ထောင့် ခြောက် ရာ လေး ဆယ့် ကိုး ဒေါ်လာ ခုနစ်_unit ဆယ့် နှစ်_unit ဆင့်
+MONEY_MARKUP	money|integer_part:11|currency:thb|fractional_part:03|currency:thb|style:1|	ဆယ့် တစ်_unit ဘတ် သုံး ပြား
+MONEY_MARKUP	money|integer_part:237|currency:usd|fractional_part:35|currency:usd|style:1|	နှစ်_unit ရာ သုံး ဆယ့် ခုနစ်_unit ဒေါ်လာ သုံး ဆယ့် ငါး ဆင့်
+MONEY_MARKUP	money|integer_part:100|currency:usd|fractional_part:50|currency:usd|style:1|	တစ်_unit ရာ ဒေါ်လာ ငါး ဆယ် ဆင့်
+MONEY_MARKUP	money|integer_part:100000|currency:usd|fractional_part:65|currency:usd|style:1|	တစ်_unit သိန်း ဒေါ်လာ ခြောက် ဆယ့် ငါး ဆင့်
+MONEY_MARKUP	money|integer_part:12345|currency:usd|fractional_part:97|currency:usd|style:1|	တစ်_unit သောင်း နှစ်_unit ထောင့် သုံး ရာ လေး ဆယ့် ငါး ဒေါ်လာ ကိုး ဆယ့် ခုနစ်_unit ဆင့်
+MONEY_MARKUP	money|integer_part:8857|currency:usd|fractional_part:71|currency:usd|style:1|	ရှစ် ထောင့် ရှစ် ရာ ငါး ဆယ့် ခုနစ်_unit ဒေါ်လာ ခုနစ်_unit ဆယ့် တစ်_unit ဆင့်
+MONEY_MARKUP	money|integer_part:6649|currency:usd|fractional_part:72|currency:usd|style:1|	ခြောက် ထောင့် ခြောက် ရာ လေး ဆယ့် ကိုး ဒေါ်လာ ခုနစ်_unit ဆယ့် နှစ်_unit ဆင့်

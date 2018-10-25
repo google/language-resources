@@ -1,0 +1,19 @@
+# Single digit
+DIGIT_MARKUP	digit|digit:1|	တစ်_standalone
+DIGIT_MARKUP	digit|digit:2|	နှစ်_standalone
+DIGIT_MARKUP	digit|digit:3|	သုံး
+DIGIT_MARKUP	digit|digit:4|	လေး
+DIGIT_MARKUP	digit|digit:5|	ငါး
+DIGIT_MARKUP	digit|digit:6|	ခြောက်
+DIGIT_MARKUP	digit|digit:7|	ခုနစ်_standalone
+DIGIT_MARKUP	digit|digit:8|	ရှစ်
+DIGIT_MARKUP	digit|digit:9|	ကိုး
+
+# Consecutive digits
+DIGIT_MARKUP	digit|digit:01|	သုည တစ်_standalone
+DIGIT_MARKUP	digit|digit:11|	တစ်_standalone တစ်_standalone
+DIGIT_MARKUP	digit|digit:123|	တစ်_standalone နှစ်_standalone သုံး
+DIGIT_MARKUP	digit|digit:2345|	နှစ်_standalone သုံး လေး ငါး
+DIGIT_MARKUP	digit|digit:34567|	သုံး လေး ငါး ခြောက် ခုနစ်_standalone
+DIGIT_MARKUP	digit|digit:456789|	လေး ငါး ခြောက် ခုနစ်_standalone ရှစ် ကိုး
+DIGIT_MARKUP	digit|digit:5678901|	ငါး ခြောက် ခုနစ်_standalone ရှစ် ကိုး သုည တစ်_standalone

@@ -1,0 +1,40 @@
+VERBATIM_MARKUP	verbatim|verbatim:"|	မျက်တောင်
+VERBATIM_MARKUP	verbatim|verbatim:#|	ဟက်ရှ်
+VERBATIM_MARKUP	verbatim|verbatim:$|	ဒေါ်လာ
+VERBATIM_MARKUP	verbatim|verbatim:€|	ယူရို
+VERBATIM_MARKUP	verbatim|verbatim:£|	ပေါင်
+VERBATIM_MARKUP	verbatim|verbatim:%|	ရာခိုင်နှုန်း
+VERBATIM_MARKUP	verbatim|verbatim:(|	ဝိုက်ကွင်းဖွင့်
+VERBATIM_MARKUP	verbatim|verbatim:)|	ဝိုက်ကွင်းပိတ်
+VERBATIM_MARKUP	verbatim|verbatim:*|	စတား
+VERBATIM_MARKUP	verbatim|verbatim:+|	အပေါင်း
+VERBATIM_MARKUP	verbatim|verbatim:,|	ကော်မာ
+VERBATIM_MARKUP	verbatim|verbatim:-|	ဒက်ရှ်
+VERBATIM_MARKUP	verbatim|verbatim:.|	ဒေါ့
+VERBATIM_MARKUP	verbatim|verbatim:/|	ဆလက်ရှ်
+VERBATIM_MARKUP	verbatim|verbatim::|	ကိုလုံ
+VERBATIM_MARKUP	verbatim|verbatim:;|	ဆီမီးကိုလုံ
+VERBATIM_MARKUP	verbatim|verbatim:<|	အနည်း သင်္ကေတ
+VERBATIM_MARKUP	verbatim|verbatim:=|	ညီမျှခြင်း
+VERBATIM_MARKUP	verbatim|verbatim:>|	အများ သင်္ကေတ
+VERBATIM_MARKUP	verbatim|verbatim:!|	အာမေဋိတ် သင်္ကေတ
+VERBATIM_MARKUP	verbatim|verbatim:?|	အမေး သင်္ကေတ
+VERBATIM_MARKUP	verbatim|verbatim:@|	အက်
+VERBATIM_MARKUP	verbatim|verbatim:[|	ထောင့်ကွင်းဖွင့်
+VERBATIM_MARKUP	verbatim|verbatim:]|	ထောင့်ကွင်းပိတ်
+VERBATIM_MARKUP	verbatim|verbatim:©|	ကော်ပီရိုက်
+VERBATIM_MARKUP	verbatim|verbatim:{|	တွန့်ကွင်းဖွင့်
+VERBATIM_MARKUP	verbatim|verbatim:}|	တွန့်ကွင်းပိတ်
+VERBATIM_MARKUP	verbatim|verbatim:−|	အနုတ်
+VERBATIM_MARKUP	verbatim|verbatim:²|	နှစ်ထပ်
+VERBATIM_MARKUP	verbatim|verbatim:³|	သုံးထပ်
+VERBATIM_MARKUP	verbatim|verbatim:°|	ဒီဂရီ
+VERBATIM_MARKUP	verbatim|verbatim:×|	အမြှောက်
+VERBATIM_MARKUP	verbatim|verbatim:÷|	အစား
+VERBATIM_MARKUP	verbatim|verbatim:√|	နှစ်ထပ်ကိန်းရင်း
+VERBATIM_MARKUP	verbatim|verbatim:.23.01|	ဒေါ့ နှစ်_standalone သုံး ဒေါ့ သုည တစ်_standalone
+VERBATIM_MARKUP	verbatim|verbatim:.00000.0001|	ဒေါ့ သုည သုည သုည သုည သုည ဒေါ့ သုည သုည သုည တစ်_standalone
+VERBATIM_MARKUP	verbatim|verbatim:.10.14|	ဒေါ့ တစ်_standalone သုည ဒေါ့ တစ်_standalone လေး
+VERBATIM_MARKUP	verbatim|verbatim:(♥)|	ဝိုက်ကွင်းဖွင့် အသည်းပုံ ဝိုက်ကွင်းပိတ်
+VERBATIM_MARKUP	verbatim|verbatim:♬♬♬|	ဂီတသင်္ကေတ ဂီတသင်္ကေတ ဂီတသင်္ကေတ
+VERBATIM_MARKUP	verbatim|verbatim:1²×2³=9|	တစ်_standalone နှစ်ထပ် အမြှောက် နှစ်_standalone သုံးထပ် ညီမျှခြင်း ကိုး

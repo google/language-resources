@@ -1,0 +1,22 @@
+# Universal testcases
+LSEQ_FULLSTOPS	U.V.	letters: "U.V."
+LSEQ_FULLSTOPS	A.B.C.	letters: "A.B.C."
+LSEQ_FULLSTOPS	I.B.M.	letters: "I.B.M."
+LSEQ_FULLSTOPS	IBM	letters: "IBM"
+LSEQ_FULLSTOPS	U.S.A.	letters: "u.s.a."
+LSEQ_FULLSTOPS	USA	letters: "u.s.a."
+
+# Burmese testcases
+LSEQ_FULLSTOPS	စစစ	letters: "စစစ"
+LSEQ_FULLSTOPS	ရဝတ	letters: "ရဝတ"
+LSEQ_FULLSTOPS	တကသ	letters: "တကသ"
+LSEQ_FULLSTOPS	အ.ထ.က	letters: "အထက"
+LSEQ_FULLSTOPS	အ . ထ . က	letters: "အထက"
+LSEQ_FULLSTOPS	အ.လ.က	letters: "အလက"
+LSEQ_FULLSTOPS	အ.မ.က	letters: "အမက"
+
+# Exceptions, failing on purpose.
+LSEQ_FULLSTOPS	နဝမ
+LSEQ_FULLSTOPS	ပထမ
+LSEQ_FULLSTOPS	မရမက
+

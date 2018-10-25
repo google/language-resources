@@ -1,0 +1,24 @@
+TIME_MARKUP	10:23	time { hours: 10 minutes: 23 style: 1 }
+TIME_MARKUP	09:12	time { hours: 9 minutes: 12 style: 1 }
+TIME_MARKUP	02:23	time { hours: 2 minutes: 23 style: 1 }
+TIME_MARKUP	02:23:01	time { hours: 2 minutes: 23 seconds: 1 style: 1 }
+TIME_MARKUP	02:23:49	time { hours: 2 minutes: 23 seconds: 49 style: 1 }
+TIME_MARKUP	8:11	time { hours: 8 minutes: 11 style: 1 }
+TIME_MARKUP	23:54	time { hours: 23 minutes: 54 style: 1 }
+TIME_MARKUP	9:43	time { hours: 9 minutes: 43 style: 1 }
+TIME_MARKUP	မနက် 11	time {suffix: မနက် hours: 11 style: 2 }
+TIME_MARKUP	နံနက် 12	time {suffix: နံနက် hours: 12 style: 2 }
+TIME_MARKUP	ညနေ 12:45	time {suffix: ညနေ hours: 12 minutes: 45 style: 2 }
+TIME_MARKUP	မနက်ခင်း 9:15	time {suffix: မနက်ခင်း hours: 9 minutes: 15 style: 2 }
+TIME_MARKUP	မွန်းလွဲ 8:00	time {suffix: မွန်းလွဲ hours: 8 minutes: 0 style: 2 }
+TIME_MARKUP	နေ့ခင်း 4:00	time {suffix: နေ့ခင်း hours: 4 minutes: 0 style: 2 }
+TIME_MARKUP	13:00	time { hours: 13 minutes: 0 style: 1 }
+TIME_MARKUP	13:00:11	time { hours: 13 minutes: 0 seconds: 11 style: 1 }
+TIME_MARKUP	13:00	time { hours: 13 minutes: 0 style: 1 }
+TIME_MARKUP	01:00	time { hours: 1 minutes: 0 style: 1 }
+TIME_MARKUP	05:12	time { hours: 5 minutes: 12 style: 1 }
+TIME_MARKUP	ညနေ 3:00 နာရီ	time {suffix: ညနေ hours: 3 minutes: 0 style: 2 }
+TIME_MARKUP	ညနေ 3 နာရီ ခွဲ	time {suffix: ညနေ hours: 3 minutes: 30 style: 2 }
+TIME_MARKUP	4pm	time {suffix: ညနေ hours: 4 style: 2 }
+TIME_MARKUP	16pm	time {suffix: ညနေ hours: 16 style: 2 }
+TIME_MARKUP	8 နာရီ ခွဲ	time { hours: 8 minutes: 30 style: 1 }

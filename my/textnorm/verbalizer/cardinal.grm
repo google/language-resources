@@ -1,0 +1,61 @@
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Verbalizer for cardinals.
+
+import 'number_names_rules.grm' as n;
+import 'universal_rules.grm' as universal_rules;
+import 'universal_func.grm' as universal_func;
+import 'digit.grm' as d;
+
+digit_sequence = (d.DIGIT <10>) (universal_rules.ins_space d.DIGIT<10>)*;
+
+# Rewrite cardinal number to use proper wordId.
+# In order to mark the pronounciation of cardinal number 1, 2, 7 preceding unit
+# or number scale.
+cardinal_variant_preceding_unit_or_scale = CDRewrite[
+  ("ခုနစ်" : "ခုနစ်_unit") |
+  ("တစ်" : "တစ်_unit") |
+  ("နှစ်" : "နှစ်_unit"), "", " " | "[EOS]", universal_rules.sigma_star
+];
+
+# For standalone cardinal number with 1, 2, 7 as its last digit, undo the
+# change to the last digit's pronunciation.
+
+undo_change_of_last_digit_of_standalone_cardinal = CDRewrite[
+  ("ခုနစ်_unit" : "ခုနစ်_standalone") |
+  ("တစ်_unit" : "တစ်_standalone") |
+  ("နှစ်_unit" : "နှစ်_standalone"), "", "[EOS]", universal_rules.sigma_star
+];
+
+# If we cannot read it as a number name, read it as a sequence of
+# digits.
+export CARDINAL = Optimize[
+  (((n.MINUS universal_rules.ins_space)? n.CARDINAL_NUMBER_NAME
+  @ cardinal_variant_preceding_unit_or_scale
+  @ undo_change_of_last_digit_of_standalone_cardinal)
+  | digit_sequence)
+];
+
+export CARDINAL_MARKUP = Optimize[
+  universal_rules.semclass_cardinal
+  universal_rules.integer
+  CARDINAL
+  universal_rules.rec_sep
+];
+
+export CARDINAL_PRECEDING_UNIT = Optimize[
+  n.CARDINAL_NUMBER_NAME
+  @ cardinal_variant_preceding_unit_or_scale
+];

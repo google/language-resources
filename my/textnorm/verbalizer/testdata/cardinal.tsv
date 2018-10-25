@@ -1,0 +1,19 @@
+CARDINAL_MARKUP	cardinal|integer:1|	တစ်_standalone
+CARDINAL_MARKUP	cardinal|integer:-1|	အနုတ် တစ်_standalone
+CARDINAL_MARKUP	cardinal|integer:-19|	အနုတ် ဆယ့် ကိုး
+CARDINAL_MARKUP	cardinal|integer:128|	တစ်_unit ရာ နှစ်_unit ဆယ့် ရှစ်
+CARDINAL_MARKUP	cardinal|integer:-12000|	အနုတ် တစ်_unit သောင်း နှစ်_unit ထောင်
+CARDINAL_MARKUP	cardinal|integer:21000|	နှစ်_unit သောင်း တစ်_unit ထောင်
+CARDINAL_MARKUP	cardinal|integer:7818724567|	ခုနစ်_unit ဘီလီယံ ရှစ် ဆယ့် တစ်_unit ကုဋေ ရှစ် သန်း ခုနစ်_unit သိန်း နှစ်_unit သောင်း လေး ထောင့် ငါး ရာ ခြောက် ဆယ့် ခုနစ်_standalone
+CARDINAL_MARKUP	cardinal|integer:901000000000|	ကိုး ရာ့ တစ်_unit ဘီလီယံ
+CARDINAL_MARKUP	cardinal|integer:987654321|	ကိုး ဆယ့် ရှစ် ကုဋေ ခုနစ်_unit သန်း ခြောက် သိန်း ငါး သောင်း လေး ထောင့် သုံး ရာ နှစ်_unit ဆယ့် တစ်_standalone
+CARDINAL_MARKUP	cardinal|integer:2017|	နှစ်_unit ထောင့် တစ်_unit ဆယ့် ခုနစ်_standalone
+CARDINAL_MARKUP	cardinal|integer:118|	တစ်_unit ရာ တစ်_unit ဆယ့် ရှစ်
+CARDINAL_MARKUP	cardinal|integer:1113|	တစ်_unit ထောင့် တစ်_unit ရာ တစ်_unit ဆယ့် သုံး
+CARDINAL_MARKUP	cardinal|integer:2117|	နှစ်_unit ထောင့် တစ်_unit ရာ တစ်_unit ဆယ့် ခုနစ်_standalone
+CARDINAL_MARKUP	cardinal|integer:11|	ဆယ့် တစ်_standalone
+CARDINAL_MARKUP	cardinal|integer:120000000|	ဆယ့် နှစ်_unit ကုဋေ
+CARDINAL_MARKUP	cardinal|integer:843695|	ရှစ် သိန်း လေး သောင်း သုံး ထောင့် ခြောက် ရာ ကိုး ဆယ့် ငါး
+CARDINAL_MARKUP	cardinal|integer:550|	ငါး ရာ့ ငါး ဆယ်
+CARDINAL_MARKUP	cardinal|integer:1960|	တစ်_unit ထောင့် ကိုး ရာ့ ခြောက် ဆယ်
+CARDINAL_MARKUP	cardinal|integer:979156713712|	ကိုး ရာ ခုနစ်_unit ဆယ့် ကိုး ဘီလီယံ တစ်_unit ဆယ့် ငါး ကုဋေ ခြောက် သန်း ခုနစ်_unit သိန်း တစ်_unit သောင်း သုံး ထောင့် ခုနစ်_unit ရာ တစ်_unit ဆယ့် နှစ်_standalone

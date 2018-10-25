@@ -1,0 +1,15 @@
+peta	ပီတာ
+tera	တယ်ရာ
+giga	ဂစ်ဂါ
+mega	မီဂါ
+kilo	ကီလို
+hecto	ဟက်တို
+deca	ဒက္ကာ
+deci	ဒက်ဆီ
+centi	စင်တီ
+milli	မီလီ
+micro	မိုက်ခရို
+nano	နာနို
+pico	ပစ်ကို
+femto	ဖန်တို
+atto	အက်တို

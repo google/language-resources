@@ -1,0 +1,40 @@
+# Dot separator
+# Symbol
+MONEY_MARKUP	$1.2	money { currency: "usd" amount { integer_part: "1" fractional_part: "20"} style: 1 }
+MONEY_MARKUP	1.2ကျပ်	money { amount { integer_part: "1" fractional_part: "20"} currency: "mmk" style: 1 }
+MONEY_MARKUP	1.2 ကျပ်	money { amount { integer_part: "1" fractional_part: "20"} currency: "mmk" style: 1 }
+MONEY_MARKUP	$1.07	money { currency: "usd" amount { integer_part: "1" fractional_part: "07"} style: 1 }
+MONEY_MARKUP	$20.05	money { currency: "usd" amount { integer_part: "20" fractional_part: "05"} style: 1 }
+MONEY_MARKUP	$10.01	money { currency: "usd" amount { integer_part: "10" fractional_part: "01"} style: 1 }
+MONEY_MARKUP	$5.03	money { currency: "usd" amount { integer_part: "5" fractional_part: "03"} style: 1 }
+
+# Burmese currency names
+MONEY_MARKUP	320.7 ကျပ်	money { amount { integer_part: "320" fractional_part: "70"} currency: "mmk" style: 1 }
+MONEY_MARKUP	320.7 ပေါင်	money { amount { integer_part: "320" fractional_part: "70"} currency: "gbp" style: 1 }
+
+# Burmese currency names with quantities
+MONEY_MARKUP	ပေါင် 1.7 သိန်း	money { currency: "gbp" amount { integer_part: "1" fractional_part: "7"} quantity: 100000 style: 1 }
+MONEY_MARKUP	ဒေါ်လာ 3.7 သန်း	money { currency: "usd" amount { integer_part: "3" fractional_part: "7"} quantity: 1000000 style: 1 }
+MONEY_MARKUP	2.5 ပေါင်	money { amount { integer_part: "2" fractional_part: "50"} currency: "gbp" style: 1 }
+MONEY_MARKUP	1.3 ယန်း	money { amount { integer_part: "1" fractional_part: "30"} currency: "jpy" style: 1 }
+
+# English currency names
+MONEY_MARKUP	120.7 dollar	money { amount { integer_part: "120" fractional_part: "70"} currency: "usd" style: 1 }
+MONEY_MARKUP	100 pound	money { amount { integer_part: "100" } currency: "gbp" style: 1 }
+MONEY_MARKUP	100 yen	money { amount { integer_part: "100" } currency: "jpy" style: 1 }
+
+# Only interger part
+MONEY_MARKUP	100 ဒေါ်လာ	money { amount { integer_part: "100" } currency: "usd" style: 1 }
+MONEY_MARKUP	200 ကျပ်	money { amount { integer_part: "200" } currency: "mmk" style: 1 }
+MONEY_MARKUP	300 ကျပ်	money { amount { integer_part: "300" } currency: "mmk" style: 1 }
+MONEY_MARKUP	400 ကျပ်	money { amount { integer_part: "400" } currency: "mmk" style: 1 }
+MONEY_MARKUP	500 ကျပ်	money { amount { integer_part: "500" } currency: "mmk" style: 1 }
+MONEY_MARKUP	600 ကျပ်	money { amount { integer_part: "600" } currency: "mmk" style: 1 }
+MONEY_MARKUP	700 ကျပ်	money { amount { integer_part: "700" } currency: "mmk" style: 1 }
+MONEY_MARKUP	800 ကျပ်	money { amount { integer_part: "800" } currency: "mmk" style: 1 }
+MONEY_MARKUP	900 ကျပ်	money { amount { integer_part: "900" } currency: "mmk" style: 1 }
+
+# Currency symbol first
+MONEY_MARKUP	ဒေါ်လာ100	money { currency: "usd" amount { integer_part: "100" } style: 1 }
+MONEY_MARKUP	ကျပ် 200	money { currency: "mmk" amount { integer_part: "200" } style: 1 }
+MONEY_MARKUP	ကျပ် 4  ကုဋေ	money { currency: "mmk" amount { integer_part: "4" } quantity: 10000000 style: 1 }

@@ -1,0 +1,93 @@
+# Cardinal numbers.
+TOKENIZE_AND_CLASSIFY	1	tokens { cardinal { integer: "1" } }
+TOKENIZE_AND_CLASSIFY	2	tokens { cardinal { integer: "2" } }
+TOKENIZE_AND_CLASSIFY	3	tokens { cardinal { integer: "3" } }
+TOKENIZE_AND_CLASSIFY	4	tokens { cardinal { integer: "4" } }
+TOKENIZE_AND_CLASSIFY	5	tokens { cardinal { integer: "5" } }
+TOKENIZE_AND_CLASSIFY	6	tokens { cardinal { integer: "6" } }
+TOKENIZE_AND_CLASSIFY	7	tokens { cardinal { integer: "7" } }
+TOKENIZE_AND_CLASSIFY	8	tokens { cardinal { integer: "8" } }
+TOKENIZE_AND_CLASSIFY	9	tokens { cardinal { integer: "9" } }
+TOKENIZE_AND_CLASSIFY	10	tokens { cardinal { integer: "10" } }
+TOKENIZE_AND_CLASSIFY	747	tokens { cardinal { integer: "747" } }
+TOKENIZE_AND_CLASSIFY	၇၄၇	tokens { cardinal { integer: "747" } }
+TOKENIZE_AND_CLASSIFY	၁၀	tokens { cardinal { integer: "10" } }
+TOKENIZE_AND_CLASSIFY	၃၂	tokens { cardinal { integer: "32" } }
+
+# Decimals.
+TOKENIZE_AND_CLASSIFY	367.78	tokens { decimal { integer_part: "367" fractional_part: "78" } }
+TOKENIZE_AND_CLASSIFY	1.178	tokens { decimal { integer_part: "1" fractional_part: "178" } }
+TOKENIZE_AND_CLASSIFY	3673333.8	tokens { decimal { integer_part: "3673333" fractional_part: "8" } }
+TOKENIZE_AND_CLASSIFY	၃၆၇၃၃၃၃.၈	tokens { decimal { integer_part: "3673333" fractional_part: "8" } }
+
+# Digits.
+TOKENIZE_AND_CLASSIFY	007	tokens { digit: "007" }
+TOKENIZE_AND_CLASSIFY	008	tokens { digit: "008" }
+TOKENIZE_AND_CLASSIFY	01	tokens { digit: "01" }
+TOKENIZE_AND_CLASSIFY	၀၀၈	tokens { digit: "008" }
+
+# Numbers with context.
+TOKENIZE_AND_CLASSIFY	boeing 747	tokens { name: "boeing" } tokens { cardinal { integer: "747" } }
+TOKENIZE_AND_CLASSIFY	A 380	tokens { name: "A" } tokens { cardinal { integer: "380" } }
+TOKENIZE_AND_CLASSIFY	က ၃၈၀	tokens { name: "က" } tokens { cardinal { integer: "380" } }
+
+# Telephone numbers.
+TOKENIZE_AND_CLASSIFY	0718390541	tokens { telephone { number_part: "0718390541" } }
+TOKENIZE_AND_CLASSIFY	+94 718390541	tokens { telephone { country_code: "94" number_part: "718390541" } }
+TOKENIZE_AND_CLASSIFY	+957 18 390 541	tokens { telephone { country_code: "957" number_part: "18" number_part: "390" number_part: "541" } }
+TOKENIZE_AND_CLASSIFY	+977 1 412 5566	tokens { telephone { country_code: "977" number_part: "1" number_part: "412" number_part: "5566" } }
+TOKENIZE_AND_CLASSIFY	0718 390 541	tokens { telephone { number_part: "0718" number_part: "390" number_part: "541" } }
+
+# Electronic.
+TOKENIZE_AND_CLASSIFY	www.google.mm	tokens { electronic { domain: "www.google.mm" } }
+TOKENIZE_AND_CLASSIFY	someone@google.com	tokens { electronic { username: "someone@" domain: "google.com" } }
+
+# Test cases with Burmese letters.
+TOKENIZE_AND_CLASSIFY	သူမက လှသည်	tokens { name: "သူမက" } tokens { name: "လှသည်" }
+TOKENIZE_AND_CLASSIFY	138 ဘက်စ်	tokens { cardinal { integer: "138" } } tokens { name: "ဘက်စ်" }
+TOKENIZE_AND_CLASSIFY	ဝေဿန္တရာ	tokens { name: "ဝေဿန္တရာ" }
+
+# LSEQs.
+TOKENIZE_AND_CLASSIFY	FBI	tokens { letters: "FBI" }
+TOKENIZE_AND_CLASSIFY	CIA	tokens { letters: "CIA" }
+
+# Emoticons.
+TOKENIZE_AND_CLASSIFY	:)	tokens { concept: ":)" }
+TOKENIZE_AND_CLASSIFY	:-D	tokens { concept: ":-D" }
+TOKENIZE_AND_CLASSIFY	:-O	tokens { concept: ":-O" }
+TOKENIZE_AND_CLASSIFY	:-|	tokens { concept: ":-|" }
+TOKENIZE_AND_CLASSIFY	:@	tokens { concept: ":@" }
+
+# Verbitm and Spoken punct.
+TOKENIZE_AND_CLASSIFY	I am @ home	tokens { name: "I" } tokens { name: "am" } tokens { verbatim: "@" } tokens { name: "home" }
+TOKENIZE_AND_CLASSIFY	4++	tokens { cardinal { integer: "4" } } tokens { verbatim: "+" } tokens { verbatim: "+" }
+TOKENIZE_AND_CLASSIFY	1.2.2	tokens { cardinal { integer: "1" } } tokens { verbatim: ".2.2" }
+TOKENIZE_AND_CLASSIFY	done. thanks	tokens { name: "done" } tokens { name: "." pause_length: PAUSE_LONG phrase_break: true type: PUNCT } tokens { name: "thanks" }
+TOKENIZE_AND_CLASSIFY	me & him	tokens { name: "me" } tokens { verbatim: "&" } tokens { name: "him" }
+TOKENIZE_AND_CLASSIFY	ပြီးပြီလား. သွားကြစို့	tokens { name: "ပြီးပြီလား" } tokens { name: "." pause_length: PAUSE_LONG phrase_break: true type: PUNCT } tokens { name: "သွားကြစို့" }
+TOKENIZE_AND_CLASSIFY	>	tokens { verbatim: ">" }
+TOKENIZE_AND_CLASSIFY	<	tokens { verbatim: "<" }
+TOKENIZE_AND_CLASSIFY	မဟာမဲခေါင်ဒေသ၊	tokens { name: "မဟာမဲခေါင်ဒေသ" } tokens { name: "၊" pause_length: PAUSE_MEDIUM phrase_break: true type: PUNCT }
+TOKENIZE_AND_CLASSIFY	ရေးထိုးခဲ့ပါသည်။	tokens { name: "ရေးထိုးခဲ့ပါသည်" } tokens { name: "။" pause_length: PAUSE_LONG type: PUNCT }
+TOKENIZE_AND_CLASSIFY	အနီ၊ အဝါ၊ အဖြူ၊ အညို၊ အမည်း တို့သည် အခြေခံအရောင်များ ဖြစ်သည်။	tokens { name: "အနီ" } tokens { name: "၊" pause_length: PAUSE_MEDIUM phrase_break: true type: PUNCT } tokens { name: "အဝါ" } tokens { name: "၊" pause_length: PAUSE_MEDIUM phrase_break: true type: PUNCT } tokens { name: "အဖြူ" } tokens { name: "၊" pause_length: PAUSE_MEDIUM phrase_break: true type: PUNCT } tokens { name: "အညို" } tokens { name: "၊" pause_length: PAUSE_MEDIUM phrase_break: true type: PUNCT } tokens { name: "အမည်း" } tokens { name: "တို့သည်" } tokens { name: "အခြေခံအရောင်များ" } tokens { name: "ဖြစ်သည်" } tokens { name: "။" pause_length: PAUSE_LONG type: PUNCT }
+
+# Measures
+TOKENIZE_AND_CLASSIFY	100 km	tokens { measure { decimal { integer_part: "100" } units: "kilometer" } }
+TOKENIZE_AND_CLASSIFY	100 cm	tokens { measure { decimal { integer_part: "100" } units: "centimeter" } }
+TOKENIZE_AND_CLASSIFY	100 kg	tokens { measure { decimal { integer_part: "100" } units: "kilogram" } }
+TOKENIZE_AND_CLASSIFY	100 g	tokens { measure { decimal { integer_part: "100" } units: "gram" } }
+TOKENIZE_AND_CLASSIFY	12 km³	tokens { measure { decimal { integer_part: "12" } units: "cubic kilometer" } }
+TOKENIZE_AND_CLASSIFY	12 km²	tokens { measure { decimal { integer_part: "12" } units: "square kilometer" } }
+TOKENIZE_AND_CLASSIFY	1 m²	tokens { measure { decimal { integer_part: "1" } units: "square meter" } }
+TOKENIZE_AND_CLASSIFY	1 GB	tokens { measure { decimal { integer_part: "1" } units: "gigabyte" } }
+TOKENIZE_AND_CLASSIFY	21 °C	tokens { measure { decimal { integer_part: "21" } units: "degree celsius" } }
+TOKENIZE_AND_CLASSIFY	10 kW	tokens { measure { decimal { integer_part: "10" } units: "kilowatt" } }
+TOKENIZE_AND_CLASSIFY	40 ft	tokens { measure { decimal { integer_part: "40" } units: "foot" } }
+TOKENIZE_AND_CLASSIFY	10 m³	tokens { measure { decimal { integer_part: "10" } units: "cubic meter" } }
+TOKENIZE_AND_CLASSIFY	1/2 km	tokens { measure { fraction { numerator: 1 denominator: 2 } units: "kilometer" } }
+TOKENIZE_AND_CLASSIFY	100 km/h	tokens { measure { decimal { integer_part: "100" } units: "kilometer per hour" } }
+
+# Times
+TOKENIZE_AND_CLASSIFY	နံနက် 12	tokens { time {suffix: နံနက် hours: 12 style: 2 } }
+TOKENIZE_AND_CLASSIFY	ညနေ 12:45	tokens { time {suffix: ညနေ hours: 12 minutes: 45 style: 2 } }
+TOKENIZE_AND_CLASSIFY	你好 สวัสดี салам	tokens { name: "你好" type: UNKNOWN } tokens { name: "สวัสดี" type: UNKNOWN } tokens { name: "салам" type: UNKNOWN }

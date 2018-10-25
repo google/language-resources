@@ -1,0 +1,13 @@
+CONNECTOR_MARKUP	1996-1997	date { year: 1996 } } tokens { connector { type: "range" }  } tokens { date { year: 1997 }
+CONNECTOR_MARKUP	1996-97	date { year: 1996 } } tokens { connector { type: "range" }  } tokens { cardinal { integer: "97" }
+CONNECTOR_MARKUP	5cmx5cmx10cm	measure { decimal { integer_part: "5"  } units: "centimeter" } } tokens { connector { type: "by" }  } tokens { measure { decimal { integer_part: "5"  } units: "centimeter" } } tokens { connector { type: "by" }  } tokens { measure { decimal { integer_part: "10"  } units: "centimeter" }
+CONNECTOR_MARKUP	5x5x10cm	cardinal { integer: "5" } } tokens { connector { type: "by" }  } tokens { cardinal { integer: "5" } } tokens { connector { type: "by" }  } tokens { measure { decimal { integer_part: "10"  } units: "centimeter" }
+CONNECTOR_MARKUP	5x10cm	cardinal { integer: "5" } } tokens { connector { type: "by" }  } tokens { measure { decimal { integer_part: "10"  } units: "centimeter" }
+CONNECTOR_MARKUP	5x10	cardinal { integer: "5" } } tokens { connector { type: "by" }  } tokens { cardinal { integer: "10" }
+CONNECTOR_MARKUP	10:2	cardinal { integer: "10" } } tokens { connector { type: "ratio" }  } tokens { cardinal { integer: "2" }
+CONNECTOR_MARKUP	13x106	cardinal { integer: "13" } } tokens { connector { type: "by" }  } tokens { cardinal { integer: "106" }
+CONNECTOR_MARKUP	5x10	cardinal { integer: "5" } } tokens { connector { type: "by" }  } tokens { cardinal { integer: "10" }
+CONNECTOR_MARKUP	4pm-5pm	time {suffix: ညနေ hours: 4 style: 2 } } tokens { connector { type: "range" }  } tokens { time {suffix: ညနေ hours: 5 style: 2 }
+CONNECTOR_MARKUP	4:00-5:00	time { hours: 4 minutes: 0 style: 1 } } tokens { connector { type: "range" }  } tokens { time { hours: 5 minutes: 0 style: 1 }
+CONNECTOR_MARKUP	4m-5m	measure { decimal { integer_part: "4"  } units: "meter" } } tokens { connector { type: "range" }  } tokens { measure { decimal { integer_part: "5"  } units: "meter" }
+CONNECTOR_MARKUP	2:1:112	cardinal { integer: "2" } } tokens { connector { type: "ratio" }  } tokens { cardinal { integer: "1" } } tokens { connector { type: "ratio" }  } tokens { cardinal { integer: "112" }

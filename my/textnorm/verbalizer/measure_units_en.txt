@@ -1,0 +1,51 @@
+meter	မီတာ
+second	စက္ကန့်
+ampere	အမ်ပီအာ
+kelvin	ကယ်ဗင်
+mole	မိုး
+hertz	ဟာဇ့်
+radian	ရေဒီယံ
+newton	နယူတန်
+pascal	ပါစကယ်
+joule	ဂျိုး
+watt	ဝပ်
+volt	ဗို့
+ohm	အုမ်း
+tesla	တက်စလာ
+henry	ဟင်နရီ
+degree celsius	ဒီဂရီ ဆဲလ်စီးရပ်စ်
+minute	မိနစ်
+hour	နာရီ
+day	ရက်
+week	ပတ်
+month	လ
+year	နှစ်_standalone
+century	ရာစုနှစ်
+millennium	ထောင်စုနှစ်
+inch	လက်မ
+foot	ပေ
+yard	ကိုက်
+mile	မိုင်
+gallon	ဂါလံ
+ounce	အောင်စ
+pound	ပေါင်
+ton	တန်
+degree	ဒီဂရီ
+hectare	ဟက်တာ
+liter	လီတာ
+gram	ဂရမ်
+calories	ကယ်လိုရီ
+kilocalorie	ကီလို ကယ်လိုရီ
+decibel	ဒက်ဆီဘယ်
+electron volt	အီလက်ထရွန် ဗို့
+knot	နော့
+horsepower	မြင်း ကောင်ရေ အား
+degree fahrenheit	ဒီဂရီ ဖာရင်ဟိုက်
+tablespoon	စားပွဲတင် ဇွန်း
+teaspoon	လက်ဖက်ရည် ဇွန်း
+bit	ဘစ်
+byte	ဘိုက်
+astronomical unit	နက္ခတ္တ ဗေဒ ယူနစ်
+light year	အလင်း နှစ်_standalone
+pixel	ပစ်ဇယ်
+percent	ရာခိုင်နှုန်း

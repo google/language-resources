@@ -1,0 +1,8 @@
+PHONE_NUMBER_MARKUP	telephone|number_part:01|number_part:555|number_part:602|	သုည တစ်_standalone sil ငါး ငါး ငါး sil ခြောက် သုည နှစ်_standalone
+PHONE_NUMBER_MARKUP	telephone|number_part:09|number_part:420|number_part:038|number_part:197|	သုည ကိုး sil လေး နှစ်_standalone သုည sil သုည သုံး ရှစ် sil တစ်_standalone ကိုး ခုနစ်_standalone
+PHONE_NUMBER_MARKUP	telephone|country_code:695|number_part:345|number_part:081|number_part:0987|	အပေါင်း ခြောက် ကိုး ငါး sil သုံး လေး ငါး sil သုည ရှစ် တစ်_standalone sil သုည sil ကိုး ရှစ် ခုနစ်_standalone
+PHONE_NUMBER_MARKUP	telephone|country_code:95|number_part:1|number_part:380|number_part:322|	အပေါင်း ကိုး ငါး sil တစ်_standalone sil သုံး ရှစ် သုည sil သုံး နှစ်_standalone နှစ်_standalone
+PHONE_NUMBER_MARKUP	telephone|country_code:011|number_part:223|number_part:674|number_part:2365|extension:1331|	အပေါင်း သုည တစ်_standalone တစ်_standalone sil နှစ်_standalone နှစ်_standalone သုံး sil ခြောက် ခုနစ်_standalone လေး sil နှစ်_standalone sil သုံး ခြောက် ငါးတစ်_standalone သုံး သုံး တစ်_standalone
+PHONE_NUMBER_MARKUP	telephone|number_part:9|number_part:7381|number_part:2981|	ကိုး sil ခုနစ်_standalone sil သုံး ရှစ် တစ်_standalone sil နှစ်_standalone sil ကိုး ရှစ် တစ်_standalone
+PHONE_NUMBER_MARKUP	telephone|number_part:0430292293|	သုည sil လေး သုံး သုည sil နှစ်_standalone ကိုး နှစ်_standalone sil နှစ်_standalone ကိုး သုံး
+PHONE_NUMBER_MARKUP	telephone|number_part:050004|	သုည ငါး သုည sil သုည သုည လေး

@@ -1,0 +1,15 @@
+FRACTION_MARKUP	fraction|integer_part:-1|numerator:12|denominator:0|	ကိန်းပြည့် အနုတ် တစ်_standalone sil ပိုင်းဝေ ဆယ့် နှစ်_standalone ပိုင်းခြေ သုည
+FRACTION_MARKUP	fraction|integer_part:12|numerator:11000|denominator:324|	ကိန်းပြည့် ဆယ့် နှစ်_standalone sil ပိုင်းဝေ တစ်_unit သောင်း တစ်_unit ထောင် ပိုင်းခြေ သုံး ရာ နှစ်_unit ဆယ့် လေး
+FRACTION_MARKUP	fraction|integer_part:16|numerator:3|denominator:5|	ကိန်းပြည့် ဆယ့် ခြောက် sil ပိုင်းဝေ သုံး ပိုင်းခြေ ငါး
+FRACTION_MARKUP	fraction|integer_part:17|numerator:4|denominator:5|	ကိန်းပြည့် ဆယ့် ခုနစ်_standalone sil ပိုင်းဝေ လေး ပိုင်းခြေ ငါး
+FRACTION_MARKUP	fraction|numerator:-1|denominator:2|	ပိုင်းဝေ အနုတ် တစ်_standalone ပိုင်းခြေ နှစ်_standalone
+FRACTION_MARKUP	fraction|numerator:-129|denominator:12|	ပိုင်းဝေ အနုတ် တစ်_unit ရာ နှစ်_unit ဆယ့် ကိုး ပိုင်းခြေ ဆယ့် နှစ်_standalone
+FRACTION_MARKUP	fraction|numerator:1112|denominator:1|	ပိုင်းဝေ တစ်_unit ထောင့် တစ်_unit ရာ တစ်_unit ဆယ့် နှစ်_standalone ပိုင်းခြေ တစ်_standalone
+FRACTION_MARKUP	fraction|numerator:11345|denominator:567234|	ပိုင်းဝေ တစ်_unit သောင်း တစ်_unit ထောင့် သုံး ရာ လေး ဆယ့် ငါး ပိုင်းခြေ ငါး သိန်း ခြောက် သောင်း ခုနစ်_unit ထောင့် နှစ်_unit ရာ သုံး ဆယ့် လေး
+FRACTION_MARKUP	fraction|numerator:12|denominator:1|	ပိုင်းဝေ ဆယ့် နှစ်_standalone ပိုင်းခြေ တစ်_standalone
+FRACTION_MARKUP	fraction|numerator:121|denominator:1|	ပိုင်းဝေ တစ်_unit ရာ နှစ်_unit ဆယ့် တစ်_standalone ပိုင်းခြေ တစ်_standalone
+FRACTION_MARKUP	fraction|numerator:121|denominator:543|	ပိုင်းဝေ တစ်_unit ရာ နှစ်_unit ဆယ့် တစ်_standalone ပိုင်းခြေ ငါး ရာ လေး ဆယ့် သုံး
+FRACTION_MARKUP	fraction|numerator:12111000|denominator:130100|	ပိုင်းဝေ တစ်_unit ကုဋေ နှစ်_unit သန်း တစ်_unit သိန်း တစ်_unit သောင်း တစ်_unit ထောင် ပိုင်းခြေ တစ်_unit သိန်း သုံး သောင်း တစ်_unit ရာ
+FRACTION_MARKUP	fraction|numerator:3200|denominator:2000|	ပိုင်းဝေ သုံး ထောင့် နှစ်_unit ရာ ပိုင်းခြေ နှစ်_unit ထောင်
+FRACTION_MARKUP	fraction|numerator:4|denominator:5|	ပိုင်းဝေ လေး ပိုင်းခြေ ငါး
+FRACTION_MARKUP	fraction|numerator:4567|denominator:1234|	ပိုင်းဝေ လေး ထောင့် ငါး ရာ ခြောက် ဆယ့် ခုနစ်_standalone ပိုင်းခြေ တစ်_unit ထောင့် နှစ်_unit ရာ သုံး ဆယ့် လေး

@@ -55,9 +55,9 @@
 #          0EA2                                 yo ya (mid)
 \u0E22 → \u0E8D ;  # ya         YO YAK (low)    nyo nyung (low) IRREGULAR!
 \u0E23 → \u0EA3 ;  # ra         RO RUA          ro rot
-\u0E24 → \u0EA4 ;  # vocalic r  RU                              to be proposed
+# 0E24 → \u0EA4 ;  # vocalic r  RU                              to be proposed
 \u0E25 → \u0EA5 ;  # la         LO LING         lo ling
-\u0E26 → \u0EA6 ;  # vocalic l  LU                              to be proposed
+# 0E26 → \u0EA6 ;  # vocalic l  LU                              to be proposed
 \u0E27 → \u0EA7 ;  # va         WO WAEN         wo wi
 \u0E28 → \u0EA8 ;  # sha        SO SALA         SANSKRIT SHA
 \u0E29 → \u0EA9 ;  # ssa        SO RUSI         SANSKRIT SSA
@@ -99,7 +99,7 @@
 \u0E44 → \u0EC4 ;  #            ai mai malai    mai may
 
 # Vowel length sign
-\u0E45 → \u0EC5 ;  # length     LAKKHANGYAO                     to be proposed
+# 0E45 → \u0EC5 ;  # length     LAKKHANGYAO                     to be proposed
 
 # Repetition mark
 \u0E46 → \u0EC6 ;  #            repetition      repetition

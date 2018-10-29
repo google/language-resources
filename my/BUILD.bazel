@@ -68,6 +68,13 @@ genrule(
           """,
 )
 
+genrule(
+    name = "make_phoneme_test_tsv",
+    srcs = ["phonemes.txt"],
+    outs = ["phoneme2tts_test.tsv"],
+    cmd = """cut -f 2,5 $< >$@""",
+)
+
 # It is difficult to get rid of phoneme.syms: doing so would make compiling the
 # G2P grammar much messier, since the location of phoneme.syms must be known.
 # Compromise: keep phoneme.syms and ensure that it matches phonemes.txt.
@@ -82,12 +89,27 @@ sh_test(
     ],
 )
 
+# It is difficult to get rid of phoneme2tts.tsv: doing so would make compiling the
+# G2P grammar much messier, since the location of phoneme2tts.tsv must be known.
+# Compromise: keep phoneme2tts.tsv and ensure that it matches phoneme2tts_test.tsv.
+sh_test(
+    name = "phoneme_tsv_is_current",
+    timeout = "short",
+    srcs = ["//utils:eval.sh"],
+    args = ["diff -u $(location phoneme2tts_test.tsv) $(location phoneme2tts.tsv)"],
+    data = [
+        "phoneme2tts.tsv",
+        "phoneme2tts_test.tsv",
+    ],
+)
+
 genrule(
     name = "compile_burmese_grm",
     srcs = [
         "burmese.grm",
         "grapheme.syms",
         "phoneme.syms",
+        "phoneme2tts.tsv",
     ],
     outs = ["burmese.far"],
     cmd = """

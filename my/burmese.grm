@@ -18,6 +18,7 @@
 
 g = SymbolTable['my/grapheme.syms'];
 p = SymbolTable['my/phoneme.syms'];
+p2t = StringFile['my/phoneme2tts.tsv', p, 'byte'];
 
 export UTF8_TO_GRAPHEME = Optimize[
  ("(":"(".g)|(")":")".g)|("*":"*".g)|
@@ -176,6 +177,8 @@ g2p_initial =
 | ("gha".g      : "g".p)
 | ("nga".g      : "ŋ".p)
 | ("nga -h".g   : "ŋ̊".p)
+| ("nga -h -r".g: "ɲ̥".p <-1>)
+| ("nga -r".g   : "ɲ".p <-1>)
 # Historic palatal stops ==> alveolar fricatives
 | ("ca".g       : "s".p)
 | ("cha".g      : "sʰ".p)
@@ -256,9 +259,9 @@ g2p_nucleus =
 | ("-aa visarga".g : "á".p)
 | ("-aa".g : "à".p)
 | ("-i".g ("ka".g | "ga".g | "ca".g | "tta".g | "ta".g | "da".g | "pa".g | "sa".g) "asat".g : "eɪ̯ ʔ".p)
-| ("-i".g (("nga".g | "na".g | "ma".g) "dot asat".g | "anusvara dot".g) : "ḛɪ̯ɴ".p)
-| ("-i".g (("nga".g | "na".g | "ma".g) "asat visarga".g | "anusvara visarga".g) : "éɪ̯ɴ".p)
-| ("-i".g (("nga".g | "na".g | "ma".g) "asat".g | "anusvara".g) : "èɪ̯ɴ".p)
+| ("-i".g (("nga".g | "nna".g | "na".g | "ma".g) "dot asat".g | "anusvara dot".g) : "ḛɪ̯ɴ".p)
+| ("-i".g (("nga".g | "nna".g | "na".g | "ma".g) "asat visarga".g | "anusvara visarga".g) : "éɪ̯ɴ".p)
+| ("-i".g (("nga".g | "nna".g | "na".g | "ma".g) "asat".g | "anusvara".g) : "èɪ̯ɴ".p)
 | ("-i -u".g ("ka".g | "tta".g | "ta".g) "asat".g : "aɪ̯ ʔ".p)
 | ("-i -u".g ("nga".g | "nna".g) "dot asat".g : "a̰ɪ̯ɴ".p)
 | ("-i -u".g ("nga".g | "nna".g) "asat visarga".g : "áɪ̯ɴ".p)
@@ -302,9 +305,12 @@ g2p_nucleus =
 | ("anusvara visarga".g : "áɴ".p)
 | ("anusvara".g : "àɴ".p)
 | ("-w".g ("tta".g | "ta".g) "asat".g : "ʊ ʔ".p)
-| ("-w".g "na".g "dot asat".g : "ʊ̰ɴ".p)
-| ("-w".g "na".g "asat visarga".g : "ʊ́ɴ".p)
-| ("-w".g "na".g "asat".g : "ʊ̀ɴ".p)
+| ("-w".g ("na".g | "nna".g) "dot asat".g : "ʊ̰ɴ".p)
+| ("-w anusvara dot".g : "ʊ̰ɴ".p)
+| ("-w".g ("na".g | "nna".g) "asat visarga".g : "ʊ́ɴ".p)
+| ("-w anusvara visarga".g: "ʊ́ɴ".p)
+| ("-w".g ("na".g | "nna".g) "asat".g : "ʊ̀ɴ".p)
+| ("-w anusvara".g : "ʊ̀ɴ".p)
 ;
 
 g2p_coda_consonant =
@@ -356,22 +362,47 @@ g2p_exceptions =
 (
 # Effect of initial wa ဝ (not medial -w) on the nucleus:
   ("wa".g "-aa".g? ("tta".g | "ta".g) "asat".g : "w ʊ ʔ".p)
-| ("wa".g "na".g "dot asat".g : "w ʊ̰ɴ".p)
-| ("wa".g "na".g "asat visarga".g : "w ʊ́ɴ".p)
-| ("wa".g "na".g "asat".g : "w ʊ̀ɴ".p)
+| ("wa".g ("na".g | "nna".g) "dot asat".g : "w ʊ̰ɴ".p)
+| ("wa".g ("na".g | "nna".g) "asat visarga".g : "w ʊ́ɴ".p)
+| ("wa".g ("na".g | "nna".g) "asat".g : "w ʊ̀ɴ".p)
+# Override pronunciation for combinations:
+| ("la nnya asat visarga".g     : "l ɛ́".p)
+| ("cha nnya asat".g            : "sʰ ɛ̀".p)
+| ("tha nnya asat".g            : "tʰ ɛ̀".p)
+| ("tha nnya dot asat".g        : "tʰ ɛ̰".p)
+| ("tha nnya asat visarga".g    : "tʰ ɛ́".p)
+| ("pa nnya asat".g             : "p ɛ̀".p)
+| ("pa nnya dot asat".g         : "p j ḭ".p)
+| ("pa nnya asat visarga".g     : "p j í".p)
+| ("pa -r nnya dot asat".g      : "p j ḛ".p)
+| ("pha nnya asat".g            : "pʰ ɛ̀".p)
+| ("pha nnya dot asat".g        : "pʰ ɛ̰".p)
+| ("pha nnya asat visarga".g    : "pʰ ɛ́".p)
+| ("pha -r nnya asat".g         : "pʰ j è".p)
+| ("pha -r nnya dot asat".g     : "pʰ j ḛ".p)
+| ("pha -r nnya asat visarga".g : "pʰ j é".p)
+| ("ba nnya asat visarga".g     : "b j í".p)
+| ("ma nnya asat".g             : "m j ì".p)
+| ("ma nnya dot asat".g         : "m j ḭ".p)
+| ("ma nnya asat visarga".g     : "m ɛ́".p)
+| ("ma -h nnya dot asat".g      : "m̥ ɛ̰".p)
+| ("ra -h nnya asat".g          : "ʃ è".p)
+| ("ra -h nnya dot asat".g      : "ʃ ḛ".p)
+| ("la nnya asat".g             : "l ɛ̀".p)
+| ("la nnya dot asat".g         : "l ɛ̰".p)
+| ("la -h nnya asat".g          : "l̥ ɛ̀".p)
+| ("la -h nnya dot asat".g      : "l̥ ɛ̰".p)
+| ("la -h nnya asat visarga".g  : "l̥ ɛ́".p)
+| ("ka -w ma asat visarga".g    : "k ʊ́ɴ".p)
+| ("cha -w ma asat visarga".g   : "sʰ ʊ́ɴ".p)
 )
 ("".g : "".p)
 ;
 
-# Override pronunciation of လည်း so that it comes out as /lɛ́/.
-g2p_le = "la nnya asat visarga".g : "l ɛ́".p;
-
-
 g2p_syllable =
-  (g2p_regular <2>)
-| (g2p_other <2>)
-| (g2p_exceptions <1>)  # needs to be cheaper than the preceding disjuncts
-| (g2p_le)              # cheaper still
+  (g2p_regular <1>)
+| (g2p_other <1>)
+| (g2p_exceptions)  # needs to be cheaper than the preceding disjuncts
 ;
 
 syllable_boundary = "".g : ".".p;
@@ -417,7 +448,9 @@ r_to_j = CDRewrite["ɹ".p : "j".p, "".p, "".p, pstar];
 
 export G2P = Optimize[g2p_with_r @ r_to_j];
 
-export B2P = Optimize[UTF8_TO_GRAPHEME* @ g2p_with_r];
+export B2P = Optimize[UTF8_TO_GRAPHEME* @ g2p_with_r @ r_to_j];
+
+export B2P_TTS = Optimize[B2P @ ((p2t ("" : " "))* p2t)];
 
 #
 # Phonemic respelling (phoneme-to-grapheme) rules

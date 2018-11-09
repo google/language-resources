@@ -251,6 +251,24 @@ cc_library(
 )
 
 cc_library(
+    name = "tapes",
+    hdrs = ["tapes.h"],
+    deps = ["@openfst//:lib_lite"],
+)
+
+cc_test(
+    name = "tapes-test",
+    timeout = "short",
+    srcs = ["tapes-test.cc"],
+    deps = [
+        ":gtest_main",
+        ":iterator",
+        ":tapes",
+        "@openfst//:lib_lite",
+    ],
+)
+
+cc_library(
     name = "arc",
     hdrs = ["arc.h"],
     deps = ["@openfst//:fst"],

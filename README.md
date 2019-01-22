@@ -46,6 +46,10 @@ datasets. These tools are written in C++ and Python and are built with
 | High quality TTS data for Khmer | [http://www.openslr.org/42/](http://www.openslr.org/42/) |
 | High quality TTS data for Nepali | [http://www.openslr.org/43/](http://www.openslr.org/43/) |
 | High quality TTS data for Sundanese | [http://www.openslr.org/44/](http://www.openslr.org/44/) |
+| Large Sinhala ASR training data set | [http://www.openslr.org/52/](http://www.openslr.org/52/)|
+| Large Bengali ASR training data set	|  [http://www.openslr.org/53/](http://www.openslr.org/53/)|
+| Large Nepali ASR training data set	| [http://www.openslr.org/54/](http://www.openslr.org/54/) |
+
 
 
 ## Other reading resources

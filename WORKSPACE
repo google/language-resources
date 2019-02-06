@@ -1,5 +1,9 @@
 workspace(name = "language_resources")
 
+load("@bazel_tools//tools/build_defs/repo:git.bzl",
+     "git_repository", "new_git_repository")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 # Android SDK
 
 android_sdk_repository(
@@ -9,39 +13,46 @@ android_sdk_repository(
 
 # Protobuf
 
-protobuf_version = "3.6.1"
-
-protobuf_sha256 = "3d4e589d81b2006ca603c1ab712c9715a76227293032d05b26fca603f90b3f5b"
+protobuf_version = "3.7.0rc2"
 
 # proto_library and related rules implicitly depend on @com_google_protobuf.
 http_archive(
     name = "com_google_protobuf",
-    sha256 = protobuf_sha256,
     strip_prefix = "protobuf-%s" % protobuf_version,
-    urls = ["https://github.com/google/protobuf/archive/v%s.tar.gz" %
+    urls = ["https://github.com/protocolbuffers/protobuf/archive/v%s.tar.gz" %
             protobuf_version],
 )
 
-# DEPREACTED. For backwards compatibility with older versions of Bazel:
 http_archive(
-    name = "com_google_protobuf_cc",
-    sha256 = protobuf_sha256,
-    strip_prefix = "protobuf-%s" % protobuf_version,
-    urls = ["https://github.com/google/protobuf/archive/v%s.tar.gz" %
-            protobuf_version],
-)
-
-new_http_archive(
     name = "six_archive",
-    build_file = "bazel/six.BUILD",
+    build_file = "//bazel:six.BUILD",
     sha256 = "70e8a77beed4562e7f14fe23a786b54f6296e34344c23bc42f07b15018ff98e9",
     strip_prefix = "six-1.11.0",
     urls = ["https://pypi.python.org/packages/16/d8/bc6316cf98419719bd59c91742194c111b6f2e85abac88e496adefaf7afe/six-1.11.0.tar.gz#md5=d12789f9baf7e9fb2524c0c64f1773f8"],
 )
 
+http_archive(
+    name = "bazel_skylib",
+    strip_prefix = "bazel-skylib-master",
+    urls = ["https://github.com/bazelbuild/bazel-skylib/archive/master.zip"],
+)
+
+http_archive(
+    name = "net_zlib",
+    build_file = "@com_google_protobuf//:third_party/zlib.BUILD",
+    sha256 = "c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1",
+    strip_prefix = "zlib-1.2.11",
+    urls = ["https://zlib.net/zlib-1.2.11.tar.gz"],
+)
+
 bind(
     name = "six",
     actual = "@six_archive//:six",
+)
+
+bind(
+    name = "zlib",
+    actual = "@net_zlib//:zlib",
 )
 
 # Google fundamental libraries
@@ -63,18 +74,18 @@ bind(
     actual = "@com_google_googletest//:gtest_main",
 )
 
-new_http_archive(
+http_archive(
     name = "farmhash",
-    build_file = "bazel/farmhash.BUILD",
+    build_file = "//bazel:farmhash.BUILD",
     strip_prefix = "farmhash-master",
     urls = ["https://github.com/google/farmhash/archive/master.zip"],
 )
 
-new_git_repository(
+http_archive(
     name = "com_googlesource_code_re2",
-    build_file = "bazel/re2.BUILD",
-    remote = "https://github.com/google/re2.git",
-    tag = "2018-09-01",
+    build_file = "//bazel:re2.BUILD",
+    strip_prefix = "re2-master",
+    urls = ["https://github.com/google/re2/archive/master.zip"],
 )
 
 bind(
@@ -127,21 +138,21 @@ bind(
 
 new_git_repository(
     name = "openfst",
-    build_file = "bazel/openfst.BUILD",
+    build_file = "//bazel:openfst.BUILD",
     commit = "612b2042a54a415926aaeee12106b93ae2d38bb2",
     remote = "https://github.com/mjansche/openfst.git",
 )
 
 new_git_repository(
     name = "opengrm_ngram",
-    build_file = "bazel/opengrm-ngram.BUILD",
+    build_file = "//bazel:opengrm-ngram.BUILD",
     remote = "https://github.com/mjansche/opengrm-ngram.git",
     tag = "1.3.4",
 )
 
 new_git_repository(
     name = "thrax",
-    build_file = "bazel/thrax.BUILD",
+    build_file = "//bazel:thrax.BUILD",
     commit = "c65fb3d51f9bd0299503f3289a124f52c3431eeb",
     remote = "https://github.com/mjansche/thrax.git",
 )
@@ -150,7 +161,7 @@ new_git_repository(
 
 new_git_repository(
     name = "sparrowhawk",
-    build_file = "bazel/sparrowhawk.BUILD",
+    build_file = "//bazel:sparrowhawk.BUILD",
     commit = "a0503e26a433fbd3a9ff81ba7a08819e4a3bb668",
     remote = "https://github.com/google/sparrowhawk.git",
 )

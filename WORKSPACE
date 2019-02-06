@@ -1,7 +1,10 @@
 workspace(name = "language_resources")
 
-load("@bazel_tools//tools/build_defs/repo:git.bzl",
-     "git_repository", "new_git_repository")
+load(
+    "@bazel_tools//tools/build_defs/repo:git.bzl",
+    "git_repository",
+    "new_git_repository",
+)
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 # Android SDK
@@ -13,7 +16,7 @@ android_sdk_repository(
 
 # Protobuf
 
-protobuf_version = "3.7.0rc2"
+protobuf_version = "3.6.1.3"
 
 # proto_library and related rules implicitly depend on @com_google_protobuf.
 http_archive(

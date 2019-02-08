@@ -25,7 +25,7 @@ matrix:
           packages:
             - g++-7
       env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+        - MATRIX_EVAL="export CC=gcc-7 CXX=g++-7"
     - os: linux
       python: 3.3
       addons:
@@ -35,7 +35,7 @@ matrix:
           packages:
             - g++-7
       env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+        - MATRIX_EVAL="export CC=gcc-7 CXX=g++-7"
     - os: linux
       python: 3.6
       addons:
@@ -45,7 +45,7 @@ matrix:
           packages:
             - g++-7
       env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+        - MATRIX_EVAL="export CC=gcc-7 CXX=g++-7"
     - os: osx
       language: cpp
       env:

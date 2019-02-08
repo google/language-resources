@@ -139,10 +139,9 @@ bind(
 
 # OpenFst, OpenGrm NGram & Thrax
 
-new_git_repository(
+git_repository(
     name = "openfst",
-    build_file = "//bazel:openfst.BUILD",
-    commit = "612b2042a54a415926aaeee12106b93ae2d38bb2",
+    commit = "907e554056b5e9fc5130a7425e2eeccbf9ef2413",
     remote = "https://github.com/mjansche/openfst.git",
 )
 

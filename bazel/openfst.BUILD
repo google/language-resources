@@ -301,16 +301,26 @@ cc_test(
     ],
 )
 
-cc_test(
-    name = "algo_test",
-    srcs = [
-        prefix_dir + "test/algo_test.cc",
-        prefix_dir + "include/fst/test/algo_test.h",
-        prefix_dir + "include/fst/test/rand-fst.h",
-    ],
-    copts = ["-Wno-unused-local-typedefs"],
-    deps = [":fst"],
-)
+[
+    cc_test(
+        name = "algo_test_%s" % weight,
+        srcs = [
+            prefix_dir + "test/algo_test.cc",
+            prefix_dir + "include/fst/test/algo_test.h",
+            prefix_dir + "include/fst/test/rand-fst.h",
+        ],
+        defines = ["TEST_%s" % weight.upper()],
+        #copts = ["-Wno-unused-local-typedefs"],
+        deps = [":fst"],
+    )
+    for weight in [
+        "tropical",
+        "log",
+        "minmax",
+        "lexicographic",
+        "power",
+    ]
+]
 
 # Non-template scripting-language integration (script/)
 

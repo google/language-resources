@@ -93,7 +93,7 @@
 #include "festus/real-weight.h"
 #include "festus/value-weight-static.h"
 
-DEFINE_double(delta, fst::kDelta,
+DEFINE_double(delta, 1e-16,
               "Convergence threshold for ShortestDistance");
 DEFINE_bool(modular_int, false,
             "Try to compute ShortestDistance in modular int semiring");
@@ -107,11 +107,13 @@ void TestOneStateLoop(
     typename Arc::Weight loop_weight,
     typename Arc::Weight final_weight,
     typename Arc::Weight expected_sum_total,
-    float comparison_delta,
+    double comparison_delta,
     int power_series_terms,
     bool use_shortest_distance,
     const char *msg) {
   typedef typename Arc::Weight Weight;
+
+  VLOG(0) << "loop weight = " << loop_weight;
 
   // One-state FST with a loop at its only (initial and final) state.
   fst::VectorFst<Arc> fst;
@@ -129,12 +131,12 @@ void TestOneStateLoop(
     Weight power = Weight::One();
     Weight series = Weight::One();
     VLOG(0) << "\\sum_{n=0}^0 loop_weight^n = " << series;
-    VLOG(0) << "  sum x final = " << Times(series, final_weight);
+    VLOG(0) << "  sum * final = " << Times(series, final_weight);
     for (int n = 1; n <= power_series_terms; ++n) {
       power = Times(power, loop_weight);
       series = Plus(series, power);
       VLOG(0) << "\\sum_{n=0}^" << n << " loop_weight^n = " << series;
-      VLOG(0) << "  sum x final = " << Times(series, final_weight);
+      VLOG(0) << "  sum * final = " << Times(series, final_weight);
     }
   }
 
@@ -146,10 +148,10 @@ void TestOneStateLoop(
 }
 
 TEST(AlgebraicPathTest, Log) {
-  typedef fst::LogArc Arc;
+  typedef fst::Log64Arc Arc;
   typedef Arc::Weight Weight;
 
-  constexpr float q = 1.0f / 32768.0f;
+  constexpr double q = 1.0 / 65536.0;
 
   TestOneStateLoop<Arc>(
       Weight(-std::log1p(-q)), Weight(-std::log(q)), Weight::One(), 1e-9, 9,

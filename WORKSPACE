@@ -141,7 +141,7 @@ bind(
 
 git_repository(
     name = "openfst",
-    commit = "907e554056b5e9fc5130a7425e2eeccbf9ef2413",
+    commit = "68cc7f8a6102afa1ec28e483efff8b66e2f64d8f",
     remote = "https://github.com/mjansche/openfst.git",
 )
 

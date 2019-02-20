@@ -56,7 +56,17 @@ datasets. These tools are written in C++ and Python and are built with
 
 SLTU 2016 Tutorial - [https://sites.google.com/site/sltututorial/overview](https://sites.google.com/site/sltututorial/overview)
 
+## Publications
 
+- [Text Normalization for Bangla, Khmer, Nepali, Javanese, Sinhala, and Sundanese TTS Systems](https://ai.google/research/pubs/pub47344)
+
+- [A Step-by-Step Process for Building TTS Voices Using Open Source Data and Framework for Bangla, Javanese, Khmer, Nepali, Sinhala, and Sundanese](https://ai.google/research/pubs/pub47347)
+
+- [Building Open Javanese and Sundanese Corpora for Multilingual Text-to-Speech](https://ai.google/research/pubs/pub46929)
+
+- [Building Statistical Parametric Multi-speaker Synthesis for Bangladeshi Bangla](https://ai.google/research/pubs/pub45301)
+
+- [TTS for Low Resource Languages: A Bangla Synthesizer](https://ai.google/research/pubs/pub45300)
 
 ## License
 

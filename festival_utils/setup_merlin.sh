@@ -40,7 +40,7 @@ fi
 
 # Setup environment variables.
 export FESTIVAL_VOICE_PATH=$1
-export MERLIN_PATH=$2
+export MERLIN_PATH=$(realpath "$2")
 export WAV_PATH=$3
 BASEDIR=$(dirname "$0")
 LANGUAGE=$4

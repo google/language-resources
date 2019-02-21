@@ -55,6 +55,11 @@ export MERLIN_DATA_PATH="${MERLIN_VOICE_PATH}/data"
 # TODO(pasindu): Make this an argument.
 FESTIVAL_VOICE_FILE_LIST_PATH="${FESTIVAL_VOICE_PATH}/file_id_list.scp"
 
+if [ ! -f ${FESTIVAL_VOICE_FILE_LIST_PATH} ]; then
+  echo "Creating voice file list from txt.done.data"
+  awk '{print $2}' ${FESTIVAL_VOICE_PATH}/etc/txt.done.data &> ${FESTIVAL_VOICE_FILE_LIST_PATH}
+fi
+
 echo "FESTIVAL_VOICE_PATH - ${FESTIVAL_VOICE_PATH:?Set env variable FESTIVAL_VOICE_PATH}"
 echo "MERLIN_PATH - ${MERLIN_PATH:?Set env variable MERLIN_PATH}"
 echo "WAV_PATH - ${WAV_PATH:?Set env variable WAV_PATH}"
@@ -185,7 +190,7 @@ sed -i "s|MERLIN_TOPLEVEL_PATH|${MERLIN_VOICE_PATH}|g" "${TEST_ACOUSTIC_CONF_FIL
 sed -i "s|SAMPLE_RATE|${SAMPLE_RATE}|g" "${TEST_ACOUSTIC_CONF_FILE}"
 
 MERLIN_FILE_LIST_PATH="${MERLIN_DATA_PATH}/file_id_list.scp"
-echo "Copying filelist ${FESTIVAL_VOICE_FILE_LIST_PATH}."
+echo "Copying filelist ${FESTIVAL_VOICE_FILE_LIST_PATH}"
 cp "${FESTIVAL_VOICE_FILE_LIST_PATH}"  "${MERLIN_FILE_LIST_PATH}"
 
 # TODO(pasindu): Run script to validate the setup.

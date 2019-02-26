@@ -40,11 +40,24 @@ int main(int argc, char *argv[]) {
 
   const int size = std::strtol(argv[1], nullptr, 0);
   const double mu = std::strtod(argv[2], nullptr);
+  // The value extra_poisson is a multiplicative term which determines the
+  // relative extra-Poisson variance. The variance of the negative binomial
+  // distribution with parameters size and mu is mu * extra_poisson, whereas
+  // the variance of a Poisson distribution with the same mean mu is simply
+  // mu. For a fixed value of mu, the negative binomial distribution
+  // approaches the Poisson distribution with mean mu as size approaches
+  // infinity, and hence extra_poisson approaches 1.
+  const double extra_poisson = 1 + mu / size;
 
   std::cerr << "size: " << size << std::endl;
-  std::cerr << "prob: " << (size / (size + mu)) << std::endl;
-  std::cerr << "mu:   " << mu << std::endl;
-  std::cerr << "var:  " << (mu * (1 + mu / size)) << std::endl;
+  std::cerr << "prob: "
+            << size << "/" << "(" << size << "+" << mu << ") = "
+            << size / (size + mu) << std::endl;
+  std::cerr << "mean: " << mu << std::endl;
+  std::cerr << "var:  "
+            << mu << "*(1+" << mu << "/" << size << ") = "
+            << mu << "*" << extra_poisson << " = "
+            << mu * extra_poisson << std::endl;
 
   // Since prob == size / (size + mu), odds are size : mu.
   const fst::Log64Weight odds_for = -std::log(size);

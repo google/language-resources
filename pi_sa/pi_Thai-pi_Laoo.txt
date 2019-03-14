@@ -14,8 +14,8 @@
 
 # Transliteration of Pali from Thai script to Lao script.
 #
-# References the upcoming Pali extensions for Lao described in
-# http://www.unicode.org/cgi-bin/GetMatchingDocs.pl?L2/17-106R
+# References extended Lao characters used to write Pali, which were added in
+# Unicode 12 (https://www.unicode.org/charts/PDF/Unicode-12.0/U120-0E80.pdf).
 
 # Consonants
 \u0E01 ↔ \u0E81 ;  # ka         KO KAI          ko kay

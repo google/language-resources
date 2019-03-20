@@ -8,7 +8,7 @@ LANG=af
 
 # Tools:
 runfiles="${0}.runfiles"
-sh_utter="$runfiles/language_resources/utils/sh-utter"
+sh_utter="$runfiles/language_resources/utils/sh_utter"
 prefix=`pwd`/"$runfiles"/language_resources/"$LANG"/sparrowhawk/
 config=sparrowhawk_configuration.ascii_proto
 

@@ -1,11 +1,11 @@
-- Textnorm - Contains verbalizers and classifers written in thrax which can be used with sparrowhawk. 
+- Textnorm - Contains verbalizers and classifers written in Thrax which can be used with Sparrowhawk.
 
-- Sparrowhawk - settings for running sparrowhawk with above textnorms. 
+- Sparrowhawk - Settings for running Sparrowhawk with above textnorms.
 
-- Festvox - Contains data and instructions on how to setup festvox TTS.
+- Festvox - Contains data and instructions on how to setup Festvox TTS (Text-to-Speech).
 
-- Merlin - Contains instructions on how to setup merlin TTS.
+- Merlin - Contains instructions on how to setup Merlin TTS.
 
-- sinhala.grm - Thrax based sinhala G2P.
+- sinhala.grm - Thrax based Sinhala G2P (Grapheme-to-Phoneme).
 
-- si-si_FONIPA.txt - ICU IPA G2P
+- si-si_FONIPA.txt - ICU IPA G2P.

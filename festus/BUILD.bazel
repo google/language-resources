@@ -484,3 +484,18 @@ sh_binary(
         "@openfst//:fstrmepsilon",
     ],
 )
+
+cc_library(
+    name = "rmepscycle",
+    hdrs = ["rmepscycle.h"],
+    deps = ["@openfst//:fst"],
+)
+
+cc_binary(
+    name = "fstrmepscycle",
+    srcs = ["fstrmepscycle.cc"],
+    deps = [
+        ":rmepscycle",
+        "@openfst//:fst",
+    ],
+)

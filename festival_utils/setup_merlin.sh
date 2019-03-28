@@ -154,10 +154,10 @@ cp "${FESTIVAL_LABEL_PHONE_ALIGN}"/*.lab "${MERLIN_LABEL_PHONE_ALIGN}"
 # TODO(pasindu): Check in these files for each langauge.
 echo "Generating HTS questions"
 
-PHONOLOGY="${LANG}/festvox/ipa_phonology.json"
+PHONOLOGY="${LANGUAGE}/festvox/ipa_phonology.json"
 if [ ! -f "${PHONOLOGY}" ];
 then
-  PHONOLOGY="${LANG}/festvox/phonology.json"
+  PHONOLOGY="${LANGUAGE}/festvox/phonology.json"
 fi
 
 "${BASEDIR}/generate_hts_questions.py" "${PHONOLOGY}" \

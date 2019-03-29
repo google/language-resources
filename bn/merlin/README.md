@@ -3,7 +3,7 @@
 
 2. Build an [Bangla Festival Voice](https://github.com/googlei18n/language-resources/tree/master/bn/festvox)
 
-3. Setup Merlin with the following command (after setup, the voice can be found at ```<FULL_MERLIN_PATH>/egs/bn_bd/```
+3. Setup Merlin with the following command (after setup, the voice can be found at ```<FULL_MERLIN_PATH>/egs/bn_bd/```)
 
    ```./festival_utils/setup_merlin.sh <FESTIVAL_VOICE_PATH> <FULL_MERLIN_PATH> <WAV_PATH>  bn bn_bd 16000```
 

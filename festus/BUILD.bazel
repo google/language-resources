@@ -499,3 +499,9 @@ cc_binary(
         "@openfst//:fst",
     ],
 )
+
+cc_library(
+    name = "weight-convert",
+    hdrs = ["weight-convert.h"],
+    deps = ["@openfst//:fst"],
+)

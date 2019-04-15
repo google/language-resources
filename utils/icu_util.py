@@ -27,8 +27,11 @@ import icu
 from utils import utf8
 
 
-def LoadTransliterationRules(path, name, direction=icu.UTransDirection.FORWARD):
+def LoadTransliterationRules(path, name, reverse=False):
   rules = utf8.GetContents(path)
+  direction = icu.UTransDirection.FORWARD
+  if reverse:
+    direction = icu.UTransDirection.REVERSE
   transliterator = icu.Transliterator.createFromRules(name, rules, direction)
   return transliterator
 

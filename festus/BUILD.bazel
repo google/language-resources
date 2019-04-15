@@ -505,3 +505,21 @@ cc_library(
     hdrs = ["weight-convert.h"],
     deps = ["@openfst//:fst"],
 )
+
+cc_library(
+    name = "mode-search",
+    hdrs = ["mode-search.h"],
+    deps = [
+        ":weight-convert",
+        "@openfst//:fst",
+    ],
+)
+
+cc_binary(
+    name = "best-labeling",
+    srcs = ["best-labeling.cc"],
+    deps = [
+        ":mode-search",
+        "@openfst//:fst",
+    ],
+)

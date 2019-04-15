@@ -15,7 +15,10 @@
 #ifndef FESTUS_WEIGHT_CONVERT_H__
 #define FESTUS_WEIGHT_CONVERT_H__
 
+#include <fst/arc-map.h>
 #include <fst/float-weight.h>
+#include <fst/fst.h>
+#include <fst/mutable-fst.h>
 #include <fst/weight.h>
 
 namespace fst {
@@ -37,5 +40,15 @@ struct WeightConvert<TropicalWeightTpl<double>, LogWeightTpl<double>> {
 };
 
 }  // namespace fst
+
+namespace festus {
+
+template <class FromArc, class ToArc>
+void ConvertWeight(const fst::Fst<FromArc> &from_fst,
+                   fst::MutableFst<ToArc> *to_fst) {
+  fst::ArcMap(from_fst, to_fst, fst::WeightConvertMapper<FromArc, ToArc>());
+}
+
+}  // namespace festus
 
 #endif  // FESTUS_WEIGHT_CONVERT_H__

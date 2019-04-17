@@ -117,3 +117,15 @@ compile_grm(
 )
 
 script_test(script = "Sinh")
+
+py_test(
+    name = "Malayalam_InterIndic_test",
+    srcs = ["Malayalam_InterIndic_test.py"],
+    data = [
+        "//third_party/cldr:Malayalam-Bengali.xml",
+        "//third_party/cldr:Malayalam-InterIndic.xml",
+        "//third_party/cldr:Malayalam-Latin.xml",
+        "//third_party/cldr:Malayalam-Tamil.xml",
+    ],
+    tags = ["manual"],  # requires patched PyICU
+)

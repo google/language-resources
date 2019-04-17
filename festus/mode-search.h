@@ -119,7 +119,7 @@ inline std::string StrExp(double ln_value) {
   static constexpr int16 kMaxFinite = 709;
   std::ostringstream strm;
   if (std::isfinite(ln_value) && ln_value > kMaxFinite) {
-    static constexpr double kLn10 = 1.0 / std::log(10.0);
+    static constexpr double kLn10 = 0.434294481903251828;  // 1 / ln(10)
     double log10_value = ln_value * kLn10;
     static constexpr int64 kMaxExponent = 1LL << 53;
     if (log10_value > kMaxExponent) {

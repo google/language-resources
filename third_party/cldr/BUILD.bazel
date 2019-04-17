@@ -3,6 +3,10 @@ package(default_visibility = ["//visibility:public"])
 licenses(["notice"])  # Unicode License Agreement - Data Files and Software
 
 exports_files([
+    "Malayalam-Bengali.xml",
+    "Malayalam-InterIndic.xml",
+    "Malayalam-Latin.xml",
+    "Malayalam-Tamil.xml",
     "ta-ta_FONIPA.txt",
     "xh-xh_FONIPA.txt",
     "zu-zu_FONIPA.txt",

@@ -31,8 +31,4 @@ set -o xtrace
 "$BAZEL_EXECUTABLE" info release
 "$BAZEL_EXECUTABLE" run  $STRATEGY       //utils:python_version
 "$BAZEL_EXECUTABLE" test $STRATEGY $SHOW //utils:python_version{,_sh}_test
-
-"$BAZEL_EXECUTABLE" query '//... - rdeps(//..., filter("/textnorm/", //...))' |
-  xargs "$BAZEL_EXECUTABLE" test $STRATEGY --
-
-"$BAZEL_EXECUTABLE" test $STRATEGY -- //ne/...
+"$BAZEL_EXECUTABLE" test $STRATEGY --    //...

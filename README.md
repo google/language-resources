@@ -49,7 +49,11 @@ datasets. These tools are written in C++ and Python and are built with
 | Large Sinhala ASR training data set | [http://www.openslr.org/52/](http://www.openslr.org/52/)|
 | Large Bengali ASR training data set	|  [http://www.openslr.org/53/](http://www.openslr.org/53/)|
 | Large Nepali ASR training data set	| [http://www.openslr.org/54/](http://www.openslr.org/54/) |
-
+| Crowdsourced high-quality Argentinian Spanish speech data set | [https://www.openslr.org/61/](https://www.openslr.org/61/) |
+| Crowdsourced high-quality Malayalam multi-speaker speech data set | [https://www.openslr.org/63/](https://www.openslr.org/63/) |
+| Crowdsourced high-quality Marathi multi-speaker speech data set | [https://www.openslr.org/64/](https://www.openslr.org/64/) |
+| Crowdsourced high-quality Tamil multi-speaker speech data set | [https://www.openslr.org/65/](https://www.openslr.org/65/) |
+| Crowdsourced high-quality Telugu multi-speaker speech data set | [https://www.openslr.org/66/](https://www.openslr.org/66/) |
 
 
 ## Other reading resources

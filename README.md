@@ -37,18 +37,18 @@ datasets. These tools are written in C++ and Python and are built with
 ## Opensourced Audio Data
 | Resource | Link |
 |-----------|--------------------|
-| Sinhala TTS recordings (~3K) | [http://www.openslr.org/30/](http://www.openslr.org/30/)      |
-| TTS recordings for four South African languages (af, st, tn, xh) | [http://www.openslr.org/32/](http://www.openslr.org/32/)  |
-| Large Javanese ASR training data set (~185K)	| [http://www.openslr.org/35/](http://www.openslr.org/35/) |
-| Large Sundanese ASR training data set	(~220K)| [http://www.openslr.org/36/](http://www.openslr.org/36/) |
-| High quality TTS data for Bengali languages | [http://www.openslr.org/37/](http://www.openslr.org/37/) |
-| High quality TTS data for Javanese | [http://www.openslr.org/41/](http://www.openslr.org/41/) |
-| High quality TTS data for Khmer | [http://www.openslr.org/42/](http://www.openslr.org/42/) |
-| High quality TTS data for Nepali | [http://www.openslr.org/43/](http://www.openslr.org/43/) |
-| High quality TTS data for Sundanese | [http://www.openslr.org/44/](http://www.openslr.org/44/) |
-| Large Sinhala ASR training data set | [http://www.openslr.org/52/](http://www.openslr.org/52/)|
-| Large Bengali ASR training data set	|  [http://www.openslr.org/53/](http://www.openslr.org/53/)|
-| Large Nepali ASR training data set	| [http://www.openslr.org/54/](http://www.openslr.org/54/) |
+| Sinhala TTS recordings (~3K) | [https://www.openslr.org/30/](https://www.openslr.org/30/)      |
+| TTS recordings for four South African languages (af, st, tn, xh) | [https://www.openslr.org/32/](https://www.openslr.org/32/)  |
+| Large Javanese ASR training data set (~185K)	| [https://www.openslr.org/35/](https://www.openslr.org/35/) |
+| Large Sundanese ASR training data set	(~220K)| [https://www.openslr.org/36/](https://www.openslr.org/36/) |
+| High quality TTS data for Bengali languages | [https://www.openslr.org/37/](https://www.openslr.org/37/) |
+| High quality TTS data for Javanese | [https://www.openslr.org/41/](https://www.openslr.org/41/) |
+| High quality TTS data for Khmer | [https://www.openslr.org/42/](https://www.openslr.org/42/) |
+| High quality TTS data for Nepali | [https://www.openslr.org/43/](https://www.openslr.org/43/) |
+| High quality TTS data for Sundanese | [https://www.openslr.org/44/](https://www.openslr.org/44/) |
+| Large Sinhala ASR training data set | [https://www.openslr.org/52/](https://www.openslr.org/52/)|
+| Large Bengali ASR training data set	|  [https://www.openslr.org/53/](http://www.openslr.org/53/)|
+| Large Nepali ASR training data set	| [https://www.openslr.org/54/](https://www.openslr.org/54/) |
 | Crowdsourced high-quality Argentinian Spanish speech data set | [https://www.openslr.org/61/](https://www.openslr.org/61/) |
 | Crowdsourced high-quality Malayalam multi-speaker speech data set | [https://www.openslr.org/63/](https://www.openslr.org/63/) |
 | Crowdsourced high-quality Marathi multi-speaker speech data set | [https://www.openslr.org/64/](https://www.openslr.org/64/) |

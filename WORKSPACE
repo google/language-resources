@@ -16,15 +16,21 @@ android_sdk_repository(
 
 # Protobuf
 
-protobuf_version = "3.6.1.3"
+# Use a commit ahead of tag 3.7.1, in order to pick up a BUILD file fix:
+protobuf_commit = "8e5b2f1b821c1f42b28db4c276f71e50ff1bf0e7"
 
-# proto_library and related rules implicitly depend on @com_google_protobuf.
 http_archive(
     name = "com_google_protobuf",
-    strip_prefix = "protobuf-%s" % protobuf_version,
-    urls = ["https://github.com/protocolbuffers/protobuf/archive/v%s.tar.gz" %
-            protobuf_version],
+    strip_prefix = "protobuf-%s" % protobuf_commit,
+    urls = [
+        "https://github.com/protocolbuffers/protobuf/archive/%s.tar.gz" %
+        protobuf_commit,
+    ],
 )
+
+load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+
+protobuf_deps()
 
 http_archive(
     name = "six_archive",
@@ -40,22 +46,9 @@ http_archive(
     urls = ["https://github.com/bazelbuild/bazel-skylib/archive/master.zip"],
 )
 
-http_archive(
-    name = "net_zlib",
-    build_file = "@com_google_protobuf//:third_party/zlib.BUILD",
-    sha256 = "c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1",
-    strip_prefix = "zlib-1.2.11",
-    urls = ["https://zlib.net/zlib-1.2.11.tar.gz"],
-)
-
 bind(
     name = "six",
     actual = "@six_archive//:six",
-)
-
-bind(
-    name = "zlib",
-    actual = "@net_zlib//:zlib",
 )
 
 # Google fundamental libraries

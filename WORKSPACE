@@ -134,7 +134,7 @@ bind(
 
 git_repository(
     name = "openfst",
-    commit = "68cc7f8a6102afa1ec28e483efff8b66e2f64d8f",
+    commit = "22867ee7b483598a729abe125da2517584a5d010",  # 1.7.2 plus Bazel
     remote = "https://github.com/mjansche/openfst.git",
 )
 

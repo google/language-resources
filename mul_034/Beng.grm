@@ -168,6 +168,15 @@ independent_vowel =
 |                  "o".c           | "au".c
 ;
 
+typos =
+  ("ba nukta".c : "ra".c)
+;
+
+fix_typos =
+  CDRewrite["a -aa".c : "aa".c, "", "", star]
+@ CDRewrite[typos, "", "", star]
+;
+
 vowels_to_nfc_aux =
   ("-e -aa".c : "-o".c)
 | ("-e -au_length".c : "-au".c)
@@ -222,6 +231,7 @@ del_inherent_vowel = CDRewrite["@".g : "", "", explicit_vowel_or_virama, star];
 
 codepoints_to_graphemes_internal = Optimize[
   codepoint*
+@ fix_typos
 @ vowels_to_nfc
 @ compose_dotted
 @ ins_reph

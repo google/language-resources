@@ -88,6 +88,16 @@ codepoint_to_grapheme =
 | ("-vocalic_ll".c : ",ll".g)
 | ("ra_with_middle_diagonal".c : "r".g)
 | ("ra_with_lower_diagonal".c : "w".g)
+| ("0".c : "0".g)
+| ("1".c : "1".g)
+| ("2".c : "2".g)
+| ("3".c : "3".g)
+| ("4".c : "4".g)
+| ("5".c : "5".g)
+| ("6".c : "6".g)
+| ("7".c : "7".g)
+| ("8".c : "8".g)
+| ("9".c : "9".g)
 ;
 
 separator_c =
@@ -170,6 +180,7 @@ independent_vowel =
 
 typos =
   ("ba nukta".c : "ra".c)
+| ("vocalic_l".c : "9".c)
 ;
 
 fix_typos =

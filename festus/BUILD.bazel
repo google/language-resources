@@ -72,6 +72,21 @@ cc_test(
 )
 
 cc_library(
+    name = "rational",
+    hdrs = ["rational.h"],
+)
+
+cc_test(
+    name = "rational-test",
+    timeout = "short",
+    srcs = ["rational-test.cc"],
+    deps = [
+        ":gtest_main",
+        ":rational",
+    ],
+)
+
+cc_library(
     name = "modular-int-semiring",
     hdrs = ["modular-int-semiring.h"],
     deps = ["@openfst//:base"],

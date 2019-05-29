@@ -4,13 +4,14 @@ language: python
 
 branches:
   except:
+    - dev
     - docker-integration
     - docker-test
 
 env:
   global:
     - ANDROID_SDK=4333796
-    - BAZEL=0.22.0
+    - BAZEL=0.26.0
     - JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
 
 matrix:

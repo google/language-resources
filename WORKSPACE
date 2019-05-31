@@ -16,15 +16,14 @@ android_sdk_repository(
 
 # Protobuf
 
-# Use a commit ahead of tag 3.7.1, in order to pick up a BUILD file fix:
-protobuf_commit = "8e5b2f1b821c1f42b28db4c276f71e50ff1bf0e7"
+protobuf_version = "3.8.0"
 
 http_archive(
     name = "com_google_protobuf",
-    strip_prefix = "protobuf-%s" % protobuf_commit,
+    strip_prefix = "protobuf-%s" % protobuf_version,
     urls = [
-        "https://github.com/protocolbuffers/protobuf/archive/%s.tar.gz" %
-        protobuf_commit,
+        "https://github.com/protocolbuffers/protobuf/archive/v%s.tar.gz"
+	% protobuf_version,
     ],
 )
 

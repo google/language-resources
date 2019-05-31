@@ -1,6 +1,6 @@
 # Language Resources and Tools
 
-[![Build Status](https://travis-ci.org/googlei18n/language-resources.svg?branch=master)](https://travis-ci.org/googlei18n/language-resources)
+[![Build Status](https://travis-ci.org/google/language-resources.svg?branch=master)](https://travis-ci.org/google/language-resources)
 
 Datasets and scripts for basic natural language and speech processing.
 

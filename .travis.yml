@@ -4,6 +4,7 @@ language: python
 
 branches:
   except:
+    - dev
     - docker-integration
     - docker-test
 

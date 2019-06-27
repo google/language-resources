@@ -70,7 +70,9 @@ wget http://festvox.org/packed/festival/2.4/voices/festvox_kallpc16k.tar.gz
 wget http://festvox.org/packed/festival/2.4/voices/festvox_rablpc16k.tar.gz
 
 wget http://festvox.org/festvox-2.7/festvox-2.7.0-release.tar.gz
-wget http://tts.speech.cs.cmu.edu/awb/sptk/SPTK-3.6.tar.gz
+# Following sptk link is not available.
+# wget http://tts.speech.cs.cmu.edu/awb/sptk/SPTK-3.6.tar.gz
+wget https://download.sourceforge.net/project/sp-tk/SPTK/SPTK-3.6/SPTK-3.6.tar.gz
 
 wget http://festvox.org/flite/packed/flite-2.0/flite-2.0.0-release.tar.bz2
 

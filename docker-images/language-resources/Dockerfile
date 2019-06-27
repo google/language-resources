@@ -19,7 +19,11 @@ ENV NODEJS_VERSION="v8.9.3"
 ENV BAZEL_VERSION="0.8.0"
 ENV ANDROID_TOOLS_VERSION="3859397"
 
-RUN apt-get update && apt-get install -y \
+RUN echo "deb [check-valid-until=no] http://archive.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list
+RUN sed -i '/deb http:\/\/deb.debian.org\/debian jessie-updates main/d' /etc/apt/sources.list
+RUN apt-get -o Acquire::Check-Valid-Until=false update
+
+RUN apt-get install -y \
       sox \
       curl \
       libicu-dev \
@@ -29,12 +33,11 @@ RUN apt-get update && apt-get install -y \
       python-dev \
       python-setuptools \
       unzip \
-      wget \
-      && rm -rf /var/lib/apt/lists/*
+      wget
 
 # Clone language resources
 WORKDIR /usr/local/src
-RUN git clone https://github.com/googlei18n/language-resources
+RUN git clone https://github.com/google/language-resources
 
 # Load language resources python modules
 ENV PYTHONPATH="/usr/local/src/language-resources"

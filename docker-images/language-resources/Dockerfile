@@ -33,7 +33,8 @@ RUN apt-get install -y \
       python-dev \
       python-setuptools \
       unzip \
-      wget
+      wget \
+      && rm -rf /var/lib/apt/lists/*
 
 # Clone language resources
 WORKDIR /usr/local/src

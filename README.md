@@ -54,6 +54,18 @@ datasets. These tools are written in C++ and Python and are built with
 | Crowdsourced high-quality Marathi multi-speaker speech data set | [https://www.openslr.org/64/](https://www.openslr.org/64/) |
 | Crowdsourced high-quality Tamil multi-speaker speech data set | [https://www.openslr.org/65/](https://www.openslr.org/65/) |
 | Crowdsourced high-quality Telugu multi-speaker speech data set | [https://www.openslr.org/66/](https://www.openslr.org/66/) |
+| Data set which contains recordings of Catalan |   [https://www.openslr.org/69](https://www.openslr.org/69)  |
+| Crowdsourced high-quality Nigerian English speech data set |   [https://www.openslr.org/70](https://www.openslr.org/70)  |
+| Crowdsourced high-quality Chilean Spanish speech data set |   [https://www.openslr.org/71](https://www.openslr.org/71)  |
+| Crowdsourced high-quality Columbian Spanish speech data set |   [https://www.openslr.org/72](https://www.openslr.org/72)  |
+| Crowdsourced high-quality Peruvian Spanish speech data set |   [https://www.openslr.org/73](https://www.openslr.org/73)  |
+| Crowdsourced high-quality Puerto Rico Spanish speech data set		  |   [https://www.openslr.org/74](https://www.openslr.org/74)  |
+| Crowdsourced high-quality Venezuelan Spanish speech data set |   [https://www.openslr.org/75](https://www.openslr.org/75)  |
+| Crowdsourced high-quality Basque speech data set	 |   [https://www.openslr.org/76](https://www.openslr.org/76)  |
+| Crowdsourced high-quality Galician speech data set |   [https://www.openslr.org/77](https://www.openslr.org/77)  |
+| Crowdsourced high-quality Gujarati multi-speaker speech data set	 |   [https://www.openslr.org/78](https://www.openslr.org/78)  |
+| Crowdsourced high-quality Kannada multi-speaker speech data set	 |   [https://www.openslr.org/79](https://www.openslr.org/79)  |
+| Crowdsourced high-quality Burmese speech data set	 |   [https://www.openslr.org/80](https://www.openslr.org/80)  |
 
 
 ## Other reading resources

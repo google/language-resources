@@ -31,7 +31,7 @@ from __future__ import division, print_function
 
 import sys
 
-from scipy import stats  # Debian/Ubuntu: apt-get install python-scipy
+from scipy import stats  # Debian/Ubuntu: apt-get --no-install-recommends install -y python-scipy
 
 
 def UpperTailPValue(successes, trials, prob):

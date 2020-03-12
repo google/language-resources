@@ -19,7 +19,7 @@ ENV NODEJS_VERSION="v8.9.3"
 ENV BAZEL_VERSION="0.8.0"
 ENV ANDROID_TOOLS_VERSION="3859397"
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get --no-install-recommends install -y \
       sox \
       curl \
       libicu-dev \

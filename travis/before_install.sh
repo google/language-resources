@@ -12,7 +12,7 @@ else
   ## Fix this when Xenial becomes available.
   # sudo add-apt-repository ppa:suawekk/trusty-backports -y
   # sudo apt-get update -qq
-  sudo apt-get install -q -y libicu-dev
+  sudo apt-get --no-install-recommends install -y -q libicu-dev
 fi
 
 curl -L "https://github.com/bazelbuild/bazel/releases/download/${BAZEL}/bazel-${BAZEL}-installer-${MY_OS}-x86_64.sh" > bazel-installer.sh

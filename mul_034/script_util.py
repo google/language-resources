@@ -19,7 +19,7 @@ import sys
 
 # Non-hermetic dependency on PyICU. Install this in one of several ways:
 # * pip install PyICU
-# * apt-get install python-pyicu python3-icu
+# * apt-get --no-install-recommends install -y python-pyicu python3-icu
 import icu
 
 from utils import utf8

@@ -66,6 +66,8 @@ datasets. These tools are written in C++ and Python and are built with
 | Crowdsourced high-quality Gujarati multi-speaker speech data set	 |   [https://www.openslr.org/78](https://www.openslr.org/78)  |
 | Crowdsourced high-quality Kannada multi-speaker speech data set	 |   [https://www.openslr.org/79](https://www.openslr.org/79)  |
 | Crowdsourced high-quality Burmese speech data set	 |   [https://www.openslr.org/80](https://www.openslr.org/80)  |
+| Data set which contains male and female recordings of English from various dialects of the UK and Ireland.| [https://www.openslr.org/83](https://www.openslr.org/83)  |
+|Crowdsourced high-quality Yoruba speech data set | [https://www.openslr.org/86](https://www.openslr.org/86) |
 
 
 ## Other reading resources

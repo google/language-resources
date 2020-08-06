@@ -76,11 +76,28 @@ SLTU 2016 Tutorial - [https://sites.google.com/site/sltututorial/overview](https
 
 ## Publications
 
+- [Burmese Speech Corpus, Finite­-State Text Normalization and Pronunciation Grammars with an Application to Text-­to-­Speech
+](https://research.google/pubs/pub49146/)
+
+- [Crowdsourcing Latin American Spanish for Low-Resource Text-to-Speech](https://research.google/pubs/pub49150/)
+
+- [Open-source Multi-speaker Corpora of the English Accents in the British Isles](https://research.google/pubs/pub49149/)
+
+- [Open-source Multi-speaker Speech Corpora for Building Gujarati, Kannada, Malayalam, Marathi, Tamil and Telugu Speech Synthesis Systems](https://research.google/pubs/pub49148/)
+
+- [Google Crowdsourced Speech Corpora and Related Open-Source Resources for Low-Resource Languages and Dialects: An Overview](https://research.google/pubs/pub48928/)
+
+- [Open-Source High Quality Speech Datasets for Basque, Catalan and Galician](https://research.google/pubs/pub49136/)
+
 - [Text Normalization for Bangla, Khmer, Nepali, Javanese, Sinhala, and Sundanese TTS Systems](https://ai.google/research/pubs/pub47344)
 
 - [A Step-by-Step Process for Building TTS Voices Using Open Source Data and Framework for Bangla, Javanese, Khmer, Nepali, Sinhala, and Sundanese](https://ai.google/research/pubs/pub47347)
 
+- [FonBund: A Library for Combining Cross-lingual Phonological Segment Data](https://research.google/pubs/pub46930/)
+
 - [Building Open Javanese and Sundanese Corpora for Multilingual Text-to-Speech](https://ai.google/research/pubs/pub46929)
+
+- [Rapid development of TTS corpora for four South African languages](https://research.google/pubs/pub47393/)
 
 - [Building Statistical Parametric Multi-speaker Synthesis for Bangladeshi Bangla](https://ai.google/research/pubs/pub45301)
 

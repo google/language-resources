@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package(default_visibility = ["//visibility:public"])
-
 load("//:thrax.bzl", "thrax_compile_grm")
+
+package(default_visibility = ["//visibility:public"])
 
 thrax_compile_grm(
     name = "universal_rules",

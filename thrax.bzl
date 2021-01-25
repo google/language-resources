@@ -18,6 +18,8 @@
 # shortcomings, it will only work with grammars that use local (or relative)
 # imports, and it requires all transitive dependencies to be listed in deps.
 
+load("@rules_cc//cc:defs.bzl", "cc_test")
+
 def thrax_compile_grm(name, src = None, deps = []):
     thraxcompiler = "@thrax//:thraxcompiler"
     if not src:
@@ -43,7 +45,7 @@ def thrax_compile_grm(name, src = None, deps = []):
 
 # This macro is used to run thrax grammer tests.
 def grm_regression_test(name, far_file_path, test_file_path, far_file, test_file):
-    native.cc_test(
+    cc_test(
         name = name,
         size = "small",
         args = ["--far=" + far_file_path + far_file, "--test_file=" + test_file_path + test_file],

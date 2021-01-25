@@ -59,7 +59,7 @@ bool LineReader::Reset(StringPiece path) {
   if (path.empty()) {
     instream_ = &std::cin;
   } else {
-    infile_.open(path);
+    infile_.open(path.ToString());
     if (!infile_) {
       LOG(ERROR) << "Could not open file: " << path;
       return false;

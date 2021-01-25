@@ -7,6 +7,21 @@ load(
 )
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
+# Bazel rules
+
+http_archive(
+    name = "rules_android",
+    urls = ["https://github.com/bazelbuild/rules_android/archive/v0.1.1.zip"],
+    sha256 = "cd06d15dd8bb59926e4d65f9003bfc20f9da4b2519985c27e190cddc8b7a7806",
+    strip_prefix = "rules_android-0.1.1",
+)
+
+http_archive(
+    name = "rules_python",
+    sha256 = "b6d46438523a3ec0f3cead544190ee13223a52f6a6765a29eae7b7cc24cc83a0",
+    url = "https://github.com/bazelbuild/rules_python/releases/download/0.1.0/rules_python-0.1.0.tar.gz",
+)
+
 # Android SDK
 
 android_sdk_repository(
@@ -16,14 +31,14 @@ android_sdk_repository(
 
 # Protobuf
 
-protobuf_version = "3.8.0"
+protobuf_version = "3.14.0"
 
 http_archive(
     name = "com_google_protobuf",
     strip_prefix = "protobuf-%s" % protobuf_version,
     urls = [
-        "https://github.com/protocolbuffers/protobuf/archive/v%s.tar.gz"
-	% protobuf_version,
+        "https://github.com/protocolbuffers/protobuf/archive/v%s.tar.gz" %
+        protobuf_version,
     ],
 )
 

@@ -125,7 +125,7 @@ genrule(
           $(location preprocess_arab)
         ) <(
           cut -f 3 $< |
-          sed 's/ \.//g'
+          sed 's/ \\.//g'
         ) > $@
         """,
     tools = [

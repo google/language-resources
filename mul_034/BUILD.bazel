@@ -70,6 +70,7 @@ genrule(
         "Deva.syms",
         "Sinh.syms",
         "Taml.syms",
+        "Telu.syms",
     ],
     cmd = "$(location :make_script_syms) --genrule $(OUTS)",
     tools = [":make_script_syms"],

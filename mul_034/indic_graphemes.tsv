@@ -3,6 +3,7 @@
 )	EOS		# end of string
 .	.		# syllable break; can mark independent vowels
 -	-		# separator; visible hyphen or apostrophe
+␣	space	space
 |	non-joiner	non-joiner
 +	joiner	joiner
 ˘	^	virama
@@ -31,7 +32,8 @@ a͜u	au	au
 o̐	om	om
 ṁ	;m	anusvara bindi
 ṃ	.m	tippi
-m̐	~m	candrabindu adak_bindi
+m̐	~m	candrabindu adak_bindi Telu:-candrabindu_above
+n͑	(n	Telu:candrabindu
 ḥ	.h	visarga
 ẖ	_h	jihvamuliya
 ḫ	^h	upadhmaniya

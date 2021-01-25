@@ -71,8 +71,8 @@ thrax_compile_grm(
 
 thrax_compile_grm(
     name = "connector",
-    deps =  [
-        "time.far", 
+    deps = [
+        "time.far",
         "time.grm",
     ] + universal_deps,
 )
@@ -95,20 +95,18 @@ thrax_compile_grm(
 thrax_compile_grm(
     name = "date",
     deps = [
-        "burmese.far", 
+        "burmese.far",
         "burmese.grm",
-    ] + 
-    universal_deps,
+    ] + universal_deps,
 )
 
 thrax_compile_grm(
     name = "lseq",
     deps = [
         "lseq_exceptions.tsv",
-        "burmese.far", 
+        "burmese.far",
         "burmese.grm",
-    ] + 
-    universal_deps,
+    ] + universal_deps,
 )
 
 thrax_compile_grm(
@@ -126,11 +124,8 @@ thrax_compile_grm(
         "money.far",
         "time.grm",
         "time.far",
-    ] + 
-    universal_deps,
+    ] + universal_deps,
 )
-
-
 
 thrax_compile_grm(
     name = "tokenize_and_classify",
@@ -149,6 +144,5 @@ thrax_compile_grm(
         "money.far",
         "time.grm",
         "time.far",
-    ] + 
-    universal_deps,
+    ] + universal_deps,
 )

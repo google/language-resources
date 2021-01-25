@@ -46,7 +46,6 @@ base_path = "my/textnorm/verbalizer/"
     ]
 ]
 
-
 universal_deps = [
     "universal_func.far",
     "universal_func.grm",

@@ -14,7 +14,7 @@ curl -L http://festvox.org/packed/festival/2.4/voices/festvox_kallpc16k.tar.gz |
 tar xz --no-same-owner --no-same-permissions && \
 curl -L http://festvox.org/festvox-2.7/festvox-2.7.0-release.tar.gz | \
 tar xz --no-same-owner --no-same-permissions && \
-curl -L http://tts.speech.cs.cmu.edu/awb/sptk/SPTK-3.6.tar.gz | \
+curl -L https://download.sourceforge.net/project/sp-tk/SPTK/SPTK-3.6/SPTK-3.6.tar.gz | \
 tar xz --no-same-owner --no-same-permissions && \
 patch -p0 < festvox/src/clustergen/SPTK-3.6.patch
 curl -L http://festvox.org/packed/festival/2.4/speech_tools-2.4-release.tar.gz | \

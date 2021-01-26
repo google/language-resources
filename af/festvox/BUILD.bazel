@@ -15,10 +15,9 @@
 # Copyright 2016 Google, Inc.
 # Author: mjansche@google.com (Martin Jansche)
 
-package(default_visibility = ["//visibility:public"])
+load("//festival_utils:festvox.bzl", "json_phonology_test", "make_festvox_prompts")
 
-load("//festival_utils:festvox.bzl", "make_festvox_prompts")
-load("//festival_utils:festvox.bzl", "json_phonology_test")
+package(default_visibility = ["//visibility:public"])
 
 """
 Usage

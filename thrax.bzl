@@ -18,16 +18,18 @@
 # shortcomings, it will only work with grammars that use local (or relative)
 # imports, and it requires all transitive dependencies to be listed in deps.
 
-def thrax_compile_grm(name, src=None, deps=[]):
-  thraxcompiler = "@thrax//:thraxcompiler"
-  if not src:
-    src = name + ".grm"
-  native.genrule(
-    name = name + "_thrax_compile_grm",
-    srcs = [src] + deps,
-    outs = [name + ".far"],
-    tools = [thraxcompiler],
-    cmd = """
+load("@rules_cc//cc:defs.bzl", "cc_test")
+
+def thrax_compile_grm(name, src = None, deps = []):
+    thraxcompiler = "@thrax//:thraxcompiler"
+    if not src:
+        src = name + ".grm"
+    native.genrule(
+        name = name + "_thrax_compile_grm",
+        srcs = [src] + deps,
+        outs = [name + ".far"],
+        tools = [thraxcompiler],
+        cmd = """
           for f in $(SRCS); do
             if [ ! -f $(@D)/$$(basename $$f) ]; then
               cp $$f $(@D)
@@ -39,19 +41,19 @@ def thrax_compile_grm(name, src=None, deps=[]):
             --output_far=$@ \
             --print_rules=false
           """ % (thraxcompiler, src),
-  )
+    )
 
 # This macro is used to run thrax grammer tests.
 def grm_regression_test(name, far_file_path, test_file_path, far_file, test_file):
-    native.cc_test(
+    cc_test(
         name = name,
         size = "small",
         args = ["--far=" + far_file_path + far_file, "--test_file=" + test_file_path + test_file],
-        data=[
-              far_file,
-              test_file,
+        data = [
+            far_file,
+            test_file,
         ],
         deps = [
-            "//utils:grm_tester_lib"
+            "//utils:grm_tester_lib",
         ],
     )

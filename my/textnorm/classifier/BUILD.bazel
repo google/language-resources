@@ -12,10 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package(default_visibility = ["//visibility:public"])
+load("//:thrax.bzl", "grm_regression_test", "thrax_compile_grm")
 
-load("//:thrax.bzl", "thrax_compile_grm")
-load("//:thrax.bzl", "grm_regression_test")
+package(default_visibility = ["//visibility:public"])
 
 exports_files([
     "lseq_exceptions.tsv",
@@ -71,8 +70,8 @@ thrax_compile_grm(
 
 thrax_compile_grm(
     name = "connector",
-    deps =  [
-        "time.far", 
+    deps = [
+        "time.far",
         "time.grm",
     ] + universal_deps,
 )
@@ -95,20 +94,18 @@ thrax_compile_grm(
 thrax_compile_grm(
     name = "date",
     deps = [
-        "burmese.far", 
+        "burmese.far",
         "burmese.grm",
-    ] + 
-    universal_deps,
+    ] + universal_deps,
 )
 
 thrax_compile_grm(
     name = "lseq",
     deps = [
         "lseq_exceptions.tsv",
-        "burmese.far", 
+        "burmese.far",
         "burmese.grm",
-    ] + 
-    universal_deps,
+    ] + universal_deps,
 )
 
 thrax_compile_grm(
@@ -126,11 +123,8 @@ thrax_compile_grm(
         "money.far",
         "time.grm",
         "time.far",
-    ] + 
-    universal_deps,
+    ] + universal_deps,
 )
-
-
 
 thrax_compile_grm(
     name = "tokenize_and_classify",
@@ -149,6 +143,5 @@ thrax_compile_grm(
         "money.far",
         "time.grm",
         "time.far",
-    ] + 
-    universal_deps,
+    ] + universal_deps,
 )

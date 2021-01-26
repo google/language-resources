@@ -15,6 +15,10 @@
 # Copyright 2016, 2017 Google, Inc.
 # Author: mjansche@google.com (Martin Jansche)
 
+load("@rules_python//python:defs.bzl", "py_binary")
+load("@rules_java//java:defs.bzl", "java_binary", "java_test")
+load("@rules_android//android:rules.bzl", "android_library")
+
 package(default_visibility = ["//visibility:public"])
 
 licenses(["notice"])  # Apache 2.0

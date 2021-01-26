@@ -15,9 +15,9 @@
 # Copyright 2016 Google, Inc.
 # Author: pasindu@google.com (Pasindu De Silva)
 
-package(default_visibility = ["//visibility:public"])
-
 load("//festival_utils:festvox.bzl", "festvox")
+
+package(default_visibility = ["//visibility:public"])
 
 """
 Usage

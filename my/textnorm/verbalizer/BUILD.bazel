@@ -12,10 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package(default_visibility = ["//visibility:public"])
+load("//:thrax.bzl", "grm_regression_test", "thrax_compile_grm")
 
-load("//:thrax.bzl", "thrax_compile_grm")
-load("//:thrax.bzl", "grm_regression_test")
+package(default_visibility = ["//visibility:public"])
 
 base_path = "my/textnorm/verbalizer/"
 
@@ -45,7 +44,6 @@ base_path = "my/textnorm/verbalizer/"
         "verbatim",
     ]
 ]
-
 
 universal_deps = [
     "universal_func.far",

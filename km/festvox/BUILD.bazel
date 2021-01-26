@@ -14,9 +14,9 @@
 #
 # Author: pasindu@google.com (Pasindu De Silva)
 
-package(default_visibility = ["//visibility:public"])
-
 load("//festival_utils:festvox.bzl", "festvox")
+
+package(default_visibility = ["//visibility:public"])
 
 """
 Usage

@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@rules_python//python:defs.bzl", "py_binary", "py_library", "py_test")
+load(":build_defs.bzl", "compile_grm", "script_test")
+
 package(default_visibility = ["//visibility:public"])
 
 sh_test(
@@ -70,6 +73,7 @@ genrule(
         "Deva.syms",
         "Sinh.syms",
         "Taml.syms",
+        "Telu.syms",
     ],
     cmd = "$(location :make_script_syms) --genrule $(OUTS)",
     tools = [":make_script_syms"],
@@ -84,8 +88,6 @@ genrule(
     cmd = "$(location :make_grapheme_syms) $(OUTS)",
     tools = [":make_grapheme_syms"],
 )
-
-load(":build_defs.bzl", "compile_grm", "script_test")
 
 compile_grm(
     src = "Beng.grm",

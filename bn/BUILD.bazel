@@ -62,7 +62,7 @@ genrule(
         ) <(
           grep '^[^#a-z]' $< |
           cut -f 2 |
-          sed 's/ \.//g'
+          sed 's/ \\.//g'
         ) > $@
         """,
     tools = [

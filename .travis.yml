@@ -1,5 +1,5 @@
 sudo: required
-dist: trusty
+dist: bionic
 language: python
 
 branches:
@@ -10,62 +10,28 @@ branches:
 
 env:
   global:
-    - ANDROID_SDK=4333796
-    - BAZEL=0.22.0
-    - JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
+    - ANDROID_SDK=6858069
+    - BAZEL=3.7.2
 
 matrix:
   fast_finish: true
   include:
     - os: linux
-      python: 2.7
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-7
-      env:
-        - MATRIX_EVAL="export CC=gcc-7 CXX=g++-7"
-    - os: linux
-      python: 3.3
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-7
-      env:
-        - MATRIX_EVAL="export CC=gcc-7 CXX=g++-7"
-    - os: linux
       python: 3.6
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-7
-      env:
-        - MATRIX_EVAL="export CC=gcc-7 CXX=g++-7"
     - os: osx
+      osx_image: xcode11.3
       language: cpp
-      env:
-        - PY=/usr/bin/python2.7
-        - MATRIX_EVAL=""
   allow_failures:
     - os: osx
+      osx_image: xcode11.3
       language: cpp
-      env:
-        - PY=/usr/bin/python2.7
-        - MATRIX_EVAL=""
 
 before_install:
-  - eval "${MATRIX_EVAL}"
   - . travis/before_install.sh
 
 install:
-  - yes | "$ANDROID_HOME/tools/bin/sdkmanager" 'build-tools;28.0.2' 'platforms;android-28' > /dev/null
-  - pip install -r travis/requirements.txt
+  - yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'build-tools;28.0.3' 'platforms;android-28' > /dev/null
+  - pip3 install -r travis/requirements.txt
 
 script:
   - travis/script.sh

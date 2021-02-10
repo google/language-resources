@@ -1,5 +1,7 @@
 # Wikipedia Pronunciation Data Tables Extraction Project
 
+This is not an official Google product.
+
 ## Background
 
 The English Wikipedia has many pages on different languages containing
@@ -20,9 +22,9 @@ languages could be added by appending their ISO-639 code to the query
 Note that this data set does not include IPA pronunciations which may be listed
 in the text of a Wikipedia page, only data extracted from formatted tables.
 
-For more details about how this data was extracted, see our paper "Mining
-Large-Scale Low-Resource Pronunciation Data from Wikipedia", posted to arXiv.
-TODO(tbreiner): Add link here once paper is posted.
+For more details about how this data was extracted, see our paper [Mining
+Large-Scale Low-Resource Pronunciation Data from
+Wikipedia](https://research.google/pubs/pub50056/)
 
 ## Structure of this Dataset
 

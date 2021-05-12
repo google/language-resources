@@ -69,8 +69,8 @@ bind(
 
 http_archive(
     name = "com_google_googletest",
-    strip_prefix = "googletest-main",
-    urls = ["https://github.com/google/googletest/archive/main.zip"],
+    strip_prefix = "googletest-master",
+    urls = ["https://github.com/google/googletest/archive/master.zip"],
 )
 
 # DEPRECATED. Aliases in //external referenced by @com_google_protobuf:

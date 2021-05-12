@@ -56,8 +56,8 @@ http_archive(
 
 http_archive(
     name = "bazel_skylib",
-    strip_prefix = "bazel-skylib-master",
-    urls = ["https://github.com/bazelbuild/bazel-skylib/archive/master.zip"],
+    strip_prefix = "bazel-skylib-main",
+    urls = ["https://github.com/bazelbuild/bazel-skylib/archive/main.zip"],
 )
 
 bind(
@@ -69,8 +69,8 @@ bind(
 
 http_archive(
     name = "com_google_googletest",
-    strip_prefix = "googletest-master",
-    urls = ["https://github.com/google/googletest/archive/master.zip"],
+    strip_prefix = "googletest-main",
+    urls = ["https://github.com/google/googletest/archive/main.zip"],
 )
 
 # DEPRECATED. Aliases in //external referenced by @com_google_protobuf:

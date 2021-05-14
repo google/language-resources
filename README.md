@@ -57,7 +57,7 @@ datasets. These tools are written in C++ and Python and are built with
 | Data set which contains recordings of Catalan |   [https://www.openslr.org/69](https://www.openslr.org/69)  |
 | Crowdsourced high-quality Nigerian English speech data set |   [https://www.openslr.org/70](https://www.openslr.org/70)  |
 | Crowdsourced high-quality Chilean Spanish speech data set |   [https://www.openslr.org/71](https://www.openslr.org/71)  |
-| Crowdsourced high-quality Columbian Spanish speech data set |   [https://www.openslr.org/72](https://www.openslr.org/72)  |
+| Crowdsourced high-quality Colombian Spanish speech data set |   [https://www.openslr.org/72](https://www.openslr.org/72)  |
 | Crowdsourced high-quality Peruvian Spanish speech data set |   [https://www.openslr.org/73](https://www.openslr.org/73)  |
 | Crowdsourced high-quality Puerto Rico Spanish speech data set		  |   [https://www.openslr.org/74](https://www.openslr.org/74)  |
 | Crowdsourced high-quality Venezuelan Spanish speech data set |   [https://www.openslr.org/75](https://www.openslr.org/75)  |

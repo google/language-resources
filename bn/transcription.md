@@ -35,7 +35,6 @@ Bangla has a system of 7 simple vocalic contrasts:
 | o | ও | দোষ | d o sh | blame |
 | E | অ্যা | দেখ্ | d E kh | look! |
 | O | অ | দশ | d O sh | ten |
-| a | আ | দাস | d a sh | slave |
 
 It is important to pay special attention to the distinction between the mid vowels /o/ vs. /O/; and /e/ vs. /E/. This is especially true when the /o/ or /O/ corresponds to the intrinsic vowel of a consonant letter (when there is no explicit vowel sign). There is always a question whether an implicit vowel should be transcribed as /o/, as /O/, or is completely absent. Consider the vowel (if any) after ক in these examples:
 

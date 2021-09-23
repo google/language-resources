@@ -17,7 +17,7 @@ FROM langtech/base-festival:v1_1
 # Required by run_merlin.py
 ENV USER root
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get --no-install-recommends install -y \
   autoconf \
   build-essential \
   ca-certificates \

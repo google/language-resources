@@ -14,7 +14,7 @@
 
 FROM langtech/base-language-resources:v1_1
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get --no-install-recommends install -y \
       automake \
       bc \
       curl \
